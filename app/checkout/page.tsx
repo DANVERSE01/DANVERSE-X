@@ -443,10 +443,9 @@ export default function CheckoutPage() {
         <div className="px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <Button
-              variant="ghost"
               size="sm"
               onClick={handleBack}
-              className="p-2 hover:bg-neutral-800 rounded-full -ml-2 sm:p-2.5"
+              className="p-2 hover:bg-neutral-800 rounded-full -ml-2 sm:p-2.5 bg-transparent text-white"
             >
               {currentStep === 1 ? (
                 <X className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -548,8 +547,7 @@ export default function CheckoutPage() {
                   <Button
                     key={option.id}
                     onClick={option.action}
-                    variant="outline"
-                    className="w-full h-auto p-4 text-left liquid-glass hover:liquid-glass-enhanced transition-all duration-200 group rounded-2xl sm:p-6 bg-transparent"
+                    className="w-full h-auto p-4 text-left liquid-glass hover:liquid-glass-enhanced transition-all duration-200 group rounded-2xl sm:p-6 bg-transparent border border-white/10"
                   >
                     <div className="flex items-center gap-4 w-full sm:gap-5">
                       <div className="text-2xl flex-shrink-0 sm:text-3xl">{option.emoji}</div>

@@ -117,8 +117,7 @@ export function SiteHeaderArchviz() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button
-                  size="icon"
-                  className="border border-gray-700 bg-gray-900/80 text-gray-200 hover:bg-gray-800"
+                  className="h-9 w-9 border border-gray-700 bg-gray-900/80 text-gray-200 hover:bg-gray-800 p-0"
                 >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>

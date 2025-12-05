@@ -8,6 +8,8 @@ import { Instagram, Mail, MessageCircle } from "lucide-react"
 import LazyVideo from "./lazy-video"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 
+const WHATSAPP_LINK = "https://wa.me/201207346648?text=Hello%20I%20came%20across%20your%20website%20and%20I%20need"
+
 interface FooterContent {
   tagline: string
   copyright: string
@@ -43,7 +45,7 @@ export function AppverseFooter() {
             asChild
             className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
           >
-            <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
               Contact Us
             </a>
           </Button>
@@ -145,7 +147,7 @@ export function AppverseFooter() {
                 </li>
                 <li>
                   <a
-                    href="https://wa.link/rc25na"
+                    href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-red-400 transition-colors"

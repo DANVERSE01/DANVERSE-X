@@ -5,6 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, ExternalLink, Calendar, Tag, User } from "lucide-react"
 
+// WhatsApp link constant
+const WHATSAPP_LINK = "https://wa.me/201207346648?text=Hello%20I%20came%20across%20your%20website%20and%20I%20need"
+
 // Project data - can be moved to CMS or database
 const projectsData: Record<string, ProjectData> = {
   "neon-dreams-campaign": {
@@ -272,7 +275,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             size="lg"
             className="bg-lime-400 text-black font-semibold rounded-full px-10 py-6 text-lg hover:bg-lime-300 hover:scale-105 transition-all duration-300"
           >
-            <Link href="https://wa.link/rc25na" target="_blank">
+            <Link href={WHATSAPP_LINK} target="_blank">
               Start Your Project
             </Link>
           </Button>

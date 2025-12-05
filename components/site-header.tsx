@@ -9,6 +9,8 @@ import { Menu, Building2, Palette, Globe, Briefcase } from "lucide-react"
 import { useState, useEffect } from "react"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 
+const WHATSAPP_LINK = "https://wa.me/201207346648?text=Hello%20I%20came%20across%20your%20website%20and%20I%20need"
+
 export function SiteHeader() {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -116,7 +118,7 @@ export function SiteHeader() {
               size="sm"
               className="bg-lime-400 text-black font-semibold rounded-full px-6 hover:bg-lime-300 hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/20"
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
+              <Link href={WHATSAPP_LINK} target="_blank">
                 Start Project
               </Link>
             </Button>
@@ -166,7 +168,7 @@ export function SiteHeader() {
                     asChild
                     className="w-full bg-lime-400 text-black font-semibold rounded-full hover:bg-lime-300 py-6 text-base"
                   >
-                    <Link href="https://wa.link/rc25na" target="_blank">
+                    <Link href={WHATSAPP_LINK} target="_blank">
                       Start Your Project
                     </Link>
                   </Button>

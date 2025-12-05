@@ -58,8 +58,7 @@ export function LogoMarquee() {
             </p>
           </div>
           <Button
-            variant="outline"
-            className="border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-red-400 rounded-full px-6"
+            className="border border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-red-400 rounded-full px-6"
           >
             Learn More
           </Button>

@@ -272,6 +272,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </p>
           <Button
             asChild
+            size="lg"
             className="bg-lime-400 text-black font-semibold rounded-full px-10 py-6 text-lg hover:bg-lime-300 hover:scale-105 transition-all duration-300"
           >
             <Link href={WHATSAPP_LINK} target="_blank">

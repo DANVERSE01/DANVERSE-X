@@ -27,7 +27,8 @@ export function Hero() {
           <div className="mt-8">
             <Button
               asChild
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-base font-medium text-white hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
+              size="lg"
+              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
             >
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
                 Chat With Us

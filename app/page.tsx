@@ -13,11 +13,11 @@ export default function Page() {
   const pricingStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPageElement",
-    "@id": "https://danverse.ai/#pricing",
+    "@id": "https://danverse.com/#pricing",
     name: "Pricing Plans",
     description:
       "Creative services pricing plans - packages for cinematic ads, branding, websites, and AI content systems",
-    url: "https://danverse.ai/#pricing",
+    url: "https://danverse.com/#pricing",
     mainEntity: {
       "@type": "PriceSpecification",
       name: "Creative Services",
@@ -51,23 +51,23 @@ export default function Page() {
   const pageStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://danverse.ai/",
+    "@id": "https://danverse.com/",
     name: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-    url: "https://danverse.ai/",
+    url: "https://danverse.com/",
     mainEntity: {
       "@type": "Organization",
       name: "DANVERSE",
-      url: "https://danverse.ai",
+      url: "https://danverse.com",
       sameAs: ["https://instagram.com/danverse.creative"],
     },
     hasPart: [
       {
         "@type": "WebPageElement",
-        "@id": "https://danverse.ai/#pricing",
+        "@id": "https://danverse.com/#pricing",
         name: "Pricing Section",
-        url: "https://danverse.ai/#pricing",
+        url: "https://danverse.com/#pricing",
       },
     ],
   }

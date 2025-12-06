@@ -128,7 +128,7 @@ export function SiteHeader() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button className="h-9 w-9 text-white hover:bg-white/10 rounded-full p-0">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-full">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>

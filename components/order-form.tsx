@@ -248,9 +248,10 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
               Total: {formatPrice(calculateTotal())}
             </Badge>
             <Button
+              variant="ghost"
               size="sm"
               onClick={onClose}
-              className="text-neutral-400 hover:text-white hover:bg-neutral-800 bg-transparent"
+              className="text-neutral-400 hover:text-white hover:bg-neutral-800"
             >
               <X className="h-4 w-4" />
             </Button>
@@ -318,11 +319,12 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
                   </p>
                   <div className="grid grid-cols-2 gap-4">
                     <Button
+                      variant={order.has3DModel === true ? "default" : "outline"}
                       onClick={() => setOrder({ ...order, has3DModel: true })}
                       className={`h-16 ${
                         order.has3DModel === true
                           ? "bg-[#C6FF3A] text-black hover:bg-[#C6FF3A]/90"
-                          : "border border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
+                          : "border-neutral-700 text-neutral-300 hover:bg-neutral-800"
                       }`}
                     >
                       <div className="text-center">
@@ -331,11 +333,12 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
                       </div>
                     </Button>
                     <Button
+                      variant={order.has3DModel === false ? "default" : "outline"}
                       onClick={() => setOrder({ ...order, has3DModel: false })}
                       className={`h-16 ${
                         order.has3DModel === false
                           ? "bg-[#C6FF3A] text-black hover:bg-[#C6FF3A]/90"
-                          : "border border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
+                          : "border-neutral-700 text-neutral-300 hover:bg-neutral-800"
                       }`}
                     >
                       <div className="text-center">
@@ -439,11 +442,12 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
                 <h4 className="text-lg font-semibold text-white">Do you also need 3D renders?</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <Button
+                    variant={order.needsRenders === true ? "default" : "outline"}
                     onClick={() => setOrder({ ...order, needsRenders: true })}
                     className={`h-16 ${
                       order.needsRenders === true
                         ? "bg-[#C6FF3A] text-black hover:bg-[#C6FF3A]/90"
-                        : "border border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
+                        : "border-neutral-700 text-neutral-300 hover:bg-neutral-800"
                     }`}
                   >
                     <div className="text-center">
@@ -452,11 +456,12 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
                     </div>
                   </Button>
                   <Button
+                    variant={order.needsRenders === false ? "default" : "outline"}
                     onClick={() => setOrder({ ...order, needsRenders: false, renderPackage: null })}
                     className={`h-16 ${
                       order.needsRenders === false
                         ? "bg-[#C6FF3A] text-black hover:bg-[#C6FF3A]/90"
-                        : "border border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
+                        : "border-neutral-700 text-neutral-300 hover:bg-neutral-800"
                     }`}
                   >
                     <div className="text-center">
@@ -574,8 +579,9 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
         {/* Footer */}
         <div className="flex items-center justify-between p-6 border-t border-neutral-800">
           <Button
+            variant="outline"
             onClick={currentStep === 1 ? onClose : handleBack}
-            className="border border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
+            className="border-neutral-700 text-neutral-300 hover:bg-neutral-800 bg-transparent"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {currentStep === 1 ? "Cancel" : "Back"}

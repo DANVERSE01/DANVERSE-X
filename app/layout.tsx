@@ -2,98 +2,30 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
 import Plasma from "@/components/plasma"
 import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://danverse.ai'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "DANVERSE | AI-Powered Creative Studio",
-    template: "%s | DANVERSE",
-  },
+  title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
   description:
     "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-  keywords: [
-    "AI creative studio",
-    "cinematic ads",
-    "brand design",
-    "creative agency",
-    "AI content creation",
-    "video production",
-    "3D visualization",
-    "digital marketing",
-  ],
-  authors: [{ name: "DANVERSE Studio" }],
-  creator: "DANVERSE Studio",
-  publisher: "DANVERSE Studio",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  manifest: '/manifest.json',
+  generator: "v0.app",
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "DANVERSE",
-    title: "DANVERSE | AI-Powered Creative Studio",
+    title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'DANVERSE | AI-Powered Creative Studio',
-      },
-    ],
+    type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DANVERSE | AI-Powered Creative Studio",
+    title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-    images: ['/opengraph-image'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  icons: {
-    icon: [
-      { url: '/icon', type: 'image/png', sizes: '32x32' },
-      { url: '/icons/favicon-dark.svg', type: 'image/svg+xml' },
-    ],
-    apple: [
-      { url: '/apple-icon', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: '/icons/favicon-dark.svg',
-      },
-    ],
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'black-translucent',
-    title: 'DANVERSE',
-  },
-  applicationName: 'DANVERSE',
-  category: 'business',
-  classification: 'Creative Studio',
 }
 
 export default function RootLayout({
@@ -104,19 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <head>
-        {/* Viewport Configuration */}
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
         />
-        
-        {/* Theme Color */}
-        <meta name="theme-color" content="#ef4444" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
-        
-        {/* Microsoft Tiles */}
-        <meta name="msapplication-TileColor" content="#0a0a0f" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
 
         {/* Font Preload */}
         <link
@@ -125,7 +48,47 @@ export default function RootLayout({
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
+
+        {/* Dynamic Favicon Script */}
+        <Script id="dynamic-favicon" strategy="beforeInteractive">
+          {`
+            function updateFavicon() {
+              const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              const faviconHref = darkMode ? '/icons/skitbit-white.svg' : '/icons/favicon-dark.svg';
+              let link = document.querySelector("link[rel~='icon']");
+              if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.getElementsByTagName('head')[0].appendChild(link);
+              }
+              link.href = faviconHref;
+            }
+            updateFavicon();
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+          `}
+        </Script>
+
+        {/* Google Tag Manager (deferred) */}
+        <Script id="gtm-script" strategy="lazyOnload">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-NFLHXXGK');`}
+        </Script>
+
+        {/* Google Analytics (deferred) */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-W6LV22900R" strategy="lazyOnload" />
+        <Script id="gtag-init" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W6LV22900R');
+          `}
+        </Script>
       </head>
       <body>
         <Suspense fallback={null}>

@@ -1,6 +1,5 @@
 // Local implementation of class-variance-authority to avoid package resolution issues
 import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
 
 export type VariantProps<T extends (...args: any) => any> = Omit<Parameters<T>[0], "class" | "className">
 
@@ -18,7 +17,7 @@ interface Config<T extends ConfigSchema> {
 export function cva<T extends ConfigSchema>(base?: ClassValue, config?: Config<T>) {
   return (props?: ConfigVariants<T> & { class?: ClassValue; className?: ClassValue }) => {
     if (!config?.variants) {
-      return twMerge(clsx(base, props?.class, props?.className))
+      return clsx(base, props?.class, props?.className)
     }
 
     const { variants, defaultVariants, compoundVariants } = config
@@ -51,6 +50,6 @@ export function cva<T extends ConfigSchema>(base?: ClassValue, config?: Config<T
       [] as ClassValue[],
     )
 
-    return twMerge(clsx(base, getVariantClassNames, compoundVariantClassNames, props?.class, props?.className))
+    return clsx(base, getVariantClassNames, compoundVariantClassNames, props?.class, props?.className)
   }
 }

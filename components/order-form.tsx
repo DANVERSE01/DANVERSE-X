@@ -54,7 +54,7 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
   })
 
   const [orderConfig, setOrderConfig] = useState({
-    whatsappNumber: "+201207346648", // Updated WhatsApp number
+    whatsappNumber: "+918384092211",
     modelingOptions: {
       simple: { price_usd: 35, price_inr: 3000, description: "Basic shapes, minimal details" },
       medium: { price_usd: 60, price_inr: 5000, description: "Moderate details, textures" },

@@ -9,12 +9,12 @@ import { Suspense } from "react"
 const inter = Inter({ subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
-  title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
+  title: "DANVERSE | AI-Powered Creative Studio",
   description:
     "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
   generator: "v0.app",
   openGraph: {
-    title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
+    title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
     type: "website",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DANVERSE WEBSITE - STYLE | AI-Powered Creative Studio",
+    title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
   },

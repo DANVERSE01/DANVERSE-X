@@ -7,8 +7,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { CheckCircle2 } from "lucide-react"
 import { ExamplesDialog } from "./examples-dialog"
 
-const WHATSAPP_LINK = "https://wa.me/201207346648?text=Hello%20I%20came%20across%20your%20website%20and%20I%20need"
-
 type Feature = { text: string; muted?: boolean }
 
 const ACCENT = "#EF4444"
@@ -90,7 +88,7 @@ export function Pricing() {
               asChild
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
-              <Link href={WHATSAPP_LINK} target="_blank">
+              <Link href="https://wa.link/rc25na" target="_blank">
                 Contact Now
               </Link>
             </Button>

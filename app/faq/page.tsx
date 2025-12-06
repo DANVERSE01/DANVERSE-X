@@ -43,8 +43,6 @@ const faqs = [
   },
 ]
 
-const WHATSAPP_LINK = "https://wa.me/201207346648?text=Hello%20I%20came%20across%20your%20website%20and%20I%20need"
-
 export default function FAQPage() {
   return (
     <>
@@ -75,7 +73,7 @@ export default function FAQPage() {
                 <section className="pt-4 border-t border-white/10">
                   <p className="text-white/50 text-sm">
                     Have more questions?{" "}
-                    <Link href={WHATSAPP_LINK} className="text-red-400 hover:underline">
+                    <Link href="https://wa.link/rc25na" className="text-red-400 hover:underline">
                       Contact us
                     </Link>
                   </p>

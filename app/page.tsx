@@ -78,21 +78,11 @@ export default function Page() {
 
       <main className="min-h-[100dvh] text-white relative z-10">
         <SiteHeader />
-        <section id="hero">
-          <Hero />
-        </section>
-        <section id="features">
-          <Features />
-        </section>
-        <section id="work">
-          <LogoMarquee />
-        </section>
-        <section id="pricing">
-          <Pricing />
-        </section>
-        <section id="contact">
-          <AppverseFooter />
-        </section>
+        <Hero />
+        <Features />
+        <LogoMarquee />
+        <Pricing />
+        <AppverseFooter />
       </main>
 
       {/* JSON-LD structured data */}

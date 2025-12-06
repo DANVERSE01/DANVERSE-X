@@ -443,7 +443,6 @@ export default function CheckoutPage() {
         <div className="px-4 py-3 sm:px-6 sm:py-4">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <Button
-              size="sm"
               onClick={handleBack}
               className="p-2 hover:bg-neutral-800 rounded-full -ml-2 sm:p-2.5 bg-transparent text-white"
             >

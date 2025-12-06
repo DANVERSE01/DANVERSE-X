@@ -34,7 +34,7 @@ export default function Page() {
         </p>
 
         <div className="mt-6 flex justify-center">
-          <Button size="lg" className="rounded-lg">
+          <Button className="rounded-lg px-8 py-3 text-base">
             Purchase – $49
             <span className="ml-2 text-sm text-muted-foreground line-through">$79</span>
           </Button>
@@ -183,7 +183,7 @@ export default function Page() {
         <div className="rounded-2xl bg-secondary/70 px-6 py-10 text-center">
           <h3 className="text-2xl font-semibold md:text-3xl">Get started with your iPhone photography journey</h3>
           <div className="mt-6 flex justify-center">
-            <Button size="lg" className="rounded-lg">
+            <Button className="rounded-lg px-8 py-3 text-base">
               Purchase – $49 <span className="ml-2 text-sm text-muted-foreground line-through">$79</span>
             </Button>
           </div>

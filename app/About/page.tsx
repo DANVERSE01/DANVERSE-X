@@ -102,7 +102,6 @@ export default function AboutPage() {
             <p className="text-lg text-gray-300 mb-8">Let&apos;s create something extraordinary for your brand.</p>
             <Button
               asChild
-              size="lg"
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-full px-8 py-6 text-lg"
             >
               <Link href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">

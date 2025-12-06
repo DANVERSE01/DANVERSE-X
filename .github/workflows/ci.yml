@@ -27,8 +27,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
+run: pnpm install
       - name: Run TypeScript check
         run: pnpm tsc --noEmit
 

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
   description:
     "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-  generator: "v0.app",
+  // generator: "v0.app",
   openGraph: {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:

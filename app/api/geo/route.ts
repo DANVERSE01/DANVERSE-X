@@ -3,20 +3,21 @@ import { NextResponse } from "next/server"
 const SOUTH_ASIA = new Set(["IN", "PK", "BD"])
 
 export async function GET(request: Request) {
-  // Prefer Vercel country header; fall back to Accept-Language / timezone heuristics.
+  // Use standard headers for country detection
+  // x-country-code and cf-ipcountry are common in many CDNs (Cloudflare, etc.)
   const countryHeader =
-    request.headers.get("x-vercel-ip-country") ||
     request.headers.get("x-country-code") ||
     request.headers.get("cf-ipcountry") ||
     ""
 
   let country = countryHeader.toUpperCase()
 
-  // If no server-provided country, use very light heuristics from headers
+  // If no server-provided country, use heuristics from Accept-Language
   if (!country) {
     const acceptLang = request.headers.get("accept-language") || ""
     if (/-(IN|PK|BD)\b/i.test(acceptLang)) {
-      country = acceptLang.match(/-(IN|PK|BD)\b/i)?.[1]?.toUpperCase() || ""
+      const match = acceptLang.match(/-(IN|PK|BD)\b/i)
+      country = match ? match[1].toUpperCase() : ""
     }
   }
 

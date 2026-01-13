@@ -15,8 +15,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Ensure the project can be deployed on any platform
-  output: 'standalone',
+  // Optimized for Netlify deployment
 }
 
 export default nextConfig

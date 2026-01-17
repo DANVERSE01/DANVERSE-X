@@ -1,18 +1,18 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Space_Grotesk, Inter } from "next/font/google"
 import Script from "next/script"
-import Plasma from "@/components/plasma"
-import { Suspense } from "react"
+import RobotBackground from "@/components/RobotBackground"
+import NebulaLayer from "@/components/NebulaLayer"
 
-const inter = Inter({ subsets: ["latin"], display: "swap" })
+const display = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-display" });
+const body    = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body" });
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
   description:
     "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-  // generator: "v0.app",
   openGraph: {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
@@ -34,21 +34,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
       <head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
-        />
-
-        {/* Font Preload */}
-        <link
-          rel="preload"
-          href="/fonts/Inter.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          fetchPriority="high"
         />
 
         {/* Dynamic Favicon Script */}
@@ -90,13 +80,12 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body>
-        <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-black">
-            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />
-          </div>
-          <div className="relative z-10">{children}</div>
-        </Suspense>
+      <body className="font-body bg-[color:var(--bg-0)] text-[color:var(--text)]">
+        <RobotBackground />
+        <NebulaLayer />
+        <main className="relative z-[2] pointer-events-none">
+          {children}
+        </main>
       </body>
     </html>
   )

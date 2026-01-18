@@ -10,7 +10,7 @@ const SCENE_URL = "https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
 
 export default function RobotBackground() {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-auto">
+    <div className="fixed inset-0 z-0 pointer-events-none">
       <Suspense
         fallback={
           <div className="w-full h-full flex items-center justify-center bg-black">

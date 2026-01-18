@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+   icons: {
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
   },
 }
 
@@ -84,8 +89,8 @@ export default function RootLayout({
         <RobotBackground />
         <NebulaLayer />
         {/* Changed pointer-events-none to pointer-events-auto to allow scrolling and interaction */}
-        <main className="relative z-[2] pointer-evenpointer-events-auto  pointer-events-nonets-auto">
-          {children}
+        {children}            <div className="pointer-events-auto">
+                </div>
         </main>
       </body>
     </html>

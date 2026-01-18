@@ -23,10 +23,9 @@ export const metadata = {
   title: 'DANVERSE - AI Cinematic Studio',
   description: 'AI Cinematic Studio for brands - Premium digital services',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
-    shortcut: '/favicon.ico',
-  },
+icon: '/icon.svg',
+    apple: '/icon.svg',
+  shortcut: '/icon.svg',
   openGraph: {
     title: 'DANVERSE - AI Cinematic Studio',
     description: 'Premium AI-powered creative services',

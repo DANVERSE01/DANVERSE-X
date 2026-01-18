@@ -83,7 +83,8 @@ export default function RootLayout({
       <body className="font-body bg-[color:var(--bg-0)] text-[color:var(--text)]">
         <RobotBackground />
         <NebulaLayer />
-        <main className="relative z-[2] pointer-events-none">
+        {/* Changed pointer-events-none to pointer-events-auto to allow scrolling and interaction */}
+        <main className="relative z-[2] pointer-events-auto">
           {children}
         </main>
       </body>

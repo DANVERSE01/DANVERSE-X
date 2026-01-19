@@ -77,3 +77,4 @@ All rights reserved. DANVERSE Creative Studio.
 
 - Email: danverseai@outlook.com
 - Instagram: @danverse.creative
+- WhatsApp: +20 120 734 6648

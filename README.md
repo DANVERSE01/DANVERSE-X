@@ -68,7 +68,6 @@ npm run dev
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/danverse-ai-website)
 
 ## License
 

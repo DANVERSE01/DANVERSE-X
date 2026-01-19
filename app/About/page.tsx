@@ -105,7 +105,7 @@ export default function AboutPage() {
               size="lg"
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
+              <Link href="https://wa.me/201207346648" target="_blank">
                 Get in Touch
               </Link>
             </Button>

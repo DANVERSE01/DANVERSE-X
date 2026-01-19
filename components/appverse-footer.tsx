@@ -43,7 +43,7 @@ export function AppverseFooter() {
             asChild
             className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
           >
-            <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/201207346648" target="_blank" rel="noopener noreferrer">
               Contact Us
             </a>
           </Button>
@@ -145,7 +145,7 @@ export function AppverseFooter() {
                 </li>
                 <li>
                   <a
-                    href="https://wa.link/rc25na"
+                    href="https://wa.me/201207346648"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-red-400 transition-colors"

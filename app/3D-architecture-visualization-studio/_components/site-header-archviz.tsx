@@ -107,7 +107,7 @@ export function SiteHeaderArchviz() {
               asChild
               className="bg-lime-400 text-black font-medium rounded-lg px-6 py-2.5 hover:bg-lime-300 hover:shadow-md hover:scale-[1.02] transition-all"
             >
-              <Link href="https://wa.link/65mf3i" target="_blank">
+              <Link href="https://wa.me/201207346648" target="_blank">
                 Get ArchViz Quote
               </Link>
             </Button>
@@ -177,7 +177,7 @@ export function SiteHeaderArchviz() {
                     asChild
                     className="w-full bg-lime-400 text-black font-medium rounded-lg px-6 py-2.5 hover:bg-lime-300 hover:shadow-md hover:scale-[1.02] transition-all"
                   >
-                    <Link href="https://wa.link/65mf3i" target="_blank">
+                    <Link href="https://wa.me/201207346648" target="_blank">
                       Start a Project
                     </Link>
                   </Button>

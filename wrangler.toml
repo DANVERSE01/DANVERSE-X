@@ -1,6 +1,0 @@
-name = "danverse-x"
-compatibility_date = "2024-01-23"
-compatibility_flags = ["nodejs_compat"]
-
-[vars]
-NEXT_TELEMETRY_DISABLED = "1"

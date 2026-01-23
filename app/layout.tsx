@@ -1,64 +1,110 @@
-import React from "react";
-// app/layout.tsx
+import type { Metadata, Viewport } from 'next';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'sonner';
 import './globals.css';
-import { Space_Grotesk, Inter } from 'next/font/google';
-import RobotBackground from '@/components/RobotBackground';
-import NebulaLayer from '@/components/NebulaLayer';
-import { ReactNode } from 'react';
-import { Metadata } from 'next';
 
-// Load fonts
-const display = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-display',
-});
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
 
-const body = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-body',
-});
-
-// Define metadata including favicon
 export const metadata: Metadata = {
-  title: 'DANVERSE - AI Cinematic Studio',
-  description: 'AI Cinematic Studio for brands - Premium digital services',
-  icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
-    shortcut: '/icon.svg',
+  metadataBase: new URL('https://danverse.pages.dev'),
+  title: {
+    default: 'DANVERSE - AI Cinematic Studio',
+    template: '%s | DANVERSE',
+  },
+  description: 'Premium AI-powered creative services for cinematic productions, visual effects, and digital content creation. Transform your vision into reality.',
+  keywords: [
+    'AI',
+    'Cinematic',
+    'Studio',
+    'Visual Effects',
+    'VFX',
+    'Video Production',
+    'AI Art',
+    'Digital Content',
+    'Creative Services',
+    'Motion Graphics',
+  ],
+  authors: [{ name: 'DANVERSE Team', url: 'https://danverse.pages.dev' }],
+  creator: 'DANVERSE',
+  publisher: 'DANVERSE',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
-    title: 'DANVERSE - AI Cinematic Studio',
-    description: 'Premium AI-powered creative services',
     type: 'website',
     locale: 'en_US',
+    url: 'https://danverse.pages.dev',
+    siteName: 'DANVERSE',
+    title: 'DANVERSE - AI Cinematic Studio',
+    description: 'Premium AI-powered creative services for cinematic productions.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'DANVERSE - AI Cinematic Studio',
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'DANVERSE - AI Cinematic Studio',
-    description: 'Premium AI-powered creative services',
+    description: 'Premium AI-powered creative services for cinematic productions.',
+    images: ['/og-image.png'],
+    creator: '@danverse_ai',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
   children,
-}: {
-  children: ReactNode;
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="font-body bg-[color:var(--bg-0)] text-[color:var(--text)]">
-        {/* Full-screen interactive robot background */}
-        <RobotBackground />
-        {/* Cinematic nebula layer */}
-        <NebulaLayer />
-        {/* Main content wrapper */}
-        <main className="relative z-[2] pointer-events-none min-h-screen">
-          {/* Wrap interactive elements in pointer-events-auto so they can be clicked */}
-          <div className="pointer-events-auto">{children}</div>
-        </main>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body
+        className={`${GeistSans.variable} ${GeistMono.variable} min-h-screen bg-background font-sans antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster position="bottom-right" richColors closeButton />
+        </ThemeProvider>
       </body>
     </html>
   );

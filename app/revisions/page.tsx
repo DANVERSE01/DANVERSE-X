@@ -1,3 +1,4 @@
+import React from "react";
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
 import type { Metadata } from "next"

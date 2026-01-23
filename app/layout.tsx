@@ -1,9 +1,11 @@
+import React from "react";
 // app/layout.tsx
 import './globals.css';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import RobotBackground from '@/components/RobotBackground';
 import NebulaLayer from '@/components/NebulaLayer';
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
 
 // Load fonts
 const display = Space_Grotesk({
@@ -19,7 +21,7 @@ const body = Inter({
 });
 
 // Define metadata including favicon
-export const metadata = {
+export const metadata: Metadata = {
   title: 'DANVERSE - AI Cinematic Studio',
   description: 'AI Cinematic Studio for brands - Premium digital services',
   icons: {

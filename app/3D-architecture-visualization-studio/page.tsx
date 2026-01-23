@@ -1,3 +1,4 @@
+import React from "react";
 import { SiteHeaderArchviz } from "./_components/site-header-archviz"
 import { HeroArchviz } from "./_components/hero-archviz"
 import { FeaturesArchviz } from "./_components/features-archviz"

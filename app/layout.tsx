@@ -23,9 +23,10 @@ export const metadata = {
   title: 'DANVERSE - AI Cinematic Studio',
   description: 'AI Cinematic Studio for brands - Premium digital services',
   icons: {
-icon: '/icon.svg',
+    icon: '/icon.svg',
     apple: '/icon.svg',
-  shortcut: '/icon.svg',
+    shortcut: '/icon.svg',
+  },
   openGraph: {
     title: 'DANVERSE - AI Cinematic Studio',
     description: 'Premium AI-powered creative services',
@@ -37,7 +38,7 @@ icon: '/icon.svg',
     title: 'DANVERSE - AI Cinematic Studio',
     description: 'Premium AI-powered creative services',
   },
-} as const;
+};
 
 export default function RootLayout({
   children,

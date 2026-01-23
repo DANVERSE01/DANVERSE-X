@@ -30,12 +30,12 @@ cd danverse-ai-website
 
 2. Install dependencies:
 \`\`\`bash
-pnpm install
+npm install
 \`\`\`
 
 3. Run the development server:
 \`\`\`bash
-pnpm dev
+npm run dev
 \`\`\`
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.

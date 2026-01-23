@@ -53,7 +53,7 @@ export default function AdminLogin() {
         <div className="mt-auto">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
             <p className="text-white/90 text-lg font-medium">
-              &quot;AI-Powered Creative Studio for Cinematic Ads, Branding & Digital Experiences&quot;
+              "AI-Powered Creative Studio for Cinematic Ads, Branding & Digital Experiences"
             </p>
           </div>
         </div>

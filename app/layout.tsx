@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
+import { RobotBackground } from "@/components/RobotBackground"
 import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
@@ -91,6 +92,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
+        <RobotBackground />
         <Suspense fallback={null}>
           <div className="fixed inset-0 z-0 bg-black">
             <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />

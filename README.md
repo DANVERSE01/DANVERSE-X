@@ -68,6 +68,7 @@ npm run dev
 
 Deploy to Vercel with one click:
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/danverse-ai-website)
 
 ## License
 
@@ -77,4 +78,3 @@ All rights reserved. DANVERSE Creative Studio.
 
 - Email: danverseai@outlook.com
 - Instagram: @danverse.creative
-- WhatsApp: +20 120 734 6648

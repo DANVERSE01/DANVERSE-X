@@ -1,4 +1,3 @@
-import React from "react";
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
 import { Button } from "@/components/ui/button"

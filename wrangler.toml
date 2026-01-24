@@ -1,23 +1,7 @@
 name = "danverse"
-main = "out/server.js"
 compatibility_date = "2024-01-01"
+pages_build_output_dir = "out"
 
 [build]
 command = "npm run build"
 cwd = "./"
-watch_paths = ["src/**/*.ts", "src/**/*.tsx"]
-
-[build.upload]
-format = "service-worker"
-
-[env.production]
-name = "danverse-prod"
-route = "danverse.com/*"
-zone_id = ""
-
-[[routes]]
-pattern = "danverse.com/*"
-zone_name = "danverse.com"
-
-[triggers.crons]
-crons = []

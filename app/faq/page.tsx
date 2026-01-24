@@ -73,7 +73,7 @@ export default function FAQPage() {
                 <section className="pt-4 border-t border-white/10">
                   <p className="text-white/50 text-sm">
                     Have more questions?{" "}
-                    <Link href="https://wa.link/rc25na" className="text-red-400 hover:underline">
+                    <Link href="https://wa.me/201207346648" className="text-red-400 hover:underline">
                       Contact us
                     </Link>
                   </p>

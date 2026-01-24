@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 
 const SOUTH_ASIA = new Set(["IN", "PK", "BD"])
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   // Prefer Vercel country header; fall back to Accept-Language / timezone heuristics.
   const countryHeader =

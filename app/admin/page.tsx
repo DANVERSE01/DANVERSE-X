@@ -344,7 +344,7 @@ export default function AdminDashboard() {
     router.push("/admin/login")
   }
 
-  const handleContentChange = (section: keyof ContentData, field: string, value: string | string[]) => {
+  const handleContentChange = (section: keyof ContentData, field: string, value: any) => {
     setContent((prev) => ({
       ...prev,
       [section]: {

@@ -29,7 +29,9 @@ export function LogoMarquee() {
     { label: "Sales Scripts", icon: "scripts" as const },
   ]
 
-  const ContentCard = ({ item, rowId }: { item: (typeof firstRowContent)[0]; rowId: string }) => (
+  type ContentItem = (typeof firstRowContent)[0] | (typeof secondRowContent)[0];
+
+  const ContentCard = ({ item, rowId }: { item: ContentItem; rowId: string }) => (
     <div
       className="flex-shrink-0 mx-2"
       onMouseEnter={() => setPausedRow(rowId)}

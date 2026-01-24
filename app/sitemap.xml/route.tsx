@@ -7,6 +7,8 @@ const URLS = [
   { url: "/3D-architecture-visualization-studio", priority: "0.9", changefreq: "weekly" },
 ]
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const { origin } = new URL(request.url)
   const lastmod = new Date().toISOString()

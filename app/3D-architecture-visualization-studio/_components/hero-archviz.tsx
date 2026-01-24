@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import LazyVideo from "@/components/lazy-video"
@@ -6,7 +5,7 @@ import LazyVideo from "@/components/lazy-video"
 export function HeroArchviz() {
   const cta = (
     <Button asChild className="rounded-full bg-lime-400 px-6 text-black hover:bg-lime-300">
-      <a href="https://wa.me/201207346648" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.link/65mf3i" target="_blank" rel="noopener noreferrer">
         Start ArchViz Project
       </a>
     </Button>

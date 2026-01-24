@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
@@ -344,7 +344,7 @@ export default function AdminDashboard() {
     router.push("/admin/login")
   }
 
-  const handleContentChange = (section: keyof ContentData, field: string, value: any) => {
+  const handleContentChange = (section: keyof ContentData, field: string, value: string | string[]) => {
     setContent((prev) => ({
       ...prev,
       [section]: {

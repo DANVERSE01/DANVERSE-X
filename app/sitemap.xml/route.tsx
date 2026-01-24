@@ -1,4 +1,3 @@
-import React from "react";
 const URLS = [
   { url: "/", priority: "1.0", changefreq: "weekly" },
   { url: "/#pricing", priority: "0.9", changefreq: "weekly" },

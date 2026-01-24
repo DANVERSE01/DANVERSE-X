@@ -8,11 +8,11 @@ import { Card, CardContent } from "@/components/ui/card"
 import { BeforeAfter } from "./_components/before-after"
 import { Camera, Grid2X2, Scissors, Wand2 } from "lucide-react"
 
-// Note: metadata cannot be exported from a client component in Next.js 13/14 app router.
-// If you need metadata, it should be in a separate layout or a parent server component.
-// export const metadata: Metadata = {
-//   title: "3D Product Rendering",
-// }
+export const dynamic = "force-static"
+
+export const metadata: Metadata = {
+  title: "3D Product Rendering",
+}
 
 export default function Page() {
   return (

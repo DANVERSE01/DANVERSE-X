@@ -1,58 +1,18 @@
-export const dynamic = "force-dynamic";
-
-export async function GET(request: Request) {
-  const { origin } = new URL(request.url)
-
+export async function GET() {
   const lines = [
-    "# robots.txt for DANVERSE — allow AI crawlers and search engines",
+    "# robots.txt for DANVERSE",
     "User-agent: GPTBot",
     "Allow: /",
     "Disallow: /privacy",
     "Disallow: /terms",
-    "Disallow: /t&c",
-    "",
-    "User-agent: ChatGPT-User",
-    "Allow: /",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
-    "",
-    "User-agent: ClaudeBot",
-    "Allow: /",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
-    "",
-    "User-agent: CCBot",
-    "Allow: /",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
-    "",
-    "User-agent: PerplexityBot",
-    "Allow: /",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
-    "",
-    "User-agent: Googlebot",
-    "Allow: /",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
     "",
     "User-agent: *",
     "Allow: /",
     "Disallow: /api/",
     "Disallow: /admin/",
-    "Disallow: /private/",
-    "Disallow: /privacy",
-    "Disallow: /terms",
-    "Disallow: /t&c",
     "",
-    `Sitemap: ${origin}/sitemap.xml`,
+    "Sitemap: https://danverseai.vercel.app/sitemap.xml",
   ].join("\n")
-
   return new Response(lines, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",

@@ -29,7 +29,7 @@
 - [x] Zero ESLint errors (ignoreDuringBuilds: true)
 
 ### 3. Build Verification
-```bash
+\`\`\`bash
 # Local test build
 npm install
 npm run build
@@ -44,12 +44,12 @@ ls -la out/
 # - out/images/
 # - out/icons/
 # - out/videos/
-```
+\`\`\`
 
 ### 4. Deployment Commands
 
 #### Option A: Cloudflare Pages (Recommended)
-```bash
+\`\`\`bash
 # Install wrangler globally
 npm install -g wrangler
 
@@ -57,19 +57,19 @@ npm install -g wrangler
 npx wrangler pages deploy out
 
 # Or use Git integration in Cloudflare Dashboard
-```
+\`\`\`
 
 #### Option B: Netlify
-```bash
+\`\`\`bash
 npm install -g netlify-cli
 netlify deploy --prod --dir=out
-```
+\`\`\`
 
 #### Option C: Vercel
-```bash
+\`\`\`bash
 npm install -g vercel
 vercel --prod
-```
+\`\`\`
 
 ### 5. Post-Deployment Testing
 
@@ -104,40 +104,40 @@ vercel --prod
 ### 7. File Status
 
 **Root Level:**
-```
+\`\`\`
 ✅ wrangler.toml              (Cloudflare Pages config)
 ✅ next.config.mjs            (Next.js 15 config)
 ✅ netlify.toml               (Netlify alternative)
 ✅ vercel.json                (Vercel alternative)
 ✅ package.json               (Dependencies & scripts)
 ✅ CLOUDFLARE_PAGES_DEPLOYMENT.md  (Full guide)
-```
+\`\`\`
 
 **Public Directory:**
-```
+\`\`\`
 ✅ public/_routes.json        (SPA routing)
 ✅ public/_redirects          (Netlify SPA)
 ✅ public/images/             (Static images)
 ✅ public/icons/              (Brand icons)
 ✅ public/videos/             (Video content)
-```
+\`\`\`
 
 **Build Output (Generated):**
-```
+\`\`\`
 ✅ out/index.html             (SPA entry point)
 ✅ out/_next/                 (JS/CSS bundles)
 ✅ out/assets/                (Static assets)
-```
+\`\`\`
 
 ### 8. DNS Configuration (if using custom domain)
 
 For Cloudflare Pages with custom domain:
-```
+\`\`\`
 Type:   CNAME
 Name:   danverse.example.com
 Target: <project>.pages.dev
 TTL:    Auto
-```
+\`\`\`
 
 ### 9. Success Criteria
 
@@ -153,7 +153,7 @@ TTL:    Auto
 ### 10. Rollback Plan
 
 If deployment fails:
-```bash
+\`\`\`bash
 # Check build logs
 npm run build
 
@@ -165,7 +165,7 @@ npx wrangler pages preview out
 
 # Debug routing
 cat public/_routes.json
-```
+\`\`\`
 
 ## Deployment Status: READY ✅
 

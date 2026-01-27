@@ -12,16 +12,16 @@ This project is configured for **pure static export** deployment to Cloudflare P
 ### Build & Deploy Steps
 
 #### 1. Local Build Test
-```bash
+\`\`\`bash
 npm install
 npm run build
-```
+\`\`\`
 Expected output: Static files generated in `/out` directory
 
 #### 2. Deploy to Cloudflare Pages
-```bash
+\`\`\`bash
 npx wrangler pages deploy out
-```
+\`\`\`
 
 #### 3. Connect to Git (Optional - for auto-deploy)
 - Log in to Cloudflare Dashboard
@@ -66,10 +66,10 @@ npx wrangler pages deploy out
 ### Troubleshooting
 
 **Build fails locally?**
-```bash
+\`\`\`bash
 npm run build
 # Check for errors in terminal
-```
+\`\`\`
 
 **Deploy fails on Pages?**
 - Verify `/out` directory exists locally
@@ -81,7 +81,7 @@ npm run build
 - All non-asset requests will redirect to index.html
 
 ### File Structure for Deployment
-```
+\`\`\`
 danverse/
 ├── out/                          (Generated - DO NOT commit)
 │   ├── index.html
@@ -96,7 +96,7 @@ danverse/
 ├── next.config.mjs               (Static export enabled)
 ├── package.json
 └── ...
-```
+\`\`\`
 
 ### Performance Notes
 

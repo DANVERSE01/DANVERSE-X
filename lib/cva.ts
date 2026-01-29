@@ -1,7 +1,7 @@
 // Local implementation of class-variance-authority to avoid package resolution issues
 import { clsx, type ClassValue } from "clsx"
 
-export type VariantProps<T extends (...args: any) => any> = Omit<Parameters<T>[0], "class" | "className">
+export type VariantProps<T extends (...args: any) => any> = Omit<NonNullable<Parameters<T>[0]>, "class" | "className">
 
 type ConfigSchema = Record<string, Record<string, ClassValue>>
 type ConfigVariants<T extends ConfigSchema> = {

@@ -1,7 +1,7 @@
 "use client"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import YouTubeGrid from "./youtube-grid"
+import ExampleGrid from "./example-grid"
 
 const ACCENT = "#C6FF3A"
 
@@ -26,7 +26,7 @@ export function ExamplesDialog({ open, onOpenChange, planName, price, videoIds }
           </DialogHeader>
         </div>
         <div className="max-h-[80vh] overflow-auto px-5 py-5 lg:px-6 lg:py-6">
-          <YouTubeGrid videoIds={videoIds} />
+          <ExampleGrid videoIds={videoIds} />
         </div>
       </DialogContent>
     </Dialog>

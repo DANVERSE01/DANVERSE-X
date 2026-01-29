@@ -117,6 +117,8 @@ interface ActivityItem {
 }
 
 // CHANGE: Updated default content with DANVERSE branding
+const DEFAULT_PRICING_EXAMPLES = Array.from({ length: 9 }, (_, index) => `Example ${index + 1}`)
+
 const defaultContent: ContentData = {
   hero: {
     title: "HIGH-IMPACT CINEMATIC ADS & CREATIVE",
@@ -152,17 +154,7 @@ const defaultContent: ContentData = {
         "7–10 Day Turnaround time",
         "Simple 3D Models Included", // Updated to show it's included
       ],
-      videos: [
-        "ysz5S6PUM-U",
-        "aqz-KE-bpKQ",
-        "ScMzIvxBSi4",
-        "dQw4w9WgXcQ",
-        "VYOjWnS4cMY",
-        "9bZkp7q19f0",
-        "3JZ_D3ELwOQ",
-        "e-ORhEE9VVg",
-        "fJ9rUzIMcZQ",
-      ],
+      videos: DEFAULT_PRICING_EXAMPLES,
     },
     pro: {
       price_usd: "$699",
@@ -175,17 +167,7 @@ const defaultContent: ContentData = {
         "20–25 Day Turnaround",
         "Pre-built 3D Models",
       ],
-      videos: [
-        "ASV2myPRfKA",
-        "eTfS2lqwf6A",
-        "KALbYHmGV4I",
-        "Go0AA9hZ4as",
-        "sB7RZ9QCOAg",
-        "TK2WboJOJaw",
-        "5Xq7UdXXOxI",
-        "kMjWCidQSK0",
-        "RKKdQvwKOhQ",
-      ],
+      videos: DEFAULT_PRICING_EXAMPLES,
     },
     premium: {
       price_usd: "$2,049",
@@ -198,17 +180,7 @@ const defaultContent: ContentData = {
         "Priority – 20 Day Turnaround",
         "Highly Complex 3D Models Included", // Updated to show it's included
       ],
-      videos: [
-        "v2AC41dglnM",
-        "pRpeEdMmmQ0",
-        "3AtDnEC4zak",
-        "JRfuAukYTKg",
-        "LsoLEjrDogU",
-        "RB-RcX5DS5A",
-        "hTWKbfoikeg",
-        "YQHsXMglC9A",
-        "09R8_2nJtjg",
-      ],
+      videos: DEFAULT_PRICING_EXAMPLES,
     },
   },
   orderForm: {
@@ -344,7 +316,16 @@ export default function AdminDashboard() {
     router.push("/admin/login")
   }
 
-  const handleContentChange = (section: keyof ContentData, field: string, value: string | string[]) => {
+  const handleContentChange = (
+    section: keyof ContentData,
+    field: string,
+    value:
+      | string
+      | string[]
+      | ContentData["orderForm"]["modelingOptions"]
+      | ContentData["orderForm"]["renderOptions"]
+      | ContentData["orderForm"]["formSteps"],
+  ) => {
     setContent((prev) => ({
       ...prev,
       [section]: {
@@ -382,20 +363,8 @@ export default function AdminDashboard() {
 
   const addVideo = (tier: "startup" | "pro" | "premium") => {
     if (videoToAdd.trim()) {
-      // Extract YouTube ID if full URL is pasted
-      let videoId = videoToAdd.trim()
-
-      // Handle youtube.com/watch?v= format
-      if (videoId.includes("youtube.com/watch?v=")) {
-        videoId = videoId.split("v=")[1]?.split("&")[0] || videoId
-      }
-
-      // Handle youtu.be/ format
-      if (videoId.includes("youtu.be/")) {
-        videoId = videoId.split("youtu.be/")[1]?.split("?")[0] || videoId
-      }
-
-      handlePricingChange(tier, "videos", [...content.pricing[tier].videos, videoId])
+      const label = videoToAdd.trim()
+      handlePricingChange(tier, "videos", [...content.pricing[tier].videos, label])
       setVideoToAdd("")
     }
   }
@@ -985,7 +954,7 @@ export default function AdminDashboard() {
                         <Input
                           value={videoToAdd}
                           onChange={(e) => setVideoToAdd(e.target.value)}
-                          placeholder="Add YouTube video ID or URL..."
+                          placeholder="Add example label..."
                           className="bg-[#0f0f0f] border-neutral-700 text-white"
                           onKeyPress={(e) => e.key === "Enter" && addVideo(tier)}
                         />
@@ -1002,12 +971,9 @@ export default function AdminDashboard() {
                         {content.pricing[tier].videos.map((videoId, index) => (
                           <div key={index} className="relative">
                             <div className="aspect-video bg-neutral-900 rounded-lg overflow-hidden">
-                              <iframe
-                                src={`https://www.youtube.com/embed/${videoId}`}
-                                className="w-full h-full"
-                                allowFullScreen
-                                title={`${tier} plan video ${index + 1}`}
-                              />
+                              <div className="flex h-full w-full items-center justify-center text-xs text-neutral-500">
+                                Preview {index + 1}
+                              </div>
                             </div>
                             <Button
                               variant="ghost"
@@ -1642,9 +1608,9 @@ export default function AdminDashboard() {
                 </p>
               </div>
               <div>
-                <p className="text-white font-medium mb-2">How do I add new videos to pricing plans?</p>
+                <p className="text-white font-medium mb-2">How do I add new examples to pricing plans?</p>
                 <p className="text-neutral-400 text-sm">
-                  Go to Pricing section, select a plan, and add YouTube video IDs in the Video Examples field.
+                  Go to Pricing section, select a plan, and add labels in the Video Examples field.
                 </p>
               </div>
               <div>

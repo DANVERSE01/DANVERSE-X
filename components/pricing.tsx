@@ -2,10 +2,14 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { CheckCircle2 } from "lucide-react"
-import { ExamplesDialog } from "./examples-dialog"
+
+const ExamplesDialog = dynamic(() => import("./examples-dialog").then(mod => ({ default: mod.ExamplesDialog })), {
+  ssr: false,
+})
 
 type Feature = { text: string; muted?: boolean }
 

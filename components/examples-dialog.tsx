@@ -67,3 +67,5 @@ export function ExamplesDialog({ open, onOpenChange, planName, price, videoIds }
     </Dialog>
   )
 }
+
+export default ExamplesDialog

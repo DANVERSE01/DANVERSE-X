@@ -206,21 +206,21 @@ export function Pricing() {
         onOpenChange={(v) => setOpenPlan(v ? "Startup" : null)}
         planName="Startup Plan"
         price={PRICES[currency].startup}
-        videoIds={startupVideos}
+        videoIds={[]}
       />
       <ExamplesDialog
         open={openPlan === "Pro"}
         onOpenChange={(v) => setOpenPlan(v ? "Pro" : null)}
         planName="Pro Plan"
         price={PRICES[currency].pro}
-        videoIds={proVideos}
+        videoIds={[]}
       />
       <ExamplesDialog
         open={openPlan === "Premium"}
         onOpenChange={(v) => setOpenPlan(v ? "Premium" : null)}
         planName="Premium Plan"
         price={PRICES[currency].premium}
-        videoIds={premiumVideos}
+        videoIds={[]}
       />
     </section>
   )

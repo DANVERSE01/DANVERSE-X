@@ -41,6 +41,22 @@ const PRICES = {
 
 type Currency = "INR" | "USD"
 
+type StepOption = {
+  id: string
+  title: string
+  emoji: string
+  action: () => void
+  price?: string
+  subtitle?: string
+}
+
+type StepContent = {
+  title: string
+  subtitle?: string
+  options?: StepOption[]
+  isSummary?: boolean
+}
+
 function guessLocalCurrency(): Currency {
   const lang = typeof navigator !== "undefined" ? navigator.language : ""
   const tz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : ""
@@ -252,7 +268,7 @@ export default function CheckoutPage() {
     return (currentStep / totalSteps) * 100
   }
 
-  const getStepContent = () => {
+  const getStepContent = (): StepContent => {
     // Step 1: 3D Model Question (only for Pro plan)
     if (currentStep === 1 && !order.package?.includes3DModeling) {
       return {
@@ -558,11 +574,11 @@ export default function CheckoutPage() {
                           <div className="font-semibold text-white text-base group-hover:text-[#C6FF3A] transition-colors sm:text-lg">
                             {option.title}
                           </div>
-                          {option.price && (
+                          {"price" in option && option.price && (
                             <div className="text-[#C6FF3A] font-bold text-sm sm:text-base">{option.price}</div>
                           )}
                         </div>
-                        {option.subtitle && (
+                        {"subtitle" in option && option.subtitle && (
                           <div className="text-neutral-400 text-sm mt-1 sm:text-base">{option.subtitle}</div>
                         )}
                       </div>

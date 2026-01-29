@@ -4,11 +4,11 @@ import { Play } from "lucide-react"
 
 const ACCENT = "#C6FF3A"
 
-type YouTubeGridProps = {
+type ExampleGridProps = {
   videoIds: string[]
 }
 
-export default function YouTubeGrid({ videoIds }: YouTubeGridProps) {
+export default function ExampleGrid({ videoIds }: ExampleGridProps) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {videoIds.map((_, idx) => (
@@ -25,12 +25,14 @@ export default function YouTubeGrid({ videoIds }: YouTubeGridProps) {
           {/* Overlay Controls Placeholder */}
           <div className="pointer-events-none absolute inset-x-0 bottom-3 z-20 flex items-center justify-center">
             <button
-              className="pointer-events-auto rounded-full px-3 py-1 text-xs font-medium text-black transition-colors opacity-50 cursor-not-allowed"
+              aria-disabled="true"
+              className="pointer-events-none rounded-full px-3 py-1 text-xs font-medium text-black transition-colors opacity-50 cursor-not-allowed"
               style={{ backgroundColor: ACCENT }}
-              disabled
+              tabIndex={-1}
+              type="button"
             >
               <span className="inline-flex items-center gap-1">
-                <Play className="h-3.5 w-3.5" /> Play
+                <Play className="h-3.5 w-3.5" /> Preview
               </span>
             </button>
           </div>

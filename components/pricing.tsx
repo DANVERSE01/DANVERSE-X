@@ -44,9 +44,7 @@ function guessLocalCurrency(): Currency {
   return "USD"
 }
 
-const startupVideos = ["H1h5dHpp1Nw", "HXARcSSdfMU", "fd8zraQ1JdE", "ARQyF2FA3Ec", "dEZfHADlFtw", "wuyfdfKO6Rc"]
-const proVideos = ["ASV2myPRfKA", "eTfS2lqwf6A", "KALbYHmGV4I", "Go0AA9hZ4as", "sB7RZ9QCOAg", "TK2WboJOJaw"]
-const premiumVideos = ["v2AC41dglnM", "pRpeEdMmmQ0", "3AtDnEC4zak", "JRfuAukYTKg", "LsoLEjrDogU", "RB-RcX5DS5A"]
+const EXAMPLE_TILES = Array.from({ length: 6 }, (_, index) => `Example ${index + 1}`)
 
 export function Pricing() {
   const [openPlan, setOpenPlan] = useState<null | "Startup" | "Pro" | "Premium">(null)
@@ -206,21 +204,21 @@ export function Pricing() {
         onOpenChange={(v) => setOpenPlan(v ? "Startup" : null)}
         planName="Startup Plan"
         price={PRICES[currency].startup}
-        videoIds={[]}
+        videoIds={EXAMPLE_TILES}
       />
       <ExamplesDialog
         open={openPlan === "Pro"}
         onOpenChange={(v) => setOpenPlan(v ? "Pro" : null)}
         planName="Pro Plan"
         price={PRICES[currency].pro}
-        videoIds={[]}
+        videoIds={EXAMPLE_TILES}
       />
       <ExamplesDialog
         open={openPlan === "Premium"}
         onOpenChange={(v) => setOpenPlan(v ? "Premium" : null)}
         planName="Premium Plan"
         price={PRICES[currency].premium}
-        videoIds={[]}
+        videoIds={EXAMPLE_TILES}
       />
     </section>
   )

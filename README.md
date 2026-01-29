@@ -1,80 +1,91 @@
-# DANVERSE AI Website
+# DANVERSE-X
 
-A premium creative studio website built with Next.js 15, featuring cinematic WebGL backgrounds, professional UI components, and a cohesive red/orange brand identity.
+A Next.js project structured with the App Router, reusable UI components, and multiple content routes for a marketing-style site.
+
+## Badges
+
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)
+
+CI/CD Pipeline badge: TBD – not confirmed from repo (no origin remote configured).
+
+## Table of Contents
+
+- [Features](#features)
+- [Quickstart](#quickstart)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Scripts](#scripts)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
 
 ## Features
 
-- **Cinematic Aurora Background** - Pure WebGL shader-based animated background with smooth flowing effects
-- **Professional Logo System** - Custom DANVERSE branding with multiple variants (emblem, wordmark, lockups)
-- **Responsive Design** - Fully responsive across all devices
-- **Modern Stack** - Next.js 15, React 19, Tailwind CSS 4, TypeScript
-- **shadcn/ui Components** - Premium UI components with custom styling
-- **Dark Mode** - Full dark mode support
+- Next.js App Router layout and routes under `app/`.
+- Dedicated routes for About, FAQ, checkout, admin, revisions, and terms pages.
+- API route handlers under `app/api`.
+- SEO assets including `sitemap.xml` and `robots.txt`.
+- Reusable UI components organized under `components/` and `components/ui`.
 
-## Tech Stack
+## Quickstart
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
-- **UI Components**: shadcn/ui
-- **Fonts**: Space Grotesk, Inter
-- **Graphics**: Pure WebGL shaders
+Clone the repository (URL TBD – not confirmed from repo because no origin remote is configured in this snapshot):
 
-## Getting Started
+```bash
+git clone <TBD>
+cd DANVERSE-X
+```
 
-1. Clone the repository:
-\`\`\`bash
-git clone https://github.com/YOUR_USERNAME/danverse-ai-website.git
-cd danverse-ai-website
-\`\`\`
+Install dependencies:
 
-2. Install dependencies:
-\`\`\`bash
-npm install
-\`\`\`
+```bash
+pnpm install
+```
 
-3. Run the development server:
-\`\`\`bash
-npm run dev
-\`\`\`
+Start the development server:
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+```bash
+pnpm dev
+```
 
 ## Project Structure
 
-\`\`\`
-├── app/                    # Next.js App Router pages
-│   ├── About/             # About page
-│   ├── admin/             # Admin dashboard
-│   ├── checkout/          # Checkout flow
-│   ├── faq/               # FAQ page
-│   ├── revisions/         # Revisions policy
-│   ├── t&c/               # Terms & conditions
-│   └── page.tsx           # Homepage
-├── components/            # React components
-│   ├── ui/               # shadcn/ui components
-│   ├── danverse-logo.tsx # Logo system
-│   ├── hero.tsx          # Hero section
-│   ├── features.tsx      # Features section
-│   ├── pricing.tsx       # Pricing section
-│   ├── plasma.tsx        # WebGL Aurora background
-│   └── ...
-├── lib/                   # Utility functions
-├── public/               # Static assets
-└── styles/               # Global styles
-\`\`\`
+```text
+.
+├── app/                # App Router routes, layouts, and assets
+├── components/         # Reusable UI components
+├── files/              # Project assets and supporting files
+├── lib/                # Shared utilities
+├── public/             # Static assets
+├── styles/             # Global styling
+├── .github/            # GitHub workflows and templates
+├── middleware.ts       # Next.js middleware
+└── package.json        # Scripts and dependencies
+```
 
-## Deployment
+## Configuration
 
-Deploy to Vercel with one click:
+This project does not require environment variables for basic local development (based on current code).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/danverse-ai-website)
+## Scripts
+
+- `pnpm dev` - run the development server
+- `pnpm build` - build the production app
+- `pnpm start` - run the production server
+- `pnpm lint` - run ESLint
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for reporting guidance.
 
 ## License
 
-All rights reserved. DANVERSE Creative Studio.
-
-## Contact
-
-- Email: danverseai@outlook.com
-- Instagram: @danverse.creative
+Licensed under the [MIT License](LICENSE).

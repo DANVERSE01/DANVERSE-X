@@ -429,5 +429,6 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
               </div>
             </div>
           )}
+          }
 
 (Content truncated due to size limit. Use line ranges to read remaining content)

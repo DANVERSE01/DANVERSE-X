@@ -3,8 +3,15 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
-import Plasma from "@/components/plasma"
-import { RobotBackground } from "@/components/RobotBackground"
+import dynamic from "next/dynamic"
+
+// Dynamically import heavy graphical components on the client only. This avoids
+// including WebGL shaders and complex animations in the server bundle, which
+// improves initial page load times and reduces the risk of hydration
+// mismatches. The `ssr: false` option ensures these components are only
+// rendered after the page has mounted on the client.
+const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
+const RobotBackground = dynamic(() => import("@/components/RobotBackground"), { ssr: false })
 import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
@@ -49,7 +56,6 @@ export default function RootLayout({
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
-          fetchPriority="high"
         />
 
         {/* Dynamic Favicon Script */}

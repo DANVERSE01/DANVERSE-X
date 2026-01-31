@@ -63,7 +63,7 @@ export default function RevisionPolicyPage() {
                 </section>
 
                 <section className="space-y-3">
-                  <h2 className="text-xl font-semibold text-white">5. Contact Us</h2>
+                  <h2 className="text-xl font-semibold text-white">5. Book a Call</h2>
                   <p className="text-white/60 text-sm">
                     Email:{" "}
                     <a href="mailto:danverseai@outlook.com" className="text-red-400 hover:underline">

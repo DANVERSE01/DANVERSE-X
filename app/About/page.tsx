@@ -7,7 +7,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "About — DANVERSE",
   description:
-    "DANVERSE is a next generation creative studio combining artificial intelligence, cinematic storytelling, and sharp strategy.",
+    "DANVERSE is built for teams that need premium creative on repeat. We lock direction first, then ship ads, brand systems, and content workflows with consistency across every campaign.",
 }
 
 export default function AboutPage() {
@@ -18,7 +18,7 @@ export default function AboutPage() {
     url: "https://danverse.com",
     logo: "https://danverse.com/logo.png",
     description:
-      "DANVERSE is a next generation creative studio that combines artificial intelligence, cinematic storytelling, and sharp strategy.",
+      "DANVERSE is built for teams that need premium creative on repeat. We lock direction first, then ship ads, brand systems, and content workflows with consistency across every campaign.",
     sameAs: ["https://www.instagram.com/danverse.creative"],
     contactPoint: [
       {
@@ -32,27 +32,27 @@ export default function AboutPage() {
   const features = [
     {
       title: "Cinematic Ads & UGC",
-      desc: "High impact vertical and horizontal videos for TikTok, Reels, and campaigns with strong hooks and storytelling.",
+      desc: "Cinematic performance ads with platform-native pacing.",
     },
     {
       title: "Branding & Visual Identity",
-      desc: "Logos, visual systems, hero graphics, and brand worlds that feel premium, futuristic, and consistent.",
+      desc: "Brand systems that keep every asset on-model.",
     },
     {
       title: "Websites & Landing Pages",
-      desc: "Modern websites and landing pages using clean UI, strong copy, and smooth motion.",
+      desc: "Conversion structure + premium feel, built to close.",
     },
     {
       title: "AI Content Systems",
-      desc: "Custom AI workflows that generate scripts, posts, emails, and content on demand.",
+      desc: "Your brand voice, automated into repeatable output.",
     },
     {
       title: "Strategic Guidance",
-      desc: "High level consulting on AI tools, prompt writing, and building creative systems that make money.",
+      desc: "Direction and campaign planning that removes guesswork.",
     },
     {
       title: "Global Reach",
-      desc: "Serving brands worldwide with world-class cinematic visuals and creative solutions.",
+      desc: "Remote-first delivery built for speed and clarity.",
     },
   ]
 
@@ -72,8 +72,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
-              A next generation creative studio combining artificial intelligence, cinematic storytelling, and sharp
-              strategy.
+              DANVERSE is built for teams that need premium creative on repeat. We lock direction first, then ship ads, brand systems, and content workflows with consistency across every campaign.
             </p>
           </div>
         </section>
@@ -106,7 +105,7 @@ export default function AboutPage() {
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
               <Link href="https://wa.me/201207346648" target="_blank">
-                Get in Touch
+                Book a Call
               </Link>
             </Button>
           </div>

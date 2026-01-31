@@ -37,13 +37,14 @@ export function Features() {
       </h2>
 
       <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
-        {/* Cinematic Visuals Card */}
+        {/* Cinematic Visuals Card -> CRAFT + CONTROL */}
         <Card className="liquid-glass border border-white/10 overflow-hidden">
           <CardHeader className="pb-4">
-            <p className="text-[11px] tracking-widest text-red-400 uppercase">Cinematic Visuals</p>
-            <CardTitle className="mt-1 text-xl text-white">Make the experience truly memorable</CardTitle>
+            <p className="text-[11px] tracking-widest text-red-400 uppercase">CRAFT + CONTROL</p>
+            <CardTitle className="mt-1 text-xl text-white">Cinematic, without the chaos</CardTitle>
           </CardHeader>
           <CardContent>
+            <p className="text-sm text-white/60 mb-4">Every shot has a purpose. Every detail serves the outcome.</p>
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
@@ -67,22 +68,23 @@ export function Features() {
           </CardContent>
         </Card>
 
-        {/* Client Love Card */}
+        {/* Client Feedback Card -> CLIENT FEEDBACK */}
         <Card className="liquid-glass border border-white/10 overflow-hidden">
           <CardHeader className="pb-4">
-            <p className="text-[11px] tracking-widest text-red-400 uppercase">Client Love</p>
+            <p className="text-[11px] tracking-widest text-red-400 uppercase">CLIENT FEEDBACK</p>
             <CardTitle className="mt-1 text-xl text-white">
-              Campaigns that move the needle — audiences feel the difference instantly.
+              Five-star standard delivery
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="mb-5 flex items-end gap-3">
-              <div className="text-4xl font-bold text-red-400">4.9</div>
-              <div className="flex items-center gap-0.5 pb-1">
+            <p className="text-sm text-white/60 mb-4">We ship only when it’s right, not when it’s “almost done.”</p>
+            <div className="mb-5 flex flex-col items-start gap-1">
+              <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-red-400 text-red-400" />
                 ))}
               </div>
+              <div className="text-[10px] font-medium text-red-400 uppercase tracking-wider">Post-project feedback</div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <Image
@@ -102,6 +104,13 @@ export function Features() {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* AI Content Systems Block */}
+      <div className="mt-12 max-w-5xl mx-auto p-8 rounded-2xl liquid-glass border border-white/10 text-center">
+        <p className="text-lg text-white/80 leading-relaxed">
+          We build AI workflows that turn briefs into hooks, scripts, and campaign variants with your brand rules locked in.
+        </p>
       </div>
     </section>
   )

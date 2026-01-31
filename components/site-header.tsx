@@ -103,7 +103,7 @@ export function SiteHeader() {
               className="bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-full px-5 hover:from-red-400 hover:to-orange-400 transition-all"
             >
               <Link href="https://wa.me/201207346648" target="_blank">
-                Chat With Us
+                Book a Call
               </Link>
             </Button>
           </div>

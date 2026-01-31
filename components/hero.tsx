@@ -12,14 +12,28 @@ export function Hero() {
             <DanverseLogo size="hero" />
           </div>
 
+          {/* Eyebrow Label */}
+          <div className="mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
+            CREATIVE OPERATING SYSTEM
+          </div>
+
           {/* Headline */}
           <h1 className="text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            <span className="block text-white">AI-POWERED</span>
-            <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
-              CREATIVE STUDIO
+            <span className="block text-white uppercase">Cinematic Ads</span>
+            <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent uppercase">
+              Built for Scale
             </span>
-            <span className="block text-white">FOR BRANDS</span>
           </h1>
+
+          {/* Subheadline */}
+          <p className="mt-6 text-center text-lg text-white/70 max-w-2xl mx-auto">
+            A premium creative studio that builds ads, brand systems, and AI workflows into one repeatable output engine.
+          </p>
+
+          {/* Micro Line */}
+          <p className="mt-2 text-center text-sm text-white/50 italic">
+            Direction locked. Output consistent. Delivery predictable.
+          </p>
 
           {/* CTA Button */}
           <div className="mt-8">
@@ -29,7 +43,7 @@ export function Hero() {
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
             >
               <a href="https://wa.me/201207346648" target="_blank" rel="noopener noreferrer">
-                Chat With Us
+                Book a Call
               </a>
             </Button>
           </div>
@@ -96,18 +110,18 @@ function PhoneCard({
 const phoneData = [
   {
     title: "Conversions",
-    sub: "Turn clicks into paying customers.",
+    sub: "Creative engineered for response, not just attention.",
     tone: "results",
     videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
   },
   {
     title: "Speed",
-    sub: "Launch in days, not weeks.",
+    sub: "Fast sprints. Tight reviews. Clean handoff.",
     tone: "speed",
   },
   {
     title: "Social-Ready",
-    sub: "Made for IG, TikTok, and Meta.",
+    sub: "Native pacing and exports for Reels, TikTok, and paid social.",
     tone: "social",
     videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
   },

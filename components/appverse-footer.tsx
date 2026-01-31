@@ -44,7 +44,7 @@ export function AppverseFooter() {
             className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
           >
             <a href="https://wa.me/201207346648" target="_blank" rel="noopener noreferrer">
-              Contact Us
+              Book a Call
             </a>
           </Button>
         </div>

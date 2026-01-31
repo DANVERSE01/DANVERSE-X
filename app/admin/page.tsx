@@ -123,7 +123,7 @@ const defaultContent: ContentData = {
   hero: {
     title: "HIGH-IMPACT CINEMATIC ADS & CREATIVE",
     subtitle: "DANVERSE",
-    buttonText: "Chat With Us",
+    buttonText: "Book a Call",
   },
   features: {
     title: "What makes us the best creative studio for you.",

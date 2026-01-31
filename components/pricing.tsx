@@ -47,7 +47,7 @@ function guessLocalCurrency(): Currency {
 const EXAMPLE_TILES = Array.from({ length: 6 }, (_, index) => `Example ${index + 1}`)
 
 export function Pricing() {
-  const [openPlan, setOpenPlan] = useState<null | "Startup" | "Pro" | "Premium">(null)
+  const [openPlan, setOpenPlan] = useState<null | "Starter" | "Campaign" | "System">(null)
   const [currency, setCurrency] = useState<Currency>("USD")
 
   useEffect(() => {
@@ -87,26 +87,26 @@ export function Pricing() {
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
               <Link href="https://wa.me/201207346648" target="_blank">
-                Contact Now
+                Book a Call
               </Link>
             </Button>
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3 max-w-5xl mx-auto">
-          {/* Startup */}
+          {/* Starter */}
           <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
             <div className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-medium bg-white/10 text-white/70">
               {PRICES[currency].save}
             </div>
             <CardHeader className="space-y-2 pb-4">
-              <div className="text-sm font-semibold text-white">Startup</div>
+              <div className="text-sm font-semibold text-white">Starter</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-3xl font-bold text-white">{PRICES[currency].startup}</span>
                 <span className="text-xs text-white/50">per video</span>
               </div>
               <Button
-                onClick={() => setOpenPlan("Startup")}
+                onClick={() => setOpenPlan("Starter")}
                 className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
               >
                 View Examples
@@ -128,12 +128,12 @@ export function Pricing() {
             </CardContent>
           </Card>
 
-          {/* Pro - Featured */}
+          {/* Campaign - Featured */}
           <Card className="relative overflow-hidden rounded-2xl liquid-glass-enhanced border-red-500/30 ring-1 ring-red-500/20">
             <div className="absolute -top-px left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-orange-500" />
             <CardHeader className="space-y-2 pb-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-white">Pro</span>
+                <span className="text-sm font-semibold text-white">Campaign</span>
                 <span className="text-[10px] font-medium bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full">
                   Popular
                 </span>
@@ -143,7 +143,7 @@ export function Pricing() {
                 <span className="text-xs text-white/50">per video</span>
               </div>
               <Button
-                onClick={() => setOpenPlan("Pro")}
+                onClick={() => setOpenPlan("Campaign")}
                 className="w-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-400 hover:to-orange-400 mt-2"
               >
                 View Examples
@@ -165,16 +165,16 @@ export function Pricing() {
             </CardContent>
           </Card>
 
-          {/* Premium */}
+          {/* System */}
           <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
             <CardHeader className="space-y-2 pb-4">
-              <div className="text-sm font-semibold text-white">Premium</div>
+              <div className="text-sm font-semibold text-white">System</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-3xl font-bold text-white">{PRICES[currency].premium}</span>
                 <span className="text-xs text-white/50">per video</span>
               </div>
               <Button
-                onClick={() => setOpenPlan("Premium")}
+                onClick={() => setOpenPlan("System")}
                 className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
               >
                 View Examples
@@ -200,23 +200,23 @@ export function Pricing() {
 
       {/* Modals */}
       <ExamplesDialog
-        open={openPlan === "Startup"}
-        onOpenChange={(v) => setOpenPlan(v ? "Startup" : null)}
-        planName="Startup Plan"
+        open={openPlan === "Starter"}
+        onOpenChange={(v) => setOpenPlan(v ? "Starter" : null)}
+        planName="Starter Plan"
         price={PRICES[currency].startup}
         videoIds={EXAMPLE_TILES}
       />
       <ExamplesDialog
-        open={openPlan === "Pro"}
-        onOpenChange={(v) => setOpenPlan(v ? "Pro" : null)}
-        planName="Pro Plan"
+        open={openPlan === "Campaign"}
+        onOpenChange={(v) => setOpenPlan(v ? "Campaign" : null)}
+        planName="Campaign Plan"
         price={PRICES[currency].pro}
         videoIds={EXAMPLE_TILES}
       />
       <ExamplesDialog
-        open={openPlan === "Premium"}
-        onOpenChange={(v) => setOpenPlan(v ? "Premium" : null)}
-        planName="Premium Plan"
+        open={openPlan === "System"}
+        onOpenChange={(v) => setOpenPlan(v ? "System" : null)}
+        planName="System Plan"
         price={PRICES[currency].premium}
         videoIds={EXAMPLE_TILES}
       />

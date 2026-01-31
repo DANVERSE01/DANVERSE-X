@@ -1,13 +1,14 @@
-export const runtime = 'edge';
-
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.danverse.ai';
+
   return {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin/', '/api/'],
     },
-    sitemap: 'https://www.danverse.ai/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

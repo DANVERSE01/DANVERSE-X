@@ -1,39 +1,29 @@
-# Contributing
+# Contributing to DANVERSE-X
 
-Thanks for taking the time to contribute! This repository welcomes issues and pull requests that improve documentation, reliability, and maintainability.
+Thank you for your interest in contributing to DANVERSE-X! We welcome contributions that improve documentation, reliability, and maintainability.
 
-## How to Contribute
+## How Can I Contribute?
 
-1. **Open an issue** describing the bug, enhancement, or documentation change.
-2. **Fork the repo** and create a branch from `main`.
-3. **Make focused changes** that are easy to review.
-4. **Open a pull request** with a clear summary and testing notes.
+### Reporting Bugs
 
-## Branch Naming
+- **Search for existing issues:** Check if the problem has already been reported.
+- **Use the Bug Report template:** Provide clear steps to reproduce, expected behavior, and environment details.
 
-Use a short, descriptive prefix:
+### Suggesting Enhancements
 
-- `feat/short-description`
-- `fix/short-description`
-- `docs/short-description`
-- `chore/short-description`
+- **Open a Feature Request:** Describe the proposed improvement and its benefits.
 
-## Code Style
+### Pull Requests
 
-- Follow existing project conventions.
-- Keep changes minimal and well-scoped.
-- Avoid introducing new dependencies unless absolutely necessary.
+1. **Fork the repo** and create your branch from `main`.
+2. **Branch naming convention:**
+   - `feat/description` for new features.
+   - `fix/description` for bug fixes.
+   - `docs/description` for documentation.
+   - `chore/description` for maintenance.
+3. **Follow code style:** Keep changes focused and consistent with the existing codebase.
+4. **Validation:** Run `pnpm lint` and `pnpm build` before submitting.
 
-## Reporting Issues
+## Code of Conduct
 
-When filing a bug report, include:
-
-- Steps to reproduce
-- Expected vs. actual behavior
-- Environment details (OS, Node.js version, package manager)
-
-## Pull Request Checklist
-
-- [ ] Changes are focused and documented
-- [ ] Relevant scripts (lint/test/build) were run when applicable
-- [ ] Documentation updated if behavior changed
+All contributors are expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md).

@@ -62,7 +62,7 @@ export function FeaturesArchviz() {
           </CardHeader>
           <CardContent>
             <div className="mb-6 flex items-end gap-4">
-              <div className="text-5xl font-bold text-lime-300">4.9</div>
+              <div className="text-5xl font-bold text-lime-300">★★★★★</div>
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-5 w-5 fill-lime-300 text-lime-300" />

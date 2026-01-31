@@ -1,6 +1,6 @@
 # DANVERSE-X
 
-A Next.js project structured with the App Router, reusable UI components, and multiple content routes for a marketing-style site.
+A Next.js App Router project with reusable UI components and multiple content routes for a marketing-style site.
 
 ## Badges
 
@@ -10,7 +10,7 @@ A Next.js project structured with the App Router, reusable UI components, and mu
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)
 
-CI/CD Pipeline badge: TBD – not confirmed from repo (no origin remote configured).
+Build status badge is not included because a repository origin URL is not configured in this checkout.
 
 ## Table of Contents
 
@@ -26,14 +26,14 @@ CI/CD Pipeline badge: TBD – not confirmed from repo (no origin remote configur
 ## Features
 
 - Next.js App Router layout and routes under `app/`.
-- Dedicated routes for About, FAQ, checkout, admin, revisions, and terms pages.
+- Dedicated routes for About, FAQ, checkout, revisions, and terms pages.
 - API route handlers under `app/api`.
-- SEO assets including `sitemap.xml` and `robots.txt`.
+- SEO assets including `sitemap.xml` and `robots.txt` routes.
 - Reusable UI components organized under `components/` and `components/ui`.
 
 ## Quickstart
 
-Clone the repository (URL TBD – not confirmed from repo because no origin remote is configured in this snapshot):
+Clone the repository (URL TBD – origin remote is not configured in this checkout):
 
 ```bash
 git clone <TBD>

@@ -78,15 +78,29 @@ export default function Page() {
     <>
       {/* Aurora background is now rendered in layout.tsx */}
 
-      <main className="min-h-[100dvh] text-white relative z-10">
-        <SiteHeader />
-        <Hero />
-        <Features />
-        <LogoMarquee />
-        <Pricing />
-        <AppverseFooter />
-        {/* Scroll-to-top button for improved navigation */}
-        <ScrollToTop />
+      <main className="min-h-[100dvh] text-white relative z-10 pointer-events-none">
+        <div className="pointer-events-auto">
+          <SiteHeader />
+        </div>
+        <div className="pointer-events-auto">
+          <Hero />
+        </div>
+        <div className="pointer-events-auto">
+          <Features />
+        </div>
+        <div className="pointer-events-auto">
+          <LogoMarquee />
+        </div>
+        <div className="pointer-events-auto">
+          <Pricing />
+        </div>
+        <div className="pointer-events-auto">
+          <AppverseFooter />
+        </div>
+        <div className="pointer-events-auto">
+          {/* Scroll-to-top button for improved navigation */}
+          <ScrollToTop />
+        </div>
       </main>
 
       {/* JSON-LD structured data */}

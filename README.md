@@ -1,6 +1,6 @@
 # DANVERSE-X
 
-DANVERSE-X is an AI-powered creative studio platform built with Next.js for delivering cinematic advertisements, branding, and intelligent content systems.
+DANVERSE-X is a premium AI-powered creative studio platform built with Next.js for delivering cinematic advertisements, branding, and intelligent content systems.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
@@ -26,8 +26,8 @@ DANVERSE-X is an AI-powered creative studio platform built with Next.js for deli
 - **Next.js App Router**: Modern architecture utilizing layouts, optimized routes, and server components.
 - **Premium UI Components**: Built with Radix UI, Lucide Icons, and Tailwind CSS for a professional look and feel.
 - **3D Visualizations**: Integrated with Spline and React Three Fiber for immersive web experiences.
-- **SEO & Performance**: Dynamic sitemaps, robots.txt, and JSON-LD structured data for maximum visibility.
-- **Comprehensive Content Routes**: Dedicated pages for FAQ, Checkout, Revisions, and Service-specific landing pages.
+- **SEO & Performance**: Optimized robots.txt and sitemap.xml with Edge runtime support.
+- **Comprehensive Content Routes**: Dedicated pages for FAQ, About, Revisions, and Service-specific landing pages.
 
 ## Quickstart
 
@@ -73,7 +73,7 @@ DANVERSE-X is an AI-powered creative studio platform built with Next.js for deli
 
 The project uses environment variables for configuration. Create a `.env.local` file based on `.env.example`:
 
-- `NEXT_PUBLIC_SITE_URL`: The base URL of the deployed site.
+- `NEXT_PUBLIC_SITE_URL`: The base URL of the deployed site for sitemap generation.
 - `NEXT_PUBLIC_WHATSAPP_NUMBER`: Contact phone number for WhatsApp integration.
 - `NEXT_PUBLIC_CONTACT_EMAIL`: Official support and contact email.
 

@@ -1,6 +1,6 @@
 ## Description
 
-Please include a summary of the change and which issue is fixed. Include relevant motivation and context. List any dependencies that are required for this change.
+Please include a summary of the change and which issue is fixed. Include relevant motivation and context.
 
 ## Type of Change
 
@@ -12,11 +12,9 @@ Please include a summary of the change and which issue is fixed. Include relevan
 
 ## How Has This Been Tested?
 
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration.
-
 - [ ] `pnpm lint`
 - [ ] `pnpm build`
-- [ ] Manual verification (please describe)
+- [ ] Manual verification
 
 ## Checklist
 
@@ -25,6 +23,4 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
-- [ ] Any dependent changes have been merged and published in downstream modules
+- [ ] New and existing tests pass locally with my changes

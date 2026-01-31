@@ -1,39 +1,38 @@
-# Contributing
+# Contributing to DANVERSE-X
 
-Thanks for taking the time to contribute! This repository welcomes issues and pull requests that improve documentation, reliability, and maintainability.
+First off, thank you for considering contributing to DANVERSE-X! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
 
-## How to Contribute
+## How Can I Contribute?
 
-1. **Open an issue** describing the bug, enhancement, or documentation change.
-2. **Fork the repo** and create a branch from `main`.
-3. **Make focused changes** that are easy to review.
-4. **Open a pull request** with a clear summary and testing notes.
+### Reporting Bugs
 
-## Branch Naming
+- **Check for existing issues:** Before opening a new issue, please search the tracker to see if the problem has already been reported.
+- **Use the Bug Report template:** Provide as much information as possible, including steps to reproduce, expected behavior, and environment details.
 
-Use a short, descriptive prefix:
+### Suggesting Enhancements
 
-- `feat/short-description`
-- `fix/short-description`
-- `docs/short-description`
-- `chore/short-description`
+- **Open a Feature Request:** Describe the proposed enhancement and why it would be useful for the project.
 
-## Code Style
+### Pull Requests
 
-- Follow existing project conventions.
-- Keep changes minimal and well-scoped.
-- Avoid introducing new dependencies unless absolutely necessary.
+1. **Fork the repo** and create your branch from `main`.
+2. **Branch naming convention:**
+   - `feat/short-description` for new features.
+   - `fix/short-description` for bug fixes.
+   - `docs/short-description` for documentation changes.
+   - `chore/short-description` for maintenance tasks.
+3. **Follow the code style:** Ensure your code matches the existing style of the project.
+4. **Pass all checks:** Run `pnpm lint` and `pnpm build` before submitting.
+5. **Update documentation:** If you're adding or changing functionality, update the README or other documentation as needed.
 
-## Reporting Issues
+## Development Workflow
 
-When filing a bug report, include:
+1. Clone your fork.
+2. Install dependencies with `pnpm install`.
+3. Create a new branch.
+4. Make your changes and commit them with descriptive messages.
+5. Push your branch and open a Pull Request.
 
-- Steps to reproduce
-- Expected vs. actual behavior
-- Environment details (OS, Node.js version, package manager)
+## Code of Conduct
 
-## Pull Request Checklist
-
-- [ ] Changes are focused and documented
-- [ ] Relevant scripts (lint/test/build) were run when applicable
-- [ ] Documentation updated if behavior changed
+By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).

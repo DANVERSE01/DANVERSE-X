@@ -1,16 +1,13 @@
 # DANVERSE-X
 
-A Next.js project structured with the App Router, reusable UI components, and multiple content routes for a marketing-style site.
+DANVERSE-X is an AI-powered creative studio platform built with Next.js for delivering cinematic advertisements, branding, and intelligent content systems.
 
-## Badges
-
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)
-
-CI/CD Pipeline badge: TBD – not confirmed from repo (no origin remote configured).
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![CI/CD Pipeline](https://github.com/DANVERSE01/DANVERSE-X/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DANVERSE01/DANVERSE-X/actions/workflows/ci.yml)
 
 ## Table of Contents
 
@@ -25,67 +22,76 @@ CI/CD Pipeline badge: TBD – not confirmed from repo (no origin remote configur
 
 ## Features
 
-- Next.js App Router layout and routes under `app/`.
-- Dedicated routes for About, FAQ, checkout, admin, revisions, and terms pages.
-- API route handlers under `app/api`.
-- SEO assets including `sitemap.xml` and `robots.txt`.
-- Reusable UI components organized under `components/` and `components/ui`.
+- **AI-Powered Creative Studio**: Specialized in cinematic ads, bold branding, and smart content systems.
+- **Next.js App Router**: Modern architecture utilizing layouts, optimized routes, and server components.
+- **Premium UI Components**: Built with Radix UI, Lucide Icons, and Tailwind CSS for a professional look and feel.
+- **3D Visualizations**: Integrated with Spline and React Three Fiber for immersive web experiences.
+- **SEO & Performance**: Dynamic sitemaps, robots.txt, and JSON-LD structured data for maximum visibility.
+- **Comprehensive Content Routes**: Dedicated pages for FAQ, Checkout, Revisions, and Service-specific landing pages.
 
 ## Quickstart
 
-Clone the repository (URL TBD – not confirmed from repo because no origin remote is configured in this snapshot):
+### Prerequisites
 
-```bash
-git clone <TBD>
-cd DANVERSE-X
-```
+- Node.js 18+
+- pnpm 9+
 
-Install dependencies:
+### Installation
 
-```bash
-pnpm install
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/DANVERSE01/DANVERSE-X.git
+   cd DANVERSE-X
+   ```
 
-Start the development server:
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-```bash
-pnpm dev
-```
+3. Start the development server:
+   ```bash
+   pnpm dev
+   ```
 
 ## Project Structure
 
 ```text
 .
-├── app/                # App Router routes, layouts, and assets
-├── components/         # Reusable UI components
-├── files/              # Project assets and supporting files
-├── lib/                # Shared utilities
-├── public/             # Static assets
-├── styles/             # Global styling
-├── .github/            # GitHub workflows and templates
-├── middleware.ts       # Next.js middleware
-└── package.json        # Scripts and dependencies
+├── app/                # App Router routes, layouts, and API handlers
+├── components/         # Reusable UI and layout components
+├── files/              # Support files and source assets
+├── lib/                # Shared utility functions and types
+├── public/             # Static assets (images, fonts, etc.)
+├── styles/             # Global CSS and Tailwind configurations
+├── .github/            # GitHub Actions and repository templates
+├── middleware.ts       # Next.js middleware for authentication
+└── package.json        # Project metadata, scripts, and dependencies
 ```
 
 ## Configuration
 
-This project does not require environment variables for basic local development (based on current code).
+The project uses environment variables for configuration. Create a `.env.local` file based on `.env.example`:
+
+- `NEXT_PUBLIC_SITE_URL`: The base URL of the deployed site.
+- `NEXT_PUBLIC_WHATSAPP_NUMBER`: Contact phone number for WhatsApp integration.
+- `NEXT_PUBLIC_CONTACT_EMAIL`: Official support and contact email.
 
 ## Scripts
 
-- `pnpm dev` - run the development server
-- `pnpm build` - build the production app
-- `pnpm start` - run the production server
-- `pnpm lint` - run ESLint
+- `pnpm dev`: Start the development server.
+- `pnpm build`: Create an optimized production build.
+- `pnpm start`: Run the production server.
+- `pnpm lint`: Run ESLint for code quality checks.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for our guidelines.
 
 ## Security
 
-See [SECURITY.md](SECURITY.md) for reporting guidance.
+For security-related issues, please refer to our [SECURITY.md](SECURITY.md).
 
 ## License
 
-Licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).

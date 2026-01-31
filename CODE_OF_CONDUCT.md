@@ -32,7 +32,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the project maintainers.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the project maintainers at danverseai@outlook.com.
 
 ## Attribution
 

@@ -2,10 +2,10 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please do **not** open a public issue. Instead, use a private reporting channel such as GitHub Security Advisories (if enabled) or contact the project maintainers through a private method.
+If you discover a security vulnerability within this project, please do **not** open a public issue. Instead, please report it privately by emailing **danverseai@outlook.com**.
 
-Please include as much detail as possible to help reproduce and address the issue quickly.
+We appreciate your help in keeping this project secure. Please include as much detail as possible to help us reproduce and address the issue quickly.
 
 ## Supported Versions
 
-This project currently provides security updates only for the latest code on the default branch.
+Security updates are currently provided for the latest version of the project on the `main` branch.

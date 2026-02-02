@@ -54,7 +54,6 @@ export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
 }
 
 export function DanverseEmblem({ size = "md", className = "" }: LogoProps) {
-  const { width, height } = SIZES[size]
   return <DanverseLogo size={size} className={className} />
 }
 

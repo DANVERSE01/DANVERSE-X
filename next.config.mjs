@@ -2,14 +2,8 @@
 const nextConfig = {
   output: 'export',
   distDir: '.next',
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
-  typescript: {
-    ignoreBuildErrors: false,
-  },
   images: {
-    unoptimized: false,
+    unoptimized: true, // Required for static export to serve images correctly
     remotePatterns: [
       {
         protocol: 'https',
@@ -17,6 +11,8 @@ const nextConfig = {
       },
     ],
   },
+  // Ensure trailing slashes for consistent routing on static hosts
+  trailingSlash: true,
 }
 
 export default nextConfig

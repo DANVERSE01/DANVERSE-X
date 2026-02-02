@@ -7,10 +7,7 @@ import { AppverseFooter } from "@/components/appverse-footer"
 import { ScrollToTop } from "./scroll-to-top"
 import Script from "next/script"
 
-// Move structured data objects outside of the component so they are only created
-// once during module initialization. This prevents unnecessary re-creation on
-// every render and makes the component easier to read. These objects contain
-// JSON‑LD for search engine optimization.
+// Structured data for SEO
 const PRICING_STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "WebPageElement",
@@ -76,9 +73,9 @@ const PAGE_STRUCTURED_DATA = {
 export default function Page() {
   return (
     <>
-      {/* Aurora background is now rendered in layout.tsx */}
-
+      {/* Main content wrapper with pointer-events-none to allow robot interaction behind it */}
       <main className="min-h-[100dvh] text-white relative z-10 pointer-events-none">
+        {/* Each section re-enables pointer-events-auto for its interactive elements */}
         <div className="pointer-events-auto">
           <SiteHeader />
         </div>
@@ -98,7 +95,6 @@ export default function Page() {
           <AppverseFooter />
         </div>
         <div className="pointer-events-auto">
-          {/* Scroll-to-top button for improved navigation */}
           <ScrollToTop />
         </div>
       </main>

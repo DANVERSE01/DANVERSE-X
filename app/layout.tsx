@@ -4,17 +4,13 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
 import dynamic from "next/dynamic"
+import { Suspense } from "react"
 
-// Dynamically import heavy graphical components on the client only. This avoids
-// including WebGL shaders and complex animations in the server bundle, which
-// improves initial page load times and reduces the risk of hydration
-// mismatches. The `ssr: false` option ensures these components are only
-// rendered after the page has mounted on the client.
+// Dynamically import heavy graphical components on the client only.
 const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
 const RobotBackground = dynamic(() => import("@/components/RobotBackground").then((mod) => mod.RobotBackground), {
   ssr: false,
 })
-import { Suspense } from "react"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -95,13 +91,21 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body>
+      <body className="bg-black">
+        {/* Robot Background - Interactive Layer */}
         <RobotBackground />
+        
         <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-black">
+          {/* Plasma Background - Visual Layer */}
+          <div className="fixed inset-0 z-0 bg-black pointer-events-none">
             <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />
           </div>
-          <div className="relative z-10">{children}</div>
+          
+          {/* Content Layer - pointer-events-none to let robot receive events, 
+              but children (buttons, links) will re-enable pointer-events-auto */}
+          <div className="relative z-10 pointer-events-none">
+            {children}
+          </div>
         </Suspense>
       </body>
     </html>

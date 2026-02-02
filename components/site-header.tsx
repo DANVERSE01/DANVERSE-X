@@ -57,14 +57,14 @@ export function SiteHeader() {
 
           {/* Desktop Nav - Center */}
           <nav className="hidden items-center gap-8 text-sm text-white/90 md:flex">
-            <NavigationMenu>
+            <NavigationMenu viewport={false}>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-white/90 hover:text-red-400 data-[state=open]:text-red-400 hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
                     Services
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[300px] gap-1 p-2 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl">
+                  <NavigationMenuContent className="md:absolute md:top-full md:left-0 md:mt-2 z-[100]">
+                    <ul className="grid w-[300px] gap-1 p-2 bg-black/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl relative z-[101]">
                       {services.map((service) => (
                         <li key={service.href}>
                           <NavigationMenuLink asChild>

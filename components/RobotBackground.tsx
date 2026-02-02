@@ -1,11 +1,21 @@
 "use client";
 
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 const sceneUrl = "https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode";
 
 export function RobotBackground() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    // Delay loading the heavy 3D scene to prioritize critical path
+    const timer = setTimeout(() => setShouldLoad(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!shouldLoad) return <div className="fixed inset-0 z-[1] bg-black" />;
+
   return (
     <div className="fixed inset-0 z-[1] overflow-hidden" aria-hidden="true">
       <Suspense

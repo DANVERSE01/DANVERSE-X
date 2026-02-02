@@ -167,33 +167,40 @@
   }
 }
 
-/* Apple Site Header Glass Effects */
+/* Apple Site Header Glass Effects - Optimized for performance */
 .liquid-glass {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .liquid-glass-enhanced {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .liquid-glass-header {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .glass-border {
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(0, 0, 0, 0.75);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enable blur only on devices that can handle it smoothly */
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .liquid-glass, .liquid-glass-enhanced, .liquid-glass-header, .glass-border {
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+  .liquid-glass { background: rgba(0, 0, 0, 0.6); }
+  .liquid-glass-enhanced { background: rgba(0, 0, 0, 0.7); }
+  .liquid-glass-header { background: rgba(0, 0, 0, 0.5); }
+  .glass-border { background: rgba(0, 0, 0, 0.5); }
 }
 
 /* Logo Marquee Animations */

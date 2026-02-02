@@ -16,7 +16,12 @@ const RobotBackground = dynamic(() => import("@/components/RobotBackground").the
 })
 import { Suspense } from "react"
 
-const inter = Inter({ subsets: ["latin"], display: "swap" })
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+  preload: true,
+})
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -44,20 +49,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={`${inter.variable} font-sans`}>
       <head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
-        />
-
-        {/* Font Preload */}
-        <link
-          rel="preload"
-          href="/fonts/Inter.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
         />
 
         {/* Dynamic Favicon Script */}

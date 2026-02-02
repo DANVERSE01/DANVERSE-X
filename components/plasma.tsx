@@ -221,20 +221,39 @@ export default function Plasma({
 
     let animationId: number
     const startTime = performance.now()
+    let lastTime = 0
+    const fps = 30
+    const interval = 1000 / fps
+    let isVisible = true
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting
+      },
+      { threshold: 0 },
+    )
+    observer.observe(canvas)
 
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
       canvas.width = canvas.clientWidth * dpr
       canvas.height = canvas.clientHeight * dpr
       gl.viewport(0, 0, canvas.width, canvas.height)
     }
 
-    const render = () => {
-      resize()
+    const render = (now: number) => {
+      animationId = requestAnimationFrame(render)
+
+      if (!isVisible) return
+
+      const delta = now - lastTime
+      if (delta < interval) return
+      lastTime = now - (delta % interval)
+
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
 
-      const elapsed = (performance.now() - startTime) / 1000
+      const elapsed = (now - startTime) / 1000
 
       gl.uniform1f(timeLocation, elapsed * speed)
       gl.uniform1f(amplitudeLocation, amplitude)
@@ -245,16 +264,16 @@ export default function Plasma({
       gl.uniform2f(resolutionLocation, canvas.width, canvas.height)
 
       gl.drawArrays(gl.TRIANGLES, 0, 6)
-      animationId = requestAnimationFrame(render)
     }
 
     window.addEventListener("resize", resize)
     resize()
-    render()
+    animationId = requestAnimationFrame(render)
 
     return () => {
       window.removeEventListener("resize", resize)
       cancelAnimationFrame(animationId)
+      observer.disconnect()
     }
   }, [colorStops, speed, amplitude, blend])
 

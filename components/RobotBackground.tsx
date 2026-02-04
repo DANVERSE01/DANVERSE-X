@@ -9,15 +9,15 @@ export function RobotBackground() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    // Delay loading the heavy 3D scene to prioritize critical path
-    const timer = setTimeout(() => setShouldLoad(true), 2000);
+    // تقليل وقت التأخير لتحسين انطباع السرعة
+    const timer = setTimeout(() => setShouldLoad(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
   if (!shouldLoad) return <div className="fixed inset-0 z-[1] bg-black" />;
 
   return (
-    <div className="fixed inset-0 z-[1] overflow-hidden" aria-hidden="true">
+    <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-auto" aria-hidden="true">
       <Suspense
         fallback={
           <div className="flex h-full w-full items-center justify-center bg-black">

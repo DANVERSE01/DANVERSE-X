@@ -244,7 +244,7 @@ export default function Plasma({
     const render = (now: number) => {
       animationId = requestAnimationFrame(render)
 
-      if (!isVisible) return
+      if (!isVisible || document.visibilityState === "hidden") return
 
       const delta = now - lastTime
       if (delta < interval) return

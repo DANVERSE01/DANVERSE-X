@@ -29,7 +29,7 @@ export function LogoMarqueeArchviz() {
           >
             <div className="w-24 h-24 rounded-2xl bg-black/40 border border-white/20 backdrop-blur-xl flex items-center justify-center overflow-hidden">
               <div className="relative w-full h-full">
-                <Image src={logo.image || "/placeholder.svg"} alt={logo.name} fill className="object-cover" />
+                <Image src={logo.image || "/placeholder-logo.png"} alt={logo.name} fill className="object-cover" />
               </div>
             </div>
           </div>

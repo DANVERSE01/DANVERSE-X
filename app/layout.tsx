@@ -92,21 +92,24 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="bg-black">
-        {/* Robot Background - Interactive Layer */}
-        <RobotBackground />
+        {/* Visual Background Layer */}
+        <div className="fixed inset-0 z-0 bg-black pointer-events-none">
+          <Suspense fallback={null}>
+            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={0.8} amplitude={0.8} blend={0.5} />
+          </Suspense>
+        </div>
+
+        {/* Interactive 3D Layer */}
+        <div className="fixed inset-0 z-[1]">
+          <RobotBackground />
+        </div>
         
-        <Suspense fallback={null}>
-          {/* Plasma Background - Visual Layer */}
-          <div className="fixed inset-0 z-0 bg-black pointer-events-none">
-            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />
-          </div>
-          
-          {/* Content Layer - pointer-events-none to let robot receive events, 
-              but children (buttons, links) will re-enable pointer-events-auto */}
-          <div className="relative z-10 pointer-events-none">
+        {/* Content Layer */}
+        <div className="relative z-10 pointer-events-none min-h-screen">
+          <div className="pointer-events-auto">
             {children}
           </div>
-        </Suspense>
+        </div>
       </body>
     </html>
   )

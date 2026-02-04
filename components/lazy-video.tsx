@@ -108,7 +108,7 @@ export default function LazyVideo({
       loop={loop}
       playsInline={playsInline}
       controls={controls}
-      preload="none"
+      preload="metadata"
       poster={poster}
       aria-label={ariaLabel}
       disableRemotePlayback

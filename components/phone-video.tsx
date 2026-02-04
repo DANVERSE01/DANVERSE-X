@@ -89,7 +89,7 @@ export default function PhoneVideo({
       muted
       loop
       playsInline
-      preload="none"
+      preload="metadata"
       poster={poster}
       aria-label="Skitbit app preview video"
       disableRemotePlayback

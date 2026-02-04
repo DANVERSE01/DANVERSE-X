@@ -407,7 +407,7 @@ export function OrderForm({ isOpen, onClose, selectedPackage }: OrderFormProps) 
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center">
                           <Image
-                            src={`/placeholder-120x120.png?height=120&width=120&text=${option.name}+3D`}
+                            src="/placeholder.jpg"
                             alt={option.name}
                             width={48}
                             height={48}

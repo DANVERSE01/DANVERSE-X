@@ -21,6 +21,7 @@ export default function Plasma({
     const canvas = canvasRef.current
     if (!canvas) return
 
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     const gl = canvas.getContext("webgl", {
       alpha: true,
       premultipliedAlpha: true,
@@ -225,6 +226,7 @@ export default function Plasma({
     const fps = 30
     const interval = 1000 / fps
     let isVisible = true
+    let isPageVisible = document.visibilityState === "visible"
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -235,21 +237,13 @@ export default function Plasma({
     observer.observe(canvas)
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      const dpr = Math.min(window.devicePixelRatio || 1, prefersReducedMotion ? 1 : 1.5)
       canvas.width = canvas.clientWidth * dpr
       canvas.height = canvas.clientHeight * dpr
       gl.viewport(0, 0, canvas.width, canvas.height)
     }
 
-    const render = (now: number) => {
-      animationId = requestAnimationFrame(render)
-
-      if (!isVisible) return
-
-      const delta = now - lastTime
-      if (delta < interval) return
-      lastTime = now - (delta % interval)
-
+    const drawFrame = (now: number) => {
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
 
@@ -266,12 +260,34 @@ export default function Plasma({
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
 
+    const render = (now: number) => {
+      animationId = requestAnimationFrame(render)
+
+      if (!isVisible || !isPageVisible) return
+
+      const delta = now - lastTime
+      if (delta < interval) return
+      lastTime = now - (delta % interval)
+
+      drawFrame(now)
+    }
+
+    const onVisibilityChange = () => {
+      isPageVisible = document.visibilityState === "visible"
+    }
+
     window.addEventListener("resize", resize)
+    document.addEventListener("visibilitychange", onVisibilityChange)
     resize()
-    animationId = requestAnimationFrame(render)
+    if (prefersReducedMotion) {
+      drawFrame(performance.now())
+    } else {
+      animationId = requestAnimationFrame(render)
+    }
 
     return () => {
       window.removeEventListener("resize", resize)
+      document.removeEventListener("visibilitychange", onVisibilityChange)
       cancelAnimationFrame(animationId)
       observer.disconnect()
     }

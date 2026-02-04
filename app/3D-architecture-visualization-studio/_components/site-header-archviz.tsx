@@ -51,7 +51,7 @@ export function SiteHeaderArchviz() {
       <div className="container mx-auto max-w-4xl">
         <div className="flex h-14 items-center justify-between px-6 liquid-glass-header rounded-full">
           <Link href="/3D-architecture-visualization-studio" className="flex items-center gap-1.5">
-            <Image src="/icons/skitbit-white.svg" alt="Skitbit logo" width={20} height={20} className="h-5 w-5" />
+            <Image src="/icons/skitbit-white.png" alt="Skitbit logo" width={20} height={20} className="h-5 w-5" />
             <span className="font-semibold tracking-wide text-white">Skitbit ArchViz</span>
           </Link>
 
@@ -127,7 +127,7 @@ export function SiteHeaderArchviz() {
               </SheetTrigger>
               <SheetContent side="right" className="liquid-glass border-gray-800 p-0 w-64 flex flex-col">
                 <div className="flex items-center gap-1.5 px-4 py-4 border-b border-gray-800">
-                  <Image src="/icons/skitbit-white.svg" alt="Skitbit logo" width={24} height={24} className="h-6 w-6" />
+                  <Image src="/icons/skitbit-white.png" alt="Skitbit logo" width={24} height={24} className="h-6 w-6" />
                   <span className="font-semibold tracking-wide text-white text-lg">Skitbit ArchViz</span>
                 </div>
                 <nav className="flex flex-col gap-1 mt-2 text-gray-200">

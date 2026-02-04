@@ -71,6 +71,15 @@ pnpm dev
 
 This project does not require environment variables for basic local development (based on current code).
 
+### Static asset handling
+
+- Local images/videos are served from `/public` and `next.config.mjs` keeps `images.unoptimized` enabled for static hosting compatibility.
+- When adding new assets, reference them by their final `/public/...` path and verify with:
+
+```bash
+node scripts/check-public-assets.mjs
+```
+
 ## Scripts
 
 - `pnpm dev` - run the development server

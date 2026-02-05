@@ -48,7 +48,7 @@ export function Features() {
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/intuitive-1.png"
+                  src="/images/intuitive-1.webp"
                   alt="Close-up smartphone camera module"
                   fill
                   className="object-cover"
@@ -57,7 +57,7 @@ export function Features() {
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/intuitive-2.png"
+                  src="/images/intuitive-2.webp"
                   alt="Hand gripping textured phone back"
                   fill
                   className="object-cover"
@@ -88,14 +88,14 @@ export function Features() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <Image
-                src="/images/top-rated-1.png"
+                src="/images/top-rated-1.webp"
                 width={280}
                 height={160}
                 alt="Product sketch concepts"
                 className="h-full w-full rounded-xl border border-white/10 object-cover"
               />
               <Image
-                src="/images/top-rated-2.png"
+                src="/images/top-rated-2.webp"
                 width={280}
                 height={160}
                 alt="Backpacks on stage"

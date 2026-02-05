@@ -9,15 +9,19 @@ export function RobotBackground() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    // تقليل وقت التأخير لتحسين انطباع السرعة
-    const timer = setTimeout(() => setShouldLoad(true), 500);
+    // Reduced delay for faster perceived load
+    const timer = setTimeout(() => setShouldLoad(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
   if (!shouldLoad) return <div className="fixed inset-0 z-[1] bg-black" />;
 
   return (
-    <div className="fixed inset-0 z-[1] overflow-hidden pointer-events-auto" aria-hidden="true">
+    <div 
+      className="fixed inset-0 z-[1] overflow-hidden pointer-events-auto" 
+      aria-hidden="true"
+      style={{ willChange: 'transform' }}
+    >
       <Suspense
         fallback={
           <div className="flex h-full w-full items-center justify-center bg-black">

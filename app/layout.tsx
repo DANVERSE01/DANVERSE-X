@@ -105,10 +105,8 @@ export default function RootLayout({
         </div>
         
         {/* Content Layer */}
-        <div className="relative z-10 pointer-events-none min-h-screen">
-          <div className="pointer-events-auto">
-            {children}
-          </div>
+        <div className="relative z-10 min-h-screen">
+          {children}
         </div>
       </body>
     </html>

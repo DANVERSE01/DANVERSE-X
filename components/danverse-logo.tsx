@@ -27,7 +27,7 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
       <Image
-        src="/images/danverse-logo.png"
+        src="/images/danverse-logo.webp"
         alt="DANVERSE"
         width={width}
         height={height}
@@ -42,7 +42,7 @@ export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
       <Image
-        src="/images/danverse-logo.png"
+        src="/images/danverse-logo.webp"
         alt="DANVERSE"
         width={140}
         height={40}

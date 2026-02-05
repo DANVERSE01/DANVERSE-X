@@ -73,30 +73,14 @@ const PAGE_STRUCTURED_DATA = {
 export default function Page() {
   return (
     <>
-      {/* Main content wrapper with pointer-events-none to allow robot interaction behind it */}
-      <main className="min-h-[100dvh] text-white relative z-10 pointer-events-none">
-        {/* Each section re-enables pointer-events-auto for its interactive elements */}
-        <div className="pointer-events-auto">
-          <SiteHeader />
-        </div>
-        <div className="pointer-events-auto">
-          <Hero />
-        </div>
-        <div className="pointer-events-auto">
-          <Features />
-        </div>
-        <div className="pointer-events-auto">
-          <LogoMarquee />
-        </div>
-        <div className="pointer-events-auto">
-          <Pricing />
-        </div>
-        <div className="pointer-events-auto">
-          <AppverseFooter />
-        </div>
-        <div className="pointer-events-auto">
-          <ScrollToTop />
-        </div>
+      <main className="min-h-[100dvh] text-white relative z-10">
+        <SiteHeader />
+        <Hero />
+        <Features />
+        <LogoMarquee />
+        <Pricing />
+        <AppverseFooter />
+        <ScrollToTop />
       </main>
 
       {/* JSON-LD structured data */}

@@ -84,7 +84,7 @@ function PhoneCard({
     <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
       <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
         <LazyVideo
-          src={videoSrc ?? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4"}
+          src={videoSrc ?? "/videos/fallback.webm"}
           className="absolute inset-0 h-full w-full object-cover"
           autoplay={true}
           loop={true}
@@ -107,14 +107,14 @@ function PhoneCard({
   )
 }
 
-const fallbackVideo = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm";
+const fallbackVideo = "/videos/fallback.webm";
 
 const phoneData = [
   {
     title: "Conversions",
     sub: "Creative engineered for response, not just attention.",
     tone: "results",
-    videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
+    videoSrc: fallbackVideo,
   },
   {
     title: "Speed",
@@ -126,7 +126,7 @@ const phoneData = [
     title: "Social-Ready",
     sub: "Native pacing and exports for Reels, TikTok, and paid social.",
     tone: "social",
-    videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
+    videoSrc: fallbackVideo,
   },
   {
     title: "Standout",

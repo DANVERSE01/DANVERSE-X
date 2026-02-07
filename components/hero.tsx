@@ -84,7 +84,7 @@ function PhoneCard({
     <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
       <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
         <LazyVideo
-          src={videoSrc ?? "/videos/fallback.webm"}
+          src={videoSrc ?? "/videos/default-fallback.mp4"}
           className="absolute inset-0 h-full w-full object-cover"
           autoplay={true}
           loop={true}
@@ -114,30 +114,30 @@ const phoneData = [
     title: "Conversions",
     sub: "Creative engineered for response, not just attention.",
     tone: "results",
-    videoSrc: fallbackVideo,
+    videoSrc: "/videos/conversions.mp4",
   },
   {
     title: "Speed",
     sub: "Fast sprints. Tight reviews. Clean handoff.",
     tone: "speed",
-    videoSrc: fallbackVideo,
+    videoSrc: "/videos/default-fallback.mp4",
   },
   {
     title: "Social-Ready",
     sub: "Native pacing and exports for Reels, TikTok, and paid social.",
     tone: "social",
-    videoSrc: fallbackVideo,
+    videoSrc: "/videos/social-ready.webm",
   },
   {
     title: "Standout",
     sub: "Be the product no one scrolls past.",
     tone: "standout",
-    videoSrc: fallbackVideo,
+    videoSrc: "/videos/default-fallback.mp4",
   },
   {
     title: "Premium",
     sub: "Look like the market leader.",
     tone: "premium",
-    videoSrc: fallbackVideo,
+    videoSrc: "/videos/conversions.mp4",
   },
 ]

@@ -107,6 +107,8 @@ function PhoneCard({
   )
 }
 
+const fallbackVideo = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm";
+
 const phoneData = [
   {
     title: "Conversions",
@@ -118,6 +120,7 @@ const phoneData = [
     title: "Speed",
     sub: "Fast sprints. Tight reviews. Clean handoff.",
     tone: "speed",
+    videoSrc: fallbackVideo,
   },
   {
     title: "Social-Ready",
@@ -129,10 +132,12 @@ const phoneData = [
     title: "Standout",
     sub: "Be the product no one scrolls past.",
     tone: "standout",
+    videoSrc: fallbackVideo,
   },
   {
     title: "Premium",
     sub: "Look like the market leader.",
     tone: "premium",
+    videoSrc: fallbackVideo,
   },
 ]

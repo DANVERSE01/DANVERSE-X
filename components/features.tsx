@@ -53,6 +53,7 @@ export function Features() {
                   fill
                   className="object-cover"
                   sizes="(min-width: 768px) 240px, 45vw"
+                  unoptimized
                 />
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
@@ -62,6 +63,7 @@ export function Features() {
                   fill
                   className="object-cover"
                   sizes="(min-width: 768px) 240px, 45vw"
+                  unoptimized
                 />
               </div>
             </div>
@@ -93,6 +95,7 @@ export function Features() {
                 height={160}
                 alt="Product sketch concepts"
                 className="h-full w-full rounded-xl border border-white/10 object-cover"
+                unoptimized
               />
               <Image
                 src="/images/top-rated-2.webp"
@@ -100,6 +103,7 @@ export function Features() {
                 height={160}
                 alt="Backpacks on stage"
                 className="h-full w-full rounded-xl border border-white/10 object-cover"
+                unoptimized
               />
             </div>
           </CardContent>

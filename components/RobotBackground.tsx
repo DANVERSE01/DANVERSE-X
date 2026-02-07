@@ -1,35 +1,31 @@
 "use client";
 
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy, useRef, useEffect } from "react";
+import type { Application } from "@splinetool/runtime";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 const sceneUrl = "https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode";
 
 export function RobotBackground() {
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const splineApp = useRef<Application | null>(null);
 
-  useEffect(() => {
-    // Reduced delay for faster perceived load
-    const timer = setTimeout(() => setShouldLoad(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!shouldLoad) return <div className="fixed inset-0 z-[1] bg-black" />;
+  function onLoad(spline: Application) {
+    splineApp.current = spline;
+  }
 
   return (
     <div 
       className="fixed inset-0 z-[1] overflow-hidden pointer-events-auto" 
       aria-hidden="true"
-      style={{ willChange: 'transform' }}
+      style={{ willChange: 'transform', touchAction: 'none' }}
     >
-      <Suspense
-        fallback={
-          <div className="flex h-full w-full items-center justify-center bg-black">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/30 border-b-white" />
-          </div>
-        }
-      >
-        <Spline scene={sceneUrl} className="h-full w-full" />
+      <Suspense fallback={null}>
+        <Spline 
+          scene={sceneUrl} 
+          className="h-full w-full"
+          onLoad={onLoad}
+          renderOnDemand={false}
+        />
       </Suspense>
     </div>
   );

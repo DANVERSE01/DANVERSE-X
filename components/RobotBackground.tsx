@@ -1,9 +1,9 @@
 "use client";
 
-import { Suspense, lazy, useRef, useEffect } from "react";
+import { useRef } from "react";
+import Spline from "@splinetool/react-spline";
 import type { Application } from "@splinetool/runtime";
 
-const Spline = lazy(() => import("@splinetool/react-spline"));
 const sceneUrl = "https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode";
 
 export function RobotBackground() {
@@ -19,14 +19,12 @@ export function RobotBackground() {
       aria-hidden="true"
       style={{ willChange: 'transform', touchAction: 'none' }}
     >
-      <Suspense fallback={null}>
-        <Spline 
-          scene={sceneUrl} 
-          className="h-full w-full"
-          onLoad={onLoad}
-          renderOnDemand={false}
-        />
-      </Suspense>
+      <Spline 
+        scene={sceneUrl} 
+        className="h-full w-full"
+        onLoad={onLoad}
+        renderOnDemand={false}
+      />
     </div>
   );
 }

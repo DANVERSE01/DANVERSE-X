@@ -2,8 +2,15 @@
 const nextConfig = {
   output: 'export',
   distDir: '.next',
+  
+  // Performance: Remove console logs in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
   images: {
-    unoptimized: true, // Required for static export to serve images correctly
+    unoptimized: true, // Required for static export
+    formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,7 +18,12 @@ const nextConfig = {
       },
     ],
   },
-  // Ensure trailing slashes for consistent routing on static hosts
+  
+  // Performance: Optimize package imports
+  experimental: {
+    optimizePackageImports: ['@splinetool/react-spline', 'lucide-react'],
+  },
+  
   trailingSlash: true,
 }
 

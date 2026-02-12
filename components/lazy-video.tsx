@@ -51,7 +51,6 @@ export default function LazyVideo({
                 await el.play()
               } catch (error) {
                 // Autoplay might be blocked
-                // console.log("[v0] Autoplay blocked:", error)
               }
             }
             if (el.readyState >= 3) {

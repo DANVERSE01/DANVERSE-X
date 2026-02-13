@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Instagram, Mail, MessageCircle } from "lucide-react"
 import LazyVideo from "./lazy-video"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
+import { logger } from "@/lib/logger"
 
 interface FooterContent {
   tagline: string
@@ -29,7 +30,7 @@ export function AppverseFooter() {
         const parsed = JSON.parse(savedContent)
         if (parsed.footer) setContent(parsed.footer)
       } catch (error) {
-        console.error("Error parsing saved content:", error)
+        logger.error("Error parsing saved content", error);
       }
     }
   }, [])

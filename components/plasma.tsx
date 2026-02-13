@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { logger } from "@/lib/logger"
 
 interface PlasmaProps {
   colorStops?: [string, string, string]
@@ -170,7 +171,7 @@ export default function Plasma({
       gl.shaderSource(shader, source)
       gl.compileShader(shader)
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error("Shader compile error:", gl.getShaderInfoLog(shader))
+        logger.error("Shader compile error", gl.getShaderInfoLog(shader))
         gl.deleteShader(shader)
         return null
       }
@@ -188,7 +189,7 @@ export default function Plasma({
     gl.attachShader(program, fragmentShader)
     gl.linkProgram(program)
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error("Program link error:", gl.getProgramInfoLog(program))
+      logger.error("Program link error", gl.getProgramInfoLog(program))
       return
     }
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Star } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { logger } from "@/lib/logger"
 
 interface FeaturesContent {
   title: string
@@ -25,7 +26,7 @@ export function Features() {
         const parsed = JSON.parse(savedContent)
         if (parsed.features) setContent(parsed.features)
       } catch (error) {
-        console.error("Error parsing saved content:", error)
+        logger.error("Error parsing saved content", error);
       }
     }
   }, [])

@@ -5,6 +5,7 @@ import { Inter } from "next/font/google"
 import Script from "next/script"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import { ErrorBoundary } from "@/components/ErrorBoundary"
 
 // Dynamically import heavy graphical components on the client only.
 const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
@@ -94,14 +95,18 @@ export default function RootLayout({
       <body className="bg-black">
         {/* Visual Background Layer */}
         <div className="fixed inset-0 z-0 bg-black pointer-events-none">
-          <Suspense fallback={null}>
-            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={0.8} amplitude={0.8} blend={0.5} />
-          </Suspense>
+          <ErrorBoundary componentName="Plasma Background">
+            <Suspense fallback={null}>
+              <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={0.8} amplitude={0.8} blend={0.5} />
+            </Suspense>
+          </ErrorBoundary>
         </div>
 
         {/* Interactive 3D Layer */}
         <div className="fixed inset-0 z-[1]">
-          <RobotBackground />
+          <ErrorBoundary componentName="3D Robot Background">
+            <RobotBackground />
+          </ErrorBoundary>
         </div>
         
         {/* Content Layer */}

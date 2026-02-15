@@ -114,7 +114,7 @@ const phoneData = [
     title: "Conversions",
     sub: "Creative engineered for response, not just attention.",
     tone: "results",
-    videoSrc: "/videos/conversions-opt.webm",
+    videoSrc: "/videos/conversions.mp4",
   },
   {
     title: "Speed",
@@ -126,7 +126,7 @@ const phoneData = [
     title: "Social-Ready",
     sub: "Native pacing and exports for Reels, TikTok, and paid social.",
     tone: "social",
-    videoSrc: "/videos/social.mp4",
+    videoSrc: "/videos/social-ready.mp4",
   },
   {
     title: "Standout",

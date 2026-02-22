@@ -27,57 +27,23 @@ const SHOWREEL_DATA: ShowreelItem[] = [
 const VideoTile = ({ item }: { item: ShowreelItem }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const rafId = useRef<number | null>(null)
   const [isIntersecting, setIntersecting] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: 0.01 }
     )
     if (containerRef.current) observer.observe(containerRef.current)
     return () => observer.disconnect()
   }, [])
 
-  const handleMove = (e: React.PointerEvent) => {
-    if (!containerRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    if (rafId.current) cancelAnimationFrame(rafId.current)
-
-    rafId.current = requestAnimationFrame(() => {
-      const rect = containerRef.current!.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      const xc = rect.width / 2
-      const yc = rect.height / 2
-      
-      const rx = (-(y - yc) / yc) * 15
-      const ry = ((x - xc) / xc) * 15
-
-      containerRef.current!.style.setProperty("--rx", `${rx}deg`)
-      containerRef.current!.style.setProperty("--ry", `${ry}deg`)
-      containerRef.current!.style.setProperty("--mx", `${(x / rect.width) * 100}%`)
-      containerRef.current!.style.setProperty("--my", `${(y / rect.height) * 100}%`)
-    })
-  }
-
-  const handleLeave = () => {
-    if (rafId.current) cancelAnimationFrame(rafId.current)
-    containerRef.current?.style.setProperty("--rx", "0deg")
-    containerRef.current?.style.setProperty("--ry", "0deg")
-  }
-
   return (
     <div
       ref={containerRef}
-      onPointerMove={handleMove}
-      onPointerLeave={handleLeave}
-      className={`group relative overflow-hidden border border-white/5 bg-[#050505] transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-white/20 hover:z-50 ${item.span || ""} ${
+      className={`group relative overflow-hidden bg-black border-[0.5px] border-white/5 transition-all duration-700 ease-out hover:z-10 hover:border-white/20 ${item.span || ""} ${
         item.aspect === "portrait" ? "aspect-[9/16]" : item.aspect === "square" ? "aspect-square" : "aspect-video"
       }`}
-      style={{
-        transform: "perspective(1500px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))",
-        willChange: "transform",
-      } as React.CSSProperties}
     >
       {/* Cinematic Video Layer */}
       {isIntersecting ? (
@@ -88,112 +54,97 @@ const VideoTile = ({ item }: { item: ShowreelItem }) => {
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:opacity-100"
+          className="absolute inset-0 h-full w-full object-cover opacity-50 grayscale transition-all duration-1000 ease-in-out group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
         />
       ) : (
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-[#050505]" />
       )}
 
-      {/* Deep Vignette & Gradient Overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_70%,rgba(0,0,0,0.8)_100%)] z-10" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-10" />
+      {/* Cinematic Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 z-10" />
+      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
       
-      {/* Interactive Light Highlight */}
-      <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 z-20 bg-[radial-gradient(circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,0.1)_0%,transparent_60%)]" />
-
-      {/* Overlapping Kinetic Typography */}
-      <div className="relative z-30 flex h-full flex-col justify-between p-6 md:p-10">
-        <div className="flex items-center justify-between mix-blend-difference">
-          <span className="text-[10px] font-black tracking-[0.4em] text-red-500 uppercase leading-none">{item.category}</span>
-          <span className="font-mono text-[9px] text-white/30 tracking-widest">{item.meta}</span>
+      {/* Content Layer */}
+      <div className="relative z-20 flex h-full flex-col justify-between p-5 md:p-8">
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] font-bold tracking-[0.3em] text-white/40 uppercase mix-blend-difference">{item.category}</span>
+          <div className="h-[1px] w-4 bg-white/20" />
         </div>
         
-        <div className="space-y-3">
-          <h3 className="text-2xl md:text-5xl font-black tracking-[-0.08em] text-white uppercase leading-[0.85] transition-all duration-700 group-hover:text-red-500 group-hover:tracking-[-0.05em]">
-            {item.title.split(' ').map((word, i) => (
-              <span key={i} className="block overflow-hidden">
-                <span className="block transform transition-transform duration-700 group-hover:translate-y-0 translate-y-[100%]">
-                  {word}
-                </span>
-              </span>
-            ))}
-            <span className="block mt-2 h-[1px] w-0 bg-red-500 transition-all duration-1000 ease-out group-hover:w-full" />
+        <div className="space-y-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+          <h3 className="text-xl md:text-3xl font-black tracking-tighter text-white uppercase leading-none">
+            {item.title}
           </h3>
-          <p className="text-[9px] font-bold tracking-[0.2em] text-white/20 uppercase opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2">
-            Creative Direction Locked
-          </p>
+          <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+            <span className="text-[8px] font-mono text-red-600 tracking-widest uppercase">{item.meta}</span>
+            <div className="h-[1px] flex-1 bg-red-600/30" />
+          </div>
         </div>
       </div>
 
-      {/* Scanline Effect Overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.02] z-40 bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAACdJREFUGFdjZEADjIwMDIyMjIwMDEwMDEwMDEwMDEwMDEwMDEwMDEwMDEwMDF8BAO/07/5XfP+EAAAAAElFTkSuQmCC')] bg-repeat" />
+      {/* Film Grain / Noise Effect */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
     </div>
   )
 }
 
 export function PricingExamplesStrip() {
   return (
-    <div className="w-full space-y-16 md:space-y-32 py-20 md:py-32 bg-black overflow-hidden">
-      {/* World-Class Kinetic Header */}
-      <header className="relative text-center space-y-6 md:space-y-10 px-4">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.015] pointer-events-none">
-          <h2 className="text-[25vw] font-black tracking-tighter text-white uppercase leading-none select-none">
-            DANVERSE
-          </h2>
-        </div>
-
-        <div className="relative z-10 space-y-6 md:space-y-8">
-          <div className="flex flex-col items-center gap-3 md:gap-4">
-            <span className="text-[10px] md:text-[12px] font-black tracking-[0.6em] md:tracking-[0.8em] text-red-600 uppercase">Engineered for Impact</span>
-            <div className="h-[1px] md:h-[2px] w-24 md:w-32 bg-gradient-to-r from-transparent via-red-600 to-transparent" />
+    <div className="w-full bg-black py-24 md:py-40 overflow-hidden">
+      {/* High-End Typography Header */}
+      <header className="relative mb-20 md:mb-32 px-6">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-[1px] w-8 bg-red-600" />
+                <span className="text-[10px] font-bold tracking-[0.5em] text-red-600 uppercase">Production 2026</span>
+              </div>
+              <h2 className="text-5xl md:text-[7vw] font-black tracking-[-0.05em] text-white uppercase leading-[0.9]">
+                Cinematic<br/>
+                <span className="text-transparent stroke-text">Showreel</span>
+              </h2>
+            </div>
+            
+            <div className="max-w-md">
+              <p className="text-sm md:text-lg font-medium text-white/40 leading-relaxed uppercase tracking-tight">
+                A curated collection of high-fidelity visual systems. Engineered for brands that demand global impact and creative excellence.
+              </p>
+            </div>
           </div>
-          
-          <h2 className="text-6xl md:text-[12rem] font-black tracking-[-0.08em] md:tracking-[-0.1em] text-white uppercase leading-[0.8] md:leading-[0.75]">
-            <span className="block bg-gradient-to-b from-white to-white/30 bg-clip-text text-transparent animate-shimmer">
-              Cinematic
-            </span>
-            <span className="block text-red-700 filter drop-shadow-[0_0_30px_rgba(185,28,28,0.2)]">
-              Showreel
-            </span>
-          </h2>
-          
-          <p className="mx-auto max-w-2xl text-base md:text-2xl font-bold text-white/20 tracking-tighter leading-tight uppercase px-4">
-            A system of high-fidelity creative benchmarks. <br className="hidden md:block"/>
-            <span className="text-white/40">9+ production-ready outputs locked for 2026.</span>
-          </p>
         </div>
       </header>
 
-      {/* Advanced Dynamic Grid - Gapless on Mobile, Minimal on Desktop */}
-      <div className="mx-auto grid w-full max-w-[2400px] grid-cols-1 gap-0 sm:grid-cols-2 md:grid-cols-4 auto-rows-auto border-y border-white/5">
+      {/* Gapless Cinematic Grid */}
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 border-t border-white/5">
         {SHOWREEL_DATA.map((item) => (
           <VideoTile key={item.id} item={item} />
         ))}
       </div>
 
-      {/* Bottom CTA Section */}
-      <footer className="text-center py-12 md:py-20">
-        <button className="group relative px-10 py-5 md:px-12 md:py-6 bg-transparent border border-white/10 rounded-full overflow-hidden transition-all duration-500 hover:border-red-600">
-          <div className="absolute inset-0 bg-red-600 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]" />
-          <span className="relative z-10 text-[10px] md:text-[12px] font-black tracking-[0.4em] md:tracking-[0.5em] text-white uppercase group-hover:text-white transition-colors duration-500">
-            Initialize Project
-          </span>
-        </button>
+      {/* Minimalist Footer CTA */}
+      <footer className="mt-24 md:mt-40 px-6 text-center">
+        <div className="inline-flex flex-col items-center gap-8">
+          <div className="h-20 w-[1px] bg-gradient-to-b from-red-600 to-transparent" />
+          <button className="group relative overflow-hidden">
+            <span className="block text-[10px] font-black tracking-[0.8em] text-white uppercase transition-transform duration-500 group-hover:-translate-y-full">
+              Initialize Project
+            </span>
+            <span className="absolute inset-0 text-[10px] font-black tracking-[0.8em] text-red-600 uppercase translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+              Initialize Project
+            </span>
+          </button>
+        </div>
       </footer>
 
       <style jsx>{`
-        @keyframes shimmer {
-          0% { background-position: 100% 0; }
-          100% { background-position: -100% 0; }
+        .stroke-text {
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
         }
-        .animate-shimmer {
-          background-image: linear-gradient(110deg, #fff 45%, #444 50%, #fff 55%);
-          background-size: 200% 100%;
-          animation: shimmer 6s linear infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-shimmer { animation: none; }
-          div { transform: none !important; }
+        @media (max-width: 768px) {
+          .stroke-text {
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+          }
         }
       `}</style>
     </div>

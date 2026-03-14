@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = ".next"
 
 # Next.js static export generates /route/index.html for every route.
 # No SPA redirect needed — Netlify serves files directly.

@@ -15,29 +15,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: npm ci
 
       - name: Run TypeScript check
-        run: pnpm tsc --noEmit
+        run: npm run type-check
 
       - name: Run ESLint
-        run: pnpm lint
+        run: npm run lint
         continue-on-error: true
 
       - name: Build project
-        run: pnpm build
+        run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://danverse.ai
           NEXT_PUBLIC_WHATSAPP_NUMBER: 201207346648

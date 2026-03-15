@@ -31,5 +31,3 @@
   [headers.values]
     Cache-Control = "public, max-age=2592000, immutable"
 
-[context.production]
-  environment = { NODE_ENV = "production" }

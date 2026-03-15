@@ -14,15 +14,15 @@ interface ShowreelItem {
 }
 
 const SHOWREEL_DATA: ShowreelItem[] = [
-  { id: "1", title: "Luxury Motion",   category: "BRAND",    meta: "4K · 60FPS",      src: "/videos/standout.mp4",       aspect: "landscape", span: "md:col-span-2 md:row-span-2" },
-  { id: "2", title: "Tech Reveal",     category: "SaaS",     meta: "9:16 · SOCIAL",   src: "/videos/speed.mp4",          aspect: "portrait" },
-  { id: "3", title: "Product Macro",   category: "AD",       meta: "3D · VFX",        src: "/videos/premium.mp4",        aspect: "square" },
-  { id: "4", title: "Dynamic Flow",    category: "FILM",     meta: "COLOR · GRADED",  src: "/videos/conversions.mp4",    aspect: "portrait" },
-  { id: "5", title: "Elite Systems",   category: "B2B",      meta: "ANIMATION",       src: "/videos/social-ready.mp4",   aspect: "landscape", span: "md:col-span-2" },
-  { id: "6", title: "Vision 2026",     category: "AI",       meta: "GEN · ART",       src: "/videos/standout.mp4",       aspect: "portrait" },
-  { id: "7", title: "Brand Core",      category: "IDENTITY", meta: "LOGO · MOTION",   src: "/videos/default-fallback.mp4", aspect: "square" },
-  { id: "8", title: "Future Sprints",  category: "UI/UX",    meta: "INTERACTIVE",     src: "/videos/speed.mp4",          aspect: "landscape" },
-  { id: "9", title: "Master Class",    category: "EDU",      meta: "STORYTELLING",    src: "/videos/premium.mp4",        aspect: "portrait" },
+  { id: "1", title: "Luxury Motion",  category: "BRAND",    meta: "4K · 60FPS",      src: "/videos/premium.mp4",       aspect: "landscape", span: "md:col-span-2 md:row-span-2" },
+  { id: "2", title: "Tech Reveal",    category: "SaaS",     meta: "9:16 · SOCIAL",   src: "/videos/speed.mp4",          aspect: "portrait" },
+  { id: "3", title: "Product Macro",  category: "AD",       meta: "3D · VFX",        src: "/videos/conversions.mp4",    aspect: "square" },
+  { id: "4", title: "Dynamic Flow",   category: "FILM",     meta: "COLOR · GRADED",  src: "/videos/social-ready.mp4",   aspect: "portrait" },
+  { id: "5", title: "Elite Systems",  category: "B2B",      meta: "ANIMATION",       src: "/videos/standout.mp4",       aspect: "landscape", span: "md:col-span-2" },
+  { id: "6", title: "Vision 2026",    category: "AI",       meta: "GEN · ART",       src: "/videos/premium.mp4",        aspect: "portrait" },
+  { id: "7", title: "Brand Core",     category: "IDENTITY", meta: "LOGO · MOTION",   src: "/videos/conversions.mp4",    aspect: "square" },
+  { id: "8", title: "Future Sprints", category: "UI/UX",    meta: "INTERACTIVE",     src: "/videos/speed.mp4",          aspect: "landscape" },
+  { id: "9", title: "Master Class",   category: "EDU",      meta: "STORYTELLING",    src: "/videos/social-ready.mp4",   aspect: "portrait" },
 ]
 
 const VideoTile = ({ item }: { item: ShowreelItem }) => {

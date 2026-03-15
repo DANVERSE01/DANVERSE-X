@@ -1,10 +1,6 @@
 [build]
-  command = "NETLIFY_NEXT_PLUGIN_SKIP_INSTALL=true npm run build"
+  command = "npm run build"
   publish = "out"
-
-# Next.js static export generates /route/index.html for every route.
-# No SPA redirect needed — Netlify serves files directly.
-# See docs/NETLIFY_ROUTING_FIX.md for rationale.
 
 [[headers]]
   for = "/*"

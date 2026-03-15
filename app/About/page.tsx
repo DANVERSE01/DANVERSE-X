@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
-import { SiteHeader } from "@/components/site-header"
-import { AppverseFooter } from "@/components/appverse-footer"
-import { Button } from "@/components/ui/button"
+import { fireCTAAndOpenWhatsApp } from "../../lib/n8n"
+import { SiteHeader } from "../../components/site-header"
+import { AppverseFooter } from "../../components/appverse-footer"
+import { Button } from "../../components/ui/button"
 
 // ── Counter Component ──────────────────────────────────────────────────────
 function AnimatedCounter({ target, suffix = "", duration = 1800 }: { target: number; suffix?: string; duration?: number }) {

@@ -120,7 +120,7 @@ export default function RootLayout({
         </div>
 
         {/* Interactive 3D Layer */}
-        <div className="fixed inset-0 z-[1]">
+        <div className="fixed inset-0 z-[1] pointer-events-none">
           <ErrorBoundary componentName="3D Robot Background">
             <RobotBackground />
           </ErrorBoundary>

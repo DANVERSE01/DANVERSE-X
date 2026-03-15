@@ -7,6 +7,7 @@ import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 interface PricingPlan {
   name: string
   price: string
+  subtitle: string
   badge?: string
   highlighted: boolean
   features: string[]
@@ -16,47 +17,53 @@ interface PricingPlan {
 const PLANS: PricingPlan[] = [
   {
     name: "Starter",
-    price: "$299",
+    price: "$199",
+    subtitle: "For brand launches",
     highlighted: false,
     cta: "Get Started",
     features: [
       "1 Cinematic Ad (up to 60s)",
-      "1 Platform format (9:16 or 16:9)",
+      "1 format: 9:16 or 16:9 or 21:9",
       "Basic color grade",
-      "2 revision rounds",
-      "5-day turnaround",
+      "1 revision round",
+      "5-day delivery",
       "MP4 final delivery",
     ],
   },
   {
     name: "Professional",
-    price: "$699",
-    badge: "Most Popular",
+    price: "$499",
+    subtitle: "For serious brands",
+    badge: "MOST POPULAR",
     highlighted: true,
     cta: "Start Project",
     features: [
       "3 Cinematic Ads (up to 90s each)",
-      "All platform formats included",
+      "1 format per ad: 9:16 or 16:9 or 21:9",
       "Cinematic color grade + LUT",
       "Brand system integration",
-      "3 revision rounds",
-      "7-day turnaround",
-      "All format delivery pack",
+      "3 hook variants per ad",
+      "2 revision rounds",
+      "7-day delivery",
     ],
   },
   {
     name: "Premium",
-    price: "$2,049",
+    price: "$1,499",
+    subtitle: "The full creative system",
+    badge: "ELITE",
     highlighted: false,
     cta: "Book a Call",
     features: [
-      "Full campaign (10+ assets)",
-      "Video + branding + landing page",
-      "Custom AI content workflow",
+      "5 Cinematic Ads + UGC content",
+      "1 format per ad: 9:16 or 16:9 or 21:9",
+      "Cinematic color grade + LUT",
+      "Full branding package",
+      "AI content system setup",
+      "Landing page design",
+      "3 revision rounds",
+      "15-day delivery",
       "Dedicated creative director",
-      "Unlimited revisions",
-      "14-day turnaround",
-      "Ongoing retainer option",
     ],
   },
 ]
@@ -95,7 +102,7 @@ export function PricingCards() {
             <div>
               <p className="text-[11px] tracking-widest text-white/40 uppercase mb-2">{plan.name}</p>
               <p className="text-5xl font-black text-white">{plan.price}</p>
-              <p className="text-xs text-white/30 mt-1">per project</p>
+              <p className="text-xs text-white/30 mt-1">{plan.subtitle}</p>
             </div>
 
             <ul className="flex flex-col gap-y-2 flex-1">

@@ -11,7 +11,21 @@ export function ProjectorOpen() {
     const ring = ringRef.current
     if (!dot || !ring) return
 
-    const onMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY }
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches
+    if (!isFinePointer) {
+      dot.style.display = "none"
+      ring.style.display = "none"
+      return
+    }
+
+    dot.style.display = "block"
+    ring.style.display = "block"
+
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY
+      dot.style.opacity = "1"
+      ring.style.opacity = "1"
+    }
     document.addEventListener("mousemove", onMove)
 
     let raf: number
@@ -48,8 +62,8 @@ export function ProjectorOpen() {
 
   return (
     <>
-      <div ref={dotRef} className="cursor-dot" />
-      <div ref={ringRef} className="cursor-ring" />
+      <div ref={dotRef} className="cursor-dot" style={{ display: "none", opacity: 0 }} />
+      <div ref={ringRef} className="cursor-ring" style={{ display: "none", opacity: 0 }} />
       <section style={{ height: "100vh", background: "#060606", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "1px", background: "rgba(255,255,255,0.04)", height: 0, boxShadow: "0 0 60px 30px rgba(255,255,255,0.015)", animation: "beamGrow 1.8s ease-out 0.2s forwards" }} />
         <style jsx>{`

@@ -57,7 +57,7 @@ export function ReelSection() {
         </div>
         <div style={{ position: "relative", width: "100%", aspectRatio: "2.35/1", overflow: "hidden", background: clip.bg, transition: "background 0.5s ease" }}>
           <div style={{ position: "absolute", inset: 0 }}>
-            <LazyVideo src={clip.src} autoplay muted loop playsInline className="h-full w-full object-cover" />
+            <LazyVideo key={`${active}-${clip.src}`} src={clip.src} autoplay muted loop playsInline className="h-full w-full object-cover" />
           </div>
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 45%)", zIndex: 1 }} />
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "clamp(20px,4vw,48px)", zIndex: 2 }}>

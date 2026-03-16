@@ -10,66 +10,29 @@ export function ProjectorOpen() {
     const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
-
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches
-    if (!isFinePointer) {
-      dot.style.display = "none"
-      ring.style.display = "none"
-      return
-    }
-
-    dot.style.display = "block"
-    ring.style.display = "block"
-
-    const onMove = (e: MouseEvent) => {
-      mx = e.clientX; my = e.clientY
-      dot.style.opacity = "1"
-      ring.style.opacity = "1"
-    }
+    const onMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY }
     document.addEventListener("mousemove", onMove)
-
     let raf: number
     const animate = () => {
-      dot.style.left = `${mx}px`
-      dot.style.top = `${my}px`
-      rx += (mx - rx) * 0.13
-      ry += (my - ry) * 0.13
-      ring.style.left = `${rx}px`
-      ring.style.top = `${ry}px`
+      dot.style.left = `${mx}px`; dot.style.top = `${my}px`
+      rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13
+      ring.style.left = `${rx}px`; ring.style.top = `${ry}px`
       raf = requestAnimationFrame(animate)
     }
     raf = requestAnimationFrame(animate)
-
-    const expand = () => {
-      dot.style.width = "14px"; dot.style.height = "14px"
-      ring.style.width = "52px"; ring.style.height = "52px"
-      ring.style.borderColor = "#e63c2f"
-    }
-    const shrink = () => {
-      dot.style.width = "6px"; dot.style.height = "6px"
-      ring.style.width = "36px"; ring.style.height = "36px"
-      ring.style.borderColor = "rgba(230,60,47,0.35)"
-    }
+    const expand = () => { dot.style.width = "14px"; dot.style.height = "14px"; ring.style.width = "52px"; ring.style.height = "52px"; ring.style.borderColor = "#e63c2f" }
+    const shrink = () => { dot.style.width = "6px"; dot.style.height = "6px"; ring.style.width = "36px"; ring.style.height = "36px"; ring.style.borderColor = "rgba(230,60,47,0.35)" }
     const interactive = Array.from(document.querySelectorAll("a, button"))
     interactive.forEach(el => { el.addEventListener("mouseenter", expand); el.addEventListener("mouseleave", shrink) })
-
-    return () => {
-      document.removeEventListener("mousemove", onMove)
-      cancelAnimationFrame(raf)
-      interactive.forEach(el => { el.removeEventListener("mouseenter", expand); el.removeEventListener("mouseleave", shrink) })
-    }
+    return () => { document.removeEventListener("mousemove", onMove); cancelAnimationFrame(raf); interactive.forEach(el => { el.removeEventListener("mouseenter", expand); el.removeEventListener("mouseleave", shrink) }) }
   }, [])
 
   return (
     <>
-      <div ref={dotRef} className="cursor-dot" style={{ display: "none", opacity: 0 }} />
-      <div ref={ringRef} className="cursor-ring" style={{ display: "none", opacity: 0 }} />
+      <div ref={dotRef} className="cursor-dot" />
+      <div ref={ringRef} className="cursor-ring" />
       <section style={{ height: "100vh", background: "#060606", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "1px", background: "rgba(255,255,255,0.04)", height: 0, boxShadow: "0 0 60px 30px rgba(255,255,255,0.015)", animation: "beamGrow 1.8s ease-out 0.2s forwards" }} />
-        <style jsx>{`
-          @keyframes beamGrow { to { height: 100vh } }
-          @keyframes fadeIn { to { color: rgba(255,255,255,0.2) } }
-        `}</style>
         <p style={{ fontFamily: "Courier Prime, monospace", fontSize: "9px", letterSpacing: "8px", textTransform: "uppercase", color: "rgba(255,255,255,0)", animation: "fadeIn 0.8s ease 1.4s forwards", marginBottom: "28px", position: "relative", zIndex: 1 }}>
           danverse.ai · creative concepts · 2026
         </p>

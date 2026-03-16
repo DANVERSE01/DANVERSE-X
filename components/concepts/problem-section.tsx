@@ -9,14 +9,10 @@ const STATS = [
 
 export function ProblemSection() {
   const ref = useRef<HTMLElement>(null)
-
   useEffect(() => {
     const els = ref.current?.querySelectorAll(".clip-reveal")
     if (!els) return
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible") }),
-      { threshold: 0.15 }
-    )
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible") }), { threshold: 0.15 })
     els.forEach(el => obs.observe(el))
     return () => obs.disconnect()
   }, [])
@@ -40,12 +36,8 @@ export function ProblemSection() {
       <div className="clip-reveal" style={{ transitionDelay: "0.15s" }}>
         {STATS.map((s, i) => (
           <div key={s.label} style={{ padding: "24px 0", borderBottom: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
-            <div style={{ fontFamily: "Bebas Neue, Arial Black, sans-serif", fontSize: "clamp(52px,9vw,88px)", color: "#e63c2f", lineHeight: 1, letterSpacing: "2px" }}>
-              {s.num}
-            </div>
-            <div style={{ fontFamily: "Courier Prime, monospace", fontSize: "9px", letterSpacing: "4px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginTop: "4px" }}>
-              {s.label}
-            </div>
+            <div style={{ fontFamily: "Bebas Neue, Arial Black, sans-serif", fontSize: "clamp(52px,9vw,88px)", color: "#e63c2f", lineHeight: 1, letterSpacing: "2px" }}>{s.num}</div>
+            <div style={{ fontFamily: "Courier Prime, monospace", fontSize: "9px", letterSpacing: "4px", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginTop: "4px" }}>{s.label}</div>
           </div>
         ))}
       </div>

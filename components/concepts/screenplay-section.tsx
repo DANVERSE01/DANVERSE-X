@@ -6,19 +6,19 @@ import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 const SCRIPT_LINES = [
   { type: "slug",      text: "FADE IN:" },
   { type: "slug",      text: "INT. THE HOOK -- DIGITAL SPACE -- 0-3s" },
-  { type: "action",    text: "The screen holds black. Your brand arrives. Three seconds -- the only window before the brain decides to scroll past. We engineer this moment. We don't guess at it." },
+  { type: "action",    text: "The screen holds black. Your brand arrives. Three seconds -- the only window before the brain decides to scroll past. We engineer this moment. We do not guess at it." },
   { type: "character", text: "DANVERSE (V.O.)" },
-  { type: "dialogue",  text: "We don't guess at the hook. We engineer it." },
+  { type: "dialogue",  text: "We do not guess at the hook. We engineer it." },
   { type: "direction", text: "CUT TO:" },
   { type: "slug",      text: "INT. THE STORY -- NARRATIVE ARC -- 3-45s" },
   { type: "action",    text: "Problem introduced. Solution revealed. Transformation made real. Every frame earns its place. Nothing is filler. The narrative is the product." },
   { type: "character", text: "DANVERSE (V.O.)" },
-  { type: "dialogue",  text: "If it doesn't serve the conversion, it doesn't exist." },
+  { type: "dialogue",  text: "If it does not serve the conversion, it does not exist." },
   { type: "direction", text: "SMASH CUT TO:" },
   { type: "slug",      text: "INT. THE CALL -- PEAK MOMENT -- 45-60s" },
   { type: "action",    text: "One decision. One action. The CTA lands at peak emotional investment -- written into the story from the brief, not appended in the edit." },
   { type: "character", text: "DANVERSE (V.O.)" },
-  { type: "dialogue",  text: "We don't ask for the click. We make it inevitable." },
+  { type: "dialogue",  text: "We do not ask for the click. We make it inevitable." },
   { type: "direction", text: "FADE OUT." },
 ] as const
 

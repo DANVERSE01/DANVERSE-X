@@ -11,7 +11,7 @@ const CLIPS = [
   { cat: "B2B",      title: "Elite Systems",    fmt: "Motion - Brand Animation",     src: "/videos/premium.mp4",      bg: "#060606" },
   { cat: "AI",       title: "Vision 2026",      fmt: "Generative - Art Direction",   src: "/videos/conversions.mp4",  bg: "#000" },
   { cat: "IDENTITY", title: "Brand Core",       fmt: "Logo - Motion - Identity",     src: "/videos/speed.mp4",        bg: "#060606" },
-  { cat: "UI/UX",    title: "Future Sprints",   fmt: "Interactive - Product",        src: "/videos/social-ready.mp4", bg: "#000" },
+  { cat: "UIUX",     title: "Future Sprints",   fmt: "Interactive - Product",        src: "/videos/social-ready.mp4", bg: "#000" },
   { cat: "EDU",      title: "Master Class",     fmt: "Storytelling - Long Form",     src: "/videos/standout.mp4",     bg: "#060606" },
 ]
 
@@ -57,7 +57,7 @@ export function ReelSection() {
         </div>
         <div style={{ position: "relative", width: "100%", aspectRatio: "2.35/1", overflow: "hidden", background: clip.bg, transition: "background 0.5s ease" }}>
           <div style={{ position: "absolute", inset: 0 }}>
-            <LazyVideo key={`${active}-${clip.src}`} src={clip.src} autoplay muted loop playsInline className="h-full w-full object-cover" />
+            <LazyVideo src={clip.src} autoplay muted loop playsInline className="h-full w-full object-cover" />
           </div>
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 45%)", zIndex: 1 }} />
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "clamp(20px,4vw,48px)", zIndex: 2 }}>
@@ -74,7 +74,7 @@ export function ReelSection() {
         </div>
         <div style={{ display: "flex", gap: "2px", padding: "0 clamp(24px,6vw,80px)", paddingBottom: "48px", overflowX: "auto", scrollbarWidth: "none" }}>
           {CLIPS.map((c, i) => (
-            <button key={`${c.cat}-${i}`} onClick={() => { stopAuto(); setActive(i) }} style={{ flexShrink: 0, width: "clamp(80px,8vw,120px)", background: "none", border: "none", cursor: "pointer", padding: 0, opacity: i === active ? 1 : 0.3, transition: "opacity 0.3s" }}>
+            <button key={i} onClick={() => { stopAuto(); setActive(i) }} style={{ flexShrink: 0, width: "clamp(80px,8vw,120px)", background: "none", border: "none", cursor: "pointer", padding: 0, opacity: i === active ? 1 : 0.3, transition: "opacity 0.3s" }}>
               <div style={{ width: "100%", aspectRatio: "16/9", background: c.bg }} />
               <p style={{ fontFamily: "Courier Prime, monospace", fontSize: "8px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginTop: "4px", textAlign: "left" }}>{c.cat}</p>
             </button>

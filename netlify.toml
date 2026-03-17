@@ -2,6 +2,15 @@
   command = "npm run build"
   publish = "out"
 
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "false"
+  NETLIFY_NEXT_PLUGIN_SKIP_INSTALL = "true"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -30,4 +39,3 @@
   for = "/videos/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000, immutable"
-

@@ -3,155 +3,109 @@
 import React, { useRef, useEffect, useState } from "react"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
-interface ShowreelItem {
-  id: string
-  title: string
-  category: string
-  meta: string
-  src: string
-  aspect: "landscape" | "portrait" | "square"
-  span?: string
-}
-
-const SHOWREEL_DATA: ShowreelItem[] = [
-  { id: "1", title: "Luxury Motion",  category: "BRAND",    meta: "4K · 60FPS",      src: "/videos/premium.mp4",       aspect: "landscape", span: "md:col-span-2 md:row-span-2" },
-  { id: "2", title: "Tech Reveal",    category: "SaaS",     meta: "9:16 · SOCIAL",   src: "/videos/speed.mp4",          aspect: "portrait" },
-  { id: "3", title: "Product Macro",  category: "AD",       meta: "3D · VFX",        src: "/videos/conversions.mp4",    aspect: "square" },
-  { id: "4", title: "Dynamic Flow",   category: "FILM",     meta: "COLOR · GRADED",  src: "/videos/social-ready.mp4",   aspect: "portrait" },
-  { id: "5", title: "Elite Systems",  category: "B2B",      meta: "ANIMATION",       src: "/videos/standout.mp4",       aspect: "landscape", span: "md:col-span-2" },
-  { id: "6", title: "Vision 2026",    category: "AI",       meta: "GEN · ART",       src: "/videos/premium.mp4",        aspect: "portrait" },
-  { id: "7", title: "Brand Core",     category: "IDENTITY", meta: "LOGO · MOTION",   src: "/videos/conversions.mp4",    aspect: "square" },
-  { id: "8", title: "Future Sprints", category: "UI/UX",    meta: "INTERACTIVE",     src: "/videos/speed.mp4",          aspect: "landscape" },
-  { id: "9", title: "Master Class",   category: "EDU",      meta: "STORYTELLING",    src: "/videos/social-ready.mp4",   aspect: "portrait" },
+const GRID = [
+  { id:"1174583531", cat:"FILM",     title:"Cinematic Open",  meta:"21:9 · Cinemascope",  span:"md:col-span-3", aspect:"aspect-[21/9]" },
+  { id:"1174570414", cat:"SOCIAL",   title:"Vertical Story",  meta:"9:16 · Social First", span:"md:col-span-1", aspect:"aspect-[9/16]" },
+  { id:"1174570412", cat:"BRAND",    title:"Brand Motion",    meta:"4K · Widescreen",     span:"md:col-span-2 md:row-span-2", aspect:"aspect-video" },
+  { id:"1174570411", cat:"AD",       title:"Performance Ad",  meta:"9:16 · Conversion",   span:"md:col-span-1", aspect:"aspect-[9/16]" },
+  { id:"1174570425", cat:"SAAS",     title:"Tech Reveal",     meta:"16:9 · Product",      span:"md:col-span-1", aspect:"aspect-video" },
+  { id:"1174570410", cat:"FILM",     title:"Wide Format",     meta:"21:9 · Anamorphic",   span:"md:col-span-4", aspect:"aspect-[21/9]" },
+  { id:"1164910761", cat:"BRAND",    title:"Brand Story",     meta:"9:16 · Vertical",     span:"md:col-span-1", aspect:"aspect-[9/16]" },
+  { id:"1164910689", cat:"B2B",      title:"Corporate Film",  meta:"16:9 · B2B",          span:"md:col-span-2", aspect:"aspect-video" },
+  { id:"1164910758", cat:"SOCIAL",   title:"Story Campaign",  meta:"9:16 · Story",        span:"md:col-span-1", aspect:"aspect-[9/16]" },
+  { id:"1164910681", cat:"PRODUCT",  title:"Product Macro",   meta:"60FPS · Detail",      span:"md:col-span-1", aspect:"aspect-square" },
+  { id:"1164910756", cat:"FILM",     title:"Epic Wide",       meta:"21:9 · Cinematic",    span:"md:col-span-2", aspect:"aspect-[21/9]" },
+  { id:"1164910690", cat:"AD",       title:"Social Ad",       meta:"9:16 · Performance",  span:"md:col-span-1", aspect:"aspect-[9/16]" },
+  { id:"1164910687", cat:"IDENTITY", title:"Brand Identity",  meta:"Motion · Logo",       span:"md:col-span-4", aspect:"aspect-video" },
 ]
 
-const VideoTile = ({ item }: { item: ShowreelItem }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isIntersecting, setIntersecting] = useState(false)
+function Tile({ item }: { item: typeof GRID[0] }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIntersecting(entry.isIntersecting),
-      { threshold: 0.01 }
-    )
-    if (containerRef.current) observer.observe(containerRef.current)
-    return () => observer.disconnect()
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true) }, { threshold: 0.05 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
   }, [])
 
   return (
     <div
-      ref={containerRef}
-      className={`group relative overflow-hidden bg-black border-[0.5px] border-white/5 transition-all duration-700 ease-out hover:z-10 hover:border-white/20 ${item.span || ""} ${
-        item.aspect === "portrait" ? "aspect-[9/16]" : item.aspect === "square" ? "aspect-square" : "aspect-video"
-      }`}
+      ref={ref}
+      className={`group relative overflow-hidden bg-[#050505] border-[0.5px] border-white/5 cursor-pointer ${item.span} ${item.aspect}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      {/* Cinematic Video Layer */}
-      {isIntersecting ? (
-        <video
-          ref={videoRef}
-          src={item.src}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-50 grayscale transition-all duration-1000 ease-in-out group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
+      {visible && (
+        <iframe
+          src={`https://player.vimeo.com/video/${item.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{
+            border: "none",
+            filter: hovered ? "grayscale(0) brightness(1)" : "grayscale(1) brightness(0.5)",
+            transform: hovered ? "scale(1.06)" : "scale(1)",
+            transition: "filter 0.9s ease, transform 1.1s cubic-bezier(0.16,1,0.3,1)",
+          }}
+          allow="autoplay; fullscreen"
         />
-      ) : (
-        <div className="absolute inset-0 bg-[#050505]" />
       )}
-
-      {/* Cinematic Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 z-10" />
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10" />
-      
-      {/* Content Layer */}
-      <div className="relative z-20 flex h-full flex-col justify-between p-5 md:p-8">
-        <div className="flex items-center justify-between">
-          <span className="text-[9px] font-bold tracking-[0.3em] text-white/40 uppercase mix-blend-difference">{item.category}</span>
-          <div className="h-[1px] w-4 bg-white/20" />
-        </div>
-        
-        <div className="space-y-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
-          <h3 className="text-xl md:text-3xl font-black tracking-tighter text-white uppercase leading-none">
-            {item.title}
-          </h3>
-          <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-            <span className="text-[8px] font-mono text-red-600 tracking-widest uppercase">{item.meta}</span>
-            <div className="h-[1px] flex-1 bg-red-600/30" />
-          </div>
+      <div className="absolute inset-0 z-10" style={{ background: hovered ? "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)" : "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.1) 100%)", transition: "background 0.7s ease" }} />
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-4 md:p-6">
+        <span className="text-[8px] font-bold tracking-[0.4em] uppercase" style={{ color: hovered ? "#e63c2f" : "rgba(255,255,255,0.3)", transition: "color 0.4s", fontFamily: "'Courier Prime', monospace" }}>{item.cat}</span>
+        <div className="h-px" style={{ width: hovered ? "40px" : "16px", background: hovered ? "#e63c2f" : "rgba(255,255,255,0.15)", transition: "width 0.5s ease, background 0.4s" }} />
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-4 md:p-6" style={{ transform: hovered ? "translateY(0)" : "translateY(6px)", transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)" }}>
+        <h3 className="font-black uppercase leading-none text-white" style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif", fontSize: "clamp(18px, 3vw, 48px)", letterSpacing: "0.03em" }}>{item.title}</h3>
+        <div className="flex items-center gap-3 mt-2" style={{ opacity: hovered ? 1 : 0, transition: "opacity 0.5s ease 0.1s" }}>
+          <span className="text-[7px] tracking-[0.3em] uppercase font-mono" style={{ color: "#e63c2f", fontFamily: "'Courier Prime', monospace" }}>{item.meta}</span>
+          <div className="h-px flex-1" style={{ background: "rgba(230,60,47,0.3)" }} />
         </div>
       </div>
-
-      {/* Film Grain / Noise Effect */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] z-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
+      <div className="absolute inset-0 z-30 pointer-events-none" style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')", opacity: 0.03 }} />
+      <div className="absolute inset-0 z-10 pointer-events-none" style={{ boxShadow: hovered ? "inset 0 0 0 1px rgba(230,60,47,0.4)" : "inset 0 0 0 1px transparent", transition: "box-shadow 0.4s ease" }} />
     </div>
   )
 }
 
 export function PricingExamplesStrip() {
   return (
-    <div className="w-full bg-black py-24 md:py-40 overflow-hidden">
-      {/* High-End Typography Header */}
-      <header className="relative mb-20 md:mb-32 px-6">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-12">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-[1px] w-8 bg-red-600" />
-                <span className="text-[10px] font-bold tracking-[0.5em] text-red-600 uppercase">Production 2026</span>
-              </div>
-              <h2 className="text-5xl md:text-[7vw] font-black tracking-[-0.05em] text-white uppercase leading-[0.9]">
-                Cinematic<br/>
-                <span className="text-transparent stroke-text">Showreel</span>
-              </h2>
+    <div className="w-full bg-black overflow-hidden" style={{ paddingTop: "clamp(60px,8vw,120px)" }}>
+      <header className="px-6 md:px-12 mb-16 md:mb-24 max-w-[1600px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-10">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="h-px w-8" style={{ background: "#e63c2f" }} />
+              <span className="text-[9px] font-bold tracking-[0.5em] uppercase" style={{ color: "#e63c2f", fontFamily: "'Courier Prime', monospace" }}>Production 2024–2026</span>
             </div>
-            
-            <div className="max-w-md">
-              <p className="text-sm md:text-lg font-medium text-white/40 leading-relaxed uppercase tracking-tight">
-                A curated collection of high-fidelity visual systems. Engineered for brands that demand global impact and creative excellence.
-              </p>
-            </div>
+            <h2 className="text-white uppercase leading-[0.85]" style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif", fontSize: "clamp(52px, 9vw, 120px)", letterSpacing: "-0.02em" }}>
+              Cinematic<br />
+              <span style={{ WebkitTextStroke: "1px rgba(255,255,255,0.25)", color: "transparent" }}>Showreel</span>
+            </h2>
           </div>
+          <p className="max-w-sm leading-relaxed" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "11px", letterSpacing: "0.08em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase" }}>
+            A curated collection of high-fidelity visual systems. Engineered for brands that demand global impact and creative excellence.
+          </p>
         </div>
       </header>
 
-      {/* Gapless Cinematic Grid */}
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 border-t border-white/5">
-        {SHOWREEL_DATA.map((item) => (
-          <VideoTile key={item.id} item={item} />
-        ))}
+        {GRID.map((item) => <Tile key={item.id} item={item} />)}
       </div>
 
-      {/* Minimalist Footer CTA */}
-      <footer className="mt-24 md:mt-40 px-6 text-center">
+      <footer className="text-center" style={{ padding: "clamp(60px,8vw,120px) 24px" }}>
         <div className="inline-flex flex-col items-center gap-8">
-          <div className="h-20 w-[1px] bg-gradient-to-b from-red-600 to-transparent" />
-          <button
-            type="button"
-            onClick={() => fireCTAAndOpenWhatsApp("showreel-cta")}
-            className="group relative overflow-hidden"
-          >
-            <span className="block text-[10px] font-black tracking-[0.8em] text-white uppercase transition-transform duration-500 group-hover:-translate-y-full">
-              Initialize Project
-            </span>
-            <span className="absolute inset-0 text-[10px] font-black tracking-[0.8em] text-red-600 uppercase translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-              Initialize Project
-            </span>
+          <div className="w-px" style={{ height: "80px", background: "linear-gradient(to bottom, #e63c2f, transparent)" }} />
+          <button type="button" onClick={() => fireCTAAndOpenWhatsApp("showreel-cta")} className="group relative overflow-hidden" style={{ height: "20px" }}>
+            <span className="block font-black uppercase" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", letterSpacing: "0.8em", color: "#fff", transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)" }}>Initialize Project</span>
+            <span className="absolute inset-0 font-black uppercase" style={{ fontFamily: "'Courier Prime', monospace", fontSize: "10px", letterSpacing: "0.8em", color: "#e63c2f", transform: "translateY(100%)", transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)" }}>Initialize Project</span>
           </button>
         </div>
+        <style jsx>{`
+          button:hover span:first-child { transform: translateY(-100%) }
+          button:hover span:last-child  { transform: translateY(0) }
+        `}</style>
       </footer>
-
-      <style jsx>{`
-        .stroke-text {
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-        }
-        @media (max-width: 768px) {
-          .stroke-text {
-            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
-          }
-        }
-      `}</style>
     </div>
   )
 }

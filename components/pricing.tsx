@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { PricingExamplesStrip } from "./PricingExamplesStrip"
+import { ReelSection } from "./PricingExamplesStrip"
 import { PricingCards } from "./pricing-cards"
 
 export function Pricing() {
@@ -9,7 +9,7 @@ export function Pricing() {
     <section id="pricing" className="text-white relative z-10 overflow-hidden bg-black">
       <PricingCards />
       <div className="container mx-auto px-0 py-0 lg:py-0">
-        <PricingExamplesStrip />
+        <ReelSection />
       </div>
     </section>
   )

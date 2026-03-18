@@ -129,12 +129,6 @@ const phoneData = [
     videoSrc: "/videos/social-ready.mp4",
   },
   {
-    title: "Standout",
-    sub: "Be the product no one scrolls past.",
-    tone: "standout",
-    videoSrc: "/videos/standout.mp4",
-  },
-  {
     title: "Premium",
     sub: "Look like the market leader.",
     tone: "premium",

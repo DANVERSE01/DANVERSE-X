@@ -58,7 +58,7 @@ function VimeoFrame({ clip }: { clip: Clip }) {
   )
 }
 
-export function ReelSection() {
+export function PricingExamplesStrip() {
   const [active, setActive] = useState(0)
   const [reduce, setReduce] = useState(false)
   const auto = useRef<ReturnType<typeof setInterval>|null>(null)

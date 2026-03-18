@@ -26,8 +26,8 @@ const SPEEDS: Record<string,number> = {slug:38,action:16,character:28,dialogue:2
 const STYLES: Record<string,React.CSSProperties> = {
   slug:      {fontWeight:700,textTransform:"uppercase",letterSpacing:"2px",color:"#fff",fontSize:"12px",marginTop:"20px"},
   action:    {color:"rgba(255,255,255,0.45)",fontSize:"12px",lineHeight:1.8,maxWidth:"58ch"},
-  character: {color:"#fff",textAlign:"center",fontSize:"12px",marginTop:"16px",letterSpacing:"1px"},
-  dialogue:  {color:"rgba(255,255,255,0.6)",fontSize:"12px",lineHeight:1.7,padding:"0 15%",fontStyle:"italic"},
+  character: {color:"#fff",textAlign:"center",fontSize:"12px",marginTop:"16px",fontWeight:700},
+  dialogue:  {color:"#fff",textAlign:"center",fontSize:"12px",maxWidth:"35ch",margin:"0 auto 8px"},
   direction: {color:"rgba(255,255,255,0.3)",textAlign:"right",textTransform:"uppercase",letterSpacing:"2px",fontSize:"11px",marginTop:"12px"},
 }
 

@@ -161,7 +161,7 @@ function CinematicCard({ clip, index }: { clip: typeof CLIPS[0]; index: number }
 
 export function ReelSection() {
   return (
-    <section className="bg-black border-t border-white/5">
+    <section className="bg-gradient-to-b from-black/60 to-black/40 border-t border-white/5">
       {/* Header Section */}
       <div className="px-[clamp(24px,6vw,80px)] py-20 flex flex-col md:flex-row justify-between items-end gap-12">
         <div className="max-w-2xl">

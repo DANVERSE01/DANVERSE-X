@@ -8,17 +8,24 @@ import { DanverseLogo } from "./danverse-logo"
 export function Hero() {
   return (
     <section className="relative w-full overflow-hidden" style={{ height: '100svh' }}>
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
-          width="100%"
-          height="100%"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', pointerEvents: 'none' }}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '100vw',
+            height: '56.25vw',
+            minHeight: '100%',
+            minWidth: '177.78vh',
+            transform: 'translate(-50%, -50%)',
+            border: 'none',
+            pointerEvents: 'none',
+          }}
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-          title="DANVERSE Hero Background Video"
+          title="Hero background"
         ></iframe>
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
@@ -28,7 +35,7 @@ export function Hero() {
           <div className="flex flex-col items-center justify-center py-8 sm:py-12">
           {/* Logo - Centered with consistent spacing */}
             <div className="mb-4">
-              <DanverseLogo size="hero" />
+              <DanverseLogo size="lg" />
             </div>
 
           {/* Eyebrow Label */}

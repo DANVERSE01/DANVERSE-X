@@ -7,8 +7,21 @@ import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section className="relative isolate overflow-hidden min-h-[90vh] flex items-center">
+      {/* Vimeo Background Video */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <iframe
+          src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+          className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-60 grayscale-[0.3]"
+          frameBorder="0"
+          allow="autoplay; fullscreen"
+          allowFullScreen
+        ></iframe>
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center justify-center py-12 sm:py-16">
           {/* Logo - Centered with consistent spacing */}
           <div className="mb-6">

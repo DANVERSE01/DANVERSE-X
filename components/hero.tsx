@@ -30,7 +30,7 @@ export function Hero() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 
-      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-4 px-4 overflow-y-hidden">
+      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-4 px-4">
         <div className="container mx-auto">
           <div className="flex flex-col items-center justify-center w-full pt-4 pb-2 gap-0">
 
@@ -107,7 +107,7 @@ function PhoneCard({
 }) {
   return (
     <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
-      <div className="relative w-full overflow-hidden rounded-[20px] bg-black" style={{ height: '210px' }}>
+      <div className="relative w-full overflow-hidden rounded-[20px] bg-black" style={{ aspectRatio: '9/16', maxHeight: '360px' }}>
         <LazyVideo
           src={videoSrc ?? "/videos/default-fallback.mp4"}
           className="absolute inset-0 h-full w-full object-cover"

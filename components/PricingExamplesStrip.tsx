@@ -5,16 +5,16 @@ import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
 const VIDEOS = [
   { id:"1174583531", cat:"FILM",     title:"Cinematic Open",  ratio:"21/9",  delay:0   },
-  { id:"1174570414", cat:"SOCIAL",   title:"Vertical Story",  ratio:"9/16",  delay:60  },
-  { id:"1174570425", cat:"SAAS",     title:"Tech Reveal",     ratio:"16/9",  delay:120 },
-  { id:"1174570410", cat:"FILM",     title:"Wide Format",     ratio:"21/9",  delay:180 },
-  { id:"1164910761", cat:"BRAND",    title:"Brand Story",     ratio:"9/16",  delay:240 },
-  { id:"1164910689", cat:"B2B",      title:"Corporate Film",  ratio:"16/9",  delay:300 },
-  { id:"1164910758", cat:"SOCIAL",   title:"Story Campaign",  ratio:"9:16",  delay:360 },
-  { id:"1164910681", cat:"PRODUCT",  title:"Product Macro",   ratio:"1/1",   delay:420 },
-  { id:"1164910756", cat:"FILM",     title:"Epic Wide",       ratio:"21/9",  delay:480 },
-  { id:"1164910690", cat:"AD",       title:"Social Ad",       ratio:"9/16",  delay:540 },
-  { id:"1164910687", cat:"IDENTITY", title:"Brand Identity",  ratio:"16/9",  delay:600 },
+  { id:"1174570414", cat:"SOCIAL",   title:"Vertical Story",  ratio:"9/16",  delay:40  },
+  { id:"1174570425", cat:"SAAS",     title:"Tech Reveal",     ratio:"16/9",  delay:80  },
+  { id:"1174570410", cat:"FILM",     title:"Wide Format",     ratio:"21/9",  delay:120 },
+  { id:"1164910761", cat:"BRAND",    title:"Brand Story",     ratio:"9/16",  delay:160 },
+  { id:"1164910689", cat:"B2B",      title:"Corporate Film",  ratio:"16/9",  delay:200 },
+  { id:"1164910758", cat:"SOCIAL",   title:"Story Campaign",  ratio:"9/16",  delay:240 },
+  { id:"1164910681", cat:"PRODUCT",  title:"Product Macro",   ratio:"1/1",   delay:280 },
+  { id:"1164910756", cat:"FILM",     title:"Epic Wide",       ratio:"21/9",  delay:320 },
+  { id:"1164910690", cat:"AD",       title:"Social Ad",       ratio:"9/16",  delay:360 },
+  { id:"1164910687", cat:"IDENTITY", title:"Brand Identity",  ratio:"16/9",  delay:400 },
 ]
 
 function CinematicTile({ item, index, onHover }: { item: typeof VIDEOS[0]; index: number; onHover: (id: string | null) => void }) {

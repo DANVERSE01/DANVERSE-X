@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import { ErrorBoundary } from "@/components/ErrorBoundary"
 
 // Dynamically import heavy graphical components on the client only.
-const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
+const RobotBackground = dynamic(() => import("@/components/RobotBackground").then(m => ({ default: m.RobotBackground })), { ssr: false })
 
 const inter = Inter({
   subsets: ["latin"],
@@ -107,11 +107,11 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="bg-black">
-        {/* Visual Background Layer */}
+        {/* Visual Background Layer - 3D Robot Background */}
         <div className="fixed inset-0 z-0 bg-black pointer-events-none">
-          <ErrorBoundary componentName="Plasma Background">
-            <Suspense fallback={null}>
-              <Plasma colorStops={["#000000", "#111111", "#000000"]} speed={0.3} amplitude={0.5} blend={0.8} />
+          <ErrorBoundary componentName="RobotBackground">
+            <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
+              <RobotBackground />
             </Suspense>
           </ErrorBoundary>
         </div>

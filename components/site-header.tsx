@@ -18,6 +18,7 @@ import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
 export function SiteHeader() {
+  // Fixed header with proper padding to prevent overlap with hero content
   const [servicesOpen, setServicesOpen] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
 
@@ -49,9 +50,9 @@ export function SiteHeader() {
   ]
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 w-full">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex h-14 items-center justify-between px-5 liquid-glass-header rounded-full">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full">
+      <div className="container mx-auto px-4 py-3 pt-4">
+        <div className="flex h-14 items-center justify-between px-5 liquid-glass-header rounded-full bg-black/30 backdrop-blur-md">
           {/* Logo - Left */}
           <Link href="/" className="flex-shrink-0">
             <DanverseHeaderLogo />

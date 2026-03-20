@@ -74,8 +74,8 @@ export default function LazyVideo({
     }
 
     observer = new IntersectionObserver(onIntersect, {
-      rootMargin: "80px",
-      threshold: 0.15,
+      rootMargin: "50px",
+      threshold: 0.1,
     })
     observer.observe(el)
 
@@ -107,10 +107,14 @@ export default function LazyVideo({
       loop={loop}
       playsInline={playsInline}
       controls={controls}
-      preload="none"
+      preload="metadata"
       poster={poster}
       aria-label={ariaLabel}
       disableRemotePlayback
+      style={{
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+      } as React.CSSProperties}
       {...props}
     >
       Your browser does not support the video tag.

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   title: "3D Product Rendering",
 }
 
+const PLACEHOLDER_IMAGE = "/placeholder.svg"
+
 export default function Page() {
   return (
     <main className="bg-background text-foreground">
@@ -57,7 +59,7 @@ export default function Page() {
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="relative h-56 w-80 shrink-0 overflow-hidden rounded-xl">
                 <Image
-                  src={`/photo-grid-.jpg?height=320&width=640&query=photo%20grid%20${i + 1}`}
+                  src={PLACEHOLDER_IMAGE}
                   alt={`Sample ${i + 1}`}
                   fill
                   className="object-cover"
@@ -101,7 +103,7 @@ export default function Page() {
       <section className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-10 px-4 py-10 md:grid-cols-2 md:py-16">
         <div className="relative overflow-hidden rounded-2xl">
           <Image
-            src="/macro-iphone-camera.jpg"
+            src={PLACEHOLDER_IMAGE}
             alt="iPhone camera macro"
             width={1100}
             height={800}
@@ -150,8 +152,8 @@ export default function Page() {
           </p>
         </div>
         <BeforeAfter
-          beforeSrc="/before-building-fa-ade.jpg"
-          afterSrc="/after-building-fa-ade.jpg"
+          beforeSrc={PLACEHOLDER_IMAGE}
+          afterSrc={PLACEHOLDER_IMAGE}
           className="mx-auto w-full max-w-xl"
         />
       </section>
@@ -167,7 +169,7 @@ export default function Page() {
           {[1, 2].map((i) => (
             <div key={i} className="relative overflow-hidden rounded-2xl">
               <Image
-                src={`/large-gallery-image-.jpg?height=900&width=1200&query=large%20gallery%20image%20${i}`}
+                src={PLACEHOLDER_IMAGE}
                 alt={`Gallery ${i}`}
                 width={1200}
                 height={900}
@@ -201,7 +203,7 @@ export default function Page() {
               <CardContent className="p-6">
                 <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-xl">
                   <Image
-                    src={`/.jpg?height=320&width=320&query=${encodeURIComponent(item.title)}`}
+                    src={PLACEHOLDER_IMAGE}
                     alt={item.title}
                     fill
                     className="object-cover"

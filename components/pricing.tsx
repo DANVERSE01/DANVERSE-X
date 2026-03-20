@@ -1,6 +1,3 @@
-"use client"
-
-import React from "react"
 import { PricingExamplesStrip } from "./PricingExamplesStrip"
 import { PricingCards } from "./pricing-cards"
 

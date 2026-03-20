@@ -74,7 +74,7 @@ export default function RootLayout({
           {`
             function updateFavicon() {
               const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const faviconHref = darkMode ? '/icons/icon-light-32x32.png' : '/icons/icon-dark-32x32.png';
+              const faviconHref = darkMode ? '/icon-light-32x32.png' : '/icon-dark-32x32.png';
               let link = document.querySelector("link[rel~='icon']");
               if (!link) {
                 link = document.createElement('link');

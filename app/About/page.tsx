@@ -1,43 +1,8 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import { fireCTAAndOpenWhatsApp } from "../../lib/n8n"
 import { SiteHeader } from "../../components/site-header"
 import { AppverseFooter } from "../../components/appverse-footer"
 import { Button } from "../../components/ui/button"
-
-// ── Counter Component ──────────────────────────────────────────────────────
-function AnimatedCounter({ target, suffix = "", duration = 1800 }: { target: number; suffix?: string; duration?: number }) {
-  const [value, setValue] = useState(0)
-  const ref = useRef<HTMLSpanElement>(null)
-  const started = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
-          const start = performance.now()
-          const tick = (now: number) => {
-            const elapsed = now - start
-            const progress = Math.min(elapsed / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 3)
-            setValue(Math.round(eased * target))
-            if (progress < 1) requestAnimationFrame(tick)
-          }
-          requestAnimationFrame(tick)
-        }
-      },
-      { threshold: 0.4 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [target, duration])
-
-  return <span ref={ref}>{value}{suffix}</span>
-}
+import { AnimatedCounter } from "@/components/AnimatedCounter"
+import { WaCtaButton } from "@/components/wa-cta-button"
 
 // ── Data ───────────────────────────────────────────────────────────────────
 const PHILOSOPHY = [
@@ -97,9 +62,7 @@ export default function AboutPage() {
               repeatable systems, and cinematic execution for brands that cannot afford to look average.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fade-in-up animate-fade-in-up-delay-3">
-              <Button size="lg" onClick={() => fireCTAAndOpenWhatsApp("about-hero-cta")} className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all">
-                Start a Project
-              </Button>
+              <WaCtaButton source="about-hero-cta" label="Start a Project" />
               <Button asChild variant="outline" size="lg" className="rounded-full border-white/20 bg-white/5 px-8 text-white font-medium hover:bg-white/10 transition-all">
                 <a href="#process">See How We Work</a>
               </Button>
@@ -173,13 +136,7 @@ export default function AboutPage() {
               Let&apos;s Build Something Bold
             </h2>
             <p className="text-white/50 mb-8 text-sm max-w-md mx-auto">One conversation. Direction locked. Work starts within 48 hours.</p>
-            <Button
-              size="lg"
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
-              onClick={() => fireCTAAndOpenWhatsApp("about-cta")}
-            >
-              Book a Call
-            </Button>
+            <WaCtaButton source="about-cta" />
           </div>
         </section>
 

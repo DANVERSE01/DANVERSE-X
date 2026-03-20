@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 export default function PhoneVideo({
   src = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
@@ -8,28 +8,30 @@ export default function PhoneVideo({
   poster,
 }: { src?: string; className?: string; poster?: string }) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [loaded, setLoaded] = useState(false)
+  const loadedRef = useRef(false)
 
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
+    loadedRef.current = false
 
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     const saveData = (navigator as any)?.connection?.saveData === true
     const shouldAutoplay = !(prefersReducedMotion || saveData)
 
     let observer: IntersectionObserver | null = null
+    let playOnCanPlay: (() => void) | null = null
 
     const onIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach(async (entry) => {
-        if (entry.isIntersecting && !loaded) {
+        if (entry.isIntersecting && !loadedRef.current) {
           const sourceEl = el.querySelector("source")
-          if (sourceEl && !sourceEl.getAttribute("src")) {
+          if (sourceEl && sourceEl.getAttribute("src") !== src) {
             sourceEl.setAttribute("src", src)
             el.load()
           }
 
-          const playVideo = async () => {
+          playOnCanPlay = async () => {
             if (!shouldAutoplay) return
             try {
               await el.play()
@@ -39,17 +41,17 @@ export default function PhoneVideo({
           }
 
           if (el.readyState >= 3) {
-            playVideo()
+            void playOnCanPlay()
           } else {
-            el.addEventListener("canplay", playVideo, { once: true })
+            el.addEventListener("canplay", playOnCanPlay, { once: true })
           }
 
-          setLoaded(true)
-        } else if (!entry.isIntersecting && loaded) {
+          loadedRef.current = true
+        } else if (!entry.isIntersecting && loadedRef.current) {
           try {
             el.pause()
           } catch {}
-        } else if (entry.isIntersecting && loaded && shouldAutoplay) {
+        } else if (entry.isIntersecting && loadedRef.current && shouldAutoplay) {
           try {
             await el.play()
           } catch {}
@@ -70,7 +72,7 @@ export default function PhoneVideo({
         try {
           el.pause()
         } catch {}
-      } else if (loaded && shouldAutoplay) {
+      } else if (loadedRef.current && shouldAutoplay) {
         el.play().catch(() => {})
       }
     }
@@ -79,8 +81,11 @@ export default function PhoneVideo({
     return () => {
       document.removeEventListener("visibilitychange", onVisibility)
       observer?.disconnect()
+      if (playOnCanPlay) {
+        el.removeEventListener("canplay", playOnCanPlay)
+      }
     }
-  }, [src, loaded])
+  }, [src])
 
   return (
     <video

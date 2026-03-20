@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 interface LazyVideoProps {
   src: string
@@ -27,26 +27,28 @@ export default function LazyVideo({
   ...props
 }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const [loaded, setLoaded] = useState(false)
+  const loadedRef = useRef(false)
 
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
+    loadedRef.current = false
 
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     const saveData = (navigator as any)?.connection?.saveData === true
     const shouldAutoplay = autoplay && !prefersReducedMotion && !saveData
 
     let observer: IntersectionObserver | null = null
+    let playOnCanPlay: (() => void) | null = null
 
     const onIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach(async (entry) => {
-        if (entry.isIntersecting && !loaded) {
+        if (entry.isIntersecting && !loadedRef.current) {
           el.src = src
           el.load()
 
           if (shouldAutoplay) {
-            const playVideo = async () => {
+            playOnCanPlay = async () => {
               try {
                 await el.play()
               } catch (error) {
@@ -54,18 +56,18 @@ export default function LazyVideo({
               }
             }
             if (el.readyState >= 3) {
-              playVideo()
+              void playOnCanPlay()
             } else {
-              el.addEventListener("canplay", playVideo, { once: true })
+              el.addEventListener("canplay", playOnCanPlay, { once: true })
             }
           }
 
-          setLoaded(true)
-        } else if (!entry.isIntersecting && loaded && shouldAutoplay) {
+          loadedRef.current = true
+        } else if (!entry.isIntersecting && loadedRef.current && shouldAutoplay) {
           try {
             el.pause()
           } catch {}
-        } else if (entry.isIntersecting && loaded && shouldAutoplay) {
+        } else if (entry.isIntersecting && loadedRef.current && shouldAutoplay) {
           try {
             await el.play()
           } catch {}
@@ -86,7 +88,7 @@ export default function LazyVideo({
         try {
           el.pause()
         } catch {}
-      } else if (shouldAutoplay && loaded) {
+      } else if (shouldAutoplay && loadedRef.current) {
         // resume only if we were auto-playing
         el.play().catch(() => {})
       }
@@ -96,8 +98,11 @@ export default function LazyVideo({
     return () => {
       document.removeEventListener("visibilitychange", onVisibility)
       observer?.disconnect()
+      if (playOnCanPlay) {
+        el.removeEventListener("canplay", playOnCanPlay)
+      }
     }
-  }, [src, loaded, autoplay])
+  }, [src, autoplay])
 
   return (
     <video

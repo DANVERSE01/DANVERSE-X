@@ -44,10 +44,10 @@ export function FeaturesArchviz() {
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
-                <Image src="/images/intuitive-1.png" alt="ArchViz material sample" fill className="object-cover" />
+                <Image src="/images/intuitive-1.webp" alt="ArchViz material sample" fill className="object-cover" />
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
-                <Image src="/images/intuitive-2.png" alt="Interior lighting demo" fill className="object-cover" />
+                <Image src="/images/intuitive-2.webp" alt="Interior lighting demo" fill className="object-cover" />
               </div>
             </div>
           </CardContent>

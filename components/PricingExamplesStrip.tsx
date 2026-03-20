@@ -316,20 +316,14 @@ export function PricingExamplesStrip() {
 
       {/* Masonry Grid - Zero Gaps */}
       <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 w-full"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-          gap: "0",
-          width: "100%",
           background: "linear-gradient(to bottom, rgba(230,60,47,0.02) 0%, rgba(0,0,0,0) 100%)",
           borderTop: "1px solid rgba(230,60,47,0.1)",
         }}
       >
-        {VIDEOS.map((item, index) => (
-          <CinematicTile
-            key={item.id}
-            item={item}
-          />
+        {VIDEOS.map((item) => (
+          <CinematicTile key={item.id} item={item} />
         ))}
       </div>
 

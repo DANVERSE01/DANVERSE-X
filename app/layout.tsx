@@ -3,6 +3,9 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
+import dynamic from "next/dynamic"
+
+const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
 
 const inter = Inter({
   subsets: ["latin"],
@@ -108,6 +111,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="bg-black">
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <Plasma />
+        </div>
         <div className="relative z-10 min-h-screen">
           {children}
         </div>

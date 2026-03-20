@@ -7,7 +7,7 @@ import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex items-center">
+    <section className="relative w-full overflow-hidden" style={{ height: '100svh' }}>
       <div className="absolute inset-0 z-0">
         <iframe
           src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
@@ -20,63 +20,65 @@ export function Hero() {
           loading="lazy"
           title="DANVERSE Hero Background Video"
         ></iframe>
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-16">
-        <div className="flex flex-col items-center justify-center py-8 sm:py-12">
+      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-12 px-4">
+        <div className="container mx-auto">
+          <div className="flex flex-col items-center justify-center py-8 sm:py-12">
           {/* Logo - Centered with consistent spacing */}
-          <div className="mb-4">
-            <DanverseLogo size="hero" />
-          </div>
+            <div className="mb-4">
+              <DanverseLogo size="hero" />
+            </div>
 
           {/* Eyebrow Label */}
-          <div className="mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
-            CREATIVE OPERATING SYSTEM
-          </div>
+            <div className="mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
+              CREATIVE OPERATING SYSTEM
+            </div>
 
           {/* Headline */}
-          <h1 className="font-display text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            <span className="block text-white uppercase">Cinematic Ads</span>
-            <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent uppercase">
-              Built for Scale
-            </span>
-          </h1>
+            <h1 className="font-display text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              <span className="block text-white uppercase">Cinematic Ads</span>
+              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent uppercase">
+                Built for Scale
+              </span>
+            </h1>
 
           {/* Subheadline */}
-          <p className="mt-6 text-center text-lg text-white/70 max-w-2xl mx-auto">
-            A premium creative studio that builds ads, brand systems, and AI workflows into one repeatable output engine.
-          </p>
+            <p className="mt-6 text-center text-lg text-white/70 max-w-2xl mx-auto">
+              A premium creative studio that builds ads, brand systems, and AI workflows into one repeatable output engine.
+            </p>
 
           {/* Micro Line */}
-          <p className="mt-2 text-center text-sm text-white/50 italic">
-            Direction locked. Output consistent. Delivery predictable.
-          </p>
+            <p className="mt-2 text-center text-sm text-white/50 italic">
+              Direction locked. Output consistent. Delivery predictable.
+            </p>
 
           {/* CTA Button */}
-          <div className="mt-8">
-            <Button
-              size="lg"
-              onClick={() => fireCTAAndOpenWhatsApp("hero-cta")}
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
-            >
-              Book a Call
-            </Button>
-          </div>
+            <div className="mt-8">
+              <Button
+                size="lg"
+                onClick={() => fireCTAAndOpenWhatsApp("hero-cta")}
+                className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
+              >
+                Book a Call
+              </Button>
+            </div>
 
           {/* Phone Cards Grid */}
-          <div className="mt-12 w-full">
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-6xl mx-auto">
-              {phoneData.map((p, i) => {
-                const visibility =
-                  i <= 1 ? "block" : i === 2 ? "hidden sm:block" : i === 3 ? "hidden lg:block" : "hidden xl:block"
+            <div className="mt-12 w-full">
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-6xl mx-auto">
+                {phoneData.map((p, i) => {
+                  const visibility =
+                    i <= 1 ? "block" : i === 2 ? "hidden sm:block" : i === 3 ? "hidden lg:block" : "hidden xl:block"
 
-                return (
-                  <div key={i} className={visibility}>
-                    <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
-                  </div>
-                )
-              })}
+                  return (
+                    <div key={i} className={visibility}>
+                      <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>

@@ -216,7 +216,7 @@ export function PricingExamplesStrip() {
   }, [])
 
   return (
-    <div className="w-full bg-black overflow-hidden">
+    <div className="w-full bg-transparent overflow-hidden">
       {/* Header */}
       <header
         ref={headerRef}

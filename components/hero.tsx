@@ -30,20 +30,21 @@ export function Hero() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 
-      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-24 pb-4 px-4 overflow-y-hidden">
+      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-4 px-4 overflow-y-hidden">
         <div className="container mx-auto">
-          <div className="flex flex-col items-center justify-center py-2 sm:py-4">
-          {/* Logo - Centered with consistent spacing */}
-            <div className="mb-4">
+          <div className="flex flex-col items-center justify-center w-full pt-4 pb-2 gap-0">
+
+            {/* Logo */}
+            <div className="mb-3 flex justify-center">
               <DanverseLogo size="md" />
             </div>
 
-          {/* Eyebrow Label */}
-            <div className="mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
+            {/* Eyebrow */}
+            <div className="mb-3 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
               CREATIVE OPERATING SYSTEM
             </div>
 
-          {/* Headline */}
+            {/* Headline */}
             <h1 className="font-display text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               <span className="block text-white uppercase">Cinematic Ads</span>
               <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent uppercase">
@@ -51,18 +52,18 @@ export function Hero() {
               </span>
             </h1>
 
-          {/* Subheadline */}
-            <p className="mt-6 text-center text-lg text-white/70 max-w-2xl mx-auto">
+            {/* Subheadline */}
+            <p className="mt-4 text-center text-base text-white/70 max-w-2xl mx-auto">
               A premium creative studio that builds ads, brand systems, and AI workflows into one repeatable output engine.
             </p>
 
-          {/* Micro Line */}
-            <p className="mt-2 text-center text-sm text-white/50 italic">
+            {/* Micro Line */}
+            <p className="mt-1 text-center text-sm text-white/50 italic">
               Direction locked. Output consistent. Delivery predictable.
             </p>
 
-          {/* CTA Button */}
-            <div className="mt-8">
+            {/* CTA Button */}
+            <div className="mt-5">
               <Button
                 size="lg"
                 onClick={() => fireCTAAndOpenWhatsApp("hero-cta")}
@@ -72,9 +73,9 @@ export function Hero() {
               </Button>
             </div>
 
-          {/* Phone Cards Grid */}
-            <div className="mt-12 w-full">
-              <div className="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-5xl mx-auto w-full">
+            {/* Phone Cards Grid */}
+            <div className="mt-6 w-full">
+              <div className="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-5xl mx-auto w-full items-start">
                 {phoneData.map((p, i) => {
                   const visibility =
                     i === 0 ? "block" :
@@ -82,15 +83,15 @@ export function Hero() {
                     i === 2 ? "hidden md:block" :
                     i === 3 ? "hidden xl:block" :
                     "hidden 2xl:block"
-
                   return (
-                    <div key={i} className={visibility}>
+                    <div key={i} className={`${visibility} max-h-[260px] overflow-hidden`}>
                       <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
                     </div>
                   )
                 })}
               </div>
             </div>
+
           </div>
         </div>
       </div>

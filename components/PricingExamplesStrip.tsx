@@ -46,7 +46,7 @@ function CinematicTile({ item }: { item: typeof VIDEOS[0] }) {
   return (
     <div
       ref={ref}
-      className="relative overflow-hidden bg-black group"
+      className="relative overflow-hidden w-full bg-black group"
       style={{
         aspectRatio: '16/9',
         opacity: entered ? 1 : 0,
@@ -60,7 +60,7 @@ function CinematicTile({ item }: { item: typeof VIDEOS[0] }) {
       {visible && (
         <iframe
           src={`https://player.vimeo.com/video/${item.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{
             border: "none",
             filter: hovered ? "grayscale(0) brightness(1.15) saturate(1.3)" : "grayscale(0.6) brightness(0.6) saturate(0.8)",

@@ -34,5 +34,8 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# Local nested clone / workspace artifact
+DANVERSE-X/
+
 # TypeScript
 *.tsbuildinfo

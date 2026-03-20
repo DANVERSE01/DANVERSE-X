@@ -107,7 +107,7 @@ function PhoneCard({
 }) {
   return (
     <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
-      <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
+      <div className="relative w-full overflow-hidden rounded-[20px] bg-black" style={{ height: '210px' }}>
         <LazyVideo
           src={videoSrc ?? "/videos/default-fallback.mp4"}
           className="absolute inset-0 h-full w-full object-cover"

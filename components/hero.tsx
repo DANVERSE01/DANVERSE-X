@@ -7,7 +7,7 @@ import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden min-h-screen flex items-center -mt-[88px]">
+    <section className="relative isolate overflow-hidden min-h-screen flex items-center">
       {/* Vimeo Background Video */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 w-full h-full scale-110">

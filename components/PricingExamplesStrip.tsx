@@ -17,30 +17,31 @@ const VIDEOS = [
   { id:"1164910687", cat:"IDENTITY", title:"Brand Identity",  ratio:"16/9",  delay:400 },
 ]
 
-function CinematicTile({ item, index, onHover }: { item: typeof VIDEOS[0]; index: number; onHover: (id: string | null) => void }) {
+function CinematicTile({ item }: { item: typeof VIDEOS[0] }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [entered, setEntered] = useState(false)
   const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
+    let enterTimer: ReturnType<typeof setTimeout> | null = null
+
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
           setVisible(true)
-          setTimeout(() => setEntered(true), item.delay)
+          enterTimer = setTimeout(() => setEntered(true), item.delay)
+          obs.disconnect()
         }
       },
       { threshold: 0.1 }
     )
     if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
+    return () => {
+      obs.disconnect()
+      if (enterTimer) clearTimeout(enterTimer)
+    }
   }, [item.delay])
-
-  const handleHover = (isHovered: boolean) => {
-    setHovered(isHovered)
-    onHover(isHovered ? item.id : null)
-  }
 
   return (
     <div
@@ -52,8 +53,8 @@ function CinematicTile({ item, index, onHover }: { item: typeof VIDEOS[0]; index
         transform: entered ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
         transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${item.delay}ms, transform 1s cubic-bezier(0.16,1,0.3,1) ${item.delay}ms`,
       }}
-      onMouseEnter={() => handleHover(true)}
-      onMouseLeave={() => handleHover(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {/* Video Background */}
       {visible && (
@@ -205,7 +206,6 @@ function CinematicTile({ item, index, onHover }: { item: typeof VIDEOS[0]; index
 export function PricingExamplesStrip() {
   const headerRef = useRef<HTMLDivElement>(null)
   const [headerIn, setHeaderIn] = useState(false)
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   useEffect(() => {
     const obs = new IntersectionObserver(([e]) => {
@@ -329,8 +329,6 @@ export function PricingExamplesStrip() {
           <CinematicTile
             key={item.id}
             item={item}
-            index={index}
-            onHover={setHoveredId}
           />
         ))}
       </div>

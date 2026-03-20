@@ -114,6 +114,7 @@ export default function LazyVideo({
       style={{
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
+        transform: 'translateZ(0)',
       } as React.CSSProperties}
       {...props}
     >

@@ -50,7 +50,7 @@ export function SiteHeader() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-auto">
       <div className="container mx-auto px-4 py-3 pt-4">
         <div className="flex h-14 items-center justify-between px-5 liquid-glass-header rounded-full bg-black/30 backdrop-blur-md">
           {/* Logo - Left */}

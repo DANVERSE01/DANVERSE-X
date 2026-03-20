@@ -73,9 +73,9 @@ const PAGE_STRUCTURED_DATA = {
 export default function Page() {
   return (
     <>
-      <main className="min-h-[100dvh] text-white relative z-10 pt-16">
+      <main className="min-h-[100dvh] text-white relative z-10">
         <SiteHeader />
-        <div className="h-16"></div>
+        <div className="h-20"></div>
         <Hero />
         <Features />
         <LogoMarquee />

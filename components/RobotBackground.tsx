@@ -23,7 +23,7 @@ export function RobotBackground() {
 
   return (
     <div
-      className="fixed inset-0 z-[1] overflow-hidden pointer-events-auto"
+      className="fixed inset-0 z-0 overflow-hidden pointer-events-auto"
       aria-hidden="true"
       style={{ 
         willChange: 'transform', 
@@ -31,6 +31,7 @@ export function RobotBackground() {
         backfaceVisibility: 'hidden',
         WebkitBackfaceVisibility: 'hidden',
         perspective: 1000,
+        transform: 'translateZ(0)',
       }}
     >
       {!isLoaded && !hasError && (
@@ -49,6 +50,7 @@ export function RobotBackground() {
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
+            transform: 'translateZ(0)',
           }}
         />
       )}

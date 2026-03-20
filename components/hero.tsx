@@ -30,12 +30,12 @@ export function Hero() {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 
-      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-12 px-4">
+      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-24 pb-4 px-4 overflow-y-hidden">
         <div className="container mx-auto">
-          <div className="flex flex-col items-center justify-center py-8 sm:py-12">
+          <div className="flex flex-col items-center justify-center py-2 sm:py-4">
           {/* Logo - Centered with consistent spacing */}
             <div className="mb-4">
-              <DanverseLogo size="lg" />
+              <DanverseLogo size="md" />
             </div>
 
           {/* Eyebrow Label */}
@@ -74,10 +74,14 @@ export function Hero() {
 
           {/* Phone Cards Grid */}
             <div className="mt-12 w-full">
-              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-6xl mx-auto">
+              <div className="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-5xl mx-auto w-full">
                 {phoneData.map((p, i) => {
                   const visibility =
-                    i <= 1 ? "block" : i === 2 ? "hidden sm:block" : i === 3 ? "hidden lg:block" : "hidden xl:block"
+                    i === 0 ? "block" :
+                    i === 1 ? "block" :
+                    i === 2 ? "hidden md:block" :
+                    i === 3 ? "hidden xl:block" :
+                    "hidden 2xl:block"
 
                   return (
                     <div key={i} className={visibility}>

@@ -46,8 +46,9 @@ function CinematicTile({ item }: { item: typeof VIDEOS[0] }) {
   return (
     <div
       ref={ref}
-      className="relative overflow-hidden bg-black group aspect-video"
+      className="relative overflow-hidden bg-black group"
       style={{
+        aspectRatio: '16/9',
         opacity: entered ? 1 : 0,
         transform: entered ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
         transition: `opacity 0.8s cubic-bezier(0.16,1,0.3,1) ${item.delay}ms, transform 1s cubic-bezier(0.16,1,0.3,1) ${item.delay}ms`,

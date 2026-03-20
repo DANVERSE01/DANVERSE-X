@@ -3,12 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
-import dynamic from "next/dynamic"
-import { Suspense } from "react"
-import { ErrorBoundary } from "@/components/ErrorBoundary"
-
-// Dynamically import heavy graphical components on the client only.
-const RobotBackground = dynamic(() => import("@/components/RobotBackground").then(m => ({ default: m.RobotBackground })), { ssr: false })
+import { BackgroundLayer } from "@/components/BackgroundLayer"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -116,11 +111,7 @@ export default function RootLayout({
       <body className="bg-black">
         {/* Visual Background Layer - 3D Robot Background */}
         <div className="fixed inset-0 z-0 bg-black pointer-events-none">
-          <ErrorBoundary componentName="RobotBackground">
-            <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
-              <RobotBackground />
-            </Suspense>
-          </ErrorBoundary>
+          <BackgroundLayer />
         </div>
 
         {/* Content Layer */}

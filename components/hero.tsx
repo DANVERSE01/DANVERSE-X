@@ -11,15 +11,17 @@ export function Hero() {
       {/* Vimeo Background Video */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <iframe
-          src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1"
-          className="absolute inset-0 w-full h-full object-cover"
+          src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
+          className="absolute inset-0 w-full h-full"
           style={{ 
             border: 'none',
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            objectFit: 'cover',
           }}
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
+          loading="lazy"
           title="DANVERSE Hero Background Video"
         ></iframe>
         {/* Overlay to ensure text readability */}

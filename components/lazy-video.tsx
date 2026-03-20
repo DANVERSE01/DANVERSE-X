@@ -74,8 +74,8 @@ export default function LazyVideo({
     }
 
     observer = new IntersectionObserver(onIntersect, {
-      rootMargin: "50px",
-      threshold: 0.1,
+      rootMargin: "200px",
+      threshold: 0.05,
     })
     observer.observe(el)
 

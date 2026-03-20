@@ -23,7 +23,7 @@ export function RobotBackground() {
 
   return (
     <div
-      className="fixed inset-0 z-0 overflow-hidden pointer-events-auto"
+      className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
       aria-hidden="true"
       style={{ 
         willChange: 'transform', 
@@ -41,18 +41,20 @@ export function RobotBackground() {
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
       )}
       {!hasError && (
-        <Spline
-          scene={sceneUrl}
-          className="h-full w-full"
-          onLoad={onLoad}
-          onError={onError}
-          renderOnDemand={false}
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'translateZ(0)',
-          }}
-        />
+        <div style={{ pointerEvents: "auto", position: "absolute", inset: 0 }}>
+          <Spline
+            scene={sceneUrl}
+            className="h-full w-full"
+            onLoad={onLoad}
+            onError={onError}
+            renderOnDemand={false}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'translateZ(0)',
+            }}
+          />
+        </div>
       )}
     </div>
   );

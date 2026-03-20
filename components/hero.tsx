@@ -7,28 +7,23 @@ import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden min-h-screen flex items-center">
-      {/* Vimeo Background Video */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center">
+      <div className="absolute inset-0 z-0">
         <iframe
           src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
-          className="absolute inset-0 w-full h-full"
-          style={{ 
-            border: 'none',
-            pointerEvents: 'none',
-            objectFit: 'cover',
-          }}
+          width="100%"
+          height="100%"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', pointerEvents: 'none' }}
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
           title="DANVERSE Hero Background Video"
         ></iframe>
-        {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 pt-12 md:pt-20">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-16">
         <div className="flex flex-col items-center justify-center py-8 sm:py-12">
           {/* Logo - Centered with consistent spacing */}
           <div className="mb-4">

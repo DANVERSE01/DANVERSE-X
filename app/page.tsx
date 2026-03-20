@@ -75,8 +75,6 @@ export default function Page() {
     <>
       <main className="min-h-[100dvh] text-white relative z-10">
         <SiteHeader />
-        {/* Spacer = header height: pt-4(16) + h-14(56) + pb-3(12) = 84px */}
-        <div className="h-[84px]"></div>
         <Hero />
         <Features />
         <LogoMarquee />

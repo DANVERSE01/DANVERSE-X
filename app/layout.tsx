@@ -3,7 +3,6 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
-import { BackgroundLayer } from "@/components/BackgroundLayer"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -109,12 +108,6 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="bg-black">
-        {/* Visual Background Layer - 3D Robot Background */}
-        <div className="fixed inset-0 z-0 bg-black pointer-events-none">
-          <BackgroundLayer />
-        </div>
-
-        {/* Content Layer */}
         <div className="relative z-10 min-h-screen">
           {children}
         </div>

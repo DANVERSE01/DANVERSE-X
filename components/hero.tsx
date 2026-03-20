@@ -34,11 +34,6 @@ export function Hero() {
         <div className="container mx-auto">
           <div className="flex flex-col items-center justify-center w-full pt-4 pb-2 gap-0">
 
-            {/* Logo */}
-            <div className="mb-3 flex justify-center">
-              <DanverseLogo size="md" />
-            </div>
-
             {/* Eyebrow */}
             <div className="mb-3 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
               CREATIVE OPERATING SYSTEM
@@ -84,7 +79,7 @@ export function Hero() {
                     i === 3 ? "hidden xl:block" :
                     "hidden 2xl:block"
                   return (
-                    <div key={i} className={`${visibility} max-h-[260px] overflow-hidden`}>
+                    <div key={i} className={visibility}>
                       <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
                     </div>
                   )

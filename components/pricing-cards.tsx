@@ -18,7 +18,7 @@ const PLANS: PricingPlan[] = [
   {
     name: "Starter",
     price: "$199",
-    subtitle: "For brand launches",
+    subtitle: "One ad. Done right.",
     highlighted: false,
     cta: "Get Started",
     features: [
@@ -33,7 +33,7 @@ const PLANS: PricingPlan[] = [
   {
     name: "Professional",
     price: "$499",
-    subtitle: "For serious brands",
+    subtitle: "Built for brands that scale.",
     badge: "MOST POPULAR",
     highlighted: true,
     cta: "Start Project",
@@ -50,7 +50,7 @@ const PLANS: PricingPlan[] = [
   {
     name: "Premium",
     price: "$1,499",
-    subtitle: "The full creative system",
+    subtitle: "Your entire creative operation.",
     badge: "ELITE",
     highlighted: false,
     cta: "Book a Call",
@@ -77,7 +77,7 @@ export function PricingCards() {
           Pick Your Plan
         </h2>
         <p className="mt-4 text-sm text-white/50 max-w-md mx-auto">
-          No hidden fees. No retainers unless you want one. Just clear deliverables and fast execution.
+          No retainers. No surprises. Cinematic output — delivered on time, every time.
         </p>
       </div>
 

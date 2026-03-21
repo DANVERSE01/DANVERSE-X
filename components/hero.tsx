@@ -170,7 +170,6 @@ function PhoneCard({
       >
         <LazyVideo
           src={videoSrc ?? "/videos/default-fallback.mp4"}
-          poster="/images/danverse-logo-blend-1.webp"
           className="absolute inset-0 h-full w-full object-cover"
           autoplay={true}
           loop={true}

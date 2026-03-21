@@ -62,7 +62,7 @@ export default function AboutPage() {
               repeatable systems, and cinematic execution for brands that cannot afford to look average.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fade-in-up animate-fade-in-up-delay-3">
-              <WaCtaButton source="about-hero-cta" label="Start a Project" />
+              <WaCtaButton source="about-hero-cta" label="Initialize a Project" />
               <Button asChild variant="outline" size="lg" className="rounded-full border-white/20 bg-white/5 px-8 text-white font-medium hover:bg-white/10 transition-all">
                 <a href="#process">See How We Work</a>
               </Button>

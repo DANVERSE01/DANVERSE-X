@@ -16,8 +16,11 @@ export function Hero() {
     >
       {/* Video background — contained in its own overflow-hidden div */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <iframe
-          src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           style={{
             position: 'absolute',
             top: '50%',
@@ -27,13 +30,12 @@ export function Hero() {
             minHeight: '100%',
             minWidth: '177.78vh',
             transform: 'translate(-50%, -50%)',
-            border: 'none',
+            objectFit: 'cover',
             pointerEvents: 'none',
           }}
-          frameBorder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          title="Hero background"
-        />
+        >
+          <source src="/videos/conversions.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 

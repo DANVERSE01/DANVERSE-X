@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/danverse-logo-blend-1.webp",
+        url: "/images/danverse-logo.webp",
         width: 1200,
         height: 630,
         alt: "DANVERSE — AI-Powered Creative Studio",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-    images: ["/images/danverse-logo-blend-1.webp"],
+    images: ["/images/danverse-logo.webp"],
   },
 }
 

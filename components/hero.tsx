@@ -48,7 +48,7 @@ export function Hero() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-display text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="font-display text-center font-extrabold tracking-tight" style={{ fontSize: 'clamp(1.8rem, 6vw, 4.5rem)', lineHeight: 1.05 }}>
               <span className="block text-white uppercase">Cinematic Ads</span>
               <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent uppercase">
                 Built for Scale
@@ -170,6 +170,7 @@ function PhoneCard({
       >
         <LazyVideo
           src={videoSrc ?? "/videos/default-fallback.mp4"}
+          poster="/images/danverse-logo-blend-1.webp"
           className="absolute inset-0 h-full w-full object-cover"
           autoplay={true}
           loop={true}

@@ -84,7 +84,7 @@ function SlateRow({ item, idx }: { item: typeof VIDEOS[0]; idx: number }) {
       <div style={{ position:"absolute", bottom:0, left:0, right:hovered?0:"100%", height:"1px", background:"#e63c2f", transition:"right 0.65s cubic-bezier(0.16,1,0.3,1)", zIndex:1 }} />
       <div style={{ padding:"0 0 0 28px", fontFamily:"'Courier Prime',monospace", fontSize:"10px", letterSpacing:"0.2em", color:hovered?"#e63c2f":"rgba(255,255,255,0.14)", transition:"color 0.3s" }}>{item.label}</div>
       <div style={{ padding:"18px 20px" }}>
-        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(28px,3.5vw,48px)", letterSpacing:hovered?"0.07em":"0.03em", color:"#fff", lineHeight:0.92, transition:"letter-spacing 0.55s cubic-bezier(0.16,1,0.3,1)" }}>{item.title}</div>
+        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(18px,2.2vw,32px)", letterSpacing:hovered?"0.07em":"0.03em", color:"#fff", lineHeight:0.92, transition:"letter-spacing 0.55s cubic-bezier(0.16,1,0.3,1)" }}>{item.title}</div>
         <div style={{ fontFamily:"'Courier Prime',monospace", fontSize:"8px", letterSpacing:"0.35em", color:hovered?"rgba(230,60,47,0.65)":"rgba(255,255,255,0.18)", textTransform:"uppercase", marginTop:3, transition:"color 0.3s" }}>{item.cat} · {item.fmt}</div>
       </div>
       <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-end", gap:12, padding:"0 20px", borderLeft:"1px solid rgba(255,255,255,0.04)", height:"100%" }}>
@@ -139,8 +139,8 @@ export function PricingExamplesStrip() {
           <div style={{ width:36, height:"1.5px", background:"#e63c2f" }} />
           <div style={{ fontFamily:"'Courier Prime',monospace", fontSize:"9px", letterSpacing:"0.55em", color:"#e63c2f", textTransform:"uppercase" }}>Cinematic Showcase</div>
         </div>
-        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(80px,12vw,140px)", lineHeight:0.8, letterSpacing:"-0.01em", color:"#fff", opacity:headerIn?1:0, transform:headerIn?"translateY(0)":"translateY(40px)", transition:"all 1s cubic-bezier(0.16,1,0.3,1) 0.1s" }}>Production</div>
-        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(80px,12vw,140px)", lineHeight:0.8, letterSpacing:"-0.01em", background:"linear-gradient(90deg,#e63c2f 0%,#ff6030 60%,#e63c2f 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", opacity:headerIn?1:0, transform:headerIn?"translateY(0)":"translateY(40px)", transition:"all 1s cubic-bezier(0.16,1,0.3,1) 0.15s" }}>2024–2026</div>
+        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(48px,7vw,96px)", lineHeight:0.8, letterSpacing:"-0.01em", color:"#fff", opacity:headerIn?1:0, transform:headerIn?"translateY(0)":"translateY(40px)", transition:"all 1s cubic-bezier(0.16,1,0.3,1) 0.1s" }}>Production</div>
+        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(48px,7vw,96px)", lineHeight:0.8, letterSpacing:"-0.01em", background:"linear-gradient(90deg,#e63c2f 0%,#ff6030 60%,#e63c2f 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", opacity:headerIn?1:0, transform:headerIn?"translateY(0)":"translateY(40px)", transition:"all 1s cubic-bezier(0.16,1,0.3,1) 0.15s" }}>2024–2026</div>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", padding:"24px 0 0", marginTop:20, borderTop:"1px solid rgba(255,255,255,0.06)", opacity:headerIn?1:0, transition:"opacity 0.9s ease 0.3s" }}>
           <div style={{ fontFamily:"'Barlow Condensed',sans-serif", fontSize:12, fontWeight:300, color:"rgba(255,255,255,0.28)", letterSpacing:"0.1em", textTransform:"uppercase", lineHeight:1.9, maxWidth:340 }}>A curated collection of high-fidelity visual systems.<br />Engineered for brands that demand<br />global impact and cinematic excellence.</div>
           <div style={{ textAlign:"right" }}>

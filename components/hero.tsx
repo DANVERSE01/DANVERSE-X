@@ -94,32 +94,43 @@ export function Hero() {
             paddingBottom: '0',
           }}
         >
-          {phoneData.map((p, i) => (
-            <div
-              key={i}
-              style={{
-                flexShrink: 0,
-                width: '110px',
-                transform: `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`,
-                zIndex: zIndexes[i],
-                transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1), z-index 0s',
-                cursor: 'pointer',
-                marginLeft: i === 0 ? 0 : '-10px',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.transform = 'rotate(0deg) translateY(-24px) scale(1.07)'
-                el.style.zIndex = '10'
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.transform = `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`
-                el.style.zIndex = String(zIndexes[i])
-              }}
-            >
-              <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
-            </div>
-          ))}
+          {phoneData.map((p, i) => {
+            const isMobileHidden = i === 0 || i === 4
+            const isTabletHidden = i === 4
+            return (
+              <div
+                key={i}
+                className={
+                  isMobileHidden
+                    ? 'hidden sm:block'
+                    : isTabletHidden
+                    ? 'hidden lg:block'
+                    : 'block'
+                }
+                style={{
+                  flexShrink: 0,
+                  width: '110px',
+                  transform: `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`,
+                  zIndex: zIndexes[i],
+                  transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1)',
+                  cursor: 'pointer',
+                  marginLeft: i === 0 ? 0 : '-10px',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.transform = 'rotate(0deg) translateY(-24px) scale(1.07)'
+                  el.style.zIndex = '10'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.transform = `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`
+                  el.style.zIndex = String(zIndexes[i])
+                }}
+              >
+                <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
+              </div>
+            )
+          })}
         </div>
       </div>
 

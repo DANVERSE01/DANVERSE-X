@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Star } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-const TITLE = "Why brands choose DANVERSE"
+const TITLE = "Built different. By design."
 
 export function Features() {
   return (
@@ -16,10 +16,10 @@ export function Features() {
         <Card className="liquid-glass border border-white/10 overflow-hidden">
           <CardHeader className="pb-4">
             <p className="text-[11px] tracking-widest text-red-400 uppercase">CRAFT + CONTROL</p>
-            <CardTitle className="mt-1 text-xl text-white">Cinematic, without the chaos</CardTitle>
+            <CardTitle className="mt-1 text-xl text-white">Direction before a single frame is shot.</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-white/60 mb-4">Every shot has a purpose. Every detail serves the outcome.</p>
+            <p className="text-sm text-white/60 mb-4">We lock strategy, visual language, and output format before production starts.</p>
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
@@ -48,11 +48,11 @@ export function Features() {
           <CardHeader className="pb-4">
             <p className="text-[11px] tracking-widest text-red-400 uppercase">CLIENT FEEDBACK</p>
             <CardTitle className="mt-1 text-xl text-white">
-              Five-star standard delivery
+              We ship finished work. Not "almost done."
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-white/60 mb-4">We ship only when it’s right, not when it’s “almost done.”</p>
+            <p className="text-sm text-white/60 mb-4">Every deliverable passes internal QA. You review final — not rough cuts.</p>
             <div className="mb-5 flex flex-col items-start gap-1">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -84,7 +84,7 @@ export function Features() {
       {/* AI Content Systems Block */}
       <div className="mt-12 max-w-5xl mx-auto p-8 rounded-2xl liquid-glass border border-white/10 text-center">
         <p className="text-lg text-white/80 leading-relaxed">
-          We build AI workflows that turn briefs into hooks, scripts, and campaign variants with your brand rules locked in.
+          One brief. Ten campaign-ready outputs. Hooks, scripts, formats — locked inside your brand system.
         </p>
       </div>
     </section>

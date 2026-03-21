@@ -44,7 +44,7 @@ export function Hero() {
 
             {/* Eyebrow */}
             <div className="mb-3 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
-              CREATIVE OPERATING SYSTEM
+              PRECISION · SCALE · CINEMA
             </div>
 
             {/* Headline */}
@@ -57,12 +57,12 @@ export function Hero() {
 
             {/* Subheadline */}
             <p className="mt-4 text-center text-base text-white/70 max-w-2xl mx-auto">
-              A premium creative studio that builds ads, brand systems, and AI workflows into one repeatable output engine.
+              We engineer visual systems that convert. Every frame is intentional. Every deliverable is final.
             </p>
 
             {/* Micro Line */}
             <p className="mt-1 text-center text-sm text-white/50 italic">
-              Direction locked. Output consistent. Delivery predictable.
+              No revisions for the sake of it. No fluff. Just output that performs.
             </p>
 
             {/* CTA */}

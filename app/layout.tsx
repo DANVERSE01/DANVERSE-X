@@ -76,7 +76,7 @@ export default function RootLayout({
           {`
             function updateFavicon() {
               const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const faviconHref = '/images/danverse-logo.webp';
+              const faviconHref = darkMode ? '/icon-light-32x32.png' : '/icon-dark-32x32.png';
               let link = document.querySelector("link[rel~='icon']");
               if (!link) {
                 link = document.createElement('link');

@@ -3,11 +3,18 @@
 import { Button } from "@/components/ui/button"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 import LazyVideo from "./lazy-video"
-import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
+  const rotations  = [-8, -3, 0, 3, 8]
+  const translateYs = [20,  8, 0, 8, 20]
+  const zIndexes   = [1,   2, 5, 2,  1]
+
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: '100svh' }}>
+    <section
+      className="relative w-full"
+      style={{ height: '100svh', overflow: 'visible' }}
+    >
+      {/* Video background — contained in its own overflow-hidden div */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://player.vimeo.com/video/1174583531?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&playsinline=1&quality=540p"
@@ -26,13 +33,14 @@ export function Hero() {
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
           title="Hero background"
-        ></iframe>
+        />
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
       </div>
 
-      <div className="relative z-[2] flex flex-col items-center justify-center w-full h-full pt-20 pb-4 px-4">
+      {/* Text content — centered in upper portion */}
+      <div className="relative z-[2] flex flex-col items-center justify-center w-full pt-28 pb-0 px-4" style={{ height: '65%' }}>
         <div className="container mx-auto">
-          <div className="flex flex-col items-center justify-center w-full pt-4 pb-2 gap-0">
+          <div className="flex flex-col items-center justify-center w-full gap-0">
 
             {/* Eyebrow */}
             <div className="mb-3 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 uppercase tracking-widest">
@@ -57,7 +65,7 @@ export function Hero() {
               Direction locked. Output consistent. Delivery predictable.
             </p>
 
-            {/* CTA Button */}
+            {/* CTA */}
             <div className="mt-5">
               <Button
                 size="lg"
@@ -68,28 +76,53 @@ export function Hero() {
               </Button>
             </div>
 
-            {/* Phone Cards Grid */}
-            <div className="mt-6 w-full">
-              <div className="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-5xl mx-auto w-full items-start">
-                {phoneData.map((p, i) => {
-                  const visibility =
-                    i === 0 ? "block" :
-                    i === 1 ? "block" :
-                    i === 2 ? "hidden md:block" :
-                    i === 3 ? "hidden xl:block" :
-                    "hidden 2xl:block"
-                  return (
-                    <div key={i} className={visibility}>
-                      <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
+
+      {/* 3D Fan Cards — absolutely positioned at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-[3]"
+        style={{ height: '42%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0' }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            perspective: '1200px',
+            paddingBottom: '0',
+          }}
+        >
+          {phoneData.map((p, i) => (
+            <div
+              key={i}
+              style={{
+                flexShrink: 0,
+                width: '110px',
+                transform: `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`,
+                zIndex: zIndexes[i],
+                transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1), z-index 0s',
+                cursor: 'pointer',
+                marginLeft: i === 0 ? 0 : '-10px',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLDivElement
+                el.style.transform = 'rotate(0deg) translateY(-24px) scale(1.07)'
+                el.style.zIndex = '10'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLDivElement
+                el.style.transform = `rotate(${rotations[i]}deg) translateY(${translateYs[i]}px)`
+                el.style.zIndex = String(zIndexes[i])
+              }}
+            >
+              <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} />
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   )
 }
@@ -106,8 +139,24 @@ function PhoneCard({
   videoSrc?: string
 }) {
   return (
-    <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
-      <div className="relative w-full overflow-hidden rounded-[20px] bg-black" style={{ aspectRatio: '9/16', maxHeight: '360px' }}>
+    <div
+      style={{
+        borderRadius: '20px',
+        border: '1px solid rgba(255,255,255,0.12)',
+        background: 'rgba(0,0,0,0.5)',
+        padding: '4px',
+        boxShadow: '0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05)',
+      }}
+    >
+      <div
+        style={{
+          borderRadius: '16px',
+          overflow: 'hidden',
+          aspectRatio: '9/16',
+          position: 'relative',
+          background: '#0a0a0a',
+        }}
+      >
         <LazyVideo
           src={videoSrc ?? "/videos/default-fallback.mp4"}
           className="absolute inset-0 h-full w-full object-cover"
@@ -117,13 +166,11 @@ function PhoneCard({
           playsInline={true}
           aria-label={`${title} - ${sub}`}
         />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="text-xl font-bold text-white mb-1">{title}</div>
-          <p className="text-xs text-white/70">{sub}</p>
-          <div className="mt-2 inline-flex items-center rounded-full bg-red-500/20 border border-red-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider text-red-400">
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%)' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '10px 8px 8px' }}>
+          <div style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif", fontSize: '15px', color: '#fff', letterSpacing: '0.04em', marginBottom: '2px' }}>{title}</div>
+          <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.6)', marginBottom: '5px', lineHeight: 1.3 }}>{sub}</p>
+          <div style={{ display: 'inline-flex', alignItems: 'center', borderRadius: '100px', background: 'rgba(230,60,47,0.15)', border: '1px solid rgba(230,60,47,0.3)', padding: '1px 6px', fontSize: '7px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#e63c2f' }}>
             DANVERSE
           </div>
         </div>
@@ -131,7 +178,6 @@ function PhoneCard({
     </div>
   )
 }
-
 
 const phoneData = [
   {

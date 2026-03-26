@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, production-improvements]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-checks:
+    name: Code Quality & Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run TypeScript check
+        run: npm run type-check
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Build project
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://danverse.ai
+          NEXT_PUBLIC_WHATSAPP_NUMBER: 201207346648
+          NEXT_PUBLIC_CONTACT_EMAIL: danverseai@outlook.com
+
+      - name: Check build size
+        run: |
+          echo "Build completed successfully!"
+          du -sh .next
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm audit
+        run: npm audit --production
+        continue-on-error: true

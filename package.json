@@ -40,6 +40,7 @@
     "@radix-ui/react-toggle": "1.1.1",
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
+    "@react-three/fiber": "^8.17.14",
     "@splinetool/react-spline": "4.1.0",
     "@splinetool/runtime": "^1.9.0",
     "@studio-freight/lenis": "^1.0.42",
@@ -66,6 +67,7 @@
     "split-type": "^0.3.4",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.183.2",
     "vaul": "^0.9.9",
     "zod": "3.25.67"
   },
@@ -73,6 +75,7 @@
     "@types/node": "^22",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.183.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
     "postcss": "^8.4.38",

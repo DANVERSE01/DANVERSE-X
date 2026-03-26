@@ -53,8 +53,9 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       }
 
       lenis = new Lenis({
-        lerp: 0.1,
+        lerp: 0.05,
         smoothWheel: true,
+        wheelMultiplier: 0.92,
       })
 
       destroySync = syncScrollTriggerWithLenis(lenis)

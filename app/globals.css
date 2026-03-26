@@ -3,45 +3,47 @@
 @tailwind utilities;
 
 :root {
-  /* Foundation: the darkest carbon used for cinematic depth and footer surfaces. */
+  /* Base: carbon black foundation for the darkest hero zones and shadow mass. */
   --color-base: #04070c;
-  /* Shadow: blue-black ink used for vignettes, overlays, and shadow wash. */
+  /* Shadow: blue-black depth for vignettes, rails, and lacquer falloff. */
   --color-shadow: #0a1325;
-  /* Midnight: the core navy used for large gradient masses and hero atmosphere. */
+  /* Midnight: structural navy used for the main dark gradients and WebGL surfaces. */
   --color-midnight: #162a53;
-  /* Cobalt: the electric blue used for primary actions, motion glows, and focus accents. */
+  /* Cobalt: controlled energy highlight for motion edges, focus rings, and glow accents. */
   --color-cobalt: #2f63ba;
-  /* Glacial: the cool blue used for borders, lines, and soft reflective highlights. */
+  /* Brown: warm organic undertone used sparingly inside the colder palette. */
+  --color-brown: #3e2b2d;
+  /* Glacial: cool silver-blue for technical separators and lifted edges. */
   --color-glacial: #7ea0c8;
-  /* Pearl: the silver text tone used for body copy and chrome surfaces. */
+  /* Pearl: premium silver-grey for body copy and satin reflections. */
   --color-pearl: #c7d3e0;
-  /* Ice: the brightest neutral used for high-contrast highlights and the top of the page wash. */
+  /* Ice: high-key pearl white used in small highlights and hero typography. */
   --color-ice: #eef3f8;
-  /* Crimson: the warm accent used for urgency, CTA edge light, and proof beats. */
+  /* Crimson: vascular accent used sparingly for urgency and focal veins. */
   --color-crimson: #c7264c;
-  /* Rose: the magenta accent used for cinematic bloom and secondary highlights. */
+  /* Rose: supporting bloom accent for secondary highlights and hover warmth. */
   --color-rose: #e45d86;
-  /* Fog: the lower page wash used to keep the background soft and powdery. */
+  /* Fog: cool atmospheric haze used in subtle overlays rather than large fills. */
   --color-fog: #e8eff5;
 
-  --background: 214 42% 7%;
-  --foreground: 212 24% 88%;
-  --card: 215 38% 9%;
-  --card-foreground: 212 24% 88%;
-  --popover: 215 38% 9%;
-  --popover-foreground: 212 24% 88%;
+  --background: 219 33% 3%;
+  --foreground: 211 26% 83%;
+  --card: 219 38% 9%;
+  --card-foreground: 211 26% 83%;
+  --popover: 219 38% 9%;
+  --popover-foreground: 211 26% 83%;
   --primary: 217 60% 46%;
   --primary-foreground: 210 40% 98%;
-  --secondary: 216 34% 14%;
-  --secondary-foreground: 212 24% 88%;
-  --muted: 216 24% 16%;
-  --muted-foreground: 214 18% 70%;
-  --accent: 216 34% 14%;
+  --secondary: 218 37% 12%;
+  --secondary-foreground: 211 26% 83%;
+  --muted: 218 29% 12%;
+  --muted-foreground: 212 20% 68%;
+  --accent: 218 37% 12%;
   --accent-foreground: 210 40% 98%;
   --destructive: 342 69% 47%;
   --destructive-foreground: 210 40% 98%;
-  --border: 216 22% 25%;
-  --input: 216 22% 25%;
+  --border: 214 24% 28%;
+  --input: 214 24% 28%;
   --ring: 217 60% 46%;
   --radius: 0.5rem;
 }
@@ -56,9 +58,10 @@
   }
   body {
     background:
-      radial-gradient(circle at 16% 18%, rgb(126 160 200 / 18%), transparent 26%),
-      radial-gradient(circle at 82% 12%, rgb(228 93 134 / 16%), transparent 22%),
-      linear-gradient(var(--color-ice), var(--color-fog));
+      radial-gradient(circle at 16% 14%, rgb(126 160 200 / 10%), transparent 20%),
+      radial-gradient(circle at 84% 12%, rgb(47 99 186 / 14%), transparent 18%),
+      radial-gradient(circle at 64% 80%, rgb(199 38 76 / 5%), transparent 24%),
+      linear-gradient(180deg, rgb(10 19 37) 0%, rgb(4 7 12) 100%);
     color: var(--color-pearl);
     font-feature-settings: "rlig" 1, "calt" 1;
     min-height: 100vh;
@@ -71,13 +74,13 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: 0.22;
-    mix-blend-mode: soft-light;
+    opacity: 0.14;
+    mix-blend-mode: screen;
     background-image:
-      radial-gradient(circle at 20% 20%, rgb(255 255 255 / 28%) 0, transparent 24%),
-      radial-gradient(circle at 80% 30%, rgb(126 160 200 / 18%) 0, transparent 22%),
+      radial-gradient(circle at 22% 18%, rgb(238 243 248 / 12%) 0, transparent 22%),
+      radial-gradient(circle at 80% 28%, rgb(126 160 200 / 10%) 0, transparent 18%),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-    background-size: auto, auto, 180px 180px;
+    background-size: auto, auto, 200px 200px;
     z-index: 1;
   }
 }
@@ -116,10 +119,11 @@ html.lenis body {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 18%, rgb(47 99 186 / 18%), transparent 30%),
-    radial-gradient(circle at 76% 26%, rgb(199 38 76 / 14%), transparent 24%),
-    radial-gradient(circle at 20% 72%, rgb(10 19 37 / 28%), transparent 34%);
-  opacity: 0.9;
+    radial-gradient(circle at 50% 16%, rgb(47 99 186 / 12%), transparent 28%),
+    radial-gradient(circle at 74% 22%, rgb(62 43 45 / 9%), transparent 16%),
+    radial-gradient(circle at 24% 76%, rgb(22 42 83 / 20%), transparent 30%),
+    linear-gradient(180deg, transparent 0%, rgb(4 7 12 / 14%) 100%);
+  opacity: 0.88;
   z-index: -1;
 }
 
@@ -130,58 +134,114 @@ html.lenis body {
 }
 
 .powder-panel {
-  background: linear-gradient(180deg, rgb(4 7 12 / 88%), rgb(10 19 37 / 82%));
-  border: 1px solid rgb(199 211 224 / 10%);
+  background:
+    radial-gradient(circle at 18% 14%, rgb(238 243 248 / 6%), transparent 18%),
+    linear-gradient(180deg, rgb(10 19 37 / 92%), rgb(4 7 12 / 88%) 54%, rgb(22 42 83 / 58%) 100%);
+  border: 1px solid rgb(199 211 224 / 9%);
   box-shadow:
-    0 18px 48px rgb(4 7 12 / 18%),
-    inset 0 1px 0 rgb(255 255 255 / 12%);
-  backdrop-filter: blur(24px);
+    0 10px 24px rgb(4 7 12 / 18%),
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    inset 0 -1px 0 rgb(47 99 186 / 12%);
+  backdrop-filter: blur(10px) saturate(120%);
 }
 
 .chrome-border {
-  border: 1px solid rgb(126 160 200 / 28%);
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 6%), 0 12px 36px rgb(10 19 37 / 18%);
+  border: 1px solid rgb(126 160 200 / 18%);
+  box-shadow: 0 0 0 1px rgb(238 243 248 / 4%), 0 8px 18px rgb(10 19 37 / 12%);
 }
 
 .soft-marquee {
   background:
-    linear-gradient(90deg, transparent, rgb(238 243 248 / 18%), transparent),
-    rgb(255 255 255 / 4%);
+    linear-gradient(90deg, transparent, rgb(199 211 224 / 14%), transparent),
+    rgb(10 19 37 / 3%);
+}
+
+.lacquer-shell {
+  background:
+    radial-gradient(circle at 18% 16%, rgb(238 243 248 / 10%), transparent 20%),
+    radial-gradient(circle at 82% 14%, rgb(47 99 186 / 16%), transparent 18%),
+    linear-gradient(145deg, rgb(22 42 83 / 96%), rgb(10 19 37 / 94%) 46%, rgb(62 43 45 / 24%) 100%);
+  border: 1px solid rgb(199 211 224 / 12%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 10%),
+    inset 0 -1px 0 rgb(47 99 186 / 12%),
+    0 14px 30px rgb(4 7 12 / 16%);
+}
+
+.micro-edge {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    inset 0 -1px 0 rgb(47 99 186 / 8%);
+}
+
+.soft-shell {
+  background:
+    radial-gradient(circle at 18% 18%, rgb(238 243 248 / 20%), transparent 26%),
+    linear-gradient(180deg, rgb(199 211 224 / 16%), rgb(126 160 200 / 10%));
+  border: 1px solid rgb(126 160 200 / 14%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 18%),
+    0 10px 24px rgb(10 19 37 / 10%);
+}
+
+.command-cta {
+  background: linear-gradient(135deg, rgb(22 42 83 / 96%), rgb(47 99 186 / 84%));
+  border: 1px solid rgb(199 211 224 / 18%);
+  color: var(--color-ice);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 12%),
+    0 10px 22px rgb(10 19 37 / 16%);
+}
+
+.command-cta:hover {
+  background: linear-gradient(135deg, rgb(22 42 83 / 96%), rgb(62 43 45 / 88%));
+}
+
+.command-ghost {
+  background: rgb(199 211 224 / 8%);
+  border: 1px solid rgb(126 160 200 / 16%);
+  color: var(--color-pearl);
+}
+
+.command-ghost:hover {
+  background: rgb(199 211 224 / 12%);
+  border-color: rgb(47 99 186 / 26%);
+  color: var(--color-ice);
 }
 
 /* Apple Site Header Glass Effects */
 .liquid-glass {
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgb(7 13 24 / 82%);
+  border: 1px solid rgb(199 211 224 / 12%);
+  box-shadow: 0 8px 20px rgb(4 7 12 / 10%), inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 .liquid-glass-enhanced {
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: rgb(7 13 24 / 88%);
+  border: 1px solid rgb(199 211 224 / 16%);
+  box-shadow: 0 12px 28px rgb(4 7 12 / 12%), inset 0 1px 0 rgb(255 255 255 / 10%);
 }
 
 .liquid-glass-header {
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgb(7 13 24 / 68%);
+  border: 1px solid rgb(199 211 224 / 10%);
+  box-shadow: 0 6px 16px rgb(4 7 12 / 10%), inset 0 1px 0 rgb(255 255 255 / 8%);
 }
 
 .glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.75);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(199 211 224 / 12%);
+  background: rgb(7 13 24 / 72%);
+  box-shadow: 0 8px 18px rgb(4 7 12 / 10%), inset 0 1px 0 rgb(255 255 255 / 14%);
 }
 
 @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
   .liquid-glass, .liquid-glass-enhanced, .liquid-glass-header, .glass-border {
-    backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(145%);
   }
-  .liquid-glass { background: rgba(0, 0, 0, 0.6); }
-  .liquid-glass-enhanced { background: rgba(0, 0, 0, 0.7); }
-  .liquid-glass-header { background: rgba(0, 0, 0, 0.5); }
-  .glass-border { background: rgba(0, 0, 0, 0.5); }
+  .liquid-glass { background: rgb(7 13 24 / 60%); }
+  .liquid-glass-enhanced { background: rgb(7 13 24 / 68%); }
+  .liquid-glass-header { background: rgb(7 13 24 / 52%); }
+  .glass-border { background: rgb(7 13 24 / 54%); }
 }
 
 /* Logo Marquee Animations */

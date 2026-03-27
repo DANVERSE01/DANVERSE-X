@@ -1,3 +1,5 @@
+import { createWhatsAppUrl } from "@/lib/env"
+
 export interface ClientIntakePayload extends Record<string, unknown> {
   name?: string
   service?: string
@@ -90,13 +92,8 @@ export async function triggerLeadCapture(payload: Record<string, unknown>): Prom
 }
 
 export function fireCTAAndOpenWhatsApp(source: string, waMessage = "") {
-  const waNumber = "201207346648"
-  const waUrl = waMessage
-    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`
-    : `https://wa.me/${waNumber}`
-
   triggerClientIntake({ source }).catch(() => null)
-  window.open(waUrl, "_blank", "noopener,noreferrer")
+  window.open(createWhatsAppUrl(waMessage), "_blank", "noopener,noreferrer")
 }
 
 export async function triggerOrderIntake(payload: OrderIntakePayload): Promise<void> {

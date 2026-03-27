@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import { env } from "@/lib/env"
 
 const URLS = [
   { url: "/", priority: 1.0, changeFrequency: "weekly" },
@@ -16,11 +17,10 @@ const URLS = [
 }>
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://danverse.ai").replace(/\/$/, "")
   const lastModified = new Date()
 
   return URLS.map(({ url, priority, changeFrequency }) => ({
-    url: `${siteUrl}${url}`,
+    url: `${env.NEXT_PUBLIC_SITE_URL}${url}`,
     lastModified,
     changeFrequency,
     priority,

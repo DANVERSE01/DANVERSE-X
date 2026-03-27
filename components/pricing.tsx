@@ -5,11 +5,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { CheckCircle2 } from "lucide-react"
+import { createWhatsAppUrl } from "@/lib/env"
 import { ExamplesDialog } from "./examples-dialog"
 
 type Feature = { text: string; muted?: boolean }
-
-const ACCENT = "#EF4444"
 
 function FeatureItem({ text, muted = false }: Feature) {
   return (
@@ -88,7 +87,7 @@ export function Pricing() {
               asChild
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
+              <Link href={createWhatsAppUrl()} target="_blank">
                 Contact Now
               </Link>
             </Button>

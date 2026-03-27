@@ -1,39 +1,57 @@
 # Contributing
 
-Thanks for taking the time to contribute! This repository welcomes issues and pull requests that improve documentation, reliability, and maintainability.
+## Clone and run locally
 
-## How to Contribute
+```bash
+git clone https://github.com/DANVERSE01/DANVERSE-X.git
+cd DANVERSE-X
+npm install
+cp .env.example .env.local
+npm run dev
+```
 
-1. **Open an issue** describing the bug, enhancement, or documentation change.
-2. **Fork the repo** and create a branch from `main`.
-3. **Make focused changes** that are easy to review.
-4. **Open a pull request** with a clear summary and testing notes.
+Required public environment variables:
 
-## Branch Naming
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_WHATSAPP_NUMBER`
+- `NEXT_PUBLIC_CONTACT_EMAIL`
 
-Use a short, descriptive prefix:
+Optional public environment variables:
+
+- `NEXT_PUBLIC_GTM_ID`
+- `NEXT_PUBLIC_GA_ID`
+- `NEXT_PUBLIC_SENTRY_DSN`
+
+## Branch naming
+
+Use one of these prefixes for all branch names:
 
 - `feat/short-description`
 - `fix/short-description`
-- `docs/short-description`
 - `chore/short-description`
 
-## Code Style
+## Commit convention
 
-- Follow existing project conventions.
-- Keep changes minimal and well-scoped.
-- Avoid introducing new dependencies unless absolutely necessary.
+Commits are validated with Commitlint and must follow Conventional Commits.
 
-## Reporting Issues
+Examples:
 
-When filing a bug report, include:
+- `feat: add vitals ingestion route`
+- `fix: prevent video autoplay when offscreen`
+- `chore: tighten TypeScript and hook config`
 
-- Steps to reproduce
-- Expected vs. actual behavior
-- Environment details (OS, Node.js version, package manager)
+## Run checks
 
-## Pull Request Checklist
+Use these commands before opening a pull request:
 
-- [ ] Changes are focused and documented
-- [ ] Relevant scripts (lint/test/build) were run when applicable
-- [ ] Documentation updated if behavior changed
+```bash
+npm run lint
+npm run test
+npm run test:e2e
+npx tsc --noEmit
+npm run build
+```
+
+## Pull requests
+
+Keep PRs focused, explain the change clearly, and include screenshots for UI changes. Link the related issue when one exists and note any environment or deployment impact in the PR description.

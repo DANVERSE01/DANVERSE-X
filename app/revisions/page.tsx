@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
+import { contactEmailHref, env } from "@/lib/env"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -66,8 +67,8 @@ export default function RevisionPolicyPage() {
                   <h2 className="text-xl font-semibold text-white">5. Contact Us</h2>
                   <p className="text-white/60 text-sm">
                     Email:{" "}
-                    <a href="mailto:danverseai@outlook.com" className="text-red-400 hover:underline">
-                      danverseai@outlook.com
+                    <a href={contactEmailHref} className="text-red-400 hover:underline">
+                      {env.NEXT_PUBLIC_CONTACT_EMAIL}
                     </a>
                   </p>
                 </section>

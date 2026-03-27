@@ -4,10 +4,12 @@ about: Suggest an improvement or new feature
 labels: enhancement
 ---
 
-## Problem
+## What do you want to change?
 
-## Proposed Solution
+## Why does it matter?
 
-## Alternatives Considered
+## Proposed solution
 
-## Additional Context
+## Alternatives considered
+
+## Additional context

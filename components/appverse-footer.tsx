@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Instagram, Mail, MessageCircle } from "lucide-react"
+import { contactEmailHref, createWhatsAppUrl, env } from "@/lib/env"
 import LazyVideo from "./lazy-video"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 
@@ -43,7 +44,7 @@ export function AppverseFooter() {
             asChild
             className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
           >
-            <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+            <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
               Contact Us
             </a>
           </Button>
@@ -135,17 +136,14 @@ export function AppverseFooter() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="mailto:danverseai@outlook.com"
-                    className="flex items-center gap-2 hover:text-red-400 transition-colors"
-                  >
+                  <a href={contactEmailHref} className="flex items-center gap-2 hover:text-red-400 transition-colors">
                     <Mail className="h-4 w-4" />
-                    Email
+                    {env.NEXT_PUBLIC_CONTACT_EMAIL}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://wa.link/rc25na"
+                    href={createWhatsAppUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-red-400 transition-colors"

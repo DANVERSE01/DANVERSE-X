@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { createWhatsAppUrl } from "@/lib/env"
 import LazyVideo from "./lazy-video"
 import { DanverseLogo } from "./danverse-logo"
 
@@ -31,7 +32,7 @@ export function Hero() {
               size="lg"
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
             >
-              <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+              <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                 Chat With Us
               </a>
             </Button>
@@ -46,7 +47,7 @@ export function Hero() {
 
                 return (
                   <div key={i} className={visibility}>
-                    <PhoneCard title={p.title} sub={p.sub} tone={p.tone} videoSrc={p.videoSrc} posterSrc={p.posterSrc} />
+                    <PhoneCard title={p.title} sub={p.sub} videoSrc={p.videoSrc} posterSrc={p.posterSrc} />
                   </div>
                 )
               })}
@@ -61,13 +62,11 @@ export function Hero() {
 function PhoneCard({
   title = "Feature",
   sub = "Description here",
-  tone = "default",
   videoSrc,
   posterSrc,
 }: {
   title?: string
   sub?: string
-  tone?: string
   videoSrc?: string
   posterSrc?: string
 }) {
@@ -95,17 +94,7 @@ function PhoneCard({
   )
 }
 
-function PhoneCardVideo({
-  title,
-  sub,
-  src,
-  poster,
-}: {
-  title: string
-  sub: string
-  src: string
-  poster: string
-}) {
+function PhoneCardVideo({ title, sub, src, poster }: { title: string; sub: string; src: string; poster: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [shouldAutoplay, setShouldAutoplay] = useState(false)
   const [isInView, setIsInView] = useState(false)
@@ -144,7 +133,7 @@ function PhoneCardVideo({
       {
         rootMargin: "120px 0px",
         threshold: 0.35,
-      },
+      }
     )
 
     observer.observe(container)
@@ -169,7 +158,8 @@ function PhoneCardVideo({
 }
 
 const defaultPhoneCardMedia = {
-  videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
+  videoSrc:
+    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
   posterSrc: "/images/hero-posters/default-card.webp",
 }
 
@@ -178,7 +168,8 @@ const phoneData = [
     title: "Conversions",
     sub: "Turn clicks into paying customers.",
     tone: "results",
-    videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
+    videoSrc:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
     posterSrc: "/images/hero-posters/conversions-card.webp",
   },
   {
@@ -191,7 +182,8 @@ const phoneData = [
     title: "Social-Ready",
     sub: "Made for IG, TikTok, and Meta.",
     tone: "social",
-    videoSrc: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
+    videoSrc:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
     posterSrc: "/images/hero-posters/social-ready-card.webp",
   },
   {

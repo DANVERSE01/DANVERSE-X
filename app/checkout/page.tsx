@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { X, ArrowRight, ChevronLeft } from "lucide-react"
+import { env } from "@/lib/env"
 import { triggerOrderIntake } from "@/lib/n8n"
 
 interface OrderState {
@@ -82,7 +83,7 @@ export default function CheckoutPage() {
 
   // Add state for order configuration
   const [orderConfig, setOrderConfig] = useState({
-    whatsappNumber: "+201207346648",
+    whatsappNumber: env.NEXT_PUBLIC_WHATSAPP_NUMBER,
     modelingOptions: {
       simple: { price_usd: 35, price_inr: 3000, description: "Basic shapes, minimal details" },
       medium: { price_usd: 60, price_inr: 5000, description: "Moderate details, textures" },
@@ -233,12 +234,6 @@ export default function CheckoutPage() {
     message += `Please confirm the details and let me know the next steps.`
 
     return encodeURIComponent(message)
-  }
-
-  const previewWhatsAppMessage = () => {
-    const message = generateWhatsAppMessage()
-    const decodedMessage = decodeURIComponent(message)
-    alert(`WhatsApp Message Preview:\n\n${decodedMessage}`)
   }
 
   // Update WhatsApp URL generation

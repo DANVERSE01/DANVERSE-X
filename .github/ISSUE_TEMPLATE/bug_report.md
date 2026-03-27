@@ -4,21 +4,25 @@ about: Report a reproducible problem
 labels: bug
 ---
 
-## Summary
+## What happened
 
-## Steps to Reproduce
+## Steps to reproduce
+
 1.
 2.
 3.
 
-## Expected Behavior
+## Expected behavior
 
-## Actual Behavior
+## Actual behavior
+
+## Screenshots or recordings
 
 ## Environment
-- OS:
-- Node.js version:
-- Package manager:
-- Browser (if applicable):
 
-## Additional Context
+- OS:
+- Browser:
+- Device:
+- Node.js version:
+
+## Additional context

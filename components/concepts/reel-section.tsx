@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import LazyVideo from "@/components/lazy-video"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
@@ -79,7 +79,7 @@ const CLIPS = [
   },
 ]
 
-function CinematicCard({ clip, index }: { clip: typeof CLIPS[0]; index: number }) {
+function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
 
@@ -107,9 +107,7 @@ function CinematicCard({ clip, index }: { clip: typeof CLIPS[0]; index: number }
 
       {/* Overlay Gradients */}
       <div
-        className={`absolute inset-0 z-10 transition-opacity duration-700 ${
-          hovered ? "opacity-40" : "opacity-70"
-        }`}
+        className={`absolute inset-0 z-10 transition-opacity duration-700 ${hovered ? "opacity-40" : "opacity-70"}`}
         style={{
           background: "linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.4) 100%)",
         }}
@@ -122,7 +120,10 @@ function CinematicCard({ clip, index }: { clip: typeof CLIPS[0]; index: number }
             hovered ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
           }`}
         >
-          <span style={{ fontFamily: "'Courier Prime', monospace" }} className="text-[10px] tracking-[0.4em] text-red-500 uppercase font-bold">
+          <span
+            style={{ fontFamily: "'Courier Prime', monospace" }}
+            className="text-[10px] tracking-[0.4em] text-red-500 uppercase font-bold"
+          >
             {clip.cat}
           </span>
         </div>
@@ -141,7 +142,10 @@ function CinematicCard({ clip, index }: { clip: typeof CLIPS[0]; index: number }
               hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <span style={{ fontFamily: "'Courier Prime', monospace" }} className="text-[9px] tracking-widest text-white/40 uppercase">
+            <span
+              style={{ fontFamily: "'Courier Prime', monospace" }}
+              className="text-[9px] tracking-widest text-white/40 uppercase"
+            >
               {clip.fmt}
             </span>
             <div className="h-[1px] flex-1 bg-gradient-to-r from-red-500/50 to-transparent" />
@@ -167,20 +171,27 @@ export function ReelSection() {
         <div className="max-w-2xl">
           <div className="flex items-center gap-4 mb-6">
             <div className="h-[1px] w-12 bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
-            <p style={{ fontFamily: "'Courier Prime', monospace" }} className="text-[10px] tracking-[0.6em] text-red-500 uppercase font-bold">
+            <p
+              style={{ fontFamily: "'Courier Prime', monospace" }}
+              className="text-[10px] tracking-[0.6em] text-red-500 uppercase font-bold"
+            >
               CONCEPT 06 / THE WORK
             </p>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }} className="text-white text-[clamp(48px,8vw,120px)] leading-[0.82] tracking-tighter uppercase">
+          <h2
+            style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+            className="text-white text-[clamp(48px,8vw,120px)] leading-[0.82] tracking-tighter uppercase"
+          >
             Production
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
-              2024–2026
-            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">2024–2026</span>
           </h2>
         </div>
         <div className="text-right hidden md:block">
-          <p style={{ fontFamily: "'Courier Prime', monospace" }} className="text-[11px] tracking-[0.2em] text-white/30 uppercase leading-relaxed">
+          <p
+            style={{ fontFamily: "'Courier Prime', monospace" }}
+            className="text-[11px] tracking-[0.2em] text-white/30 uppercase leading-relaxed"
+          >
             A curated collection of
             <br />
             high-fidelity visual systems.
@@ -193,7 +204,7 @@ export function ReelSection() {
       {/* Masonry Cinema Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-0 border-y border-white/5">
         {CLIPS.map((clip, i) => (
-          <CinematicCard key={i} clip={clip} index={i} />
+          <CinematicCard key={i} clip={clip} />
         ))}
       </div>
 
@@ -205,11 +216,17 @@ export function ReelSection() {
           className="group relative px-12 py-6 bg-transparent border border-red-500/30 hover:border-red-500 transition-all duration-500 overflow-hidden"
         >
           <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/5 transition-colors duration-500" />
-          <span style={{ fontFamily: "'Courier Prime', monospace" }} className="relative text-xs tracking-[0.8em] text-white group-hover:text-red-500 transition-colors duration-500 uppercase font-bold">
+          <span
+            style={{ fontFamily: "'Courier Prime', monospace" }}
+            className="relative text-xs tracking-[0.8em] text-white group-hover:text-red-500 transition-colors duration-500 uppercase font-bold"
+          >
             Initialize Project
           </span>
         </button>
-        <p style={{ fontFamily: "'Courier Prime', monospace" }} className="mt-12 text-[9px] tracking-[0.4em] text-white/10 uppercase">
+        <p
+          style={{ fontFamily: "'Courier Prime', monospace" }}
+          className="mt-12 text-[9px] tracking-[0.4em] text-white/10 uppercase"
+        >
           DANVERSE · Engineering Cinematic Excellence
         </p>
       </div>

@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
+import { createWhatsAppUrl } from "@/lib/env"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -73,7 +74,7 @@ export default function FAQPage() {
                 <section className="pt-4 border-t border-white/10">
                   <p className="text-white/75 text-sm">
                     Have more questions?{" "}
-                    <Link href="https://wa.link/rc25na" className="text-red-400 hover:underline">
+                    <Link href={createWhatsAppUrl()} className="text-red-400 hover:underline">
                       Contact us
                     </Link>
                   </p>

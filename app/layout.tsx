@@ -1,15 +1,15 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
+import { WebVitalsReporter } from "@/components/web-vitals-reporter"
+import { env } from "@/lib/env"
 import { Suspense } from "react"
 
-const inter = Inter({ subsets: ["latin"], display: "swap" })
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://danverse.ai").replace(/\/$/, "")
+const GTM_ID = env.NEXT_PUBLIC_GTM_ID
+const GA_ID = env.NEXT_PUBLIC_GA_ID
+const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -33,28 +33,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-
-        {/* Font Preload */}
-        <link
-          rel="preload"
-          href="/fonts/Inter.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          fetchPriority="high"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Dynamic Favicon Script */}
         <Script id="dynamic-favicon" strategy="beforeInteractive">
@@ -104,6 +87,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <WebVitalsReporter />
         <Suspense fallback={null}>
           <div className="fixed inset-0 z-0 bg-black">
             <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />

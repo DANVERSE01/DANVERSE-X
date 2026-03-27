@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
 import { Button } from "@/components/ui/button"
+import { createWhatsAppUrl, env } from "@/lib/env"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -15,8 +16,8 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "DANVERSE",
-    url: "https://danverse.com",
-    logo: "https://danverse.com/logo.png",
+    url: env.NEXT_PUBLIC_SITE_URL,
+    logo: `${env.NEXT_PUBLIC_SITE_URL}/logo.png`,
     description:
       "DANVERSE is a next generation creative studio that combines artificial intelligence, cinematic storytelling, and sharp strategy.",
     sameAs: ["https://www.instagram.com/danverse.creative"],
@@ -24,7 +25,7 @@ export default function AboutPage() {
       {
         "@type": "ContactPoint",
         contactType: "customer service",
-        email: "danverseai@outlook.com",
+        email: env.NEXT_PUBLIC_CONTACT_EMAIL,
       },
     ],
   }
@@ -105,7 +106,7 @@ export default function AboutPage() {
               size="lg"
               className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400"
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
+              <Link href={createWhatsAppUrl()} target="_blank">
                 Get in Touch
               </Link>
             </Button>

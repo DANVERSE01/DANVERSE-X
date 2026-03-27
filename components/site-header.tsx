@@ -13,6 +13,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { createWhatsAppUrl } from "@/lib/env"
 import { useState } from "react"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 
@@ -102,7 +103,7 @@ export function SiteHeader() {
               size="sm"
               className="bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-full px-5 hover:from-red-400 hover:to-orange-400 transition-all"
             >
-              <Link href="https://wa.link/rc25na" target="_blank">
+              <Link href={createWhatsAppUrl()} target="_blank">
                 Chat With Us
               </Link>
             </Button>
@@ -169,7 +170,7 @@ export function SiteHeader() {
                     asChild
                     className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-full hover:from-red-400 hover:to-orange-400"
                   >
-                    <Link href="https://wa.link/rc25na" target="_blank">
+                    <Link href={createWhatsAppUrl()} target="_blank">
                       Get a Quote
                     </Link>
                   </Button>

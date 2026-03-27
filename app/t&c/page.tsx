@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
+import { contactEmailHref, env } from "@/lib/env"
 import Link from "next/link"
 import type { Metadata } from "next"
 
@@ -85,8 +86,8 @@ export default function TermsPage() {
                   <h2 className="text-xl font-semibold text-white">6. Contact Us</h2>
                   <p className="text-white/60 text-sm">
                     Email:{" "}
-                    <a href="mailto:danverseai@outlook.com" className="text-red-400 hover:underline">
-                      danverseai@outlook.com
+                    <a href={contactEmailHref} className="text-red-400 hover:underline">
+                      {env.NEXT_PUBLIC_CONTACT_EMAIL}
                     </a>
                   </p>
                 </section>

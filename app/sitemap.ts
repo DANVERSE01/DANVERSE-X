@@ -1,38 +1,28 @@
-export const dynamic = 'force-static';
+import type { MetadataRoute } from "next"
 
-import { MetadataRoute } from 'next';
-
-const BASE_URL = 'https://danverse.ai';
-
-type ChangeFrequency = MetadataRoute.Sitemap[number]['changeFrequency'];
-
-type SitemapEntry = {
-  url: string;
-  priority: number;
-  changeFrequency: ChangeFrequency;
-};
-
-const URLS: SitemapEntry[] = [
-  { url: '/', priority: 1, changeFrequency: 'weekly' },
-  { url: '/3D-architecture-visualization-studio', priority: 0.9, changeFrequency: 'weekly' },
-  { url: '/3d-product-rendering', priority: 0.9, changeFrequency: 'weekly' },
-  { url: '/About', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/faq', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/revisions', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/checkout', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/cinematic-ads', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/branding', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/websites', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/t&c', priority: 0.5, changeFrequency: 'yearly' },
-];
+const URLS = [
+  { url: "/", priority: 1.0, changeFrequency: "weekly" },
+  { url: "/3D-architecture-visualization-studio", priority: 0.9, changeFrequency: "weekly" },
+  { url: "/3d-product-rendering", priority: 0.9, changeFrequency: "weekly" },
+  { url: "/faq", priority: 0.8, changeFrequency: "monthly" },
+  { url: "/About", priority: 0.7, changeFrequency: "monthly" },
+  { url: "/checkout", priority: 0.6, changeFrequency: "monthly" },
+  { url: "/revisions", priority: 0.6, changeFrequency: "monthly" },
+  { url: "/t&c", priority: 0.5, changeFrequency: "yearly" },
+] satisfies Array<{
+  url: string
+  priority: number
+  changeFrequency: NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>
+}>
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://danverse.ai").replace(/\/$/, "")
+  const lastModified = new Date()
 
-  return URLS.map((entry) => ({
-    url: `${BASE_URL}${entry.url}`,
+  return URLS.map(({ url, priority, changeFrequency }) => ({
+    url: `${siteUrl}${url}`,
     lastModified,
-    changeFrequency: entry.changeFrequency,
-    priority: entry.priority,
-  }));
+    changeFrequency,
+    priority,
+  }))
 }

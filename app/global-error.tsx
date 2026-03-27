@@ -1,22 +1,12 @@
 "use client"
 
-import * as Sentry from "@sentry/nextjs"
-import NextError from "next/error"
-import { useEffect } from "react"
+import { ErrorScreen } from "@/components/error-screen"
 
-export default function GlobalError({
-  error,
-}: {
-  error: Error & { digest?: string }
-}) {
-  useEffect(() => {
-    Sentry.captureException(error)
-  }, [error])
-
+export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html lang="en">
       <body>
-        <NextError statusCode={0} />
+        <ErrorScreen error={error} reset={reset} />
       </body>
     </html>
   )

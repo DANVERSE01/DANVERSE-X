@@ -7,11 +7,17 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent } from "@/components/ui/card"
 import { BeforeAfter } from "./_components/before-after"
 import { Camera, Grid2X2, Scissors, Wand2 } from "lucide-react"
+import { createServiceMetadata } from "@/lib/service-metadata"
 
 export const dynamic = "force-static"
 
-export const metadata: Metadata = {
-  title: "3D Product Rendering",
+export function generateMetadata(): Metadata {
+  return createServiceMetadata({
+    path: "/3d-product-rendering",
+    title: "3D Product Rendering | DANVERSE",
+    description:
+      "Photoreal 3D product renders, launch visuals, and premium packshots built for e-commerce, paid media, and standout product storytelling.",
+  })
 }
 
 const PLACEHOLDER_IMAGE = "/placeholder.svg"
@@ -58,12 +64,7 @@ export default function Page() {
           <div className="flex gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="relative h-56 w-80 shrink-0 overflow-hidden rounded-xl">
-                <Image
-                  src={PLACEHOLDER_IMAGE}
-                  alt={`Sample ${i + 1}`}
-                  fill
-                  className="object-cover"
-                />
+                <Image src={PLACEHOLDER_IMAGE} alt={`Sample ${i + 1}`} fill className="object-cover" />
               </div>
             ))}
           </div>
@@ -151,11 +152,7 @@ export default function Page() {
             looks to your images. Specifically designed for photos shot on iPhone.
           </p>
         </div>
-        <BeforeAfter
-          beforeSrc={PLACEHOLDER_IMAGE}
-          afterSrc={PLACEHOLDER_IMAGE}
-          className="mx-auto w-full max-w-xl"
-        />
+        <BeforeAfter beforeSrc={PLACEHOLDER_IMAGE} afterSrc={PLACEHOLDER_IMAGE} className="mx-auto w-full max-w-xl" />
       </section>
 
       {/* Shot on iPhone gallery */}
@@ -202,12 +199,7 @@ export default function Page() {
             <Card key={i} className="rounded-2xl">
               <CardContent className="p-6">
                 <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-xl">
-                  <Image
-                    src={PLACEHOLDER_IMAGE}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={PLACEHOLDER_IMAGE} alt={item.title} fill className="object-cover" />
                 </div>
                 <p className="mt-4 text-center font-medium">{item.title}</p>
               </CardContent>
@@ -249,15 +241,7 @@ export default function Page() {
   )
 }
 
-function Feature({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode
-  title: string
-  desc: string
-}) {
+function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
     <div className="flex gap-4">
       <div className="mt-1 flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-foreground/80">

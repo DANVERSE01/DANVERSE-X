@@ -31,6 +31,9 @@ jobs:
           NEXT_PUBLIC_WHATSAPP_NUMBER: 201207346648
           NEXT_PUBLIC_CONTACT_EMAIL: danverseai@outlook.com
 
+      - name: Bundle size check
+        run: npm run bundlesize
+
       - name: Run TypeScript check
         run: npx tsc --noEmit
 

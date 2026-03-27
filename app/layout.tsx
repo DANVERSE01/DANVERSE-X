@@ -3,6 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
+import { ScrollTracker } from "@/components/scroll-tracker"
 import { WebVitalsReporter } from "@/components/web-vitals-reporter"
 import { env } from "@/lib/env"
 import { Suspense } from "react"
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <ScrollTracker />
         <WebVitalsReporter />
         <Suspense fallback={null}>
           <div className="fixed inset-0 z-0 bg-black">

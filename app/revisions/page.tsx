@@ -18,7 +18,7 @@ export default function RevisionPolicyPage() {
               <div className="space-y-10">
                 <header className="space-y-3">
                   <h1 className="text-3xl md:text-4xl font-bold text-red-400">Revision Policy</h1>
-                  <p className="text-white/50">
+                  <p className="text-white/75">
                     Our revision policy ensures transparency and fairness for all clients while maintaining quality and
                     efficiency.
                   </p>
@@ -27,7 +27,7 @@ export default function RevisionPolicyPage() {
                 <section className="space-y-3">
                   <h2 className="text-xl font-semibold text-white">1. Included Revisions</h2>
                   <p className="text-white/60 text-sm leading-relaxed">Each plan includes a set number of revisions:</p>
-                  <ul className="list-disc list-inside space-y-1.5 text-white/50 text-sm">
+                  <ul className="list-disc list-inside space-y-1.5 text-white/75 text-sm">
                     <li>Startup Plan: 1 revision included</li>
                     <li>Pro Plan: 2 revisions included</li>
                     <li>Premium Plan: 3 revisions included</li>
@@ -39,7 +39,7 @@ export default function RevisionPolicyPage() {
                   <p className="text-white/60 text-sm leading-relaxed">
                     Revisions beyond the included amount will be charged at hourly rates:
                   </p>
-                  <ul className="list-disc list-inside space-y-1.5 text-white/50 text-sm">
+                  <ul className="list-disc list-inside space-y-1.5 text-white/75 text-sm">
                     <li>Startup Plan: $35/hour</li>
                     <li>Pro Plan: $55/hour</li>
                     <li>Premium Plan: $60/hour</li>
@@ -63,7 +63,7 @@ export default function RevisionPolicyPage() {
                 </section>
 
                 <section className="space-y-3">
-                  <h2 className="text-xl font-semibold text-white">5. Book a Call</h2>
+                  <h2 className="text-xl font-semibold text-white">5. Contact Us</h2>
                   <p className="text-white/60 text-sm">
                     Email:{" "}
                     <a href="mailto:danverseai@outlook.com" className="text-red-400 hover:underline">

@@ -25,7 +25,7 @@ export default function TermsPage() {
               <div className="space-y-10">
                 <header className="space-y-3">
                   <h1 className="text-3xl md:text-4xl font-bold text-red-400">Terms and Conditions</h1>
-                  <p className="text-white/50">
+                  <p className="text-white/75">
                     Welcome to DANVERSE. By accessing our website, you agree to these terms and conditions.
                   </p>
                 </header>
@@ -44,7 +44,7 @@ export default function TermsPage() {
                     Unless otherwise stated, DANVERSE owns all the project files. This includes all electronic files,
                     drawings, source files, and any materials provided to the client.
                   </p>
-                  <ul className="list-disc list-inside space-y-1.5 text-white/50 text-sm">
+                  <ul className="list-disc list-inside space-y-1.5 text-white/75 text-sm">
                     <li>You must not republish material from this site.</li>
                     <li>
                       You must not reproduce, duplicate, or copy material for commercial purposes without permission.
@@ -82,7 +82,7 @@ export default function TermsPage() {
                 </section>
 
                 <section className="space-y-3">
-                  <h2 className="text-xl font-semibold text-white">6. Book a Call</h2>
+                  <h2 className="text-xl font-semibold text-white">6. Contact Us</h2>
                   <p className="text-white/60 text-sm">
                     Email:{" "}
                     <a href="mailto:danverseai@outlook.com" className="text-red-400 hover:underline">

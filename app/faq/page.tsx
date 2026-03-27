@@ -54,7 +54,7 @@ export default function FAQPage() {
               <div className="space-y-8">
                 <header className="space-y-3">
                   <h1 className="text-3xl md:text-4xl font-bold text-red-400">Frequently Asked Questions</h1>
-                  <p className="text-white/50">
+                  <p className="text-white/75">
                     Answers to common questions about our 3D animation and creative services.
                   </p>
                 </header>
@@ -71,9 +71,9 @@ export default function FAQPage() {
                 </div>
 
                 <section className="pt-4 border-t border-white/10">
-                  <p className="text-white/50 text-sm">
+                  <p className="text-white/75 text-sm">
                     Have more questions?{" "}
-                    <Link href="https://wa.me/201207346648" className="text-red-400 hover:underline">
+                    <Link href="https://wa.link/rc25na" className="text-red-400 hover:underline">
                       Contact us
                     </Link>
                   </p>

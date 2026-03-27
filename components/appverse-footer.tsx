@@ -1,18 +1,38 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Instagram, Mail, MessageCircle } from "lucide-react"
 import LazyVideo from "./lazy-video"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
-import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
-const TAGLINE =
-  "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems."
-const COPYRIGHT = "© 2026 — DANVERSE"
+interface FooterContent {
+  tagline: string
+  copyright: string
+}
+
+const defaultContent: FooterContent = {
+  tagline:
+    "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems.",
+  copyright: "© 2025 — DANVERSE",
+}
 
 export function AppverseFooter() {
+  const [content, setContent] = useState<FooterContent>(defaultContent)
+
+  useEffect(() => {
+    const savedContent = localStorage.getItem("skitbit-content")
+    if (savedContent) {
+      try {
+        const parsed = JSON.parse(savedContent)
+        if (parsed.footer) setContent(parsed.footer)
+      } catch (error) {
+        console.error("Error parsing saved content:", error)
+      }
+    }
+  }, [])
 
   return (
     <section className="text-white">
@@ -20,10 +40,12 @@ export function AppverseFooter() {
       <div className="container mx-auto px-4 pt-16">
         <div className="flex justify-center">
           <Button
-            onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
+            asChild
             className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
           >
-            Book a Call
+            <a href="https://wa.link/rc25na" target="_blank" rel="noopener noreferrer">
+              Contact Us
+            </a>
           </Button>
         </div>
       </div>
@@ -77,12 +99,12 @@ export function AppverseFooter() {
             {/* Brand */}
             <div className="space-y-4">
               <DanverseHeaderLogo />
-              <p className="max-w-sm text-sm text-white/50">{TAGLINE}</p>
+              <p className="max-w-sm text-sm text-white/75">{content.tagline}</p>
             </div>
 
             {/* Navigation */}
             <div>
-              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">Navigation</h5>
+              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/70">Navigation</h5>
               <ul className="space-y-2 text-sm text-white/60">
                 {["Home", "Features", "Pricing", "About"].map((item) => (
                   <li key={item}>
@@ -99,7 +121,7 @@ export function AppverseFooter() {
 
             {/* Social */}
             <div>
-              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">Connect</h5>
+              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/70">Connect</h5>
               <ul className="space-y-2 text-sm text-white/60">
                 <li>
                   <a
@@ -123,7 +145,7 @@ export function AppverseFooter() {
                 </li>
                 <li>
                   <a
-                    href="https://wa.me/201207346648"
+                    href="https://wa.link/rc25na"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-red-400 transition-colors"
@@ -137,8 +159,8 @@ export function AppverseFooter() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
-            <p>{COPYRIGHT}</p>
+          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/70 sm:flex-row">
+            <p>{content.copyright}</p>
             <div className="flex items-center gap-6">
               <Link href="/revisions" className="hover:text-red-400 transition-colors">
                 Revision Policy

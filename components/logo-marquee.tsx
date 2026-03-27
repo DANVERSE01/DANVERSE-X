@@ -29,9 +29,7 @@ export function LogoMarquee() {
     { label: "Sales Scripts", icon: "scripts" as const },
   ]
 
-  type RowItem = (typeof firstRowContent)[number] | (typeof secondRowContent)[number]
-
-  const ContentCard = ({ item, rowId }: { item: RowItem; rowId: string }) => (
+  const ContentCard = ({ item, rowId }: { item: (typeof firstRowContent)[0]; rowId: string }) => (
     <div
       className="flex-shrink-0 mx-2"
       onMouseEnter={() => setPausedRow(rowId)}
@@ -54,7 +52,7 @@ export function LogoMarquee() {
             <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
               Built for <span className="text-red-400">future focused</span> brands
             </h2>
-            <p className="mt-3 max-w-xl text-sm text-white/50">
+            <p className="mt-3 max-w-xl text-sm text-white/75">
               DANVERSE partners with brands, creators and teams that want cinematic ads, bold branding and smart content
               systems.
             </p>

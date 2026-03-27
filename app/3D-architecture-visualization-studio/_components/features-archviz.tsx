@@ -19,7 +19,7 @@ export function FeaturesArchviz() {
   const [content, setContent] = useState<FeaturesContent>(defaultContent)
 
   useEffect(() => {
-    const saved = localStorage.getItem("danverse-content")
+    const saved = localStorage.getItem("skitbit-content")
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
@@ -44,10 +44,10 @@ export function FeaturesArchviz() {
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
-                <Image src="/images/intuitive-1.webp" alt="ArchViz material sample" fill className="object-cover" />
+                <Image src="/images/intuitive-1.png" alt="ArchViz material sample" fill className="object-cover" />
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
-                <Image src="/images/intuitive-2.webp" alt="Interior lighting demo" fill className="object-cover" />
+                <Image src="/images/intuitive-2.png" alt="Interior lighting demo" fill className="object-cover" />
               </div>
             </div>
           </CardContent>
@@ -62,7 +62,7 @@ export function FeaturesArchviz() {
           </CardHeader>
           <CardContent>
             <div className="mb-6 flex items-end gap-4">
-              <div className="text-5xl font-bold text-lime-300">★★★★★</div>
+              <div className="text-5xl font-bold text-lime-300">4.9</div>
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-5 w-5 fill-lime-300 text-lime-300" />
@@ -71,7 +71,7 @@ export function FeaturesArchviz() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <Image
-                src={"/images/archviz/client-love-1.jpg"}
+                src={"/images/archviz/client-love-1.webp"}
                 width={280}
                 height={160}
                 alt="Photoreal dusk exterior street-corner render showcasing a modern glass building"
@@ -79,7 +79,7 @@ export function FeaturesArchviz() {
                 priority
               />
               <Image
-                src={"/images/archviz/client-love-2.jpg"}
+                src={"/images/archviz/client-love-2.webp"}
                 width={280}
                 height={160}
                 alt="Cinematic glass pavilion exterior with interior structure visible and water reflection"

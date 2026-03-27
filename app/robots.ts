@@ -1,19 +1,14 @@
-export const dynamic = 'force-static';
-
-import { MetadataRoute } from 'next';
-
-const BASE_URL = 'https://danverse.ai';
+import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  // Netlify-friendly: static metadata route output for /robots.txt.
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://danverse.ai").replace(/\/$/, "")
+
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/admin/'],
-      },
-    ],
-    sitemap: `${BASE_URL}/sitemap.xml`,
-  };
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: "/api/",
+    },
+    sitemap: `${siteUrl}/sitemap.xml`,
+  }
 }

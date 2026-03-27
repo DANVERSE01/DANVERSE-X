@@ -46,6 +46,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1"
         />
 
+        {/* Font Preload */}
         <link
           rel="preload"
           href="/fonts/Inter.woff2"
@@ -55,6 +56,7 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
+        {/* Dynamic Favicon Script */}
         <Script id="dynamic-favicon" strategy="beforeInteractive">
           {`
             function updateFavicon() {

@@ -1,0 +1,15 @@
+{
+  "name": "DANVERSE",
+  "short_name": "DANVERSE",
+  "description": "AI-Powered Creative Studio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#e63c2f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any"
+    }
+  ]
+}

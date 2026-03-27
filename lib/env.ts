@@ -1,5 +1,11 @@
 import { z } from "zod"
 
+const publicEnvDefaults = {
+  NEXT_PUBLIC_SITE_URL: "https://danverse.ai",
+  NEXT_PUBLIC_WHATSAPP_NUMBER: "201207346648",
+  NEXT_PUBLIC_CONTACT_EMAIL: "danverseai@outlook.com",
+} as const
+
 const optionalTrimmedString = z.preprocess((value) => {
   if (typeof value !== "string") {
     return undefined
@@ -13,6 +19,15 @@ const optionalUrl = optionalTrimmedString.refine(
   (value) => value === undefined || z.string().url().safeParse(value).success,
   "must be a valid URL"
 )
+
+function withFallback(value: string | undefined, fallback: string) {
+  if (typeof value !== "string") {
+    return fallback
+  }
+
+  const trimmed = value.trim()
+  return trimmed === "" ? fallback : trimmed
+}
 
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_SITE_URL: z
@@ -42,9 +57,12 @@ const publicEnvSchema = z.object({
 })
 
 const parsedPublicEnv = publicEnvSchema.safeParse({
-  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-  NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
-  NEXT_PUBLIC_CONTACT_EMAIL: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+  NEXT_PUBLIC_SITE_URL: withFallback(process.env.NEXT_PUBLIC_SITE_URL, publicEnvDefaults.NEXT_PUBLIC_SITE_URL),
+  NEXT_PUBLIC_WHATSAPP_NUMBER: withFallback(
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+    publicEnvDefaults.NEXT_PUBLIC_WHATSAPP_NUMBER
+  ),
+  NEXT_PUBLIC_CONTACT_EMAIL: withFallback(process.env.NEXT_PUBLIC_CONTACT_EMAIL, publicEnvDefaults.NEXT_PUBLIC_CONTACT_EMAIL),
   NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
   NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
   NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,

@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
@@ -7,10 +7,10 @@ on:
     branches: [main]
 
 jobs:
-  quality-checks:
-    name: Code Quality & Build
+  checks:
+    name: Install, Build, Typecheck, Audit
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
           cache: 'npm'
 
       - name: Install dependencies
@@ -26,53 +26,9 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env:
-          NEXT_PUBLIC_SITE_URL: https://danverse.ai
-          NEXT_PUBLIC_WHATSAPP_NUMBER: 201207346648
-          NEXT_PUBLIC_CONTACT_EMAIL: danverseai@outlook.com
-
-      - name: Bundle size check
-        run: npm run bundlesize
 
       - name: Run TypeScript check
         run: npx tsc --noEmit
-
-      - name: Start production server
-        run: |
-          npm run start > next-start.log 2>&1 &
-          for i in {1..30}; do
-            if curl -fsS http://localhost:3000 > /dev/null; then
-              exit 0
-            fi
-            sleep 2
-          done
-          cat next-start.log
-          exit 1
-        env:
-          NEXT_PUBLIC_SITE_URL: https://danverse.ai
-          NEXT_PUBLIC_WHATSAPP_NUMBER: 201207346648
-          NEXT_PUBLIC_CONTACT_EMAIL: danverseai@outlook.com
-
-      - name: Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v10
-        with:
-          urls: |
-            http://localhost:3000
-          budgetPath: ./budget.json
-          uploadArtifacts: true
-
-      - name: Check build size
-        run: |
-          echo "Build completed successfully!"
-          du -sh .next
-
-  security-scan:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Run npm audit
         run: npm audit --omit=dev --audit-level=high

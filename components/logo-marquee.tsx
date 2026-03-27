@@ -4,10 +4,15 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { MarqueeCardIcon } from "./marquee-card-icon"
 
+type ContentCardItem = {
+  label: string
+  icon: React.ComponentProps<typeof MarqueeCardIcon>["type"]
+}
+
 export function LogoMarquee() {
   const [pausedRow, setPausedRow] = useState<string | null>(null)
 
-  const firstRowContent = [
+  const firstRowContent: ContentCardItem[] = [
     { label: "AI Startups", icon: "ai-startups" as const },
     { label: "Personal Brands", icon: "personal-brands" as const },
     { label: "SaaS & Tech", icon: "saas-tech" as const },
@@ -18,7 +23,7 @@ export function LogoMarquee() {
     { label: "E-commerce", icon: "ecommerce" as const },
   ]
 
-  const secondRowContent = [
+  const secondRowContent: ContentCardItem[] = [
     { label: "Community Funnels", icon: "community-funnels" as const },
     { label: "Cinematic Ads", icon: "cinematic-ads" as const },
     { label: "UGC Video Labs", icon: "ugc-labs" as const },
@@ -29,7 +34,7 @@ export function LogoMarquee() {
     { label: "Sales Scripts", icon: "scripts" as const },
   ]
 
-  const ContentCard = ({ item, rowId }: { item: (typeof firstRowContent)[0]; rowId: string }) => (
+  const ContentCard = ({ item, rowId }: { item: ContentCardItem; rowId: string }) => (
     <div
       className="flex-shrink-0 mx-2"
       onMouseEnter={() => setPausedRow(rowId)}

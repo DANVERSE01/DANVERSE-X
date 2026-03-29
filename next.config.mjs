@@ -45,6 +45,7 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: ".next",
   images: {
     unoptimized: true,
   },

@@ -1011,8 +1011,30 @@ export function PricingExamplesStrip() {
           <button
             type="button"
             onClick={() => fireCTAAndOpenWhatsApp("showreel-cta")}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-accent)] text-black font-semibold tracking-widest uppercase text-sm overflow-hidden transition-all duration-500 hover:bg-[var(--color-accent-2)] hover:scale-105 hover:shadow-[0_0_40px_rgba(255,69,0,0.5)] active:scale-95"
-            style={{ marginBottom: 8 }}
+            style={{
+              fontFamily: "'Bebas Neue',sans-serif",
+              fontSize: 15,
+              letterSpacing: "0.4em",
+              color: "#fff",
+              background: "transparent",
+              border: "1px solid rgba(230,60,47,0.45)",
+              padding: "14px 44px",
+              cursor: "pointer",
+              textTransform: "uppercase",
+              display: "block",
+              marginBottom: 8,
+              transition: "all 0.45s",
+            }}
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLButtonElement).style.background = "#e63c2f"
+              ;(e.currentTarget as HTMLButtonElement).style.borderColor = "#e63c2f"
+              ;(e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 50px rgba(230,60,47,0.35)"
+            }}
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLButtonElement).style.background = "transparent"
+              ;(e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(230,60,47,0.45)"
+              ;(e.currentTarget as HTMLButtonElement).style.boxShadow = "none"
+            }}
           >
             INITIALIZE PROJECT
           </button>

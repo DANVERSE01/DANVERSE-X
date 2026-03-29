@@ -1,13 +1,8 @@
-"use client"
-
-import { useEffect } from "react"
-import CustomCursor from "@/components/cursor"
-import NoiseOverlay from "@/components/noise-overlay"
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
 import { LogoMarquee } from "@/components/logo-marquee"
-import CinematicShowcase from "@/components/cinematic-showcase"
+import { CinematicShowcase } from "@/components/cinematic-showcase"
 import { Pricing } from "@/components/pricing"
 import { AppverseFooter } from "@/components/appverse-footer"
 import { ScrollToTop } from "./scroll-to-top"
@@ -77,28 +72,9 @@ const PAGE_STRUCTURED_DATA = {
 } as const
 
 export default function Page() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view")
-          }
-        }),
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    )
-
-    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element))
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <>
-      <CustomCursor />
-      <NoiseOverlay />
-
-      <main className="relative z-10 min-h-[100dvh] text-[var(--color-text)]">
+      <main className="min-h-[100dvh] text-white relative z-10">
         <SiteHeader />
         <Hero />
         <Features />

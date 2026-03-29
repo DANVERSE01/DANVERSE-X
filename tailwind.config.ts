@@ -1,10 +1,14 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 // all in fixtures is set to tailwind v3 as interims solutions
 
 const config: Config = {
   darkMode: "class",
-  content: ["./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}", "*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
@@ -62,7 +66,6 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-body)"],
         display: ["var(--font-display)"],
-        condensed: ["var(--font-condensed)"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -96,4 +99,4 @@ const config: Config = {
   plugins: [require("tailwindcss-animate")],
 }
 
-export default config
+export default config;

@@ -43,11 +43,20 @@ export function ErrorScreen({ error, reset }: ErrorScreenProps) {
         ) : null}
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button type="button" onClick={() => reset?.()} className="justify-center">
+          <Button
+            type="button"
+            onClick={() => reset?.()}
+            className="rounded-full bg-[#e63c2f] px-6 text-sm font-semibold uppercase tracking-[0.18em] text-black hover:bg-[#ff6a5e]"
+          >
             <RefreshCw className="h-4 w-4" />
             Retry
           </Button>
-          <Button type="button" variant="outline" onClick={() => router.back()} className="justify-center">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.back()}
+            className="rounded-full border-white/15 bg-transparent px-6 text-sm font-semibold uppercase tracking-[0.18em] text-white hover:bg-white/10"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>

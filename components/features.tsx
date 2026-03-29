@@ -7,35 +7,19 @@ const TITLE = "Built different. By design."
 export function Features() {
   return (
     <section id="features" className="container mx-auto px-4 py-16 sm:py-20">
-      <p
-        style={{ fontFamily: "var(--font-condensed)" }}
-        className="reveal mb-4 text-center text-xs uppercase tracking-[0.45em] text-[var(--color-accent)]"
-      >
-        Design Systems
-      </p>
-      <h2
-        style={{ fontFamily: "var(--font-display)" }}
-        className="reveal mb-10 text-center text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase text-white"
-      >
+      <h2 className="mb-10 text-center text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
         {TITLE}
       </h2>
 
-      <div className="grid max-w-5xl mx-auto gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
         {/* Cinematic Visuals Card -> CRAFT + CONTROL */}
-        <Card className="reveal liquid-glass overflow-hidden border border-white/10">
+        <Card className="liquid-glass border border-white/10 overflow-hidden">
           <CardHeader className="pb-4">
-            <p
-              style={{ fontFamily: "var(--font-condensed)" }}
-              className="text-[11px] uppercase tracking-[0.35em] text-[var(--color-accent)]"
-            >
-              CRAFT + CONTROL
-            </p>
+            <p className="text-[11px] tracking-widest text-red-400 uppercase">CRAFT + CONTROL</p>
             <CardTitle className="mt-1 text-xl text-white">Direction before a single frame is shot.</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-white/60 mb-4">
-              We lock strategy, visual language, and output format before production starts.
-            </p>
+            <p className="text-sm text-white/60 mb-4">We lock strategy, visual language, and output format before production starts.</p>
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
@@ -60,20 +44,15 @@ export function Features() {
         </Card>
 
         {/* Client Feedback Card -> CLIENT FEEDBACK */}
-        <Card className="reveal liquid-glass overflow-hidden border border-white/10">
+        <Card className="liquid-glass border border-white/10 overflow-hidden">
           <CardHeader className="pb-4">
-            <p
-              style={{ fontFamily: "var(--font-condensed)" }}
-              className="text-[11px] uppercase tracking-[0.35em] text-[var(--color-accent)]"
-            >
-              CLIENT FEEDBACK
-            </p>
-            <CardTitle className="mt-1 text-xl text-white">We ship finished work. Not "almost done."</CardTitle>
+            <p className="text-[11px] tracking-widest text-red-400 uppercase">CLIENT FEEDBACK</p>
+            <CardTitle className="mt-1 text-xl text-white">
+              We ship finished work. Not "almost done."
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-white/60 mb-4">
-              Every deliverable passes internal QA. You review final — not rough cuts.
-            </p>
+            <p className="text-sm text-white/60 mb-4">Every deliverable passes internal QA. You review final — not rough cuts.</p>
             <div className="mb-5 flex flex-col items-start gap-1">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -103,7 +82,7 @@ export function Features() {
       </div>
 
       {/* AI Content Systems Block */}
-      <div className="reveal mx-auto mt-12 max-w-5xl rounded-2xl border border-white/10 p-8 text-center liquid-glass">
+      <div className="mt-12 max-w-5xl mx-auto p-8 rounded-2xl liquid-glass border border-white/10 text-center">
         <p className="text-lg text-white/80 leading-relaxed">
           One brief. Ten campaign-ready outputs. Hooks, scripts, formats — locked inside your brand system.
         </p>

@@ -14,7 +14,7 @@ export function WaCtaButton({
   source,
   label = "Book a Call",
   size = "lg",
-  className = "group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-accent)] text-black font-semibold tracking-widest uppercase text-sm overflow-hidden transition-all duration-500 hover:bg-[var(--color-accent-2)] hover:scale-105 hover:shadow-[0_0_40px_rgba(255,69,0,0.5)] active:scale-95 justify-center",
+  className = "rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all",
 }: WaCtaButtonProps) {
   return (
     <Button size={size} className={className} onClick={() => fireCTAAndOpenWhatsApp(source)}>

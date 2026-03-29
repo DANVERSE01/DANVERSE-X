@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 import { Play, Pause } from "lucide-react"
 
+const ACCENT = "#C6FF3A"
+
 type YouTubeGridProps = {
   videoIds: string[]
 }
@@ -135,7 +137,8 @@ export default function YouTubeGrid({ videoIds }: YouTubeGridProps) {
             {playingIndex === idx ? (
               <button
                 onClick={() => handlePause(idx)}
-                className="pointer-events-auto group relative inline-flex items-center gap-2 px-4 py-2 border border-white/20 text-white font-semibold tracking-[0.3em] uppercase text-[10px] overflow-hidden transition-all duration-500 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:shadow-[0_0_30px_rgba(255,69,0,0.2)] active:scale-95 before:absolute before:inset-0 before:bg-[var(--color-accent)] before:scale-x-0 before:origin-left before:transition-transform before:duration-500 hover:before:scale-x-100 before:opacity-10"
+                className="pointer-events-auto rounded-full liquid-glass-header px-3 py-1 text-xs transition-colors"
+                style={{ color: ACCENT }}
               >
                 <span className="inline-flex items-center gap-1">
                   <Pause className="h-3.5 w-3.5" /> Pause
@@ -144,7 +147,8 @@ export default function YouTubeGrid({ videoIds }: YouTubeGridProps) {
             ) : (
               <button
                 onClick={() => handlePlay(idx)}
-                className="pointer-events-auto group relative inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-accent)] text-black font-semibold tracking-[0.3em] uppercase text-[10px] overflow-hidden transition-all duration-500 hover:bg-[var(--color-accent-2)] hover:scale-105 hover:shadow-[0_0_40px_rgba(255,69,0,0.5)] active:scale-95"
+                className="pointer-events-auto rounded-full px-3 py-1 text-xs font-medium text-black transition-colors"
+                style={{ backgroundColor: ACCENT }}
               >
                 <span className="inline-flex items-center gap-1">
                   <Play className="h-3.5 w-3.5" /> Play

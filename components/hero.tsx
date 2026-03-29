@@ -12,18 +12,12 @@ export function Hero() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center py-12 sm:py-16">
           {/* Logo - Centered with consistent spacing */}
-          <div className="reveal mb-6">
+          <div className="mb-6">
             <DanverseLogo size="hero" />
           </div>
 
           {/* Headline */}
-          <p
-            style={{ fontFamily: "var(--font-condensed)" }}
-            className="reveal mb-5 text-center text-xs uppercase tracking-[0.55em] text-[var(--color-accent)]"
-          >
-            DANVERSE CREATIVE STUDIO
-          </p>
-          <h1 className="display reveal text-center text-[clamp(3.25rem,9vw,9rem)] leading-[0.88] uppercase tracking-[0.04em]">
+          <h1 className="text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
             <span className="block text-white">AI-POWERED</span>
             <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
               CREATIVE STUDIO
@@ -32,8 +26,12 @@ export function Hero() {
           </h1>
 
           {/* CTA Button */}
-          <div className="reveal mt-8">
-            <Button asChild size="lg" className="justify-center">
+          <div className="mt-8">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
+            >
               <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                 Chat With Us
               </a>
@@ -41,7 +39,7 @@ export function Hero() {
           </div>
 
           {/* Phone Cards Grid */}
-          <div className="reveal mt-12 w-full">
+          <div className="mt-12 w-full">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-6xl mx-auto">
               {phoneData.map((p, i) => {
                 const visibility =

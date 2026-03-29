@@ -98,11 +98,7 @@ export function SiteHeader() {
 
           {/* Desktop CTA - Right */}
           <div className="hidden md:block flex-shrink-0">
-            <Button
-              asChild
-              size="sm"
-              className="bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-full px-5 hover:from-red-400 hover:to-orange-400 transition-all"
-            >
+            <Button asChild size="sm" className="justify-center">
               <Link href={createWhatsAppUrl()} target="_blank">
                 Chat With Us
               </Link>
@@ -166,10 +162,7 @@ export function SiteHeader() {
 
                 {/* CTA Button */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-full hover:from-red-400 hover:to-orange-400"
-                  >
+                  <Button asChild className="w-full justify-center">
                     <Link href={createWhatsAppUrl()} target="_blank">
                       Get a Quote
                     </Link>

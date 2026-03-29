@@ -179,8 +179,8 @@ export function ReelSection() {
             </p>
           </div>
           <h2
-            style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            className="text-white text-[clamp(48px,8vw,120px)] leading-[0.82] tracking-tighter uppercase"
+            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase text-white md:text-[clamp(3.5rem,8vw,7.5rem)]"
           >
             Production
             <br />
@@ -212,13 +212,13 @@ export function ReelSection() {
       <div className="px-[clamp(24px,6vw,80px)] py-32 flex flex-col items-center text-center">
         <div className="w-[1px] h-24 bg-gradient-to-b from-red-500 to-transparent mb-12" />
         <button
+          type="button"
           onClick={() => fireCTAAndOpenWhatsApp("concept-06-reel")}
-          className="group relative px-12 py-6 bg-transparent border border-red-500/30 hover:border-red-500 transition-all duration-500 overflow-hidden"
+          className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-accent)] text-black font-semibold tracking-widest uppercase text-sm overflow-hidden transition-all duration-500 hover:bg-[var(--color-accent-2)] hover:scale-105 hover:shadow-[0_0_40px_rgba(255,69,0,0.5)] active:scale-95"
         >
-          <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/5 transition-colors duration-500" />
           <span
-            style={{ fontFamily: "'Courier Prime', monospace" }}
-            className="relative text-xs tracking-[0.8em] text-white group-hover:text-red-500 transition-colors duration-500 uppercase font-bold"
+            style={{ fontFamily: "var(--font-condensed)" }}
+            className="relative text-sm tracking-[0.4em] uppercase font-semibold"
           >
             Initialize Project
           </span>

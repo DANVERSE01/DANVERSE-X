@@ -13,16 +13,12 @@ const TAGLINE =
 const COPYRIGHT = "© 2026 — DANVERSE"
 
 export function AppverseFooter() {
-
   return (
     <section className="text-white">
       {/* Contact CTA */}
       <div className="container mx-auto px-4 pt-16">
-        <div className="flex justify-center">
-          <Button
-            onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
-            className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
-          >
+        <div className="reveal flex justify-center">
+          <Button onClick={() => fireCTAAndOpenWhatsApp("footer-cta")} className="justify-center">
             Book a Call
           </Button>
         </div>
@@ -30,12 +26,22 @@ export function AppverseFooter() {
 
       {/* AI Content Card */}
       <div className="container mx-auto px-4 py-16">
-        <Card className="relative overflow-hidden rounded-2xl liquid-glass p-8 md:p-10">
+        <Card className="reveal relative overflow-hidden rounded-2xl p-8 md:p-10 liquid-glass">
           <div className="grid items-center gap-8 md:grid-cols-2">
             {/* Left Content */}
             <div>
-              <p className="mb-2 text-[11px] tracking-widest text-red-400 uppercase">AI Content Systems</p>
-              <h3 className="text-2xl font-bold text-white sm:text-3xl">Automate your creative workflow</h3>
+              <p
+                style={{ fontFamily: "var(--font-condensed)" }}
+                className="mb-2 text-[11px] uppercase tracking-[0.35em] text-red-400"
+              >
+                AI Content Systems
+              </p>
+              <h3
+                style={{ fontFamily: "var(--font-display)" }}
+                className="text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase text-white"
+              >
+                Automate your creative workflow
+              </h3>
               <p className="mt-3 text-sm text-white/60 max-w-md">
                 Generate scripts, posts, emails, and content on demand. Our AI systems connect your tools and automate
                 the creative process.
@@ -71,7 +77,7 @@ export function AppverseFooter() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-white/10">
+      <footer className="reveal border-t border-white/10">
         <div className="container mx-auto px-4 py-12">
           <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
             {/* Brand */}

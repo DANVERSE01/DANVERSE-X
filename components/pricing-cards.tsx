@@ -73,7 +73,10 @@ export function PricingCards() {
     <div className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
         <p className="text-[11px] tracking-widest text-red-400 uppercase mb-3">Pricing</p>
-        <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white uppercase">
+        <h2
+          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase text-white"
+        >
           Pick Your Plan
         </h2>
         <p className="mt-4 text-sm text-white/50 max-w-md mx-auto">
@@ -115,18 +118,15 @@ export function PricingCards() {
             </ul>
 
             <Button
-              className={`w-full rounded-full font-medium transition-all ${
-                plan.highlighted
-                  ? "bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-400 hover:to-orange-400 hover:scale-105"
-                  : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
-              }`}
+              variant={plan.highlighted ? "default" : "outline"}
+              className="w-full justify-center"
               onClick={() =>
                 fireCTAAndOpenWhatsApp(
                   plan.name === "Starter"
                     ? "pricing-starter"
                     : plan.name === "Professional"
-                    ? "pricing-professional"
-                    : "pricing-premium"
+                      ? "pricing-professional"
+                      : "pricing-premium"
                 )
               }
             >

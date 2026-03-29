@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;700;900&display=swap");
 @import "../lib/tokens.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -5,6 +6,17 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --font-condensed: "Barlow Condensed", sans-serif;
+  --color-bg: #080808;
+  --color-surface: #0f0f0f;
+  --color-accent: #ff4500;
+  --color-accent-2: #ff6a00;
+  --color-lime: #c8ff00;
+  --color-text: #f0ede8;
+  --color-muted: rgba(240, 237, 232, 0.45);
+  --color-border: rgba(255, 255, 255, 0.07);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -40,8 +52,8 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* DANVERSE Brand Colors */
-  --danverse-red: var(--color-brand-primary);
-  --danverse-orange: var(--color-brand-secondary);
+  --danverse-red: var(--color-accent);
+  --danverse-orange: var(--color-accent-2);
   --danverse-purple: #a855f7;
 }
 
@@ -127,13 +139,22 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  .display {
+    font-family: var(--font-display);
   }
 
   html {
     height: 100%;
     overflow-x: hidden;
     overscroll-behavior: none;
-    background: #000000;
+    background: var(--color-bg);
   }
 
   body {
@@ -142,7 +163,7 @@
     min-height: 100dvh;
     overflow-x: hidden;
     overscroll-behavior: none;
-    background: #000000;
+    background: var(--color-bg);
     -webkit-overflow-scrolling: touch;
     touch-action: manipulation;
   }
@@ -163,7 +184,7 @@
 
   #__next,
   [data-nextjs-scroll-focus-boundary] {
-    background: #000000;
+    background: var(--color-bg);
     min-height: 100vh;
     min-height: 100dvh;
   }
@@ -174,28 +195,36 @@
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .liquid-glass-enhanced {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .liquid-glass-header {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .glass-border {
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Logo Marquee Animations */
@@ -223,4 +252,118 @@
 
 .animate-scroll-left {
   animation: scroll-left 45s linear infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 60px rgba(255, 69, 0, 0.7),
+      0 0 100px rgba(255, 106, 0, 0.3);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes textReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.animate-text-reveal {
+  animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scan-line {
+  animation: scanLine 3s linear infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #000;
 }

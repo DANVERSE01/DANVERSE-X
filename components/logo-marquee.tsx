@@ -52,9 +52,18 @@ export function LogoMarquee() {
   return (
     <section className="text-white py-16 sm:py-20 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
+        <div className="reveal mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="text-center sm:text-left">
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+            <p
+              style={{ fontFamily: "var(--font-condensed)" }}
+              className="mb-4 text-xs uppercase tracking-[0.45em] text-[var(--color-accent)]"
+            >
+              Strategic Partners
+            </p>
+            <h2
+              style={{ fontFamily: "var(--font-display)" }}
+              className="text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase text-white"
+            >
               Built for <span className="text-red-400">future focused</span> brands
             </h2>
             <p className="mt-3 max-w-xl text-sm text-white/75">
@@ -62,16 +71,11 @@ export function LogoMarquee() {
               systems.
             </p>
           </div>
-          <Button
-            variant="outline"
-            className="border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-red-400 rounded-full px-6"
-          >
-            Learn More
-          </Button>
+          <Button variant="outline">Learn More</Button>
         </div>
 
         {/* Marquee Rows */}
-        <div className="space-y-4">
+        <div className="reveal space-y-4">
           {/* First Row */}
           <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <div

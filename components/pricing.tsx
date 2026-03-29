@@ -72,21 +72,24 @@ export function Pricing() {
   return (
     <section id="pricing" className="text-white">
       <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="mx-auto max-w-2xl text-center mb-12">
-          <div className="mx-auto mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20">
+        <div className="reveal mx-auto mb-12 max-w-2xl text-center">
+          <div
+            style={{ fontFamily: "var(--font-condensed)" }}
+            className="mx-auto mb-4 inline-flex items-center rounded-full border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.35em] text-red-400"
+          >
             Pricing & Packages
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+          <h2
+            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[clamp(2.5rem,6vw,6rem)] leading-none uppercase"
+          >
             Simple, Transparent Pricing
           </h2>
           <p className="mt-3 text-sm text-white/75 max-w-lg mx-auto">
             No hidden fees. Just world-class creative work that fits your budget.
           </p>
           <div className="mt-6">
-            <Button
-              asChild
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 text-white font-medium hover:from-red-400 hover:to-orange-400"
-            >
+            <Button asChild className="justify-center">
               <Link href={createWhatsAppUrl()} target="_blank">
                 Contact Now
               </Link>
@@ -96,7 +99,7 @@ export function Pricing() {
 
         <div className="grid gap-6 lg:grid-cols-3 max-w-5xl mx-auto">
           {/* Startup */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
+          <Card className="reveal relative overflow-hidden rounded-2xl border-white/10 liquid-glass">
             <div className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-medium bg-white/10 text-white/70">
               {PRICES[currency].save}
             </div>
@@ -106,10 +109,7 @@ export function Pricing() {
                 <span className="text-3xl font-bold text-white">{PRICES[currency].startup}</span>
                 <span className="text-xs text-white/75">per video</span>
               </div>
-              <Button
-                onClick={() => setOpenPlan("Startup")}
-                className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
-              >
+              <Button onClick={() => setOpenPlan("Startup")} variant="outline" className="mt-2 w-full justify-center">
                 View Examples
               </Button>
             </CardHeader>
@@ -130,7 +130,7 @@ export function Pricing() {
           </Card>
 
           {/* Pro - Featured */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass-enhanced border-red-500/30 ring-1 ring-red-500/20">
+          <Card className="reveal relative overflow-hidden rounded-2xl border-red-500/30 ring-1 ring-red-500/20 liquid-glass-enhanced">
             <div className="absolute -top-px left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-orange-500" />
             <CardHeader className="space-y-2 pb-4">
               <div className="flex items-center gap-2">
@@ -143,10 +143,7 @@ export function Pricing() {
                 <span className="text-3xl font-bold text-white">{PRICES[currency].pro}</span>
                 <span className="text-xs text-white/75">per video</span>
               </div>
-              <Button
-                onClick={() => setOpenPlan("Pro")}
-                className="w-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-400 hover:to-orange-400 mt-2"
-              >
+              <Button onClick={() => setOpenPlan("Pro")} className="mt-2 w-full justify-center">
                 View Examples
               </Button>
             </CardHeader>
@@ -167,17 +164,14 @@ export function Pricing() {
           </Card>
 
           {/* Premium */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
+          <Card className="reveal relative overflow-hidden rounded-2xl border-white/10 liquid-glass">
             <CardHeader className="space-y-2 pb-4">
               <div className="text-sm font-semibold text-white">Premium</div>
               <div className="flex items-baseline gap-1">
                 <span className="text-3xl font-bold text-white">{PRICES[currency].premium}</span>
                 <span className="text-xs text-white/75">per video</span>
               </div>
-              <Button
-                onClick={() => setOpenPlan("Premium")}
-                className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
-              >
+              <Button onClick={() => setOpenPlan("Premium")} variant="outline" className="mt-2 w-full justify-center">
                 View Examples
               </Button>
             </CardHeader>

@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
 import { LogoMarquee } from "@/components/logo-marquee"
+import { CinematicShowcase } from "@/components/cinematic-showcase"
 import { Pricing } from "@/components/pricing"
 import { AppverseFooter } from "@/components/appverse-footer"
 import { ScrollToTop } from "./scroll-to-top"
@@ -78,6 +79,7 @@ export default function Page() {
         <Hero />
         <Features />
         <LogoMarquee />
+        <CinematicShowcase />
         <Pricing />
         <AppverseFooter />
         <ScrollToTop />

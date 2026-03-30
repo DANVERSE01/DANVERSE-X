@@ -72,7 +72,7 @@ export function CinematicShowcase() {
     <section
       ref={sectionRef}
       style={{
-        background: "#000",
+        background: "transparent",
         color: "#fff",
         overflow: "hidden",
         position: "relative",
@@ -150,7 +150,11 @@ export function CinematicShowcase() {
             position: "relative",
             width: "100%",
             aspectRatio: "16/9",
-            background: "#050505",
+            background: "linear-gradient(180deg, rgba(5,5,7,0.18) 0%, rgba(5,5,7,0.34) 100%)",
+            backdropFilter: "blur(20px) saturate(140%)",
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+            borderBottom: "1px solid rgba(255,255,255,0.04)",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             overflow: "hidden",
             opacity: isTransitioning ? 0 : 1,
             transition: "opacity 0.4s ease",
@@ -344,7 +348,8 @@ export function CinematicShowcase() {
         gridTemplateColumns: "repeat(4, 1fr)",
         gap: 2,
         padding: "2px",
-        background: "#0a0a0a",
+        background: "rgba(5,5,7,0.22)",
+        backdropFilter: "blur(14px) saturate(130%)",
       }}>
         {WORKS.map((w, i) => (
           <div
@@ -355,7 +360,7 @@ export function CinematicShowcase() {
               aspectRatio: "16/9",
               overflow: "hidden",
               cursor: "pointer",
-              background: "#050505",
+              background: "rgba(5,5,7,0.18)",
               opacity: i === activeIdx ? 1 : 0.4,
               transition: "opacity 0.4s, transform 0.4s",
               transform: i === activeIdx ? "scale(1)" : "scale(0.98)",

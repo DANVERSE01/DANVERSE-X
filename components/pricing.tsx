@@ -191,7 +191,7 @@ export function Pricing() {
       id="process"
       ref={sectionRef}
       aria-labelledby="process-heading"
-      className="relative isolate overflow-hidden bg-[#050507] text-white"
+      className="relative isolate overflow-hidden bg-transparent text-white"
     >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-8rem] top-[-6rem] h-[22rem] w-[22rem] rounded-full bg-[#C9A84C]/10 blur-[140px]" />
@@ -260,7 +260,7 @@ export function Pricing() {
                     <div className="relative flex justify-center pt-4 sm:pt-5">
                       <span
                         aria-hidden="true"
-                        className="absolute left-1/2 top-[4.5rem] z-10 h-3 w-3 -translate-x-1/2 rounded-full border border-[#C9A84C]/70 bg-[#050507] shadow-[0_0_24px_rgba(201,168,76,0.42)] sm:top-[5.5rem] lg:top-[6rem]"
+                        className="absolute left-1/2 top-[4.5rem] z-10 h-3 w-3 -translate-x-1/2 rounded-full border border-[#C9A84C]/70 bg-[rgba(5,5,7,0.48)] shadow-[0_0_24px_rgba(201,168,76,0.42)] backdrop-blur-sm sm:top-[5.5rem] lg:top-[6rem]"
                       />
                       <div
                         ref={(element) => {
@@ -304,7 +304,7 @@ export function Pricing() {
                       ref={(element) => {
                         if (element) cardRefs.current[index] = element
                       }}
-                      className="process-card relative overflow-hidden rounded-[1.75rem] border border-[#1C1C26] bg-[#111118] px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.35)] will-change-transform sm:px-8 sm:py-9 lg:px-10 lg:py-10"
+                      className="process-card relative overflow-hidden rounded-[1.75rem] border border-[rgba(28,28,38,0.88)] bg-[rgba(17,17,24,0.62)] px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-[22px] will-change-transform sm:px-8 sm:py-9 lg:px-10 lg:py-10"
                     >
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.12),transparent_38%),radial-gradient(circle_at_left,rgba(255,255,255,0.045),transparent_28%)] opacity-80" />
                       <div className="relative">

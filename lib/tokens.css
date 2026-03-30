@@ -1,17 +1,51 @@
 :root {
-  --color-brand-primary: #e63c2f;
-  --color-brand-secondary: #ff6030;
-  --color-bg: #000000;
-  --color-surface: #0a0a0a;
-  --color-text: #ffffff;
-  --color-muted: #666666;
+  /* Brand Core */
+  --color-brand-primary: #e0e75b;
+  --color-brand-secondary: #00a6a6;
+  --color-accent-coral: #ef786a;
+  --color-accent-lavender: #c48bb4;
+  --color-accent-steel: #a8c5d0;
+
+  /* Surfaces */
+  --color-surface-base: #080e12;
+  --color-surface-raised: #0d1e28;
+  --color-surface-overlay: rgba(255, 255, 255, 0.04);
+
+  /* Typography */
+  --color-text-primary: #eef0e8;
+  --color-text-secondary: #a8c5d0;
+  --color-text-muted: #6a8a94;
+  --color-text-inverse: #080e12;
+
+  /* Borders */
+  --color-border-subtle: rgba(224, 231, 91, 0.12);
+  --color-border-strong: rgba(224, 231, 91, 0.4);
+  --color-border-teal: rgba(0, 166, 166, 0.25);
+
+  /* Compatibility aliases for existing component references */
+  --color-bg: var(--color-surface-base);
+  --color-surface: var(--color-surface-raised);
+  --color-text: var(--color-text-primary);
+  --color-muted: var(--color-text-muted);
+
+  /* Glows */
+  --glow-primary: 0 0 40px rgba(224, 231, 91, 0.28);
+  --glow-secondary: 0 0 40px rgba(0, 166, 166, 0.25);
+  --glow-coral: 0 0 30px rgba(239, 120, 106, 0.25);
+
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
   --font-process-display: "Syne", var(--font-display);
   --font-process-body: "DM Sans", var(--font-body);
-  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Motion */
+  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-snap: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 300ms;
-  --dur-normal: 500ms;
-  --dur-slow: 800ms;
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 600ms;
+  --dur-fast: var(--duration-fast);
+  --dur-normal: var(--duration-base);
+  --dur-slow: var(--duration-slow);
 }

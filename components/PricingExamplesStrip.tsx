@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
+import showcaseStyles from "./showcase.module.css"
 
 const VIDEOS = [
   {
@@ -99,6 +100,15 @@ const VIDEOS = [
 
 const TICKER_WORDS = VIDEOS.map((v) => v.title).concat(["DANVERSE · 2026"])
 
+const SURFACE_BASE = "var(--color-surface-base)"
+const SURFACE_RAISED = "var(--color-surface-raised)"
+const TEXT_PRIMARY = "var(--color-text-primary)"
+const TEXT_SECONDARY = "var(--color-text-secondary)"
+const TEXT_MUTED = "var(--color-text-muted)"
+const ACCENT_CORAL = "var(--color-accent-coral)"
+const VIMEO_QUERY = "autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto&playsinline=1"
+const VIMEO_ALLOW = "autoplay; fullscreen; picture-in-picture"
+
 function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
   const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -117,29 +127,38 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
     return () => obs.disconnect()
   }, [])
   const widthMap: Record<string, string> = {
-    "21/9": "calc(200px * 21 / 9)",
-    "9/16": "calc(200px * 9 / 16)",
-    "16/9": "calc(200px * 16 / 9)",
-    "1/1": "200px",
+    "21/9": "clamp(16rem,44vw,29.25rem)",
+    "9/16": "clamp(6.25rem,18vw,7rem)",
+    "16/9": "clamp(12rem,36vw,13.875rem)",
+    "1/1": "clamp(11rem,30vw,12.5rem)",
   }
-  const titleSizeMap: Record<string, string> = { "21/9": "22px", "16/9": "16px", "9/16": "13px", "1/1": "16px" }
+  const titleSizeMap: Record<string, string> = {
+    "21/9": "clamp(1rem,2vw,1.375rem)",
+    "16/9": "clamp(0.9rem,1.6vw,1rem)",
+    "9/16": "clamp(0.85rem,1.4vw,0.95rem)",
+    "1/1": "clamp(0.9rem,1.6vw,1rem)",
+  }
   return (
     <div
       ref={ref}
+      tabIndex={0}
+      aria-label={`${item.title} preview, ${item.fmt}`}
       style={{
         flexShrink: 0,
-        width: widthMap[item.ratio] ?? "200px",
-        height: "200px",
+        width: widthMap[item.ratio] ?? "clamp(11rem,30vw,12.5rem)",
+        height: "clamp(11rem,30vw,12.5rem)",
         position: "relative",
         overflow: "hidden",
-        background: "#0a0a0a",
+        background: SURFACE_RAISED,
         cursor: "pointer",
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(8px)",
+        transform: visible ? "translateY(0)" : "translateY(clamp(0.375rem,1vw,0.5rem))",
         transition: `opacity 0.6s ease ${item.delay * 0.5}ms, transform 0.6s ease ${item.delay * 0.5}ms`,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     >
       <div
         style={{
@@ -150,12 +169,13 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
             : "brightness(0.5) grayscale(0.35) saturate(0.7)",
           transform: hovered ? "scale(1.05)" : "scale(1)",
           transition: "all 0.9s cubic-bezier(0.16,1,0.3,1)",
-          background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), #000)`,
+          background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), ${SURFACE_BASE})`,
         }}
       />
       {visible && (
         <iframe
-          src={`https://player.vimeo.com/video/${item.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
+          title={`${item.title} reel preview`}
+          src={`https://player.vimeo.com/video/${item.id}?${VIMEO_QUERY}`}
           style={{
             position: "absolute",
             inset: 0,
@@ -169,7 +189,7 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
             transform: hovered ? "scale(1.05)" : "scale(1)",
             transition: "all 0.9s cubic-bezier(0.16,1,0.3,1)",
           }}
-          allow="autoplay; fullscreen"
+          allow={VIMEO_ALLOW}
         />
       )}
       <div
@@ -185,21 +205,21 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
           top: 0,
           left: 0,
           right: 0,
-          height: "1.5px",
-          background: hovered ? "#e63c2f" : "rgba(230,60,47,0.09)",
-          boxShadow: hovered ? "0 0 16px rgba(230,60,47,0.5)" : "none",
+          height: "clamp(0.09375rem,0.3vw,0.125rem)",
+          background: hovered ? ACCENT_CORAL : "rgba(239,120,106,0.09)",
+          boxShadow: hovered ? "0 0 16px rgba(239,120,106,0.5)" : "none",
           transition: "all 0.35s",
         }}
       />
       <div
         style={{
           position: "absolute",
-          top: 10,
-          left: 10,
+          top: "clamp(0.5rem,1.8vw,0.625rem)",
+          left: "clamp(0.5rem,1.8vw,0.625rem)",
           fontFamily: "'Courier Prime',monospace",
-          fontSize: "7px",
+          fontSize: "clamp(0.6rem,1vw,0.7rem)",
           letterSpacing: "0.35em",
-          color: hovered ? "#e63c2f" : "rgba(255,255,255,0.18)",
+          color: hovered ? ACCENT_CORAL : TEXT_SECONDARY,
           textTransform: "uppercase",
           transition: "color 0.35s",
         }}
@@ -209,15 +229,15 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
       <div
         style={{
           position: "absolute",
-          bottom: 10,
-          left: 10,
-          right: 10,
+          bottom: "clamp(0.5rem,1.8vw,0.625rem)",
+          left: "clamp(0.5rem,1.8vw,0.625rem)",
+          right: "clamp(0.5rem,1.8vw,0.625rem)",
           fontFamily: "'Bebas Neue',sans-serif",
-          fontSize: titleSizeMap[item.ratio] ?? "16px",
+          fontSize: titleSizeMap[item.ratio] ?? "clamp(0.9rem,1.6vw,1rem)",
           letterSpacing: "0.04em",
-          color: "#fff",
+          color: TEXT_PRIMARY,
           opacity: hovered ? 1 : 0.75,
-          transform: hovered ? "translateY(0)" : "translateY(4px)",
+          transform: hovered ? "translateY(0)" : "translateY(clamp(0.125rem,0.8vw,0.25rem))",
           transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
         }}
       >
@@ -226,11 +246,11 @@ function ReelTile({ item }: { item: (typeof VIDEOS)[0] }) {
       <div
         style={{
           position: "absolute",
-          bottom: 10,
-          right: 10,
+          bottom: "clamp(0.5rem,1.8vw,0.625rem)",
+          right: "clamp(0.5rem,1.8vw,0.625rem)",
           fontFamily: "'Courier Prime',monospace",
-          fontSize: "7px",
-          color: "rgba(255,255,255,0.25)",
+          fontSize: "clamp(0.6rem,1vw,0.7rem)",
+          color: TEXT_MUTED,
           letterSpacing: "0.2em",
         }}
       >
@@ -268,11 +288,13 @@ function SplitTile({
   return (
     <div
       ref={ref}
+      tabIndex={0}
+      aria-label={`${item.title} preview, ${item.fmt}`}
       style={{
         position: "relative",
         aspectRatio: "1/1",
         overflow: "hidden",
-        background: "#000",
+        background: SURFACE_BASE,
         cursor: "pointer",
         opacity: visible ? 1 : 0,
         transition: `opacity 0.5s ease ${item.delay * 0.4}ms`,
@@ -285,6 +307,14 @@ function SplitTile({
         setHovered(false)
         onLeave()
       }}
+      onFocus={() => {
+        setHovered(true)
+        onHover(item)
+      }}
+      onBlur={() => {
+        setHovered(false)
+        onLeave()
+      }}
     >
       <div
         style={{
@@ -293,12 +323,13 @@ function SplitTile({
           filter: hovered ? "brightness(0.85) saturate(1.2)" : "brightness(0.45) grayscale(0.3)",
           transform: hovered ? "scale(1.06)" : "scale(1)",
           transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
-          background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), #000)`,
+          background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), ${SURFACE_BASE})`,
         }}
       />
       {visible && (
         <iframe
-          src={`https://player.vimeo.com/video/${item.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
+          title={`${item.title} split preview`}
+          src={`https://player.vimeo.com/video/${item.id}?${VIMEO_QUERY}`}
           style={{
             position: "absolute",
             inset: 0,
@@ -309,7 +340,7 @@ function SplitTile({
             filter: hovered ? "brightness(0.85) saturate(1.2)" : "brightness(0.45) grayscale(0.3)",
             transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
           }}
-          allow="autoplay; fullscreen"
+          allow={VIMEO_ALLOW}
         />
       )}
       <div
@@ -326,19 +357,19 @@ function SplitTile({
           left: 0,
           right: 0,
           height: "1px",
-          background: hovered ? "#e63c2f" : "rgba(230,60,47,0.07)",
+          background: hovered ? ACCENT_CORAL : "rgba(239,120,106,0.07)",
           transition: "background 0.3s",
         }}
       />
       <div
         style={{
           position: "absolute",
-          top: 7,
-          left: 7,
+          top: "clamp(0.375rem,1.4vw,0.5rem)",
+          left: "clamp(0.375rem,1.4vw,0.5rem)",
           fontFamily: "'Courier Prime',monospace",
-          fontSize: "6px",
+          fontSize: "clamp(0.55rem,0.9vw,0.65rem)",
           letterSpacing: "0.3em",
-          color: "rgba(255,255,255,0.18)",
+          color: TEXT_SECONDARY,
           textTransform: "uppercase",
         }}
       >
@@ -347,11 +378,11 @@ function SplitTile({
       <div
         style={{
           position: "absolute",
-          bottom: 4,
-          right: 6,
+          bottom: "clamp(0.125rem,0.8vw,0.25rem)",
+          right: "clamp(0.25rem,1vw,0.375rem)",
           fontFamily: "'Bebas Neue',sans-serif",
-          fontSize: "44px",
-          color: hovered ? "rgba(230,60,47,0.2)" : "rgba(255,255,255,0.03)",
+          fontSize: "clamp(2rem,8vw,2.75rem)",
+          color: hovered ? "rgba(239,120,106,0.2)" : "rgba(255,255,255,0.03)",
           lineHeight: 1,
           transition: "color 0.35s",
         }}
@@ -361,11 +392,11 @@ function SplitTile({
       <div
         style={{
           position: "absolute",
-          bottom: 7,
-          left: 7,
+          bottom: "clamp(0.375rem,1.4vw,0.5rem)",
+          left: "clamp(0.375rem,1.4vw,0.5rem)",
           fontFamily: "'Bebas Neue',sans-serif",
-          fontSize: "12px",
-          color: "#fff",
+          fontSize: "clamp(0.8rem,1.4vw,1rem)",
+          color: TEXT_PRIMARY,
           letterSpacing: "0.04em",
         }}
       >
@@ -405,9 +436,11 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
   return (
     <div
       ref={ref}
+      tabIndex={0}
+      aria-label={`${item.title} slate preview, ${item.fmt}`}
       style={{
         display: "grid",
-        gridTemplateColumns: "64px 1fr 160px",
+        gridTemplateColumns: "clamp(2.75rem,8vw,4rem) minmax(0,1fr) clamp(5.5rem,18vw,10rem)",
         alignItems: "center",
         borderBottom: "1px solid rgba(255,255,255,0.04)",
         cursor: "pointer",
@@ -415,13 +448,15 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
         overflow: "hidden",
         background: hovered ? "rgba(255,255,255,0.018)" : "transparent",
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(-16px)",
+        transform: visible ? "translateX(0)" : "translateX(clamp(-1rem,-2vw,-0.5rem))",
         transitionProperty: "background,opacity,transform",
         transitionDuration: "0.4s,0.5s,0.5s",
         transitionDelay: `0s,${idx * 40}ms,${idx * 40}ms`,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
     >
       <div
         style={{
@@ -430,30 +465,30 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
           left: 0,
           right: hovered ? 0 : "100%",
           height: "1px",
-          background: "#e63c2f",
+          background: ACCENT_CORAL,
           transition: "right 0.65s cubic-bezier(0.16,1,0.3,1)",
           zIndex: 1,
         }}
       />
       <div
         style={{
-          padding: "0 0 0 28px",
+          padding: "0 0 0 clamp(0.75rem,3vw,1.75rem)",
           fontFamily: "'Courier Prime',monospace",
-          fontSize: "10px",
+          fontSize: "clamp(0.7rem,1.3vw,0.8rem)",
           letterSpacing: "0.2em",
-          color: hovered ? "#e63c2f" : "rgba(255,255,255,0.14)",
+          color: hovered ? ACCENT_CORAL : TEXT_MUTED,
           transition: "color 0.3s",
         }}
       >
         {item.label}
       </div>
-      <div style={{ padding: "18px 20px" }}>
+      <div style={{ padding: "clamp(0.875rem,2.5vw,1.125rem) clamp(0.75rem,2vw,1.25rem)" }}>
         <div
           style={{
             fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: "clamp(18px,2.2vw,32px)",
+            fontSize: "clamp(1.125rem,2.2vw,2rem)",
             letterSpacing: hovered ? "0.07em" : "0.03em",
-            color: "#fff",
+            color: TEXT_PRIMARY,
             lineHeight: 0.92,
             transition: "letter-spacing 0.55s cubic-bezier(0.16,1,0.3,1)",
           }}
@@ -463,11 +498,11 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
         <div
           style={{
             fontFamily: "'Courier Prime',monospace",
-            fontSize: "8px",
+            fontSize: "clamp(0.65rem,1vw,0.75rem)",
             letterSpacing: "0.35em",
-            color: hovered ? "rgba(230,60,47,0.65)" : "rgba(255,255,255,0.18)",
+            color: hovered ? "rgba(239,120,106,0.65)" : TEXT_SECONDARY,
             textTransform: "uppercase",
-            marginTop: 3,
+            marginTop: "clamp(0.125rem,0.6vw,0.1875rem)",
             transition: "color 0.3s",
           }}
         >
@@ -479,33 +514,42 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "flex-end",
-          gap: 12,
-          padding: "0 20px",
+          gap: "clamp(0.5rem,1.5vw,0.75rem)",
+          padding: "0 clamp(0.75rem,2vw,1.25rem)",
           borderLeft: "1px solid rgba(255,255,255,0.04)",
           height: "100%",
         }}
       >
         <div
           style={{
-            width: hovered ? "86px" : 0,
-            height: "48px",
+            width: hovered ? "clamp(4.5rem,12vw,5.375rem)" : 0,
+            height: "clamp(2.5rem,6vw,3rem)",
             overflow: "hidden",
-            borderRadius: 3,
+            borderRadius: "clamp(0.125rem,0.5vw,0.1875rem)",
             transition: "width 0.6s cubic-bezier(0.16,1,0.3,1)",
             flexShrink: 0,
           }}
         >
-          <div style={{ width: "86px", height: "48px", position: "relative", borderRadius: 3, overflow: "hidden" }}>
+          <div
+            style={{
+              width: "clamp(4.5rem,12vw,5.375rem)",
+              height: "clamp(2.5rem,6vw,3rem)",
+              position: "relative",
+              borderRadius: "clamp(0.125rem,0.5vw,0.1875rem)",
+              overflow: "hidden",
+            }}
+          >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), #000)`,
+                background: `linear-gradient(135deg, hsl(${VIDEOS.indexOf(item) * 33}, 60%, 8%), ${SURFACE_BASE})`,
               }}
             />
             {showVideo && (
               <iframe
-                src={`https://player.vimeo.com/video/${item.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
+                title={`${item.title} slate preview`}
+                src={`https://player.vimeo.com/video/${item.id}?${VIMEO_QUERY}`}
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -514,7 +558,7 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
                   border: "none",
                   pointerEvents: "none",
                 }}
-                allow="autoplay; fullscreen"
+                allow={VIMEO_ALLOW}
               />
             )}
           </div>
@@ -522,9 +566,9 @@ function SlateRow({ item, idx }: { item: (typeof VIDEOS)[0]; idx: number }) {
         <div
           style={{
             fontFamily: "'Courier Prime',monospace",
-            fontSize: "8px",
+            fontSize: "clamp(0.65rem,1vw,0.75rem)",
             letterSpacing: "0.25em",
-            color: "rgba(255,255,255,0.1)",
+            color: TEXT_MUTED,
             whiteSpace: "nowrap",
             opacity: hovered ? 1 : 0,
             transition: "opacity 0.35s 0.05s",
@@ -573,18 +617,18 @@ export function PricingExamplesStrip() {
   const stopDrag = useCallback(() => setIsDragging(false), [])
   const tickerWords = [...TICKER_WORDS, ...TICKER_WORDS]
   return (
-    <div style={{ background: "#000", color: "#fff", overflow: "hidden" }}>
-      <div style={{ background: "#e63c2f", padding: "8px 0", overflow: "hidden", whiteSpace: "nowrap" }}>
+    <div style={{ background: SURFACE_BASE, color: TEXT_PRIMARY, overflow: "hidden" }}>
+      <div className={showcaseStyles.tickerBar}>
         <div style={{ display: "inline-flex", animation: "danverse-tick 22s linear infinite" }}>
           {tickerWords.map((w, i) => (
             <span
               key={i}
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: "10px",
+                fontSize: "clamp(0.7rem,1.2vw,0.8rem)",
                 letterSpacing: "0.4em",
                 color: "#fff",
-                padding: "0 28px",
+                padding: "0 clamp(1rem,3vw,1.75rem)",
                 borderRight: "1px solid rgba(255,255,255,0.25)",
                 textTransform: "uppercase",
               }}
@@ -595,14 +639,21 @@ export function PricingExamplesStrip() {
         </div>
       </div>
       <style>{`@keyframes danverse-tick { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }`}</style>
-      <div ref={headerRef} style={{ padding: "56px 32px 0", position: "relative", overflow: "hidden" }}>
+      <div
+        ref={headerRef}
+        style={{
+          padding: "clamp(2rem,6vw,3.5rem) clamp(1rem,4vw,2rem) 0",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
         <div
           style={{
             position: "absolute",
-            top: -30,
-            right: -16,
+            top: "clamp(-1.5rem,-3vw,-0.5rem)",
+            right: "clamp(-1rem,-2vw,-0.25rem)",
             fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: "280px",
+            fontSize: "clamp(7rem,22vw,17.5rem)",
             lineHeight: 1,
             color: "rgba(255,255,255,0.022)",
             letterSpacing: "-0.03em",
@@ -616,20 +667,26 @@ export function PricingExamplesStrip() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 12,
-            marginBottom: 20,
+            gap: "clamp(0.5rem,1.5vw,0.75rem)",
+            marginBottom: "clamp(0.875rem,2.5vw,1.25rem)",
             opacity: headerIn ? 1 : 0,
-            transform: headerIn ? "translateY(0)" : "translateY(20px)",
+            transform: headerIn ? "translateY(0)" : "translateY(clamp(0.75rem,2vw,1.25rem))",
             transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)",
           }}
         >
-          <div style={{ width: 36, height: "1.5px", background: "#e63c2f" }} />
+          <div
+            style={{
+              width: "clamp(1.5rem,5vw,2.25rem)",
+              height: "clamp(0.09375rem,0.3vw,0.125rem)",
+              background: ACCENT_CORAL,
+            }}
+          />
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: "9px",
+              fontSize: "clamp(0.7rem,1.4vw,0.8rem)",
               letterSpacing: "0.55em",
-              color: "#e63c2f",
+              color: ACCENT_CORAL,
               textTransform: "uppercase",
             }}
           >
@@ -639,28 +696,26 @@ export function PricingExamplesStrip() {
         <div
           style={{
             fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: "clamp(48px,7vw,96px)",
+            fontSize: "clamp(3rem,7vw,6rem)",
             lineHeight: 0.8,
             letterSpacing: "-0.01em",
-            color: "#fff",
+            color: TEXT_PRIMARY,
             opacity: headerIn ? 1 : 0,
-            transform: headerIn ? "translateY(0)" : "translateY(40px)",
+            transform: headerIn ? "translateY(0)" : "translateY(clamp(1rem,4vw,2.5rem))",
             transition: "all 1s cubic-bezier(0.16,1,0.3,1) 0.1s",
           }}
         >
           Production
         </div>
         <div
+          className={showcaseStyles.yearGradient}
           style={{
             fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: "clamp(48px,7vw,96px)",
+            fontSize: "clamp(3rem,7vw,6rem)",
             lineHeight: 0.8,
             letterSpacing: "-0.01em",
-            background: "linear-gradient(90deg,#e63c2f 0%,#ff6030 60%,#e63c2f 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
             opacity: headerIn ? 1 : 0,
-            transform: headerIn ? "translateY(0)" : "translateY(40px)",
+            transform: headerIn ? "translateY(0)" : "translateY(clamp(1rem,4vw,2.5rem))",
             transition: "all 1s cubic-bezier(0.16,1,0.3,1) 0.15s",
           }}
         >
@@ -671,8 +726,10 @@ export function PricingExamplesStrip() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-end",
-            padding: "24px 0 0",
-            marginTop: 20,
+            flexWrap: "wrap",
+            gap: "clamp(1rem,3vw,1.5rem)",
+            padding: "clamp(1rem,3vw,1.5rem) 0 0",
+            marginTop: "clamp(0.875rem,2.5vw,1.25rem)",
             borderTop: "1px solid rgba(255,255,255,0.06)",
             opacity: headerIn ? 1 : 0,
             transition: "opacity 0.9s ease 0.3s",
@@ -681,13 +738,13 @@ export function PricingExamplesStrip() {
           <div
             style={{
               fontFamily: "'Barlow Condensed',sans-serif",
-              fontSize: 12,
+              fontSize: "clamp(0.8rem,1.5vw,0.9rem)",
               fontWeight: 300,
-              color: "rgba(255,255,255,0.28)",
+              color: TEXT_MUTED,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               lineHeight: 1.9,
-              maxWidth: 340,
+              maxWidth: "min(100%,21.25rem)",
             }}
           >
             A curated collection of high-fidelity visual systems.
@@ -696,12 +753,12 @@ export function PricingExamplesStrip() {
             <br />
             global impact and cinematic excellence.
           </div>
-          <div style={{ textAlign: "right" }}>
+          <div style={{ textAlign: "right", marginLeft: "auto" }}>
             <div
               style={{
                 fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: 52,
-                color: "rgba(230,60,47,0.15)",
+                fontSize: "clamp(2.25rem,6vw,3.25rem)",
+                color: "rgba(239,120,106,0.15)",
                 lineHeight: 1,
               }}
             >
@@ -710,8 +767,8 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: 8,
-                color: "rgba(255,255,255,0.15)",
+                fontSize: "clamp(0.65rem,1vw,0.75rem)",
+                color: TEXT_MUTED,
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
               }}
@@ -724,19 +781,21 @@ export function PricingExamplesStrip() {
       <div style={{ marginTop: 2 }}>
         <div
           style={{
-            padding: "14px 32px",
+            padding: "clamp(0.875rem,2vw,1rem) clamp(1rem,4vw,2rem)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "clamp(0.5rem,2vw,1rem)",
             borderTop: "1px solid rgba(255,255,255,0.05)",
           }}
         >
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: 8,
+              fontSize: "clamp(0.65rem,1vw,0.75rem)",
               letterSpacing: "0.45em",
-              color: "rgba(255,255,255,0.18)",
+              color: TEXT_SECONDARY,
               textTransform: "uppercase",
             }}
           >
@@ -745,47 +804,25 @@ export function PricingExamplesStrip() {
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: 8,
+              fontSize: "clamp(0.65rem,1vw,0.75rem)",
               letterSpacing: "0.3em",
-              color: "rgba(255,255,255,0.1)",
+              color: TEXT_MUTED,
               textTransform: "uppercase",
             }}
           >
             21:9 · 9:16 · 16:9 · 1:1
           </div>
         </div>
-        <div
-          style={{
-            height: 18,
-            background: "#0d0d0d",
-            display: "flex",
-            alignItems: "center",
-            padding: "0 12px",
-            gap: 14,
-            overflow: "hidden",
-            borderTop: "1px solid rgba(255,255,255,0.05)",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
-          }}
-        >
+        <div className={showcaseStyles.filmStrip}>
           {Array.from({ length: 24 }).map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 11,
-                height: 7,
-                borderRadius: 2,
-                background: "#000",
-                border: "1px solid rgba(255,255,255,0.07)",
-                flexShrink: 0,
-              }}
-            />
+            <div key={i} className={showcaseStyles.filmStripHole} />
           ))}
         </div>
         <div
           ref={reelRef}
           style={{
             display: "flex",
-            gap: 2,
+            gap: "clamp(0.125rem,0.6vw,0.25rem)",
             overflowX: "auto",
             scrollbarWidth: "none",
             cursor: isDragging ? "grabbing" : "grab",
@@ -800,38 +837,16 @@ export function PricingExamplesStrip() {
             <ReelTile key={v.id} item={v} />
           ))}
         </div>
-        <div
-          style={{
-            height: 18,
-            background: "#0d0d0d",
-            display: "flex",
-            alignItems: "center",
-            padding: "0 12px",
-            gap: 14,
-            overflow: "hidden",
-            borderTop: "1px solid rgba(255,255,255,0.05)",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
-          }}
-        >
+        <div className={showcaseStyles.filmStrip}>
           {Array.from({ length: 24 }).map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 11,
-                height: 7,
-                borderRadius: 2,
-                background: "#000",
-                border: "1px solid rgba(255,255,255,0.07)",
-                flexShrink: 0,
-              }}
-            />
+            <div key={i} className={showcaseStyles.filmStripHole} />
           ))}
         </div>
       </div>
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "280px 1fr",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,18rem),1fr))",
           gap: 0,
           borderTop: "2px solid rgba(255,255,255,0.04)",
           marginTop: 2,
@@ -839,7 +854,7 @@ export function PricingExamplesStrip() {
       >
         <div
           style={{
-            padding: "32px 28px",
+            padding: "clamp(1.5rem,4vw,2rem) clamp(1rem,3vw,1.75rem)",
             borderRight: "1px solid rgba(255,255,255,0.06)",
             display: "flex",
             flexDirection: "column",
@@ -851,11 +866,11 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: 8,
+                fontSize: "clamp(0.65rem,1vw,0.75rem)",
                 letterSpacing: "0.45em",
-                color: "rgba(255,255,255,0.2)",
+                color: TEXT_SECONDARY,
                 textTransform: "uppercase",
-                marginBottom: 20,
+                marginBottom: "clamp(0.875rem,2.5vw,1.25rem)",
               }}
             >
               — Browse Works
@@ -863,39 +878,44 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: 120,
+                fontSize: "clamp(4rem,14vw,7.5rem)",
                 color: "rgba(255,255,255,0.03)",
                 lineHeight: 0.85,
-                marginBottom: -14,
+                marginBottom: "clamp(-0.75rem,-2vw,-0.25rem)",
               }}
             >
               11
             </div>
-            <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 40, color: "#fff", lineHeight: 0.88 }}>
-              Production
-            </div>
             <div
               style={{
                 fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: 40,
-                background: "linear-gradient(90deg,#e63c2f,#ff6030)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontSize: "clamp(2rem,5vw,2.5rem)",
+                color: TEXT_PRIMARY,
                 lineHeight: 0.88,
-                marginBottom: 24,
+              }}
+            >
+              Production
+            </div>
+            <div
+              className={showcaseStyles.yearGradient}
+              style={{
+                fontFamily: "'Bebas Neue',sans-serif",
+                fontSize: "clamp(2rem,5vw,2.5rem)",
+                lineHeight: 0.88,
+                marginBottom: "clamp(1rem,3vw,1.5rem)",
               }}
             >
               2024–2026
             </div>
           </div>
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 16 }}>
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "clamp(0.875rem,2.5vw,1rem)" }}>
             <div
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: 8,
+                fontSize: "clamp(0.65rem,1vw,0.75rem)",
                 letterSpacing: "0.3em",
-                color: "#e63c2f",
-                marginBottom: 6,
+                color: ACCENT_CORAL,
+                marginBottom: "clamp(0.25rem,1vw,0.375rem)",
               }}
             >
               {activeVideo ? `WORK ${activeVideo.label}` : "HOVER ANY WORK"}
@@ -903,8 +923,8 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: 28,
-                color: "#fff",
+                fontSize: "clamp(1.5rem,4vw,1.75rem)",
+                color: TEXT_PRIMARY,
                 lineHeight: 0.95,
                 transition: "all 0.4s",
               }}
@@ -914,11 +934,11 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: 7,
+                fontSize: "clamp(0.6rem,0.95vw,0.7rem)",
                 letterSpacing: "0.35em",
-                color: "rgba(255,255,255,0.2)",
+                color: TEXT_SECONDARY,
                 textTransform: "uppercase",
-                marginTop: 4,
+                marginTop: "clamp(0.125rem,0.8vw,0.25rem)",
                 transition: "all 0.4s",
               }}
             >
@@ -927,10 +947,10 @@ export function PricingExamplesStrip() {
             <div
               style={{
                 fontFamily: "'Courier Prime',monospace",
-                fontSize: 7,
+                fontSize: "clamp(0.6rem,0.95vw,0.7rem)",
                 letterSpacing: "0.2em",
-                color: "rgba(230,60,47,0.5)",
-                marginTop: 2,
+                color: activeVideo ? ACCENT_CORAL : TEXT_MUTED,
+                marginTop: "clamp(0.125rem,0.6vw,0.1875rem)",
               }}
             >
               {activeVideo ? activeVideo.fmt : "11 WORKS · DANVERSE"}
@@ -940,9 +960,9 @@ export function PricingExamplesStrip() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4,1fr)",
-            gap: 2,
-            background: "#111",
+            gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,8rem),1fr))",
+            gap: "clamp(0.125rem,0.6vw,0.25rem)",
+            background: SURFACE_RAISED,
             alignContent: "start",
           }}
         >
@@ -954,19 +974,21 @@ export function PricingExamplesStrip() {
       <div style={{ borderTop: "2px solid rgba(255,255,255,0.04)", marginTop: 2 }}>
         <div
           style={{
-            padding: "20px 32px",
+            padding: "clamp(1rem,3vw,1.25rem) clamp(1rem,4vw,2rem)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "clamp(0.5rem,2vw,1rem)",
             borderBottom: "1px solid rgba(255,255,255,0.05)",
           }}
         >
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: 8,
+              fontSize: "clamp(0.65rem,1vw,0.75rem)",
               letterSpacing: "0.45em",
-              color: "rgba(255,255,255,0.18)",
+              color: TEXT_SECONDARY,
               textTransform: "uppercase",
             }}
           >
@@ -975,9 +997,9 @@ export function PricingExamplesStrip() {
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: 8,
+              fontSize: "clamp(0.65rem,1vw,0.75rem)",
               letterSpacing: "0.3em",
-              color: "rgba(255,255,255,0.1)",
+              color: TEXT_MUTED,
               textTransform: "uppercase",
             }}
           >
@@ -990,17 +1012,19 @@ export function PricingExamplesStrip() {
       </div>
       <div
         style={{
-          padding: "44px 32px",
+          padding: "clamp(1.75rem,5vw,2.75rem) clamp(1rem,4vw,2rem)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "clamp(1rem,3vw,1.5rem)",
           borderTop: "1px solid rgba(255,255,255,0.06)",
         }}
       >
         <div
           style={{
             fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: 52,
+            fontSize: "clamp(2.25rem,6vw,3.25rem)",
             color: "rgba(255,255,255,0.04)",
             letterSpacing: "-0.01em",
           }}
@@ -1011,39 +1035,16 @@ export function PricingExamplesStrip() {
           <button
             type="button"
             onClick={() => fireCTAAndOpenWhatsApp("showreel-cta")}
-            style={{
-              fontFamily: "'Bebas Neue',sans-serif",
-              fontSize: 15,
-              letterSpacing: "0.4em",
-              color: "#fff",
-              background: "transparent",
-              border: "1px solid rgba(230,60,47,0.45)",
-              padding: "14px 44px",
-              cursor: "pointer",
-              textTransform: "uppercase",
-              display: "block",
-              marginBottom: 8,
-              transition: "all 0.45s",
-            }}
-            onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLButtonElement).style.background = "#e63c2f"
-              ;(e.currentTarget as HTMLButtonElement).style.borderColor = "#e63c2f"
-              ;(e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 50px rgba(230,60,47,0.35)"
-            }}
-            onMouseLeave={(e) => {
-              ;(e.currentTarget as HTMLButtonElement).style.background = "transparent"
-              ;(e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(230,60,47,0.45)"
-              ;(e.currentTarget as HTMLButtonElement).style.boxShadow = "none"
-            }}
+            className={showcaseStyles.showreelCtaButton}
           >
             INITIALIZE PROJECT
           </button>
           <div
             style={{
               fontFamily: "'Courier Prime',monospace",
-              fontSize: 8,
+              fontSize: "clamp(0.65rem,1vw,0.75rem)",
               letterSpacing: "0.3em",
-              color: "rgba(255,255,255,0.15)",
+              color: TEXT_MUTED,
               textAlign: "center",
               textTransform: "uppercase",
             }}
@@ -1054,8 +1055,8 @@ export function PricingExamplesStrip() {
         <div
           style={{
             fontFamily: "'Courier Prime',monospace",
-            fontSize: 8,
-            color: "rgba(255,255,255,0.12)",
+            fontSize: "clamp(0.65rem,1vw,0.75rem)",
+            color: TEXT_MUTED,
             letterSpacing: "0.25em",
             textAlign: "right",
             lineHeight: 2,

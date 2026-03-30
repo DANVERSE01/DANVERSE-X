@@ -11,63 +11,60 @@ export const contentType = "image/png"
 
 export default function OpenGraphImage() {
   return new ImageResponse(
-    (
+    <div
+      style={{
+        alignItems: "center",
+        background: "#080e12",
+        color: "#eef0e8",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        justifyContent: "center",
+        position: "relative",
+        width: "100%",
+      }}
+    >
       <div
         style={{
-          alignItems: "center",
-          background: "#000000",
-          color: "#ffffff",
+          background: "radial-gradient(circle at top, rgba(239, 120, 106, 0.28), transparent 55%)",
+          inset: 0,
+          position: "absolute",
+        }}
+      />
+      <div
+        style={{
+          border: "1px solid rgba(239, 120, 106, 0.35)",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
-          justifyContent: "center",
+          gap: 20,
+          padding: "56px 72px",
           position: "relative",
-          width: "100%",
+          textAlign: "center",
         }}
       >
         <div
           style={{
-            background:
-              "radial-gradient(circle at top, rgba(230, 60, 47, 0.28), transparent 55%)",
-            inset: 0,
-            position: "absolute",
-          }}
-        />
-        <div
-          style={{
-            border: "1px solid rgba(230, 60, 47, 0.35)",
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-            padding: "56px 72px",
-            position: "relative",
-            textAlign: "center",
+            color: "#ef786a",
+            fontSize: 116,
+            fontWeight: 800,
+            letterSpacing: 8,
+            lineHeight: 1,
           }}
         >
-          <div
-            style={{
-              color: "#e63c2f",
-              fontSize: 116,
-              fontWeight: 800,
-              letterSpacing: 8,
-              lineHeight: 1,
-            }}
-          >
-            DANVERSE
-          </div>
-          <div
-            style={{
-              color: "#ffffff",
-              fontSize: 36,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-            }}
-          >
-            AI-Powered Creative Studio
-          </div>
+          DANVERSE
+        </div>
+        <div
+          style={{
+            color: "#eef0e8",
+            fontSize: 36,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+          }}
+        >
+          AI-Powered Creative Studio
         </div>
       </div>
-    ),
-    size,
+    </div>,
+    size
   )
 }

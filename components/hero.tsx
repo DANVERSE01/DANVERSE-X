@@ -7,24 +7,6 @@ import LazyVideo from "./lazy-video"
 import { DanverseLogo } from "./danverse-logo"
 
 export function Hero() {
-  useEffect(() => {
-    const ease = "cubic-bezier(0.16, 1, 0.3, 1)"
-    const dur = "0.9s"
-    const lines: Array<{ id: string; delay: string }> = [
-      { id: "hl1", delay: "0.15s" },
-      { id: "hl2", delay: "0.35s" },
-      { id: "hl3", delay: "0.5s" },
-      { id: "hl4", delay: "0.75s" },
-    ]
-    lines.forEach(({ id, delay }) => {
-      const el = document.getElementById(id)
-      if (!el) return
-      el.style.transition = `transform ${dur} ${ease} ${delay}, opacity ${dur} ease ${delay}`
-      el.style.transform = "translateY(0)"
-      el.style.opacity = "1"
-    })
-  }, [])
-
   return (
     <section className="relative isolate overflow-hidden">
       <div className="container mx-auto px-4">
@@ -45,57 +27,15 @@ export function Hero() {
           <h1
             className="text-center text-white"
             style={{
-              fontSize: "clamp(3rem, 8.5vw, 7.5rem)",
+              fontSize: "clamp(3rem, 7vw, 6.5rem)",
               fontWeight: 900,
               letterSpacing: "-0.04em",
-              lineHeight: 0.93,
+              lineHeight: 0.96,
             }}
           >
-            <span className="block overflow-hidden" style={{ overflow: "hidden" }}>
-              <span id="hl1" className="block" style={{ transform: "translateY(108%)", opacity: 0 }}>
-                WE DON'T MAKE ADS.
-              </span>
-            </span>
-            <span className="block" style={{ overflow: "hidden" }}>
-              <span
-                id="hl2"
-                className="block"
-                style={{
-                  color: "var(--color-lime)",
-                  transform: "translateY(108%)",
-                  opacity: 0,
-                }}
-              >
-                WE BUILD BRAND
-              </span>
-            </span>
-            <span className="block" style={{ overflow: "hidden" }}>
-              <span
-                id="hl3"
-                className="block"
-                style={{
-                  color: "var(--color-lime)",
-                  transform: "translateY(108%)",
-                  opacity: 0,
-                }}
-              >
-                WEAPONS.
-              </span>
-            </span>
-            <span
-              id="hl4"
-              className="block"
-              style={{
-                fontSize: "clamp(0.85rem, 2vw, 1.15rem)",
-                fontWeight: 300,
-                letterSpacing: "0.22em",
-                color: "rgba(168,197,208,0.6)",
-                marginTop: "clamp(1rem, 2.5vw, 1.5rem)",
-                opacity: 0,
-              }}
-            >
-              POWERED BY AI.
-            </span>
+            <span className="block">WE DON'T MAKE ADS.</span>
+            <span className="block text-[var(--color-lime)]">WE BUILD BRAND WEAPONS.</span>
+            <span className="block">POWERED BY AI.</span>
           </h1>
 
           {/* CTA Button */}

@@ -8,38 +8,33 @@ import styles from "@/styles/showcase.module.css"
 const WORKS = [
   {
     embed: "https://player.vimeo.com/video/1174583531",
-    title: "New Year's Reel",
-    subtitle: "Personal Cinematic Film",
-    category: "PERSONAL FILM",
-    desc: "A personal cinematic project — action, explosions, and visual storytelling produced entirely with AI.",
+    title: "New Year's Reel - Personal Cinematic Film",
+    category: "PERSONAL / FILM",
+    desc: "A personal cinematic project. Action sequences, explosions, and visual storytelling - produced entirely with AI.",
   },
   {
     embed: "https://player.vimeo.com/video/1164910690",
-    title: "Jacob & Co × Bugatti",
-    subtitle: "Luxury Watch Campaign",
-    category: "SOCIAL CAMPAIGN",
-    desc: "A high-concept cinematic social campaign for one of the world's most exclusive watch collaborations.",
+    title: "Jacob & Co x Bugatti - Luxury Watch Campaign",
+    category: "SOCIAL / AD",
+    desc: "A high-end social ad for one of the world's most exclusive watch collaborations.",
   },
   {
     embed: "https://player.vimeo.com/video/1178056977",
-    title: "Poke Monster",
-    subtitle: "Samurai Sushi — Brand Film",
-    category: "BRAND FILM",
-    desc: "Full cinematic brand identity film for a Japanese-inspired restaurant chain in Canada.",
+    title: "Poke Monster - Samurai Sushi Brand Film",
+    category: "BRAND / FILM",
+    desc: "Cinematic brand identity film for a Japanese-inspired restaurant in Canada.",
   },
   {
     embed: "https://player.vimeo.com/video/1174570425",
-    title: "Alhama",
-    subtitle: "UAE Exhibition Identity Film",
-    category: "IDENTITY FILM",
-    desc: "AI-generated brand film produced in 72 hours for a major government exhibition in Sharjah.",
+    title: "Alhama - UAE Exhibition Identity Film",
+    category: "PRODUCT / REVEAL",
+    desc: "A full AI-generated brand film produced in 3 days for a major exhibition in Sharjah.",
   },
   {
     embed: "https://player.vimeo.com/video/1173977023",
-    title: "Wizzora",
-    subtitle: "Cinematic Agency Reel",
-    category: "AGENCY REEL",
-    desc: "Cinematic brand reel for a Gulf marketing agency — multi-brand campaign with millions of views.",
+    title: "Wizzora - Cinematic Agency Brand Film",
+    category: "IDENTITY / MOTION",
+    desc: "A cinematic brand film for a Gulf marketing agency - multi-brand campaign with millions of views.",
   },
 ] as const
 
@@ -100,7 +95,6 @@ export function CinematicShowcase() {
           <div className={styles.workCopy} aria-live="polite" aria-atomic="true">
             <p className={styles.categoryLabel}>{activeWork.category}</p>
             <h3 className={styles.workTitle}>{activeWork.title}</h3>
-            <p className={styles.workSubtitle}>{activeWork.subtitle}</p>
             <p className={styles.workDescription}>{activeWork.desc}</p>
           </div>
 
@@ -122,7 +116,6 @@ export function CinematicShowcase() {
               <div className={styles.indicatorBar} />
               <p className={styles.thumbCategory}>{work.category}</p>
               <p className={styles.thumbTitle}>{work.title}</p>
-              <p className={styles.thumbSub}>{work.subtitle}</p>
             </button>
           ))}
         </div>

@@ -93,8 +93,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollTracker />
         <WebVitalsReporter />
         <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-black">
-            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />
+          <div className="fixed inset-0 z-0 bg-[var(--color-surface-base)]">
+            <Plasma colorStops={["#00A6A6", "#BB8CFF", "#E0E75B"]} speed={1.0} amplitude={1.0} blend={0.7} />
           </div>
           <main id="main-content" tabIndex={-1} className="relative z-10">
             {children}

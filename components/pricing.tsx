@@ -151,7 +151,7 @@ export function Pricing() {
                 duration: 1.15,
                 ease: "power2.out",
               },
-              0.05,
+              0.05
             )
           }
         })
@@ -194,17 +194,26 @@ export function Pricing() {
       className="relative isolate overflow-hidden bg-transparent text-white"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[-6rem] h-[22rem] w-[22rem] rounded-full bg-[#C9A84C]/10 blur-[140px]" />
+        <div
+          className="absolute left-[-8rem] top-[-6rem] h-[22rem] w-[22rem] rounded-full blur-[140px]"
+          style={{ background: "rgba(224,231,91,0.12)" }}
+        />
         <div className="absolute right-[-10rem] top-[8rem] h-[24rem] w-[24rem] rounded-full bg-white/[0.04] blur-[160px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_18%,rgba(255,255,255,0)_82%,rgba(255,255,255,0.03)_100%)]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(224,231,91,0.14) 0%, rgba(224,231,91,0.04) 20%, rgba(224,231,91,0) 82%, rgba(224,231,91,0.1) 100%)",
+          }}
+        />
       </div>
 
       <div className="container relative mx-auto px-4 py-24 sm:py-28 lg:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-3xl">
             <p
-              className="text-[0.68rem] uppercase tracking-[0.42em] text-[#C9A84C]/72"
-              style={{ fontFamily: "var(--font-process-body)" }}
+              className="text-[0.68rem] uppercase tracking-[0.42em]"
+              style={{ fontFamily: "var(--font-process-body)", color: "rgba(224,231,91,0.72)" }}
             >
               The Process
             </p>
@@ -241,10 +250,15 @@ export function Pricing() {
               aria-hidden="true"
               className="pointer-events-none absolute bottom-14 left-8 top-12 w-px sm:left-11 lg:left-[3.25rem]"
             >
-              <div className="absolute inset-0 rounded-full bg-[#C9A84C]/16" />
+              <div className="absolute inset-0 rounded-full" style={{ backgroundColor: "rgba(224,231,91,0.16)" }} />
               <div
                 ref={lineFillRef}
-                className="absolute inset-0 origin-top scale-y-0 rounded-full bg-[linear-gradient(180deg,#f5df95_0%,#C9A84C_55%,rgba(201,168,76,0.2)_100%)] shadow-[0_0_18px_rgba(201,168,76,0.42)]"
+                className="absolute inset-0 origin-top scale-y-0 rounded-full"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(224,231,91,0.2) 0%, rgba(224,231,91,0.8) 55%, rgba(224,231,91,0.16) 100%)",
+                  boxShadow: "0 0 18px rgba(224,231,91,0.42)",
+                }}
               />
             </div>
 
@@ -260,7 +274,11 @@ export function Pricing() {
                     <div className="relative flex justify-center pt-4 sm:pt-5">
                       <span
                         aria-hidden="true"
-                        className="absolute left-1/2 top-[4.5rem] z-10 h-3 w-3 -translate-x-1/2 rounded-full border border-[#C9A84C]/70 bg-[rgba(5,5,7,0.48)] shadow-[0_0_24px_rgba(201,168,76,0.42)] backdrop-blur-sm sm:top-[5.5rem] lg:top-[6rem]"
+                        className="absolute left-1/2 top-[4.5rem] z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-[rgba(5,5,7,0.48)] backdrop-blur-sm sm:top-[5.5rem] lg:top-[6rem]"
+                        style={{
+                          border: "1px solid rgba(224,231,91,0.55)",
+                          boxShadow: "0 0 24px rgba(224,231,91,0.42)",
+                        }}
                       />
                       <div
                         ref={(element) => {
@@ -272,8 +290,8 @@ export function Pricing() {
                         <svg viewBox="0 0 320 180" className="h-auto w-full" aria-hidden="true">
                           <defs>
                             <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#f4d984" />
-                              <stop offset="100%" stopColor="#C9A84C" />
+                              <stop offset="0%" stopColor="#E0E75B" />
+                              <stop offset="100%" stopColor="#BBD54A" />
                             </linearGradient>
                           </defs>
                           <text
@@ -311,8 +329,8 @@ export function Pricing() {
                         <div className="flex items-start justify-between gap-6">
                           <div>
                             <p
-                              className="text-[0.65rem] uppercase tracking-[0.38em] text-[#C9A84C]/72"
-                              style={{ fontFamily: "var(--font-process-body)" }}
+                              className="text-[0.65rem] uppercase tracking-[0.38em]"
+                              style={{ fontFamily: "var(--font-process-body)", color: "rgba(224,231,91,0.72)" }}
                             >
                               Stage {step.number}
                             </p>
@@ -323,7 +341,10 @@ export function Pricing() {
                               {step.title}
                             </h3>
                           </div>
-                          <span className="mt-1 rounded-full border border-white/10 bg-white/[0.03] p-3 text-[#C9A84C]/82">
+                          <span
+                            className="mt-1 rounded-full border border-white/10 bg-white/[0.03] p-3"
+                            style={{ color: "rgba(224,231,91,0.82)" }}
+                          >
                             <ArrowUpRight className="h-5 w-5" />
                           </span>
                         </div>
@@ -335,7 +356,13 @@ export function Pricing() {
                           {step.description}
                         </p>
 
-                        <div className="mt-8 h-px w-full bg-gradient-to-r from-[#C9A84C]/45 via-white/8 to-transparent" />
+                        <div
+                          className="mt-8 h-px w-full"
+                          style={{
+                            background:
+                              "linear-gradient(to right, rgba(224,231,91,0.45), rgba(255,255,255,0.08), transparent)",
+                          }}
+                        />
                       </div>
                     </div>
                   </article>

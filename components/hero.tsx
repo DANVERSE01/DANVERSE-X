@@ -24,40 +24,58 @@ export function Hero() {
           </div>
 
           {/* Headline */}
-          <p className="section-label mb-5">Director-Led Creative Studio</p>
+          <p className="section-label mb-5">Danverse Studio</p>
           <h1
-            className="mx-auto max-w-[13.5ch] text-center text-white"
+            className="mx-auto max-w-[8.5ch] px-2 text-center text-white"
             style={{
-              fontSize: "clamp(2.9rem, 6.8vw, 6.2rem)",
+              fontSize: "clamp(3.1rem, 10vw, 7rem)",
               fontWeight: 900,
               letterSpacing: "-0.04em",
-              lineHeight: 0.92,
+              lineHeight: 0.88,
             }}
           >
-            <span className="block">CINEMATIC CAMPAIGNS.</span>
-            <span className="block text-[var(--color-lime)]">DISTINCTIVE BRAND WORLDS.</span>
-            <span className="block">SYSTEMS THAT SCALE THEM.</span>
+            <span className="block">FILMS.</span>
+            <span className="block text-[var(--color-lime)]">IDENTITY.</span>
+            <span className="block">SYSTEMS.</span>
           </h1>
 
-          <p className="body-copy mx-auto mt-6 max-w-3xl text-center text-sm leading-7 sm:text-base">
-            DANVERSE builds director-led films, identity systems, and AI-native production infrastructure for brands
-            that need visual authority across launches, platforms, and markets.
+          <p className="body-copy mx-auto mt-6 max-w-2xl text-center text-sm leading-7 sm:text-base">
+            Director-led creative for brands that need visual authority, not noise.
           </p>
 
           {/* CTA Button */}
-          <div className="mt-8">
-            <Button
-              asChild
-              size="lg"
-              className="cta-coral rounded-full px-8 py-3 font-medium text-white transition-all hover:scale-105"
-            >
-              <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                Chat With Us
-              </a>
-            </Button>
-            <p className="body-copy mt-3 text-center text-xs uppercase tracking-[0.18em]">
-              Based in Egypt. Built for global launches.
-            </p>
+          <div className="mt-8 flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <Button
+                asChild
+                size="lg"
+                className="cta-coral rounded-full px-8 py-3 font-medium text-white transition-all hover:scale-105"
+              >
+                <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+                  Chat With Us
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="rounded-full border-white/15 bg-white/[0.03] px-8 py-3 text-white hover:bg-white/[0.06] hover:text-[var(--color-lime)]"
+              >
+                <a href="#showcase">View Work</a>
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {["Cinematic Ads", "Brand Identity", "AI Production"].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/72"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Phone Cards Grid */}

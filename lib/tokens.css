@@ -7,6 +7,8 @@
   --color-muted: #666666;
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
+  --font-process-display: "Syne", var(--font-display);
+  --font-process-body: "DM Sans", var(--font-body);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
   --dur-fast: 300ms;

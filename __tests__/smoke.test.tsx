@@ -42,7 +42,7 @@ vi.mock("@/components/logo-marquee", () => ({
 }))
 
 vi.mock("@/components/pricing", () => ({
-  Pricing: () => <section data-testid="pricing" />,
+  Pricing: () => <section data-testid="process" />,
 }))
 
 vi.mock("@/components/appverse-footer", () => ({
@@ -59,7 +59,7 @@ describe("smoke tests", () => {
 
     expect(container.querySelector("main")).toBeInTheDocument()
     expect(screen.getByTestId("site-header")).toBeInTheDocument()
-    expect(screen.getByTestId("pricing")).toBeInTheDocument()
+    expect(screen.getByTestId("process")).toBeInTheDocument()
   })
 
   it("Hero component mounts correctly", () => {

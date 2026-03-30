@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Tag, HelpCircle, Info, ChevronDown, Building2, Palette, Globe } from "lucide-react"
+import { Menu, Workflow, HelpCircle, Info, ChevronDown, Building2, Palette, Globe } from "lucide-react"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -42,7 +42,7 @@ export function SiteHeader() {
   ]
 
   const links = [
-    { href: "#pricing", label: "Pricing", icon: Tag },
+    { href: "#process", label: "Process", icon: Workflow },
     { href: "/faq", label: "FAQ", icon: HelpCircle },
     { href: "/About", label: "About", icon: Info },
   ]

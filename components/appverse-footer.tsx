@@ -13,6 +13,12 @@ const TAGLINE =
 const COPYRIGHT = "© 2026 — DANVERSE"
 
 export function AppverseFooter() {
+  const navigationLinks = [
+    { href: "/", label: "Home" },
+    { href: "/#features", label: "Features" },
+    { href: "/#process", label: "Process" },
+    { href: "/About", label: "About" },
+  ]
 
   return (
     <section className="text-white">
@@ -84,13 +90,10 @@ export function AppverseFooter() {
             <div>
               <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">Navigation</h5>
               <ul className="space-y-2 text-sm text-white/60">
-                {["Home", "Features", "Pricing", "About"].map((item) => (
-                  <li key={item}>
-                    <Link
-                      href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                      className="hover:text-red-400 transition-colors"
-                    >
-                      {item}
+                {navigationLinks.map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="hover:text-red-400 transition-colors">
+                      {item.label}
                     </Link>
                   </li>
                 ))}

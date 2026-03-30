@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;700;800&display=swap");
 @import "../lib/tokens.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -223,4 +224,64 @@
 
 .animate-scroll-left {
   animation: scroll-left 45s linear infinite;
+}
+
+@keyframes process-number-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.process-card {
+  transition:
+    transform 520ms var(--ease-cinematic),
+    border-color 320ms ease,
+    box-shadow 520ms var(--ease-cinematic);
+}
+
+.process-number-shell {
+  transition:
+    transform 520ms var(--ease-cinematic),
+    filter 520ms var(--ease-cinematic);
+}
+
+.process-step:hover .process-card,
+.process-step:focus-within .process-card {
+  transform: translateY(-14px);
+  border-color: rgba(201, 168, 76, 0.72);
+  box-shadow:
+    0 28px 96px rgba(201, 168, 76, 0.18),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.process-step:hover .process-number-shell,
+.process-step:focus-within .process-number-shell {
+  animation: process-number-pulse 1.8s var(--ease-cinematic) infinite;
+  filter: drop-shadow(0 0 26px rgba(201, 168, 76, 0.34));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-card,
+  .process-number-shell {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .process-step:hover .process-card,
+  .process-step:focus-within .process-card {
+    transform: none;
+    border-color: rgba(28, 28, 38, 1);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  .process-step:hover .process-number-shell,
+  .process-step:focus-within .process-number-shell {
+    animation: none !important;
+    transform: none !important;
+    filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.14));
+  }
 }

@@ -1,226 +1,350 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { CheckCircle2 } from "lucide-react"
-import { createWhatsAppUrl } from "@/lib/env"
-import { ExamplesDialog } from "./examples-dialog"
+import { useEffect, useRef } from "react"
+import { ArrowUpRight } from "lucide-react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-type Feature = { text: string; muted?: boolean }
-
-function FeatureItem({ text, muted = false }: Feature) {
-  return (
-    <li className="flex items-start gap-2">
-      <CheckCircle2 className="mt-0.5 h-4 w-4 text-red-400 flex-shrink-0" />
-      <span className={`text-sm ${muted ? "text-white/75" : "text-white/80"}`}>{text}</span>
-    </li>
-  )
+type ProcessStep = {
+  number: string
+  title: string
+  description: string
 }
 
-type Currency = "INR" | "USD"
+const HEADLINE_WORDS = ["The", "Process"]
 
-const PRICES: Record<Currency, { startup: string; pro: string; premium: string; save: string }> = {
-  INR: {
-    startup: "₹25,000",
-    pro: "₹55,000",
-    premium: "₹1,70,500",
-    save: "Save ₹1,500",
+const PROCESS_STEPS: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Strategy Lock",
+    description: "We define your visual language before a single frame is touched.",
   },
-  USD: {
-    startup: "$299",
-    pro: "$699",
-    premium: "$2,049",
-    save: "Save $20",
+  {
+    number: "02",
+    title: "Production",
+    description: "Cinematic lighting, 3D modelling, color grade - built inside your brand system.",
   },
-}
-
-function guessLocalCurrency(): Currency {
-  const lang = typeof navigator !== "undefined" ? navigator.language : ""
-  const tz = typeof Intl !== "undefined" ? Intl.DateTimeFormat().resolvedOptions().timeZone : ""
-  if (/-(IN|PK|BD)\b/i.test(lang) || /(Kolkata|Karachi|Dhaka)/i.test(tz || "")) return "INR"
-  return "USD"
-}
-
-const startupVideos = ["H1h5dHpp1Nw", "HXARcSSdfMU", "fd8zraQ1JdE", "ARQyF2FA3Ec", "dEZfHADlFtw", "wuyfdfKO6Rc"]
-const proVideos = ["ASV2myPRfKA", "eTfS2lqwf6A", "KALbYHmGV4I", "Go0AA9hZ4as", "sB7RZ9QCOAg", "TK2WboJOJaw"]
-const premiumVideos = ["v2AC41dglnM", "pRpeEdMmmQ0", "3AtDnEC4zak", "JRfuAukYTKg", "LsoLEjrDogU", "RB-RcX5DS5A"]
+  {
+    number: "03",
+    title: "Delivery",
+    description: "Final assets. All platform ratios. Source files. Ready on day one.",
+  },
+]
 
 export function Pricing() {
-  const [openPlan, setOpenPlan] = useState<null | "Startup" | "Pro" | "Premium">(null)
-  const [currency, setCurrency] = useState<Currency>("USD")
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const headlineRef = useRef<HTMLHeadingElement | null>(null)
+  const stepsRef = useRef<HTMLDivElement | null>(null)
+  const lineFillRef = useRef<HTMLDivElement | null>(null)
+  const wordRefs = useRef<HTMLSpanElement[]>([])
+  const cardRefs = useRef<HTMLDivElement[]>([])
+  const numberShellRefs = useRef<HTMLDivElement[]>([])
+  const numberTextRefs = useRef<SVGTextElement[]>([])
 
   useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     let cancelled = false
-    async function load() {
-      try {
-        const res = await fetch("/api/geo", { cache: "no-store" })
-        if (!res.ok) throw new Error("geo failed")
-        const data = await res.json()
-        if (!cancelled) setCurrency(data?.currency === "INR" ? "INR" : "USD")
-      } catch {
-        if (!cancelled) setCurrency(guessLocalCurrency())
+
+    const ctx = gsap.context(() => {
+      const words = wordRefs.current.filter(Boolean)
+      const cards = cardRefs.current.filter(Boolean)
+      const numberShells = numberShellRefs.current.filter(Boolean)
+      const numberTexts = numberTextRefs.current.filter(Boolean)
+
+      const setStrokeState = (revealed: boolean) => {
+        numberTexts.forEach((node) => {
+          const length = Math.max(node.getComputedTextLength(), 1)
+          node.style.strokeDasharray = `${length}`
+          node.style.strokeDashoffset = revealed ? "0" : `${length}`
+        })
       }
-    }
-    load()
+
+      const setReducedState = () => {
+        setStrokeState(true)
+        gsap.set(words, { yPercent: 0, opacity: 1 })
+        gsap.set(cards, { x: 0, opacity: 1, rotate: 0 })
+        gsap.set(numberShells, { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, y: 0 })
+        if (lineFillRef.current) {
+          gsap.set(lineFillRef.current, { scaleY: 1, transformOrigin: "top center" })
+        }
+      }
+
+      if (prefersReducedMotion) {
+        const fontReady = document.fonts?.ready
+        if (fontReady) {
+          fontReady.then(() => {
+            if (!cancelled) setReducedState()
+          })
+        } else {
+          setReducedState()
+        }
+        return
+      }
+
+      const animateIn = () => {
+        if (cancelled) return
+
+        setStrokeState(false)
+        gsap.set(words, { yPercent: 115, opacity: 0.2 })
+        gsap.set(cards, { x: -48, opacity: 0, rotate: -1.5 })
+        gsap.set(numberShells, { clipPath: "inset(0 100% 0 0)", opacity: 0, y: 36 })
+
+        if (lineFillRef.current) {
+          gsap.set(lineFillRef.current, { scaleY: 0, transformOrigin: "top center" })
+        }
+
+        gsap.to(words, {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.05,
+          ease: "power4.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: headlineRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        })
+
+        gsap.to(cards, {
+          x: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: 1.05,
+          ease: "power4.out",
+          stagger: 0.18,
+          scrollTrigger: {
+            trigger: stepsRef.current,
+            start: "top 74%",
+            once: true,
+          },
+        })
+
+        numberShells.forEach((shell, index) => {
+          const stroke = numberTexts[index]
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: shell,
+              start: "top 84%",
+              once: true,
+            },
+          })
+
+          timeline.to(shell, {
+            clipPath: "inset(0% 0% 0% 0%)",
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power4.out",
+          })
+
+          if (stroke) {
+            timeline.to(
+              stroke,
+              {
+                strokeDashoffset: 0,
+                duration: 1.15,
+                ease: "power2.out",
+              },
+              0.05,
+            )
+          }
+        })
+
+        if (lineFillRef.current && stepsRef.current) {
+          gsap.to(lineFillRef.current, {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: stepsRef.current,
+              start: "top 76%",
+              end: "bottom 26%",
+              scrub: 1.1,
+            },
+          })
+        }
+      }
+
+      const fontReady = document.fonts?.ready
+      if (fontReady) {
+        fontReady.then(() => {
+          animateIn()
+        })
+      } else {
+        animateIn()
+      }
+    }, section)
+
     return () => {
       cancelled = true
+      ctx.revert()
     }
   }, [])
 
   return (
-    <section id="pricing" className="text-white">
-      <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="mx-auto max-w-2xl text-center mb-12">
-          <div className="mx-auto mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20">
-            Pricing & Packages
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-            Simple, Transparent Pricing
-          </h2>
-          <p className="mt-3 text-sm text-white/75 max-w-lg mx-auto">
-            No hidden fees. Just world-class creative work that fits your budget.
-          </p>
-          <div className="mt-6">
-            <Button
-              asChild
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 text-white font-medium hover:from-red-400 hover:to-orange-400"
-            >
-              <Link href={createWhatsAppUrl()} target="_blank">
-                Contact Now
-              </Link>
-            </Button>
-          </div>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3 max-w-5xl mx-auto">
-          {/* Startup */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
-            <div className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-medium bg-white/10 text-white/70">
-              {PRICES[currency].save}
-            </div>
-            <CardHeader className="space-y-2 pb-4">
-              <div className="text-sm font-semibold text-white">Startup</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold text-white">{PRICES[currency].startup}</span>
-                <span className="text-xs text-white/75">per video</span>
-              </div>
-              <Button
-                onClick={() => setOpenPlan("Startup")}
-                className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
-              >
-                View Examples
-              </Button>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <ul className="space-y-2.5">
-                {[
-                  "10–15s Reel/Teaser (1 SKU)",
-                  "Simple background + lighting",
-                  "1 revision",
-                  "Delivered in 10 days",
-                  "Social-ready visuals",
-                  "3D Modelling included",
-                ].map((f, i) => (
-                  <FeatureItem key={i} text={f} />
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Pro - Featured */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass-enhanced border-red-500/30 ring-1 ring-red-500/20">
-            <div className="absolute -top-px left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-orange-500" />
-            <CardHeader className="space-y-2 pb-4">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-white">Pro</span>
-                <span className="text-[10px] font-medium bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full">
-                  Popular
-                </span>
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold text-white">{PRICES[currency].pro}</span>
-                <span className="text-xs text-white/75">per video</span>
-              </div>
-              <Button
-                onClick={() => setOpenPlan("Pro")}
-                className="w-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-400 hover:to-orange-400 mt-2"
-              >
-                View Examples
-              </Button>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <ul className="space-y-2.5">
-                {[
-                  "20–25s Animation (1 SKU)",
-                  "Fixed shot-list (no surprises)",
-                  "Creative background + pro graphics",
-                  "2 structured revisions",
-                  "Delivered in 3 weeks",
-                  "3D Modelling included",
-                ].map((f, i) => (
-                  <FeatureItem key={i} text={f} />
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Premium */}
-          <Card className="relative overflow-hidden rounded-2xl liquid-glass border-white/10">
-            <CardHeader className="space-y-2 pb-4">
-              <div className="text-sm font-semibold text-white">Premium</div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold text-white">{PRICES[currency].premium}</span>
-                <span className="text-xs text-white/75">per video</span>
-              </div>
-              <Button
-                onClick={() => setOpenPlan("Premium")}
-                className="w-full rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 mt-2"
-              >
-                View Examples
-              </Button>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <ul className="space-y-2.5">
-                {[
-                  "30–40s Animation (up to 5 SKUs)",
-                  "Advanced storyboard + shot design",
-                  "Delivered in 4 weeks",
-                  "Lighting, camera animation, depth",
-                  "Up to 3 structured revisions",
-                  "3D Modelling included",
-                ].map((f, i) => (
-                  <FeatureItem key={i} text={f} />
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+    <section
+      id="process"
+      ref={sectionRef}
+      aria-labelledby="process-heading"
+      className="relative isolate overflow-hidden bg-[#050507] text-white"
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-8rem] top-[-6rem] h-[22rem] w-[22rem] rounded-full bg-[#C9A84C]/10 blur-[140px]" />
+        <div className="absolute right-[-10rem] top-[8rem] h-[24rem] w-[24rem] rounded-full bg-white/[0.04] blur-[160px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03)_0%,rgba(255,255,255,0)_18%,rgba(255,255,255,0)_82%,rgba(255,255,255,0.03)_100%)]" />
       </div>
 
-      {/* Modals */}
-      <ExamplesDialog
-        open={openPlan === "Startup"}
-        onOpenChange={(v) => setOpenPlan(v ? "Startup" : null)}
-        planName="Startup Plan"
-        price={PRICES[currency].startup}
-        videoIds={startupVideos}
-      />
-      <ExamplesDialog
-        open={openPlan === "Pro"}
-        onOpenChange={(v) => setOpenPlan(v ? "Pro" : null)}
-        planName="Pro Plan"
-        price={PRICES[currency].pro}
-        videoIds={proVideos}
-      />
-      <ExamplesDialog
-        open={openPlan === "Premium"}
-        onOpenChange={(v) => setOpenPlan(v ? "Premium" : null)}
-        planName="Premium Plan"
-        price={PRICES[currency].premium}
-        videoIds={premiumVideos}
-      />
+      <div className="container relative mx-auto px-4 py-24 sm:py-28 lg:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-3xl">
+            <p
+              className="text-[0.68rem] uppercase tracking-[0.42em] text-[#C9A84C]/72"
+              style={{ fontFamily: "var(--font-process-body)" }}
+            >
+              The Process
+            </p>
+            <h2
+              id="process-heading"
+              ref={headlineRef}
+              className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-[2.8rem] font-semibold leading-none sm:text-[4.4rem] lg:text-[5.6rem]"
+              style={{ fontFamily: "var(--font-process-display)" }}
+            >
+              {HEADLINE_WORDS.map((word, index) => (
+                <span key={word} className="inline-flex overflow-hidden pb-2 sm:pb-3">
+                  <span
+                    ref={(element) => {
+                      if (element) wordRefs.current[index] = element
+                    }}
+                    className="inline-block will-change-transform"
+                  >
+                    {word}
+                  </span>
+                </span>
+              ))}
+            </h2>
+            <p
+              className="mt-6 max-w-2xl text-base leading-8 text-white/62 sm:text-lg"
+              style={{ fontFamily: "var(--font-process-body)" }}
+            >
+              A three-step production system built to lock the concept, shape the frame, and ship launch-ready assets
+              without breaking the brand.
+            </p>
+          </div>
+
+          <div ref={stepsRef} className="relative mt-16 sm:mt-20">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-14 left-8 top-12 w-px sm:left-11 lg:left-[3.25rem]"
+            >
+              <div className="absolute inset-0 rounded-full bg-[#C9A84C]/16" />
+              <div
+                ref={lineFillRef}
+                className="absolute inset-0 origin-top scale-y-0 rounded-full bg-[linear-gradient(180deg,#f5df95_0%,#C9A84C_55%,rgba(201,168,76,0.2)_100%)] shadow-[0_0_18px_rgba(201,168,76,0.42)]"
+              />
+            </div>
+
+            <div className="space-y-8 sm:space-y-12">
+              {PROCESS_STEPS.map((step, index) => {
+                const gradientId = `process-number-stroke-${step.number}`
+
+                return (
+                  <article
+                    key={step.number}
+                    className="process-step relative grid grid-cols-[4rem_1fr] gap-4 sm:grid-cols-[5.5rem_1fr] sm:gap-8 lg:grid-cols-[6.5rem_1fr]"
+                  >
+                    <div className="relative flex justify-center pt-4 sm:pt-5">
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-1/2 top-[4.5rem] z-10 h-3 w-3 -translate-x-1/2 rounded-full border border-[#C9A84C]/70 bg-[#050507] shadow-[0_0_24px_rgba(201,168,76,0.42)] sm:top-[5.5rem] lg:top-[6rem]"
+                      />
+                      <div
+                        ref={(element) => {
+                          if (element) numberShellRefs.current[index] = element
+                        }}
+                        className="process-number-shell relative z-20 w-[5rem] overflow-hidden will-change-transform sm:w-[6.75rem] lg:w-[7.75rem]"
+                        style={{ filter: "drop-shadow(0 0 18px rgba(201, 168, 76, 0.14))" }}
+                      >
+                        <svg viewBox="0 0 320 180" className="h-auto w-full" aria-hidden="true">
+                          <defs>
+                            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="#f4d984" />
+                              <stop offset="100%" stopColor="#C9A84C" />
+                            </linearGradient>
+                          </defs>
+                          <text
+                            ref={(element) => {
+                              if (element) numberTextRefs.current[index] = element
+                            }}
+                            x="8"
+                            y="144"
+                            fill="transparent"
+                            stroke={`url(#${gradientId})`}
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            fontSize="152"
+                            style={{
+                              fontFamily: "var(--font-process-display)",
+                              fontWeight: 800,
+                              letterSpacing: "-0.08em",
+                            }}
+                          >
+                            {step.number}
+                          </text>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div
+                      ref={(element) => {
+                        if (element) cardRefs.current[index] = element
+                      }}
+                      className="process-card relative overflow-hidden rounded-[1.75rem] border border-[#1C1C26] bg-[#111118] px-6 py-7 shadow-[0_24px_80px_rgba(0,0,0,0.35)] will-change-transform sm:px-8 sm:py-9 lg:px-10 lg:py-10"
+                    >
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,168,76,0.12),transparent_38%),radial-gradient(circle_at_left,rgba(255,255,255,0.045),transparent_28%)] opacity-80" />
+                      <div className="relative">
+                        <div className="flex items-start justify-between gap-6">
+                          <div>
+                            <p
+                              className="text-[0.65rem] uppercase tracking-[0.38em] text-[#C9A84C]/72"
+                              style={{ fontFamily: "var(--font-process-body)" }}
+                            >
+                              Stage {step.number}
+                            </p>
+                            <h3
+                              className="mt-4 text-2xl font-semibold leading-none text-white sm:text-[2rem] lg:text-[2.35rem]"
+                              style={{ fontFamily: "var(--font-process-display)" }}
+                            >
+                              {step.title}
+                            </h3>
+                          </div>
+                          <span className="mt-1 rounded-full border border-white/10 bg-white/[0.03] p-3 text-[#C9A84C]/82">
+                            <ArrowUpRight className="h-5 w-5" />
+                          </span>
+                        </div>
+
+                        <p
+                          className="mt-8 max-w-3xl text-base leading-8 text-white/72 sm:text-lg"
+                          style={{ fontFamily: "var(--font-process-body)" }}
+                        >
+                          {step.description}
+                        </p>
+
+                        <div className="mt-8 h-px w-full bg-gradient-to-r from-[#C9A84C]/45 via-white/8 to-transparent" />
+                      </div>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

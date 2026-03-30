@@ -9,42 +9,14 @@ import { ScrollToTop } from "./scroll-to-top"
 import Script from "next/script"
 
 // Structured data for SEO
-const PRICING_STRUCTURED_DATA = {
+const PROCESS_STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "WebPageElement",
-  "@id": "https://danverse.ai/#pricing",
-  name: "Pricing Plans",
+  "@id": "https://danverse.ai/#process",
+  name: "The Process",
   description:
-    "Creative services pricing plans - packages for cinematic ads, branding, websites, and AI content systems",
-  url: "https://danverse.ai/#pricing",
-  mainEntity: {
-    "@type": "PriceSpecification",
-    name: "Creative Services",
-    description: "Professional creative services with multiple pricing tiers",
-    offers: [
-      {
-        "@type": "Offer",
-        name: "Starter",
-        price: "299",
-        priceCurrency: "USD",
-        description: "Basic creative services package",
-      },
-      {
-        "@type": "Offer",
-        name: "Professional",
-        price: "699",
-        priceCurrency: "USD",
-        description: "Professional creative services package",
-      },
-      {
-        "@type": "Offer",
-        name: "Premium",
-        price: "2049",
-        priceCurrency: "USD",
-        description: "Premium creative services package",
-      },
-    ],
-  },
+    "A three-step cinematic production workflow covering strategy lock, production, and launch-ready delivery.",
+  url: "https://danverse.ai/#process",
 } as const
 
 const PAGE_STRUCTURED_DATA = {
@@ -64,9 +36,9 @@ const PAGE_STRUCTURED_DATA = {
   hasPart: [
     {
       "@type": "WebPageElement",
-      "@id": "https://danverse.ai/#pricing",
-      name: "Pricing Section",
-      url: "https://danverse.ai/#pricing",
+      "@id": "https://danverse.ai/#process",
+      name: "Process Section",
+      url: "https://danverse.ai/#process",
     },
   ],
 } as const
@@ -87,11 +59,11 @@ export default function Page() {
 
       {/* JSON-LD structured data */}
       <Script
-        id="pricing-structured-data"
+        id="process-structured-data"
         type="application/ld+json"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(PRICING_STRUCTURED_DATA),
+          __html: JSON.stringify(PROCESS_STRUCTURED_DATA),
         }}
       />
 

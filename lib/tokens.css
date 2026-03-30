@@ -1,11 +1,11 @@
 :root {
   /* Core Palette */
-  --color-lime: #f5f500;
-  --color-lavender: #c9a8f5;
-  --color-coral: #ff4d2e;
+  --color-lime: #e0e75b;
+  --color-lavender: #c48bb4;
+  --color-coral: #ef786a;
   --color-stone: #2e2e2e;
-  --color-bg: #111111;
-  --color-bg-card: #1c1c1c;
+  --color-bg: #06090e;
+  --color-bg-card: #0b1520;
   --color-ash: #8a9a95;
 
   /* Compatibility aliases */
@@ -29,8 +29,8 @@
   --color-text-inverse: #111111;
 
   /* Borders */
-  --color-border-subtle: rgba(245, 245, 0, 0.08);
-  --color-border-strong: rgba(245, 245, 0, 0.28);
+  --color-border-subtle: rgba(224, 231, 91, 0.08);
+  --color-border-strong: rgba(224, 231, 91, 0.28);
   --color-border-teal: rgba(201, 168, 245, 0.25);
 
   --color-surface: var(--color-surface-raised);
@@ -38,9 +38,9 @@
   --color-muted: var(--color-text-muted);
 
   /* Glows */
-  --glow-primary: 0 0 42px rgba(245, 245, 0, 0.24);
-  --glow-secondary: 0 0 48px rgba(201, 168, 245, 0.22);
-  --glow-coral: 0 0 38px rgba(255, 77, 46, 0.22);
+  --glow-primary: 0 0 42px rgba(224, 231, 91, 0.24);
+  --glow-secondary: 0 0 48px rgba(196, 139, 180, 0.2);
+  --glow-coral: 0 0 38px rgba(239, 120, 106, 0.22);
 
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Space Grotesk", sans-serif;

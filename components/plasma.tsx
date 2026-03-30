@@ -11,7 +11,7 @@ interface PlasmaProps {
 }
 
 export default function Plasma({
-  colorStops = ["#ef4444", "#f97316", "#fbbf24"],
+  colorStops = ["#00A6A6", "#BB8CFF", "#E0E75B"],
   speed = 1.0,
   amplitude = 1.0,
   blend = 0.6,
@@ -231,7 +231,7 @@ export default function Plasma({
       (entries) => {
         isVisible = entries[0].isIntersecting
       },
-      { threshold: 0 },
+      { threshold: 0 }
     )
     observer.observe(canvas)
 

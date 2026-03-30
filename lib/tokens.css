@@ -2,14 +2,16 @@
   /* Brand Core */
   --color-brand-primary: #e0e75b;
   --color-brand-secondary: #00a6a6;
-  --color-accent-coral: #ef786a;
-  --color-accent-lavender: #c48bb4;
-  --color-accent-steel: #a8c5d0;
+  --color-accent-coral: #ff8f3f; /* warm orange */
+  --color-accent-lavender: #bb8cff; /* flow purple */
+  --color-accent-steel: #7fd1ff;
+  --color-accent-purple: #bb8cff;
+  --color-accent-orange: #ff8f3f;
 
   /* Surfaces */
-  --color-surface-base: #080e12;
-  --color-surface-raised: #0d1e28;
-  --color-surface-overlay: rgba(255, 255, 255, 0.04);
+  --color-surface-base: #0d1b1e;
+  --color-surface-raised: #11262b;
+  --color-surface-overlay: rgba(14, 37, 42, 0.45);
 
   /* Typography */
   --color-text-primary: #eef0e8;

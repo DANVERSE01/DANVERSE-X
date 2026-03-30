@@ -27,8 +27,8 @@ interface IconProps {
 
 export function MarqueeCardIcon({ type, size = 48, className = "" }: IconProps) {
   const sw = "2.5"
-  const accent = "#EF4444" // Red
-  const accent2 = "#F97316" // Orange
+  const accent = "#BB8CFF" // Flow purple
+  const accent2 = "#E0E75B" // Citrus lime
 
   // AI Startups - Neural network / brain
   if (type === "ai-startups") {

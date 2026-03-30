@@ -71,8 +71,8 @@ export function DanverseWordmark({ size = "md", className = "" }: LogoProps) {
 
   return (
     <span
-      className={`font-bold tracking-[0.15em] bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent ${fontSizes[size]} ${className}`}
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      className={`wordmark-shimmer font-bold uppercase tracking-[0.18em] ${fontSizes[size]} ${className}`}
+      style={{ fontFamily: "var(--font-display)" }}
     >
       DANVERSE
     </span>

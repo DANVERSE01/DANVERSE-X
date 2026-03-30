@@ -41,8 +41,12 @@ vi.mock("@/components/logo-marquee", () => ({
   LogoMarquee: () => <section data-testid="logo-marquee" />,
 }))
 
-vi.mock("@/components/pricing", () => ({
-  Pricing: () => <section data-testid="pricing" />,
+vi.mock("@/components/cinematic-showcase", () => ({
+  CinematicShowcase: () => <section data-testid="showcase" />,
+}))
+
+vi.mock("@/components/process-section", () => ({
+  ProcessSection: () => <section data-testid="process-section" />,
 }))
 
 vi.mock("@/components/appverse-footer", () => ({
@@ -55,17 +59,20 @@ afterEach(() => {
 
 describe("smoke tests", () => {
   it("homepage renders without crashing", () => {
-    const { container } = render(<Page />)
+    render(<Page />)
 
-    expect(container.querySelector("main")).toBeInTheDocument()
     expect(screen.getByTestId("site-header")).toBeInTheDocument()
-    expect(screen.getByTestId("pricing")).toBeInTheDocument()
+    expect(screen.getByTestId("showcase")).toBeInTheDocument()
+    expect(screen.getByTestId("process-section")).toBeInTheDocument()
   })
 
   it("Hero component mounts correctly", () => {
     render(<Hero />)
 
-    expect(screen.getByRole("heading", { name: /ai-powered creative studio for brands/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /chat with us/i })).toHaveAttribute("href", "https://wa.me/201207346648")
+    expect(screen.getByRole("heading", { name: /launch visuals that feel cinematic on first contact\./i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /start your project/i })).toHaveAttribute(
+      "href",
+      expect.stringContaining("https://wa.me/201207346648")
+    )
   })
 })

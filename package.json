@@ -8,7 +8,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "optimize": "node scripts/optimize-images.mjs",
-    "postbuild": "node scripts/verify-sitemap.mjs || true",
+    "postbuild": "node scripts/verify-sitemap.mjs || node -e \"process.exit(0)\"",
     "prepare": "husky",
     "start": "next start",
     "test": "vitest run",

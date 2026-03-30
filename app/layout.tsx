@@ -2,15 +2,29 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import Script from "next/script"
+import { Suspense } from "react"
+import { DM_Sans, Syne } from "next/font/google"
 import Plasma from "@/components/plasma"
 import { ScrollTracker } from "@/components/scroll-tracker"
+import { SiteEffects } from "@/components/site-effects"
 import { WebVitalsReporter } from "@/components/web-vitals-reporter"
 import { env } from "@/lib/env"
-import { Suspense } from "react"
 
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "600", "700", "800"],
+})
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "700"],
+})
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -36,28 +50,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Dynamic Favicon Script */}
-        <Script id="dynamic-favicon" strategy="beforeInteractive">
-          {`
-            function updateFavicon() {
-              const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const faviconHref = darkMode ? '/icons/skitbit-white.svg' : '/icons/favicon-dark.svg';
-              let link = document.querySelector("link[rel~='icon']");
-              if (!link) {
-                link = document.createElement('link');
-                link.rel = 'icon';
-                document.getElementsByTagName('head')[0].appendChild(link);
-              }
-              link.href = faviconHref;
-            }
-            updateFavicon();
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
-          `}
-        </Script>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
 
         {GTM_ID ? (
           <Script id="gtm-script" strategy="lazyOnload">
@@ -81,18 +77,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Script>
         ) : null}
       </head>
-      <body>
+      <body className="antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-full focus:bg-[var(--gold-primary)] focus:px-4 focus:py-2 focus:text-[var(--bg-void)]"
         >
           Skip to content
         </a>
+        <SiteEffects />
         <ScrollTracker />
         <WebVitalsReporter />
         <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-black">
-            <Plasma colorStops={["#ef4444", "#f97316", "#fbbf24"]} speed={1.0} amplitude={1.0} blend={0.6} />
+          <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[var(--bg-void)]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_60%_at_50%_40%,rgba(201,168,76,0.08)_0%,rgba(79,195,247,0.04)_40%,transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_30%_60%,rgba(201,168,76,0.07)_0%,transparent_60%),radial-gradient(ellipse_60%_40%_at_70%_30%,rgba(79,195,247,0.05)_0%,transparent_55%),radial-gradient(ellipse_100%_80%_at_50%_50%,rgba(108,92,231,0.03)_0%,transparent_70%)] opacity-80" />
+            <Plasma colorStops={["#c9a84c", "#4fc3f7", "#6c5ce7"]} speed={0.72} amplitude={0.58} blend={0.28} />
           </div>
           <main id="main-content" tabIndex={-1} className="relative z-10">
             {children}

@@ -45,14 +45,12 @@ export default function WebsitesPage() {
       <main className="min-h-screen text-white">
         <section className="px-4 py-20">
           <div className="container mx-auto max-w-4xl text-center">
-            <div className="mb-4 inline-flex items-center rounded-full border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-red-400">
+            <div className="mb-4 inline-flex items-center rounded-full border border-[rgba(201,168,76,0.2)] bg-[rgba(201,168,76,0.1)] px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-[var(--gold-primary)]">
               Websites & Landing Pages
             </div>
             <h1 className="mb-6 font-display text-4xl font-extrabold uppercase tracking-tight md:text-5xl lg:text-6xl">
               <span className="block text-white">Sites That</span>
-              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
-                Convert
-              </span>
+              <span className="headline-accent block">Convert</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-white/60 md:text-xl">
               Modern websites and landing pages with clean UI and purposeful motion. We build for results - fast load,
@@ -70,9 +68,9 @@ export default function WebsitesPage() {
               {FEATURES.map((feature) => (
                 <div
                   key={feature.tag}
-                  className="liquid-glass rounded-2xl border border-white/10 p-6 transition-all hover:border-red-500/30"
+                  className="liquid-glass rounded-2xl border border-white/10 p-6 transition-all hover:border-[rgba(201,168,76,0.24)]"
                 >
-                  <p className="mb-2 text-[10px] uppercase tracking-widest text-red-400">{feature.tag}</p>
+                  <p className="mb-2 text-[10px] uppercase tracking-widest text-[var(--gold-primary)]">{feature.tag}</p>
                   <h3 className="mb-3 text-lg font-bold text-white">{feature.title}</h3>
                   <p className="text-sm text-white/50">{feature.desc}</p>
                 </div>
@@ -89,7 +87,7 @@ export default function WebsitesPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {PROCESS.map((item) => (
                 <div key={item.step} className="liquid-glass rounded-2xl border border-white/10 p-6">
-                  <p className="mb-3 text-4xl font-black text-red-500/30">{item.step}</p>
+                  <p className="mb-3 text-4xl font-black text-[rgba(201,168,76,0.28)]">{item.step}</p>
                   <h4 className="mb-2 text-sm font-bold uppercase tracking-widest text-white">{item.label}</h4>
                   <p className="text-xs text-white/50">{item.desc}</p>
                 </div>
@@ -100,10 +98,11 @@ export default function WebsitesPage() {
 
         <section className="px-4 py-20 text-center">
           <div className="container mx-auto max-w-2xl rounded-2xl border border-white/10 p-10 liquid-glass">
-            <p className="mb-3 text-[10px] uppercase tracking-widest text-red-400">Pricing</p>
+            <p className="mb-3 text-[10px] uppercase tracking-widest text-[var(--gold-primary)]">Project Scope</p>
             <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Ready to build?</h2>
             <p className="mb-8 text-sm text-white/50">
-              Starter at $299 - Professional at $699 - Premium at $2,049. All plans include revisions.
+              Websites are scoped around page count, motion depth, and launch timeline so expectations stay clear from
+              strategy through deployment.
             </p>
             <WaCtaButton source="websites-cta" label="Book a Call" />
           </div>

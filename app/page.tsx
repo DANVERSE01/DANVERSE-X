@@ -1,50 +1,38 @@
-import { SiteHeader } from "@/components/site-header"
-import { Hero } from "@/components/hero"
-import { Features } from "@/components/features"
-import { LogoMarquee } from "@/components/logo-marquee"
-import { CinematicShowcase } from "@/components/cinematic-showcase"
-import { Pricing } from "@/components/pricing"
-import { AppverseFooter } from "@/components/appverse-footer"
-import { ScrollToTop } from "./scroll-to-top"
 import Script from "next/script"
+import { AppverseFooter } from "@/components/appverse-footer"
+import { CinematicShowcase } from "@/components/cinematic-showcase"
+import { Features } from "@/components/features"
+import { Hero } from "@/components/hero"
+import { LogoMarquee } from "@/components/logo-marquee"
+import { ProcessSection } from "@/components/process-section"
+import { SiteHeader } from "@/components/site-header"
+import { ScrollToTop } from "./scroll-to-top"
 
-// Structured data for SEO
-const PRICING_STRUCTURED_DATA = {
+const PROCESS_STRUCTURED_DATA = {
   "@context": "https://schema.org",
-  "@type": "WebPageElement",
-  "@id": "https://danverse.ai/#pricing",
-  name: "Pricing Plans",
+  "@type": "HowTo",
+  "@id": "https://danverse.ai/#process",
+  name: "DANVERSE Creative Process",
   description:
-    "Creative services pricing plans - packages for cinematic ads, branding, websites, and AI content systems",
-  url: "https://danverse.ai/#pricing",
-  mainEntity: {
-    "@type": "PriceSpecification",
-    name: "Creative Services",
-    description: "Professional creative services with multiple pricing tiers",
-    offers: [
-      {
-        "@type": "Offer",
-        name: "Starter",
-        price: "299",
-        priceCurrency: "USD",
-        description: "Basic creative services package",
-      },
-      {
-        "@type": "Offer",
-        name: "Professional",
-        price: "699",
-        priceCurrency: "USD",
-        description: "Professional creative services package",
-      },
-      {
-        "@type": "Offer",
-        name: "Premium",
-        price: "2049",
-        priceCurrency: "USD",
-        description: "Premium creative services package",
-      },
-    ],
-  },
+    "A premium three-step creative workflow covering strategy, production, and launch-ready delivery for cinematic brand campaigns.",
+  url: "https://danverse.ai/#process",
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Strategy Lock",
+      text: "Define the visual language, target format, and campaign objectives before production starts.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Production",
+      text: "Build the cinematic assets with motion, 3D, lighting, and internal quality assurance.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Launch-Ready Delivery",
+      text: "Deliver final assets in multiple ratios with structured revisions and source files.",
+    },
+  ],
 } as const
 
 const PAGE_STRUCTURED_DATA = {
@@ -53,7 +41,7 @@ const PAGE_STRUCTURED_DATA = {
   "@id": "https://danverse.ai/",
   name: "DANVERSE | AI-Powered Creative Studio",
   description:
-    "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+    "DANVERSE is an AI-powered creative studio building cinematic ads, premium branding, and launch-ready content systems for ambitious brands.",
   url: "https://danverse.ai/",
   mainEntity: {
     "@type": "Organization",
@@ -64,9 +52,21 @@ const PAGE_STRUCTURED_DATA = {
   hasPart: [
     {
       "@type": "WebPageElement",
-      "@id": "https://danverse.ai/#pricing",
-      name: "Pricing Section",
-      url: "https://danverse.ai/#pricing",
+      "@id": "https://danverse.ai/#work",
+      name: "Production Showcase",
+      url: "https://danverse.ai/#work",
+    },
+    {
+      "@type": "WebPageElement",
+      "@id": "https://danverse.ai/#process",
+      name: "Creative Process",
+      url: "https://danverse.ai/#process",
+    },
+    {
+      "@type": "WebPageElement",
+      "@id": "https://danverse.ai/#contact",
+      name: "Contact Section",
+      url: "https://danverse.ai/#contact",
     },
   ],
 } as const
@@ -74,24 +74,23 @@ const PAGE_STRUCTURED_DATA = {
 export default function Page() {
   return (
     <>
-      <main className="min-h-[100dvh] text-white relative z-10">
+      <div className="relative z-10 text-[var(--platinum)]">
         <SiteHeader />
         <Hero />
         <Features />
         <LogoMarquee />
         <CinematicShowcase />
-        <Pricing />
+        <ProcessSection />
         <AppverseFooter />
         <ScrollToTop />
-      </main>
+      </div>
 
-      {/* JSON-LD structured data */}
       <Script
-        id="pricing-structured-data"
+        id="process-structured-data"
         type="application/ld+json"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(PRICING_STRUCTURED_DATA),
+          __html: JSON.stringify(PROCESS_STRUCTURED_DATA),
         }}
       />
 

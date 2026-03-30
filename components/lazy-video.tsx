@@ -1,17 +1,12 @@
 "use client"
 
+import type { VideoHTMLAttributes } from "react"
 import { useEffect, useRef } from "react"
 
-interface LazyVideoProps {
+interface LazyVideoProps extends Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "src"> {
   src: string
-  className?: string
-  poster?: string
   autoplay?: boolean
-  loop?: boolean
-  muted?: boolean
-  controls?: boolean
-  playsInline?: boolean
-  "aria-label"?: string
+  rootMargin?: string
 }
 
 export default function LazyVideo({
@@ -23,86 +18,82 @@ export default function LazyVideo({
   muted = true,
   controls = false,
   playsInline = true,
-  "aria-label": ariaLabel,
+  rootMargin = "220px",
   ...props
 }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const loadedRef = useRef(false)
+  const inViewRef = useRef(false)
 
   useEffect(() => {
-    const el = videoRef.current
-    if (!el) return
+    const video = videoRef.current
+
+    if (!video) {
+      return
+    }
+
     loadedRef.current = false
+    inViewRef.current = false
 
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
-    const saveData = (navigator as any)?.connection?.saveData === true
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true
     const shouldAutoplay = autoplay && !prefersReducedMotion && !saveData
 
-    let observer: IntersectionObserver | null = null
-    let playOnCanPlay: (() => void) | null = null
+    const syncPlayback = async () => {
+      if (!shouldAutoplay || !loadedRef.current || !inViewRef.current || document.visibilityState === "hidden") {
+        video.pause()
+        return
+      }
 
-    const onIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach(async (entry) => {
-        if (entry.isIntersecting && !loadedRef.current) {
-          el.src = src
-          el.load()
-
-          if (shouldAutoplay) {
-            playOnCanPlay = async () => {
-              try {
-                await el.play()
-              } catch (error) {
-                // Autoplay might be blocked
-              }
-            }
-            if (el.readyState >= 3) {
-              void playOnCanPlay()
-            } else {
-              el.addEventListener("canplay", playOnCanPlay, { once: true })
-            }
-          }
-
-          loadedRef.current = true
-        } else if (!entry.isIntersecting && loadedRef.current && shouldAutoplay) {
-          try {
-            el.pause()
-          } catch {}
-        } else if (entry.isIntersecting && loadedRef.current && shouldAutoplay) {
-          try {
-            await el.play()
-          } catch {}
-        }
-      })
-    }
-
-    observer = new IntersectionObserver(onIntersect, {
-      rootMargin: "200px",
-      threshold: 0.05,
-    })
-    observer.observe(el)
-
-    const onVisibility = () => {
-      if (!el) return
-      const hidden = document.visibilityState === "hidden"
-      if (hidden) {
-        try {
-          el.pause()
-        } catch {}
-      } else if (shouldAutoplay && loadedRef.current) {
-        // resume only if we were auto-playing
-        el.play().catch(() => {})
+      try {
+        await video.play()
+      } catch {
+        // Ignore autoplay failures so the poster can remain in place.
       }
     }
-    document.addEventListener("visibilitychange", onVisibility)
+
+    const loadVideo = () => {
+      if (loadedRef.current) {
+        return
+      }
+
+      video.src = src
+      video.load()
+      loadedRef.current = true
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        inViewRef.current = entry?.isIntersecting ?? false
+
+        if (inViewRef.current) {
+          loadVideo()
+          void syncPlayback()
+          return
+        }
+
+        video.pause()
+      },
+      {
+        rootMargin,
+        threshold: 0.05,
+      }
+    )
+
+    const handleVisibilityChange = () => {
+      void syncPlayback()
+    }
+
+    observer.observe(video)
+    document.addEventListener("visibilitychange", handleVisibilityChange)
 
     return () => {
-      document.removeEventListener("visibilitychange", onVisibility)
-      observer?.disconnect()
-      if (playOnCanPlay) {
-        el.removeEventListener("canplay", playOnCanPlay)
-      }
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+      observer.disconnect()
+      video.pause()
     }
-  }, [src, autoplay])
+  }, [autoplay, rootMargin, src])
 
   return (
     <video
@@ -112,15 +103,9 @@ export default function LazyVideo({
       loop={loop}
       playsInline={playsInline}
       controls={controls}
-      preload="metadata"
       poster={poster}
-      aria-label={ariaLabel}
+      preload="none"
       disableRemotePlayback
-      style={{
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden',
-        transform: 'translateZ(0)',
-      } as React.CSSProperties}
       {...props}
     >
       Your browser does not support the video tag.

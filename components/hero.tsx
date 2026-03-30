@@ -1,201 +1,154 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
+import { ArrowRight } from "lucide-react"
 import { createWhatsAppUrl } from "@/lib/env"
+import { DanverseLogo, DanverseWordmark } from "./danverse-logo"
 import LazyVideo from "./lazy-video"
-import { DanverseLogo } from "./danverse-logo"
+
+const DEFAULT_POSTER = "/images/hero-posters/default-card.webp"
+
+const SERVICE_CARDS = [
+  {
+    title: "Conversions",
+    description: "Narratives cut for action, retention, and purchase intent.",
+    tag: "Conversion System",
+    videoSrc: "/videos/conversions.mp4",
+    posterSrc: "/images/hero-posters/conversions-card.webp",
+  },
+  {
+    title: "Speed",
+    description: "A locked process that keeps launches moving without chaos.",
+    tag: "Fast Turnaround",
+    videoSrc: "/videos/speed.mp4",
+    posterSrc: DEFAULT_POSTER,
+  },
+  {
+    title: "Social-Ready",
+    description: "Built for vertical platforms, paid media, and thumb-stop momentum.",
+    tag: "9:16 Native",
+    videoSrc: "/videos/social-ready.mp4",
+    posterSrc: "/images/hero-posters/social-ready-card.webp",
+  },
+  {
+    title: "Standout",
+    description: "Lighting, motion, and framing that create instant visual authority.",
+    tag: "Premium Finish",
+    videoSrc: "/videos/standout.mp4",
+    posterSrc: DEFAULT_POSTER,
+  },
+  {
+    title: "Premium",
+    description: "Launch assets that make the brand feel bigger on first contact.",
+    tag: "Brand Elevation",
+    videoSrc: "/videos/premium.mp4",
+    posterSrc: DEFAULT_POSTER,
+  },
+] as const
 
 export function Hero() {
+  const [isReady, setIsReady] = useState(false)
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setIsReady(true))
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
+
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center py-12 sm:py-16">
-          {/* Logo - Centered with consistent spacing */}
-          <div className="mb-6">
-            <DanverseLogo size="hero" />
+    <section className="section-shell relative overflow-hidden pt-10 sm:pt-16" data-analytics-section="Hero">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_30%_60%,rgba(201,168,76,0.07)_0%,transparent_60%),radial-gradient(ellipse_60%_40%_at_70%_30%,rgba(79,195,247,0.05)_0%,transparent_55%),radial-gradient(ellipse_100%_80%_at_50%_50%,rgba(108,92,231,0.03)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-16 px-4 sm:px-6">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <div
+            className={`transition-all duration-1000 ${isReady ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}
+          >
+            <div className="hero-logo-wrapper mx-auto flex w-fit flex-col items-center">
+              <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-[rgba(201,168,76,0.22)] bg-[rgba(255,255,255,0.02)] shadow-[0_0_60px_rgba(201,168,76,0.08)] backdrop-blur-xl sm:h-32 sm:w-32">
+                <DanverseLogo size="sm" className="scale-[1.12]" />
+              </div>
+              <DanverseWordmark size="lg" className="mt-6 text-[1.5rem] sm:text-[1.9rem]" />
+              <span className="mt-3 text-[0.72rem] uppercase tracking-[0.32em] text-[var(--platinum-muted)]">
+                Obsidian Gold Studio
+              </span>
+              <span className="mt-5 h-px w-10 bg-[var(--gold-primary)]" />
+            </div>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            <span className="block text-white">AI-POWERED</span>
-            <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
-              CREATIVE STUDIO
-            </span>
-            <span className="block text-white">FOR BRANDS</span>
+          <h1
+            className={`mt-10 max-w-5xl text-balance font-black leading-none text-[clamp(3.4rem,9vw,6.9rem)] text-[var(--platinum)] transition-all duration-1000 delay-100 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            Launch visuals that feel
+            <span className="headline-accent block">cinematic on first contact.</span>
           </h1>
 
-          {/* CTA Button */}
-          <div className="mt-8">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
-            >
-              <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                Chat With Us
-              </a>
-            </Button>
+          <p
+            className={`mt-6 max-w-2xl text-pretty text-[1rem] leading-8 text-[var(--platinum-muted)] sm:text-[1.125rem] transition-all duration-1000 delay-200 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
+          >
+            DANVERSE builds high-conversion campaign films, premium brand systems, and motion-led web experiences for
+            brands that need to own the frame without sacrificing performance.
+          </p>
+
+          <div
+            className={`mt-10 flex flex-col items-center gap-4 sm:flex-row transition-all duration-1000 delay-300 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
+            <a href={createWhatsAppUrl("I want to start a DANVERSE project.")} className="btn-primary" data-hover>
+              Start Your Project
+            </a>
+            <a href="#work" className="btn-secondary" data-hover>
+              View Showcase
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
+        </div>
 
-          {/* Phone Cards Grid */}
-          <div className="mt-12 w-full">
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-6xl mx-auto">
-              {phoneData.map((p, i) => {
-                const visibility =
-                  i <= 1 ? "block" : i === 2 ? "hidden sm:block" : i === 3 ? "hidden lg:block" : "hidden xl:block"
+        <div
+          className={`transition-all duration-1000 delay-500 ${
+            isReady ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        >
+          <div className="service-cards-wrapper -mx-4 flex gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:overflow-visible lg:px-0">
+            {SERVICE_CARDS.map((card, index) => (
+              <article
+                key={card.title}
+                className="service-card group relative aspect-[3/4] w-[260px] flex-none overflow-hidden rounded-[20px] border border-[var(--bg-border)] bg-[var(--gradient-card)] shadow-[0_30px_80px_rgba(0,0,0,0.28)] transition-all duration-500 [transition-timing-function:var(--ease-cinematic)] hover:-translate-y-1.5 hover:border-[var(--gold-primary)] lg:w-auto"
+                style={{ transitionDelay: `${index * 60}ms` }}
+                data-hover
+              >
+                <LazyVideo
+                  src={card.videoSrc}
+                  poster={card.posterSrc}
+                  autoplay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-cinematic)] group-hover:scale-105"
+                  aria-label={`${card.title} showcase`}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,7,0.92)_0%,rgba(5,5,7,0.22)_48%,transparent_72%)]" />
 
-                return (
-                  <div key={i} className={visibility}>
-                    <PhoneCard title={p.title} sub={p.sub} videoSrc={p.videoSrc} posterSrc={p.posterSrc} />
-                  </div>
-                )
-              })}
-            </div>
+                <div className="service-card-overlay relative flex h-full flex-col justify-end p-6">
+                  <span className="card-tag mb-4 inline-flex w-fit items-center rounded-full border border-[rgba(201,168,76,0.35)] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[var(--gold-primary)]">
+                    {card.tag}
+                  </span>
+                  <h3 className="service-card-title text-[1.45rem] font-bold text-[var(--platinum)]">{card.title}</h3>
+                  <p className="service-card-desc mt-2 text-sm leading-6 text-[var(--platinum-muted)]">
+                    {card.description}
+                  </p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
     </section>
   )
 }
-
-function PhoneCard({
-  title = "Feature",
-  sub = "Description here",
-  videoSrc,
-  posterSrc,
-}: {
-  title?: string
-  sub?: string
-  videoSrc?: string
-  posterSrc?: string
-}) {
-  return (
-    <div className="relative rounded-[24px] glass-border bg-black/40 p-1.5">
-      <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
-        <PhoneCardVideo
-          title={title}
-          sub={sub}
-          src={videoSrc ?? defaultPhoneCardMedia.videoSrc}
-          poster={posterSrc ?? defaultPhoneCardMedia.posterSrc}
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="text-xl font-bold text-white mb-1">{title}</div>
-          <p className="text-xs text-white/70">{sub}</p>
-          <div className="mt-2 inline-flex items-center rounded-full bg-red-500/20 border border-red-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider text-red-400">
-            DANVERSE
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function PhoneCardVideo({ title, sub, src, poster }: { title: string; sub: string; src: string; poster: string }) {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const [shouldAutoplay, setShouldAutoplay] = useState(false)
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-
-    const syncPlayback = () => {
-      const prefersReducedMotion = mediaQuery.matches
-      setShouldAutoplay(!prefersReducedMotion)
-
-      if (prefersReducedMotion) {
-        containerRef.current?.querySelector("video")?.pause()
-      }
-    }
-
-    syncPlayback()
-
-    if (typeof mediaQuery.addEventListener === "function") {
-      mediaQuery.addEventListener("change", syncPlayback)
-      return () => mediaQuery.removeEventListener("change", syncPlayback)
-    }
-
-    mediaQuery.addListener(syncPlayback)
-    return () => mediaQuery.removeListener(syncPlayback)
-  }, [])
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry?.isIntersecting ?? false)
-      },
-      {
-        rootMargin: "120px 0px",
-        threshold: 0.35,
-      }
-    )
-
-    observer.observe(container)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div ref={containerRef} className="absolute inset-0">
-      <LazyVideo
-        src={src}
-        poster={poster}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoplay={shouldAutoplay && isInView}
-        loop={true}
-        muted={true}
-        playsInline={true}
-        aria-label={`${title} - ${sub}`}
-        data-hero-background="true"
-      />
-    </div>
-  )
-}
-
-const defaultPhoneCardMedia = {
-  videoSrc:
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
-  posterSrc: "/images/hero-posters/default-card.webp",
-}
-
-const phoneData = [
-  {
-    title: "Conversions",
-    sub: "Turn clicks into paying customers.",
-    tone: "results",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
-    posterSrc: "/images/hero-posters/conversions-card.webp",
-  },
-  {
-    title: "Speed",
-    sub: "Launch in days, not weeks.",
-    tone: "speed",
-    posterSrc: defaultPhoneCardMedia.posterSrc,
-  },
-  {
-    title: "Social-Ready",
-    sub: "Made for IG, TikTok, and Meta.",
-    tone: "social",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
-    posterSrc: "/images/hero-posters/social-ready-card.webp",
-  },
-  {
-    title: "Standout",
-    sub: "Be the product no one scrolls past.",
-    tone: "standout",
-    posterSrc: defaultPhoneCardMedia.posterSrc,
-  },
-  {
-    title: "Premium",
-    sub: "Look like the market leader.",
-    tone: "premium",
-    posterSrc: defaultPhoneCardMedia.posterSrc,
-  },
-]

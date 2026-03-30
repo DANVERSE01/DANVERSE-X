@@ -81,7 +81,7 @@ export function FooterArchviz() {
               <div>
                 <h5 className="mb-2 text-xs font-semibold uppercase tracking-widest text-neutral-400">Navigation</h5>
                 <ul className="space-y-2 text-sm text-neutral-300">
-                  {["Services", "Pricing", "FAQ", "About"].map((item) => (
+                  {["Services", "Process", "FAQ", "About"].map((item) => (
                     <li key={item}>
                       <a href={`#${item.toLowerCase()}`} className="hover:text-lime-300">
                         {item}
@@ -114,8 +114,8 @@ export function FooterArchviz() {
               <a href="#services" className="hover:text-lime-300">
                 Services
               </a>
-              <a href="#pricing" className="hover:text-lime-300">
-                Pricing
+              <a href="#process" className="hover:text-lime-300">
+                Process
               </a>
             </div>
           </div>

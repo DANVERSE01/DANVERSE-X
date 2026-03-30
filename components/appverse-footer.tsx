@@ -1,155 +1,183 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Instagram, Mail, MessageCircle } from "lucide-react"
-import LazyVideo from "./lazy-video"
-import { DanverseHeaderLogo } from "@/components/danverse-logo"
+import { ArrowUpRight, Instagram, Mail, MessageCircle } from "lucide-react"
+import { contactEmailHref, createWhatsAppUrl } from "@/lib/env"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
+import { DanverseHeaderLogo, DanverseWordmark } from "@/components/danverse-logo"
+import LazyVideo from "./lazy-video"
 
-const TAGLINE =
-  "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems."
-const COPYRIGHT = "© 2026 — DANVERSE"
+const footerLinks = [
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/#work" },
+  { label: "Process", href: "/#process" },
+  { label: "About", href: "/About" },
+] as const
 
 export function AppverseFooter() {
-
   return (
-    <section className="text-white">
-      {/* Contact CTA */}
-      <div className="container mx-auto px-4 pt-16">
-        <div className="flex justify-center">
-          <Button
-            onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
-            className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 shadow-lg shadow-red-500/20"
-          >
-            Book a Call
-          </Button>
-        </div>
-      </div>
+    <section id="contact" className="section-shell pb-10" data-analytics-section="Contact">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-4 sm:px-6">
+        <article className="panel-surface reveal-on-scroll grid gap-8 rounded-[32px] p-6 sm:p-8 lg:grid-cols-[1.2fr_360px]" data-reveal>
+          <div className="max-w-3xl">
+            <span className="section-tag">Contact</span>
+            <h2 className="mt-7 text-balance text-[clamp(2.4rem,5vw,4.4rem)] font-black leading-[0.96]">
+              Ready to build the launch asset your brand deserves?
+            </h2>
+            <p className="mt-5 max-w-2xl text-pretty text-sm leading-8 text-[var(--platinum-muted)] sm:text-base">
+              Bring the brief, the product, or the idea. We will shape the direction, lock the process, and deliver a
+              cinematic system that is ready to ship across the formats that matter.
+            </p>
 
-      {/* AI Content Card */}
-      <div className="container mx-auto px-4 py-16">
-        <Card className="relative overflow-hidden rounded-2xl liquid-glass p-8 md:p-10">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            {/* Left Content */}
-            <div>
-              <p className="mb-2 text-[11px] tracking-widest text-red-400 uppercase">AI Content Systems</p>
-              <h3 className="text-2xl font-bold text-white sm:text-3xl">Automate your creative workflow</h3>
-              <p className="mt-3 text-sm text-white/60 max-w-md">
-                Generate scripts, posts, emails, and content on demand. Our AI systems connect your tools and automate
-                the creative process.
-              </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <button type="button" onClick={() => fireCTAAndOpenWhatsApp("footer-cta")} className="btn-primary" data-hover>
+                Book a Call
+              </button>
+              <a href={contactEmailHref} className="btn-secondary" data-hover>
+                Email DANVERSE
+              </a>
             </div>
 
-            {/* Right Mockup */}
-            <div className="mx-auto w-full max-w-[280px]">
-              <div className="relative rounded-[24px] liquid-glass p-1.5 shadow-2xl">
-                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
-                  <LazyVideo
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%202-YFaCK7cEiHWSMRv8XEHaLCoYj2SUAi.mp4"
-                    className="absolute inset-0 h-full w-full object-cover"
-                    autoplay={true}
-                    loop={true}
-                    muted={true}
-                    playsInline={true}
-                    aria-label="DANVERSE automation preview"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="text-2xl font-bold text-white">Automation</div>
-                    <p className="text-xs text-white/70 mt-1">From content to campaigns in minutes</p>
-                    <div className="mt-2 inline-flex items-center rounded-full bg-red-500/20 border border-red-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider text-red-400">
-                      POWERED by DANVERSE
-                    </div>
-                  </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Campaign films", "Brand systems", "Launch pages", "AI content systems"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[var(--platinum-muted)]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mx-auto w-full max-w-[320px]">
+            <div className="rounded-[28px] border border-[rgba(201,168,76,0.16)] bg-[rgba(5,5,7,0.78)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+              <div className="relative aspect-[9/16] overflow-hidden rounded-[22px] bg-[var(--bg-void)]">
+                <LazyVideo
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%202-YFaCK7cEiHWSMRv8XEHaLCoYj2SUAi.mp4"
+                  poster="/images/hero-posters/default-card.webp"
+                  autoplay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 h-full w-full object-cover"
+                  aria-label="DANVERSE automation preview"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,7,0.92)_0%,transparent_62%)]" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.24em] text-[var(--gold-primary)]">
+                    AI Content Systems
+                  </span>
+                  <h3 className="mt-3 text-2xl font-bold text-[var(--platinum)]">Automation</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--platinum-muted)]">
+                    From scripts to campaign outputs, all routed through one premium operating system.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        </Card>
-      </div>
+        </article>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-            {/* Brand */}
-            <div className="space-y-4">
-              <DanverseHeaderLogo />
-              <p className="max-w-sm text-sm text-white/50">{TAGLINE}</p>
+        <footer className="reveal-on-scroll border-t border-[var(--bg-border)] pt-8" data-reveal>
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-md">
+              <DanverseHeaderLogo className="h-9 w-auto opacity-95" />
+              <div className="mt-5">
+                <DanverseWordmark size="md" className="text-xl" />
+              </div>
+              <p className="mt-4 text-sm leading-7 text-[var(--platinum-muted)]">
+                DANVERSE is an AI-powered creative studio building cinematic ads, premium brand worlds, and launch-ready
+                content systems for ambitious teams.
+              </p>
             </div>
 
-            {/* Navigation */}
-            <div>
-              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">Navigation</h5>
-              <ul className="space-y-2 text-sm text-white/60">
-                {["Home", "Features", "Pricing", "About"].map((item) => (
-                  <li key={item}>
-                    <Link
-                      href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                      className="hover:text-red-400 transition-colors"
+            <div className="grid gap-10 sm:grid-cols-3">
+              <div>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-[var(--gold-primary)]">
+                  Navigation
+                </h4>
+                <ul className="mt-4 space-y-3 text-sm text-[var(--platinum-muted)]">
+                  {footerLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="transition-colors hover:text-[var(--platinum)]" data-hover>
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-[var(--gold-primary)]">Connect</h4>
+                <ul className="mt-4 space-y-3 text-sm text-[var(--platinum-muted)]">
+                  <li>
+                    <a
+                      href="https://www.instagram.com/muhammedd_adel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-[var(--platinum)]"
+                      data-hover
                     >
-                      {item}
-                    </Link>
+                      <Instagram className="h-4 w-4 text-[var(--gold-primary)]" />
+                      Instagram
+                    </a>
                   </li>
-                ))}
-              </ul>
-            </div>
+                  <li>
+                    <a href={contactEmailHref} className="inline-flex items-center gap-2 transition-colors hover:text-[var(--platinum)]" data-hover>
+                      <Mail className="h-4 w-4 text-[var(--gold-primary)]" />
+                      Email
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={createWhatsAppUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-[var(--platinum)]"
+                      data-hover
+                    >
+                      <MessageCircle className="h-4 w-4 text-[var(--gold-primary)]" />
+                      WhatsApp
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Social */}
-            <div>
-              <h5 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">Connect</h5>
-              <ul className="space-y-2 text-sm text-white/60">
-                <li>
-                  <a
-                    href="https://www.instagram.com/muhammedd_adel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-red-400 transition-colors"
+              <div>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-[var(--gold-primary)]">
+                  Start Here
+                </h4>
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={() => fireCTAAndOpenWhatsApp("footer-slide-cta")}
+                    className="group relative inline-flex overflow-hidden rounded-full border border-[var(--gold-primary)] px-6 py-4 text-[0.72rem] font-bold uppercase tracking-[0.2em] text-[var(--gold-primary)] transition-colors duration-300 hover:text-[var(--bg-void)]"
+                    data-hover
                   >
-                    <Instagram className="h-4 w-4" />
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:danverseai@gmail.com"
-                    className="flex items-center gap-2 hover:text-red-400 transition-colors"
-                  >
-                    <Mail className="h-4 w-4" />
-                    Email
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://wa.me/201207346648"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-red-400 transition-colors"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp
-                  </a>
-                </li>
-              </ul>
+                    <span className="absolute inset-0 -translate-x-[101%] bg-[var(--gold-primary)] transition-transform duration-500 [transition-timing-function:var(--ease-cinematic)] group-hover:translate-x-0" />
+                    <span className="relative inline-flex items-center gap-2">
+                      Start Your Project
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
-            <p>{COPYRIGHT}</p>
-            <div className="flex items-center gap-6">
-              <Link href="/revisions" className="hover:text-red-400 transition-colors">
+          <div className="mt-10 flex flex-col gap-4 border-t border-[var(--bg-border)] pt-6 text-xs uppercase tracking-[0.18em] text-[var(--platinum-faint)] sm:flex-row sm:items-center sm:justify-between">
+            <p>Copyright 2026 DANVERSE</p>
+            <div className="flex flex-wrap gap-5">
+              <Link href="/revisions" className="transition-colors hover:text-[var(--platinum-muted)]" data-hover>
                 Revision Policy
               </Link>
-              <Link href="/t&c" className="hover:text-red-400 transition-colors">
+              <Link href="/t&c" className="transition-colors hover:text-[var(--platinum-muted)]" data-hover>
                 Terms & Conditions
               </Link>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </section>
   )
 }

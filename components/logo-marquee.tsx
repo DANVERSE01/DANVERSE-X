@@ -1,105 +1,66 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import type { ComponentProps } from "react"
 import { MarqueeCardIcon } from "./marquee-card-icon"
 
-type ContentCardItem = {
+type CategoryItem = {
   label: string
-  icon: React.ComponentProps<typeof MarqueeCardIcon>["type"]
+  icon: ComponentProps<typeof MarqueeCardIcon>["type"]
 }
 
+const categoryItems: CategoryItem[] = [
+  { label: "AI Startups", icon: "ai-startups" },
+  { label: "Personal Brands", icon: "personal-brands" },
+  { label: "SaaS & Tech", icon: "saas-tech" },
+  { label: "Education", icon: "education" },
+  { label: "Agencies", icon: "agencies" },
+  { label: "Events", icon: "events" },
+  { label: "Luxury Brands", icon: "luxury" },
+  { label: "E-commerce", icon: "ecommerce" },
+  { label: "Community Funnels", icon: "community-funnels" },
+  { label: "Cinematic Ads", icon: "cinematic-ads" },
+  { label: "UGC Video Labs", icon: "ugc-labs" },
+  { label: "Brand Identity", icon: "brand-identity" },
+  { label: "Landing Pages", icon: "landing" },
+  { label: "AI Pipelines", icon: "pipeline" },
+  { label: "Growth Kits", icon: "growth" },
+  { label: "Sales Scripts", icon: "scripts" },
+]
+
 export function LogoMarquee() {
-  const [pausedRow, setPausedRow] = useState<string | null>(null)
-
-  const firstRowContent: ContentCardItem[] = [
-    { label: "AI Startups", icon: "ai-startups" as const },
-    { label: "Personal Brands", icon: "personal-brands" as const },
-    { label: "SaaS & Tech", icon: "saas-tech" as const },
-    { label: "Education", icon: "education" as const },
-    { label: "Agencies", icon: "agencies" as const },
-    { label: "Events", icon: "events" as const },
-    { label: "Luxury Brands", icon: "luxury" as const },
-    { label: "E-commerce", icon: "ecommerce" as const },
-  ]
-
-  const secondRowContent: ContentCardItem[] = [
-    { label: "Community Funnels", icon: "community-funnels" as const },
-    { label: "Cinematic Ads", icon: "cinematic-ads" as const },
-    { label: "UGC Video Labs", icon: "ugc-labs" as const },
-    { label: "Brand Identity", icon: "brand-identity" as const },
-    { label: "Landing Pages", icon: "landing" as const },
-    { label: "AI Pipelines", icon: "pipeline" as const },
-    { label: "Growth Kits", icon: "growth" as const },
-    { label: "Sales Scripts", icon: "scripts" as const },
-  ]
-
-  const ContentCard = ({ item, rowId }: { item: ContentCardItem; rowId: string }) => (
-    <div
-      className="flex-shrink-0 mx-2"
-      onMouseEnter={() => setPausedRow(rowId)}
-      onMouseLeave={() => setPausedRow(null)}
-    >
-      <div className="w-36 h-24 sm:w-44 sm:h-28 rounded-xl bg-black/40 border border-white/10 backdrop-blur-xl flex flex-col items-center justify-center hover:border-red-400/50 hover:bg-white/5 transition-all p-3">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
-          <MarqueeCardIcon type={item.icon} size={40} />
-        </div>
-        <p className="text-xs sm:text-sm font-medium text-white text-center leading-tight">{item.label}</p>
-      </div>
-    </div>
-  )
-
   return (
-    <section className="text-white py-16 sm:py-20 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
-          <div className="text-center sm:text-left">
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-              Built for <span className="text-red-400">future focused</span> brands
-            </h2>
-            <p className="mt-3 max-w-xl text-sm text-white/75">
-              DANVERSE partners with brands, creators and teams that want cinematic ads, bold branding and smart content
-              systems.
-            </p>
-          </div>
-          <Button
-            variant="outline"
-            className="border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-red-400 rounded-full px-6"
-          >
-            Learn More
-          </Button>
+    <section className="section-shell" data-analytics-section="Categories">
+      <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center reveal-on-scroll" data-reveal>
+          <span className="section-tag">Future-Focused Brands</span>
+          <h2 className="mt-7 text-balance text-[clamp(2.25rem,5vw,4rem)] font-black leading-[0.96]">
+            Built for <span className="headline-accent">future focused</span> brands.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-8 text-[var(--platinum-muted)] sm:text-lg">
+            Luxury launches, social campaigns, AI startups, SaaS products, events, and premium commerce teams all need
+            a visual system that feels intentional from frame one.
+          </p>
         </div>
 
-        {/* Marquee Rows */}
-        <div className="space-y-4">
-          {/* First Row */}
-          <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div
-              className="flex animate-scroll-right"
-              style={{
-                animationPlayState: pausedRow === "first" ? "paused" : "running",
-                width: "max-content",
-              }}
-            >
-              {[...firstRowContent, ...firstRowContent, ...firstRowContent].map((item, index) => (
-                <ContentCard key={`first-${index}`} item={item} rowId="first" />
-              ))}
-            </div>
-          </div>
-
-          {/* Second Row */}
-          <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div
-              className="flex animate-scroll-left"
-              style={{
-                animationPlayState: pausedRow === "second" ? "paused" : "running",
-                width: "max-content",
-              }}
-            >
-              {[...secondRowContent, ...secondRowContent, ...secondRowContent].map((item, index) => (
-                <ContentCard key={`second-${index}`} item={item} rowId="second" />
-              ))}
-            </div>
+        <div
+          className="reveal-on-scroll mt-12 overflow-x-auto rounded-[28px] border border-[var(--bg-border)] bg-[rgba(12,12,16,0.82)] p-1 [scrollbar-width:none]"
+          data-reveal
+        >
+          <div className="categories-grid grid min-w-[920px] grid-cols-8 gap-px rounded-[24px] bg-[var(--bg-border)] md:min-w-0 md:grid-cols-4 xl:grid-cols-8">
+            {categoryItems.map((item) => (
+              <article
+                key={item.label}
+                className="category-tile group flex min-h-[164px] flex-col items-center justify-center gap-4 bg-[var(--bg-elevated)] px-4 py-8 text-center transition-all duration-300 hover:bg-[var(--gold-glow)] hover:shadow-[inset_0_0_0_1px_rgba(201,168,76,0.24)]"
+                data-hover
+              >
+                <div className="[&_svg]:h-12 [&_svg]:w-12 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-105 [&_svg]:[filter:brightness(0)_saturate(100%)_invert(74%)_sepia(24%)_saturate(704%)_hue-rotate(8deg)_brightness(90%)_contrast(88%)] group-hover:[&_svg]:[filter:brightness(0)_saturate(100%)_invert(80%)_sepia(41%)_saturate(736%)_hue-rotate(7deg)_brightness(100%)_contrast(94%)]">
+                  <MarqueeCardIcon type={item.icon} size={44} />
+                </div>
+                <span className="text-sm font-semibold leading-5 text-[var(--platinum-muted)] transition-colors duration-300 group-hover:text-[var(--platinum)]">
+                  {item.label}
+                </span>
+              </article>
+            ))}
           </div>
         </div>
       </div>

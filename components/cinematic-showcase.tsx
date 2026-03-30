@@ -1,472 +1,180 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
+import { ArrowRight } from "lucide-react"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
+import LazyVideo from "./lazy-video"
 
 const WORKS = [
   {
-    id: "1164910690",
+    id: "social-campaign",
     index: "01",
-    title: "Social Campaign",
-    category: "SOCIAL · AD",
-    desc: "High-conversion vertical content engineered for paid social. Pacing optimized for thumb-stop.",
-    ratio: "9:16",
-    accent: "#e63c2f",
+    tabName: "Social Campaign",
+    tabType: "Social · Ad",
+    client: "JACOB&CO × BUGATTI",
+    title: "High-Conversion Vertical Content",
+    description: "Engineered for paid social. Pacing optimized for thumb-stop and launch-day performance.",
+    src: "https://player.vimeo.com/external/494252666.hd.mp4?s=2286079774393963493963493963493963493963&profile_id=175",
+    poster: "/images/hero-posters/social-ready-card.webp",
+    portrait: true,
   },
   {
-    id: "1178056977",
+    id: "brand-film",
     index: "02",
-    title: "Cinematic Brand Film",
-    category: "BRAND · FILM",
-    desc: "Full cinematic treatment. Visual language locked before a single frame is produced.",
-    ratio: "16:9",
-    accent: "#ff6030",
+    tabName: "Cinematic Brand Film",
+    tabType: "Brand · Film",
+    client: "DANVERSE STUDIO / LUXURY",
+    title: "Atmosphere First. Story Locked.",
+    description: "Full cinematic treatment with a clear visual language before the first frame leaves production.",
+    src: "https://player.vimeo.com/external/517090081.hd.mp4?s=2286079774393963493963493963493963493963&profile_id=175",
+    poster: "/images/top-rated-2.webp",
+    portrait: false,
   },
   {
-    id: "1174570425",
+    id: "tech-reveal",
     index: "03",
-    title: "Tech Reveal",
-    category: "PRODUCT · REVEAL",
-    desc: "Precision-timed product reveal. Every cut timed to impact. Every frame intentional.",
-    ratio: "16:9",
-    accent: "#e63c2f",
+    tabName: "Tech Reveal",
+    tabType: "Product · Reveal",
+    client: "FUTURE DEVICE // LAUNCH",
+    title: "Precision Timing for Product Impact",
+    description: "Every cut engineered around timing, material detail, and a premium reveal cadence.",
+    src: "https://player.vimeo.com/external/371433846.hd.mp4?s=2286079774393963493963493963493963493963&profile_id=175",
+    poster: "/images/intuitive-1.webp",
+    portrait: false,
   },
   {
-    id: "1173977023",
+    id: "visual-identity",
     index: "04",
-    title: "Visual Identity",
-    category: "IDENTITY · MOTION",
-    desc: "Motion identity system built to scale. Consistent across every touchpoint and format.",
-    ratio: "21:9",
-    accent: "#ff6030",
+    tabName: "Visual Identity",
+    tabType: "Identity · Motion",
+    client: "BRAND CORE SYSTEM",
+    title: "Motion Identity That Scales",
+    description: "A flexible motion system for launch moments, evergreen content, and consistent brand recall.",
+    src: "https://player.vimeo.com/external/517090048.hd.mp4?s=2286079774393963493963493963493963493963&profile_id=175",
+    poster: "/images/top-rated-1.webp",
+    portrait: false,
   },
-]
+] as const
 
 export function CinematicShowcase() {
-  const [activeIdx, setActiveIdx] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [hasEntered, setHasEntered] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setHasEntered(true) },
-      { threshold: 0.15 }
-    )
-    if (sectionRef.current) obs.observe(sectionRef.current)
-    return () => obs.disconnect()
-  }, [])
-
-  const goTo = (idx: number) => {
-    if (idx === activeIdx || isTransitioning) return
-    setIsTransitioning(true)
-    setTimeout(() => {
-      setActiveIdx(idx)
-      setIsTransitioning(false)
-    }, 400)
-  }
-
-  const active = WORKS[activeIdx]
+  const [activeId, setActiveId] = useState<(typeof WORKS)[number]["id"]>(WORKS[0].id)
+  const activeWork = WORKS.find((work) => work.id === activeId) ?? WORKS[0]
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#000",
-        color: "#fff",
-        overflow: "hidden",
-        position: "relative",
-      }}
-    >
-      {/* Section Header */}
-      <div
-        style={{
-          padding: "80px 48px 0",
-          opacity: hasEntered ? 1 : 0,
-          transform: hasEntered ? "translateY(0)" : "translateY(32px)",
-          transition: "all 1s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-          <div style={{ width: 48, height: "1.5px", background: "#e63c2f" }} />
-          <span style={{
-            fontFamily: "'Courier Prime', monospace",
-            fontSize: 9,
-            letterSpacing: "0.6em",
-            color: "#e63c2f",
-            textTransform: "uppercase",
-          }}>
-            Selected Works · 2024–2026
-          </span>
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 32 }}>
-          <div>
-            <h2 style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(56px, 8vw, 112px)",
-              lineHeight: 0.85,
-              letterSpacing: "-0.01em",
-              color: "#fff",
-              margin: 0,
-            }}>
-              Production
-            </h2>
-            <h2 style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(56px, 8vw, 112px)",
-              lineHeight: 0.85,
-              letterSpacing: "-0.01em",
-              background: "linear-gradient(90deg, #e63c2f 0%, #ff7040 50%, #e63c2f 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              margin: 0,
-            }}>
-              Showcase
-            </h2>
-          </div>
-          <p style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontSize: 13,
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.3)",
-            letterSpacing: "0.08em",
-            lineHeight: 1.9,
-            textTransform: "uppercase",
-            maxWidth: 340,
-          }}>
-            Four works.<br />
-            Each one a complete visual system.<br />
-            Built for brands that demand cinema.
+    <section id="work" className="section-shell bg-[rgba(5,5,7,0.72)]" data-analytics-section="Showcase">
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center reveal-on-scroll" data-reveal>
+          <span className="section-tag">Selected Works · 2024-2026</span>
+          <h2 className="mt-7 text-balance text-[clamp(3rem,8vw,6rem)] font-black leading-[0.9]">
+            Production
+            <span className="headline-accent block">Showcase</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-8 text-[var(--platinum-muted)] sm:text-lg">
+            Four works. Each one a complete visual system built for brands that expect cinema, not commodity content.
           </p>
         </div>
-      </div>
 
-      {/* Main Video Stage */}
-      <div style={{ marginTop: 48, position: "relative" }}>
-        {/* Giant Video */}
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: "16/9",
-            background: "#050505",
-            overflow: "hidden",
-            opacity: isTransitioning ? 0 : 1,
-            transition: "opacity 0.4s ease",
-          }}
-        >
-          <iframe
-            key={active.id}
-            src={`https://player.vimeo.com/video/${active.id}?autoplay=1&muted=1&loop=1&background=1&autopause=0&quality=auto`}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              border: "none",
-              pointerEvents: "none",
-            }}
-            allow="autoplay; fullscreen"
-          />
+        <div className="reveal-on-scroll mt-12 overflow-x-auto border-y border-[var(--bg-border)] [scrollbar-width:none]" data-reveal>
+          <div className="showcase-tabs flex min-w-[880px] md:min-w-0">
+            {WORKS.map((work) => {
+              const isActive = work.id === activeWork.id
 
-          {/* Gradient overlays */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.95) 100%)",
-            pointerEvents: "none",
-          }} />
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 50%)",
-            pointerEvents: "none",
-          }} />
-
-          {/* Work info overlay */}
-          <div style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: "clamp(24px, 4vw, 56px)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            flexWrap: "wrap",
-            gap: 24,
-          }}>
-            <div>
-              <div style={{
-                fontFamily: "'Courier Prime', monospace",
-                fontSize: 9,
-                letterSpacing: "0.5em",
-                color: active.accent,
-                textTransform: "uppercase",
-                marginBottom: 10,
-              }}>
-                {active.category} · {active.index}
-              </div>
-              <h3 style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "clamp(40px, 6vw, 80px)",
-                lineHeight: 0.85,
-                color: "#fff",
-                margin: "0 0 16px",
-                letterSpacing: "0.01em",
-              }}>
-                {active.title}
-              </h3>
-              <p style={{
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontSize: 14,
-                fontWeight: 300,
-                color: "rgba(255,255,255,0.5)",
-                letterSpacing: "0.06em",
-                maxWidth: 400,
-                lineHeight: 1.7,
-                textTransform: "uppercase",
-              }}>
-                {active.desc}
-              </p>
-            </div>
-
-            {/* Work counter */}
-            <div style={{ textAlign: "right" }}>
-              <div style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "clamp(64px, 8vw, 120px)",
-                color: "rgba(255,255,255,0.04)",
-                lineHeight: 1,
-              }}>
-                {active.index}
-              </div>
-              <div style={{
-                fontFamily: "'Courier Prime', monospace",
-                fontSize: 8,
-                letterSpacing: "0.35em",
-                color: "rgba(255,255,255,0.15)",
-                textTransform: "uppercase",
-              }}>
-                {active.ratio} · Danverse
-              </div>
-            </div>
-          </div>
-
-          {/* Top bar */}
-          <div style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "2px",
-            background: `linear-gradient(90deg, ${active.accent}, transparent)`,
-            transition: "background 0.6s ease",
-          }} />
-        </div>
-
-        {/* Work Selector — Horizontal List */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-        }}>
-          {WORKS.map((w, i) => (
-            <button
-              key={w.id}
-              type="button"
-              onClick={() => goTo(i)}
-              style={{
-                background: i === activeIdx ? "rgba(230,60,47,0.06)" : "transparent",
-                border: "none",
-                borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                borderBottom: "none",
-                padding: "28px 24px",
-                cursor: "pointer",
-                textAlign: "left",
-                position: "relative",
-                transition: "background 0.4s",
-              }}
-              aria-label={`View ${w.title}`}
-            >
-              {/* Active indicator */}
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "2px",
-                background: i === activeIdx ? w.accent : "transparent",
-                boxShadow: i === activeIdx ? `0 0 20px ${w.accent}60` : "none",
-                transition: "all 0.4s",
-              }} />
-
-              <div style={{
-                fontFamily: "'Courier Prime', monospace",
-                fontSize: 8,
-                letterSpacing: "0.45em",
-                color: i === activeIdx ? w.accent : "rgba(255,255,255,0.2)",
-                textTransform: "uppercase",
-                marginBottom: 8,
-                transition: "color 0.3s",
-              }}>
-                {w.index}
-              </div>
-              <div style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "clamp(14px, 2vw, 22px)",
-                color: i === activeIdx ? "#fff" : "rgba(255,255,255,0.4)",
-                letterSpacing: "0.03em",
-                lineHeight: 1,
-                marginBottom: 6,
-                transition: "color 0.3s",
-              }}>
-                {w.title}
-              </div>
-              <div style={{
-                fontFamily: "'Courier Prime', monospace",
-                fontSize: 7,
-                letterSpacing: "0.3em",
-                color: "rgba(255,255,255,0.15)",
-                textTransform: "uppercase",
-              }}>
-                {w.category}
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Thumbnails Row — click to jump */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: 2,
-        padding: "2px",
-        background: "#0a0a0a",
-      }}>
-        {WORKS.map((w, i) => (
-          <div
-            key={w.id}
-            onClick={() => goTo(i)}
-            style={{
-              position: "relative",
-              aspectRatio: "16/9",
-              overflow: "hidden",
-              cursor: "pointer",
-              background: "#050505",
-              opacity: i === activeIdx ? 1 : 0.4,
-              transition: "opacity 0.4s, transform 0.4s",
-              transform: i === activeIdx ? "scale(1)" : "scale(0.98)",
-            }}
-          >
-            <iframe
-              src={`https://player.vimeo.com/video/${w.id}?autoplay=1&muted=1&loop=1&background=1&quality=auto`}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                border: "none",
-                pointerEvents: "none",
-              }}
-              allow="autoplay; fullscreen"
-            />
-            <div style={{
-              position: "absolute",
-              inset: 0,
-              background: i === activeIdx
-                ? "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)"
-                : "rgba(0,0,0,0.5)",
-              transition: "background 0.4s",
-            }} />
-            {i === activeIdx && (
-              <div style={{
-                position: "absolute",
-                inset: 0,
-                border: `2px solid ${w.accent}`,
-              }} />
-            )}
-            <div style={{
-              position: "absolute",
-              bottom: 8,
-              left: 10,
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 11,
-              color: "#fff",
-              letterSpacing: "0.06em",
-            }}>
-              {w.title}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Bottom CTA */}
-      <div style={{
-        padding: "60px 48px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderTop: "1px solid rgba(255,255,255,0.05)",
-        flexWrap: "wrap",
-        gap: 32,
-      }}>
-        <div>
-          <div style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(32px, 5vw, 64px)",
-            color: "rgba(255,255,255,0.05)",
-            lineHeight: 1,
-          }}>
-            DANVERSE
-          </div>
-          <div style={{
-            fontFamily: "'Courier Prime', monospace",
-            fontSize: 9,
-            letterSpacing: "0.45em",
-            color: "rgba(255,255,255,0.2)",
-            textTransform: "uppercase",
-            marginTop: 4,
-          }}>
-            Engineering Cinematic Excellence Since 2024
+              return (
+                <button
+                  key={work.id}
+                  type="button"
+                  onClick={() => setActiveId(work.id)}
+                  className={`showcase-tab group relative flex min-w-[220px] flex-1 flex-col gap-2 border-r border-[var(--bg-border)] px-6 py-5 text-left transition-colors duration-300 ${
+                    isActive ? "bg-[var(--gold-glow)]" : "bg-transparent hover:bg-white/5"
+                  }`}
+                  data-hover
+                >
+                  <span
+                    className={`text-[0.7rem] font-bold uppercase tracking-[0.18em] ${
+                      isActive ? "text-[var(--gold-primary)]" : "text-[var(--platinum-muted)]"
+                    }`}
+                  >
+                    {work.index}
+                  </span>
+                  <span className="text-[0.98rem] font-semibold text-[var(--platinum)]">{work.tabName}</span>
+                  <span className="text-[0.68rem] uppercase tracking-[0.22em] text-[var(--platinum-muted)]">
+                    {work.tabType}
+                  </span>
+                  <span
+                    className={`absolute inset-x-0 bottom-0 h-0.5 origin-left bg-[var(--gold-primary)] transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </button>
+              )
+            })}
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => fireCTAAndOpenWhatsApp("showcase-cta")}
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 14,
-            letterSpacing: "0.5em",
-            color: "#fff",
-            background: "transparent",
-            border: "1px solid rgba(230,60,47,0.5)",
-            padding: "18px 52px",
-            cursor: "pointer",
-            textTransform: "uppercase",
-            transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
-            position: "relative",
-          }}
-          onMouseEnter={e => {
-            const el = e.currentTarget
-            el.style.background = "#e63c2f"
-            el.style.borderColor = "#e63c2f"
-            el.style.boxShadow = "0 0 60px rgba(230,60,47,0.4)"
-            el.style.letterSpacing = "0.6em"
-          }}
-          onMouseLeave={e => {
-            const el = e.currentTarget
-            el.style.background = "transparent"
-            el.style.borderColor = "rgba(230,60,47,0.5)"
-            el.style.boxShadow = "none"
-            el.style.letterSpacing = "0.5em"
-          }}
-        >
-          Start Your Project
-        </button>
+        <div className="reveal-on-scroll mt-6 overflow-hidden rounded-[28px] border border-[var(--bg-border)] bg-[var(--bg-void)] shadow-[0_32px_120px_rgba(0,0,0,0.35)]" data-reveal>
+          <div className="showcase-panel group relative aspect-[16/9] min-h-[420px] overflow-hidden md:min-h-[560px]" data-hover>
+            <div className="panel-video-wrapper absolute inset-0 bg-[var(--bg-void)]">
+              <LazyVideo
+                key={activeWork.id}
+                src={activeWork.src}
+                poster={activeWork.poster}
+                autoplay
+                loop
+                muted
+                playsInline
+                className={`absolute inset-0 h-full w-full transition-transform duration-700 [transition-timing-function:var(--ease-cinematic)] group-hover:scale-[1.02] ${
+                  activeWork.portrait ? "object-contain" : "object-cover"
+                }`}
+                aria-label={activeWork.title}
+              />
+            </div>
+
+            <div className="panel-gradient-overlay absolute inset-0 bg-[linear-gradient(to_top,rgba(5,5,7,0.92)_0%,rgba(5,5,7,0.35)_34%,transparent_62%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,7,0.65)_0%,transparent_46%,transparent_100%)]" />
+
+            <div className="play-btn absolute left-1/2 top-1/2 z-20 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--gold-primary)] bg-[rgba(201,168,76,0.14)] opacity-0 backdrop-blur-xl transition-all duration-300 group-hover:opacity-100">
+              <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-[var(--gold-primary)]" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+
+            <div className="panel-info absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-10 px-6 pb-8 pt-20 sm:px-10 sm:pb-10 lg:flex-row lg:items-end lg:justify-between lg:px-14 lg:pb-14">
+              <div className="max-w-2xl">
+                <div className="panel-client text-[0.72rem] font-bold uppercase tracking-[0.3em] text-[var(--gold-primary)]">
+                  {activeWork.client}
+                </div>
+                <h3 className="panel-title mt-4 max-w-2xl text-balance text-[clamp(1.8rem,3vw,3rem)] font-black leading-[1.04] text-[var(--platinum)]">
+                  {activeWork.title}
+                </h3>
+                <p className="panel-desc mt-4 max-w-xl text-sm leading-7 text-[var(--platinum-muted)] sm:text-base">
+                  {activeWork.description}
+                </p>
+              </div>
+
+              <div className="text-left lg:text-right">
+                <div className="text-[clamp(3.5rem,6vw,6rem)] font-black leading-none text-white/6">{activeWork.index}</div>
+                <div className="mt-2 text-[0.68rem] uppercase tracking-[0.24em] text-[var(--platinum-muted)]">
+                  {activeWork.tabType} · DANVERSE
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="reveal-on-scroll mt-8 flex flex-col items-start justify-between gap-6 border-t border-[var(--bg-border)] pt-8 sm:flex-row sm:items-center" data-reveal>
+          <div>
+            <p className="text-[0.72rem] uppercase tracking-[0.26em] text-[var(--gold-primary)]">Cinematic delivery system</p>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--platinum-muted)] sm:text-base">
+              Poster-backed playback, lazy loading, and direct video rendering keep the showcase fast, stable, and
+              ready for every screen size.
+            </p>
+          </div>
+
+          <button type="button" onClick={() => fireCTAAndOpenWhatsApp("showcase-cta")} className="btn-secondary" data-hover>
+            Start Your Project
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </section>
   )

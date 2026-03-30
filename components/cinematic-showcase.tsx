@@ -71,7 +71,7 @@ export function CinematicShowcase() {
   }
 
   return (
-    <section ref={sectionRef} className={styles.stage} aria-labelledby="production-showcase-heading">
+    <section id="showcase" ref={sectionRef} className={styles.stage} aria-labelledby="production-showcase-heading">
       <div className={styles.mediaShell}>
         <div className={`${styles.mediaWrapper} ${isTransitioning ? styles.mediaTransitioning : ""}`}>
           <iframe
@@ -88,7 +88,7 @@ export function CinematicShowcase() {
 
       <div className={`${styles.contentLayer} ${hasEntered ? styles.contentEntered : ""}`}>
         <h2 id="production-showcase-heading" className={styles.sectionHeading}>
-          Production Showcase
+          Selected Work
         </h2>
 
         <div className={styles.workInfoRow}>

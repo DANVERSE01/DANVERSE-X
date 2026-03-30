@@ -9,8 +9,8 @@ import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
 const TAGLINE =
-  "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems."
-const COPYRIGHT = "© 2026 - DANVERSE"
+  "Director-led creative studio producing cinematic campaigns, identity films, and AI-native production systems."
+const COPYRIGHT = "Copyright 2026 DANVERSE"
 
 export function AppverseFooter() {
   const navigationLinks = [

@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { MarqueeCardIcon } from "./marquee-card-icon"
@@ -55,18 +56,19 @@ export function LogoMarquee() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
           <div className="text-center sm:text-left">
             <h2 className="section-heading text-3xl text-white sm:text-4xl md:text-5xl">
-              Built for <span className="text-[var(--color-lime)]">future-focused</span> brands
+              Built for brands with <span className="text-[var(--color-lime)]">global standards</span>
             </h2>
             <p className="body-copy mt-3 max-w-xl text-sm">
-              DANVERSE partners with brands, creators and teams that want cinematic ads, bold branding and smart content
-              systems.
+              Founders, agencies, hospitality, retail, and luxury teams come to DANVERSE when the work has to feel
+              expensive, intentional, and impossible to ignore.
             </p>
           </div>
           <Button
+            asChild
             variant="outline"
             className="rounded-full border-white/20 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-lime)]"
           >
-            Learn More
+            <Link href="#showcase">See Selected Work</Link>
           </Button>
         </div>
 

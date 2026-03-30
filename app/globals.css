@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
 @import "../lib/tokens.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -127,10 +127,25 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    letter-spacing: -0.012em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   p {
     color: var(--color-ash);
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    text-wrap: balance;
   }
 
   html {
@@ -211,11 +226,16 @@
 }
 
 .brand-card {
-  background: linear-gradient(135deg, #1c1c1c 0%, #242424 50%, #1a1a1a 100%);
+  background: linear-gradient(
+    140deg,
+    rgba(26, 26, 30, 0.96) 0%,
+    rgba(15, 22, 30, 0.94) 48%,
+    rgba(11, 12, 16, 0.98) 100%
+  );
   border: 1px solid rgba(245, 245, 0, 0.08);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 20px 48px rgba(0, 0, 0, 0.22);
+    0 24px 58px rgba(0, 0, 0, 0.24);
   transition:
     border-color 240ms ease,
     box-shadow 240ms ease,
@@ -227,11 +247,12 @@
   border-color: rgba(201, 168, 245, 0.25);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 26px 64px rgba(0, 0, 0, 0.28),
-    0 0 36px rgba(201, 168, 245, 0.12);
+    0 30px 72px rgba(0, 0, 0, 0.3),
+    0 0 34px rgba(201, 168, 245, 0.1);
 }
 
 .section-label {
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -240,11 +261,13 @@
 }
 
 .section-heading {
+  font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .body-copy {
+  font-family: var(--font-body);
   color: var(--color-ash);
 }
 
@@ -322,63 +345,56 @@
   animation: scroll-left 45s linear infinite;
 }
 
-@keyframes process-number-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
-
-.process-card {
+.process-banner {
   transition:
     transform 520ms var(--ease-cinematic),
     border-color 320ms ease,
     box-shadow 520ms var(--ease-cinematic);
 }
 
-.process-number-shell {
+.process-banner-visual > * {
   transition:
     transform 520ms var(--ease-cinematic),
-    filter 520ms var(--ease-cinematic);
+    opacity 520ms var(--ease-cinematic),
+    box-shadow 520ms var(--ease-cinematic),
+    border-color 320ms ease;
 }
 
-.process-step:hover .process-card,
-.process-step:focus-within .process-card {
-  transform: translateY(-14px);
-  border-color: rgba(201, 168, 245, 0.25);
+.process-banner:hover,
+.process-banner:focus-within {
+  transform: translateY(-12px);
+  border-color: rgba(201, 168, 245, 0.22);
   box-shadow:
-    0 28px 96px rgba(201, 168, 245, 0.1),
-    0 20px 60px rgba(0, 0, 0, 0.4);
+    0 36px 120px rgba(0, 0, 0, 0.42),
+    0 0 40px rgba(201, 168, 245, 0.08);
 }
 
-.process-step:hover .process-number-shell,
-.process-step:focus-within .process-number-shell {
-  animation: process-number-pulse 1.8s var(--ease-cinematic) infinite;
-  filter: drop-shadow(0 0 26px rgba(201, 168, 245, 0.26));
+.process-banner:hover .process-banner-visual > *,
+.process-banner:focus-within .process-banner-visual > * {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 20px 64px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 255, 255, 0.05);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .process-card,
-  .process-number-shell {
+  .process-banner,
+  .process-banner-visual > * {
     transition: none !important;
     animation: none !important;
   }
 
-  .process-step:hover .process-card,
-  .process-step:focus-within .process-card {
+  .process-banner:hover,
+  .process-banner:focus-within {
     transform: none;
-    border-color: rgba(245, 245, 0, 0.08);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
   }
 
-  .process-step:hover .process-number-shell,
-  .process-step:focus-within .process-number-shell {
-    animation: none !important;
+  .process-banner:hover .process-banner-visual > *,
+  .process-banner:focus-within .process-banner-visual > * {
     transform: none !important;
-    filter: drop-shadow(0 0 18px rgba(201, 168, 245, 0.12));
+    box-shadow: none !important;
   }
 }
 

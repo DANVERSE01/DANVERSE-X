@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Star } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-const TITLE = "Built different. By design."
+const TITLE = "Precision Before Production."
 
 export function Features() {
   return (
@@ -13,11 +13,11 @@ export function Features() {
         <Card className="brand-card overflow-hidden">
           <CardHeader className="pb-4">
             <p className="section-label text-[11px]">CRAFT + CONTROL</p>
-            <CardTitle className="mt-1 text-xl text-white">Direction before a single frame is shot.</CardTitle>
+            <CardTitle className="mt-1 text-xl text-white">Every frame starts with a decision.</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="body-copy mb-4 text-sm">
-              We lock strategy, visual language, and output format before production starts.
+              We lock positioning, pacing, visual language, and output format before production begins.
             </p>
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
@@ -45,13 +45,11 @@ export function Features() {
         <Card className="brand-card overflow-hidden">
           <CardHeader className="pb-4">
             <p className="section-label text-[11px]">CLIENT FEEDBACK</p>
-            <CardTitle className="mt-1 text-xl text-white">
-              We ship finished work. Not &quot;almost done.&quot;
-            </CardTitle>
+            <CardTitle className="mt-1 text-xl text-white">What you review is already release-ready.</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="body-copy mb-4 text-sm">
-              Every deliverable passes internal QA. You review final - not rough cuts.
+              Internal QA, finish, and brand consistency happen before anything reaches your inbox.
             </p>
             <div className="mb-5 flex flex-col items-start gap-1">
               <div className="flex items-center gap-0.5">
@@ -83,7 +81,8 @@ export function Features() {
 
       <div className="brand-card mt-12 mx-auto max-w-5xl rounded-2xl p-8 text-center">
         <p className="body-copy text-lg leading-relaxed">
-          One brief. Ten campaign-ready outputs. Hooks, scripts, formats - locked inside your brand system.
+          One brief becomes a complete launch system: hooks, scripts, formats, and rollout-ready assets built around
+          your brand.
         </p>
       </div>
     </section>

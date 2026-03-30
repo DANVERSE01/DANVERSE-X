@@ -24,19 +24,25 @@ export function Hero() {
           </div>
 
           {/* Headline */}
+          <p className="section-label mb-5">Director-Led Creative Studio</p>
           <h1
-            className="text-center text-white"
+            className="mx-auto max-w-[13.5ch] text-center text-white"
             style={{
-              fontSize: "clamp(3rem, 7vw, 6.5rem)",
+              fontSize: "clamp(2.9rem, 6.8vw, 6.2rem)",
               fontWeight: 900,
               letterSpacing: "-0.04em",
-              lineHeight: 0.96,
+              lineHeight: 0.92,
             }}
           >
-            <span className="block">WE DON'T MAKE ADS.</span>
-            <span className="block text-[var(--color-lime)]">WE BUILD BRAND WEAPONS.</span>
-            <span className="block">POWERED BY AI.</span>
+            <span className="block">CINEMATIC CAMPAIGNS.</span>
+            <span className="block text-[var(--color-lime)]">DISTINCTIVE BRAND WORLDS.</span>
+            <span className="block">SYSTEMS THAT SCALE THEM.</span>
           </h1>
+
+          <p className="body-copy mx-auto mt-6 max-w-3xl text-center text-sm leading-7 sm:text-base">
+            DANVERSE builds director-led films, identity systems, and AI-native production infrastructure for brands
+            that need visual authority across launches, platforms, and markets.
+          </p>
 
           {/* CTA Button */}
           <div className="mt-8">
@@ -49,6 +55,9 @@ export function Hero() {
                 Chat With Us
               </a>
             </Button>
+            <p className="body-copy mt-3 text-center text-xs uppercase tracking-[0.18em]">
+              Based in Egypt. Built for global launches.
+            </p>
           </div>
 
           {/* Phone Cards Grid */}

@@ -5,82 +5,79 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "FAQ — DANVERSE",
-  description: "Frequently asked questions about DANVERSE creative services.",
+  title: "FAQ - DANVERSE",
+  description: "Frequently asked questions about DANVERSE creative services and delivery process.",
 }
 
-const faqs = [
+const FAQS = [
   {
-    q: "What types of products can you animate or render?",
-    a: "We can create photorealistic 3D animations and renders for almost any product — from beauty and skincare to electronics, furniture, and luxury goods.",
+    q: "What exactly does DANVERSE produce?",
+    a: "AI-powered cinematic ads, brand films, social content, and full visual identity systems. Every deliverable is production-ready - not rough cuts.",
   },
   {
-    q: "How long does a typical 3D animation take?",
-    a: "Timelines vary depending on complexity, but a standard 15–20 second animation usually takes 7–14 working days after final concept approval.",
+    q: "How long does a project take?",
+    a: "Most projects ship in 5-10 business days. Complex brand films or full campaigns take 2-3 weeks depending on scope.",
   },
   {
-    q: "Do you work with existing CAD files or need product samples?",
-    a: "We can work with both. If you have CAD or 3D models, we can import and refine them. If not, we can create models from physical product samples or detailed reference images.",
+    q: "Do you work with brands outside Egypt?",
+    a: "Yes. We work with brands across Egypt, the Gulf, Canada, and beyond. All communication is handled remotely with zero quality compromise.",
   },
   {
-    q: "How do you price your services?",
-    a: "Pricing is based on animation length, complexity, number of renders, and modeling requirements.",
+    q: "What do you need from us to start?",
+    a: "A brief, your brand assets (logo, colors, references), and a clear goal. We handle everything else from concept to final file.",
   },
   {
-    q: "Can we request changes after delivery?",
-    a: "Yes. All revisions are covered under our revision policy, which ensures smooth updates without unexpected scope creep.",
+    q: "Can we request revisions?",
+    a: "Yes. Every project includes revision rounds covered in your package. We don't ship until you're satisfied.",
   },
   {
-    q: "Will the renders match our brand's visual style?",
-    a: "Absolutely. We customize lighting, materials, camera angles, and animation pacing to fit your brand's identity and marketing needs.",
+    q: "What platforms do you deliver for?",
+    a: "Instagram Reels, TikTok, YouTube, Facebook, and any custom ratio. All assets are exported platform-ready.",
   },
   {
-    q: "What formats do you deliver in?",
-    a: "We typically deliver in MP4 (H.264) for videos and high-resolution PNG/JPG for stills. Other formats like MOV, ProRes, or transparent-background renders are available on request.",
+    q: "Do you work with AI tools only?",
+    a: "We use AI as a production accelerator - Kling, Runway, Seedance, ComfyUI - combined with human creative direction. The result is cinematic, not generated-looking.",
   },
   {
-    q: "Can you handle large-scale projects or bulk renders?",
-    a: "Yes, we regularly work on bulk orders for 10+ animations or 50+ renders. We optimize workflows to maintain quality and meet tight deadlines.",
+    q: "How do we start?",
+    a: "Hit \"Chat With Us\" and tell us what you're building. We'll respond within 24 hours with a clear plan.",
   },
-]
+] as const
 
 export default function FAQPage() {
   return (
     <>
       <SiteHeader />
-      <main className="min-h-screen text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="liquid-glass rounded-2xl p-8 md:p-10 border border-white/10">
-              <div className="space-y-8">
-                <header className="space-y-3">
-                  <h1 className="text-3xl md:text-4xl font-bold text-red-400">Frequently Asked Questions</h1>
-                  <p className="text-white/75">
-                    Answers to common questions about our 3D animation and creative services.
-                  </p>
-                </header>
+      <main className="min-h-screen px-4 py-16 text-white">
+        <div className="container mx-auto">
+          <div className="brand-card mx-auto max-w-4xl rounded-[2rem] p-8 md:p-10">
+            <header className="space-y-3">
+              <p className="section-label">FAQ</p>
+              <h1 className="section-heading text-3xl text-white md:text-4xl">Frequently Asked Questions</h1>
+              <p className="body-copy text-base md:text-lg">Everything you need to know before we start.</p>
+            </header>
 
-                <div className="space-y-6">
-                  {faqs.map((faq, index) => (
-                    <section key={index} className="space-y-2">
-                      <h2 className="text-lg font-semibold text-white">
-                        {index + 1}. {faq.q}
-                      </h2>
-                      <p className="text-white/60 text-sm leading-relaxed">{faq.a}</p>
-                    </section>
-                  ))}
-                </div>
-
-                <section className="pt-4 border-t border-white/10">
-                  <p className="text-white/75 text-sm">
-                    Have more questions?{" "}
-                    <Link href={createWhatsAppUrl()} className="text-red-400 hover:underline">
-                      Contact us
-                    </Link>
-                  </p>
+            <div className="mt-10 space-y-6">
+              {FAQS.map((faq, index) => (
+                <section key={faq.q} className="brand-card rounded-2xl px-6 py-5">
+                  <p className="section-label text-[11px]">Q{index + 1}</p>
+                  <h2 className="mt-2 text-xl font-bold text-white">{faq.q}</h2>
+                  <p className="body-copy mt-3 text-sm leading-7">{faq.a}</p>
                 </section>
-              </div>
+              ))}
             </div>
+
+            <section className="mt-8 border-t border-white/10 pt-6">
+              <p className="body-copy text-sm">
+                Need a custom answer?{" "}
+                <Link
+                  href={createWhatsAppUrl()}
+                  className="text-[var(--color-lime)] transition-colors hover:text-white"
+                >
+                  Chat With Us
+                </Link>
+              </p>
+            </section>
           </div>
         </div>
       </main>

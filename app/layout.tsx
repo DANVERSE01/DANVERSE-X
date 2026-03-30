@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WebVitalsReporter />
         <Suspense fallback={null}>
           <div className="fixed inset-0 z-0 bg-[var(--color-surface-base)]">
-            <Plasma colorStops={["#00A6A6", "#BB8CFF", "#E0E75B"]} speed={1.0} amplitude={1.0} blend={0.7} />
+            <Plasma colorStops={["#111111", "#C9A8F5", "#F5F500"]} speed={0.9} amplitude={0.85} blend={0.42} />
           </div>
           <main id="main-content" tabIndex={-1} className="relative z-10">
             {children}

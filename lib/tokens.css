@@ -1,39 +1,46 @@
 :root {
-  /* Brand Core */
-  --color-brand-primary: #e0e75b;
-  --color-brand-secondary: #00a6a6;
-  --color-accent-coral: #ff8f3f; /* warm orange */
-  --color-accent-lavender: #bb8cff; /* flow purple */
-  --color-accent-steel: #7fd1ff;
-  --color-accent-purple: #bb8cff;
-  --color-accent-orange: #ff8f3f;
+  /* Core Palette */
+  --color-lime: #f5f500;
+  --color-lavender: #c9a8f5;
+  --color-coral: #ff4d2e;
+  --color-stone: #2e2e2e;
+  --color-bg: #111111;
+  --color-bg-card: #1c1c1c;
+  --color-ash: #8a9a95;
+
+  /* Compatibility aliases */
+  --color-brand-primary: var(--color-lime);
+  --color-brand-secondary: var(--color-lavender);
+  --color-accent-coral: var(--color-coral);
+  --color-accent-lavender: var(--color-lavender);
+  --color-accent-steel: var(--color-ash);
+  --color-accent-purple: var(--color-lavender);
+  --color-accent-orange: var(--color-coral);
 
   /* Surfaces */
-  --color-surface-base: #0d1b1e;
-  --color-surface-raised: #11262b;
-  --color-surface-overlay: rgba(14, 37, 42, 0.45);
+  --color-surface-base: var(--color-bg);
+  --color-surface-raised: var(--color-bg-card);
+  --color-surface-overlay: rgba(17, 17, 17, 0.82);
 
   /* Typography */
-  --color-text-primary: #eef0e8;
-  --color-text-secondary: #a8c5d0;
-  --color-text-muted: #6a8a94;
-  --color-text-inverse: #080e12;
+  --color-text-primary: #f6f6f0;
+  --color-text-secondary: #d8d9d2;
+  --color-text-muted: var(--color-ash);
+  --color-text-inverse: #111111;
 
   /* Borders */
-  --color-border-subtle: rgba(224, 231, 91, 0.12);
-  --color-border-strong: rgba(224, 231, 91, 0.4);
-  --color-border-teal: rgba(0, 166, 166, 0.25);
+  --color-border-subtle: rgba(245, 245, 0, 0.08);
+  --color-border-strong: rgba(245, 245, 0, 0.28);
+  --color-border-teal: rgba(201, 168, 245, 0.25);
 
-  /* Compatibility aliases for existing component references */
-  --color-bg: var(--color-surface-base);
   --color-surface: var(--color-surface-raised);
   --color-text: var(--color-text-primary);
   --color-muted: var(--color-text-muted);
 
   /* Glows */
-  --glow-primary: 0 0 40px rgba(224, 231, 91, 0.28);
-  --glow-secondary: 0 0 40px rgba(0, 166, 166, 0.25);
-  --glow-coral: 0 0 30px rgba(239, 120, 106, 0.25);
+  --glow-primary: 0 0 42px rgba(245, 245, 0, 0.24);
+  --glow-secondary: 0 0 48px rgba(201, 168, 245, 0.22);
+  --glow-coral: 0 0 38px rgba(255, 77, 46, 0.22);
 
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Space Grotesk", sans-serif;

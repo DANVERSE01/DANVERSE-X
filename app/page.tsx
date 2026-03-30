@@ -15,7 +15,7 @@ const PROCESS_STRUCTURED_DATA = {
   "@id": "https://danverse.ai/#process",
   name: "The Process",
   description:
-    "A three-step cinematic production workflow covering strategy lock, production, and launch-ready delivery.",
+    "A three-step cinematic production workflow covering strategy lock, frame and build, and ship and scale.",
   url: "https://danverse.ai/#process",
 } as const
 

@@ -12,17 +12,30 @@ export function Hero() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center py-12 sm:py-16">
           {/* Logo - Centered with consistent spacing */}
-          <div className="mb-6">
-            <DanverseLogo size="hero" />
+          <div className="relative mb-6">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-[-18%] top-[-8%] h-[90%] rounded-full"
+              style={{
+                background: "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,245,0,0.04) 0%, transparent 70%)",
+              }}
+            />
+            <DanverseLogo size="hero" className="relative z-10" />
           </div>
 
           {/* Headline */}
-          <h1 className="text-center text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            <span className="block text-white">AI-POWERED</span>
-            <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
-              CREATIVE STUDIO
-            </span>
-            <span className="block text-white">FOR BRANDS</span>
+          <h1
+            className="text-center text-white"
+            style={{
+              fontSize: "clamp(3rem, 7vw, 6.5rem)",
+              fontWeight: 900,
+              letterSpacing: "-0.04em",
+              lineHeight: 0.96,
+            }}
+          >
+            <span className="block">WE DON'T MAKE ADS.</span>
+            <span className="block text-[var(--color-lime)]">WE BUILD BRAND WEAPONS.</span>
+            <span className="block">POWERED BY AI.</span>
           </h1>
 
           {/* CTA Button */}
@@ -30,7 +43,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 py-3 text-white font-medium hover:from-red-400 hover:to-orange-400 hover:scale-105 transition-all"
+              className="cta-coral rounded-full px-8 py-3 font-medium text-white transition-all hover:scale-105"
             >
               <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                 Chat With Us
@@ -84,8 +97,8 @@ function PhoneCard({
 
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <div className="text-xl font-bold text-white mb-1">{title}</div>
-          <p className="text-xs text-white/70">{sub}</p>
-          <div className="mt-2 inline-flex items-center rounded-full bg-red-500/20 border border-red-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider text-red-400">
+          <p className="body-copy text-xs">{sub}</p>
+          <div className="mt-2 inline-flex items-center rounded-full border border-[rgba(245,245,0,0.16)] bg-[rgba(245,245,0,0.08)] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[var(--color-lime)]">
             DANVERSE
           </div>
         </div>

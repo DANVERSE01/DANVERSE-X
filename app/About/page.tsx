@@ -6,10 +6,37 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About — DANVERSE",
+  title: "About - DANVERSE",
   description:
-    "DANVERSE is a next generation creative studio combining artificial intelligence, cinematic storytelling, and sharp strategy.",
+    "DANVERSE builds AI-powered cinematic ads, visual identities, websites, and creative systems for brands across Egypt and the Gulf.",
 }
+
+const FEATURES = [
+  {
+    title: "Cinematic Ads & UGC",
+    desc: "Scroll-stopping vertical and horizontal ads built for TikTok, Reels, and paid campaigns - with cinematic direction and sharp hooks.",
+  },
+  {
+    title: "Branding & Visual Identity",
+    desc: "Logo systems, visual languages, and brand worlds that feel premium, consistent, and built to last.",
+  },
+  {
+    title: "Websites & Landing Pages",
+    desc: "Conversion-first websites and landing pages - clean motion, strong copy, and zero generic templates.",
+  },
+  {
+    title: "AI Content Systems",
+    desc: "Custom AI pipelines that generate scripts, posts, and campaign assets on demand - your brand on autopilot.",
+  },
+  {
+    title: "Creative Direction",
+    desc: "We lead the vision - concept, script, visual language - so every frame serves the strategy.",
+  },
+  {
+    title: "Egypt & Gulf Market",
+    desc: "Built for Arabic-market brands. We understand the culture, the platforms, and what actually converts.",
+  },
+]
 
 export default function AboutPage() {
   const schemaData = {
@@ -19,7 +46,7 @@ export default function AboutPage() {
     url: env.NEXT_PUBLIC_SITE_URL,
     logo: `${env.NEXT_PUBLIC_SITE_URL}/logo.png`,
     description:
-      "DANVERSE is a next generation creative studio that combines artificial intelligence, cinematic storytelling, and sharp strategy.",
+      "DANVERSE is an AI-powered creative studio building cinematic ads, brand systems, and production infrastructure for modern brands.",
     sameAs: ["https://www.instagram.com/danverse.creative"],
     contactPoint: [
       {
@@ -30,84 +57,48 @@ export default function AboutPage() {
     ],
   }
 
-  const features = [
-    {
-      title: "Cinematic Ads & UGC",
-      desc: "High impact vertical and horizontal videos for TikTok, Reels, and campaigns with strong hooks and storytelling.",
-    },
-    {
-      title: "Branding & Visual Identity",
-      desc: "Logos, visual systems, hero graphics, and brand worlds that feel premium, futuristic, and consistent.",
-    },
-    {
-      title: "Websites & Landing Pages",
-      desc: "Modern websites and landing pages using clean UI, strong copy, and smooth motion.",
-    },
-    {
-      title: "AI Content Systems",
-      desc: "Custom AI workflows that generate scripts, posts, emails, and content on demand.",
-    },
-    {
-      title: "Strategic Guidance",
-      desc: "High level consulting on AI tools, prompt writing, and building creative systems that make money.",
-    },
-    {
-      title: "Global Reach",
-      desc: "Serving brands worldwide with world-class cinematic visuals and creative solutions.",
-    },
-  ]
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       <SiteHeader />
 
       <main className="min-h-screen text-white">
-        {/* Hero Section */}
-        <section className="py-20 px-4">
+        <section className="px-4 py-20">
           <div className="container mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              About{" "}
-              <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-                DANVERSE
-              </span>
+            <p className="section-label mb-4">About DANVERSE</p>
+            <h1 className="section-heading text-4xl text-white md:text-5xl lg:text-6xl">
+              Built to make brands impossible to ignore.
             </h1>
-            <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
-              A next generation creative studio combining artificial intelligence, cinematic storytelling, and sharp
-              strategy.
+            <p className="body-copy mx-auto mt-6 max-w-3xl text-lg md:text-xl">
+              We don&apos;t make content. We build brand weapons. AI-powered, director-grade, built to convert.
             </p>
           </div>
         </section>
 
-        {/* Features Grid */}
-        <section className="py-16 px-4">
-          <div className="container mx-auto max-w-5xl">
+        <section className="px-4 py-12 pb-20">
+          <div className="container mx-auto max-w-6xl">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="liquid-glass rounded-2xl p-6 border border-white/10 hover:border-red-500/30 transition-all"
-                >
-                  <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-sm text-white/75">{feature.desc}</p>
+              {FEATURES.map((feature) => (
+                <div key={feature.title} className="brand-card rounded-2xl p-6">
+                  <p className="section-label mb-3 text-[11px]">Capability</p>
+                  <h2 className="section-heading text-xl text-white">{feature.title}</h2>
+                  <p className="body-copy mt-3 text-sm leading-7">{feature.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-4 text-center">
+        <section className="px-4 py-20 text-center">
           <div className="container mx-auto max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Create Something Bold?</h2>
-            <p className="text-white/75 mb-8">Let DANVERSE bring your vision to life with cinematic creativity.</p>
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-8 text-white font-medium hover:from-red-400 hover:to-orange-400"
-            >
+            <p className="section-label mb-4">Start Here</p>
+            <h2 className="section-heading text-3xl text-white md:text-4xl">Your Next Campaign Starts Here.</h2>
+            <p className="body-copy mb-8 mt-4">
+              Tell us what you&apos;re building. We&apos;ll tell you exactly how to make it hit.
+            </p>
+            <Button asChild size="lg" className="cta-coral rounded-full px-8 text-white font-medium">
               <Link href={createWhatsAppUrl()} target="_blank">
-                Get in Touch
+                Start Your Project
               </Link>
             </Button>
           </div>

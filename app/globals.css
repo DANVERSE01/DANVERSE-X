@@ -6,79 +6,78 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: var(--color-surface-base);
+  --background: var(--color-bg);
   --foreground: var(--color-text-primary);
-  --card: var(--color-surface-raised);
+  --card: var(--color-bg-card);
   --card-foreground: var(--color-text-primary);
-  --popover: rgba(14, 29, 34, 0.9);
+  --popover: rgba(17, 17, 17, 0.96);
   --popover-foreground: var(--color-text-primary);
-  --primary: var(--color-brand-primary);
-  --primary-foreground: var(--color-text-inverse);
-  --secondary: var(--color-brand-secondary);
-  --secondary-foreground: var(--color-text-inverse);
-  --muted: var(--color-text-muted);
-  --muted-foreground: var(--color-text-secondary);
-  --accent: var(--color-accent-purple);
-  --accent-foreground: var(--color-text-inverse);
-  --destructive: var(--color-accent-orange);
-  --destructive-foreground: var(--color-text-inverse);
-  --border: rgba(224, 231, 91, 0.16);
-  --input: rgba(13, 27, 30, 0.95);
-  --ring: rgba(224, 231, 91, 0.85);
-  --chart-1: var(--color-brand-primary);
-  --chart-2: var(--color-brand-secondary);
-  --chart-3: var(--color-accent-purple);
-  --chart-4: var(--color-accent-orange);
-  --chart-5: var(--color-accent-coral);
+  --primary: var(--color-bg);
+  --primary-foreground: var(--color-text-primary);
+  --secondary: var(--color-bg-card);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: var(--color-ash);
+  --muted-foreground: var(--color-ash);
+  --accent: var(--color-bg-card);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: var(--color-coral);
+  --destructive-foreground: #ffffff;
+  --border: rgba(245, 245, 0, 0.08);
+  --input: rgba(28, 28, 28, 0.96);
+  --ring: rgba(245, 245, 0, 0.72);
+  --chart-1: var(--color-lime);
+  --chart-2: var(--color-lavender);
+  --chart-3: var(--color-coral);
+  --chart-4: var(--color-ash);
+  --chart-5: var(--color-text-secondary);
   --radius: 0.9rem;
-  --sidebar: var(--color-surface-raised);
+  --sidebar: var(--color-bg-card);
   --sidebar-foreground: var(--color-text-primary);
-  --sidebar-primary: var(--color-brand-primary);
-  --sidebar-primary-foreground: var(--color-text-inverse);
-  --sidebar-accent: var(--color-brand-secondary);
-  --sidebar-accent-foreground: var(--color-text-inverse);
+  --sidebar-primary: var(--color-lime);
+  --sidebar-primary-foreground: var(--color-bg);
+  --sidebar-accent: var(--color-bg);
+  --sidebar-accent-foreground: var(--color-text-primary);
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: rgba(224, 231, 91, 0.25);
+  --sidebar-ring: rgba(245, 245, 0, 0.25);
 
-  /* DANVERSE Brand Colors */
-  --danverse-red: var(--color-brand-primary);
-  --danverse-orange: var(--color-brand-secondary);
-  --danverse-purple: #bb8cff;
+  --danverse-red: var(--color-coral);
+  --danverse-orange: var(--color-coral);
+  --danverse-purple: var(--color-lavender);
 }
 
 .dark {
-  --background: #0d1b1e;
-  --foreground: #eef0e8;
-  --card: #11262b;
-  --card-foreground: #eef0e8;
-  --popover: rgba(10, 23, 27, 0.87);
-  --popover-foreground: #eef0e8;
-  --primary: #e0e75b;
-  --primary-foreground: #0d1b1e;
-  --secondary: #00a6a6;
-  --secondary-foreground: #0d1b1e;
-  --muted: #a8c5d0;
-  --muted-foreground: #eef0e8;
-  --accent: #bb8cff;
-  --accent-foreground: #0d1b1e;
-  --destructive: #ff8f3f;
-  --destructive-foreground: #0d1b1e;
-  --border: rgba(224, 231, 91, 0.3);
-  --input: rgba(11, 28, 32, 0.95);
-  --ring: rgba(224, 231, 91, 0.9);
-  --chart-1: #e0e75b;
-  --chart-2: #00a6a6;
-  --chart-3: #bb8cff;
-  --chart-4: #ff8f3f;
-  --chart-5: #c48bb4;
-  --sidebar: #11262b;
-  --sidebar-foreground: #eef0e8;
-  --sidebar-primary: #e0e75b;
-  --sidebar-primary-foreground: #0d1b1e;
-  --sidebar-accent: #00a6a6;
-  --sidebar-accent-foreground: #0d1b1e;
+  --background: var(--color-bg);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-bg-card);
+  --card-foreground: var(--color-text-primary);
+  --popover: rgba(17, 17, 17, 0.96);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-bg);
+  --primary-foreground: var(--color-text-primary);
+  --secondary: var(--color-bg-card);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: var(--color-ash);
+  --muted-foreground: var(--color-ash);
+  --accent: var(--color-bg-card);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: var(--color-coral);
+  --destructive-foreground: #ffffff;
+  --border: rgba(245, 245, 0, 0.08);
+  --input: rgba(28, 28, 28, 0.96);
+  --ring: rgba(245, 245, 0, 0.72);
+  --chart-1: var(--color-lime);
+  --chart-2: var(--color-lavender);
+  --chart-3: var(--color-coral);
+  --chart-4: var(--color-ash);
+  --chart-5: var(--color-text-secondary);
+  --sidebar: var(--color-bg-card);
+  --sidebar-foreground: var(--color-text-primary);
+  --sidebar-primary: var(--color-lime);
+  --sidebar-primary-foreground: var(--color-bg);
+  --sidebar-accent: var(--color-bg);
+  --sidebar-accent-foreground: var(--color-text-primary);
   --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: rgba(224, 231, 91, 0.2);
+  --sidebar-ring: rgba(245, 245, 0, 0.25);
 }
 
 @theme inline {
@@ -130,6 +129,10 @@
     font-family: var(--font-body);
   }
 
+  p {
+    color: var(--color-ash);
+  }
+
   html {
     height: 100%;
     overflow-x: hidden;
@@ -172,39 +175,124 @@
 
 /* Apple Site Header Glass Effects */
 .liquid-glass {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(28, 28, 28, 0.76);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(245, 245, 0, 0.08);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 12px 32px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .liquid-glass-enhanced {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(28, 28, 28, 0.86);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(245, 245, 0, 0.14);
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 18px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .liquid-glass-header {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(17, 17, 17, 0.72);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(245, 245, 0, 0.08);
   box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 8px 28px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(245, 245, 0, 0.08);
+  background: rgba(17, 17, 17, 0.72);
   backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 8px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.brand-card {
+  background: linear-gradient(135deg, #1c1c1c 0%, #242424 50%, #1a1a1a 100%);
+  border: 1px solid rgba(245, 245, 0, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 20px 48px rgba(0, 0, 0, 0.22);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 240ms var(--ease-cinematic);
+}
+
+.brand-card:hover,
+.brand-card:focus-within {
+  border-color: rgba(201, 168, 245, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 26px 64px rgba(0, 0, 0, 0.28),
+    0 0 36px rgba(201, 168, 245, 0.12);
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lime);
+}
+
+.section-heading {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.body-copy {
+  color: var(--color-ash);
+}
+
+.cta-coral {
+  background: var(--color-coral);
+  color: #ffffff;
+  box-shadow: 0 16px 36px rgba(255, 77, 46, 0.18);
+}
+
+.cta-coral:hover,
+.cta-coral:focus-visible {
+  background: #ff613e;
+}
+
+.cta-lime {
+  background: var(--color-lime);
+  color: var(--color-bg);
+  box-shadow: 0 16px 36px rgba(245, 245, 0, 0.18);
+}
+
+.cta-lime:hover,
+.cta-lime:focus-visible {
+  background: #ffff3c;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -0.55rem;
+  left: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--color-lime);
+  opacity: 0.92;
+  transition: transform 180ms ease;
+}
+
+.nav-link[data-active="true"]::after,
+.nav-link[data-state="open"]::after,
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* Logo Marquee Animations */
@@ -260,16 +348,16 @@
 .process-step:hover .process-card,
 .process-step:focus-within .process-card {
   transform: translateY(-14px);
-  border-color: rgba(201, 168, 76, 0.72);
+  border-color: rgba(201, 168, 245, 0.25);
   box-shadow:
-    0 28px 96px rgba(201, 168, 76, 0.18),
+    0 28px 96px rgba(201, 168, 245, 0.1),
     0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
 .process-step:hover .process-number-shell,
 .process-step:focus-within .process-number-shell {
   animation: process-number-pulse 1.8s var(--ease-cinematic) infinite;
-  filter: drop-shadow(0 0 26px rgba(201, 168, 76, 0.34));
+  filter: drop-shadow(0 0 26px rgba(201, 168, 245, 0.26));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -282,7 +370,7 @@
   .process-step:hover .process-card,
   .process-step:focus-within .process-card {
     transform: none;
-    border-color: rgba(28, 28, 38, 1);
+    border-color: rgba(245, 245, 0, 0.08);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
   }
 
@@ -290,7 +378,7 @@
   .process-step:focus-within .process-number-shell {
     animation: none !important;
     transform: none !important;
-    filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.14));
+    filter: drop-shadow(0 0 18px rgba(201, 168, 245, 0.12));
   }
 }
 
@@ -310,7 +398,7 @@
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible {
-  outline: 2px solid var(--color-brand-primary);
+  outline: 2px solid var(--color-lime);
   outline-offset: 3px;
   border-radius: 4px;
 }

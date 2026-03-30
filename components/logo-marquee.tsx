@@ -40,7 +40,7 @@ export function LogoMarquee() {
       onMouseEnter={() => setPausedRow(rowId)}
       onMouseLeave={() => setPausedRow(null)}
     >
-      <div className="w-36 h-24 sm:w-44 sm:h-28 rounded-xl bg-black/40 border border-white/10 backdrop-blur-xl flex flex-col items-center justify-center hover:border-red-400/50 hover:bg-white/5 transition-all p-3">
+      <div className="brand-card flex h-24 w-36 flex-col items-center justify-center rounded-xl p-3 backdrop-blur-xl sm:h-28 sm:w-44">
         <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
           <MarqueeCardIcon type={item.icon} size={40} />
         </div>
@@ -54,17 +54,17 @@ export function LogoMarquee() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
           <div className="text-center sm:text-left">
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-              Built for <span className="text-red-400">future focused</span> brands
+            <h2 className="section-heading text-3xl text-white sm:text-4xl md:text-5xl">
+              Built for <span className="text-[var(--color-lime)]">future-focused</span> brands
             </h2>
-            <p className="mt-3 max-w-xl text-sm text-white/75">
+            <p className="body-copy mt-3 max-w-xl text-sm">
               DANVERSE partners with brands, creators and teams that want cinematic ads, bold branding and smart content
               systems.
             </p>
           </div>
           <Button
             variant="outline"
-            className="border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-red-400 rounded-full px-6"
+            className="rounded-full border-white/20 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-lime)]"
           >
             Learn More
           </Button>

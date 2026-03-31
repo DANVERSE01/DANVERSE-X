@@ -39,7 +39,7 @@ export function HeroArchviz() {
       <div className="content-shell">
         <div className="flex flex-col items-center justify-center py-14 sm:py-20">
           <div className="mb-5 flex items-center gap-2">
-            <Image src="/images/danverse-logo.webp" alt="DANVERSE logo" width={32} height={32} className="h-8 w-8" />
+            <Image src="/images/danverse-logo.png" alt="DANVERSE logo" width={48} height={48} className="h-12 w-12 object-contain" />
             <p className="text-sm uppercase tracking-[0.25em] text-[var(--color-acid-lime)]/80">ArchViz</p>
           </div>
 

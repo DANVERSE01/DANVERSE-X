@@ -4,14 +4,20 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
+type PartnerLogo = {
+  name: string
+  image?: string
+  monogram?: string
+}
+
 export function LogoMarqueeArchviz() {
   const [pausedRow, setPausedRow] = useState<string | null>(null)
 
-  const logos = [
-    { name: "Lionsgate", image: "/placeholder-logo.png" },
-    { name: "DANVERSE", image: "/images/danverse-logo.webp" },
-    { name: "AP", image: "/placeholder-logo.png" },
-    { name: "Framework", image: "/placeholder-logo.png" },
+  const logos: PartnerLogo[] = [
+    { name: "Lionsgate", monogram: "LG" },
+    { name: "DANVERSE", image: "/images/danverse-logo.png" },
+    { name: "AP", monogram: "AP" },
+    { name: "Framework", monogram: "FW" },
   ]
 
   const Row = ({ dir, id }: { dir: "left" | "right"; id: string }) => (
@@ -28,9 +34,16 @@ export function LogoMarqueeArchviz() {
             onMouseLeave={() => setPausedRow(null)}
           >
             <div className="w-24 h-24 rounded-2xl bg-black/40 border border-white/20 backdrop-blur-xl flex items-center justify-center overflow-hidden">
-              <div className="relative w-full h-full">
-                <Image src={logo.image || "/placeholder-logo.png"} alt={logo.name} fill className="object-cover" />
-              </div>
+              {logo.image ? (
+                <div className="relative h-full w-full p-2">
+                  <Image src={logo.image} alt={logo.name} fill className="object-contain p-2" />
+                </div>
+              ) : (
+                <div className="flex h-full w-full flex-col items-center justify-center bg-[radial-gradient(circle_at_top,rgba(73,107,255,0.18),transparent_42%),linear-gradient(160deg,rgba(10,14,24,0.96),rgba(14,18,30,0.82))] px-2 text-center">
+                  <span className="text-lg font-semibold tracking-[0.16em] text-white/90">{logo.monogram}</span>
+                  <span className="mt-1 text-[9px] uppercase tracking-[0.18em] text-white/52">{logo.name}</span>
+                </div>
+              )}
             </div>
           </div>
         ))}

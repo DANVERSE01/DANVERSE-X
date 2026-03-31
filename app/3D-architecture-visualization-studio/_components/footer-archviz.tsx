@@ -63,7 +63,7 @@ export function FooterArchviz() {
             <div className="space-y-3">
               <div className="flex items-center gap-1.5">
                 <Image
-                  src="/images/danverse-logo.webp"
+                  src="/images/danverse-logo.png"
                   alt="DANVERSE logo"
                   width={24}
                   height={24}

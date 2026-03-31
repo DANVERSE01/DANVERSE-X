@@ -12,7 +12,7 @@ import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
-const OG_IMAGE_PATH = "/images/danverse-logo.webp"
+const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",

@@ -13,28 +13,28 @@ export const metadata: Metadata = {
 
 const FEATURES = [
   {
-    title: "Cinematic Ads & UGC",
-    desc: "Scroll-stopping vertical and horizontal ads built for TikTok, Reels, and paid campaigns - with cinematic direction and sharp hooks.",
+    title: "Performance Films & Social Video",
+    desc: "Performance-led campaigns for paid social, launches, and creator-native distribution, built to capture attention fast and convert with intent.",
   },
   {
-    title: "Branding & Visual Identity",
-    desc: "Logo systems, visual languages, and brand worlds that feel premium, consistent, and built to last.",
+    title: "Brand Systems & Visual Identity",
+    desc: "Identity architecture, visual languages, and brand assets designed to raise perceived value and stay coherent across every touchpoint.",
   },
   {
-    title: "Websites & Landing Pages",
-    desc: "Conversion-first websites and landing pages - clean motion, strong copy, and zero generic templates.",
+    title: "Conversion Websites & Launch Pages",
+    desc: "Launch-ready digital experiences built for conversion, premium on-screen presence, and a more convincing brand story.",
   },
   {
     title: "AI Content Systems",
-    desc: "Custom AI pipelines that generate scripts, posts, and campaign assets on demand - your brand on autopilot.",
+    desc: "Custom content engines that generate scripts, campaigns, and production-ready assets with stronger speed, control, and brand consistency.",
   },
   {
     title: "Creative Direction",
-    desc: "We lead the vision - concept, script, visual language - so every frame serves the strategy.",
+    desc: "Creative leadership across concept, narrative, framing, and execution so every asset feels aligned, intentional, and commercially sharp.",
   },
   {
-    title: "Egypt & Gulf Market",
-    desc: "Built for Arabic-market brands. We understand the culture, the platforms, and what actually converts.",
+    title: "Egypt & Gulf Market Intelligence",
+    desc: "Regional creative intelligence for Arabic-speaking markets, platform behavior, and offer positioning that actually translates into response.",
   },
 ]
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
     "@type": "Organization",
     name: "DANVERSE",
     url: env.NEXT_PUBLIC_SITE_URL,
-    logo: `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.webp`,
+    logo: `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.png`,
     description:
       "DANVERSE is an AI-powered creative studio building cinematic ads, brand systems, and production infrastructure for modern brands.",
     sameAs: ["https://www.instagram.com/danverse.creative"],

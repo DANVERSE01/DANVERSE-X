@@ -10,28 +10,29 @@ interface LogoProps {
 }
 
 const SIZES = {
-  xs: { width: 80, height: 80 },
-  small: { width: 100, height: 100 },
-  sm: { width: 120, height: 120 },
-  header: { width: 140, height: 40 },
-  md: { width: 200, height: 200 },
-  lg: { width: 280, height: 280 },
-  xl: { width: 360, height: 360 },
-  hero: { width: 320, height: 320 },
+  xs: { width: 74, height: 74, scale: 1.16 },
+  small: { width: 92, height: 92, scale: 1.18 },
+  sm: { width: 116, height: 116, scale: 1.16 },
+  header: { width: 84, height: 84, scale: 1.24 },
+  md: { width: 212, height: 212, scale: 1.08 },
+  lg: { width: 292, height: 292, scale: 1.06 },
+  xl: { width: 372, height: 372, scale: 1.04 },
+  hero: { width: 400, height: 400, scale: 1.04 },
 }
 
 export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
-  const { width, height } = SIZES[size]
+  const { width, height, scale } = SIZES[size]
   const priority = size === "hero" || size === "header"
 
   return (
     <div className={`relative flex items-center justify-center ${className}`} style={{ width, height }}>
       <Image
-        src="/images/danverse-logo.webp"
+        src="/images/danverse-logo.png"
         alt="DANVERSE"
         fill
         sizes={`${width}px`}
         className="object-contain"
+        style={{ transform: `scale(${scale})` }}
         priority={priority}
       />
     </div>
@@ -40,8 +41,16 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
 
 export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative flex items-center justify-center ${className}`} style={{ width: 140, height: 40 }}>
-      <Image src="/images/danverse-logo.webp" alt="DANVERSE" fill sizes="140px" className="object-contain" priority />
+    <div className={`relative flex items-center justify-center ${className}`} style={{ width: 84, height: 84 }}>
+      <Image
+        src="/images/danverse-logo.png"
+        alt="DANVERSE"
+        fill
+        sizes="84px"
+        className="object-contain"
+        style={{ transform: "scale(1.24)" }}
+        priority
+      />
     </div>
   )
 }

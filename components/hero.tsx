@@ -1,5 +1,6 @@
 "use client"
 
+import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { DanverseLogo } from "@/components/danverse-logo"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
@@ -8,58 +9,71 @@ import { createWhatsAppUrl } from "@/lib/env"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {
-    title: "Conversions",
-    sub: "Turn clicks into paying customers.",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
-    posterSrc: "/images/hero-posters/conversions-card.webp",
+    title: "Precision Converts",
+    sub: "Luxury detail engineered to drive desire.",
+    vimeoId: "1178894835",
   },
   {
-    title: "Speed",
-    sub: "Launch in days, not weeks.",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
-    posterSrc: "/images/hero-posters/default-card.webp",
+    title: "Velocity Performs",
+    sub: "Fast-beauty creative built to signal speed and efficacy.",
+    vimeoId: "1178894778",
   },
   {
-    title: "Social-Ready",
-    sub: "Made for IG, TikTok, and Meta.",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
-    posterSrc: "/images/hero-posters/social-ready-card.webp",
+    title: "Social Demand",
+    sub: "Vertical-first assets designed to stop scroll and scale attention.",
+    vimeoId: "1178894721",
   },
 ]
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion()
+  const reveal = (delay: number, y = 28) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.72, delay, ease: [0.22, 1, 0.36, 1] as const },
+        }
+
   return (
-    <section aria-label="Hero introduction" className="section-shell overflow-hidden pt-6 sm:pt-8">
+    <section aria-label="Hero introduction" className="section-shell overflow-hidden pt-4 sm:pt-6">
       <div className="content-shell">
-        <div className="mx-auto flex max-w-[1080px] flex-col items-center py-12 text-center sm:py-16">
-          <div className="relative mb-6">
+        <div className="mx-auto flex max-w-[1120px] flex-col items-center py-10 text-center sm:py-14">
+          <motion.div className="relative mb-5" {...reveal(0.04, 18)}>
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-[-18%] top-[-12%] h-[92%] rounded-full blur-3xl"
+              className="pointer-events-none absolute inset-x-[-22%] top-[-8%] h-[96%] rounded-full blur-3xl"
               style={{
                 background:
-                  "radial-gradient(ellipse 84% 58% at 50% 0%, rgba(49,93,255,0.18) 0%, rgba(255,47,146,0.15) 36%, rgba(217,255,38,0.08) 58%, transparent 76%)",
+                  "radial-gradient(ellipse 84% 58% at 50% 0%, rgba(61,111,255,0.26) 0%, rgba(255,47,146,0.2) 34%, rgba(217,255,38,0.12) 58%, transparent 78%)",
               }}
             />
             <DanverseLogo size="hero" className="relative" />
-          </div>
+          </motion.div>
 
-          <p className="section-label mb-5">DANVERSE Studio</p>
-          <h1 className="mx-auto max-w-[11ch] text-center text-white">
-            We Engineer Brand Authority.
-            <br />
-            Frame by Frame.
-          </h1>
-          <p className="body-copy mx-auto mt-6 max-w-2xl text-sm leading-7 sm:text-base">
+          <motion.p
+            className="section-label mb-5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[11px] text-white/86 shadow-[0_0_28px_rgba(73,107,255,0.08)]"
+            {...reveal(0.12, 18)}
+          >
+            Director-Led Creative Systems
+          </motion.p>
+
+          <motion.h1 className="mx-auto max-w-[10.5ch] text-center text-white" {...reveal(0.18, 26)}>
+            <span className="block">We Engineer</span>
+            <span className="block">Brand Authority.</span>
+            <span className="mt-2 block bg-gradient-to-r from-white via-[rgba(184,204,255,0.96)] to-[var(--color-hot-pink-strong)] bg-clip-text text-transparent">
+              Frame by Frame.
+            </span>
+          </motion.h1>
+
+          <motion.p className="body-copy mx-auto mt-6 max-w-[45rem] text-base leading-8 sm:text-lg" {...reveal(0.28, 24)}>
             Built for brands that need control, consistency, and cinematic presence.
             <br className="hidden sm:block" />
             Every asset aligned. Every frame intentional.
-          </p>
+          </motion.p>
 
-          <div className="mt-8 flex flex-col items-center gap-4">
+          <motion.div className="mt-9 flex flex-col items-center gap-4" {...reveal(0.36, 20)}>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <HoverLift>
                 <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
@@ -77,23 +91,26 @@ export function Hero() {
 
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {["Visual Systems", "Cinematic Execution", "Brand Control"].map((item) => (
-                <span
+                <motion.span
                   key={item}
                   className="accent-chip px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/80"
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
+                  animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                  transition={prefersReducedMotion ? undefined : { duration: 0.48, delay: 0.44, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {item}
-                </span>
+                </motion.span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="mt-12 w-full">
+          <motion.div className="mt-14 w-full" {...reveal(0.46, 18)}>
             <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {HERO_MEDIA.map((item, index) => (
                 <HeroMediaCard key={item.title} index={index} {...item} />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

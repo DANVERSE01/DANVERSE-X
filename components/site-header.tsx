@@ -22,21 +22,21 @@ import { createWhatsAppUrl } from "@/lib/env"
 const SERVICES = [
   {
     href: "/cinematic-ads",
-    label: "Cinematic Ads & UGC",
+    label: "Performance Films & Social Video",
     icon: Building2,
-    description: "High-impact vertical and horizontal videos for TikTok, Reels, and campaigns",
+    description: "Cinematic paid-social, launch films, and creator-native content engineered to stop scroll and move revenue.",
   },
   {
     href: "/branding",
-    label: "Branding & Visual Identity",
+    label: "Brand Systems & Visual Identity",
     icon: Palette,
-    description: "Logos, visual systems, hero graphics, and brand worlds",
+    description: "Identity architecture, visual direction, and premium brand assets built for consistency across every touchpoint.",
   },
   {
     href: "/websites",
-    label: "Websites & Landing Pages",
+    label: "Conversion Websites & Launch Pages",
     icon: Globe,
-    description: "Modern websites and landing pages with clean UI and smooth motion",
+    description: "High-conversion digital experiences with sharper positioning, premium motion, and launch-ready UX.",
   },
 ] as const
 

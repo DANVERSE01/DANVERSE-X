@@ -8,7 +8,7 @@ interface ServiceMetadataInput {
 }
 
 export function createServiceMetadata({ path, title, description }: ServiceMetadataInput): Metadata {
-  const imageUrl = `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.webp`
+  const imageUrl = `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.png`
   const pageUrl = `${env.NEXT_PUBLIC_SITE_URL}${path}`
 
   return {

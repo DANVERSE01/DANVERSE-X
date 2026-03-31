@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef, type CSSProperties } from "react"
+import { useEffect, useRef } from "react"
 import { ArrowUpRight, Clapperboard, Rocket, Sparkles, type LucideIcon } from "lucide-react"
 import { gsap } from "gsap"
+import { ProcessVisual } from "@/components/process-visuals"
 
 type ProcessStep = {
   number: string
@@ -66,12 +67,6 @@ const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
   lavender: "var(--color-hot-pink)",
   coral: "var(--color-electric-blue-strong)",
 }
-
-const PANEL_SHAPES: CSSProperties[] = [
-  { clipPath: "polygon(18% 0%, 100% 8%, 82% 100%, 0% 92%)" },
-  { clipPath: "polygon(0% 10%, 84% 0%, 100% 90%, 16% 100%)" },
-  { clipPath: "polygon(12% 0%, 100% 18%, 88% 100%, 0% 82%)" },
-]
 
 export function Pricing() {
   const sectionRef = useRef<HTMLElement | null>(null)
@@ -301,7 +296,7 @@ export function Pricing() {
                       className="process-banner-visual relative min-h-[270px] lg:min-h-[360px]"
                       aria-hidden="true"
                     >
-                      {renderVisual(step)}
+                      <ProcessVisual mode={step.visual} />
                     </div>
                   </div>
                 </article>
@@ -311,120 +306,5 @@ export function Pricing() {
         </div>
       </div>
     </section>
-  )
-}
-
-function renderVisual(step: ProcessStep) {
-  switch (step.visual) {
-    case "brief":
-      return <BriefVisual />
-    case "build":
-      return <BuildVisual />
-    case "launch":
-      return <LaunchVisual />
-    default:
-      return null
-  }
-}
-
-function BriefVisual() {
-  return (
-    <>
-      <div className="absolute inset-y-5 left-0 w-[64%] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5 backdrop-blur-sm">
-        <div className="inline-flex rounded-full bg-[var(--color-lime)] px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--color-bg)]">
-          Danverse Method
-        </div>
-        <div className="mt-5 space-y-3">
-          {["Hook first", "Taste locked", "Frame references aligned"].map((item) => (
-            <div
-              key={item}
-              className="rounded-[1.1rem] border border-white/10 bg-black/20 px-4 py-3 text-sm font-medium text-white/80"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="absolute right-[12%] top-2 h-[74%] w-[36%] -rotate-[14deg] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.03))]">
-        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_20%,rgba(49,93,255,0.24),transparent_42%)]" />
-        <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">Offer</div>
-        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(49,93,255,0.58)] to-transparent" />
-      </div>
-
-      <div className="absolute bottom-1 right-0 h-[56%] w-[42%] rotate-[8deg] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02))]">
-        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_60%_25%,rgba(255,47,146,0.22),transparent_42%)]" />
-        <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">Visual Tone</div>
-        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(255,47,146,0.52)] to-transparent" />
-      </div>
-    </>
-  )
-}
-
-function BuildVisual() {
-  const sliceHeights = ["72%", "100%", "82%"]
-  const sliceLabels = ["Shot / Light", "Motion / Pace", "Grade / Finish"]
-
-  return (
-    <>
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 text-[clamp(3.4rem,8vw,6rem)] font-black tracking-[-0.08em] text-white/[0.05]">
-        FRAME
-      </div>
-
-      <div className="absolute inset-y-2 right-0 left-[16%] flex items-end gap-4">
-        {sliceLabels.map((label, index) => (
-          <div
-            key={label}
-            className="relative flex-1 overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))]"
-            style={{
-              ...PANEL_SHAPES[index],
-              height: sliceHeights[index],
-            }}
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_22%,rgba(160,224,255,0.22),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(8,14,20,0.55))]" />
-            <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">{label}</div>
-            <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(255,47,146,0.52)] via-white/20 to-transparent" />
-          </div>
-        ))}
-      </div>
-    </>
-  )
-}
-
-function LaunchVisual() {
-  const ratios = [
-    { value: "9:16", label: "Reels" },
-    { value: "1:1", label: "Paid" },
-    { value: "16:9", label: "Hero" },
-  ]
-
-  return (
-    <div className="absolute inset-0 flex items-end">
-      <div className="w-full rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 shadow-[0_24px_90px_rgba(0,0,0,0.28)] backdrop-blur-sm sm:p-5">
-        <div className="grid gap-4 lg:grid-cols-[auto_1fr_auto] lg:items-center">
-          <div className="grid grid-cols-3 gap-2 rounded-[1.2rem] border border-white/10 bg-black/20 p-3">
-            {ratios.map((ratio) => (
-              <div key={ratio.value} className="text-center">
-                <div className="text-lg font-extrabold leading-none text-white">{ratio.value}</div>
-                <div className="mt-2 text-[10px] uppercase tracking-[0.18em] text-white/50">{ratio.label}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-[1.2rem] border border-white/10 bg-black/20 px-4 py-4">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-white/40 sm:text-white/50">
-              Ready across paid, social, launch pages, and internal handoff
-            </p>
-            <p className="mt-2 text-lg font-semibold leading-7 text-white">
-              Masters, cutdowns, cover frames, stills, and rollout logic delivered as one launch-ready pack.
-            </p>
-          </div>
-
-          <div className="inline-flex items-center justify-center rounded-full bg-[var(--color-electric-blue-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_36px_rgba(49,77,255,0.22)]">
-            Launch Pack
-          </div>
-        </div>
-      </div>
-    </div>
   )
 }

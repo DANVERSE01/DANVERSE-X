@@ -1,115 +1,32 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { HoverLift } from "@/components/hover-lift"
+import { ShowcaseControlRail } from "@/components/showcase-control-rail"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { SHOWCASE_WORKS } from "@/lib/showcase-works"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 import styles from "@/styles/showcase.module.css"
 
-const WORKS = [
-  {
-    embed: "https://player.vimeo.com/video/1178894835",
-    title: "The Art of Precision",
-    category: "Project 01",
-    client: "TAG Heuer (Carrera Series)",
-    role: "Creative Direction & Visual Strategy",
-    desc: 'A high-end commercial piece focused on the intersection of luxury and technical mastery. As Creative Director, I directed the visual narrative to emphasize the "Conversions" aspect, using macro cinematography and rhythmic editing to transform mechanical detail into an emotional brand connection.',
-  },
-  {
-    embed: "https://player.vimeo.com/video/1178894778",
-    title: "Velocity & Vitality",
-    category: "Project 02",
-    client: "MISSHA (Time Revolution)",
-    role: "Creative Direction & Motion Branding",
-    desc: "This project explores the concept of speed in skincare efficacy. My creative approach used high-energy transitions and clean, minimalist aesthetics to mirror the product's rapid results and create a visual time revolution that feels both scientific and aspirational.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1178894721",
-    title: "The Digital Aesthetic",
-    category: "Project 03",
-    client: "Modern Skincare (Social-Ready Campaign)",
-    role: "Creative Direction & Social-First Content Strategy",
-    desc: "Directed specifically for the social-ready era, this campaign prioritizes thumb-stopping visuals and vertical-first composition. I led the creative team to develop a vibrant, high-contrast palette and dynamic pacing aligned with fast-moving IG, TikTok, and Meta culture for maximum engagement.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1174583531",
-    title: "New Year's Reel - Personal Cinematic Film",
-    category: "Personal / Film",
-    client: "Self-Initiated",
-    role: "Direction, VFX & AI Storycraft",
-    desc: "A personal cinematic project with action beats, large-scale effects, and AI-led visual storytelling.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1164910690",
-    title: "Jacob & Co x Bugatti - Luxury Watch Campaign",
-    category: "Social / Ad",
-    client: "Jacob & Co x Bugatti",
-    role: "Campaign Direction & Visual Finish",
-    desc: "A high-end social campaign built around one of the world's most exclusive watch collaborations.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1178056977",
-    title: "Poke Monster - Samurai Sushi Brand Film",
-    category: "Brand / Film",
-    client: "Poke Monster",
-    role: "Brand Film Direction",
-    desc: "A cinematic identity film for a Japanese-inspired restaurant built to feel premium from frame one.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1174570425",
-    title: "Alhama - UAE Exhibition Identity Film",
-    category: "Product / Reveal",
-    client: "Alhama",
-    role: "AI Film Direction & Launch Build",
-    desc: "A full AI-generated brand film produced in three days for a major exhibition launch in Sharjah.",
-  },
-  {
-    embed: "https://player.vimeo.com/video/1173977023",
-    title: "Wizzora - Cinematic Agency Brand Film",
-    category: "Identity / Motion",
-    client: "Wizzora",
-    role: "Creative Direction & Campaign Motion",
-    desc: "A cinematic agency film built to scale into a wider multi-brand campaign with millions of views.",
-  },
-] as const
-
 export function CinematicShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
   const revealRef = useScrollReveal<HTMLDivElement>()
-  const activeWork = WORKS[activeIndex]
+  const activeWork = SHOWCASE_WORKS[activeIndex]
+  const activeNumber = String(activeIndex + 1).padStart(2, "0")
 
   const handleChange = (index: number) => {
-    if (index === activeIndex || isTransitioning) {
-      return
-    }
-
-    setIsTransitioning(true)
-    window.setTimeout(() => {
-      setActiveIndex(index)
-      setIsTransitioning(false)
-    }, 220)
+    if (index !== activeIndex) setActiveIndex(index)
   }
+  const handlePrev = () => setActiveIndex((current) => (current - 1 + SHOWCASE_WORKS.length) % SHOWCASE_WORKS.length)
+  const handleNext = () => setActiveIndex((current) => (current + 1) % SHOWCASE_WORKS.length)
 
   return (
     <section id="showcase" aria-label="Selected work" className={styles.stage}>
-      <div className={styles.mediaShell}>
-        <div className={`${styles.mediaWrapper} ${isTransitioning ? styles.mediaTransitioning : ""}`}>
-          <iframe
-            key={activeWork.embed}
-            title={`${activeWork.title} presentation reel`}
-            src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0`}
-            allow="autoplay; fullscreen; picture-in-picture"
-          />
-        </div>
-        <div className={styles.gradientOverlay} />
-      </div>
-
       <div className="section-shell">
         <div ref={revealRef} className={`${styles.contentShell} ${styles.contentLayer}`}>
           <div className={styles.headingRow}>
-            <div>
+            <div className={styles.headingCopy}>
               <p className="section-label">Selected Work</p>
               <h2 id="production-showcase-heading" className={styles.sectionHeading}>
                 Campaigns built to feel expensive in motion.
@@ -123,39 +40,60 @@ export function CinematicShowcase() {
             </HoverLift>
           </div>
 
-          <article className={styles.workFeature} aria-live="polite" aria-atomic="true">
-            <p className={styles.categoryLabel}>{activeWork.category}</p>
-            <h3 className={styles.workTitle}>{activeWork.title}</h3>
-            <div className={styles.metaRow}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Client</span>
-                <span className={styles.metaValue}>{activeWork.client}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Role</span>
-                <span className={styles.metaValue}>{activeWork.role}</span>
+          <div className={styles.viewerShell}>
+            <div className={styles.mediaPanel}>
+              <div className={styles.viewerGlow} aria-hidden="true" />
+              <div className={styles.mediaViewport}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeWork.embed}
+                    initial={{ opacity: 0.18, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0.12, scale: 0.985 }}
+                    transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                    className={styles.mediaMotion}
+                  >
+                    <iframe
+                      title={`${activeWork.title} presentation reel`}
+                      src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      className={styles.mediaFrame}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <div className={styles.mediaShade} />
+                <ShowcaseControlRail
+                  activeIndex={activeIndex}
+                  onNext={handleNext}
+                  onPrev={handlePrev}
+                  onSelect={handleChange}
+                  works={SHOWCASE_WORKS}
+                />
               </div>
             </div>
-            <p className={styles.workDescription}>{activeWork.desc}</p>
-          </article>
 
-          <div className={styles.workGrid}>
-            {WORKS.map((work, index) => (
-              <motion.button
-                key={work.embed}
-                type="button"
-                onClick={() => handleChange(index)}
-                whileHover={{ y: -4, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className={`${styles.workThumb} ${activeIndex === index ? styles.active : ""}`}
-                aria-pressed={activeIndex === index}
-                aria-label={`View ${work.title}`}
-              >
-                <div className={styles.indicatorBar} />
-                <p className={styles.thumbCategory}>{work.category}</p>
-                <p className={styles.thumbTitle}>{work.title}</p>
-              </motion.button>
-            ))}
+            <div className={styles.detailsGrid} aria-live="polite" aria-atomic="true">
+              <article className={styles.summaryCard}>
+                <div className={styles.summaryTopline}>
+                  <span className={styles.summaryIndex}>Project {activeNumber}</span>
+                  <span className={styles.summaryDivider} />
+                  <span className={styles.summaryCategory}>{activeWork.category}</span>
+                </div>
+                <h3 className={styles.summaryTitle}>{activeWork.title}</h3>
+                <p className={styles.summaryText}>{activeWork.desc}</p>
+              </article>
+
+              <div className={styles.metaGrid}>
+                <div className={styles.metaCard}>
+                  <span className={styles.metaLabel}>Client</span>
+                  <span className={styles.metaValue}>{activeWork.client}</span>
+                </div>
+                <div className={styles.metaCard}>
+                  <span className={styles.metaLabel}>Role</span>
+                  <span className={styles.metaValue}>{activeWork.role}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

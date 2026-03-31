@@ -6,7 +6,7 @@ import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
 import { createWhatsAppUrl } from "@/lib/env"
 
-const HERO_MEDIA: Array<HeroMediaItem & { visibility?: string }> = [
+const HERO_MEDIA: HeroMediaItem[] = [
   {
     title: "Conversions",
     sub: "Turn clicks into paying customers.",
@@ -28,22 +28,6 @@ const HERO_MEDIA: Array<HeroMediaItem & { visibility?: string }> = [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
     posterSrc: "/images/hero-posters/social-ready-card.webp",
   },
-  {
-    title: "Standout",
-    sub: "Be the product no one scrolls past.",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
-    posterSrc: "/images/hero-posters/default-card.webp",
-    visibility: "hidden lg:block",
-  },
-  {
-    title: "Premium",
-    sub: "Look like the market leader.",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b0f3222371106db366a14ca1c29cef55-1b1EWVSa4w3FL2zslcaCGYTy9vcxjF.mp4",
-    posterSrc: "/images/hero-posters/default-card.webp",
-    visibility: "hidden xl:block",
-  },
 ]
 
 export function Hero() {
@@ -57,45 +41,45 @@ export function Hero() {
               className="pointer-events-none absolute inset-x-[-18%] top-[-12%] h-[92%] rounded-full blur-3xl"
               style={{
                 background:
-                  "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,245,0,0.08) 0%, rgba(201,168,245,0.06) 42%, transparent 72%)",
+                  "radial-gradient(ellipse 84% 58% at 50% 0%, rgba(49,93,255,0.18) 0%, rgba(255,47,146,0.15) 36%, rgba(217,255,38,0.08) 58%, transparent 76%)",
               }}
             />
             <DanverseLogo size="hero" className="relative" />
           </div>
 
           <p className="section-label mb-5">DANVERSE Studio</p>
-          <h1 className="mx-auto max-w-[9ch] text-center text-white">Films. Identity. Systems.</h1>
+          <h1 className="mx-auto max-w-[11ch] text-center text-white">
+            We Engineer Brand Authority.
+            <br />
+            Frame by Frame.
+          </h1>
           <p className="body-copy mx-auto mt-6 max-w-2xl text-sm leading-7 sm:text-base">
-            Director-led creative for brands that need visual authority, clear systems, and launch-ready assets that
-            feel expensive on every screen.
+            Built for brands that need control, consistency, and cinematic presence.
+            <br className="hidden sm:block" />
+            Every asset aligned. Every frame intentional.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-4">
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <HoverLift>
-                <Button asChild size="lg" className="cta-coral rounded-full px-8 py-3 font-medium text-white">
+                <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
                   <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                    Chat With Us
+                    Work With Us
                   </a>
                 </Button>
               </HoverLift>
               <HoverLift>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-full border-white/10 bg-white/[0.03] px-8 py-3 text-white hover:bg-white/[0.05] hover:text-[var(--color-accent-gold)]"
-                >
-                  <a href="#showcase">View Work</a>
+                <Button asChild variant="outline" size="lg" className="cta-secondary rounded-full px-8 py-3 text-white">
+                  <a href="#showcase">Explore Projects</a>
                 </Button>
               </HoverLift>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-2.5">
-              {["Cinematic Ads", "Brand Identity", "AI Production"].map((item) => (
+              {["Visual Systems", "Cinematic Execution", "Brand Control"].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/72"
+                  className="accent-chip px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/80"
                 >
                   {item}
                 </span>
@@ -104,11 +88,9 @@ export function Hero() {
           </div>
 
           <div className="mt-12 w-full">
-            <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
-              {HERO_MEDIA.map(({ visibility, ...item }) => (
-                <div key={item.title} className={visibility}>
-                  <HeroMediaCard {...item} />
-                </div>
+            <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+              {HERO_MEDIA.map((item, index) => (
+                <HeroMediaCard key={item.title} index={index} {...item} />
               ))}
             </div>
           </div>

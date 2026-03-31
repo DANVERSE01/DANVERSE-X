@@ -45,7 +45,7 @@ export function LogoMarquee() {
         <div className="mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="max-w-3xl text-center sm:text-left">
             <h2 className="section-heading text-white">
-              Built for brands with <span className="text-[var(--color-accent-gold)]">global standards</span>
+              Built for brands with <span className="text-[var(--color-hot-pink-strong)]">global standards</span>
             </h2>
             <p className="body-copy mt-3 max-w-xl text-sm">
               Founders, agencies, hospitality, retail, and luxury teams come to DANVERSE when the work has to feel
@@ -56,7 +56,7 @@ export function LogoMarquee() {
             <Button
               asChild
               variant="outline"
-              className="rounded-full border-white/12 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-accent-gold)]"
+              className="rounded-full border-white/12 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-hot-pink-strong)]"
             >
               <Link href="#showcase">See Selected Work</Link>
             </Button>

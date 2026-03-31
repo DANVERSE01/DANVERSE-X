@@ -44,7 +44,7 @@ export default function AboutPage() {
     "@type": "Organization",
     name: "DANVERSE",
     url: env.NEXT_PUBLIC_SITE_URL,
-    logo: `${env.NEXT_PUBLIC_SITE_URL}/logo.png`,
+    logo: `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.webp`,
     description:
       "DANVERSE is an AI-powered creative studio building cinematic ads, brand systems, and production infrastructure for modern brands.",
     sameAs: ["https://www.instagram.com/danverse.creative"],
@@ -96,7 +96,7 @@ export default function AboutPage() {
             <p className="body-copy mb-8 mt-4">
               Tell us what you&apos;re building. We&apos;ll tell you exactly how to make it hit.
             </p>
-            <Button asChild size="lg" className="cta-coral rounded-full px-8 text-white font-medium">
+            <Button asChild size="lg" className="cta-primary rounded-full px-8 text-white font-medium">
               <Link href={createWhatsAppUrl()} target="_blank">
                 Start Your Project
               </Link>

@@ -12,7 +12,7 @@ import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
-const OG_IMAGE_URL = `${SITE_URL}/opengraph-image`
+const OG_IMAGE_PATH = "/images/danverse-logo.webp"
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: OG_IMAGE_URL,
+        url: OG_IMAGE_PATH,
         width: 1200,
         height: 630,
         alt: "DANVERSE creative studio preview",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-    images: [OG_IMAGE_URL],
+    images: [OG_IMAGE_PATH],
   },
 }
 
@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WebVitalsReporter />
           <Suspense fallback={null}>
             <div className="fixed inset-0 h-full w-full" style={{ zIndex: "var(--z-background)" }}>
-              <Plasma colorStops={["#0a0c0f", "#c9a8f5", "#f5f500"]} speed={0.85} amplitude={0.78} blend={0.38} />
+              <Plasma colorStops={["#315dff", "#ff2f92", "#d9ff26"]} speed={0.82} amplitude={0.92} blend={0.46} />
             </div>
             <main id="main-content" tabIndex={-1} className="relative" style={{ zIndex: "var(--z-content)" }}>
               {children}

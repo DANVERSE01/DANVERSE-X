@@ -9,33 +9,67 @@ import styles from "@/styles/showcase.module.css"
 
 const WORKS = [
   {
+    embed: "https://player.vimeo.com/video/1178894835",
+    title: "The Art of Precision",
+    category: "Project 01",
+    client: "TAG Heuer (Carrera Series)",
+    role: "Creative Direction & Visual Strategy",
+    desc: 'A high-end commercial piece focused on the intersection of luxury and technical mastery. As Creative Director, I directed the visual narrative to emphasize the "Conversions" aspect, using macro cinematography and rhythmic editing to transform mechanical detail into an emotional brand connection.',
+  },
+  {
+    embed: "https://player.vimeo.com/video/1178894778",
+    title: "Velocity & Vitality",
+    category: "Project 02",
+    client: "MISSHA (Time Revolution)",
+    role: "Creative Direction & Motion Branding",
+    desc: "This project explores the concept of speed in skincare efficacy. My creative approach used high-energy transitions and clean, minimalist aesthetics to mirror the product's rapid results and create a visual time revolution that feels both scientific and aspirational.",
+  },
+  {
+    embed: "https://player.vimeo.com/video/1178894721",
+    title: "The Digital Aesthetic",
+    category: "Project 03",
+    client: "Modern Skincare (Social-Ready Campaign)",
+    role: "Creative Direction & Social-First Content Strategy",
+    desc: "Directed specifically for the social-ready era, this campaign prioritizes thumb-stopping visuals and vertical-first composition. I led the creative team to develop a vibrant, high-contrast palette and dynamic pacing aligned with fast-moving IG, TikTok, and Meta culture for maximum engagement.",
+  },
+  {
     embed: "https://player.vimeo.com/video/1174583531",
     title: "New Year's Reel - Personal Cinematic Film",
     category: "Personal / Film",
+    client: "Self-Initiated",
+    role: "Direction, VFX & AI Storycraft",
     desc: "A personal cinematic project with action beats, large-scale effects, and AI-led visual storytelling.",
   },
   {
     embed: "https://player.vimeo.com/video/1164910690",
     title: "Jacob & Co x Bugatti - Luxury Watch Campaign",
     category: "Social / Ad",
+    client: "Jacob & Co x Bugatti",
+    role: "Campaign Direction & Visual Finish",
     desc: "A high-end social campaign built around one of the world's most exclusive watch collaborations.",
   },
   {
     embed: "https://player.vimeo.com/video/1178056977",
     title: "Poke Monster - Samurai Sushi Brand Film",
     category: "Brand / Film",
+    client: "Poke Monster",
+    role: "Brand Film Direction",
     desc: "A cinematic identity film for a Japanese-inspired restaurant built to feel premium from frame one.",
   },
   {
     embed: "https://player.vimeo.com/video/1174570425",
     title: "Alhama - UAE Exhibition Identity Film",
     category: "Product / Reveal",
+    client: "Alhama",
+    role: "AI Film Direction & Launch Build",
     desc: "A full AI-generated brand film produced in three days for a major exhibition launch in Sharjah.",
   },
   {
     embed: "https://player.vimeo.com/video/1173977023",
     title: "Wizzora - Cinematic Agency Brand Film",
     category: "Identity / Motion",
+    client: "Wizzora",
+    role: "Creative Direction & Campaign Motion",
     desc: "A cinematic agency film built to scale into a wider multi-brand campaign with millions of views.",
   },
 ] as const
@@ -92,6 +126,16 @@ export function CinematicShowcase() {
           <article className={styles.workFeature} aria-live="polite" aria-atomic="true">
             <p className={styles.categoryLabel}>{activeWork.category}</p>
             <h3 className={styles.workTitle}>{activeWork.title}</h3>
+            <div className={styles.metaRow}>
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Client</span>
+                <span className={styles.metaValue}>{activeWork.client}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Role</span>
+                <span className={styles.metaValue}>{activeWork.role}</span>
+              </div>
+            </div>
             <p className={styles.workDescription}>{activeWork.desc}</p>
           </article>
 

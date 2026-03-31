@@ -40,12 +40,12 @@ export function HeroArchviz() {
         <div className="flex flex-col items-center justify-center py-14 sm:py-20">
           <div className="mb-5 flex items-center gap-2">
             <Image src="/images/danverse-logo.webp" alt="DANVERSE logo" width={32} height={32} className="h-8 w-8" />
-            <p className="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-gold)]/80">ArchViz</p>
+            <p className="text-sm uppercase tracking-[0.25em] text-[var(--color-acid-lime)]/80">ArchViz</p>
           </div>
 
           <h1 className="mt-3 text-center text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             <span className="block">Photo-realistic</span>
-            <span className="block text-[var(--color-accent-gold)]">Architecture</span>
+            <span className="block text-[var(--color-electric-blue-strong)]">Architecture</span>
             <span className="block">Visualization</span>
           </h1>
 
@@ -54,7 +54,7 @@ export function HeroArchviz() {
           </p>
 
           <div className="mt-6">
-            <Button asChild className="cta-lime rounded-full px-6">
+            <Button asChild className="cta-primary rounded-full px-6">
               <a href="https://wa.link/65mf3i" target="_blank" rel="noopener noreferrer">
                 Start ArchViz Project
               </a>
@@ -96,7 +96,7 @@ function ArchvizCard({ sub, title, videoSrc }: (typeof ARCHVIZ_CARDS)[number]) {
           <div className="space-y-1 px-1">
             <h3 className="text-3xl font-semibold leading-snug text-white/90">{title}</h3>
             <p className="text-xs text-white/70">{sub}</p>
-            <div className="mt-3 inline-flex items-center rounded-full bg-black/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-[var(--color-accent-gold)]">
+            <div className="mt-3 inline-flex items-center rounded-full bg-black/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-[var(--color-hot-pink-strong)]">
               ArchViz
             </div>
           </div>

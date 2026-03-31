@@ -443,7 +443,7 @@ export default function CheckoutPage() {
   if (!isInitialized || !order.package) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-[var(--color-electric-blue-strong)] border-t-transparent"></div>
       </div>
     )
   }
@@ -471,7 +471,9 @@ export default function CheckoutPage() {
             {/* Inline Plan Name and Price */}
             <div className="flex items-center justify-between flex-1 mx-3 sm:mx-4">
               <div className="text-base font-semibold text-white sm:text-lg">{order.package.name} Plan</div>
-              <div className="text-base font-bold text-orange-500 sm:text-lg">{formatPrice(calculateTotal())}</div>
+              <div className="text-base font-bold text-[var(--color-electric-blue-strong)] sm:text-lg">
+                {formatPrice(calculateTotal())}
+              </div>
             </div>
             <div className="w-8 sm:w-10" />
           </div>
@@ -479,7 +481,7 @@ export default function CheckoutPage() {
           {/* Updated Progress Bar */}
           <div className="h-0.5 bg-neutral-800 rounded-full overflow-hidden sm:h-1">
             <div
-              className="h-full bg-gradient-to-r from-red-500 to-orange-500 rounded-full transition-all duration-500 ease-out"
+              className="h-full rounded-full bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-acid-lime)] transition-all duration-500 ease-out"
               style={{ width: `${getProgressPercentage()}%` }}
             />
           </div>
@@ -538,9 +540,9 @@ export default function CheckoutPage() {
                   )}
 
                   {/* Updated Total Highlight */}
-                  <div className="flex justify-between items-center py-4 bg-orange-500/10 rounded-xl px-4 mt-4 sm:py-6 sm:rounded-2xl sm:px-6 sm:mt-6">
+                  <div className="mt-4 flex items-center justify-between rounded-xl bg-[rgba(49,93,255,0.1)] px-4 py-4 sm:mt-6 sm:rounded-2xl sm:px-6 sm:py-6">
                     <h4 className="text-lg font-bold text-white sm:text-xl">Total</h4>
-                    <span className="text-2xl font-bold text-orange-500 sm:text-3xl">
+                    <span className="text-2xl font-bold text-[var(--color-electric-blue-strong)] sm:text-3xl">
                       {formatPrice(calculateTotal())}
                     </span>
                   </div>
@@ -596,7 +598,7 @@ export default function CheckoutPage() {
           {stepContent.isSummary && (
             <Button
               onClick={handleConfirmOrder}
-              className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-xl sm:h-16 sm:text-xl sm:rounded-2xl"
+              className="h-14 w-full rounded-xl bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-electric-blue)] text-lg font-semibold text-white shadow-[0_18px_40px_rgba(49,93,255,0.28)] transition-all duration-300 hover:brightness-110 sm:h-16 sm:rounded-2xl sm:text-xl"
             >
               Confirm Order
               <ArrowRight className="ml-2 h-5 w-5 sm:h-6 sm:w-6" />

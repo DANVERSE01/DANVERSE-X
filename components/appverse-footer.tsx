@@ -23,7 +23,7 @@ export function AppverseFooter() {
           <HoverLift>
             <Button
               onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
-              className="cta-coral rounded-full px-8 py-3 font-medium text-white"
+              className="cta-primary rounded-full px-8 py-3 font-medium text-white"
             >
               Book a Call
             </Button>
@@ -33,8 +33,12 @@ export function AppverseFooter() {
         <div className="my-16">
           <HoverLift>
             <Card className="brand-card relative overflow-hidden rounded-2xl !p-8 md:!p-10">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute left-8 top-8 h-32 w-32 rounded-full bg-[rgba(49,93,255,0.16)] blur-3xl" />
+                <div className="absolute bottom-8 right-10 h-28 w-28 rounded-full bg-[rgba(255,47,146,0.14)] blur-3xl" />
+              </div>
               <div className="grid items-center gap-8 md:grid-cols-2">
-                <div>
+                <div className="relative z-10">
                   <p className="section-label mb-2 text-[11px]">AI Content Systems</p>
                   <h3 className="section-heading text-white">Your Brand. On Autopilot.</h3>
                   <p className="body-copy mt-3 max-w-md text-sm">
@@ -43,8 +47,9 @@ export function AppverseFooter() {
                   </p>
                 </div>
 
-                <div className="mx-auto w-full max-w-[280px]">
-                  <div className="brand-card relative rounded-[24px] p-1.5 shadow-2xl">
+                <div className="relative z-10 mx-auto w-full max-w-[280px]">
+                  <div className="relative rounded-[28px] border border-[rgba(63,101,255,0.2)] bg-[linear-gradient(150deg,rgba(9,11,18,0.96),rgba(18,24,36,0.9))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.46),0_0_46px_rgba(49,93,255,0.12)]">
+                    <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(49,93,255,0.16),transparent_34%),radial-gradient(circle_at_bottom,rgba(255,47,146,0.12),transparent_32%)]" />
                     <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
                       <LazyVideo
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%202-YFaCK7cEiHWSMRv8XEHaLCoYj2SUAi.mp4"
@@ -55,11 +60,13 @@ export function AppverseFooter() {
                         playsInline
                         aria-label="DANVERSE automation preview"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,32,86,0.08),transparent_28%,rgba(8,10,16,0.14)_62%,rgba(5,7,11,0.78)_100%)]" />
                       <div className="absolute bottom-4 left-4 right-4">
-                        <div className="text-2xl font-semibold text-white">Automation</div>
-                        <p className="body-copy mt-1 text-xs">AI-powered production engine</p>
-                        <div className="mt-2 inline-flex items-center rounded-full border border-[rgba(245,245,0,0.16)] bg-[rgba(245,245,0,0.08)] px-2 py-0.5 text-[10px] uppercase tracking-[0.24em] text-[var(--color-lime)]">
+                        <div className="text-2xl font-semibold text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.38)]">
+                          Automation
+                        </div>
+                        <p className="mt-1 text-xs text-[var(--color-text-secondary)]">AI-powered production engine</p>
+                        <div className="device-badge mt-3 px-2.5 py-1 text-[10px] uppercase tracking-[0.24em]">
                           Powered by DANVERSE
                         </div>
                       </div>
@@ -106,10 +113,10 @@ export function AppverseFooter() {
           <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-[var(--color-text-muted)] sm:flex-row">
             <p>Copyright 2026 DANVERSE</p>
             <div className="flex items-center gap-6">
-              <Link href="/revisions" className="transition-colors hover:text-[var(--color-accent-gold)]">
+              <Link href="/revisions" className="accent-link">
                 Revision Policy
               </Link>
-              <Link href="/t&c" className="transition-colors hover:text-[var(--color-accent-gold)]">
+              <Link href="/t&c" className="accent-link">
                 Terms & Conditions
               </Link>
             </div>
@@ -127,7 +134,7 @@ function FooterGroup({ items, title }: { items: Array<{ href: string; label: str
       <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
         {items.map((item) => (
           <li key={item.label}>
-            <Link href={item.href} className="transition-colors hover:text-[var(--color-accent-gold)]">
+            <Link href={item.href} className="accent-link">
               {item.label}
             </Link>
           </li>
@@ -154,7 +161,7 @@ function FooterLink({
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="flex items-center gap-2 transition-colors hover:text-[var(--color-accent-gold)]"
+        className="accent-link flex items-center gap-2"
       >
         <Icon className="h-4 w-4" />
         {label}

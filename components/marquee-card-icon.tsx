@@ -1,5 +1,5 @@
 // DANVERSE Marquee Icon System
-// Consistent 2.5px stroke with blue and gold accents matching the current brand system.
+// Consistent 2.5px stroke with electric blue, hot pink, and acid-lime accents.
 
 type IconCategory =
   | "ai-startups"
@@ -27,8 +27,8 @@ interface IconProps {
 
 export function MarqueeCardIcon({ type, size = 48, className = "" }: IconProps) {
   const sw = "2.5"
-  const accent = "#c9a8f5"
-  const accent2 = "#f5f500"
+  const accent = "#315dff"
+  const accent2 = "#d9ff26"
 
   // AI Startups - Neural network / brain
   if (type === "ai-startups") {

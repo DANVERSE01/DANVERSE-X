@@ -49,12 +49,12 @@ export default function BrandingPage() {
       <main className="min-h-screen text-white">
         <section className="px-4 py-20">
           <div className="container mx-auto max-w-4xl text-center">
-            <div className="mb-4 inline-flex items-center rounded-full border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-red-400">
+            <div className="accent-chip mb-4 px-4 py-1.5 text-xs font-medium uppercase tracking-widest">
               Branding & Visual Identity
             </div>
             <h1 className="mb-6 font-display text-4xl font-extrabold uppercase tracking-tight md:text-5xl lg:text-6xl">
               <span className="block text-white">Brand Systems</span>
-              <span className="block bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink)] to-[var(--color-acid-lime)] bg-clip-text text-transparent">
                 Built to Scale
               </span>
             </h1>
@@ -74,11 +74,11 @@ export default function BrandingPage() {
               {FEATURES.map((feature) => (
                 <div
                   key={feature.tag}
-                  className="liquid-glass rounded-2xl border border-white/10 p-6 transition-all hover:border-red-500/30"
+                  className="liquid-glass rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-[var(--color-border-strong)]"
                 >
-                  <p className="mb-2 text-[10px] uppercase tracking-widest text-red-400">{feature.tag}</p>
+                  <p className="accent-kicker mb-2">{feature.tag}</p>
                   <h3 className="mb-3 text-lg font-bold text-white">{feature.title}</h3>
-                  <p className="text-sm text-white/50">{feature.desc}</p>
+                  <p className="body-copy text-sm">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -93,9 +93,9 @@ export default function BrandingPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {PROCESS.map((item) => (
                 <div key={item.step} className="liquid-glass rounded-2xl border border-white/10 p-6">
-                  <p className="mb-3 text-4xl font-black text-red-500/30">{item.step}</p>
+                  <p className="accent-step mb-3 text-4xl font-black">{item.step}</p>
                   <h4 className="mb-2 text-sm font-bold uppercase tracking-widest text-white">{item.label}</h4>
-                  <p className="text-xs text-white/50">{item.desc}</p>
+                  <p className="body-copy text-xs">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -104,9 +104,9 @@ export default function BrandingPage() {
 
         <section className="px-4 py-20 text-center">
           <div className="container mx-auto max-w-2xl rounded-2xl border border-white/10 p-10 liquid-glass">
-            <p className="mb-3 text-[10px] uppercase tracking-widest text-red-400">Pricing</p>
+            <p className="section-label mb-3 text-[10px]">Pricing</p>
             <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Ready to build?</h2>
-            <p className="mb-8 text-sm text-white/50">
+            <p className="body-copy mb-8 text-sm">
               Starter at $299 - Professional at $699 - Premium at $2,049. All plans include revisions.
             </p>
             <WaCtaButton source="branding-cta" label="Book a Call" />

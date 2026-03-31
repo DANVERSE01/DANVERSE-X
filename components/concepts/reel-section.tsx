@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useRef, useState } from "react"
 import LazyVideo from "@/components/lazy-video"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
@@ -86,12 +86,11 @@ function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
   return (
     <div
       ref={cardRef}
-      className={`relative overflow-hidden bg-zinc-900 group ${clip.span}`}
+      className={`group relative overflow-hidden bg-zinc-950 ${clip.span}`}
       style={{ aspectRatio: clip.ratio }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Video Layer */}
       <div className="absolute inset-0 z-0">
         <LazyVideo
           src={clip.src}
@@ -99,22 +98,20 @@ function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
           muted
           loop
           playsInline
-          className={`h-full w-full object-cover transition-transform duration-[1.5s] cubic-bezier(0.16, 1, 0.3, 1) ${
-            hovered ? "scale-110 brightness-110" : "scale-100 brightness-50 grayscale-[0.5]"
+          className={`h-full w-full object-cover transition-transform duration-[1.5s] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
+            hovered ? "scale-110 brightness-110 saturate-110" : "scale-100 brightness-50 grayscale-[0.35]"
           }`}
         />
       </div>
 
-      {/* Overlay Gradients */}
       <div
-        className={`absolute inset-0 z-10 transition-opacity duration-700 ${hovered ? "opacity-40" : "opacity-70"}`}
+        className={`absolute inset-0 z-10 transition-opacity duration-700 ${hovered ? "opacity-45" : "opacity-72"}`}
         style={{
-          background: "linear-gradient(to top, #000 0%, transparent 60%, rgba(0,0,0,0.4) 100%)",
+          background: "linear-gradient(to top, rgba(5,7,11,0.98) 0%, rgba(5,7,11,0.12) 58%, rgba(10,18,48,0.3) 100%)",
         }}
       />
 
-      {/* Content Layer */}
-      <div className="absolute inset-0 z-20 p-6 flex flex-col justify-between pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-6">
         <div
           className={`transition-all duration-700 delay-100 ${
             hovered ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
@@ -122,16 +119,16 @@ function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
         >
           <span
             style={{ fontFamily: "'Courier Prime', monospace" }}
-            className="text-[10px] tracking-[0.4em] text-red-500 uppercase font-bold"
+            className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--color-acid-lime)]"
           >
             {clip.cat}
           </span>
         </div>
 
-        <div className="transform transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1)">
+        <div className="transform transition-transform duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]">
           <h3
             style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif", textShadow: "0 4px 20px rgba(0,0,0,0.5)" }}
-            className={`text-white leading-[0.85] transition-all duration-700 ${
+            className={`leading-[0.85] text-white transition-all duration-700 ${
               hovered ? "text-4xl md:text-5xl lg:text-6xl" : "text-2xl md:text-3xl"
             }`}
           >
@@ -139,24 +136,23 @@ function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
           </h3>
           <div
             className={`mt-4 flex items-center gap-4 transition-all duration-700 delay-200 ${
-              hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              hovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
             <span
               style={{ fontFamily: "'Courier Prime', monospace" }}
-              className="text-[9px] tracking-widest text-white/40 uppercase"
+              className="text-[9px] uppercase tracking-widest text-white/40"
             >
               {clip.fmt}
             </span>
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-red-500/50 to-transparent" />
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-[rgba(49,93,255,0.8)] via-[rgba(255,47,146,0.55)] to-transparent" />
           </div>
         </div>
       </div>
 
-      {/* Interactive Border */}
       <div
-        className={`absolute inset-0 z-30 border transition-colors duration-700 pointer-events-none ${
-          hovered ? "border-red-500/30" : "border-white/5"
+        className={`pointer-events-none absolute inset-0 z-30 border transition-colors duration-700 ${
+          hovered ? "border-[rgba(255,47,146,0.28)]" : "border-white/5"
         }`}
       />
     </div>
@@ -165,67 +161,66 @@ function CinematicCard({ clip }: { clip: (typeof CLIPS)[0] }) {
 
 export function ReelSection() {
   return (
-    <section className="bg-gradient-to-b from-black/60 to-black/40 border-t border-white/5">
-      {/* Header Section */}
-      <div className="px-[clamp(24px,6vw,80px)] py-20 flex flex-col md:flex-row justify-between items-end gap-12">
+    <section className="border-t border-white/5 bg-gradient-to-b from-black/60 to-black/40">
+      <div className="flex flex-col items-end justify-between gap-12 px-[clamp(24px,6vw,80px)] py-20 md:flex-row">
         <div className="max-w-2xl">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-[1px] w-12 bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]" />
+          <div className="mb-6 flex items-center gap-4">
+            <div className="h-[1px] w-12 bg-[var(--color-electric-blue)] shadow-[0_0_20px_rgba(49,93,255,0.5)]" />
             <p
               style={{ fontFamily: "'Courier Prime', monospace" }}
-              className="text-[10px] tracking-[0.6em] text-red-500 uppercase font-bold"
+              className="text-[10px] font-bold uppercase tracking-[0.6em] text-[var(--color-hot-pink)]"
             >
               CONCEPT 06 / THE WORK
             </p>
           </div>
           <h2
             style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            className="text-white text-[clamp(48px,8vw,120px)] leading-[0.82] tracking-tighter uppercase"
+            className="text-[clamp(48px,8vw,120px)] uppercase leading-[0.82] tracking-tighter text-white"
           >
             Production
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">2024–2026</span>
+            <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink)] to-[var(--color-acid-lime)] bg-clip-text text-transparent">
+              2024-2026
+            </span>
           </h2>
         </div>
-        <div className="text-right hidden md:block">
+        <div className="hidden text-right md:block">
           <p
             style={{ fontFamily: "'Courier Prime', monospace" }}
-            className="text-[11px] tracking-[0.2em] text-white/30 uppercase leading-relaxed"
+            className="text-[11px] uppercase leading-relaxed tracking-[0.2em] text-white/30"
           >
             A curated collection of
             <br />
             high-fidelity visual systems.
             <br />
-            <span className="text-red-500/50">Engineered for global impact.</span>
+            <span className="text-[var(--color-hot-pink)]/70">Engineered for global impact.</span>
           </p>
         </div>
       </div>
 
-      {/* Masonry Cinema Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-0 border-y border-white/5">
-        {CLIPS.map((clip, i) => (
-          <CinematicCard key={i} clip={clip} />
+      <div className="grid grid-cols-1 gap-0 border-y border-white/5 md:grid-cols-3 lg:grid-cols-4">
+        {CLIPS.map((clip, index) => (
+          <CinematicCard key={index} clip={clip} />
         ))}
       </div>
 
-      {/* Footer CTA */}
-      <div className="px-[clamp(24px,6vw,80px)] py-32 flex flex-col items-center text-center">
-        <div className="w-[1px] h-24 bg-gradient-to-b from-red-500 to-transparent mb-12" />
+      <div className="flex flex-col items-center px-[clamp(24px,6vw,80px)] py-32 text-center">
+        <div className="mb-12 h-24 w-[1px] bg-gradient-to-b from-[var(--color-electric-blue)] via-[var(--color-hot-pink)] to-transparent" />
         <button
           onClick={() => fireCTAAndOpenWhatsApp("concept-06-reel")}
-          className="group relative px-12 py-6 bg-transparent border border-red-500/30 hover:border-red-500 transition-all duration-500 overflow-hidden"
+          className="group cta-secondary relative overflow-hidden border px-12 py-6 transition-all duration-500"
         >
-          <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/5 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(49,93,255,0.04),rgba(255,47,146,0.02))] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <span
             style={{ fontFamily: "'Courier Prime', monospace" }}
-            className="relative text-xs tracking-[0.8em] text-white group-hover:text-red-500 transition-colors duration-500 uppercase font-bold"
+            className="relative text-xs font-bold uppercase tracking-[0.8em] text-white transition-colors duration-500 group-hover:text-[var(--color-acid-lime)]"
           >
             Initialize Project
           </span>
         </button>
         <p
           style={{ fontFamily: "'Courier Prime', monospace" }}
-          className="mt-12 text-[9px] tracking-[0.4em] text-white/10 uppercase"
+          className="mt-12 text-[9px] uppercase tracking-[0.4em] text-white/10"
         >
           DANVERSE · Engineering Cinematic Excellence
         </p>

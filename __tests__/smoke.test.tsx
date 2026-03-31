@@ -68,7 +68,8 @@ describe("smoke tests", () => {
   it("Hero component mounts correctly", () => {
     render(<Hero />)
 
-    expect(screen.getByRole("heading", { name: /films\. identity\. systems\./i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /chat with us/i })).toHaveAttribute("href", "https://wa.me/201207346648")
+    expect(screen.getByRole("heading", { name: /we engineer brand authority\. frame by frame\./i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /work with us/i })).toHaveAttribute("href", "https://wa.me/201207346648")
+    expect(screen.getByRole("link", { name: /explore projects/i })).toHaveAttribute("href", "#showcase")
   })
 })

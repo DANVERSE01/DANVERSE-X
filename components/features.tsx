@@ -79,11 +79,14 @@ export function Features() {
             </HoverLift>
           </div>
 
-          <div className="brand-card mt-12 rounded-2xl p-8 text-center">
-            <p className="body-copy text-lg leading-relaxed">
-              One brief becomes a complete launch system: hooks, scripts, formats, and rollout-ready assets built around
-              your brand.
-            </p>
+          <div className="statement-panel mt-12 rounded-[2rem] px-8 py-8 text-left md:px-10 md:py-10">
+            <div className="relative z-10">
+              <p className="statement-kicker">Launch Architecture</p>
+              <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--color-text-secondary)] md:text-[1.22rem]">
+                One brief becomes a complete launch system: hooks, scripts, formats, and rollout-ready assets built
+                around your brand.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -8,10 +8,11 @@
     "dev": "next dev",
     "lint": "next lint",
     "optimize": "node scripts/optimize-images.mjs",
-    "postbuild": "node scripts/verify-sitemap.mjs || node -e \"process.exit(0)\"",
+    "postbuild": "npm run verify:sitemap",
     "prepare": "husky",
     "start": "next start",
     "test": "vitest run",
+    "verify:sitemap": "node scripts/verify-sitemap.mjs",
     "test:e2e": "playwright test",
     "bundlesize": "node -r ./scripts/bundlesize-fallback.cjs ./node_modules/bundlesize/index.js --config bundlesize.config.json"
   },

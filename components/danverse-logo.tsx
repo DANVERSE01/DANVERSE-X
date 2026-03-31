@@ -3,7 +3,6 @@
 import Image from "next/image"
 
 // DANVERSE Logo System - Uses exact reference image
-// Clean, symmetric, professional layout
 
 interface LogoProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "hero" | "header" | "small"
@@ -65,7 +64,7 @@ export function DanverseWordmark({ size = "md", className = "" }: LogoProps) {
 
   return (
     <span
-      className={`font-bold tracking-[0.15em] bg-gradient-to-r from-[var(--color-accent-blue)] via-[var(--color-accent-gold)] to-[var(--color-accent-blue-strong)] bg-clip-text text-transparent ${fontSizes[size]} ${className}`}
+      className={`font-bold tracking-[0.15em] bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink)] to-[var(--color-acid-lime)] bg-clip-text text-transparent ${fontSizes[size]} ${className}`}
       style={{ fontFamily: '"Sora"' }}
     >
       DANVERSE

@@ -14,7 +14,7 @@ export function WaCtaButton({
   source,
   label = "Book a Call",
   size = "lg",
-  className = "cta-coral rounded-full px-8 text-white font-medium transition-all hover:scale-105",
+  className = "cta-primary rounded-full px-8 text-white font-medium transition-all hover:scale-[1.02]",
 }: WaCtaButtonProps) {
   return (
     <Button size={size} className={className} onClick={() => fireCTAAndOpenWhatsApp(source)}>

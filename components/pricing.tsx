@@ -31,7 +31,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     accent: "lime",
     icon: Sparkles,
     visual: "brief",
-    surface: "linear-gradient(135deg, rgba(26,26,20,0.96) 0%, rgba(38,40,31,0.94) 45%, rgba(11,11,13,0.98) 100%)",
+    surface: "linear-gradient(135deg, rgba(12,14,18,0.98) 0%, rgba(14,22,40,0.94) 42%, rgba(7,8,12,0.98) 100%)",
   },
   {
     number: "02",
@@ -44,7 +44,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     accent: "lavender",
     icon: Clapperboard,
     visual: "build",
-    surface: "linear-gradient(135deg, rgba(10,18,30,0.98) 0%, rgba(12,28,40,0.94) 42%, rgba(10,10,14,0.98) 100%)",
+    surface: "linear-gradient(135deg, rgba(9,15,34,0.98) 0%, rgba(18,30,58,0.94) 42%, rgba(10,10,14,0.98) 100%)",
   },
   {
     number: "03",
@@ -57,14 +57,14 @@ const PROCESS_STEPS: ProcessStep[] = [
     accent: "coral",
     icon: Rocket,
     visual: "launch",
-    surface: "linear-gradient(135deg, rgba(22,13,18,0.98) 0%, rgba(42,18,28,0.92) 46%, rgba(9,10,14,0.98) 100%)",
+    surface: "linear-gradient(135deg, rgba(18,10,28,0.98) 0%, rgba(38,16,52,0.94) 46%, rgba(8,9,14,0.98) 100%)",
   },
 ]
 
 const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
   lime: "var(--color-lime)",
-  lavender: "var(--color-lavender)",
-  coral: "var(--color-coral)",
+  lavender: "var(--color-hot-pink)",
+  coral: "var(--color-electric-blue-strong)",
 }
 
 const PANEL_SHAPES: CSSProperties[] = [
@@ -178,17 +178,17 @@ export function Pricing() {
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-[-12rem] top-8 h-[28rem] w-[28rem] rounded-full blur-[150px]"
-          style={{ background: "rgba(245,245,0,0.12)" }}
+          style={{ background: "rgba(49,93,255,0.16)" }}
         />
         <div
           className="absolute right-[-10rem] top-[18rem] h-[24rem] w-[24rem] rounded-full blur-[140px]"
-          style={{ background: "rgba(201,168,245,0.12)" }}
+          style={{ background: "rgba(255,47,146,0.15)" }}
         />
         <div
           className="absolute inset-0 opacity-80"
           style={{
             background:
-              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 18%, rgba(201,168,245,0.05) 55%, rgba(245,245,0,0.06) 100%)",
+              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 18%, rgba(255,47,146,0.06) 55%, rgba(49,93,255,0.08) 100%)",
           }}
         />
       </div>
@@ -347,15 +347,15 @@ function BriefVisual() {
       </div>
 
       <div className="absolute right-[12%] top-2 h-[74%] w-[36%] -rotate-[14deg] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.03))]">
-        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_20%,rgba(245,245,0,0.22),transparent_42%)]" />
+        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_20%,rgba(49,93,255,0.24),transparent_42%)]" />
         <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">Offer</div>
-        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(245,245,0,0.55)] to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(49,93,255,0.58)] to-transparent" />
       </div>
 
       <div className="absolute bottom-1 right-0 h-[56%] w-[42%] rotate-[8deg] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02))]">
-        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_60%_25%,rgba(201,168,245,0.2),transparent_42%)]" />
+        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_60%_25%,rgba(255,47,146,0.22),transparent_42%)]" />
         <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">Visual Tone</div>
-        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(201,168,245,0.5)] to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(255,47,146,0.52)] to-transparent" />
       </div>
     </>
   )
@@ -383,7 +383,7 @@ function BuildVisual() {
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_22%,rgba(160,224,255,0.22),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(8,14,20,0.55))]" />
             <div className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-white/60">{label}</div>
-            <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(201,168,245,0.52)] via-white/20 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 h-px bg-gradient-to-r from-[rgba(255,47,146,0.52)] via-white/20 to-transparent" />
           </div>
         ))}
       </div>
@@ -420,7 +420,7 @@ function LaunchVisual() {
             </p>
           </div>
 
-          <div className="inline-flex items-center justify-center rounded-full bg-[var(--color-coral)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_36px_rgba(255,77,46,0.22)]">
+          <div className="inline-flex items-center justify-center rounded-full bg-[var(--color-electric-blue-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_36px_rgba(49,77,255,0.22)]">
             Launch Pack
           </div>
         </div>

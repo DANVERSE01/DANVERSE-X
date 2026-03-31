@@ -78,9 +78,9 @@ export function SiteHeader() {
                               href={service.href}
                               className="group flex items-start gap-3 rounded-xl p-3 transition-all hover:bg-white/5"
                             >
-                              <service.icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-accent-gold)]" />
+                              <service.icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-hot-pink)]" />
                               <div>
-                                <div className="text-sm font-semibold text-white group-hover:text-[var(--color-accent-gold)]">
+                                <div className="text-sm font-semibold text-white group-hover:text-[var(--color-hot-pink-strong)]">
                                   {service.label}
                                 </div>
                                 <p className="mt-0.5 text-xs body-copy">{service.description}</p>
@@ -110,7 +110,7 @@ export function SiteHeader() {
 
           <div className="hidden flex-shrink-0 md:block">
             <HoverLift>
-              <Button asChild size="sm" className="cta-coral rounded-full px-5 font-medium text-white">
+              <Button asChild size="sm" className="cta-primary rounded-full px-5 font-medium text-white">
                 <Link href={createWhatsAppUrl()} target="_blank">
                   Chat With Us
                 </Link>
@@ -134,7 +134,7 @@ export function SiteHeader() {
                   <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-white">
                       <div className="flex items-center gap-3">
-                        <Building2 className="h-4 w-4 text-[var(--color-accent-gold)]" />
+                        <Building2 className="h-4 w-4 text-[var(--color-hot-pink)]" />
                         <span className="text-sm font-medium">Services</span>
                       </div>
                       <ChevronDown
@@ -142,12 +142,12 @@ export function SiteHeader() {
                       />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <div className="ml-5 border-l-2 border-[var(--color-accent-gold)] bg-white/5">
+                      <div className="ml-5 border-l-2 border-[var(--color-hot-pink)] bg-white/5">
                         {SERVICES.map((service) => (
                           <Link
                             key={service.href}
                             href={service.href}
-                            className="flex items-center gap-3 px-5 py-2.5 text-white/70 transition-colors hover:text-[var(--color-accent-gold)]"
+                            className="flex items-center gap-3 px-5 py-2.5 text-white/70 transition-colors hover:text-[var(--color-hot-pink-strong)]"
                           >
                             <service.icon className="h-4 w-4 opacity-70" />
                             <span className="text-sm">{service.label}</span>
@@ -161,7 +161,7 @@ export function SiteHeader() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-[var(--color-accent-gold)]"
+                      className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-[var(--color-hot-pink-strong)]"
                     >
                       <link.icon className="h-4 w-4 opacity-75" />
                       <span className="text-sm font-medium">{link.label}</span>
@@ -170,7 +170,7 @@ export function SiteHeader() {
                 </nav>
 
                 <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 p-4">
-                  <Button asChild className="cta-coral w-full rounded-full font-medium text-white">
+                  <Button asChild className="cta-primary w-full rounded-full font-medium text-white">
                     <Link href={createWhatsAppUrl()} target="_blank">
                       Chat With Us
                     </Link>

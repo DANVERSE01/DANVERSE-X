@@ -9,7 +9,7 @@ export function FooterArchviz() {
     <section className="section-shell py-[var(--section-block)] text-white">
       <div className="content-shell">
         <div className="flex justify-center">
-          <Button asChild className="cta-lime rounded-full px-6 py-2 text-sm font-medium">
+          <Button asChild className="cta-primary rounded-full px-6 py-2 text-sm font-medium">
             <a href="https://wa.link/65mf3i" target="_blank" rel="noopener noreferrer">
               Book a Free Consultation
             </a>
@@ -20,7 +20,7 @@ export function FooterArchviz() {
           <Card className="relative overflow-hidden rounded-3xl liquid-glass p-6 sm:p-10">
             <div className="relative grid items-center gap-8 md:grid-cols-2">
               <div>
-                <p className="mb-2 text-[11px] tracking-widest text-[var(--color-accent-gold)]">Design Buy-In Faster</p>
+                <p className="mb-2 text-[11px] tracking-widest text-[var(--color-acid-lime)]">Design Buy-In Faster</p>
                 <h3 className="text-2xl font-semibold leading-tight text-white sm:text-3xl">
                   Walk stakeholders through your space before it is built.
                 </h3>
@@ -44,9 +44,9 @@ export function FooterArchviz() {
                     <div className="relative p-3">
                       <div className="mx-auto mb-3 h-1.5 w-16 rounded-full bg-white/20" />
                       <div className="space-y-1 px-1">
-                        <div className="text-5xl font-bold text-[var(--color-accent-gold)]">ArchViz</div>
+                        <div className="text-5xl font-bold text-[var(--color-electric-blue-strong)]">ArchViz</div>
                         <p className="text-xs text-white/80">Sell the vision with visuals</p>
-                        <div className="mt-3 inline-flex items-center rounded-full bg-black/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-[var(--color-accent-gold)]">
+                        <div className="mt-3 inline-flex items-center rounded-full bg-black/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-[var(--color-hot-pink-strong)]">
                           Walkthrough Ready
                         </div>
                       </div>
@@ -99,10 +99,10 @@ export function FooterArchviz() {
           <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-neutral-500 sm:flex-row">
             <p>© 2026 DANVERSE</p>
             <div className="flex items-center gap-6">
-              <a href="#services" className="hover:text-[var(--color-accent-gold)]">
+              <a href="#services" className="hover:text-[var(--color-hot-pink-strong)]">
                 Services
               </a>
-              <a href="#pricing" className="hover:text-[var(--color-accent-gold)]">
+              <a href="#pricing" className="hover:text-[var(--color-hot-pink-strong)]">
                 Pricing
               </a>
             </div>
@@ -120,7 +120,7 @@ function FooterLinks({ items, title }: { items: Array<{ href: string; label: str
       <ul className="space-y-2 text-sm text-neutral-300">
         {items.map((item) => (
           <li key={item.label}>
-            <Link href={item.href} className="hover:text-[var(--color-accent-gold)]">
+            <Link href={item.href} className="hover:text-[var(--color-hot-pink-strong)]">
               {item.label}
             </Link>
           </li>

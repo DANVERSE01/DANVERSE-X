@@ -34,7 +34,7 @@ const PLANS: PricingPlan[] = [
     name: "Professional",
     price: "$499",
     subtitle: "Built for brands that scale.",
-    badge: "MOST POPULAR",
+    badge: "Most Popular",
     highlighted: true,
     cta: "Start Project",
     features: [
@@ -51,7 +51,7 @@ const PLANS: PricingPlan[] = [
     name: "Premium",
     price: "$1,499",
     subtitle: "Your entire creative operation.",
-    badge: "ELITE",
+    badge: "Elite",
     highlighted: false,
     cta: "Book a Call",
     features: [
@@ -71,45 +71,45 @@ const PLANS: PricingPlan[] = [
 export function PricingCards() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="text-center mb-12">
-        <p className="text-[11px] tracking-widest text-red-400 uppercase mb-3">Pricing</p>
-        <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white uppercase">
+      <div className="mb-12 text-center">
+        <p className="section-label mb-3 text-[11px]">Pricing</p>
+        <h2 className="font-display text-3xl font-extrabold tracking-tight text-white uppercase md:text-4xl">
           Pick Your Plan
         </h2>
-        <p className="mt-4 text-sm text-white/50 max-w-md mx-auto">
-          No retainers. No surprises. Cinematic output — delivered on time, every time.
+        <p className="body-copy mx-auto mt-4 max-w-md text-sm">
+          No retainers. No surprises. Cinematic output, delivered on time, every time.
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+      <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
         {PLANS.map((plan) => (
           <div
             key={plan.name}
-            className={`relative rounded-2xl p-8 flex flex-col gap-6 transition-all ${
+            className={`brand-card relative flex flex-col gap-6 rounded-2xl p-8 transition-all ${
               plan.highlighted
-                ? "ring-1 ring-red-500/30 border border-red-500/50 bg-gradient-to-b from-red-500/20 to-orange-500/10"
-                : "bg-black/40 border border-white/10"
+                ? "border-[rgba(255,47,146,0.34)] shadow-[0_32px_72px_rgba(0,0,0,0.42),0_0_48px_rgba(49,93,255,0.12),0_0_34px_rgba(255,47,146,0.12)]"
+                : ""
             }`}
           >
             {plan.badge && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-red-500 text-white text-[10px] uppercase tracking-widest rounded-full px-3 py-1 font-bold">
+                <span className="accent-chip px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
                   {plan.badge}
                 </span>
               </div>
             )}
 
             <div>
-              <p className="text-[11px] tracking-widest text-white/40 uppercase mb-2">{plan.name}</p>
+              <p className="mb-2 text-[11px] uppercase tracking-widest text-white/40">{plan.name}</p>
               <p className="text-5xl font-black text-white">{plan.price}</p>
-              <p className="text-xs text-white/30 mt-1">{plan.subtitle}</p>
+              <p className="mt-1 text-xs text-[var(--color-text-muted)]">{plan.subtitle}</p>
             </div>
 
-            <ul className="flex flex-col gap-y-2 flex-1">
-              {plan.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm text-white/70">
-                  <Check className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
-                  {f}
+            <ul className="flex flex-1 flex-col gap-y-2">
+              {plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-2 text-sm text-white/70">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-acid-lime)]" />
+                  {feature}
                 </li>
               ))}
             </ul>
@@ -117,16 +117,16 @@ export function PricingCards() {
             <Button
               className={`w-full rounded-full font-medium transition-all ${
                 plan.highlighted
-                  ? "bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-400 hover:to-orange-400 hover:scale-105"
-                  : "border border-white/20 bg-white/5 text-white hover:bg-white/10"
+                  ? "cta-primary text-white hover:scale-[1.02]"
+                  : "cta-secondary text-white hover:scale-[1.02]"
               }`}
               onClick={() =>
                 fireCTAAndOpenWhatsApp(
                   plan.name === "Starter"
                     ? "pricing-starter"
                     : plan.name === "Professional"
-                    ? "pricing-professional"
-                    : "pricing-premium"
+                      ? "pricing-professional"
+                      : "pricing-premium"
                 )
               }
             >

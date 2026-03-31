@@ -1,7 +1,8 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { DanverseLogo } from "@/components/danverse-logo"
+import { DanverseWordmark } from "@/components/danverse-logo"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
 import { createWhatsAppUrl } from "@/lib/env"
@@ -51,19 +52,35 @@ export function Hero() {
     <section aria-label="Hero introduction" className="section-shell overflow-hidden pt-6 sm:pt-8">
       <div className="content-shell">
         <div className="mx-auto flex max-w-[1080px] flex-col items-center py-12 text-center sm:py-16">
-          <div className="relative mb-6">
+          <div className="relative mb-8 flex flex-col items-center gap-4">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-[-18%] top-[-12%] h-[92%] rounded-full blur-3xl"
+              className="pointer-events-none absolute inset-x-[-22%] top-[-18%] h-[130%] rounded-full blur-3xl"
               style={{
                 background:
-                  "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(245,245,0,0.08) 0%, rgba(201,168,245,0.06) 42%, transparent 72%)",
+                  "radial-gradient(ellipse 80% 54% at 50% 0%, rgba(245,245,0,0.1) 0%, rgba(201,168,245,0.08) 38%, transparent 72%)",
               }}
             />
-            <DanverseLogo size="hero" className="relative" />
+            <div className="relative inline-flex items-center gap-4 rounded-full border border-[rgba(245,245,0,0.12)] bg-[rgba(17,19,24,0.72)] px-4 py-3 shadow-[var(--shadow-panel)] backdrop-blur-xl">
+              <div className="relative h-16 w-16 overflow-hidden rounded-[1.35rem] border border-[rgba(245,245,0,0.18)] bg-black/40 shadow-[var(--glow-primary)]">
+                <Image
+                  src="/images/danverse-logo.webp"
+                  alt="DANVERSE emblem"
+                  fill
+                  sizes="64px"
+                  className="object-cover scale-[2.6]"
+                  style={{ objectPosition: "center 8%" }}
+                  priority
+                />
+                <div className="absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t from-[rgba(8,10,14,0.96)] via-[rgba(8,10,14,0.74)] to-transparent" />
+              </div>
+              <div className="text-left">
+                <p className="section-label mb-1">DANVERSE Studio</p>
+                <DanverseWordmark size="lg" className="tracking-[0.22em]" />
+              </div>
+            </div>
           </div>
 
-          <p className="section-label mb-5">DANVERSE Studio</p>
           <h1 className="mx-auto max-w-[9ch] text-center text-white">Films. Identity. Systems.</h1>
           <p className="body-copy mx-auto mt-6 max-w-2xl text-sm leading-7 sm:text-base">
             Director-led creative for brands that need visual authority, clear systems, and launch-ready assets that

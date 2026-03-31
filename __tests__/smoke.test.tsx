@@ -6,7 +6,11 @@ import Page from "@/app/page"
 import { Hero } from "@/components/hero"
 
 vi.mock("next/image", () => ({
-  default: ({ priority: _priority, ...props }: ImgHTMLAttributes<HTMLImageElement> & { priority?: boolean }) => (
+  default: ({
+    priority: _priority,
+    fill: _fill,
+    ...props
+  }: ImgHTMLAttributes<HTMLImageElement> & { priority?: boolean; fill?: boolean }) => (
     <img {...props} alt={props.alt ?? ""} />
   ),
 }))

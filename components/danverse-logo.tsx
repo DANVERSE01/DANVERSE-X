@@ -26,14 +26,13 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
   const priority = size === "hero" || size === "header"
 
   return (
-    <div className={`relative flex items-center justify-center ${className}`}>
+    <div className={`relative flex items-center justify-center ${className}`} style={{ width, height }}>
       <Image
         src="/images/danverse-logo.webp"
         alt="DANVERSE"
-        width={width}
-        height={height}
+        fill
+        sizes={`${width}px`}
         className="object-contain"
-        style={{ width: "auto", height: "auto" }}
         priority={priority}
       />
     </div>
@@ -42,16 +41,8 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
 
 export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
   return (
-    <div className={`relative flex items-center justify-center ${className}`}>
-      <Image
-        src="/images/danverse-logo.webp"
-        alt="DANVERSE"
-        width={140}
-        height={40}
-        className="object-contain"
-        style={{ width: "auto", height: "auto" }}
-        priority
-      />
+    <div className={`relative flex items-center justify-center ${className}`} style={{ width: 140, height: 40 }}>
+      <Image src="/images/danverse-logo.webp" alt="DANVERSE" fill sizes="140px" className="object-contain" priority />
     </div>
   )
 }

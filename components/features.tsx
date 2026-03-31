@@ -1,9 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import { Star } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { HoverLift } from "@/components/hover-lift"
-import { LazyPicture } from "@/components/lazy-picture"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 const TITLE = "Precision Before Production."
@@ -29,17 +29,15 @@ export function Features() {
                     We lock positioning, pacing, visual language, and output format before production begins.
                   </p>
                   <div className="grid grid-cols-2 gap-3">
-                    <LazyPicture
-                      webpSrc="/images/intuitive-1.webp"
+                    <FeatureImage
+                      src="/images/intuitive-1.webp"
                       alt="Close-up smartphone camera module with polished metal finish"
-                      pictureClassName="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10"
-                      className="h-full w-full object-cover"
+                      wrapperClassName="aspect-[3/4]"
                     />
-                    <LazyPicture
-                      webpSrc="/images/intuitive-2.webp"
+                    <FeatureImage
+                      src="/images/intuitive-2.webp"
                       alt="Hand gripping a textured phone back under dramatic studio lighting"
-                      pictureClassName="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10"
-                      className="h-full w-full object-cover"
+                      wrapperClassName="aspect-[3/4]"
                     />
                   </div>
                 </CardContent>
@@ -65,17 +63,15 @@ export function Features() {
                     <div className="section-label text-[10px]">Post-project feedback</div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
-                    <LazyPicture
-                      webpSrc="/images/top-rated-1.webp"
+                    <FeatureImage
+                      src="/images/top-rated-1.webp"
                       alt="Product sketch concepts arranged on a warm tabletop"
-                      pictureClassName="overflow-hidden rounded-xl border border-white/10"
-                      className="h-full w-full object-cover"
+                      wrapperClassName="aspect-[4/3]"
                     />
-                    <LazyPicture
-                      webpSrc="/images/top-rated-2.webp"
+                    <FeatureImage
+                      src="/images/top-rated-2.webp"
                       alt="Backpacks staged for a polished commercial photography setup"
-                      pictureClassName="overflow-hidden rounded-xl border border-white/10"
-                      className="h-full w-full object-cover"
+                      wrapperClassName="aspect-[4/3]"
                     />
                   </div>
                 </CardContent>
@@ -92,5 +88,13 @@ export function Features() {
         </div>
       </div>
     </section>
+  )
+}
+
+function FeatureImage({ src, alt, wrapperClassName }: { src: string; alt: string; wrapperClassName: string }) {
+  return (
+    <div className={`relative overflow-hidden rounded-xl border border-white/10 ${wrapperClassName}`}>
+      <Image src={src} alt={alt} fill sizes="(min-width: 768px) 240px, 42vw" className="h-full w-full object-cover" />
+    </div>
   )
 }

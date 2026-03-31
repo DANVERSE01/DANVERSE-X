@@ -55,9 +55,8 @@ afterEach(() => {
 
 describe("smoke tests", () => {
   it("homepage renders without crashing", () => {
-    const { container } = render(<Page />)
+    render(<Page />)
 
-    expect(container.querySelector("main")).toBeInTheDocument()
     expect(screen.getByTestId("site-header")).toBeInTheDocument()
     expect(screen.getByTestId("process")).toBeInTheDocument()
   })
@@ -65,7 +64,7 @@ describe("smoke tests", () => {
   it("Hero component mounts correctly", () => {
     render(<Hero />)
 
-    expect(screen.getByRole("heading", { name: /ai-powered creative studio for brands/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /films\. identity\. systems\./i })).toBeInTheDocument()
     expect(screen.getByRole("link", { name: /chat with us/i })).toHaveAttribute("href", "https://wa.me/201207346648")
   })
 })

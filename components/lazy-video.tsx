@@ -89,7 +89,6 @@ export default function LazyVideo({
           el.pause()
         } catch {}
       } else if (shouldAutoplay && loadedRef.current) {
-        // resume only if we were auto-playing
         el.play().catch(() => {})
       }
     }
@@ -116,11 +115,13 @@ export default function LazyVideo({
       poster={poster}
       aria-label={ariaLabel}
       disableRemotePlayback
-      style={{
-        backfaceVisibility: 'hidden',
-        WebkitBackfaceVisibility: 'hidden',
-        transform: 'translateZ(0)',
-      } as React.CSSProperties}
+      style={
+        {
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "translateZ(0)",
+        } as React.CSSProperties
+      }
       {...props}
     >
       Your browser does not support the video tag.

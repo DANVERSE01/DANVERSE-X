@@ -1,110 +1,112 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { MarqueeCardIcon } from "./marquee-card-icon"
+import type { ComponentProps } from "react"
+import { Button } from "@/components/ui/button"
+import { HoverLift } from "@/components/hover-lift"
+import { MarqueeCardIcon } from "@/components/marquee-card-icon"
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 type ContentCardItem = {
   label: string
-  icon: React.ComponentProps<typeof MarqueeCardIcon>["type"]
+  icon: ComponentProps<typeof MarqueeCardIcon>["type"]
 }
+
+const FIRST_ROW: ContentCardItem[] = [
+  { label: "AI Startups", icon: "ai-startups" },
+  { label: "Personal Brands", icon: "personal-brands" },
+  { label: "SaaS & Tech", icon: "saas-tech" },
+  { label: "Education", icon: "education" },
+  { label: "Agencies", icon: "agencies" },
+  { label: "Events", icon: "events" },
+  { label: "Luxury Brands", icon: "luxury" },
+  { label: "E-commerce", icon: "ecommerce" },
+]
+
+const SECOND_ROW: ContentCardItem[] = [
+  { label: "Community Funnels", icon: "community-funnels" },
+  { label: "Cinematic Ads", icon: "cinematic-ads" },
+  { label: "UGC Video Labs", icon: "ugc-labs" },
+  { label: "Brand Identity", icon: "brand-identity" },
+  { label: "Landing Pages", icon: "landing" },
+  { label: "AI Pipelines", icon: "pipeline" },
+  { label: "Growth Kits", icon: "growth" },
+  { label: "Sales Scripts", icon: "scripts" },
+]
 
 export function LogoMarquee() {
   const [pausedRow, setPausedRow] = useState<string | null>(null)
-
-  const firstRowContent: ContentCardItem[] = [
-    { label: "AI Startups", icon: "ai-startups" as const },
-    { label: "Personal Brands", icon: "personal-brands" as const },
-    { label: "SaaS & Tech", icon: "saas-tech" as const },
-    { label: "Education", icon: "education" as const },
-    { label: "Agencies", icon: "agencies" as const },
-    { label: "Events", icon: "events" as const },
-    { label: "Luxury Brands", icon: "luxury" as const },
-    { label: "E-commerce", icon: "ecommerce" as const },
-  ]
-
-  const secondRowContent: ContentCardItem[] = [
-    { label: "Community Funnels", icon: "community-funnels" as const },
-    { label: "Cinematic Ads", icon: "cinematic-ads" as const },
-    { label: "UGC Video Labs", icon: "ugc-labs" as const },
-    { label: "Brand Identity", icon: "brand-identity" as const },
-    { label: "Landing Pages", icon: "landing" as const },
-    { label: "AI Pipelines", icon: "pipeline" as const },
-    { label: "Growth Kits", icon: "growth" as const },
-    { label: "Sales Scripts", icon: "scripts" as const },
-  ]
-
-  const ContentCard = ({ item, rowId }: { item: ContentCardItem; rowId: string }) => (
-    <div
-      className="flex-shrink-0 mx-2"
-      onMouseEnter={() => setPausedRow(rowId)}
-      onMouseLeave={() => setPausedRow(null)}
-    >
-      <div className="brand-card flex h-24 w-36 flex-col items-center justify-center rounded-xl p-3 backdrop-blur-xl sm:h-28 sm:w-44">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-2">
-          <MarqueeCardIcon type={item.icon} size={40} />
-        </div>
-        <p className="text-xs sm:text-sm font-medium text-white text-center leading-tight">{item.label}</p>
-      </div>
-    </div>
-  )
+  const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section className="text-white py-16 sm:py-20 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
-          <div className="text-center sm:text-left">
-            <h2 className="section-heading text-3xl text-white sm:text-4xl md:text-5xl">
-              Built for brands with <span className="text-[var(--color-lime)]">global standards</span>
+    <section aria-label="Industries and offers" className="section-shell overflow-hidden py-[var(--section-block)]">
+      <div ref={revealRef} className="content-shell">
+        <div className="mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <div className="max-w-3xl text-center sm:text-left">
+            <h2 className="section-heading text-white">
+              Built for brands with <span className="text-[var(--color-accent-gold)]">global standards</span>
             </h2>
             <p className="body-copy mt-3 max-w-xl text-sm">
               Founders, agencies, hospitality, retail, and luxury teams come to DANVERSE when the work has to feel
               expensive, intentional, and impossible to ignore.
             </p>
           </div>
-          <Button
-            asChild
-            variant="outline"
-            className="rounded-full border-white/20 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-lime)]"
-          >
-            <Link href="#showcase">See Selected Work</Link>
-          </Button>
+          <HoverLift>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-white/12 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-accent-gold)]"
+            >
+              <Link href="#showcase">See Selected Work</Link>
+            </Button>
+          </HoverLift>
         </div>
 
-        {/* Marquee Rows */}
         <div className="space-y-4">
-          {/* First Row */}
-          <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div
-              className="flex animate-scroll-right"
-              style={{
-                animationPlayState: pausedRow === "first" ? "paused" : "running",
-                width: "max-content",
-              }}
-            >
-              {[...firstRowContent, ...firstRowContent, ...firstRowContent].map((item, index) => (
-                <ContentCard key={`first-${index}`} item={item} rowId="first" />
-              ))}
-            </div>
-          </div>
-
-          {/* Second Row */}
-          <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div
-              className="flex animate-scroll-left"
-              style={{
-                animationPlayState: pausedRow === "second" ? "paused" : "running",
-                width: "max-content",
-              }}
-            >
-              {[...secondRowContent, ...secondRowContent, ...secondRowContent].map((item, index) => (
-                <ContentCard key={`second-${index}`} item={item} rowId="second" />
-              ))}
-            </div>
-          </div>
+          <MarqueeRow id="first" items={FIRST_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} />
+          <MarqueeRow id="second" items={SECOND_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} reverse />
         </div>
       </div>
     </section>
+  )
+}
+
+function MarqueeRow({
+  id,
+  items,
+  pausedRow,
+  reverse = false,
+  setPausedRow,
+}: {
+  id: string
+  items: ContentCardItem[]
+  pausedRow: string | null
+  reverse?: boolean
+  setPausedRow: (rowId: string | null) => void
+}) {
+  return (
+    <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <div
+        className={reverse ? "flex animate-scroll-left" : "flex animate-scroll-right"}
+        style={{ animationPlayState: pausedRow === id ? "paused" : "running", width: "max-content" }}
+      >
+        {[...items, ...items, ...items].map((item, index) => (
+          <HoverLift
+            key={`${id}-${index}`}
+            className="mx-2 flex-shrink-0"
+            onHoverStart={() => setPausedRow(id)}
+            onHoverEnd={() => setPausedRow(null)}
+          >
+            <div className="brand-card flex h-24 w-36 flex-col items-center justify-center rounded-xl p-3 backdrop-blur-xl sm:h-28 sm:w-44">
+              <div className="mb-2 flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12">
+                <MarqueeCardIcon type={item.icon} size={40} />
+              </div>
+              <p className="text-center text-xs font-medium leading-tight text-white sm:text-sm">{item.label}</p>
+            </div>
+          </HoverLift>
+        ))}
+      </div>
+    </div>
   )
 }

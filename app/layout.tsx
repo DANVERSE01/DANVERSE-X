@@ -7,10 +7,12 @@ import { ScrollTracker } from "@/components/scroll-tracker"
 import { WebVitalsReporter } from "@/components/web-vitals-reporter"
 import { env } from "@/lib/env"
 import { Suspense } from "react"
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
+const OG_IMAGE_URL = `${SITE_URL}/opengraph-image`
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -25,12 +27,22 @@ export const metadata: Metadata = {
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
     type: "website",
     locale: "en_US",
+    url: SITE_URL,
+    images: [
+      {
+        url: OG_IMAGE_URL,
+        width: 1200,
+        height: 630,
+        alt: "DANVERSE creative studio preview",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+    images: [OG_IMAGE_URL],
   },
 }
 
@@ -47,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {`
             function updateFavicon() {
               const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const faviconHref = darkMode ? '/icons/skitbit-white.svg' : '/icons/favicon-dark.svg';
+              const faviconHref = '/favicon.ico';
               let link = document.querySelector("link[rel~='icon']");
               if (!link) {
                 link = document.createElement('link');
@@ -86,20 +98,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+          style={{ zIndex: "var(--z-cursor)" }}
         >
           Skip to content
         </a>
-        <ScrollTracker />
-        <WebVitalsReporter />
-        <Suspense fallback={null}>
-          <div className="fixed inset-0 z-0 bg-[var(--color-surface-base)]">
-            <Plasma colorStops={["#111111", "#C9A8F5", "#F5F500"]} speed={0.9} amplitude={0.85} blend={0.42} />
-          </div>
-          <main id="main-content" tabIndex={-1} className="relative z-10">
-            {children}
-          </main>
-        </Suspense>
+        <SmoothScrollProvider>
+          <ScrollTracker />
+          <WebVitalsReporter />
+          <Suspense fallback={null}>
+            <div className="fixed inset-0 h-full w-full" style={{ zIndex: "var(--z-background)" }}>
+              <Plasma colorStops={["#0a0c0f", "#c9a8f5", "#f5f500"]} speed={0.85} amplitude={0.78} blend={0.38} />
+            </div>
+            <main id="main-content" tabIndex={-1} className="relative" style={{ zIndex: "var(--z-content)" }}>
+              {children}
+            </main>
+          </Suspense>
+        </SmoothScrollProvider>
       </body>
     </html>
   )

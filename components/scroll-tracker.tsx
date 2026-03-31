@@ -94,6 +94,7 @@ export function ScrollTracker() {
     let merged = false
     let finalized = false
     let maxScrollDepth = 0
+    let frameId = 0
     let activeSection = sections[0] ? getSectionLabel(sections[0], 0) : null
     let activeSectionStartedAt = performance.now()
 
@@ -206,14 +207,18 @@ export function ScrollTracker() {
       }
     }
 
-    updateScrollDepth()
+    const updateLoop = () => {
+      updateScrollDepth()
+      frameId = window.requestAnimationFrame(updateLoop)
+    }
 
-    window.addEventListener("scroll", updateScrollDepth, { passive: true })
+    updateLoop()
+
     window.addEventListener("pagehide", finalizeSession)
     document.addEventListener("visibilitychange", handleVisibilityChange)
 
     return () => {
-      window.removeEventListener("scroll", updateScrollDepth)
+      window.cancelAnimationFrame(frameId)
       window.removeEventListener("pagehide", finalizeSession)
       document.removeEventListener("visibilitychange", handleVisibilityChange)
       observer.disconnect()

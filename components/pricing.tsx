@@ -3,7 +3,6 @@
 import { useEffect, useRef, type CSSProperties } from "react"
 import { ArrowUpRight, Clapperboard, Rocket, Sparkles, type LucideIcon } from "lucide-react"
 import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 type ProcessStep = {
   number: string
@@ -86,8 +85,6 @@ export function Pricing() {
     const section = sectionRef.current
     if (!section) return
 
-    gsap.registerPlugin(ScrollTrigger)
-
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     let cancelled = false
 
@@ -122,7 +119,7 @@ export function Pricing() {
           stagger: 0.08,
           scrollTrigger: {
             trigger: headlineRef.current,
-            start: "top 82%",
+            start: "top 85%",
             once: true,
           },
         })
@@ -135,7 +132,7 @@ export function Pricing() {
           stagger: 0.16,
           scrollTrigger: {
             trigger: cardsWrapRef.current,
-            start: "top 76%",
+            start: "top 85%",
             once: true,
           },
         })
@@ -149,7 +146,7 @@ export function Pricing() {
           stagger: 0.16,
           scrollTrigger: {
             trigger: cardsWrapRef.current,
-            start: "top 74%",
+            start: "top 85%",
             once: true,
           },
         })
@@ -176,27 +173,27 @@ export function Pricing() {
       id="process"
       ref={sectionRef}
       aria-labelledby="process-heading"
-      className="relative isolate overflow-hidden bg-transparent text-white"
+      className="section-shell relative isolate bg-transparent text-white"
     >
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-[-12rem] top-8 h-[28rem] w-[28rem] rounded-full blur-[150px]"
-          style={{ background: "rgba(245,245,0,0.08)" }}
+          style={{ background: "rgba(245,245,0,0.12)" }}
         />
         <div
           className="absolute right-[-10rem] top-[18rem] h-[24rem] w-[24rem] rounded-full blur-[140px]"
-          style={{ background: "rgba(201,168,245,0.08)" }}
+          style={{ background: "rgba(201,168,245,0.12)" }}
         />
         <div
           className="absolute inset-0 opacity-80"
           style={{
             background:
-              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 18%, rgba(245,245,0,0.04) 55%, rgba(255,77,46,0.05) 100%)",
+              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 18%, rgba(201,168,245,0.05) 55%, rgba(245,245,0,0.06) 100%)",
           }}
         />
       </div>
 
-      <div className="container relative mx-auto px-4 py-20 sm:py-24 lg:py-28">
+      <div className="content-shell relative py-[var(--section-block)]">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-4xl">
             <p className="section-label">The Process</p>

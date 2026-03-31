@@ -1,0 +1,124 @@
+
+> my-v0-project@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · instrumentationHook
+
+ ✓ Starting...
+ ○ Compiling /instrumentation ...
+ ✓ Compiled /instrumentation in 3.1s (1190 modules)
+ ✓ Ready in 7.6s
+ ○ Compiling / ...
+ ✓ Compiled / in 21.2s (4431 modules)
+ GET / 200 in 22642ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /api/vitals in 4.7s (4452 modules)
+[web-vitals] {
+  id: 'v3-1774957652968-2887383593919',
+  name: 'TTFB',
+  value: 22579.900000000373,
+  delta: 22579.900000000373,
+  rating: 'poor',
+  navigationType: 'navigate'
+}
+[web-vitals] {
+  id: 'v3-1774957652940-5740481253787',
+  name: 'TTFB',
+  value: 22579.900000000373,
+  delta: 22579.900000000373,
+  rating: 'poor',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 4691ms
+ POST /api/vitals 202 in 4694ms
+ GET /icons/favicon-dark.svg 404 in 5546ms
+ GET /?_rsc=1p60s 200 in 59ms
+[web-vitals] {
+  id: 'v3-1774957658386-4594321889276',
+  name: 'TTFB',
+  value: 22579.900000000373,
+  delta: 22579.900000000373,
+  rating: 'poor',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 23ms
+ GET / 200 in 271ms
+ GET /icons/favicon-dark.svg 404 in 44ms
+[web-vitals] {
+  id: 'v3-1774957668485-2020201003660',
+  name: 'TTFB',
+  value: 236.09999999962747,
+  delta: 236.09999999962747,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+[web-vitals] {
+  id: 'v3-1774957668497-2061176478537',
+  name: 'TTFB',
+  value: 236.09999999962747,
+  delta: 236.09999999962747,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 27ms
+ POST /api/vitals 202 in 24ms
+ ✓ Compiled in 4s (4422 modules)
+ GET /?_rsc=1p60s 200 in 326ms
+ GET / 200 in 617ms
+ ○ Compiling /api/webhook ...
+ ✓ Compiled /api/webhook in 1266ms (3242 modules)
+ POST /api/webhook 500 in 1527ms
+ ○ Compiling /api/vitals ...
+ ✓ Compiled /api/vitals in 968ms (3244 modules)
+[web-vitals] {
+  id: 'v3-1774957761601-4943529547432',
+  name: 'TTFB',
+  value: 544.0999999996275,
+  delta: 544.0999999996275,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+[web-vitals] {
+  id: 'v3-1774957761595-4398904948258',
+  name: 'TTFB',
+  value: 544.0999999996275,
+  delta: 544.0999999996275,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 1050ms
+ POST /api/vitals 202 in 1056ms
+ ✓ Compiled in 2.4s (4452 modules)
+ GET /?_rsc=1p60s 200 in 96ms
+[web-vitals] {
+  id: 'v3-1774957782553-5192979405721',
+  name: 'TTFB',
+  value: 544.0999999996275,
+  delta: 544.0999999996275,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 20ms
+ GET / 200 in 505ms
+[web-vitals] {
+  id: 'v3-1774957791229-1826261096598',
+  name: 'TTFB',
+  value: 403.59999999962747,
+  delta: 403.59999999962747,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 19ms
+[web-vitals] {
+  id: 'v3-1774957791247-4917451454997',
+  name: 'TTFB',
+  value: 403.59999999962747,
+  delta: 403.59999999962747,
+  rating: 'good',
+  navigationType: 'navigate'
+}
+ POST /api/vitals 202 in 23ms
+[?25h

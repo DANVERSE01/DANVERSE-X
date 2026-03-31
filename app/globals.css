@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;500&display=swap");
 @import "../lib/tokens.css";
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -8,80 +8,46 @@
 :root {
   --background: var(--color-bg);
   --foreground: var(--color-text-primary);
-  --card: var(--color-bg-card);
+  --card: var(--color-surface);
   --card-foreground: var(--color-text-primary);
-  --popover: rgba(17, 17, 17, 0.96);
+  --popover: rgba(17, 19, 24, 0.96);
   --popover-foreground: var(--color-text-primary);
-  --primary: var(--color-bg);
-  --primary-foreground: var(--color-text-primary);
-  --secondary: var(--color-bg-card);
+  --primary: var(--color-lime);
+  --primary-foreground: var(--color-text-inverse);
+  --secondary: var(--color-surface-elevated);
   --secondary-foreground: var(--color-text-primary);
-  --muted: var(--color-ash);
-  --muted-foreground: var(--color-ash);
-  --accent: var(--color-bg-card);
+  --muted: rgba(122, 128, 144, 0.14);
+  --muted-foreground: var(--color-text-muted);
+  --accent: rgba(201, 168, 245, 0.1);
   --accent-foreground: var(--color-text-primary);
   --destructive: var(--color-coral);
   --destructive-foreground: #ffffff;
-  --border: rgba(245, 245, 0, 0.08);
-  --input: rgba(28, 28, 28, 0.96);
-  --ring: rgba(245, 245, 0, 0.72);
+  --border: var(--color-border);
+  --input: rgba(17, 19, 24, 0.92);
+  --ring: rgba(245, 245, 0, 0.42);
   --chart-1: var(--color-lime);
   --chart-2: var(--color-lavender);
   --chart-3: var(--color-coral);
-  --chart-4: var(--color-ash);
-  --chart-5: var(--color-text-secondary);
-  --radius: 0.9rem;
-  --sidebar: var(--color-bg-card);
+  --chart-4: #7a8090;
+  --chart-5: #c8c8bc;
+  --radius: 1rem;
+  --sidebar: var(--color-surface);
   --sidebar-foreground: var(--color-text-primary);
   --sidebar-primary: var(--color-lime);
-  --sidebar-primary-foreground: var(--color-bg);
-  --sidebar-accent: var(--color-bg);
+  --sidebar-primary-foreground: var(--color-text-inverse);
+  --sidebar-accent: rgba(201, 168, 245, 0.12);
   --sidebar-accent-foreground: var(--color-text-primary);
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: rgba(245, 245, 0, 0.25);
-
-  --danverse-red: var(--color-coral);
-  --danverse-orange: var(--color-coral);
-  --danverse-purple: var(--color-lavender);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: rgba(245, 245, 0, 0.24);
 }
 
 .dark {
   --background: var(--color-bg);
   --foreground: var(--color-text-primary);
-  --card: var(--color-bg-card);
-  --card-foreground: var(--color-text-primary);
-  --popover: rgba(17, 17, 17, 0.96);
-  --popover-foreground: var(--color-text-primary);
-  --primary: var(--color-bg);
-  --primary-foreground: var(--color-text-primary);
-  --secondary: var(--color-bg-card);
-  --secondary-foreground: var(--color-text-primary);
-  --muted: var(--color-ash);
-  --muted-foreground: var(--color-ash);
-  --accent: var(--color-bg-card);
-  --accent-foreground: var(--color-text-primary);
-  --destructive: var(--color-coral);
-  --destructive-foreground: #ffffff;
-  --border: rgba(245, 245, 0, 0.08);
-  --input: rgba(28, 28, 28, 0.96);
-  --ring: rgba(245, 245, 0, 0.72);
-  --chart-1: var(--color-lime);
-  --chart-2: var(--color-lavender);
-  --chart-3: var(--color-coral);
-  --chart-4: var(--color-ash);
-  --chart-5: var(--color-text-secondary);
-  --sidebar: var(--color-bg-card);
-  --sidebar-foreground: var(--color-text-primary);
-  --sidebar-primary: var(--color-lime);
-  --sidebar-primary-foreground: var(--color-bg);
-  --sidebar-accent: var(--color-bg);
-  --sidebar-accent-foreground: var(--color-text-primary);
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: rgba(245, 245, 0, 0.25);
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: var(--font-body);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -124,87 +90,139 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    min-height: 100%;
+    overflow-x: clip;
+    background: transparent;
+    color-scheme: dark;
+    scroll-behavior: auto;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: clip;
+    background: transparent !important;
+    color: var(--color-text-primary);
     font-family: var(--font-body);
     letter-spacing: -0.012em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+
+  main,
+  section,
+  article,
+  nav {
+    position: relative;
+  }
+
+  p,
+  li,
+  button,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-body);
   }
 
   p {
-    color: var(--color-ash);
+    color: var(--color-text-muted);
     text-wrap: pretty;
   }
 
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-display);
+  h4 {
+    font-family: "Sora";
     text-wrap: balance;
+    color: var(--color-text-primary);
   }
 
-  html {
-    height: 100%;
-    overflow-x: hidden;
-    overscroll-behavior: none;
-    background: var(--color-surface-base);
+  h1 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
   }
 
-  body {
-    height: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-    overflow-x: hidden;
-    overscroll-behavior: none;
-    background: var(--color-surface-base);
-    -webkit-overflow-scrolling: touch;
-    touch-action: manipulation;
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
   }
 
-  @supports (-webkit-touch-callout: none) {
-    html {
-      height: -webkit-fill-available;
-    }
+  h3 {
+    font-size: clamp(1.35rem, 2.5vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
 
-    body {
-      min-height: -webkit-fill-available;
-      position: fixed;
-      overflow-y: scroll;
-      width: 100%;
-      height: 100%;
-    }
+  h4 {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  a,
+  button {
+    color: inherit;
+  }
+
+  img,
+  video,
+  picture,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
   }
 
   #__next,
   [data-nextjs-scroll-focus-boundary] {
-    background: var(--color-surface-base);
     min-height: 100vh;
     min-height: 100dvh;
+    background: transparent;
   }
 }
 
-/* Apple Site Header Glass Effects */
+.section-shell {
+  padding-inline: var(--section-inline);
+}
+
+.content-shell {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+
+.content-shell-narrow {
+  width: min(100%, var(--content-narrow));
+  margin-inline: auto;
+}
+
 .liquid-glass {
-  background: rgba(28, 28, 28, 0.76);
+  background: rgba(17, 17, 17, 0.72);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(245, 245, 0, 0.08);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.24),
+    0 12px 32px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .liquid-glass-enhanced {
-  background: rgba(28, 28, 28, 0.86);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(245, 245, 0, 0.14);
+  background: rgba(17, 19, 24, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(245, 245, 0, 0.12);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 24px 60px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .liquid-glass-header {
@@ -212,7 +230,7 @@
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(245, 245, 0, 0.08);
   box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.28),
+    0 12px 32px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
@@ -221,21 +239,19 @@
   background: rgba(17, 17, 17, 0.72);
   backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.18),
+    0 8px 28px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .brand-card {
   background: linear-gradient(
     140deg,
-    rgba(26, 26, 30, 0.96) 0%,
-    rgba(15, 22, 30, 0.94) 48%,
-    rgba(11, 12, 16, 0.98) 100%
+    rgba(17, 19, 24, 0.96) 0%,
+    rgba(26, 29, 36, 0.94) 48%,
+    rgba(8, 10, 14, 0.98) 100%
   );
-  border: 1px solid rgba(245, 245, 0, 0.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 24px 58px rgba(0, 0, 0, 0.24);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-panel);
   transition:
     border-color 240ms ease,
     box-shadow 240ms ease,
@@ -244,53 +260,52 @@
 
 .brand-card:hover,
 .brand-card:focus-within {
-  border-color: rgba(201, 168, 245, 0.25);
+  border-color: rgba(245, 245, 0, 0.18);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 30px 72px rgba(0, 0, 0, 0.3),
-    0 0 34px rgba(201, 168, 245, 0.1);
+    0 32px 80px rgba(0, 0, 0, 0.36),
+    0 0 40px rgba(245, 245, 0, 0.08);
 }
 
 .section-label {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-lime);
 }
 
 .section-heading {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-family: "Sora";
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
 
 .body-copy {
   font-family: var(--font-body);
-  color: var(--color-ash);
+  color: var(--color-text-muted);
 }
 
 .cta-coral {
-  background: var(--color-coral);
+  background: linear-gradient(135deg, var(--color-coral) 0%, #ff6f55 100%);
   color: #ffffff;
-  box-shadow: 0 16px 36px rgba(255, 77, 46, 0.18);
+  box-shadow: var(--glow-coral);
 }
 
 .cta-coral:hover,
 .cta-coral:focus-visible {
-  background: #ff613e;
+  background: linear-gradient(135deg, #ff6345 0%, #ff7d66 100%);
 }
 
 .cta-lime {
-  background: var(--color-lime);
-  color: var(--color-bg);
-  box-shadow: 0 16px 36px rgba(245, 245, 0, 0.18);
+  background: linear-gradient(135deg, var(--color-lime) 0%, var(--color-accent-blue-strong) 100%);
+  color: var(--color-text-inverse);
+  box-shadow: var(--glow-primary);
 }
 
 .cta-lime:hover,
 .cta-lime:focus-visible {
-  background: #ffff3c;
+  background: linear-gradient(135deg, #ffff2c 0%, #ffff72 100%);
 }
 
 .nav-link {
@@ -306,7 +321,7 @@
   height: 2px;
   transform: scaleX(0);
   transform-origin: left;
-  background: var(--color-lime);
+  background: linear-gradient(90deg, var(--color-lime), var(--color-lavender));
   opacity: 0.92;
   transition: transform 180ms ease;
 }
@@ -318,23 +333,20 @@
   transform: scaleX(1);
 }
 
-/* Logo Marquee Animations */
-@keyframes scroll-right {
-  0% {
-    transform: translateX(-33.333%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
+.lazy-image {
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 360ms ease,
+    transform 480ms var(--ease-cinematic),
+    filter 360ms ease;
+  filter: saturate(0.92);
 }
 
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
+.lazy-image.is-loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: saturate(1);
 }
 
 .animate-scroll-right {
@@ -363,10 +375,10 @@
 .process-banner:hover,
 .process-banner:focus-within {
   transform: translateY(-12px);
-  border-color: rgba(201, 168, 245, 0.22);
+  border-color: rgba(245, 245, 0, 0.18);
   box-shadow:
     0 36px 120px rgba(0, 0, 0, 0.42),
-    0 0 40px rgba(201, 168, 245, 0.08);
+    0 0 40px rgba(245, 245, 0, 0.08);
 }
 
 .process-banner:hover .process-banner-visual > *,
@@ -377,9 +389,32 @@
     0 0 30px rgba(255, 255, 255, 0.05);
 }
 
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-33.333%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .process-banner,
-  .process-banner-visual > * {
+  .process-banner-visual > *,
+  .lazy-image,
+  .animate-scroll-left,
+  .animate-scroll-right {
     transition: none !important;
     animation: none !important;
   }
@@ -387,7 +422,7 @@
   .process-banner:hover,
   .process-banner:focus-within {
     transform: none;
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-border);
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
   }
 
@@ -396,25 +431,21 @@
     transform: none !important;
     box-shadow: none !important;
   }
-}
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* Focus visible - all interactive elements */
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible {
-  outline: 2px solid var(--color-lime);
+  outline: 2px solid rgba(245, 245, 0, 0.72);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 999px;
 }

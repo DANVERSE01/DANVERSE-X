@@ -1,60 +1,65 @@
 :root {
-  /* Core Palette */
+  --color-bg: #080a0e;
+  --color-surface: #111318;
+  --color-surface-2: #1a1d24;
+  --color-border: rgba(245, 245, 0, 0.08);
+  --color-border-strong: rgba(245, 245, 0, 0.22);
+  --color-text-primary: #f0f0e8;
+  --color-text-secondary: #c8c8bc;
+  --color-text-muted: #7a8090;
   --color-lime: #f5f500;
   --color-lavender: #c9a8f5;
   --color-coral: #ff4d2e;
-  --color-stone: #2e2e2e;
-  --color-bg: #111111;
-  --color-bg-card: #1c1c1c;
-  --color-ash: #8a9a95;
+  --color-accent-blue: #f5f500;
+  --color-accent-gold: #c9a8f5;
+  --color-brand-primary: #f5f500;
+  --color-brand-secondary: #c9a8f5;
+  --glow-primary: 0 0 48px rgba(245, 245, 0, 0.22);
+  --glow-secondary: 0 0 48px rgba(201, 168, 245, 0.18);
+  --glow-coral: 0 0 38px rgba(255, 77, 46, 0.22);
+  --shadow-panel: 0 24px 72px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --font-display: "Sora";
+  --font-body: "Manrope", sans-serif;
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --section-inline: clamp(1.5rem, 5vw, 6rem);
+  --section-block: clamp(4.5rem, 10vw, 8rem);
+  --content-max: 1440px;
+  --z-background: 0;
+  --z-content: 10;
+  --z-overlay: 20;
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-cursor: 9999;
 
-  /* Compatibility aliases */
-  --color-brand-primary: var(--color-lime);
-  --color-brand-secondary: var(--color-lavender);
+  /* Compatibility aliases still used by the visual layer. */
+  --color-surface-elevated: var(--color-surface-2);
+  --color-surface-soft: rgba(17, 19, 24, 0.76);
+  --color-surface-overlay: rgba(8, 10, 14, 0.84);
+  --color-bg-card: var(--color-surface);
+  --color-surface-base: var(--color-bg);
+  --color-surface-raised: var(--color-surface-2);
+  --color-ash: var(--color-text-muted);
+  --color-text-inverse: #080a0e;
+  --color-accent-blue-strong: #ffff52;
+  --color-accent-gold-strong: #dbc2fb;
   --color-accent-coral: var(--color-coral);
   --color-accent-lavender: var(--color-lavender);
-  --color-accent-steel: var(--color-ash);
+  --color-accent-steel: var(--color-text-muted);
   --color-accent-purple: var(--color-lavender);
   --color-accent-orange: var(--color-coral);
-
-  /* Surfaces */
-  --color-surface-base: var(--color-bg);
-  --color-surface-raised: var(--color-bg-card);
-  --color-surface-overlay: rgba(17, 17, 17, 0.82);
-
-  /* Typography */
-  --color-text-primary: #f6f6f0;
-  --color-text-secondary: #d8d9d2;
-  --color-text-muted: var(--color-ash);
-  --color-text-inverse: #111111;
-
-  /* Borders */
-  --color-border-subtle: rgba(245, 245, 0, 0.08);
-  --color-border-strong: rgba(245, 245, 0, 0.28);
-  --color-border-teal: rgba(201, 168, 245, 0.25);
-
-  --color-surface: var(--color-surface-raised);
-  --color-text: var(--color-text-primary);
-  --color-muted: var(--color-text-muted);
-
-  /* Glows */
-  --glow-primary: 0 0 42px rgba(245, 245, 0, 0.24);
-  --glow-secondary: 0 0 48px rgba(201, 168, 245, 0.22);
-  --glow-coral: 0 0 38px rgba(255, 77, 46, 0.22);
-
-  --font-display: "Sora", sans-serif;
-  --font-body: "Manrope", sans-serif;
+  --color-accent-glow: rgba(245, 245, 0, 0.15);
+  --color-accent-glow-warm: rgba(201, 168, 245, 0.16);
   --font-process-display: var(--font-display);
   --font-process-body: var(--font-body);
-
-  /* Motion */
-  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-snap: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast: 180ms;
   --duration-base: 320ms;
-  --duration-slow: 600ms;
+  --duration-slow: 640ms;
   --dur-fast: var(--duration-fast);
   --dur-normal: var(--duration-base);
   --dur-slow: var(--duration-slow);
+  --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.24);
+  --shadow-focus: 0 0 0 3px rgba(245, 245, 0, 0.2);
+  --content-narrow: 1180px;
 }

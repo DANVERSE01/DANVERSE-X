@@ -23,6 +23,7 @@ const SIZES = {
 
 export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
   const { width, height } = SIZES[size]
+  const priority = size === "hero" || size === "header"
 
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
@@ -32,7 +33,8 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
         width={width}
         height={height}
         className="object-contain"
-        priority
+        style={{ width: "auto", height: "auto" }}
+        priority={priority}
       />
     </div>
   )
@@ -47,6 +49,7 @@ export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
         width={140}
         height={40}
         className="object-contain"
+        style={{ width: "auto", height: "auto" }}
         priority
       />
     </div>
@@ -71,8 +74,8 @@ export function DanverseWordmark({ size = "md", className = "" }: LogoProps) {
 
   return (
     <span
-      className={`font-bold tracking-[0.15em] bg-gradient-to-r from-red-500 via-orange-500 to-red-400 bg-clip-text text-transparent ${fontSizes[size]} ${className}`}
-      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+      className={`font-bold tracking-[0.15em] bg-gradient-to-r from-[var(--color-accent-blue)] via-[var(--color-accent-gold)] to-[var(--color-accent-blue-strong)] bg-clip-text text-transparent ${fontSizes[size]} ${className}`}
+      style={{ fontFamily: '"Sora"' }}
     >
       DANVERSE
     </span>

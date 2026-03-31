@@ -14,8 +14,8 @@ export default function OpenGraphImage() {
     <div
       style={{
         alignItems: "center",
-        background: "#0D1B1E",
-        color: "#EEF0E8",
+        background: "#080B10",
+        color: "#F0F4FF",
         display: "flex",
         flexDirection: "column",
         height: "100%",
@@ -26,14 +26,16 @@ export default function OpenGraphImage() {
     >
       <div
         style={{
-          background: "radial-gradient(circle at top, rgba(239, 120, 106, 0.28), transparent 55%)",
+          background:
+            "radial-gradient(circle at top, rgba(42, 107, 255, 0.28), transparent 48%), radial-gradient(circle at bottom right, rgba(201, 168, 76, 0.2), transparent 36%)",
           inset: 0,
           position: "absolute",
         }}
       />
       <div
         style={{
-          border: "1px solid rgba(239, 120, 106, 0.35)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          background: "rgba(13, 17, 23, 0.82)",
           display: "flex",
           flexDirection: "column",
           gap: 20,
@@ -44,9 +46,9 @@ export default function OpenGraphImage() {
       >
         <div
           style={{
-            color: "#BB8CFF",
+            color: "#F0F4FF",
             fontSize: 116,
-            fontWeight: 800,
+            fontWeight: 700,
             letterSpacing: 8,
             lineHeight: 1,
           }}
@@ -55,7 +57,7 @@ export default function OpenGraphImage() {
         </div>
         <div
           style={{
-            color: "#eef0e8",
+            color: "#C8D2E6",
             fontSize: 36,
             letterSpacing: 3,
             textTransform: "uppercase",
@@ -63,6 +65,15 @@ export default function OpenGraphImage() {
         >
           AI-Powered Creative Studio
         </div>
+        <div
+          style={{
+            alignSelf: "center",
+            background: "linear-gradient(90deg, #c9a8f5 0%, #f5f500 100%)",
+            borderRadius: 999,
+            height: 6,
+            width: 280,
+          }}
+        />
       </div>
     </div>,
     size

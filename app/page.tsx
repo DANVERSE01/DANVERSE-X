@@ -46,7 +46,7 @@ const PAGE_STRUCTURED_DATA = {
 export default function Page() {
   return (
     <>
-      <main className="min-h-[100dvh] text-white relative z-10">
+      <div className="min-h-[100dvh] text-white">
         <SiteHeader />
         <Hero />
         <Features />
@@ -55,7 +55,7 @@ export default function Page() {
         <Pricing />
         <AppverseFooter />
         <ScrollToTop />
-      </main>
+      </div>
 
       {/* JSON-LD structured data */}
       <Script

@@ -129,7 +129,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="plasma-atmosphere" aria-hidden="true" />
               <div className="plasma-grain" aria-hidden="true" />
             </div>
-            <main id="main-content" tabIndex={-1} className="relative" style={{ zIndex: "var(--z-content)" }}>
+            <main
+              id="main-content"
+              tabIndex={-1}
+              className="relative overflow-x-hidden"
+              style={{ zIndex: "var(--z-content)" }}
+            >
               {children}
             </main>
           </Suspense>

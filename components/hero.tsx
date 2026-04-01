@@ -135,7 +135,7 @@ export function Hero() {
     <section
       ref={heroRef}
       aria-label="Hero introduction"
-      className="section-shell relative overflow-hidden pt-3 sm:pt-6"
+      className="section-shell relative overflow-x-hidden pt-3 sm:pt-6"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
         <div className="content-shell relative h-[500px] sm:h-[720px] lg:h-[780px]">
@@ -208,8 +208,8 @@ export function Hero() {
             <span aria-hidden="true" className="h-px w-8 bg-gradient-to-l from-transparent via-white/42 to-white/8" />
           </motion.div>
 
-          <div className="relative mx-auto flex w-full justify-center">
-            <h1 className="relative z-10 mx-auto max-w-full text-center text-[clamp(2.05rem,9.6vw,4rem)] font-extrabold leading-[0.95] tracking-[-0.055em] text-white sm:text-[clamp(3.3rem,8vw,5.8rem)] sm:leading-[0.9] sm:tracking-[-0.06em] lg:text-[clamp(4.8rem,6.2vw,6.8rem)]">
+          <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
+            <h1 className="relative z-10 mx-auto w-full max-w-full text-center text-[clamp(2.05rem,9.6vw,4rem)] font-extrabold leading-[0.95] tracking-[-0.055em] text-white [overflow-wrap:anywhere] sm:text-[clamp(3.3rem,8vw,5.8rem)] sm:leading-[0.9] sm:tracking-[-0.06em] lg:text-[clamp(4.8rem,6.2vw,6.8rem)]">
               {HERO_HEADLINE_LINES.map((line, index) => (
                 <motion.span
                   key={line.text}

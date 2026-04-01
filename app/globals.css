@@ -92,7 +92,6 @@
 
   html {
     min-height: 100%;
-    overflow-x: clip;
     background: transparent;
     color-scheme: dark;
     scroll-behavior: auto;
@@ -101,7 +100,6 @@
   body {
     min-height: 100vh;
     min-height: 100dvh;
-    overflow-x: clip;
     background: transparent !important;
     color: var(--color-text-primary);
     font-family: var(--font-body);
@@ -151,6 +149,9 @@
       "ss01" 1,
       "ss02" 1;
     text-wrap: balance;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     color: var(--color-text-primary);
   }
 

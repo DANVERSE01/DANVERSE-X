@@ -27,11 +27,7 @@ const HERO_MEDIA: HeroMediaItem[] = [
   },
 ]
 
-const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [
-  { text: "We Build the" },
-  { text: "Visual Language" },
-  { text: "Your Brand Competes", accent: "With" },
-]
+const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [{ text: "We Build Visual Advantage" }]
 
 const HERO_EASE = [0.16, 1, 0.3, 1] as const
 const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const

@@ -33,9 +33,9 @@ export function CinematicShowcase() {
 
   return (
     <section id="showcase" aria-label="Selected work" className={styles.stage}>
-      <div className="section-shell bg-[#080a10]">
+      <div className="section-shell">
         <div ref={revealRef} className={`${styles.contentShell} ${styles.contentLayer}`}>
-          <div className={styles.headingRow}>
+          <div className={styles.headingRow} data-reveal-item>
             <div className={styles.headingCopy}>
               <p className="section-label">Selected Work</p>
               <h2 id="production-showcase-heading" className={styles.sectionHeading}>
@@ -51,26 +51,30 @@ export function CinematicShowcase() {
           </div>
 
           <div className={styles.viewerShell}>
-            <div className={styles.mediaPanel}>
+            <div className={styles.mediaPanel} data-reveal-item>
               <div className={styles.viewerGlow} aria-hidden="true" />
-              <div className={styles.mediaViewport} style={mediaViewportStyle}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeWork.embed}
-                    initial={{ opacity: 0.18, scale: 1.02 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0.12, scale: 0.985 }}
-                    transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-                    className={styles.mediaMotion}
-                  >
-                    <iframe
-                      title={`${activeWork.title} presentation reel`}
-                      src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      className={styles.mediaFrame}
-                    />
-                  </motion.div>
-                </AnimatePresence>
+              <div className={styles.mediaViewport}>
+                <div className={styles.mediaBackdrop} style={mediaViewportStyle} />
+                <div className={styles.mediaCrop}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeWork.embed}
+                      initial={{ opacity: 0.18, scale: 1.02 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0.12, scale: 0.985 }}
+                      transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+                      className={styles.mediaMotion}
+                    >
+                      <iframe
+                        title={`${activeWork.title} presentation reel`}
+                        src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        className={styles.mediaFrame}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                <div className={styles.mediaMask} />
                 <div className={styles.mediaShade} />
                 <ShowcaseControlRail
                   activeIndex={activeIndex}
@@ -82,7 +86,7 @@ export function CinematicShowcase() {
               </div>
             </div>
 
-            <div className={styles.detailsGrid} aria-live="polite" aria-atomic="true">
+            <div className={styles.detailsGrid} aria-live="polite" aria-atomic="true" data-reveal-item>
               <article className={styles.summaryCard}>
                 <div className={styles.summaryTopline}>
                   <span className={styles.summaryProject}>Project</span>

@@ -15,10 +15,12 @@ export function Features() {
     <section id="features" aria-label="Studio principles" className="section-shell py-[var(--section-block)]">
       <div ref={revealRef} className="content-shell">
         <div className="content-shell-narrow">
-          <h2 className="section-heading mb-10 text-center text-white">{TITLE}</h2>
+          <h2 data-reveal-item className="section-heading mb-10 text-center text-white">
+            {TITLE}
+          </h2>
 
           <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-            <HoverLift>
+            <HoverLift data-reveal-item>
               <Card className="brand-card overflow-hidden">
                 <CardHeader className="pb-4">
                   <p className="section-label text-[11px]">Craft + Control</p>
@@ -44,7 +46,7 @@ export function Features() {
               </Card>
             </HoverLift>
 
-            <HoverLift>
+            <HoverLift data-reveal-item>
               <Card className="brand-card overflow-hidden">
                 <CardHeader className="pb-4">
                   <p className="section-label text-[11px]">Client Feedback</p>
@@ -79,7 +81,7 @@ export function Features() {
             </HoverLift>
           </div>
 
-          <div className="statement-panel mt-12 rounded-[2rem] px-8 py-8 text-left md:px-10 md:py-10">
+          <div data-reveal-item className="statement-panel mt-12 rounded-[2rem] px-8 py-8 text-left md:px-10 md:py-10">
             <div className="relative z-10">
               <p className="statement-kicker">Launch Architecture</p>
               <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--color-text-secondary)] md:text-[1.22rem]">

@@ -19,7 +19,7 @@ export function AppverseFooter() {
   return (
     <section aria-label="Footer and contact" className="section-shell py-[var(--section-block)] text-white">
       <div ref={revealRef} className="content-shell">
-        <div className="flex justify-center">
+        <div data-reveal-item className="flex justify-center">
           <HoverLift>
             <Button
               onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
@@ -30,7 +30,7 @@ export function AppverseFooter() {
           </HoverLift>
         </div>
 
-        <div className="my-16">
+        <div data-reveal-item className="my-16">
           <HoverLift>
             <Card className="brand-card relative overflow-hidden rounded-2xl !p-8 md:!p-10">
               <div className="pointer-events-none absolute inset-0">
@@ -78,7 +78,7 @@ export function AppverseFooter() {
           </HoverLift>
         </div>
 
-        <footer className="border-t border-white/10 pt-12">
+        <footer data-reveal-item className="border-t border-white/10 pt-12">
           <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
             <div className="space-y-4">
               <DanverseHeaderLogo />

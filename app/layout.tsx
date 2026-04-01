@@ -1,6 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
+import { Plus_Jakarta_Sans, Syne } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
 import { ScrollTracker } from "@/components/scroll-tracker"
@@ -13,6 +14,20 @@ const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
+
+const displayFont = Syne({
+  subsets: ["latin"],
+  variable: "--font-display-next",
+  weight: ["700", "800"],
+  display: "swap",
+})
+
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body-next",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "DANVERSE | AI-Powered Creative Studio",
@@ -48,11 +63,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://player.vimeo.com" />
         <link rel="preconnect" href="https://i.vimeocdn.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
@@ -112,7 +125,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WebVitalsReporter />
           <Suspense fallback={null}>
             <div className="fixed inset-0 h-full w-full" style={{ zIndex: "var(--z-background)" }}>
-              <Plasma colorStops={["#315dff", "#ff2f92", "#d9ff26"]} speed={0.82} amplitude={0.92} blend={0.46} />
+              <Plasma colorStops={["#315dff", "#ff2f92", "#d9ff26"]} speed={0.74} amplitude={0.98} blend={0.62} />
+              <div className="plasma-atmosphere" aria-hidden="true" />
+              <div className="plasma-grain" aria-hidden="true" />
             </div>
             <main id="main-content" tabIndex={-1} className="relative" style={{ zIndex: "var(--z-content)" }}>
               {children}

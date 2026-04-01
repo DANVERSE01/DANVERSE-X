@@ -42,7 +42,7 @@ export function LogoMarquee() {
   return (
     <section aria-label="Industries and offers" className="section-shell overflow-hidden py-[var(--section-block)]">
       <div ref={revealRef} className="content-shell">
-        <div className="mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <div data-reveal-item className="mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="max-w-3xl text-center sm:text-left">
             <h2 className="section-heading text-white">
               Built for brands with <span className="text-[var(--color-hot-pink-strong)]">global standards</span>
@@ -86,7 +86,10 @@ function MarqueeRow({
   setPausedRow: (rowId: string | null) => void
 }) {
   return (
-    <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+    <div
+      data-reveal-item
+      className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+    >
       <div
         className={reverse ? "flex animate-scroll-left" : "flex animate-scroll-right"}
         style={{ animationPlayState: pausedRow === id ? "paused" : "running", width: "max-content" }}

@@ -16,10 +16,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function useScrollReveal<T extends HTMLElement>({
   delay = 0,
-  duration = 0.9,
+  duration = 1.05,
   once = true,
   x = 0,
-  y = 40,
+  y = 48,
 }: ScrollRevealOptions = {}) {
   const ref = useRef<T | null>(null)
 
@@ -35,27 +35,43 @@ export function useScrollReveal<T extends HTMLElement>({
       return
     }
 
-    const animation = gsap.fromTo(
-      element,
-      { opacity: 0, x, y },
-      {
+    const targets = Array.from(element.querySelectorAll<HTMLElement>("[data-reveal-item]"))
+    const revealTargets = targets.length ? targets : [element]
+    const context = gsap.context(() => {
+      gsap.set(revealTargets, {
+        opacity: 0,
+        x,
+        y,
+        scale: 0.985,
+        rotateX: 10,
+        filter: "blur(10px)",
+        transformPerspective: 1200,
+        transformOrigin: "50% 100%",
+        willChange: "transform, opacity, filter",
+      })
+
+      gsap.to(revealTargets, {
         opacity: 1,
         x: 0,
         y: 0,
+        scale: 1,
+        rotateX: 0,
+        filter: "blur(0px)",
         delay,
         duration,
-        ease: "power3.out",
+        ease: "expo.out",
+        stagger: targets.length > 1 ? 0.12 : 0,
+        clearProps: "willChange",
         scrollTrigger: {
           trigger: element,
           once,
-          start: "top 85%",
+          start: "top 88%",
         },
-      }
-    )
+      })
+    }, element)
 
     return () => {
-      animation.scrollTrigger?.kill()
-      animation.kill()
+      context.revert()
     }
   }, [delay, duration, once, x, y])
 

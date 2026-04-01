@@ -14,6 +14,16 @@ export function CinematicShowcase() {
   const revealRef = useScrollReveal<HTMLDivElement>()
   const activeWork = SHOWCASE_WORKS[activeIndex]
   const activeNumber = String(activeIndex + 1).padStart(2, "0")
+  const mediaViewportStyle =
+    activeWork.poster || activeWork.backgroundColor
+      ? {
+          backgroundColor: activeWork.backgroundColor ?? "#080a10",
+          backgroundImage: activeWork.poster ? `url(${activeWork.poster})` : "none",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }
+      : undefined
 
   const handleChange = (index: number) => {
     if (index !== activeIndex) setActiveIndex(index)
@@ -43,7 +53,7 @@ export function CinematicShowcase() {
           <div className={styles.viewerShell}>
             <div className={styles.mediaPanel}>
               <div className={styles.viewerGlow} aria-hidden="true" />
-              <div className={styles.mediaViewport}>
+              <div className={styles.mediaViewport} style={mediaViewportStyle}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeWork.embed}

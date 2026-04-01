@@ -5,6 +5,8 @@ export type ShowcaseWork = {
   client: string
   role: string
   desc: string
+  poster?: string | null
+  backgroundColor?: string
 }
 
 export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
@@ -15,6 +17,8 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     client: "Self-Initiated",
     role: "Direction, VFX & AI Storycraft",
     desc: "A personal cinematic film built entirely from AI \u2014 no crew, no location, no compromise on atmosphere",
+    poster: null,
+    backgroundColor: "#080a10",
   },
   {
     embed: "https://player.vimeo.com/video/1164910690",

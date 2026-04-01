@@ -18,7 +18,7 @@ type ProcessStep = {
   surface: string
 }
 
-const HEADLINE_WORDS = ["Built", "Like", "A", "Campaign", "Studio."]
+const HEADLINE_WORDS = ["No", "Brief", "Leaves", "Without", "a", "Direction"]
 
 const PROCESS_STEPS: ProcessStep[] = [
   {
@@ -193,7 +193,7 @@ export function Pricing() {
             <h2
               id="process-heading"
               ref={headlineRef}
-              className="section-heading mt-5 flex max-w-5xl flex-wrap gap-x-4 gap-y-2 text-[2.7rem] leading-[0.96] text-white sm:text-[4.3rem] lg:text-[5.5rem]"
+              className="section-heading mt-5 flex max-w-6xl flex-wrap gap-x-4 gap-y-2 text-[2.7rem] leading-[0.96] text-white sm:text-[4.3rem] lg:text-[5.5rem]"
             >
               {HEADLINE_WORDS.map((word, index) => (
                 <span key={word} className="inline-flex overflow-hidden pb-2 sm:pb-3">
@@ -210,8 +210,7 @@ export function Pricing() {
             </h2>
 
             <p className="body-copy mt-6 max-w-3xl text-base leading-8 sm:text-lg">
-              Every project moves through a compact studio system: we lock the idea, build the image language, then
-              deliver a rollout-ready package that can launch immediately without losing the brand.
+              Three stages. One locked direction. Zero wasted rounds
             </p>
           </div>
 

@@ -90,7 +90,7 @@ function BuildVisual() {
 
   return (
     <VisualShell>
-      <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4">
+      <div className="grid h-full grid-rows-[auto_1fr] gap-4">
         <div className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/58">
           Build Sequence
         </div>
@@ -125,19 +125,6 @@ function BuildVisual() {
             </div>
           ))}
         </div>
-
-        <div className="grid grid-cols-3 gap-3">
-          {["Shot", "Motion", "Finish"].map((label, index) => (
-            <motion.div
-              key={label}
-              className="rounded-[1.15rem] border border-white/8 bg-[rgba(255,255,255,0.03)] px-3 py-3 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white/52"
-              animate={reduced ? undefined : { y: [0, -4, 0] }}
-              transition={reduced ? undefined : { ...LOOP, duration: 5.2 + index }}
-            >
-              {label}
-            </motion.div>
-          ))}
-        </div>
       </div>
     </VisualShell>
   )
@@ -158,11 +145,13 @@ function LaunchVisual() {
               {outputs.map((ratio, index) => (
                 <motion.div
                   key={ratio}
-                  className="rounded-[1rem] border border-white/8 bg-white/[0.03] px-3 py-4 text-center"
+                  className="flex min-h-[5.25rem] items-center justify-center rounded-[1rem] border border-white/8 bg-white/[0.03] px-3 py-4 text-center"
                   animate={reduced ? undefined : { y: [0, -4, 0] }}
                   transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
                 >
-                  <div className="text-2xl font-black tracking-[-0.05em] text-white">{ratio}</div>
+                  <div className="text-[clamp(1.25rem,2.2vw,1.5rem)] font-black tracking-[-0.05em] text-white">
+                    {ratio}
+                  </div>
                 </motion.div>
               ))}
             </div>

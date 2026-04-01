@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import type { ComponentProps } from "react"
 import { Button } from "@/components/ui/button"
 import { HoverLift } from "@/components/hover-lift"
@@ -34,9 +35,8 @@ const SECOND_ROW: ContentCardItem[] = [
   { label: "Sales Scripts", icon: "scripts" },
 ]
 
-const OFFER_CARDS: ContentCardItem[] = [...FIRST_ROW, ...SECOND_ROW]
-
 export function LogoMarquee() {
+  const [pausedRow, setPausedRow] = useState<string | null>(null)
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -66,24 +66,59 @@ export function LogoMarquee() {
           </HoverLift>
         </div>
 
-        <div
-          data-reveal-item
-          className="mx-auto grid w-full max-w-[1120px] grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4"
-        >
-          {OFFER_CARDS.map((item) => (
-            <HoverLift key={item.label} className="h-full">
-              <div className="brand-card flex h-full min-h-[7.2rem] items-center gap-4 rounded-[1.4rem] px-4 py-4 text-left backdrop-blur-xl sm:min-h-[7.75rem] sm:px-5">
-                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] sm:h-12 sm:w-12">
-                  <MarqueeCardIcon type={item.icon} size={38} />
-                </div>
-                <p className="max-w-[12ch] text-sm font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-[1rem]">
-                  {item.label}
-                </p>
-              </div>
-            </HoverLift>
-          ))}
+        <div className="mx-auto w-full max-w-[1120px] space-y-4">
+          <MarqueeRow id="first" items={FIRST_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} />
+          <MarqueeRow id="second" items={SECOND_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} reverse />
         </div>
       </div>
     </section>
+  )
+}
+
+function MarqueeRow({
+  id,
+  items,
+  pausedRow,
+  reverse = false,
+  setPausedRow,
+}: {
+  id: string
+  items: ContentCardItem[]
+  pausedRow: string | null
+  reverse?: boolean
+  setPausedRow: (rowId: string | null) => void
+}) {
+  return (
+    <div
+      data-reveal-item
+      className="relative min-h-[7rem] overflow-x-clip [contain:layout_paint] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] sm:min-h-[8rem]"
+    >
+      <div
+        className={
+          reverse
+            ? "absolute inset-y-0 left-0 flex items-center animate-scroll-left"
+            : "absolute inset-y-0 left-0 flex items-center animate-scroll-right"
+        }
+        style={{ animationPlayState: pausedRow === id ? "paused" : "running", width: "max-content" }}
+      >
+        {[...items, ...items, ...items].map((item, index) => (
+          <HoverLift
+            key={`${id}-${index}`}
+            className="mx-2 flex-shrink-0"
+            onHoverStart={() => setPausedRow(id)}
+            onHoverEnd={() => setPausedRow(null)}
+          >
+            <div className="brand-card flex h-[6.75rem] w-[15.5rem] items-center gap-4 rounded-[1.45rem] px-5 text-left backdrop-blur-xl sm:h-[7.4rem] sm:w-[17rem] sm:rounded-[1.6rem]">
+              <div className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] sm:h-12 sm:w-12">
+                <MarqueeCardIcon type={item.icon} size={38} />
+              </div>
+              <p className="max-w-[11ch] text-sm font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-[1rem]">
+                {item.label}
+              </p>
+            </div>
+          </HoverLift>
+        ))}
+      </div>
+    </div>
   )
 }

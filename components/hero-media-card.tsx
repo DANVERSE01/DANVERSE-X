@@ -68,7 +68,6 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
           <div
             ref={frameRef}
             className="relative aspect-[9/16] w-full overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(8,11,18,0.92),rgba(5,7,12,0.98))]"
-            style={{ background: "#0a0a0a" }}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_16%,rgba(49,93,255,0.2),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(255,47,146,0.16),transparent_28%),radial-gradient(circle_at_52%_54%,rgba(217,255,38,0.08),transparent_28%)]" />
             <Image
@@ -76,9 +75,8 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
               alt=""
               aria-hidden="true"
               fill
-              priority={index === 0}
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 42vw, 320px"
-              className={`bg-[#0a0a0a] object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-50"}`}
+              className={`object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-50"}`}
             />
             {shouldLoad ? (
               <iframe
@@ -90,7 +88,7 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
                 onLoad={() => setIsLoaded(true)}
                 className={`absolute inset-0 h-full w-full scale-[1.04] transition-all duration-700 ease-out group-hover:scale-[1.065] ${isLoaded ? "opacity-100" : "opacity-0"}`}
                 referrerPolicy="strict-origin-when-cross-origin"
-                style={{ border: 0, background: "#0a0a0a" }}
+                style={{ border: 0 }}
               />
             ) : null}
 

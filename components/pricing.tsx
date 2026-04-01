@@ -166,7 +166,7 @@ export function Pricing() {
       id="process"
       ref={sectionRef}
       aria-labelledby="process-heading"
-      className="section-shell relative isolate overflow-hidden bg-transparent text-white"
+      className="section-shell relative isolate bg-transparent text-white"
     >
       <div className="pointer-events-none absolute inset-0">
         <div

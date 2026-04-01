@@ -17,7 +17,7 @@ export function CinematicShowcase() {
   const mediaViewportStyle =
     activeWork.poster || activeWork.backgroundColor
       ? {
-          backgroundColor: activeWork.backgroundColor ?? "#0a0a0a",
+          backgroundColor: activeWork.backgroundColor ?? "#080a10",
           backgroundImage: activeWork.poster ? `url(${activeWork.poster})` : "none",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -53,9 +53,9 @@ export function CinematicShowcase() {
           <div className={styles.viewerShell}>
             <div className={styles.mediaPanel} data-reveal-item>
               <div className={styles.viewerGlow} aria-hidden="true" />
-              <div className={styles.mediaViewport} style={{ background: "#0a0a0a" }}>
+              <div className={styles.mediaViewport}>
                 <div className={styles.mediaBackdrop} style={mediaViewportStyle} />
-                <div className={styles.mediaCrop} style={{ background: "#0a0a0a" }}>
+                <div className={styles.mediaCrop}>
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeWork.embed}
@@ -64,15 +64,12 @@ export function CinematicShowcase() {
                       exit={{ opacity: 0.12, scale: 0.985 }}
                       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
                       className={styles.mediaMotion}
-                      style={{ background: "#0a0a0a" }}
                     >
                       <iframe
                         title={`${activeWork.title} presentation reel`}
                         src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
                         allow="autoplay; fullscreen; picture-in-picture"
-                        loading={activeIndex === 0 ? "eager" : "lazy"}
                         className={styles.mediaFrame}
-                        style={{ background: "#0a0a0a" }}
                       />
                     </motion.div>
                   </AnimatePresence>

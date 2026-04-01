@@ -19,7 +19,9 @@ type HeroMediaCardProps = HeroMediaItem & {
 export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: HeroMediaCardProps) {
   const prefersReducedMotion = useReducedMotion()
   const frameRef = useRef<HTMLDivElement | null>(null)
-  const [shouldLoad, setShouldLoad] = useState(false)
+  const revealTimeoutRef = useRef<number | null>(null)
+  const readyTimeoutRef = useRef<number | null>(null)
+  const [shouldLoad, setShouldLoad] = useState(index === 0)
   const [isLoaded, setIsLoaded] = useState(false)
   const cardIndex = String(index + 1).padStart(2, "0")
   const query = prefersReducedMotion
@@ -33,14 +35,22 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
-        window.setTimeout(() => setShouldLoad(true), index === 0 ? 0 : 100 + index * 90)
+        if (index === 0) {
+          setShouldLoad(true)
+        } else {
+          revealTimeoutRef.current = window.setTimeout(() => setShouldLoad(true), 100 + index * 90)
+        }
         observer.disconnect()
       },
-      { rootMargin: "160px 0px" }
+      { rootMargin: "360px 0px" }
     )
 
     observer.observe(frame)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
+      if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
+    }
   }, [index])
 
   return (
@@ -52,9 +62,9 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
         delay: prefersReducedMotion ? 0 : index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="w-full"
+      className="h-full w-full"
     >
-      <HoverLift className="group relative mx-auto w-full max-w-[19rem] sm:max-w-[336px]">
+      <HoverLift className="group relative mx-auto h-full w-full max-w-[19rem] sm:max-w-[336px]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-8 top-4 h-14 rounded-full opacity-65 blur-3xl transition-opacity duration-500 group-hover:opacity-100 sm:inset-x-10 sm:top-5 sm:h-16"
@@ -64,10 +74,10 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
           }}
         />
 
-        <article className="rounded-[30px] border border-[rgba(92,118,255,0.22)] bg-[linear-gradient(180deg,rgba(10,14,24,0.94),rgba(6,8,14,0.98))] p-1.5 shadow-[0_30px_90px_rgba(0,0,0,0.3)]">
+        <article className="flex h-full flex-col rounded-[30px] border border-[rgba(92,118,255,0.22)] bg-[linear-gradient(180deg,rgba(10,14,24,0.94),rgba(6,8,14,0.98))] p-1.5 shadow-[0_30px_90px_rgba(0,0,0,0.3)]">
           <div
             ref={frameRef}
-            className="relative aspect-[9/16] w-full overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(8,11,18,0.92),rgba(5,7,12,0.98))]"
+            className="relative aspect-[9/16] w-full overflow-hidden rounded-[24px] bg-[#05070b]"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_16%,rgba(49,93,255,0.2),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(255,47,146,0.16),transparent_28%),radial-gradient(circle_at_52%_54%,rgba(217,255,38,0.08),transparent_28%)]" />
             <Image
@@ -75,8 +85,9 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
               alt=""
               aria-hidden="true"
               fill
+              priority={index === 0}
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 42vw, 320px"
-              className={`object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-50"}`}
+              className={`bg-[#05070b] object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-65"}`}
             />
             {shouldLoad ? (
               <iframe
@@ -85,10 +96,13 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
                 allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
                 loading={index === 0 ? "eager" : "lazy"}
                 tabIndex={-1}
-                onLoad={() => setIsLoaded(true)}
+                onLoad={() => {
+                  if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
+                  readyTimeoutRef.current = window.setTimeout(() => setIsLoaded(true), 220)
+                }}
                 className={`absolute inset-0 h-full w-full scale-[1.04] transition-all duration-700 ease-out group-hover:scale-[1.065] ${isLoaded ? "opacity-100" : "opacity-0"}`}
                 referrerPolicy="strict-origin-when-cross-origin"
-                style={{ border: 0 }}
+                style={{ border: 0, background: "#05070b" }}
               />
             ) : null}
 
@@ -102,11 +116,11 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
             <div className="absolute inset-x-3 bottom-3 h-px bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-acid-lime)] opacity-75 sm:inset-x-4 sm:bottom-4" />
           </div>
 
-          <div className="px-3 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
-            <h3 className="max-w-[11ch] text-[clamp(1.2rem,6vw,1.72rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white sm:max-w-[9.5ch] sm:tracking-[-0.055em]">
+          <div className="flex flex-1 flex-col px-3 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
+            <h3 className="min-h-[4.5rem] max-w-[11ch] text-[clamp(1.2rem,6vw,1.72rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white sm:min-h-[4.9rem] sm:max-w-[9.5ch] sm:tracking-[-0.055em]">
               {title}
             </h3>
-            <p className="body-copy mt-2 max-w-[22ch] text-[0.9rem] leading-6 text-white/68 sm:max-w-[20ch] sm:text-[0.96rem] sm:leading-7">
+            <p className="body-copy mt-2 min-h-[4.5rem] max-w-[22ch] text-[0.9rem] leading-6 text-white/68 sm:min-h-[5.25rem] sm:max-w-[20ch] sm:text-[0.96rem] sm:leading-7">
               {sub}
             </p>
           </div>

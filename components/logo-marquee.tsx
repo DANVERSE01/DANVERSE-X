@@ -42,8 +42,11 @@ export function LogoMarquee() {
   return (
     <section aria-label="Industries and offers" className="section-shell overflow-hidden py-[var(--section-block)]">
       <div ref={revealRef} className="content-shell">
-        <div data-reveal-item className="mb-10 flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="max-w-3xl text-center sm:text-left">
+        <div
+          data-reveal-item
+          className="mx-auto mb-10 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,42rem)_auto] lg:justify-center lg:items-end lg:text-left"
+        >
+          <div className="max-w-3xl">
             <h2 className="section-heading text-white">
               Built for brands with <span className="text-[var(--color-hot-pink-strong)]">global standards</span>
             </h2>
@@ -52,7 +55,7 @@ export function LogoMarquee() {
               expensive, intentional, and impossible to ignore.
             </p>
           </div>
-          <HoverLift>
+          <HoverLift className="justify-self-center lg:justify-self-start">
             <Button
               asChild
               variant="outline"
@@ -63,7 +66,7 @@ export function LogoMarquee() {
           </HoverLift>
         </div>
 
-        <div className="space-y-4">
+        <div className="mx-auto w-full max-w-[1120px] space-y-4">
           <MarqueeRow id="first" items={FIRST_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} />
           <MarqueeRow id="second" items={SECOND_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} reverse />
         </div>
@@ -88,10 +91,10 @@ function MarqueeRow({
   return (
     <div
       data-reveal-item
-      className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+      className="relative min-h-[6.5rem] overflow-x-clip [contain:layout_paint] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] sm:min-h-[7.5rem]"
     >
       <div
-        className={reverse ? "flex animate-scroll-left" : "flex animate-scroll-right"}
+        className={reverse ? "absolute inset-y-0 left-0 flex items-center animate-scroll-left" : "absolute inset-y-0 left-0 flex items-center animate-scroll-right"}
         style={{ animationPlayState: pausedRow === id ? "paused" : "running", width: "max-content" }}
       >
         {[...items, ...items, ...items].map((item, index) => (

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { HoverLift } from "@/components/hover-lift"
 import { ShowcaseControlRail } from "@/components/showcase-control-rail"
@@ -11,13 +11,15 @@ import styles from "@/styles/showcase.module.css"
 
 export function CinematicShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isFrameReady, setIsFrameReady] = useState(false)
+  const revealTimeoutRef = useRef<number | null>(null)
   const revealRef = useScrollReveal<HTMLDivElement>()
   const activeWork = SHOWCASE_WORKS[activeIndex]
   const activeNumber = String(activeIndex + 1).padStart(2, "0")
   const mediaViewportStyle =
     activeWork.poster || activeWork.backgroundColor
       ? {
-          backgroundColor: activeWork.backgroundColor ?? "#080a10",
+          backgroundColor: activeWork.backgroundColor ?? "#05070b",
           backgroundImage: activeWork.poster ? `url(${activeWork.poster})` : "none",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -25,11 +27,23 @@ export function CinematicShowcase() {
         }
       : undefined
 
+  useEffect(() => {
+    setIsFrameReady(false)
+
+    return () => {
+      if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
+    }
+  }, [activeWork.embed])
+
   const handleChange = (index: number) => {
     if (index !== activeIndex) setActiveIndex(index)
   }
   const handlePrev = () => setActiveIndex((current) => (current - 1 + SHOWCASE_WORKS.length) % SHOWCASE_WORKS.length)
   const handleNext = () => setActiveIndex((current) => (current + 1) % SHOWCASE_WORKS.length)
+  const handleFrameLoad = () => {
+    if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
+    revealTimeoutRef.current = window.setTimeout(() => setIsFrameReady(true), 260)
+  }
 
   return (
     <section id="showcase" aria-label="Selected work" className={styles.stage}>
@@ -53,7 +67,7 @@ export function CinematicShowcase() {
           <div className={styles.viewerShell}>
             <div className={styles.mediaPanel} data-reveal-item>
               <div className={styles.viewerGlow} aria-hidden="true" />
-              <div className={styles.mediaViewport}>
+              <div className={styles.mediaViewport} style={{ backgroundColor: activeWork.backgroundColor ?? "#05070b" }}>
                 <div className={styles.mediaBackdrop} style={mediaViewportStyle} />
                 <div className={styles.mediaCrop}>
                   <AnimatePresence mode="wait">
@@ -69,11 +83,17 @@ export function CinematicShowcase() {
                         title={`${activeWork.title} presentation reel`}
                         src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
                         allow="autoplay; fullscreen; picture-in-picture"
+                        loading={activeIndex === 0 ? "eager" : "lazy"}
+                        onLoad={handleFrameLoad}
                         className={styles.mediaFrame}
                       />
                     </motion.div>
                   </AnimatePresence>
                 </div>
+                <div
+                  className={`${styles.loadingCurtain} ${isFrameReady ? styles.loadingCurtainHidden : ""}`}
+                  aria-hidden="true"
+                />
                 <div className={styles.mediaMask} />
                 <div className={styles.mediaShade} />
                 <ShowcaseControlRail

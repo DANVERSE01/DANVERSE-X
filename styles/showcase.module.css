@@ -27,6 +27,8 @@
   flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
+  width: min(100%, 1120px);
+  margin-inline: auto;
   gap: 1.25rem;
 }
 
@@ -124,8 +126,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  width: 100%;
-  max-width: 100%;
+  width: min(100%, 1120px);
+  margin-inline: auto;
   min-width: 0;
   gap: clamp(1rem, 2.5vw, 1.6rem);
   background: transparent;
@@ -139,6 +141,7 @@
   box-sizing: border-box;
   border: 1px solid rgba(111, 143, 255, 0.18);
   border-radius: clamp(1.35rem, 4.5vw, 2.4rem);
+  background-color: #05070b;
   background:
     linear-gradient(155deg, rgba(9, 13, 22, 0.74) 0%, rgba(14, 18, 29, 0.46) 52%, rgba(8, 11, 19, 0.78) 100%),
     rgba(7, 10, 16, 0.3);
@@ -172,7 +175,7 @@
   min-width: 0;
   aspect-ratio: 16 / 9;
   min-height: clamp(15rem, 62vw, 22rem);
-  background: rgba(6, 8, 14, 0.18);
+  background: #05070b;
   overflow: hidden;
 }
 
@@ -195,12 +198,14 @@
   position: absolute;
   inset: 0;
   min-width: 0;
+  background: #05070b;
   overflow: hidden;
 }
 
 .mediaMotion {
   position: absolute;
   inset: -2% -4%;
+  background: #05070b;
 }
 
 .mediaFrame {
@@ -210,8 +215,31 @@
   width: 110%;
   height: 108%;
   border: 0;
-  background: #06080e;
+  background: #05070b;
   transform: translateX(-50%);
+}
+
+.loadingCurtain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  background:
+    linear-gradient(180deg, rgba(5, 7, 11, 0.14) 0%, rgba(5, 7, 11, 0.02) 22%, rgba(5, 7, 11, 0.06) 58%, rgba(5, 7, 11, 0.32) 100%),
+    radial-gradient(circle at top right, rgba(49, 93, 255, 0.12), transparent 28%),
+    radial-gradient(circle at left center, rgba(255, 47, 146, 0.1), transparent 24%),
+    radial-gradient(circle at bottom center, rgba(217, 255, 38, 0.08), transparent 24%),
+    #05070b;
+  transition:
+    opacity 260ms ease,
+    visibility 260ms ease;
+}
+
+.loadingCurtainHidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .mediaMask {

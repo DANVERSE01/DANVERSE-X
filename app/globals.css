@@ -205,17 +205,21 @@
 }
 
 .section-shell {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
   padding-inline: var(--section-inline);
 }
 
 .content-shell {
+  box-sizing: border-box;
   width: min(100%, var(--content-max));
   margin-inline: auto;
   min-width: 0;
 }
 
 .content-shell-narrow {
+  box-sizing: border-box;
   width: min(100%, var(--content-narrow));
   margin-inline: auto;
   min-width: 0;

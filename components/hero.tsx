@@ -236,7 +236,7 @@ export function Hero() {
           </motion.p>
 
           <div className="mt-8 flex w-full max-w-[18rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
-            <div className="flex w-full flex-col items-center gap-3 sm:flex-row">
+            <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:justify-center">
               <motion.div className="w-full sm:w-auto" {...reveal(0.52, 16)}>
                 <HoverLift>
                   <Button

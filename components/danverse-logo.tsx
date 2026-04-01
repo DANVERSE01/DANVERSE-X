@@ -2,26 +2,24 @@
 
 import Image from "next/image"
 
-// DANVERSE Logo System - Uses exact reference image
-
 interface LogoProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "hero" | "header" | "small"
   className?: string
 }
 
 const SIZES = {
-  xs: { width: 74, height: 74, scale: 1.16 },
-  small: { width: 92, height: 92, scale: 1.18 },
-  sm: { width: 116, height: 116, scale: 1.16 },
-  header: { width: 84, height: 84, scale: 1.24 },
-  md: { width: 212, height: 212, scale: 1.08 },
-  lg: { width: 292, height: 292, scale: 1.06 },
-  xl: { width: 372, height: 372, scale: 1.04 },
-  hero: { width: 400, height: 400, scale: 1.04 },
+  xs: { width: 54, height: 50 },
+  small: { width: 68, height: 64 },
+  sm: { width: 92, height: 86 },
+  header: { width: 84, height: 78 },
+  md: { width: 168, height: 156 },
+  lg: { width: 228, height: 212 },
+  xl: { width: 310, height: 288 },
+  hero: { width: 390, height: 362 },
 }
 
 export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
-  const { width, height, scale } = SIZES[size]
+  const { width, height } = SIZES[size]
   const priority = size === "hero" || size === "header"
 
   return (
@@ -31,8 +29,7 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
         alt="DANVERSE"
         fill
         sizes={`${width}px`}
-        className="object-contain"
-        style={{ transform: `scale(${scale})` }}
+        className="object-contain select-none drop-shadow-[0_0_24px_rgba(49,93,255,0.18)]"
         priority={priority}
       />
     </div>
@@ -40,19 +37,7 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
 }
 
 export function DanverseHeaderLogo({ className = "" }: { className?: string }) {
-  return (
-    <div className={`relative flex items-center justify-center ${className}`} style={{ width: 84, height: 84 }}>
-      <Image
-        src="/images/danverse-logo.png"
-        alt="DANVERSE"
-        fill
-        sizes="84px"
-        className="object-contain"
-        style={{ transform: "scale(1.24)" }}
-        priority
-      />
-    </div>
-  )
+  return <DanverseLogo size="header" className={className} />
 }
 
 export function DanverseEmblem({ size = "md", className = "" }: LogoProps) {

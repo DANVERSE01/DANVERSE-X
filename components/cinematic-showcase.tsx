@@ -80,19 +80,17 @@ export function CinematicShowcase() {
                   <span className={styles.summaryCategory}>{activeWork.category}</span>
                 </div>
                 <h3 className={styles.summaryTitle}>{activeWork.title}</h3>
+                <div className={styles.summaryFacts}>
+                  <span>
+                    <strong>Client</strong> {activeWork.client}
+                  </span>
+                  <span className={styles.summaryFactsDot} />
+                  <span>
+                    <strong>Role</strong> {activeWork.role}
+                  </span>
+                </div>
                 <p className={styles.summaryText}>{activeWork.desc}</p>
               </article>
-
-              <div className={styles.metaGrid}>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Client</span>
-                  <span className={styles.metaValue}>{activeWork.client}</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Role</span>
-                  <span className={styles.metaValue}>{activeWork.role}</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

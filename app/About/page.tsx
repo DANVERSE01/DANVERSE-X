@@ -8,7 +8,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "About - DANVERSE",
   description:
-    "DANVERSE builds AI-powered cinematic ads, visual identities, websites, and creative systems for brands across Egypt and the Gulf.",
+    "DANVERSE builds cinematic brand systems, launch films, and production infrastructure for brands across Egypt and the Gulf.",
 }
 
 const FEATURES = [
@@ -46,7 +46,7 @@ export default function AboutPage() {
     url: env.NEXT_PUBLIC_SITE_URL,
     logo: `${env.NEXT_PUBLIC_SITE_URL}/images/danverse-logo.png`,
     description:
-      "DANVERSE is an AI-powered creative studio building cinematic ads, brand systems, and production infrastructure for modern brands.",
+      "DANVERSE is a director-led creative studio building cinematic campaigns, identity systems, and production infrastructure for modern brands.",
     sameAs: ["https://www.instagram.com/danverse.creative"],
     contactPoint: [
       {
@@ -67,10 +67,11 @@ export default function AboutPage() {
           <div className="container mx-auto max-w-4xl text-center">
             <p className="section-label mb-4">About DANVERSE</p>
             <h1 className="section-heading text-4xl text-white md:text-5xl lg:text-6xl">
-              Built to make brands impossible to ignore.
+              Built to raise brand value on every screen.
             </h1>
             <p className="body-copy mx-auto mt-6 max-w-3xl text-lg md:text-xl">
-              We don&apos;t make content. We build brand weapons. AI-powered, director-grade, built to convert.
+              Director-led systems for brands that need sharper positioning, cleaner execution, and launch-ready assets
+              that feel premium from frame one.
             </p>
           </div>
         </section>
@@ -92,9 +93,10 @@ export default function AboutPage() {
         <section className="px-4 py-20 text-center">
           <div className="container mx-auto max-w-2xl">
             <p className="section-label mb-4">Start Here</p>
-            <h2 className="section-heading text-3xl text-white md:text-4xl">Your Next Campaign Starts Here.</h2>
+            <h2 className="section-heading text-3xl text-white md:text-4xl">Ready to sharpen the next launch?</h2>
             <p className="body-copy mb-8 mt-4">
-              Tell us what you&apos;re building. We&apos;ll tell you exactly how to make it hit.
+              Share the brief, the offer, and the ambition. We&apos;ll map the clearest route from concept to
+              rollout-ready execution.
             </p>
             <Button asChild size="lg" className="cta-primary rounded-full px-8 text-white font-medium">
               <Link href={createWhatsAppUrl()} target="_blank">

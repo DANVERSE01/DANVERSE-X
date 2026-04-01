@@ -49,15 +49,15 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "A cinematic agency film built to scale into a wider multi-brand campaign with millions of views.",
   },
   {
-    embed: "https://player.vimeo.com/video/1178894835",
+    embed: "https://player.vimeo.com/video/1178894778",
     title: "The Art of Precision",
     category: "Luxury / Watch",
     client: "TAG Heuer (Carrera Series)",
     role: "Creative Direction & Visual Strategy",
-    desc: 'A high-end commercial piece focused on the intersection of luxury and technical mastery. The visual narrative leans into macro detail, rhythm, and mechanical precision to turn product engineering into emotional desire.',
+    desc: "A high-end commercial piece focused on the intersection of luxury and technical mastery. The visual narrative leans into macro detail, rhythm, and mechanical precision to turn product engineering into emotional desire.",
   },
   {
-    embed: "https://player.vimeo.com/video/1178894778",
+    embed: "https://player.vimeo.com/video/1178894721",
     title: "Velocity & Vitality",
     category: "Beauty / Motion",
     client: "MISSHA (Time Revolution)",
@@ -65,7 +65,7 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "A fast-beauty campaign built around the idea of visible speed. High-energy transitions and clean, elevated framing translate rapid efficacy into a premium, science-led visual language.",
   },
   {
-    embed: "https://player.vimeo.com/video/1178894721",
+    embed: "https://player.vimeo.com/video/1178894835",
     title: "The Digital Aesthetic",
     category: "Social / Vertical",
     client: "Modern Skincare (Social-Ready Campaign)",

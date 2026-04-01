@@ -25,11 +25,13 @@ export function ShowcaseControlRail({ activeIndex, onNext, onPrev, onSelect, wor
 
       <div className={styles.railCenter}>
         <div className={styles.railHeader}>
-          <p className={styles.railCounter}>
-            {current}/{total}
-          </p>
+          <div className={styles.railMeta}>
+            <p className={styles.railCounter}>
+              {current}/{total}
+            </p>
+            <span className={styles.railMetaDot} />
+          </div>
           <p className={styles.railLabel}>{activeWork.title}</p>
-          <p className={styles.railHint}>Browse Reel</p>
         </div>
 
         <div className={styles.progressRail} aria-label="Showcase project rail">

@@ -59,8 +59,15 @@ export function SiteHeader() {
       style={{ zIndex: "var(--z-nav)", paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.75rem)" }}
     >
       <div className="content-shell">
-        <div className="liquid-glass-header flex h-14 items-center justify-between rounded-full px-4 sm:h-16 sm:px-5">
-          <Link href="/" className="flex-shrink-0" aria-label="Go to DANVERSE homepage">
+        <div className="liquid-glass-header relative flex h-14 items-center justify-between overflow-hidden rounded-full px-4 sm:h-16 sm:px-5">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-[radial-gradient(circle_at_left,rgba(73,107,255,0.14),transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-[radial-gradient(circle_at_right,rgba(255,47,146,0.12),transparent_70%)]" />
+
+          <Link
+            href="/"
+            className="relative flex h-10 items-center rounded-full border border-white/6 bg-white/[0.02] px-3 sm:h-11 sm:px-4"
+            aria-label="Go to DANVERSE homepage"
+          >
             <DanverseHeaderLogo />
           </Link>
 
@@ -75,15 +82,17 @@ export function SiteHeader() {
                     Services
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[340px] gap-1 rounded-2xl border border-white/10 bg-[rgba(8,11,16,0.96)] p-2 backdrop-blur-xl">
+                    <ul className="grid w-[360px] gap-1 rounded-[1.4rem] border border-white/10 bg-[rgba(8,11,16,0.96)] p-2 backdrop-blur-xl">
                       {SERVICES.map((service) => (
                         <li key={service.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               href={service.href}
-                              className="group flex items-start gap-3 rounded-xl p-3 transition-all hover:bg-white/5"
+                              className="group flex items-start gap-3 rounded-[1rem] p-3 transition-all duration-300 hover:bg-white/5"
                             >
-                              <service.icon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-hot-pink)]" />
+                              <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03]">
+                                <service.icon className="h-4.5 w-4.5 text-[var(--color-hot-pink)]" />
+                              </div>
                               <div>
                                 <div className="text-sm font-semibold text-white group-hover:text-[var(--color-hot-pink-strong)]">
                                   {service.label}
@@ -115,8 +124,13 @@ export function SiteHeader() {
 
           <div className="hidden flex-shrink-0 md:block">
             <HoverLift>
-              <Button asChild size="sm" className="cta-primary rounded-full px-5 font-medium text-white">
+              <Button
+                asChild
+                size="sm"
+                className="cta-primary rounded-full px-5 font-semibold tracking-[-0.02em] text-white"
+              >
                 <Link href={createWhatsAppUrl()} target="_blank">
+                  <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(217,255,38,0.42)]" />
                   Chat With Us
                 </Link>
               </Button>

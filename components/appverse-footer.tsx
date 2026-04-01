@@ -17,34 +17,59 @@ export function AppverseFooter() {
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section aria-label="Footer and contact" className="section-shell py-[var(--section-block)] text-white">
+    <section aria-label="Footer and contact" className="section-shell relative overflow-hidden py-[var(--section-block)] text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-10rem] top-[10%] h-[22rem] w-[22rem] rounded-full bg-[rgba(73,107,255,0.08)] blur-[120px]" />
+        <div className="absolute right-[-8rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(255,47,146,0.08)] blur-[120px]" />
+      </div>
       <div ref={revealRef} className="content-shell">
-        <div data-reveal-item className="flex justify-center">
-          <HoverLift>
-            <Button
-              onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
-              className="cta-primary rounded-full px-8 py-3 font-medium text-white"
-            >
-              Book a Call
-            </Button>
-          </HoverLift>
+        <div data-reveal-item className="mx-auto flex max-w-[48rem] flex-col items-center text-center">
+          <p className="section-label">Final Contact</p>
+          <h2 className="section-heading mt-4 max-w-[11ch] text-white">Built to look expensive before the first call.</h2>
+          <p className="body-copy mt-4 max-w-[38ch] text-[1rem] leading-7 text-white/72 sm:text-[1.05rem]">
+            If the direction is clear, the launch gets faster. If the quality is obvious, the brand gets stronger.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <HoverLift>
+              <Button
+                onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
+                className="cta-primary rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white"
+              >
+                Book a Call
+              </Button>
+            </HoverLift>
+            <div className="accent-chip px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+              Response within 24h
+            </div>
+          </div>
         </div>
 
         <div data-reveal-item className="my-12 sm:my-16">
           <HoverLift>
-            <Card className="brand-card relative overflow-hidden rounded-2xl !p-5 sm:!p-8 md:!p-10">
+            <Card className="brand-card relative overflow-hidden rounded-[2rem] !p-5 sm:!p-8 md:!p-10">
               <div className="pointer-events-none absolute inset-0">
                 <div className="absolute left-4 top-4 h-24 w-24 rounded-full bg-[rgba(49,93,255,0.16)] blur-3xl sm:left-8 sm:top-8 sm:h-32 sm:w-32" />
                 <div className="absolute bottom-4 right-4 h-20 w-20 rounded-full bg-[rgba(255,47,146,0.14)] blur-3xl sm:bottom-8 sm:right-10 sm:h-28 sm:w-28" />
               </div>
-              <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-2">
+              <div className="grid items-center gap-8 sm:gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.9fr)]">
                 <div className="relative z-10">
                   <p className="section-label mb-2 text-[11px]">AI Content Systems</p>
-                  <h3 className="section-heading text-white">Your Brand. On Autopilot.</h3>
-                  <p className="body-copy mt-3 max-w-md text-sm">
+                  <h3 className="section-heading max-w-[11ch] text-white">Your Brand. On Autopilot.</h3>
+                  <p className="body-copy mt-4 max-w-[34ch] text-[0.98rem] leading-7 sm:text-[1.03rem]">
                     We build AI systems that write your content, plan your campaigns, and ship assets while your team
                     focuses on strategy and growth.
                   </p>
+                  <div className="mt-6 flex flex-wrap gap-2.5">
+                    <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+                      Strategy-aware
+                    </div>
+                    <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+                      Production-native
+                    </div>
+                    <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+                      Launch-ready
+                    </div>
+                  </div>
                 </div>
 
                 <div className="relative z-10 mx-auto w-full max-w-[250px] sm:max-w-[280px]">
@@ -58,6 +83,7 @@ export function AppverseFooter() {
                         loop
                         muted
                         playsInline
+                        rootMargin="260px"
                         aria-label="DANVERSE automation preview"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,32,86,0.08),transparent_28%,rgba(8,10,16,0.14)_62%,rgba(5,7,11,0.78)_100%)]" />
@@ -80,9 +106,11 @@ export function AppverseFooter() {
 
         <footer data-reveal-item className="border-t border-white/10 pt-12">
           <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
-            <div className="space-y-4">
-              <DanverseHeaderLogo />
-              <p className="body-copy max-w-sm text-sm">{TAGLINE}</p>
+            <div className="space-y-5">
+              <div className="inline-flex rounded-full border border-white/8 bg-white/[0.02] px-4 py-3">
+                <DanverseHeaderLogo />
+              </div>
+              <p className="body-copy max-w-sm text-sm leading-7">{TAGLINE}</p>
             </div>
 
             <FooterGroup
@@ -131,10 +159,10 @@ function FooterGroup({ items, title }: { items: Array<{ href: string; label: str
   return (
     <div>
       <h4 className="section-label mb-3 text-xs">{title}</h4>
-      <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
+      <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)]">
         {items.map((item) => (
           <li key={item.label}>
-            <Link href={item.href} className="accent-link">
+            <Link href={item.href} className="accent-link inline-flex items-center gap-2 text-white/72 transition-colors hover:text-white">
               {item.label}
             </Link>
           </li>
@@ -161,7 +189,7 @@ function FooterLink({
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="accent-link flex items-center gap-2"
+        className="accent-link flex items-center gap-2 text-white/72 transition-colors hover:text-white"
       >
         <Icon className="h-4 w-4" />
         {label}

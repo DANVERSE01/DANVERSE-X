@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans, Syne } from "next/font/google"
+import { Manrope, Sora } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
 import { ScrollTracker } from "@/components/scroll-tracker"
@@ -15,14 +15,14 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Syne({
+const displayFont = Sora({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["700", "800"],
+  weight: ["600", "700", "800"],
   display: "swap",
 })
 
-const bodyFont = Plus_Jakarta_Sans({
+const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body-next",
   weight: ["400", "500", "600", "700", "800"],

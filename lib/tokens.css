@@ -26,8 +26,8 @@
   --glow-coral: var(--glow-secondary);
   --shadow-panel:
     0 28px 80px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(49, 93, 255, 0.06);
-  --font-display: var(--font-display-next), "Syne", sans-serif;
-  --font-body: var(--font-body-next), "Plus Jakarta Sans", sans-serif;
+  --font-display: var(--font-display-next), "Sora", sans-serif;
+  --font-body: var(--font-body-next), "Manrope", sans-serif;
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
   --section-inline: 1rem;

@@ -4,11 +4,13 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { HoverLift } from "@/components/hover-lift"
+import LazyVideo from "@/components/lazy-video"
 
 export interface HeroMediaItem {
   title: string
   sub: string
-  vimeoId: string
+  vimeoId?: string
+  videoSrc?: string
   posterSrc: string
 }
 
@@ -16,12 +18,12 @@ type HeroMediaCardProps = HeroMediaItem & {
   index?: number
 }
 
-export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: HeroMediaCardProps) {
+export function HeroMediaCard({ posterSrc, sub, title, vimeoId, videoSrc, index = 0 }: HeroMediaCardProps) {
   const prefersReducedMotion = useReducedMotion()
   const frameRef = useRef<HTMLDivElement | null>(null)
   const revealTimeoutRef = useRef<number | null>(null)
   const readyTimeoutRef = useRef<number | null>(null)
-  const [shouldLoad, setShouldLoad] = useState(index === 0)
+  const [shouldLoad, setShouldLoad] = useState(index === 0 || Boolean(videoSrc))
   const [isLoaded, setIsLoaded] = useState(false)
   const cardIndex = String(index + 1).padStart(2, "0")
   const query = prefersReducedMotion
@@ -29,6 +31,12 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
     : "background=1&muted=1&autoplay=1&loop=1&autopause=0&quality=1080p&title=0&byline=0&portrait=0&playsinline=1&dnt=1"
 
   useEffect(() => {
+    if (videoSrc) {
+      return () => {
+        if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
+      }
+    }
+
     const frame = frameRef.current
     if (!frame) return
 
@@ -51,7 +59,7 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
       if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
       if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
     }
-  }, [index])
+  }, [index, videoSrc])
 
   return (
     <motion.div
@@ -89,7 +97,25 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 42vw, 320px"
               className={`bg-[#05070b] object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-65"}`}
             />
-            {shouldLoad ? (
+            {videoSrc ? (
+              <LazyVideo
+                src={videoSrc}
+                poster={posterSrc}
+                autoplay={!prefersReducedMotion}
+                loop
+                muted
+                playsInline
+                eager={index === 0}
+                rootMargin={index === 0 ? "0px" : "360px 0px"}
+                background="#05070b"
+                aria-label={`${title} showcase reel`}
+                onReady={() => {
+                  if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
+                  readyTimeoutRef.current = window.setTimeout(() => setIsLoaded(true), index === 0 ? 80 : 140)
+                }}
+                className={`absolute inset-0 h-full w-full scale-[1.04] object-cover transition-all duration-700 ease-out group-hover:scale-[1.065] ${isLoaded ? "opacity-100" : "opacity-0"}`}
+              />
+            ) : shouldLoad && vimeoId ? (
               <iframe
                 title={`${title} showcase reel`}
                 src={`https://player.vimeo.com/video/${vimeoId}?${query}`}
@@ -117,10 +143,10 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
           </div>
 
           <div className="flex flex-1 flex-col px-3 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
-            <h3 className="min-h-[4.5rem] max-w-[11ch] text-[clamp(1.2rem,6vw,1.72rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white sm:min-h-[4.9rem] sm:max-w-[9.5ch] sm:tracking-[-0.055em]">
+            <h3 className="min-h-[4.5rem] max-w-[11ch] text-[clamp(1.16rem,5.5vw,1.62rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-white sm:min-h-[4.9rem] sm:max-w-[9.5ch]">
               {title}
             </h3>
-            <p className="body-copy mt-2 min-h-[4.5rem] max-w-[22ch] text-[0.9rem] leading-6 text-white/68 sm:min-h-[5.25rem] sm:max-w-[20ch] sm:text-[0.96rem] sm:leading-7">
+            <p className="body-copy mt-2 min-h-[4.5rem] max-w-[22ch] text-[0.92rem] leading-6 text-white/74 sm:min-h-[5.25rem] sm:max-w-[20ch] sm:text-[0.98rem] sm:leading-7">
               {sub}
             </p>
           </div>

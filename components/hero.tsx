@@ -14,19 +14,19 @@ const HERO_MEDIA: HeroMediaItem[] = [
   {
     title: "Desire on Screen",
     sub: "Crafted to make luxury feel inevitable",
-    vimeoId: "1178894778",
+    videoSrc: "/videos/premium.mp4",
     posterSrc: "/images/hero/1178894778.jpg",
   },
   {
     title: "Speed That Looks Expensive",
     sub: "High-speed creative that never looks rushed",
-    vimeoId: "1178894721",
+    videoSrc: "/videos/speed.mp4",
     posterSrc: "/images/hero/1178894721.jpg",
   },
   {
     title: "Scroll Stopped. Attention Held.",
     sub: "Built for the feed. Engineered to convert",
-    vimeoId: "1178894835",
+    videoSrc: "/videos/social-ready.mp4",
     posterSrc: "/images/hero/1178894835.jpg",
   },
 ]
@@ -90,7 +90,7 @@ export function Hero() {
           {
             y: () => window.innerHeight * 0.032,
             scale: 1.014,
-            opacity: 0.24,
+            opacity: 0.16,
             ease: "none",
           },
           0
@@ -100,8 +100,8 @@ export function Hero() {
           {
             y: () => window.innerHeight * 0.11,
             scale: 1.05,
-            opacity: 0.1,
-            filter: "blur(18px) saturate(1.04) brightness(0.98)",
+            opacity: 0.06,
+            filter: "blur(18px) saturate(0.96) brightness(0.94)",
             ease: "none",
           },
           0
@@ -153,9 +153,9 @@ export function Hero() {
             <div ref={logoDriftRef} className="relative h-full w-full">
               <div
                 ref={logoGlowRef}
-                className="absolute inset-0 scale-[1.015] opacity-[0.05] sm:opacity-[0.07] lg:opacity-[0.08]"
+                className="absolute inset-0 scale-[1.015] opacity-[0.03] sm:opacity-[0.045] lg:opacity-[0.055]"
                 style={{
-                  filter: "blur(16px) saturate(1.02) brightness(0.98)",
+                  filter: "blur(18px) saturate(0.96) brightness(0.94)",
                 }}
               >
                 <Image
@@ -170,10 +170,10 @@ export function Hero() {
 
               <div
                 ref={logoBaseRef}
-                className="absolute inset-0 opacity-[0.18] sm:opacity-[0.2] lg:opacity-[0.22]"
+                className="absolute inset-0 opacity-[0.1] sm:opacity-[0.12] lg:opacity-[0.14]"
                 style={{
                   filter:
-                    "saturate(1.05) contrast(1.06) brightness(0.96) drop-shadow(0 14px 36px rgba(5, 8, 16, 0.18))",
+                    "saturate(0.98) contrast(1.04) brightness(0.9) drop-shadow(0 14px 36px rgba(5, 8, 16, 0.14))",
                 }}
               >
                 <Image
@@ -209,7 +209,7 @@ export function Hero() {
           </motion.div>
 
           <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
-            <h1 className="relative z-10 mx-auto w-full max-w-full text-center text-[clamp(2.05rem,9.6vw,4rem)] font-extrabold leading-[0.95] tracking-[-0.055em] text-white [overflow-wrap:anywhere] sm:text-[clamp(3.3rem,8vw,5.8rem)] sm:leading-[0.9] sm:tracking-[-0.06em] lg:text-[clamp(4.8rem,6.2vw,6.8rem)]">
+            <h1 className="relative z-10 mx-auto w-full max-w-[12ch] text-center text-[clamp(2.1rem,9.2vw,4.15rem)] font-extrabold leading-[0.93] tracking-[-0.05em] text-white [overflow-wrap:anywhere] sm:max-w-[10.5ch] sm:text-[clamp(3.15rem,7.4vw,5.35rem)] sm:leading-[0.9] lg:max-w-[11.5ch] lg:text-[clamp(4.5rem,5.8vw,6.15rem)]">
               {HERO_HEADLINE_LINES.map((line, index) => (
                 <motion.span
                   key={line.text}
@@ -229,20 +229,20 @@ export function Hero() {
           </div>
 
           <motion.p
-            className="mx-auto mt-5 max-w-[32ch] text-[clamp(0.96rem,4.2vw,1.12rem)] leading-[1.6] text-white/65 sm:mt-7 sm:max-w-[42ch] sm:leading-[1.65]"
+            className="mx-auto mt-5 max-w-[34ch] text-[clamp(0.98rem,4vw,1.14rem)] leading-[1.65] text-white/74 sm:mt-7 sm:max-w-[44ch]"
             {...reveal(0.42, 20)}
           >
             Every frame deliberate. Every asset launch-ready
           </motion.p>
 
-          <div className="mt-8 flex w-full max-w-[18rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
-            <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex w-full max-w-[19rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
+            <div className="flex w-full flex-col items-center justify-center gap-3.5 sm:flex-row sm:justify-center">
               <motion.div className="w-full sm:w-auto" {...reveal(0.52, 16)}>
                 <HoverLift>
                   <Button
                     asChild
                     size="lg"
-                    className="cta-primary w-full rounded-full px-8 py-3 font-medium text-white sm:w-auto"
+                    className="cta-primary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
                   >
                     <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                       Start the Brief
@@ -257,7 +257,7 @@ export function Hero() {
                     asChild
                     variant="outline"
                     size="lg"
-                    className="cta-secondary w-full rounded-full px-8 py-3 text-white sm:w-auto"
+                    className="cta-secondary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
                   >
                     <a href="#showcase">See the Work</a>
                   </Button>

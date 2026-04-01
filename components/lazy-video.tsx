@@ -11,6 +11,10 @@ interface LazyVideoProps {
   muted?: boolean
   controls?: boolean
   playsInline?: boolean
+  eager?: boolean
+  rootMargin?: string
+  background?: string
+  onReady?: () => void
   "aria-label"?: string
 }
 
@@ -23,6 +27,10 @@ export default function LazyVideo({
   muted = true,
   controls = false,
   playsInline = true,
+  eager = false,
+  rootMargin = "200px",
+  background = "#05070b",
+  onReady,
   "aria-label": ariaLabel,
   ...props
 }: LazyVideoProps) {
@@ -40,29 +48,37 @@ export default function LazyVideo({
 
     let observer: IntersectionObserver | null = null
     let playOnCanPlay: (() => void) | null = null
+    const onLoadedData = () => {
+      onReady?.()
+    }
+
+    const loadVideo = () => {
+      if (loadedRef.current) return
+      el.src = src
+      el.load()
+
+      if (shouldAutoplay) {
+        playOnCanPlay = async () => {
+          try {
+            await el.play()
+          } catch (error) {
+            // Autoplay might be blocked
+          }
+        }
+        if (el.readyState >= 3) {
+          void playOnCanPlay()
+        } else {
+          el.addEventListener("canplay", playOnCanPlay, { once: true })
+        }
+      }
+
+      loadedRef.current = true
+    }
 
     const onIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach(async (entry) => {
         if (entry.isIntersecting && !loadedRef.current) {
-          el.src = src
-          el.load()
-
-          if (shouldAutoplay) {
-            playOnCanPlay = async () => {
-              try {
-                await el.play()
-              } catch (error) {
-                // Autoplay might be blocked
-              }
-            }
-            if (el.readyState >= 3) {
-              void playOnCanPlay()
-            } else {
-              el.addEventListener("canplay", playOnCanPlay, { once: true })
-            }
-          }
-
-          loadedRef.current = true
+          loadVideo()
         } else if (!entry.isIntersecting && loadedRef.current && shouldAutoplay) {
           try {
             el.pause()
@@ -75,11 +91,17 @@ export default function LazyVideo({
       })
     }
 
-    observer = new IntersectionObserver(onIntersect, {
-      rootMargin: "200px",
-      threshold: 0.05,
-    })
-    observer.observe(el)
+    el.addEventListener("loadeddata", onLoadedData)
+
+    if (eager) {
+      loadVideo()
+    } else {
+      observer = new IntersectionObserver(onIntersect, {
+        rootMargin,
+        threshold: 0.05,
+      })
+      observer.observe(el)
+    }
 
     const onVisibility = () => {
       if (!el) return
@@ -97,11 +119,12 @@ export default function LazyVideo({
     return () => {
       document.removeEventListener("visibilitychange", onVisibility)
       observer?.disconnect()
+      el.removeEventListener("loadeddata", onLoadedData)
       if (playOnCanPlay) {
         el.removeEventListener("canplay", playOnCanPlay)
       }
     }
-  }, [src, autoplay])
+  }, [src, autoplay, eager, onReady, rootMargin])
 
   return (
     <video
@@ -111,12 +134,13 @@ export default function LazyVideo({
       loop={loop}
       playsInline={playsInline}
       controls={controls}
-      preload="metadata"
+      preload={eager ? "auto" : "metadata"}
       poster={poster}
       aria-label={ariaLabel}
       disableRemotePlayback
       style={
         {
+          background,
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
           transform: "translateZ(0)",

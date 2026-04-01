@@ -26,7 +26,7 @@ export function ProcessVisual({ mode }: { mode: ProcessVisualMode }) {
 
 function VisualShell({ children }: { children: ReactNode }) {
   return (
-    <div className="absolute inset-0 overflow-hidden rounded-[1.6rem] border border-white/8 bg-[linear-gradient(145deg,rgba(10,16,28,0.9),rgba(9,12,22,0.72))] p-4 sm:rounded-[2rem] sm:p-6">
+    <div className="absolute inset-0 overflow-hidden rounded-[1.6rem] border border-white/8 bg-[linear-gradient(145deg,rgba(9,13,24,0.94),rgba(8,11,20,0.82))] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.24)] sm:rounded-[2rem] sm:p-6">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(73,107,255,0.16),transparent_28%),radial-gradient(circle_at_82%_76%,rgba(255,47,146,0.14),transparent_28%),radial-gradient(circle_at_52%_88%,rgba(217,255,38,0.08),transparent_26%)]" />
       <div className="relative h-full">{children}</div>
     </div>
@@ -51,7 +51,7 @@ function BriefVisual() {
       {nodes.map((node, index) => (
         <motion.div
           key={node.label}
-          className={`absolute ${node.className} rounded-full border border-white/10 bg-[rgba(11,16,26,0.68)] px-2.5 py-1.5 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/66 backdrop-blur-xl sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]`}
+          className={`absolute ${node.className} rounded-full border border-white/10 bg-[rgba(11,16,26,0.72)] px-2.5 py-1.5 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/68 backdrop-blur-xl sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]`}
           animate={reduced ? undefined : { y: [0, index % 2 === 0 ? -6 : 6, 0] }}
           transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
         >
@@ -91,16 +91,13 @@ function BuildVisual() {
   return (
     <VisualShell>
       <div className="grid h-full grid-rows-[auto_1fr] gap-3 sm:gap-4">
-        <div className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/58 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]">
+        <div className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/58 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]">
           Build Sequence
         </div>
 
         <div className="grid gap-2.5 sm:gap-3">
           {tracks.map((track, index) => (
-            <div
-              key={track.label}
-              className="rounded-[1.15rem] border border-white/8 bg-black/18 p-3 sm:rounded-[1.35rem] sm:p-4"
-            >
+            <div key={track.label} className="rounded-[1.15rem] border border-white/8 bg-black/18 p-3 sm:rounded-[1.35rem] sm:p-4">
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-white/46 sm:text-[10px] sm:tracking-[0.2em]">
                   {track.label}

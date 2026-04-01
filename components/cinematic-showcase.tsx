@@ -16,6 +16,8 @@ export function CinematicShowcase() {
   const revealRef = useScrollReveal<HTMLDivElement>()
   const activeWork = SHOWCASE_WORKS[activeIndex]
   const activeNumber = String(activeIndex + 1).padStart(2, "0")
+  const iframeQuery =
+    "background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1&quality=1080p&title=0&byline=0&portrait=0"
   const mediaViewportStyle =
     activeWork.poster || activeWork.backgroundColor
       ? {
@@ -42,7 +44,7 @@ export function CinematicShowcase() {
   const handleNext = () => setActiveIndex((current) => (current + 1) % SHOWCASE_WORKS.length)
   const handleFrameLoad = () => {
     if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
-    revealTimeoutRef.current = window.setTimeout(() => setIsFrameReady(true), 260)
+    revealTimeoutRef.current = window.setTimeout(() => setIsFrameReady(true), 340)
   }
 
   return (
@@ -81,7 +83,7 @@ export function CinematicShowcase() {
                     >
                       <iframe
                         title={`${activeWork.title} presentation reel`}
-                        src={`${activeWork.embed}?background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1`}
+                        src={`${activeWork.embed}?${iframeQuery}`}
                         allow="autoplay; fullscreen; picture-in-picture"
                         loading={activeIndex === 0 ? "eager" : "lazy"}
                         onLoad={handleFrameLoad}
@@ -93,7 +95,12 @@ export function CinematicShowcase() {
                 <div
                   className={`${styles.loadingCurtain} ${isFrameReady ? styles.loadingCurtainHidden : ""}`}
                   aria-hidden="true"
-                />
+                >
+                  <div className={styles.loadingContent}>
+                    <span className={styles.loadingEyebrow}>{activeWork.category}</span>
+                    <span className={styles.loadingTitle}>{activeWork.title}</span>
+                  </div>
+                </div>
                 <div className={styles.mediaMask} />
                 <div className={styles.mediaShade} />
                 <ShowcaseControlRail

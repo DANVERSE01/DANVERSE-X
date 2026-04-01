@@ -60,12 +60,12 @@ export function SiteHeader() {
     >
       <div className="content-shell">
         <div className="liquid-glass-header relative flex h-14 items-center justify-between overflow-hidden rounded-full px-4 sm:h-16 sm:px-5">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-[radial-gradient(circle_at_left,rgba(73,107,255,0.14),transparent_70%)]" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-[radial-gradient(circle_at_right,rgba(255,47,146,0.12),transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-[radial-gradient(circle_at_left,rgba(106,129,255,0.12),transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-[radial-gradient(circle_at_right,rgba(198,235,104,0.08),transparent_70%)]" />
 
           <Link
             href="/"
-            className="relative flex h-10 items-center rounded-full border border-white/6 bg-white/[0.02] px-3 sm:h-11 sm:px-4"
+            className="relative flex h-10 items-center rounded-full border border-white/8 bg-white/[0.025] px-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:h-11 sm:px-4"
             aria-label="Go to DANVERSE homepage"
           >
             <DanverseHeaderLogo />
@@ -82,19 +82,19 @@ export function SiteHeader() {
                     Services
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-[360px] gap-1 rounded-[1.4rem] border border-white/10 bg-[rgba(8,11,16,0.96)] p-2 backdrop-blur-xl">
+                    <ul className="grid w-[360px] gap-1 rounded-[1.4rem] border border-white/10 bg-[linear-gradient(160deg,rgba(10,13,18,0.96),rgba(18,22,32,0.92),rgba(29,18,26,0.9))] p-2 backdrop-blur-xl">
                       {SERVICES.map((service) => (
                         <li key={service.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               href={service.href}
-                              className="group flex items-start gap-3 rounded-[1rem] p-3 transition-all duration-300 hover:bg-white/5"
+                              className="group flex items-start gap-3 rounded-[1rem] p-3 transition-all duration-300 hover:bg-white/[0.04]"
                             >
                               <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03]">
-                                <service.icon className="h-4.5 w-4.5 text-[var(--color-hot-pink)]" />
+                                <service.icon className="h-4.5 w-4.5 text-[var(--color-electric-blue-strong)]" />
                               </div>
                               <div>
-                                <div className="text-sm font-semibold text-white group-hover:text-[var(--color-hot-pink-strong)]">
+                                <div className="text-sm font-semibold text-white group-hover:text-[var(--color-acid-lime)]">
                                   {service.label}
                                 </div>
                                 <p className="mt-0.5 text-xs body-copy">{service.description}</p>
@@ -147,7 +147,7 @@ export function SiteHeader() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="flex h-full w-[min(20rem,100vw)] max-w-full flex-col border-white/10 bg-[rgba(8,11,16,0.96)] p-0 backdrop-blur-xl"
+                className="flex h-full w-[min(20rem,100vw)] max-w-full flex-col border-white/10 bg-[linear-gradient(180deg,rgba(10,13,18,0.98),rgba(18,22,32,0.96),rgba(27,17,26,0.94))] p-0 backdrop-blur-xl"
               >
                 <div className="border-b border-white/10 px-4 py-5">
                   <DanverseHeaderLogo />
@@ -156,7 +156,7 @@ export function SiteHeader() {
                   <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-white">
                       <div className="flex items-center gap-3">
-                        <Building2 className="h-4 w-4 text-[var(--color-hot-pink)]" />
+                        <Building2 className="h-4 w-4 text-[var(--color-electric-blue-strong)]" />
                         <span className="text-sm font-medium">Services</span>
                       </div>
                       <ChevronDown
@@ -164,12 +164,12 @@ export function SiteHeader() {
                       />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <div className="ml-5 border-l-2 border-[var(--color-hot-pink)] bg-white/5">
+                      <div className="ml-5 border-l-2 border-[var(--color-acid-lime)] bg-white/[0.04]">
                         {SERVICES.map((service) => (
                           <Link
                             key={service.href}
                             href={service.href}
-                            className="flex items-center gap-3 px-5 py-2.5 text-white/70 transition-colors hover:text-[var(--color-hot-pink-strong)]"
+                            className="flex items-center gap-3 px-5 py-2.5 text-white/70 transition-colors hover:text-[var(--color-acid-lime)]"
                           >
                             <service.icon className="h-4 w-4 opacity-70" />
                             <span className="text-sm">{service.label}</span>
@@ -183,7 +183,7 @@ export function SiteHeader() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-[var(--color-hot-pink-strong)]"
+                      className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/[0.04] hover:text-[var(--color-acid-lime)]"
                     >
                       <link.icon className="h-4 w-4 opacity-75" />
                       <span className="text-sm font-medium">{link.label}</span>

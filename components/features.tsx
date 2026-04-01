@@ -12,16 +12,33 @@ export function Features() {
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section id="features" aria-label="Studio principles" className="section-shell py-[var(--section-block)]">
+    <section id="features" aria-label="Studio principles" className="section-shell relative overflow-hidden py-[var(--section-block)]">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-8rem] top-[8%] h-[18rem] w-[18rem] rounded-full bg-[rgba(106,129,255,0.08)] blur-[120px]" />
+        <div className="absolute right-[-8rem] top-[30%] h-[20rem] w-[20rem] rounded-full bg-[rgba(39,24,36,0.26)] blur-[120px]" />
+      </div>
       <div ref={revealRef} className="content-shell">
         <div className="mx-auto max-w-[1160px]">
-          <h2 data-reveal-item className="section-heading mx-auto mb-10 max-w-[12ch] text-center text-white sm:mb-12">
-            {TITLE}
-          </h2>
+          <div
+            data-reveal-item
+            className="mx-auto mb-10 grid max-w-[1120px] gap-5 text-center lg:grid-cols-[minmax(0,0.9fr)_minmax(0,0.75fr)_auto] lg:items-end lg:text-left"
+          >
+            <div>
+              <p className="section-label">Chapter 02 / Standards</p>
+              <h2 className="section-heading mt-4 max-w-[10ch] text-white">{TITLE}</h2>
+            </div>
+            <p className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">
+              The point is not to show more process. It is to make the standard obvious before the first deliverable
+              lands.
+            </p>
+            <div className="accent-chip justify-self-center px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/78 lg:justify-self-end">
+              Director-Led QA
+            </div>
+          </div>
 
-          <div className="mx-auto grid max-w-[1120px] auto-rows-fr gap-5 lg:grid-cols-2 lg:gap-6">
-            <HoverLift data-reveal-item>
-              <Card className="brand-card flex h-full overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(165deg,rgba(8,13,22,0.86),rgba(10,14,22,0.66))]">
+          <div className="mx-auto grid max-w-[1120px] auto-rows-fr gap-5 lg:grid-cols-[1.08fr_0.92fr] lg:gap-6">
+            <HoverLift data-reveal-item className="lg:translate-y-6">
+              <Card className="brand-card flex h-full overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(165deg,rgba(10,16,27,0.9),rgba(14,20,31,0.76),rgba(17,12,19,0.76))]">
                 <CardHeader className="pb-5 sm:pb-6">
                   <div className="flex items-center justify-between gap-4">
                     <p className="section-label text-[11px]">Craft + Control</p>
@@ -52,7 +69,7 @@ export function Features() {
             </HoverLift>
 
             <HoverLift data-reveal-item>
-              <Card className="brand-card flex h-full overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(165deg,rgba(10,12,24,0.88),rgba(12,10,26,0.68))]">
+              <Card className="brand-card flex h-full overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(165deg,rgba(11,13,25,0.92),rgba(15,18,29,0.78),rgba(31,18,28,0.72))]">
                 <CardHeader className="pb-5 sm:pb-6">
                   <div className="flex items-center justify-between gap-4">
                     <p className="section-label text-[11px]">Client Feedback</p>
@@ -93,13 +110,13 @@ export function Features() {
 
           <div
             data-reveal-item
-            className="statement-panel mx-auto mt-10 max-w-[1120px] rounded-[1.75rem] px-5 py-6 text-left sm:mt-12 sm:rounded-[2rem] sm:px-8 sm:py-8 md:px-10 md:py-10"
+            className="statement-panel mx-auto mt-10 max-w-[1120px] rounded-[1.75rem] px-5 py-6 text-left sm:mt-14 sm:rounded-[2rem] sm:px-8 sm:py-8 md:px-10 md:py-10"
           >
             <div className="relative z-10">
               <p className="statement-kicker">Launch Architecture</p>
               <p className="mt-4 max-w-[56ch] text-[1rem] leading-relaxed text-[var(--color-text-secondary)] sm:mt-5 md:text-[1.22rem]">
-                One brief becomes a complete launch system: hooks, scripts, formats, and rollout-ready assets built
-                around your brand.
+                One brief becomes a complete launch system: hooks, scripts, formats, proofs, and rollout-ready assets
+                built around a single standard.
               </p>
             </div>
           </div>

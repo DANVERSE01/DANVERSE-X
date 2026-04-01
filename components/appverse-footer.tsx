@@ -23,15 +23,16 @@ export function AppverseFooter() {
       className="section-shell relative overflow-hidden py-[var(--section-block)] text-white"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-10rem] top-[10%] h-[22rem] w-[22rem] rounded-full bg-[rgba(73,107,255,0.08)] blur-[120px]" />
-        <div className="absolute right-[-8rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(255,47,146,0.08)] blur-[120px]" />
+        <div className="absolute left-[-10rem] top-[10%] h-[22rem] w-[22rem] rounded-full bg-[rgba(106,129,255,0.08)] blur-[120px]" />
+        <div className="absolute right-[-8rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(39,24,36,0.26)] blur-[120px]" />
       </div>
       <div ref={revealRef} className="content-shell">
         <div data-reveal-item className="mx-auto flex max-w-[48rem] flex-col items-center text-center">
-          <p className="section-label">Final Contact</p>
-          <h2 className="section-heading mt-4 max-w-[11ch] text-white">Built to look expensive before the first call.</h2>
+          <p className="section-label">Chapter 06 / Final Contact</p>
+          <h2 className="section-heading mt-4 max-w-[11ch] text-white">Built to feel premium before the first reply.</h2>
           <p className="body-copy mt-4 max-w-[38ch] text-[1rem] leading-7 text-white/72 sm:text-[1.05rem]">
-            If the direction is clear, the launch gets faster. If the quality is obvious, the brand gets stronger.
+            When the direction is obvious, approvals get faster. When the standard is visible, the brand arrives
+            stronger.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <HoverLift>
@@ -57,7 +58,7 @@ export function AppverseFooter() {
               </div>
               <div className="grid items-center gap-8 sm:gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.9fr)]">
                 <div className="relative z-10">
-                  <p className="section-label mb-2 text-[11px]">AI Content Systems</p>
+                  <p className="section-label mb-2 text-[11px]">Editorial Automation Layer</p>
                   <h3 className="section-heading max-w-[11ch] text-white">Your Brand. On Autopilot.</h3>
                   <p className="body-copy mt-4 max-w-[34ch] text-[0.98rem] leading-7 sm:text-[1.03rem]">
                     We build AI systems that write your content, plan your campaigns, and ship assets while your team

@@ -30,20 +30,24 @@ export function ShowcaseControlRail({ activeIndex, onNext, onPrev, onSelect, wor
               {current}/{total}
             </p>
             <span className={styles.railMetaDot} />
-            <p className={styles.railCategory}>{activeWork.category}</p>
+            <p className={styles.railCategory}>{activeWork.client}</p>
           </div>
           <div className={styles.railHeaderCopy}>
             <p className={styles.railLabel}>{activeWork.title}</p>
           </div>
         </div>
 
-        <div className={styles.progressRail} aria-label="Showcase project rail">
+        <div
+          className={styles.progressRail}
+          aria-label="Showcase project rail"
+          style={{ gridTemplateColumns: `repeat(${works.length}, minmax(0, 1fr))` }}
+        >
           {works.map((work, index) => {
             const isActive = activeIndex === index
 
             return (
               <button
-                key={work.embed}
+                key={`${work.client}-${work.title}`}
                 type="button"
                 className={styles.progressButton}
                 aria-pressed={isActive}

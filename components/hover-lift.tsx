@@ -8,9 +8,9 @@ export function HoverLift({ className, transition, ...props }: HTMLMotionProps<"
 
   return (
     <motion.div
-      whileHover={reduced ? undefined : { y: -4, scale: 1.014 }}
-      whileTap={reduced ? undefined : { scale: 0.992 }}
-      transition={transition ?? { type: "spring", stiffness: 280, damping: 22 }}
+      whileHover={reduced ? undefined : { y: -3, scale: 1.01 }}
+      whileTap={reduced ? undefined : { scale: 0.996 }}
+      transition={transition ?? { type: "spring", stiffness: 320, damping: 24 }}
       style={{ willChange: reduced ? "auto" : "transform" }}
       className={cn(className)}
       {...props}

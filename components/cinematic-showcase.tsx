@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import LazyVideo from "@/components/lazy-video"
 import { HoverLift } from "@/components/hover-lift"
 import { ShowcaseControlRail } from "@/components/showcase-control-rail"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
@@ -11,13 +12,11 @@ import styles from "@/styles/showcase.module.css"
 
 export function CinematicShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isFrameReady, setIsFrameReady] = useState(false)
+  const [isMediaReady, setIsMediaReady] = useState(false)
   const revealTimeoutRef = useRef<number | null>(null)
   const revealRef = useScrollReveal<HTMLDivElement>()
   const activeWork = SHOWCASE_WORKS[activeIndex]
   const activeNumber = String(activeIndex + 1).padStart(2, "0")
-  const iframeQuery =
-    "background=1&autoplay=1&loop=1&muted=1&playsinline=1&autopause=0&dnt=1&quality=1080p&title=0&byline=0&portrait=0"
   const mediaViewportStyle =
     activeWork.poster || activeWork.backgroundColor
       ? {
@@ -30,21 +29,23 @@ export function CinematicShowcase() {
       : undefined
 
   useEffect(() => {
-    setIsFrameReady(false)
+    setIsMediaReady(false)
 
     return () => {
       if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
     }
-  }, [activeWork.embed])
+  }, [activeWork.videoSrc])
 
   const handleChange = (index: number) => {
     if (index !== activeIndex) setActiveIndex(index)
   }
+
   const handlePrev = () => setActiveIndex((current) => (current - 1 + SHOWCASE_WORKS.length) % SHOWCASE_WORKS.length)
   const handleNext = () => setActiveIndex((current) => (current + 1) % SHOWCASE_WORKS.length)
-  const handleFrameLoad = () => {
+
+  const handleMediaReady = () => {
     if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
-    revealTimeoutRef.current = window.setTimeout(() => setIsFrameReady(true), 340)
+    revealTimeoutRef.current = window.setTimeout(() => setIsMediaReady(true), 180)
   }
 
   return (
@@ -53,15 +54,19 @@ export function CinematicShowcase() {
         <div ref={revealRef} className={`${styles.contentShell} ${styles.contentLayer}`}>
           <div className={styles.headingRow} data-reveal-item>
             <div className={styles.headingCopy}>
-              <p className="section-label">Selected Work</p>
+              <p className="section-label">Selected Work / Curated Five</p>
               <h2 id="production-showcase-heading" className={styles.sectionHeading}>
-                Campaigns built to feel expensive in motion.
+                A quieter stage for the cuts that carry the standard.
               </h2>
+              <p className={styles.headingText}>
+                Five strongest works only. Local playback first. Cleaner narrative, faster feel, no third-party stage
+                friction.
+              </p>
             </div>
 
             <HoverLift>
               <button type="button" className={styles.ctaButton} onClick={() => fireCTAAndOpenWhatsApp("showcase-cta")}>
-                Start Your Project
+                Book the Reel Build
               </button>
             </HoverLift>
           </div>
@@ -74,33 +79,41 @@ export function CinematicShowcase() {
                 <div className={styles.mediaCrop}>
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={activeWork.embed}
+                      key={activeWork.videoSrc}
                       initial={{ opacity: 0.18, scale: 1.02 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0.12, scale: 0.985 }}
                       transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
                       className={styles.mediaMotion}
                     >
-                      <iframe
-                        title={`${activeWork.title} presentation reel`}
-                        src={`${activeWork.embed}?${iframeQuery}`}
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        loading={activeIndex === 0 ? "eager" : "lazy"}
-                        onLoad={handleFrameLoad}
-                        className={styles.mediaFrame}
+                      <LazyVideo
+                        src={activeWork.videoSrc}
+                        poster={activeWork.poster ?? undefined}
+                        autoplay
+                        loop
+                        muted
+                        playsInline
+                        eager={activeIndex === 0}
+                        rootMargin={activeIndex === 0 ? "0px" : "260px"}
+                        background={activeWork.backgroundColor ?? "#05070b"}
+                        onReady={handleMediaReady}
+                        className={styles.mediaVideo}
+                        aria-label={`${activeWork.title} campaign preview`}
                       />
                     </motion.div>
                   </AnimatePresence>
                 </div>
+
                 <div
-                  className={`${styles.loadingCurtain} ${isFrameReady ? styles.loadingCurtainHidden : ""}`}
+                  className={`${styles.loadingCurtain} ${isMediaReady ? styles.loadingCurtainHidden : ""}`}
                   aria-hidden="true"
                 >
                   <div className={styles.loadingContent}>
-                    <span className={styles.loadingEyebrow}>{activeWork.category}</span>
+                    <span className={styles.loadingEyebrow}>Local-first campaign viewer</span>
                     <span className={styles.loadingTitle}>{activeWork.title}</span>
                   </div>
                 </div>
+
                 <div className={styles.mediaMask} />
                 <div className={styles.mediaShade} />
                 <ShowcaseControlRail
@@ -116,24 +129,53 @@ export function CinematicShowcase() {
             <div className={styles.detailsGrid} aria-live="polite" aria-atomic="true" data-reveal-item>
               <article className={styles.summaryCard}>
                 <div className={styles.summaryTopline}>
-                  <span className={styles.summaryProject}>Project</span>
+                  <span className={styles.summaryProject}>Selected</span>
                   <span className={styles.summaryIndex}>{activeNumber}</span>
                   <span className={styles.summarySeparator}>&bull;</span>
                   <span className={styles.summaryCategory}>{activeWork.category}</span>
                 </div>
                 <h3 className={styles.summaryTitle}>{activeWork.title}</h3>
+                <p className={styles.summaryLead}>{activeWork.client}</p>
                 <div className={styles.summaryFacts}>
-                  <span className={styles.summaryFact}>
-                    <span className={styles.summaryFactLabel}>Client</span>
-                    <span className={styles.summaryFactValue}>{activeWork.client}</span>
-                  </span>
-                  <span className={styles.summaryFactsDot} />
                   <span className={styles.summaryFact}>
                     <span className={styles.summaryFactLabel}>Role</span>
                     <span className={styles.summaryFactValue}>{activeWork.role}</span>
                   </span>
                 </div>
                 <p className={styles.summaryText}>{activeWork.desc}</p>
+                <div className={styles.summaryTags}>
+                  <span className={styles.summaryTag}>Local Preview</span>
+                  <span className={styles.summaryTag}>Curated Edit</span>
+                  <span className={styles.summaryTag}>Launch Ready</span>
+                </div>
+              </article>
+
+              <article className={styles.rosterCard}>
+                <p className={styles.rosterEyebrow}>Curated Five</p>
+                <p className={styles.rosterIntro}>
+                  A tighter homepage reel focused on the work that defines the standard fastest.
+                </p>
+                <div className={styles.rosterList}>
+                  {SHOWCASE_WORKS.map((work, index) => {
+                    const isActive = index === activeIndex
+
+                    return (
+                      <button
+                        key={`${work.client}-${work.title}`}
+                        type="button"
+                        onClick={() => handleChange(index)}
+                        className={`${styles.rosterButton} ${isActive ? styles.rosterButtonActive : ""}`}
+                        aria-pressed={isActive}
+                      >
+                        <span className={styles.rosterIndex}>{String(index + 1).padStart(2, "0")}</span>
+                        <span className={styles.rosterBody}>
+                          <span className={styles.rosterTitle}>{work.title}</span>
+                          <span className={styles.rosterClient}>{work.client}</span>
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
               </article>
             </div>
           </div>

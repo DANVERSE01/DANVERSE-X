@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Manrope, Sora } from "next/font/google"
+import { Manrope, Syne } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
 import { ScrollTracker } from "@/components/scroll-tracker"
@@ -15,10 +15,10 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Sora({
+const displayFont = Syne({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 })
 
@@ -115,7 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:border focus:border-white/12 focus:bg-[rgba(11,14,20,0.96)] focus:px-4 focus:py-2 focus:text-white"
           style={{ zIndex: "var(--z-cursor)" }}
         >
           Skip to content
@@ -125,9 +125,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <WebVitalsReporter />
           <Suspense fallback={null}>
             <div className="fixed inset-0 h-full w-full" style={{ zIndex: "var(--z-background)" }}>
-              <Plasma colorStops={["#315dff", "#ff2f92", "#d9ff26"]} speed={0.74} amplitude={0.98} blend={0.62} />
+              <Plasma colorStops={["#1f3268", "#271824", "#bfd65c"]} speed={0.66} amplitude={0.84} blend={0.48} />
               <div className="plasma-atmosphere" aria-hidden="true" />
               <div className="plasma-grain" aria-hidden="true" />
+              <div className="editorial-vignette" aria-hidden="true" />
             </div>
             <main
               id="main-content"

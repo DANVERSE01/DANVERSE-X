@@ -166,7 +166,7 @@ export function Pricing() {
       id="process"
       ref={sectionRef}
       aria-labelledby="process-heading"
-      className="section-shell relative isolate bg-transparent text-white"
+      className="section-shell relative isolate overflow-hidden bg-transparent text-white"
     >
       <div className="pointer-events-none absolute inset-0">
         <div
@@ -188,30 +188,42 @@ export function Pricing() {
 
       <div className="content-shell relative py-[var(--section-block)]">
         <div className="mx-auto max-w-[1180px]">
-          <div className="max-w-[54rem]">
-            <p className="section-label">The Process</p>
-            <h2
-              id="process-heading"
-              ref={headlineRef}
-              className="section-heading mt-4 flex max-w-[11ch] flex-wrap gap-x-2.5 gap-y-2 text-[clamp(2.25rem,9vw,3.9rem)] leading-[0.93] text-white sm:mt-5 sm:gap-x-3.5 sm:gap-y-2.5 sm:text-[4.5rem] lg:text-[5.25rem]"
-            >
-              {HEADLINE_WORDS.map((word, index) => (
-                <span key={word} className="inline-flex overflow-hidden pb-1 sm:pb-3">
-                  <span
-                    ref={(element) => {
-                      if (element) wordRefs.current[index] = element
-                    }}
-                    className="inline-block will-change-transform"
-                  >
-                    {word}
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end">
+            <div className="max-w-[54rem]">
+              <p className="section-label">Chapter 05 / Operating Model</p>
+              <h2
+                id="process-heading"
+                ref={headlineRef}
+                className="section-heading mt-4 flex max-w-[11ch] flex-wrap gap-x-2.5 gap-y-2 text-[clamp(2.25rem,9vw,3.9rem)] leading-[0.93] text-white sm:mt-5 sm:gap-x-3.5 sm:gap-y-2.5 sm:text-[4.5rem] lg:text-[5.25rem]"
+              >
+                {HEADLINE_WORDS.map((word, index) => (
+                  <span key={word} className="inline-flex overflow-hidden pb-1 sm:pb-3">
+                    <span
+                      ref={(element) => {
+                        if (element) wordRefs.current[index] = element
+                      }}
+                      className="inline-block will-change-transform"
+                    >
+                      {word}
+                    </span>
                   </span>
-                </span>
-              ))}
-            </h2>
+                ))}
+              </h2>
 
-            <p className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
-              Three stages. One locked direction. Zero wasted rounds
-            </p>
+              <p className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
+                Three stages. One locked direction. Zero wasted rounds.
+              </p>
+            </div>
+
+            <div className="brand-card rounded-[1.6rem] p-5 text-left sm:p-6">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-acid-lime)]">
+                Studio Discipline
+              </p>
+              <p className="mt-3 text-sm leading-7 text-white/68">
+                Each stage has a different job: define the angle, build the frame language, then package the launch so
+                the client never feels the handoff.
+              </p>
+            </div>
           </div>
 
           <div ref={cardsWrapRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">

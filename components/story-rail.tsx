@@ -73,19 +73,19 @@ export function StoryRail() {
   }
 
   return (
-    <div className="pointer-events-none fixed right-5 top-1/2 z-[90] hidden -translate-y-1/2 xl:block">
+    <div className="pointer-events-none fixed right-6 top-1/2 z-[90] hidden -translate-y-1/2 2xl:block">
       <motion.aside
         initial={reduced ? undefined : { opacity: 0, x: 18 }}
         animate={reduced ? undefined : { opacity: 1, x: 0 }}
         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-auto relative overflow-hidden rounded-[1.4rem] border border-white/8 bg-[linear-gradient(160deg,rgba(8,12,21,0.88),rgba(9,13,22,0.58))] px-3 py-4 backdrop-blur-xl shadow-[0_22px_70px_rgba(0,0,0,0.28)]"
+        className="pointer-events-auto relative overflow-hidden rounded-[1.4rem] border border-white/8 bg-[linear-gradient(160deg,rgba(10,13,18,0.92),rgba(17,21,30,0.7),rgba(23,14,22,0.7))] px-3 py-4 backdrop-blur-xl shadow-[0_22px_70px_rgba(0,0,0,0.34)]"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
         <div className="mb-4 flex items-center justify-between gap-3">
           <div>
-            <p className="text-[0.58rem] font-semibold uppercase tracking-[0.24em] text-white/38">Story Rail</p>
+            <p className="text-[0.58rem] font-semibold uppercase tracking-[0.24em] text-white/34">Direction Map</p>
             <p className="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-acid-lime)]">
-              Home Flow
+              Home Chapters
             </p>
           </div>
           <div className="relative h-10 w-10 rounded-full border border-white/8 bg-white/[0.03]">
@@ -104,9 +104,9 @@ export function StoryRail() {
               />
               <defs>
                 <linearGradient id="story-rail-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#315dff" />
-                  <stop offset="55%" stopColor="#ff2f92" />
-                  <stop offset="100%" stopColor="#d9ff26" />
+                  <stop offset="0%" stopColor="#6a81ff" />
+                  <stop offset="55%" stopColor="#d8d1c5" />
+                  <stop offset="100%" stopColor="#c6eb68" />
                 </linearGradient>
               </defs>
             </svg>

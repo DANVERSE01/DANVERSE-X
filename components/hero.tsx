@@ -27,66 +27,108 @@ const HERO_MEDIA: HeroMediaItem[] = [
   },
 ]
 
+const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [
+  { text: "We Build the" },
+  { text: "Visual Language" },
+  { text: "Your Brand Competes", accent: "With" },
+]
+
+const HERO_EASE = [0.16, 1, 0.3, 1] as const
+const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const
+
 export function Hero() {
   const prefersReducedMotion = useReducedMotion()
-  const reveal = (delay: number, y = 28) =>
+  const reveal = (delay: number, y = 20, duration = 0.5) =>
     prefersReducedMotion
       ? {}
       : {
           initial: { opacity: 0, y },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.72, delay, ease: [0.22, 1, 0.36, 1] as const },
+          transition: { duration, delay, ease: HERO_EASE },
+        }
+
+  const revealLine = (delay: number) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { clipPath: "inset(0 0 100% 0)", opacity: 0 },
+          animate: { clipPath: "inset(0 0 0% 0)", opacity: 1 },
+          transition: { duration: 0.7, delay, ease: HERO_EASE },
         }
 
   return (
     <section aria-label="Hero introduction" className="section-shell overflow-hidden pt-4 sm:pt-6">
       <div className="content-shell">
         <div className="mx-auto flex max-w-[1120px] flex-col items-center py-10 text-center sm:py-14 lg:py-16">
-          <motion.p
-            className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-[rgba(8,12,20,0.48)] px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl"
-            {...reveal(0.04, 18)}
-          >
-            Cinematic Systems. Commercial Results.
-          </motion.p>
-
-          <motion.h1
-            className="mx-auto max-w-[14ch] text-center text-[clamp(3.8rem,8.2vw,6.9rem)] leading-[0.87] tracking-[-0.065em] text-white"
-            {...reveal(0.12, 24)}
-          >
-            We Build the Visual Language Your Brand Competes With
-          </motion.h1>
-
-          <motion.p
-            className="body-copy mx-auto mt-7 max-w-[44rem] text-[clamp(1.02rem,1.45vw,1.16rem)] leading-[1.7] text-white/72"
-            {...reveal(0.24, 22)}
-          >
-            Every frame deliberate. Every asset launch-ready.
-          </motion.p>
-
-          <motion.div className="mt-9 flex flex-col items-center gap-4" {...reveal(0.32, 18)}>
-            <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <HoverLift>
-                <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
-                  <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                    Start the Brief
-                  </a>
-                </Button>
-              </HoverLift>
-              <HoverLift>
-                <Button asChild variant="outline" size="lg" className="cta-secondary rounded-full px-8 py-3 text-white">
-                  <a href="#showcase">See the Work</a>
-                </Button>
-              </HoverLift>
-            </div>
+          <motion.div className="mb-6 inline-flex items-center gap-3 sm:mb-7" {...reveal(0, 18)}>
+            <span aria-hidden="true" className="h-px w-8 bg-gradient-to-r from-transparent via-white/42 to-white/8" />
+            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+              Cinematic Systems. Commercial Results.
+            </p>
+            <span aria-hidden="true" className="h-px w-8 bg-gradient-to-l from-transparent via-white/42 to-white/8" />
           </motion.div>
 
-          <motion.div className="mt-14 w-full" {...reveal(0.42, 16)}>
+          <h1 className="mx-auto max-w-full text-center text-[clamp(3.6rem,7.8vw,6.8rem)] font-extrabold leading-[0.88] tracking-[-0.06em] text-white">
+            {HERO_HEADLINE_LINES.map((line, index) => (
+              <motion.span
+                key={line.text}
+                className="block"
+                style={{ willChange: "clip-path, opacity" }}
+                {...revealLine(HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1])}
+              >
+                {line.text}{" "}
+                {line.accent ? (
+                  <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] to-[var(--color-hot-pink-strong)] bg-clip-text text-transparent">
+                    {line.accent}
+                  </span>
+                ) : null}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p
+            className="mx-auto mt-7 max-w-[42ch] text-[clamp(1rem,1.4vw,1.12rem)] leading-[1.65] text-white/65"
+            {...reveal(0.42, 20)}
+          >
+            Every frame deliberate. Every asset launch-ready
+          </motion.p>
+
+          <div className="mt-9 flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <motion.div {...reveal(0.52, 16)}>
+                <HoverLift>
+                  <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
+                    <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+                      Start the Brief
+                    </a>
+                  </Button>
+                </HoverLift>
+              </motion.div>
+
+              <motion.div {...reveal(0.6, 16)}>
+                <HoverLift>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="cta-secondary rounded-full px-8 py-3 text-white"
+                  >
+                    <a href="#showcase">See the Work</a>
+                  </Button>
+                </HoverLift>
+              </motion.div>
+            </div>
+          </div>
+
+          <div className="mt-14 w-full">
             <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {HERO_MEDIA.map((item, index) => (
-                <HeroMediaCard key={item.title} index={index} {...item} />
+                <motion.div key={item.title} className="h-full" {...reveal(0.62 + index * 0.1, 24)}>
+                  <HeroMediaCard index={index} {...item} />
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

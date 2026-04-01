@@ -141,17 +141,15 @@ function LaunchVisual() {
         <div className="grid content-start gap-4">
           <div className="rounded-[1.4rem] border border-white/8 bg-black/18 p-4">
             <div className="text-[10px] uppercase tracking-[0.22em] text-white/44">Output Matrix</div>
-            <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-3 gap-3 justify-items-start">
               {outputs.map((ratio, index) => (
                 <motion.div
                   key={ratio}
-                  className="flex min-h-[5.25rem] items-center justify-center rounded-[1rem] border border-white/8 bg-white/[0.03] px-3 py-4 text-center"
+                  className="flex h-[72px] w-[72px] items-center justify-center rounded-[1rem] border border-white/8 bg-white/[0.03] p-0 text-center"
                   animate={reduced ? undefined : { y: [0, -4, 0] }}
                   transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
                 >
-                  <div className="text-[clamp(1.25rem,2.2vw,1.5rem)] font-black tracking-[-0.05em] text-white">
-                    {ratio}
-                  </div>
+                  <div className="text-[1.35rem] font-black tracking-[-0.05em] text-white">{ratio}</div>
                 </motion.div>
               ))}
             </div>

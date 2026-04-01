@@ -33,7 +33,7 @@ export function CinematicShowcase() {
 
   return (
     <section id="showcase" aria-label="Selected work" className={styles.stage}>
-      <div className="section-shell">
+      <div className="section-shell bg-[#080a10]">
         <div ref={revealRef} className={`${styles.contentShell} ${styles.contentLayer}`}>
           <div className={styles.headingRow}>
             <div className={styles.headingCopy}>
@@ -85,18 +85,21 @@ export function CinematicShowcase() {
             <div className={styles.detailsGrid} aria-live="polite" aria-atomic="true">
               <article className={styles.summaryCard}>
                 <div className={styles.summaryTopline}>
-                  <span className={styles.summaryIndex}>Project {activeNumber}</span>
-                  <span className={styles.summaryDivider} />
+                  <span className={styles.summaryProject}>Project</span>
+                  <span className={styles.summaryIndex}>{activeNumber}</span>
+                  <span className={styles.summarySeparator}>&bull;</span>
                   <span className={styles.summaryCategory}>{activeWork.category}</span>
                 </div>
                 <h3 className={styles.summaryTitle}>{activeWork.title}</h3>
                 <div className={styles.summaryFacts}>
-                  <span>
-                    <strong>Client</strong> {activeWork.client}
+                  <span className={styles.summaryFact}>
+                    <span className={styles.summaryFactLabel}>Client</span>
+                    <span className={styles.summaryFactValue}>{activeWork.client}</span>
                   </span>
                   <span className={styles.summaryFactsDot} />
-                  <span>
-                    <strong>Role</strong> {activeWork.role}
+                  <span className={styles.summaryFact}>
+                    <span className={styles.summaryFactLabel}>Role</span>
+                    <span className={styles.summaryFactValue}>{activeWork.role}</span>
                   </span>
                 </div>
                 <p className={styles.summaryText}>{activeWork.desc}</p>

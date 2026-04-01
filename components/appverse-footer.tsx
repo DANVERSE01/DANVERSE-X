@@ -17,7 +17,11 @@ export function AppverseFooter() {
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section aria-label="Footer and contact" className="section-shell relative overflow-hidden py-[var(--section-block)] text-white">
+    <section
+      id="contact"
+      aria-label="Footer and contact"
+      className="section-shell relative overflow-hidden py-[var(--section-block)] text-white"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-10rem] top-[10%] h-[22rem] w-[22rem] rounded-full bg-[rgba(73,107,255,0.08)] blur-[120px]" />
         <div className="absolute right-[-8rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(255,47,146,0.08)] blur-[120px]" />

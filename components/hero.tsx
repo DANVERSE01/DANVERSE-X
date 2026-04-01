@@ -133,6 +133,7 @@ export function Hero() {
 
   return (
     <section
+      id="hero"
       ref={heroRef}
       aria-label="Hero introduction"
       className="section-shell relative overflow-x-hidden pt-3 sm:pt-6"
@@ -234,6 +235,25 @@ export function Hero() {
           >
             Every frame deliberate. Every asset launch-ready
           </motion.p>
+
+          <motion.div
+            className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-2.5"
+            {...reveal(0.48, 18)}
+          >
+            <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+              Cinematic Ads
+            </div>
+            <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+              Brand Systems
+            </div>
+            <div className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+              Launch Pages
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/66 backdrop-blur-xl">
+              <span className="h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(217,255,38,0.45)]" />
+              Open for select launches
+            </div>
+          </motion.div>
 
           <div className="mt-8 flex w-full max-w-[19rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
             <div className="flex w-full flex-col items-center justify-center gap-3.5 sm:flex-row sm:justify-center">

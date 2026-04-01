@@ -40,7 +40,11 @@ export function LogoMarquee() {
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
-    <section aria-label="Industries and offers" className="section-shell overflow-hidden py-[var(--section-block)]">
+    <section
+      id="industries"
+      aria-label="Industries and offers"
+      className="section-shell overflow-hidden py-[var(--section-block)]"
+    >
       <div ref={revealRef} className="content-shell">
         <div
           data-reveal-item

@@ -7,6 +7,7 @@ import { Pricing } from "@/components/pricing"
 import { AppverseFooter } from "@/components/appverse-footer"
 import { ScrollToTop } from "./scroll-to-top"
 import Script from "next/script"
+import { StoryRail } from "@/components/story-rail"
 
 // Structured data for SEO
 const PROCESS_STRUCTURED_DATA = {
@@ -47,6 +48,7 @@ export default function Page() {
   return (
     <>
       <div className="min-h-[100dvh] text-white">
+        <StoryRail />
         <SiteHeader />
         <Hero />
         <Features />

@@ -135,12 +135,12 @@ export function Hero() {
     <section
       ref={heroRef}
       aria-label="Hero introduction"
-      className="section-shell relative overflow-hidden pt-4 sm:pt-6"
+      className="section-shell relative overflow-hidden pt-3 sm:pt-6"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-        <div className="content-shell relative h-[640px] sm:h-[720px] lg:h-[780px]">
+        <div className="content-shell relative h-[500px] sm:h-[720px] lg:h-[780px]">
           <motion.div
-            className="absolute left-1/2 top-1/2 h-[min(102vw,700px)] w-[min(102vw,700px)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(82vw,820px)] sm:w-[min(82vw,820px)] lg:h-[min(64vw,920px)] lg:w-[min(64vw,920px)]"
+            className="absolute left-1/2 top-1/2 h-[min(88vw,460px)] w-[min(88vw,460px)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(82vw,820px)] sm:w-[min(82vw,820px)] lg:h-[min(64vw,920px)] lg:w-[min(64vw,920px)]"
             style={{ transformStyle: "preserve-3d" }}
             {...(prefersReducedMotion
               ? {}
@@ -199,17 +199,17 @@ export function Hero() {
       </div>
 
       <div className="content-shell relative z-[2]">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-center py-10 text-center sm:py-14 lg:py-16">
-          <motion.div className="mb-6 inline-flex items-center gap-3 sm:mb-7" {...reveal(0, 18)}>
+        <div className="mx-auto flex max-w-[1120px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
+          <motion.div className="mb-4 inline-flex items-center gap-2 sm:mb-7 sm:gap-3" {...reveal(0, 18)}>
             <span aria-hidden="true" className="h-px w-8 bg-gradient-to-r from-transparent via-white/42 to-white/8" />
-            <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+            <p className="text-[9px] font-medium uppercase tracking-[0.24em] text-white/60 sm:text-[10px] sm:tracking-[0.28em]">
               Cinematic Systems. Commercial Results.
             </p>
             <span aria-hidden="true" className="h-px w-8 bg-gradient-to-l from-transparent via-white/42 to-white/8" />
           </motion.div>
 
           <div className="relative mx-auto flex w-full justify-center">
-            <h1 className="relative z-10 mx-auto max-w-full text-center text-[clamp(3.6rem,7.8vw,6.8rem)] font-extrabold leading-[0.88] tracking-[-0.06em] text-white">
+            <h1 className="relative z-10 mx-auto max-w-full text-center text-[clamp(2.05rem,9.6vw,4rem)] font-extrabold leading-[0.95] tracking-[-0.055em] text-white sm:text-[clamp(3.3rem,8vw,5.8rem)] sm:leading-[0.9] sm:tracking-[-0.06em] lg:text-[clamp(4.8rem,6.2vw,6.8rem)]">
               {HERO_HEADLINE_LINES.map((line, index) => (
                 <motion.span
                   key={line.text}
@@ -229,17 +229,21 @@ export function Hero() {
           </div>
 
           <motion.p
-            className="mx-auto mt-7 max-w-[42ch] text-[clamp(1rem,1.4vw,1.12rem)] leading-[1.65] text-white/65"
+            className="mx-auto mt-5 max-w-[32ch] text-[clamp(0.96rem,4.2vw,1.12rem)] leading-[1.6] text-white/65 sm:mt-7 sm:max-w-[42ch] sm:leading-[1.65]"
             {...reveal(0.42, 20)}
           >
             Every frame deliberate. Every asset launch-ready
           </motion.p>
 
-          <div className="mt-9 flex flex-col items-center gap-4">
-            <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <motion.div {...reveal(0.52, 16)}>
+          <div className="mt-8 flex w-full max-w-[18rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
+            <div className="flex w-full flex-col items-center gap-3 sm:flex-row">
+              <motion.div className="w-full sm:w-auto" {...reveal(0.52, 16)}>
                 <HoverLift>
-                  <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="cta-primary w-full rounded-full px-8 py-3 font-medium text-white sm:w-auto"
+                  >
                     <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                       Start the Brief
                     </a>
@@ -247,13 +251,13 @@ export function Hero() {
                 </HoverLift>
               </motion.div>
 
-              <motion.div {...reveal(0.6, 16)}>
+              <motion.div className="w-full sm:w-auto" {...reveal(0.6, 16)}>
                 <HoverLift>
                   <Button
                     asChild
                     variant="outline"
                     size="lg"
-                    className="cta-secondary rounded-full px-8 py-3 text-white"
+                    className="cta-secondary w-full rounded-full px-8 py-3 text-white sm:w-auto"
                   >
                     <a href="#showcase">See the Work</a>
                   </Button>
@@ -262,8 +266,8 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="mt-14 w-full">
-            <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div className="mt-10 w-full sm:mt-14">
+            <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
               {HERO_MEDIA.map((item, index) => (
                 <motion.div key={item.title} className="h-full" {...reveal(0.62 + index * 0.1, 24)}>
                   <HeroMediaCard index={index} {...item} />

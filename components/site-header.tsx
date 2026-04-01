@@ -24,13 +24,15 @@ const SERVICES = [
     href: "/cinematic-ads",
     label: "Performance Films & Social Video",
     icon: Building2,
-    description: "Cinematic paid-social, launch films, and creator-native content engineered to stop scroll and move revenue.",
+    description:
+      "Cinematic paid-social, launch films, and creator-native content engineered to stop scroll and move revenue.",
   },
   {
     href: "/branding",
     label: "Brand Systems & Visual Identity",
     icon: Palette,
-    description: "Identity architecture, visual direction, and premium brand assets built for consistency across every touchpoint.",
+    description:
+      "Identity architecture, visual direction, and premium brand assets built for consistency across every touchpoint.",
   },
   {
     href: "/websites",
@@ -52,14 +54,17 @@ export function SiteHeader() {
   const isServiceRoute = SERVICES.some((service) => service.href === pathname)
 
   return (
-    <header className="sticky top-0 w-full section-shell py-4" style={{ zIndex: "var(--z-nav)" }}>
+    <header
+      className="sticky top-0 w-full section-shell pb-3 pt-3 sm:py-4"
+      style={{ zIndex: "var(--z-nav)", paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.75rem)" }}
+    >
       <div className="content-shell">
-        <div className="liquid-glass-header flex h-16 items-center justify-between rounded-full px-5">
+        <div className="liquid-glass-header flex h-14 items-center justify-between rounded-full px-4 sm:h-16 sm:px-5">
           <Link href="/" className="flex-shrink-0" aria-label="Go to DANVERSE homepage">
             <DanverseHeaderLogo />
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-8 text-sm text-white/90 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-6 text-sm text-white/90 md:flex lg:gap-8">
             <NavigationMenu viewport={false}>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -121,16 +126,19 @@ export function SiteHeader() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" className="h-10 w-10 text-white hover:bg-white/10">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-72 border-white/10 bg-[rgba(8,11,16,0.96)] p-0 backdrop-blur-xl">
+              <SheetContent
+                side="right"
+                className="flex h-full w-[min(20rem,100vw)] max-w-full flex-col border-white/10 bg-[rgba(8,11,16,0.96)] p-0 backdrop-blur-xl"
+              >
                 <div className="border-b border-white/10 px-4 py-5">
                   <DanverseHeaderLogo />
                 </div>
-                <nav aria-label="Mobile" className="flex flex-col py-2">
+                <nav aria-label="Mobile" className="flex flex-1 flex-col overflow-y-auto py-2 pb-6">
                   <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
                     <CollapsibleTrigger className="flex w-full items-center justify-between px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-white">
                       <div className="flex items-center gap-3">
@@ -169,7 +177,10 @@ export function SiteHeader() {
                   ))}
                 </nav>
 
-                <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 p-4">
+                <div
+                  className="mt-auto border-t border-white/10 p-4"
+                  style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+                >
                   <Button asChild className="cta-primary w-full rounded-full font-medium text-white">
                     <Link href={createWhatsAppUrl()} target="_blank">
                       Chat With Us

@@ -193,10 +193,10 @@ export function Pricing() {
             <h2
               id="process-heading"
               ref={headlineRef}
-              className="section-heading mt-5 flex max-w-6xl flex-wrap gap-x-4 gap-y-2 text-[2.7rem] leading-[0.96] text-white sm:text-[4.3rem] lg:text-[5.5rem]"
+              className="section-heading mt-4 flex max-w-6xl flex-wrap gap-x-3 gap-y-1.5 text-[clamp(2rem,10vw,3.55rem)] leading-[0.98] text-white sm:mt-5 sm:gap-x-4 sm:gap-y-2 sm:text-[4.3rem] lg:text-[5.5rem]"
             >
               {HEADLINE_WORDS.map((word, index) => (
-                <span key={word} className="inline-flex overflow-hidden pb-2 sm:pb-3">
+                <span key={word} className="inline-flex overflow-hidden pb-1 sm:pb-3">
                   <span
                     ref={(element) => {
                       if (element) wordRefs.current[index] = element
@@ -209,12 +209,12 @@ export function Pricing() {
               ))}
             </h2>
 
-            <p className="body-copy mt-6 max-w-3xl text-base leading-8 sm:text-lg">
+            <p className="body-copy mt-5 max-w-3xl text-[0.96rem] leading-7 sm:mt-6 sm:text-lg sm:leading-8">
               Three stages. One locked direction. Zero wasted rounds
             </p>
           </div>
 
-          <div ref={cardsWrapRef} className="mt-12 space-y-6 sm:mt-14">
+          <div ref={cardsWrapRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
             {PROCESS_STEPS.map((step, index) => {
               const Icon = step.icon
               const accent = ACCENT_COLOR[step.accent]
@@ -225,7 +225,7 @@ export function Pricing() {
                   ref={(element) => {
                     if (element) cardRefs.current[index] = element
                   }}
-                  className="process-banner group relative overflow-hidden rounded-[2rem] border border-white/10 text-white sm:rounded-[2.4rem]"
+                  className="process-banner group relative overflow-hidden rounded-[1.6rem] border border-white/10 text-white sm:rounded-[2.4rem]"
                   style={{ background: step.surface }}
                 >
                   <div
@@ -237,11 +237,11 @@ export function Pricing() {
                   />
                   <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
-                  <div className="relative grid gap-8 px-6 py-6 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:gap-10 lg:px-10 lg:py-10">
-                    <div className="flex h-full flex-col">
+                  <div className="relative grid gap-6 px-4 py-5 sm:gap-8 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:gap-10 lg:px-10 lg:py-10">
+                    <div className="flex h-full min-w-0 flex-col">
                       <div className="flex items-center gap-4">
                         <span
-                          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-black/25"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-black/25 sm:h-12 sm:w-12 sm:rounded-2xl"
                           style={{ color: accent, boxShadow: `0 0 24px ${accent}22` }}
                         >
                           <Icon className="h-5 w-5" />
@@ -252,25 +252,27 @@ export function Pricing() {
                         </div>
                       </div>
 
-                      <h3 className="mt-8 max-w-[11ch] text-[clamp(2.2rem,5vw,4.7rem)] font-extrabold leading-[0.94] tracking-[-0.05em] text-white">
+                      <h3 className="mt-6 max-w-[12ch] text-[clamp(1.85rem,10vw,3.3rem)] font-extrabold leading-[0.95] tracking-[-0.045em] text-white sm:mt-8 sm:max-w-[11ch] sm:text-[clamp(2.2rem,5vw,4.7rem)] sm:tracking-[-0.05em]">
                         {step.title}
                       </h3>
 
-                      <p className="body-copy mt-5 max-w-2xl text-base leading-8 sm:text-lg">{step.description}</p>
+                      <p className="body-copy mt-4 max-w-2xl text-[0.98rem] leading-7 sm:mt-5 sm:text-lg sm:leading-8">
+                        {step.description}
+                      </p>
 
-                      <div className="mt-6 flex flex-wrap gap-3">
+                      <div className="mt-5 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
                         {step.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="inline-flex items-center rounded-full border border-white/10 bg-black/20 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-white/70"
+                            className="inline-flex items-center rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/70 sm:px-4 sm:py-2 sm:text-[0.72rem] sm:tracking-[0.18em]"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      <div className="mt-auto pt-8">
-                        <div className="rounded-[1.6rem] border border-white/10 bg-black/20 p-4 backdrop-blur-sm sm:p-5">
+                      <div className="mt-auto pt-6 sm:pt-8">
+                        <div className="rounded-[1.35rem] border border-white/10 bg-black/20 p-4 backdrop-blur-sm sm:rounded-[1.6rem] sm:p-5">
                           <div className="flex items-start gap-3">
                             <span
                               className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30"
@@ -278,7 +280,7 @@ export function Pricing() {
                             >
                               <ArrowUpRight className="h-4 w-4" />
                             </span>
-                            <p className="text-sm leading-7 text-white/80 sm:text-[0.97rem]">
+                            <p className="text-[0.92rem] leading-6 text-white/80 sm:text-[0.97rem] sm:leading-7">
                               <span className="font-semibold text-white">Outcome:</span> {step.outcome}
                             </p>
                           </div>
@@ -290,7 +292,7 @@ export function Pricing() {
                       ref={(element) => {
                         if (element) visualRefs.current[index] = element
                       }}
-                      className="process-banner-visual relative min-h-[270px] lg:min-h-[360px]"
+                      className="process-banner-visual relative min-h-[220px] sm:min-h-[270px] lg:min-h-[360px]"
                       aria-hidden="true"
                     >
                       <ProcessVisual mode={step.visual} />

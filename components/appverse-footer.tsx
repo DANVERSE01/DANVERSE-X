@@ -30,14 +30,14 @@ export function AppverseFooter() {
           </HoverLift>
         </div>
 
-        <div data-reveal-item className="my-16">
+        <div data-reveal-item className="my-12 sm:my-16">
           <HoverLift>
-            <Card className="brand-card relative overflow-hidden rounded-2xl !p-8 md:!p-10">
+            <Card className="brand-card relative overflow-hidden rounded-2xl !p-5 sm:!p-8 md:!p-10">
               <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-8 top-8 h-32 w-32 rounded-full bg-[rgba(49,93,255,0.16)] blur-3xl" />
-                <div className="absolute bottom-8 right-10 h-28 w-28 rounded-full bg-[rgba(255,47,146,0.14)] blur-3xl" />
+                <div className="absolute left-4 top-4 h-24 w-24 rounded-full bg-[rgba(49,93,255,0.16)] blur-3xl sm:left-8 sm:top-8 sm:h-32 sm:w-32" />
+                <div className="absolute bottom-4 right-4 h-20 w-20 rounded-full bg-[rgba(255,47,146,0.14)] blur-3xl sm:bottom-8 sm:right-10 sm:h-28 sm:w-28" />
               </div>
-              <div className="grid items-center gap-8 md:grid-cols-2">
+              <div className="grid items-center gap-6 sm:gap-8 md:grid-cols-2">
                 <div className="relative z-10">
                   <p className="section-label mb-2 text-[11px]">AI Content Systems</p>
                   <h3 className="section-heading text-white">Your Brand. On Autopilot.</h3>
@@ -47,8 +47,8 @@ export function AppverseFooter() {
                   </p>
                 </div>
 
-                <div className="relative z-10 mx-auto w-full max-w-[280px]">
-                  <div className="relative rounded-[28px] border border-[rgba(63,101,255,0.2)] bg-[linear-gradient(150deg,rgba(9,11,18,0.96),rgba(18,24,36,0.9))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.46),0_0_46px_rgba(49,93,255,0.12)]">
+                <div className="relative z-10 mx-auto w-full max-w-[250px] sm:max-w-[280px]">
+                  <div className="relative rounded-[28px] border border-[rgba(63,101,255,0.2)] bg-[linear-gradient(150deg,rgba(9,11,18,0.96),rgba(18,24,36,0.9))] p-1.5 shadow-[0_28px_80px_rgba(0,0,0,0.46),0_0_46px_rgba(49,93,255,0.12)] sm:p-2">
                     <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(49,93,255,0.16),transparent_34%),radial-gradient(circle_at_bottom,rgba(255,47,146,0.12),transparent_32%)]" />
                     <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[20px] bg-black">
                       <LazyVideo
@@ -61,12 +61,12 @@ export function AppverseFooter() {
                         aria-label="DANVERSE automation preview"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,32,86,0.08),transparent_28%,rgba(8,10,16,0.14)_62%,rgba(5,7,11,0.78)_100%)]" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <div className="text-2xl font-semibold text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.38)]">
+                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+                        <div className="text-xl font-semibold text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.38)] sm:text-2xl">
                           Automation
                         </div>
                         <p className="mt-1 text-xs text-[var(--color-text-secondary)]">AI-powered production engine</p>
-                        <div className="device-badge mt-3 px-2.5 py-1 text-[10px] uppercase tracking-[0.24em]">
+                        <div className="device-badge mt-2.5 px-2 py-1 text-[9px] uppercase tracking-[0.18em] sm:mt-3 sm:px-2.5 sm:text-[10px] sm:tracking-[0.24em]">
                           Powered by DANVERSE
                         </div>
                       </div>

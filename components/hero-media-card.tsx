@@ -54,10 +54,10 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
       }}
       className="w-full"
     >
-      <HoverLift className="group relative mx-auto w-full max-w-[336px]">
+      <HoverLift className="group relative mx-auto w-full max-w-[19rem] sm:max-w-[336px]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-10 top-5 h-16 rounded-full opacity-65 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-x-8 top-4 h-14 rounded-full opacity-65 blur-3xl transition-opacity duration-500 group-hover:opacity-100 sm:inset-x-10 sm:top-5 sm:h-16"
           style={{
             background:
               "linear-gradient(90deg, rgba(49,93,255,0.24) 0%, rgba(255,47,146,0.16) 54%, rgba(217,255,38,0.14) 100%)",
@@ -95,18 +95,20 @@ export function HeroMediaCard({ posterSrc, sub, title, vimeoId, index = 0 }: Her
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,10,16,0.14)_0%,rgba(7,10,16,0.08)_20%,rgba(7,10,16,0.04)_48%,rgba(7,10,16,0.24)_80%,rgba(7,10,16,0.48)_100%)]" />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
 
-            <div className="absolute left-4 top-4 rounded-full border border-white/12 bg-[rgba(8,12,20,0.36)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/68 backdrop-blur-xl">
+            <div className="absolute left-3 top-3 rounded-full border border-white/12 bg-[rgba(8,12,20,0.36)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/68 backdrop-blur-xl sm:left-4 sm:top-4 sm:px-3 sm:text-[10px] sm:tracking-[0.24em]">
               Frame {cardIndex}
             </div>
 
-            <div className="absolute inset-x-4 bottom-4 h-px bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-acid-lime)] opacity-75" />
+            <div className="absolute inset-x-3 bottom-3 h-px bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-acid-lime)] opacity-75 sm:inset-x-4 sm:bottom-4" />
           </div>
 
-          <div className="px-3 pb-4 pt-4 sm:px-4">
-            <h3 className="max-w-[9.5ch] text-[clamp(1.35rem,2vw,1.72rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-white">
+          <div className="px-3 pb-3.5 pt-3.5 sm:px-4 sm:pb-4 sm:pt-4">
+            <h3 className="max-w-[11ch] text-[clamp(1.2rem,6vw,1.72rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-white sm:max-w-[9.5ch] sm:tracking-[-0.055em]">
               {title}
             </h3>
-            <p className="body-copy mt-2 max-w-[20ch] text-[0.96rem] leading-7 text-white/68">{sub}</p>
+            <p className="body-copy mt-2 max-w-[22ch] text-[0.9rem] leading-6 text-white/68 sm:max-w-[20ch] sm:text-[0.96rem] sm:leading-7">
+              {sub}
+            </p>
           </div>
         </article>
       </HoverLift>

@@ -30,7 +30,7 @@ export function Features() {
                   <p className="body-copy mb-4 text-sm">
                     We lock positioning, pacing, visual language, and output format before production begins.
                   </p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                     <FeatureImage
                       src="/images/intuitive-1.webp"
                       alt="Close-up smartphone camera module with polished metal finish"
@@ -53,7 +53,7 @@ export function Features() {
                   <CardTitle className="mt-1 text-white">What you review is already release-ready.</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="body-copy mb-4 text-sm">
+                  <p className="body-copy mb-3 text-sm sm:mb-4">
                     Internal QA, finish, and brand consistency happen before anything reaches your inbox.
                   </p>
                   <div className="mb-5 flex flex-col items-start gap-1">
@@ -64,7 +64,7 @@ export function Features() {
                     </div>
                     <div className="section-label text-[10px]">Post-project feedback</div>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                     <FeatureImage
                       src="/images/top-rated-1.webp"
                       alt="Product sketch concepts arranged on a warm tabletop"
@@ -81,10 +81,13 @@ export function Features() {
             </HoverLift>
           </div>
 
-          <div data-reveal-item className="statement-panel mt-12 rounded-[2rem] px-8 py-8 text-left md:px-10 md:py-10">
+          <div
+            data-reveal-item
+            className="statement-panel mt-10 rounded-[1.75rem] px-5 py-6 text-left sm:mt-12 sm:rounded-[2rem] sm:px-8 sm:py-8 md:px-10 md:py-10"
+          >
             <div className="relative z-10">
               <p className="statement-kicker">Launch Architecture</p>
-              <p className="mt-5 max-w-4xl text-lg leading-relaxed text-[var(--color-text-secondary)] md:text-[1.22rem]">
+              <p className="mt-4 max-w-4xl text-[1rem] leading-relaxed text-[var(--color-text-secondary)] sm:mt-5 md:text-[1.22rem]">
                 One brief becomes a complete launch system: hooks, scripts, formats, and rollout-ready assets built
                 around your brand.
               </p>

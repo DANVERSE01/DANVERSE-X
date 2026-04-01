@@ -121,8 +121,11 @@
   main,
   section,
   article,
-  nav {
+  nav,
+  header,
+  footer {
     position: relative;
+    min-width: 0;
   }
 
   p,
@@ -201,17 +204,20 @@
 }
 
 .section-shell {
+  width: 100%;
   padding-inline: var(--section-inline);
 }
 
 .content-shell {
   width: min(100%, var(--content-max));
   margin-inline: auto;
+  min-width: 0;
 }
 
 .content-shell-narrow {
   width: min(100%, var(--content-narrow));
   margin-inline: auto;
+  min-width: 0;
 }
 
 .liquid-glass {

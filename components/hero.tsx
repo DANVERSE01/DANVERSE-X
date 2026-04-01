@@ -57,32 +57,30 @@ export function Hero() {
 
     const context = gsap.context(() => {
       gsap.set(logoDrift, {
-        transformOrigin: "50% 56%",
-        willChange: "transform",
+        transformOrigin: "50% 50%",
+        willChange: "transform, opacity",
       })
       gsap.set([logoBase, logoGlow], {
-        transformOrigin: "50% 56%",
+        transformOrigin: "50% 50%",
         willChange: "transform, opacity, filter",
       })
 
-      const sweepTimeline = gsap.timeline({
+      const parallaxTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: hero,
           start: "top top",
           end: "bottom top",
-          scrub: 1.2,
+          scrub: 1.1,
           invalidateOnRefresh: true,
         },
       })
 
-      sweepTimeline
+      parallaxTimeline
         .to(
           logoDrift,
           {
-            x: () => window.innerWidth * 0.08,
-            y: () => window.innerHeight * 0.18,
-            rotate: 8,
-            scale: 1.08,
+            y: () => window.innerHeight * 0.075,
+            scale: 1.028,
             ease: "none",
           },
           0
@@ -90,11 +88,9 @@ export function Hero() {
         .to(
           logoBase,
           {
-            x: () => window.innerWidth * -0.024,
-            y: () => window.innerHeight * 0.055,
-            rotate: -5,
-            scale: 1.035,
-            opacity: 0.66,
+            y: () => window.innerHeight * 0.032,
+            scale: 1.014,
+            opacity: 0.24,
             ease: "none",
           },
           0
@@ -102,12 +98,10 @@ export function Hero() {
         .to(
           logoGlow,
           {
-            x: () => window.innerWidth * 0.12,
-            y: () => window.innerHeight * 0.23,
-            rotate: 13,
-            scale: 1.18,
-            opacity: 0.6,
-            filter: "blur(34px) saturate(1.24) brightness(1.08)",
+            y: () => window.innerHeight * 0.11,
+            scale: 1.05,
+            opacity: 0.1,
+            filter: "blur(18px) saturate(1.04) brightness(0.98)",
             ease: "none",
           },
           0
@@ -143,30 +137,25 @@ export function Hero() {
       aria-label="Hero introduction"
       className="section-shell relative overflow-hidden pt-4 sm:pt-6"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[640px] sm:h-[720px] lg:h-[800px]"
-      >
-        <div
-          className="absolute left-[55%] top-[49%] h-[min(126vw,820px)] w-[min(126vw,820px)] -translate-x-1/2 -translate-y-1/2 sm:left-[57%] sm:top-[49%] sm:h-[min(104vw,980px)] sm:w-[min(104vw,980px)] lg:left-[59%] lg:top-[50%] lg:h-[min(82vw,1180px)] lg:w-[min(82vw,1180px)]"
-          style={{ transformStyle: "preserve-3d" }}
-        >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        <div className="content-shell relative h-[640px] sm:h-[720px] lg:h-[780px]">
           <motion.div
-            className="relative h-full w-full"
+            className="absolute left-1/2 top-1/2 h-[min(102vw,700px)] w-[min(102vw,700px)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(82vw,820px)] sm:w-[min(82vw,820px)] lg:h-[min(64vw,920px)] lg:w-[min(64vw,920px)]"
+            style={{ transformStyle: "preserve-3d" }}
             {...(prefersReducedMotion
               ? {}
               : {
-                  initial: { opacity: 0, scale: 0.84, y: 56, rotate: -8 },
-                  animate: { opacity: 1, scale: 1, y: 0, rotate: 0 },
-                  transition: { duration: 1.05, delay: 0.14, ease: HERO_EASE },
+                  initial: { opacity: 0, scale: 0.94, y: 22 },
+                  animate: { opacity: 1, scale: 1, y: 0 },
+                  transition: { duration: 0.95, delay: 0.16, ease: HERO_EASE },
                 })}
           >
             <div ref={logoDriftRef} className="relative h-full w-full">
               <div
                 ref={logoGlowRef}
-                className="absolute inset-0 opacity-[0.34] mix-blend-screen sm:opacity-[0.42] lg:opacity-[0.48]"
+                className="absolute inset-0 scale-[1.015] opacity-[0.05] sm:opacity-[0.07] lg:opacity-[0.08]"
                 style={{
-                  filter: "blur(26px) saturate(1.18) brightness(1.06)",
+                  filter: "blur(16px) saturate(1.02) brightness(0.98)",
                 }}
               >
                 <Image
@@ -181,10 +170,10 @@ export function Hero() {
 
               <div
                 ref={logoBaseRef}
-                className="absolute inset-0 opacity-[0.5] sm:opacity-[0.56] lg:opacity-[0.6]"
+                className="absolute inset-0 opacity-[0.18] sm:opacity-[0.2] lg:opacity-[0.22]"
                 style={{
                   filter:
-                    "saturate(1.14) contrast(1.18) brightness(0.98) drop-shadow(0 0 28px rgba(40, 109, 255, 0.16)) drop-shadow(0 0 54px rgba(210, 255, 58, 0.12))",
+                    "saturate(1.05) contrast(1.06) brightness(0.96) drop-shadow(0 14px 36px rgba(5, 8, 16, 0.18))",
                 }}
               >
                 <Image
@@ -198,6 +187,14 @@ export function Hero() {
               </div>
             </div>
           </motion.div>
+
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 44%, rgba(6, 8, 14, 0.04) 0%, rgba(6, 8, 14, 0.12) 36%, rgba(6, 8, 14, 0.22) 62%, transparent 82%)",
+            }}
+          />
         </div>
       </div>
 

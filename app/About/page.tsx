@@ -67,11 +67,11 @@ export default function AboutPage() {
           <div className="container mx-auto max-w-4xl text-center">
             <p className="section-label mb-4">About DANVERSE</p>
             <h1 className="section-heading text-4xl text-white md:text-5xl lg:text-6xl">
-              Built to raise brand value on every screen.
+              Every Screen. Every Frame. No Compromise
             </h1>
             <p className="body-copy mx-auto mt-6 max-w-3xl text-lg md:text-xl">
-              Director-led systems for brands that need sharper positioning, cleaner execution, and launch-ready assets
-              that feel premium from frame one.
+              We build the creative infrastructure serious brands compete with \u2014 cinematic, precise, and ready to
+              ship
             </p>
           </div>
         </section>
@@ -93,16 +93,27 @@ export default function AboutPage() {
         <section className="px-4 py-20 text-center">
           <div className="container mx-auto max-w-2xl">
             <p className="section-label mb-4">Start Here</p>
-            <h2 className="section-heading text-3xl text-white md:text-4xl">Ready to sharpen the next launch?</h2>
+            <h2 className="section-heading text-3xl text-white md:text-4xl">The Brief Is the Beginning</h2>
             <p className="body-copy mb-8 mt-4">
-              Share the brief, the offer, and the ambition. We&apos;ll map the clearest route from concept to
-              rollout-ready execution.
+              Tell us what you&apos;re building. We&apos;ll tell you exactly how to make it hit
             </p>
-            <Button asChild size="lg" className="cta-primary rounded-full px-8 text-white font-medium">
-              <Link href={createWhatsAppUrl()} target="_blank">
-                Start Your Project
-              </Link>
-            </Button>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="cta-primary rounded-full px-8 text-white font-medium">
+                <Link href={createWhatsAppUrl()} target="_blank">
+                  Start the Brief
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="cta-secondary rounded-full px-8 text-white font-medium"
+              >
+                <Link href={createWhatsAppUrl()} target="_blank">
+                  Schedule a Call
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
       </main>

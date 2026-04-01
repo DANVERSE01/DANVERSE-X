@@ -29,7 +29,7 @@ export function DanverseLogo({ size = "md", className = "" }: LogoProps) {
         alt="DANVERSE"
         fill
         sizes={`${width}px`}
-        className="object-contain select-none drop-shadow-[0_0_24px_rgba(49,93,255,0.18)]"
+        className="object-contain"
         priority={priority}
       />
     </div>

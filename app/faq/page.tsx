@@ -53,8 +53,8 @@ export default function FAQPage() {
           <div className="brand-card mx-auto max-w-4xl rounded-[2rem] p-8 md:p-10">
             <header className="space-y-3">
               <p className="section-label">FAQ</p>
-              <h1 className="section-heading text-3xl text-white md:text-4xl">Frequently Asked Questions</h1>
-              <p className="body-copy text-base md:text-lg">Everything you need to know before we start.</p>
+              <h1 className="section-heading text-3xl text-white md:text-4xl">Before We Start</h1>
+              <p className="body-copy text-base md:text-lg">The questions brands ask before they commit</p>
             </header>
 
             <div className="mt-10 space-y-6">

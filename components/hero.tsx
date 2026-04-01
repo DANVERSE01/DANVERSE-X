@@ -8,20 +8,20 @@ import { createWhatsAppUrl } from "@/lib/env"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {
-    title: "Precision Converts",
-    sub: "Luxury detail engineered to drive desire.",
+    title: "Desire on Screen",
+    sub: "Crafted to make luxury feel inevitable",
     vimeoId: "1178894778",
     posterSrc: "/images/hero/1178894778.jpg",
   },
   {
-    title: "Velocity Performs",
-    sub: "Fast-beauty creative built to signal speed and efficacy.",
+    title: "Speed That Looks Expensive",
+    sub: "High-speed creative that never looks rushed",
     vimeoId: "1178894721",
     posterSrc: "/images/hero/1178894721.jpg",
   },
   {
-    title: "Social Demand",
-    sub: "Vertical-first assets designed to stop scroll and scale attention.",
+    title: "Scroll Stopped. Attention Held.",
+    sub: "Built for the feed. Engineered to convert",
     vimeoId: "1178894835",
     posterSrc: "/images/hero/1178894835.jpg",
   },
@@ -46,30 +46,21 @@ export function Hero() {
             className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-[rgba(8,12,20,0.48)] px-5 py-2.5 text-[10px] font-medium uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl"
             {...reveal(0.04, 18)}
           >
-            Director-Led Brand Systems
+            Cinematic Systems. Commercial Results.
           </motion.p>
 
           <motion.h1
-            className="mx-auto max-w-[11ch] text-center text-[clamp(3.8rem,8.2vw,6.9rem)] leading-[0.87] tracking-[-0.065em] text-white"
+            className="mx-auto max-w-[14ch] text-center text-[clamp(3.8rem,8.2vw,6.9rem)] leading-[0.87] tracking-[-0.065em] text-white"
             {...reveal(0.12, 24)}
           >
-            <span className="block">We Engineer</span>
-            <span className="block">Brand Authority</span>
-            <span className="mt-3 block">
-              <span className="text-white/94">Frame by </span>
-              <span className="bg-gradient-to-r from-[rgba(197,216,255,0.98)] via-[var(--color-electric-blue-strong)] to-[var(--color-hot-pink-strong)] bg-clip-text text-transparent">
-                Frame
-              </span>
-            </span>
+            We Build the Visual Language Your Brand Competes With
           </motion.h1>
 
           <motion.p
             className="body-copy mx-auto mt-7 max-w-[44rem] text-[clamp(1.02rem,1.45vw,1.16rem)] leading-[1.7] text-white/72"
             {...reveal(0.24, 22)}
           >
-            Built for brands that need control, consistency, and cinematic presence
-            <br className="hidden sm:block" />
-            Every asset aligned, every frame intentional
+            Every frame deliberate. Every asset launch-ready.
           </motion.p>
 
           <motion.div className="mt-9 flex flex-col items-center gap-4" {...reveal(0.32, 18)}>
@@ -77,13 +68,13 @@ export function Hero() {
               <HoverLift>
                 <Button asChild size="lg" className="cta-primary rounded-full px-8 py-3 font-medium text-white">
                   <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                    Work With Us
+                    Start the Brief
                   </a>
                 </Button>
               </HoverLift>
               <HoverLift>
                 <Button asChild variant="outline" size="lg" className="cta-secondary rounded-full px-8 py-3 text-white">
-                  <a href="#showcase">Explore Projects</a>
+                  <a href="#showcase">See the Work</a>
                 </Button>
               </HoverLift>
             </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
@@ -64,23 +65,58 @@ export function Hero() {
             <span aria-hidden="true" className="h-px w-8 bg-gradient-to-l from-transparent via-white/42 to-white/8" />
           </motion.div>
 
-          <h1 className="mx-auto max-w-full text-center text-[clamp(3.6rem,7.8vw,6.8rem)] font-extrabold leading-[0.88] tracking-[-0.06em] text-white">
-            {HERO_HEADLINE_LINES.map((line, index) => (
-              <motion.span
-                key={line.text}
-                className="block"
-                style={{ willChange: "clip-path, opacity" }}
-                {...revealLine(HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1])}
+          <div className="relative mx-auto flex w-full justify-center">
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[min(74vw,640px)] -translate-x-1/2 -translate-y-[48%] sm:w-[min(66vw,720px)]"
+              style={{
+                willChange: "transform, opacity",
+                filter: "drop-shadow(0 0 34px rgba(49,93,255,0.18)) drop-shadow(0 0 52px rgba(255,47,146,0.09))",
+              }}
+              {...(prefersReducedMotion
+                ? {}
+                : {
+                    initial: { opacity: 0, scale: 0.92 },
+                    animate: { opacity: 0.26, scale: 1 },
+                    transition: { duration: 0.9, delay: 0.14, ease: HERO_EASE },
+                  })}
+            >
+              <div
+                className="relative aspect-square w-full"
+                style={{
+                  WebkitMaskImage: "radial-gradient(circle at center, black 0%, black 58%, transparent 88%)",
+                  maskImage: "radial-gradient(circle at center, black 0%, black 58%, transparent 88%)",
+                }}
               >
-                {line.text}{" "}
-                {line.accent ? (
-                  <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] to-[var(--color-hot-pink-strong)] bg-clip-text text-transparent">
-                    {line.accent}
-                  </span>
-                ) : null}
-              </motion.span>
-            ))}
-          </h1>
+                <Image
+                  src="/images/hero/hero-backdrop-logo.png"
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 74vw, (max-width: 1024px) 66vw, 720px"
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+
+            <h1 className="relative z-10 mx-auto max-w-full text-center text-[clamp(3.6rem,7.8vw,6.8rem)] font-extrabold leading-[0.88] tracking-[-0.06em] text-white">
+              {HERO_HEADLINE_LINES.map((line, index) => (
+                <motion.span
+                  key={line.text}
+                  className="block"
+                  style={{ willChange: "clip-path, opacity" }}
+                  {...revealLine(HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1])}
+                >
+                  {line.text}{" "}
+                  {line.accent ? (
+                    <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] to-[var(--color-hot-pink-strong)] bg-clip-text text-transparent">
+                      {line.accent}
+                    </span>
+                  ) : null}
+                </motion.span>
+              ))}
+            </h1>
+          </div>
 
           <motion.p
             className="mx-auto mt-7 max-w-[42ch] text-[clamp(1rem,1.4vw,1.12rem)] leading-[1.65] text-white/65"

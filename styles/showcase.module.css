@@ -25,6 +25,8 @@
 .headingRow {
   display: flex;
   flex-wrap: wrap;
+  width: min(100%, 1120px);
+  margin-inline: auto;
   align-items: end;
   justify-content: space-between;
   gap: 1.25rem;
@@ -141,7 +143,8 @@
   border-radius: clamp(1.35rem, 4.5vw, 2.4rem);
   background:
     linear-gradient(155deg, rgba(9, 13, 22, 0.74) 0%, rgba(14, 18, 29, 0.46) 52%, rgba(8, 11, 19, 0.78) 100%),
-    rgba(7, 10, 16, 0.3);
+    rgba(7, 10, 16, 0.3),
+    #0a0a0a;
   backdrop-filter: blur(24px) saturate(170%);
   box-shadow:
     0 34px 90px rgba(0, 0, 0, 0.28),
@@ -172,7 +175,7 @@
   min-width: 0;
   aspect-ratio: 16 / 9;
   min-height: clamp(15rem, 62vw, 22rem);
-  background: rgba(6, 8, 14, 0.18);
+  background: #0a0a0a;
   overflow: hidden;
 }
 
@@ -182,7 +185,8 @@
   background:
     radial-gradient(circle at 24% 18%, rgba(49, 93, 255, 0.18), transparent 28%),
     radial-gradient(circle at 78% 76%, rgba(255, 47, 146, 0.16), transparent 26%),
-    linear-gradient(180deg, rgba(7, 10, 16, 0.28) 0%, rgba(7, 10, 16, 0.54) 100%);
+    linear-gradient(180deg, rgba(7, 10, 16, 0.28) 0%, rgba(7, 10, 16, 0.54) 100%),
+    #0a0a0a;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -195,12 +199,14 @@
   position: absolute;
   inset: 0;
   min-width: 0;
+  background: #0a0a0a;
   overflow: hidden;
 }
 
 .mediaMotion {
   position: absolute;
   inset: -2% -4%;
+  background: #0a0a0a;
 }
 
 .mediaFrame {
@@ -210,7 +216,7 @@
   width: 110%;
   height: 108%;
   border: 0;
-  background: #06080e;
+  background: #0a0a0a;
   transform: translateX(-50%);
 }
 

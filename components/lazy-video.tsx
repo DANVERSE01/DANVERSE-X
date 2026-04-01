@@ -117,6 +117,7 @@ export default function LazyVideo({
       disableRemotePlayback
       style={
         {
+          background: "#0a0a0a",
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
           transform: "translateZ(0)",

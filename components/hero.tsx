@@ -102,20 +102,10 @@ export function Hero() {
 
       <div className="content-shell relative z-[2]">
         <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
-          <motion.div
-            className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-xl sm:mb-7 sm:gap-4 sm:px-5"
-            {...reveal(0, 18)}
-          >
-            <span className="h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(198,235,104,0.42)]" />
-            <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-white/62 sm:text-[10px] sm:tracking-[0.32em]">
-              Chapter 01 / Editorial Launch System
-            </p>
-          </motion.div>
-
           <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
             <motion.div
               className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              {...reveal(0.16, 18)}
+              {...reveal(0.1, 18)}
             >
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-acid-lime)]">
                 Positioning
@@ -148,7 +138,7 @@ export function Hero() {
 
             <motion.div
               className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              {...reveal(0.22, 18)}
+              {...reveal(0.16, 18)}
             >
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-electric-blue-strong)]">
                 Delivery
@@ -161,7 +151,7 @@ export function Hero() {
 
           <motion.p
             className="mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
-            {...reveal(0.42, 20)}
+            {...reveal(0.32, 20)}
           >
             Director-led creative systems for brands that need cinema, identity, and launch-readiness to arrive as one
             deliberate experience.
@@ -169,7 +159,7 @@ export function Hero() {
 
           <motion.div
             className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-2.5"
-            {...reveal(0.48, 18)}
+            {...reveal(0.38, 18)}
           >
             {HERO_SIGNAL_CHIPS.map((chip) => (
               <div
@@ -222,7 +212,7 @@ export function Hero() {
                 <motion.div
                   key={item.title}
                   className={`h-full ${index === 1 ? "lg:-translate-y-6" : index === 0 ? "lg:translate-y-4" : "lg:translate-y-8"}`}
-                  {...reveal(0.62 + index * 0.1, 24)}
+                  {...reveal(0.48 + index * 0.1, 24)}
                 >
                   <HeroMediaCard index={index} featured={index === 1} {...item} />
                 </motion.div>

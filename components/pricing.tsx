@@ -190,7 +190,7 @@ export function Pricing() {
         <div className="mx-auto max-w-[1180px]">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end">
             <div className="max-w-[54rem]">
-              <p className="section-label">Chapter 05 / Operating Model</p>
+              <p className="section-label">Operating Model</p>
               <h2
                 id="process-heading"
                 ref={headlineRef}

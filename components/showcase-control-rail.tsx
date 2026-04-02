@@ -13,7 +13,6 @@ type ShowcaseControlRailProps = {
 }
 
 export function ShowcaseControlRail({ activeIndex, onNext, onPrev, onSelect, works }: ShowcaseControlRailProps) {
-  const activeWork = works[activeIndex]
   const current = String(activeIndex + 1).padStart(2, "0")
   const total = String(works.length).padStart(2, "0")
 
@@ -25,16 +24,10 @@ export function ShowcaseControlRail({ activeIndex, onNext, onPrev, onSelect, wor
 
       <div className={styles.railCenter}>
         <div className={styles.railHeader}>
-          <div className={styles.railMeta}>
-            <p className={styles.railCounter}>
-              {current}/{total}
-            </p>
-            <span className={styles.railMetaDot} />
-            <p className={styles.railCategory}>{activeWork.client}</p>
-          </div>
-          <div className={styles.railHeaderCopy}>
-            <p className={styles.railLabel}>{activeWork.title}</p>
-          </div>
+          <p className={styles.railCounter}>
+            {current}/{total}
+          </p>
+          <p className={styles.railHint}>Curated portrait stage</p>
         </div>
 
         <div
@@ -47,7 +40,7 @@ export function ShowcaseControlRail({ activeIndex, onNext, onPrev, onSelect, wor
 
             return (
               <button
-                key={`${work.client}-${work.title}`}
+                key={work.slug}
                 type="button"
                 className={styles.progressButton}
                 aria-pressed={isActive}

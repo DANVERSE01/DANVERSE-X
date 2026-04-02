@@ -1,69 +1,87 @@
 export type ShowcaseWork = {
+  slug: string
   title: string
   category: string
   client: string
   role: string
   desc: string
   videoSrc: string
-  poster?: string | null
-  embed?: string
+  poster: string
+  aspect: "portrait" | "landscape" | "square"
+  fit?: "contain" | "cover"
+  objectPosition?: string
   backgroundColor?: string
 }
 
 export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
   {
+    slug: "new-year-reel",
     title: "New Year Reel",
-    category: "Personal / Film",
+    category: "Personal Film",
     client: "Self-Initiated",
     role: "Direction, VFX & AI Storycraft",
-    desc: "A director-led personal film shaped as a mood piece, designed to prove atmosphere can be built without compromise.",
+    desc: "A director-led mood piece built to prove atmosphere can still feel premium, deliberate, and commercially sharp.",
     videoSrc: "/videos/standout.mp4",
-    embed: "https://player.vimeo.com/video/1174583531",
-    poster: null,
+    poster: "/images/showcase/new-year-reel.jpg",
+    aspect: "portrait",
+    fit: "contain",
+    objectPosition: "center center",
+    backgroundColor: "#07090d",
+  },
+  {
+    slug: "jacob-bugatti",
+    title: "The Watch the World Wasn't Ready For",
+    category: "Luxury Social",
+    client: "Jacob & Co x Bugatti",
+    role: "Campaign Direction & Visual Finish",
+    desc: "A high-contrast watch campaign where velocity, obsession, and spectacle are framed with more restraint than noise.",
+    videoSrc: "/videos/conversions.mp4",
+    poster: "/images/showcase/jacob-bugatti.jpg",
+    aspect: "portrait",
+    fit: "contain",
+    objectPosition: "center center",
     backgroundColor: "#08090d",
   },
   {
-    title: "The Watch the World Wasn't Ready For",
-    category: "Social / Ad",
-    client: "Jacob & Co x Bugatti",
-    role: "Campaign Direction & Visual Finish",
-    desc: "A high-contrast luxury campaign frame where mechanical obsession, velocity, and spectacle all arrive in one cut.",
-    videoSrc: "/videos/conversions.mp4",
-    embed: "https://player.vimeo.com/video/1164910690",
-    poster: null,
-    backgroundColor: "#090a0f",
-  },
-  {
+    slug: "tag-heuer-carrera",
     title: "The Art of Precision",
-    category: "Luxury / Watch",
+    category: "Luxury Watch",
     client: "TAG Heuer (Carrera Series)",
     role: "Creative Direction & Visual Strategy",
-    desc: "Mechanical poetry where macro detail becomes desire and the finish does as much selling as the story itself.",
+    desc: "Mechanical detail staged as desire, with macro finish and product weight doing as much selling as the story itself.",
     videoSrc: "/videos/premium.mp4",
-    embed: "https://player.vimeo.com/video/1178894778",
-    poster: "/images/hero/1178894778.jpg",
-    backgroundColor: "#07080b",
+    poster: "/images/showcase/tag-heuer-carrera.jpg",
+    aspect: "portrait",
+    fit: "contain",
+    objectPosition: "center center",
+    backgroundColor: "#06080b",
   },
   {
+    slug: "missha-time-revolution",
     title: "Velocity & Vitality",
-    category: "Beauty / Motion",
+    category: "Beauty Motion",
     client: "MISSHA (Time Revolution)",
     role: "Creative Direction & Motion Branding",
-    desc: "Beauty direction that feels fast without becoming cheap, turning efficacy, color, and texture into perceived value.",
+    desc: "Beauty motion that feels fast without becoming cheap, turning color, texture, and clarity into perceived value.",
     videoSrc: "/videos/speed.mp4",
-    embed: "https://player.vimeo.com/video/1178894721",
-    poster: "/images/hero/1178894721.jpg",
-    backgroundColor: "#091019",
+    poster: "/images/showcase/missha-time-revolution.jpg",
+    aspect: "portrait",
+    fit: "contain",
+    objectPosition: "center center",
+    backgroundColor: "#081018",
   },
   {
+    slug: "modern-skincare",
     title: "The Digital Aesthetic",
-    category: "Social / Vertical",
-    client: "Modern Skincare (Social-Ready Campaign)",
+    category: "Vertical Campaign",
+    client: "Modern Skincare",
     role: "Creative Direction & Social-First Content Strategy",
-    desc: "A vertical-first campaign system built to stop the thumb, preserve brand tone, and still feel expensive in motion.",
+    desc: "A vertical-first campaign system designed to win attention quickly while still preserving brand control and finish.",
     videoSrc: "/videos/social-ready.mp4",
-    embed: "https://player.vimeo.com/video/1178894835",
-    poster: "/images/hero/1178894835.jpg",
-    backgroundColor: "#09070e",
+    poster: "/images/showcase/modern-skincare.jpg",
+    aspect: "portrait",
+    fit: "contain",
+    objectPosition: "center center",
+    backgroundColor: "#09070d",
   },
 ] as const

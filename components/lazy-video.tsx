@@ -16,6 +16,7 @@ interface LazyVideoProps {
   background?: string
   onReady?: () => void
   "aria-label"?: string
+  style?: React.CSSProperties
 }
 
 export default function LazyVideo({
@@ -32,6 +33,7 @@ export default function LazyVideo({
   background = "#05070b",
   onReady,
   "aria-label": ariaLabel,
+  style,
   ...props
 }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -144,6 +146,7 @@ export default function LazyVideo({
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
           transform: "translateZ(0)",
+          ...style,
         } as React.CSSProperties
       }
       {...props}

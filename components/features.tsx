@@ -24,7 +24,7 @@ export function Features() {
             className="mx-auto mb-10 grid max-w-[1120px] gap-5 text-center lg:grid-cols-[minmax(0,0.9fr)_minmax(0,0.75fr)_auto] lg:items-end lg:text-left"
           >
             <div>
-              <p className="section-label">Chapter 02 / Standards</p>
+              <p className="section-label">Standards</p>
               <h2 className="section-heading mt-4 max-w-[10ch] text-white">{TITLE}</h2>
             </div>
             <p className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">

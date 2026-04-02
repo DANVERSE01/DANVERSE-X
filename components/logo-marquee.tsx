@@ -22,7 +22,7 @@ const FIRST_ROW: ContentCardItem[] = [
   { label: "Events", icon: "events" },
   { label: "Luxury Brands", icon: "luxury" },
   { label: "E-commerce", icon: "ecommerce" },
-]
+] as const
 
 const SECOND_ROW: ContentCardItem[] = [
   { label: "Community Funnels", icon: "community-funnels" },
@@ -33,7 +33,7 @@ const SECOND_ROW: ContentCardItem[] = [
   { label: "AI Pipelines", icon: "pipeline" },
   { label: "Growth Kits", icon: "growth" },
   { label: "Sales Scripts", icon: "scripts" },
-]
+] as const
 
 export function LogoMarquee() {
   const [pausedRow, setPausedRow] = useState<string | null>(null)
@@ -52,20 +52,19 @@ export function LogoMarquee() {
       <div ref={revealRef} className="content-shell">
         <div
           data-reveal-item
-          className="mx-auto mb-10 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,32rem)_minmax(0,22rem)_auto] lg:items-end lg:text-left"
+          className="mx-auto mb-8 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,31rem)_minmax(0,21rem)_auto] lg:items-end lg:text-left"
         >
           <div className="max-w-3xl">
-            <p className="section-label">Chapter 03 / Capability Reel</p>
+            <p className="section-label">Capability Reel</p>
             <h2 className="section-heading mt-4 text-white">
               Built for brands with <span className="text-[var(--color-acid-lime)]">global standards</span>
             </h2>
             <p className="body-copy mt-3 max-w-xl text-sm">
-              Founders, agencies, hospitality, retail, and luxury teams come to DANVERSE when the work has to feel
-              expensive, intentional, and impossible to ignore.
+              The message is breadth, but the visual rhythm should still feel controlled, balanced, and expensive.
             </p>
           </div>
           <p className="body-copy max-w-[24rem] justify-self-center text-sm leading-7 lg:justify-self-start">
-            Two opposing rails. One curated capability story. The message is breadth, but the feeling stays controlled.
+            Two opposing rails. Smaller capsules. Cleaner spacing. Less noise around the idea itself.
           </p>
           <HoverLift className="justify-self-center lg:justify-self-start">
             <Button
@@ -78,9 +77,22 @@ export function LogoMarquee() {
           </HoverLift>
         </div>
 
-        <div className="mx-auto w-full max-w-[1120px] space-y-4">
-          <MarqueeRow id="first" items={FIRST_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} />
-          <MarqueeRow id="second" items={SECOND_ROW} pausedRow={pausedRow} setPausedRow={setPausedRow} reverse />
+        <div className="mx-auto w-full max-w-[1120px] space-y-3.5">
+          <MarqueeRow
+            id="first"
+            items={FIRST_ROW}
+            pausedRow={pausedRow}
+            setPausedRow={setPausedRow}
+            durationSeconds={72}
+          />
+          <MarqueeRow
+            id="second"
+            items={SECOND_ROW}
+            pausedRow={pausedRow}
+            setPausedRow={setPausedRow}
+            reverse
+            durationSeconds={68}
+          />
         </div>
       </div>
     </section>
@@ -93,17 +105,19 @@ function MarqueeRow({
   pausedRow,
   reverse = false,
   setPausedRow,
+  durationSeconds,
 }: {
   id: string
-  items: ContentCardItem[]
+  items: readonly ContentCardItem[]
   pausedRow: string | null
   reverse?: boolean
   setPausedRow: (rowId: string | null) => void
+  durationSeconds: number
 }) {
   return (
     <div
       data-reveal-item
-      className="relative min-h-[7rem] overflow-x-clip [contain:layout_paint] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] sm:min-h-[8rem]"
+      className="relative min-h-[5.5rem] overflow-x-clip [contain:layout_paint] [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] sm:min-h-[6rem]"
     >
       <div
         className={
@@ -111,29 +125,35 @@ function MarqueeRow({
             ? "absolute inset-y-0 left-0 flex items-center animate-scroll-left"
             : "absolute inset-y-0 left-0 flex items-center animate-scroll-right"
         }
-        style={{ animationPlayState: pausedRow === id ? "paused" : "running", width: "max-content" }}
+        style={{
+          animationDuration: `${durationSeconds}s`,
+          animationPlayState: pausedRow === id ? "paused" : "running",
+          width: "max-content",
+        }}
       >
         {[...items, ...items, ...items].map((item, index) => (
-          <HoverLift
+          <div
             key={`${id}-${index}`}
-            className="mx-2 flex-shrink-0"
-            onHoverStart={() => setPausedRow(id)}
-            onHoverEnd={() => setPausedRow(null)}
+            className="group mx-1.5 flex-shrink-0"
+            onMouseEnter={() => setPausedRow(id)}
+            onMouseLeave={() => setPausedRow(null)}
+            onFocus={() => setPausedRow(id)}
+            onBlur={() => setPausedRow(null)}
           >
-            <div className="brand-card flex h-[6.75rem] w-[15.5rem] items-center gap-4 rounded-[1.45rem] px-5 text-left backdrop-blur-xl sm:h-[7.4rem] sm:w-[17rem] sm:rounded-[1.6rem]">
-              <div className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-white/8 bg-white/[0.03] sm:h-12 sm:w-12">
-                <MarqueeCardIcon type={item.icon} size={38} />
+            <div className="brand-card flex h-[4.55rem] w-[11.5rem] items-center gap-3 rounded-[1.18rem] px-3.5 text-left backdrop-blur-xl transition-[border-color,box-shadow] duration-300 sm:h-[4.9rem] sm:w-[12.75rem] sm:px-4">
+              <div className="flex h-9 w-9 flex-none items-center justify-center rounded-[0.95rem] border border-white/8 bg-white/[0.03] transition-transform duration-300 group-hover:scale-[1.04] group-hover:-rotate-3 sm:h-10 sm:w-10">
+                <MarqueeCardIcon type={item.icon} size={24} />
               </div>
               <div className="min-w-0">
-                <p className="text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-white/34">
+                <p className="text-[0.52rem] font-semibold uppercase tracking-[0.24em] text-white/28">
                   {String((index % items.length) + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-1 max-w-[11ch] text-sm font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-[1rem]">
+                <p className="mt-1 max-w-[10ch] text-[0.84rem] font-semibold leading-[1.05] tracking-[-0.02em] text-white sm:text-[0.92rem]">
                   {item.label}
                 </p>
               </div>
             </div>
-          </HoverLift>
+          </div>
         ))}
       </div>
     </div>

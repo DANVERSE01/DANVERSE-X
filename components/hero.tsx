@@ -1,11 +1,13 @@
 "use client"
 
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
 import { resolveCtaHref } from "@/lib/cta"
 import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
+import { ArrowRight } from "lucide-react"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {
@@ -31,200 +33,117 @@ const HERO_MEDIA: HeroMediaItem[] = [
   },
 ]
 
-const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [
-  { text: "Direction" },
-  { text: "That" },
-  { text: "Lands" },
-]
+const HERO_HEADLINE = ["DIRECTION", "THAT", "LANDS"]
 const HERO_SIGNAL_CHIPS = ["Cinematic Ads", "Brand Systems", "Launch Pages", "Content Rollouts"] as const
-const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const
 
 export function Hero() {
   return (
     <section
       id="hero"
       aria-label="Hero introduction"
-      className="section-shell relative overflow-x-hidden pt-3 sm:pt-6"
+      className="section-shell relative min-h-screen flex flex-col justify-center pt-32 overflow-hidden"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-        <div className="content-shell relative h-[560px] sm:h-[760px] lg:h-[840px]">
-          <div
-            className="hero-light-architecture intro-fade-up absolute inset-0"
-            style={{ animationDelay: "0.1s" }}
-          >
-            <div className="hero-light-grid" />
-            <div className="hero-light-frame" />
-            <div className="hero-light-beam" />
-            <div className="hero-light-beam hero-light-beam--secondary" />
-            <div className="hero-light-scan" />
-            <div className="absolute inset-x-[18%] top-[34%] h-px bg-gradient-to-r from-transparent via-white/22 to-transparent" />
-            <div className="absolute inset-x-[24%] bottom-[22%] h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-            <div className="absolute left-[18%] top-[24%] h-[30%] w-px bg-gradient-to-b from-transparent via-[rgba(106,129,255,0.34)] to-transparent" />
-            <div className="absolute right-[18%] top-[30%] h-[28%] w-px bg-gradient-to-b from-transparent via-[rgba(198,235,104,0.24)] to-transparent" />
-          </div>
-
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 42%, rgba(6, 8, 14, 0.02) 0%, rgba(6, 8, 14, 0.12) 34%, rgba(6, 8, 14, 0.28) 66%, transparent 84%)",
-            }}
-          />
-        </div>
+      {/* Cinematic Background Architecture */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,rgba(255,0,255,0.08),transparent_70%)]" />
+        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <div className="content-shell relative z-[2]">
-        <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
-          <div className="hero-immersive-stage intro-fade-up mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]" style={{ animationDelay: "0.12s" }}>
-            <div className="hero-immersive-screen relative h-[340px] sm:h-[400px] lg:h-[480px] overflow-hidden rounded-[2.1rem] bg-[#0a1130]">
-              <div className="hero-immersive-glow absolute inset-0" />
-              <div className="hero-immersive-shards" aria-hidden="true" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image
-                  src="/images/hero/1178894778.jpg"
-                  alt="Cinematic studio astronaut motion background"
-                  fill
-                  className="object-cover opacity-85"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 84vw, 1100px"
-                  priority
-                />
-              </div>
-              <div className="hero-immersive-screen-overlay absolute inset-0" />
-              <div className="hero-immersive-hud absolute inset-x-0 bottom-5 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/85 sm:text-[13px]">
-                <span className="hero-hud-dot" />
-                WARP FRAME ACTIVE
-                <span className="hero-hud-dot" />
-                GLOBAL STUDIO MOTION
-              </div>
-            </div>
-          </div>
-
-          <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
-            <div
-              className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              style={{ animationDelay: "0.1s" }}
+      <div className="content-shell relative z-10">
+        {/* Signal Chips */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {HERO_SIGNAL_CHIPS.map((chip, i) => (
+            <motion.span
+              key={chip}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="accent-chip"
             >
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-acid-lime)]">
-                Positioning
-              </p>
-              <p className="mt-3 text-sm leading-6 text-white/68">
-                Director-led production for luxury, beauty, and consumer brands that need strategic direction and final delivery control.
-              </p>
-            </div>
+              {chip}
+            </motion.span>
+          ))}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-secondary"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse shadow-[0_0_10px_var(--color-secondary)]" />
+            Open for select launches
+          </motion.div>
+        </div>
 
-            <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
-              <h1 className="hero-headline relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
-                {HERO_HEADLINE_LINES.map((line, index) => (
-                  <span
-                    key={line.text}
-                    className="intro-line-reveal block"
-                    style={{ animationDelay: `${HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1]}s` }}
-                  >
-                    {line.text}{" "}
-                    {line.accent ? (
-                      <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] to-[var(--color-acid-lime)] bg-clip-text text-transparent">
-                        {line.accent}
-                      </span>
-                    ) : null}
-                  </span>
-                ))}
-              </h1>
-            </div>
-
-            <div
-              className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              style={{ animationDelay: "0.16s" }}
+        {/* Main Headline */}
+        <div className="text-center mb-12">
+          {HERO_HEADLINE.map((word, i) => (
+            <motion.h1
+              key={word}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className={`text-gradient block ${i === 2 ? "text-primary" : ""}`}
             >
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-electric-blue-strong)]">
-                Delivery
-              </p>
-              <p className="mt-3 text-sm leading-6 text-white/68">
-                Campaign films, brand systems, and launch pages that move from approved concept to market-ready assets in one coherent package.
-              </p>
-            </div>
-          </div>
+              {word}
+            </motion.h1>
+          ))}
+        </div>
 
-          <p
-            className="intro-fade-up mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
-            style={{ animationDelay: "0.32s" }}
+        {/* Subheadline & Description */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="text-xl md:text-2xl text-white/60 leading-relaxed mb-10"
           >
             Director-led strategy and production for brands where the first frame decides whether the message gets heard.
-          </p>
+          </motion.p>
 
-          <div
-            className="intro-fade-up mt-5 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-2.5"
-            style={{ animationDelay: "0.38s" }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            {HERO_SIGNAL_CHIPS.map((chip) => (
-              <div
-                key={chip}
-                className="accent-chip px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/78"
+            <HoverLift>
+              <a
+                href={resolveCtaHref(GENERAL_BRIEF_CTA)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-primary group"
               >
-                {chip}
-              </div>
-            ))}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/66 backdrop-blur-xl">
-              <span className="h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(198,235,104,0.45)]" />
-              Open for select launches
-            </div>
-          </div>
+                Start the 4-Point Brief
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </a>
+            </HoverLift>
+            
+            <HoverLift>
+              <a 
+                href={resolveCtaHref(GENERAL_DISCOVERY_CTA)} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-bold uppercase tracking-widest text-white/60 hover:text-white transition-colors"
+              >
+                Request the 15-Minute Call
+              </a>
+            </HoverLift>
+          </motion.div>
+        </div>
 
-          <div className="mt-8 flex w-full max-w-[19rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
-            <div className="flex w-full flex-col items-center justify-center gap-3.5 sm:flex-row sm:justify-center">
-              <div className="intro-fade-up w-full sm:w-auto" style={{ animationDelay: "0.52s" }}>
-                <HoverLift>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="cta-primary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
-                  >
-                    <a
-                      href={resolveCtaHref(GENERAL_BRIEF_CTA)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Start the 4-point brief on WhatsApp"
-                    >
-                      Start the 4-Point Brief
-                    </a>
-                  </Button>
-                </HoverLift>
-              </div>
-
-              <div className="intro-fade-up w-full sm:w-auto" style={{ animationDelay: "0.6s" }}>
-                <HoverLift>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="cta-secondary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
-                  >
-                    <a href={resolveCtaHref(GENERAL_DISCOVERY_CTA)} target="_blank" rel="noopener noreferrer">
-                      Request the 15-Minute Call
-                    </a>
-                  </Button>
-                </HoverLift>
-              </div>
-            </div>
-
-            <p className="max-w-[38rem] text-sm leading-7 text-white/56">
-              Under 3 minutes: offer, audience, bottleneck, and deadline. The first reply comes back with the strongest
-              next move.
-            </p>
-          </div>
-
-          <div className="mt-10 w-full sm:mt-14">
-            <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:items-end lg:gap-6">
-              {HERO_MEDIA.map((item, index) => (
-                <div
-                  key={item.title}
-                  className={`intro-fade-up h-full ${index === 1 ? "lg:-translate-y-6" : index === 0 ? "lg:translate-y-4" : "lg:translate-y-8"}`}
-                  style={{ animationDelay: `${0.48 + index * 0.1}s` }}
-                >
-                  <HeroMediaCard index={index} featured={index === 1} {...item} />
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Media Showcase Grid */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {HERO_MEDIA.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 + index * 0.2, duration: 0.8 }}
+              className={index === 1 ? "md:-translate-y-8" : ""}
+            >
+              <HeroMediaCard index={index} featured={index === 1} {...item} />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

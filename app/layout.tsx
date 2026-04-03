@@ -1,7 +1,8 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Orbitron, Poppins } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
+import localFont from "next/font/local"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -12,24 +13,25 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Orbitron({
+// Professional Display Font - Clash Display (Simulated via local font or high-end Google Font)
+// Since Clash Display is not on Google Fonts, we'll use Geist for body and a bold sans for display
+const displayFont = Geist({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["500","600","700","800"],
+  weight: ["700", "800", "900"],
   display: "swap",
 })
 
-const fallbackDisplayFont = Poppins({
-  subsets: ["latin"],
-  variable: "--font-fallback-display",
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-})
-
-const bodyFont = Poppins({
+const bodyFont = Geist({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+})
+
+const monoFont = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 })
 
@@ -114,14 +116,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { color: "#06070a", media: "(prefers-color-scheme: dark)" },
-    { color: "#06070a", media: "(prefers-color-scheme: light)" },
+    { color: "#020408", media: "(prefers-color-scheme: dark)" },
+    { color: "#020408", media: "(prefers-color-scheme: light)" },
   ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${fallbackDisplayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -152,7 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Script>
         ) : null}
       </head>
-      <body>
+      <body className="bg-[#020408] text-white selection:bg-white/20 selection:text-white">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:border focus:border-white/12 focus:bg-[rgba(11,14,20,0.96)] focus:px-4 focus:py-2 focus:text-white"

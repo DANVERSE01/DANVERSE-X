@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Inter, Syne, Bebas_Neue } from "next/font/google"
+import { Orbitron, Poppins } from "next/font/google"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -12,24 +12,24 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Bebas_Neue({
+const displayFont = Orbitron({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["400"],
+  weight: ["500","600","700","800"],
   display: "swap",
 })
 
-const fallbackDisplayFont = Syne({
+const fallbackDisplayFont = Poppins({
   subsets: ["latin"],
   variable: "--font-fallback-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 })
 
-const bodyFont = Inter({
+const bodyFont = Poppins({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 })
 

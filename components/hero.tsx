@@ -75,13 +75,6 @@ export function Hero() {
 
       <div className="content-shell relative z-[2]">
         <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
-          <div
-            className="hero-badge-container intro-fade-up mb-5 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-[0.67rem] font-bold tracking-[0.22em] text-white/88 backdrop-blur-xl"
-            style={{ animationDelay: "0.08s" }}
-          >
-            <span className="hero-badge">STUDIO MASTERCLASS</span>
-          </div>
-
           <div className="hero-immersive-stage intro-fade-up mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]" style={{ animationDelay: "0.12s" }}>
             <div className="hero-immersive-screen relative h-[340px] sm:h-[400px] lg:h-[480px] overflow-hidden rounded-[2.1rem] bg-[#0a1130]">
               <div className="hero-immersive-glow absolute inset-0" />

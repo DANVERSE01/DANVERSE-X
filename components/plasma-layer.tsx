@@ -63,5 +63,5 @@ export function PlasmaLayer() {
     return null
   }
 
-  return <Plasma colorStops={["#1f3268", "#271824", "#bfd65c"]} speed={0.66} amplitude={0.84} blend={0.48} />
+  return <Plasma colorStops={["#E0E75B", "#00A6A6", "#EF786A"]} speed={1.0} amplitude={1.1} blend={0.78} />
 }

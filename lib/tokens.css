@@ -11,13 +11,13 @@
   --color-text-primary: #f4eee5;
   --color-text-secondary: #d8d1c5;
   --color-text-muted: #989189;
-  --color-electric-blue: #E8F85B; /* Enhanced citrus-lime - brighter and more vibrant */
-  --color-electric-blue-strong: #F8FF7B; /* Stronger version with better contrast */
-  --color-hot-pink: #00B8B8; /* Enhanced aqua-teal - more sophisticated */
-  --color-hot-pink-strong: #00D8D8; /* Stronger aqua-teal with better depth */
-  --color-acid-lime: #FF7F6A; /* Enhanced coral - warmer and more professional */
+  --color-electric-blue: #E0E75B; /* citrus-lime */
+  --color-electric-blue-strong: #F5F87E;
+  --color-hot-pink: #00A6A6; /* aqua-teal */
+  --color-hot-pink-strong: #00C6C6;
+  --color-acid-lime: #EF786A; /* coral */
   --color-lime: var(--color-acid-lime);
-  --color-lavender: #D494C4; /* Enhanced lavender - more refined */
+  --color-lavender: #C48BB4;
   --color-coral: var(--color-acid-lime);
   --color-accent-blue: var(--color-electric-blue);
   --color-accent-gold: var(--color-hot-pink);
@@ -41,7 +41,7 @@
   --shadow-material: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(232, 248, 91, 0.12);
   --shadow-glass: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   --font-display: var(--font-display-next), var(--font-fallback-display), "Bebas Neue", "Syne", sans-serif;
-  --font-body: var(--font-body-next), "Manrope", sans-serif;
+  --font-body: var(--font-body-next), "Inter", "Manrope", sans-serif;
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
   --section-inline: 1rem;

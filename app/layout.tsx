@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Manrope, Syne, Bebas_Neue } from "next/font/google"
+import { Inter, Syne, Bebas_Neue } from "next/font/google"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -26,7 +26,7 @@ const fallbackDisplayFont = Syne({
   display: "swap",
 })
 
-const bodyFont = Manrope({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
   weight: ["400", "500", "600", "700", "800"],

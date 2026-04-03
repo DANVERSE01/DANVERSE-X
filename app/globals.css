@@ -38,10 +38,19 @@
   --sidebar-accent-foreground: var(--color-text-primary);
   --sidebar-border: var(--color-border);
   --sidebar-ring: rgba(232, 248, 91, 0.30);
-  --scene-accent-rgb: 232 248 91;
-  --scene-secondary-rgb: 255 127 106;
+  --scene-accent-rgb: 224 231 91;
+  --scene-secondary-rgb: 239 120 106;
   --scene-wash-rgb: 18 24 40;
 }
+
+body {
+  font-family: "Inter", "Manrope", sans-serif;
+}
+
+h1, h2, h3, h4, .section-heading, .cta-primary {
+  font-family: "Bebas Neue", "Syne", sans-serif;
+}
+
 
 .dark {
   --background: var(--color-bg);

@@ -11,10 +11,10 @@ interface PlasmaProps {
 }
 
 export default function Plasma({
-  colorStops = ["#315dff", "#ff2f92", "#d9ff26"],
-  speed = 1.0,
-  amplitude = 1.0,
-  blend = 0.6,
+  colorStops = ["#E0E75B", "#00A6A6", "#EF786A"],
+  speed = 0.86,
+  amplitude = 1.05,
+  blend = 0.76,
 }: PlasmaProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 

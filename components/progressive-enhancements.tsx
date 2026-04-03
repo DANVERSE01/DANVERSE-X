@@ -14,6 +14,9 @@ const SmoothScrollController = dynamic(
   () => import("@/components/smooth-scroll-controller").then((module) => module.SmoothScrollController),
   { ssr: false }
 )
+const CinematicStage = dynamic(() => import("@/components/cinematic-stage").then((module) => module.CinematicStage), {
+  ssr: false,
+})
 const WebVitalsReporter = dynamic(
   () => import("@/components/web-vitals-reporter").then((module) => module.WebVitalsReporter),
   { ssr: false }
@@ -42,6 +45,7 @@ export function ProgressiveEnhancements() {
       <WebVitalsReporter />
       {enableDeferredEnhancements ? <ScrollTracker /> : null}
       {enableDeferredEnhancements ? <SmoothScrollController /> : null}
+      {enableDeferredEnhancements ? <CinematicStage /> : null}
     </>
   )
 }

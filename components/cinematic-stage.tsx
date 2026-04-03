@@ -116,7 +116,6 @@ export function CinematicStage() {
   const pathname = usePathname()
   const [enabled, setEnabled] = useState(false)
   const [activeScene, setActiveScene] = useState(HOME_SCENES[0]?.id ?? "hero")
-  const [scrollProgress, setScrollProgress] = useState(0)
   const [showPrelude, setShowPrelude] = useState(false)
   const dotRef = useRef<HTMLDivElement | null>(null)
   const ringRef = useRef<HTMLDivElement | null>(null)
@@ -338,11 +337,6 @@ export function CinematicStage() {
     }
 
     const ratios = new Map<string, number>()
-    const updateScrollProgress = () => {
-      const scrollRoot = document.documentElement
-      const scrollableHeight = Math.max(scrollRoot.scrollHeight - window.innerHeight, 1)
-      setScrollProgress(Math.min(1, Math.max(0, window.scrollY / scrollableHeight)))
-    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -366,12 +360,8 @@ export function CinematicStage() {
       observer.observe(scene.element)
     })
 
-    updateScrollProgress()
-    window.addEventListener("scroll", updateScrollProgress, { passive: true })
-
     return () => {
       observer.disconnect()
-      window.removeEventListener("scroll", updateScrollProgress)
     }
   }, [enabled, pathname, scenes])
 
@@ -403,56 +393,12 @@ export function CinematicStage() {
       <div className="cinematic-spotlight" aria-hidden="true" />
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-      {pathname === "/" && currentScene ? (
-        <SceneTelemetry currentScene={currentScene} progress={scrollProgress} sceneCount={scenes.length} />
-      ) : null}
-      {pathname === "/" && scenes.length > 0 ? (
-        <SceneRail activeScene={activeScene} progress={scrollProgress} scenes={scenes} />
-      ) : null}
+
       {pathname === "/" ? <StagePrelude show={showPrelude} onSkip={() => setShowPrelude(false)} /> : null}
     </>
   )
 }
 
-function SceneRail({
-  activeScene,
-  progress,
-  scenes,
-}: {
-  activeScene: string
-  progress: number
-  scenes: readonly Scene[]
-}) {
-  return (
-    <nav className="scene-rail" aria-label="Narrative scene rail">
-      <div className="scene-rail__eyebrow">Narrative Flow</div>
-      <div className="scene-rail__track" aria-hidden="true">
-        <span className="scene-rail__progress" style={{ transform: `scaleY(${Math.max(progress, 0.04)})` }} />
-      </div>
-      <div className="scene-rail__list">
-        {scenes.map((scene, index) => {
-          const isActive = scene.id === activeScene
-
-          return (
-            <button
-              key={scene.id}
-              type="button"
-              className="scene-rail__item"
-              data-active={isActive}
-              onClick={() => document.getElementById(scene.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
-            >
-              <span className="scene-rail__count">{String(index + 1).padStart(2, "0")}</span>
-              <span className="scene-rail__meta">
-                <span className="scene-rail__kicker">{scene.eyebrow}</span>
-                <span className="scene-rail__label">{scene.label}</span>
-              </span>
-            </button>
-          )
-        })}
-      </div>
-    </nav>
-  )
-}
 
 function StagePrelude({ onSkip, show }: { onSkip: () => void; show: boolean }) {
   if (!show) {
@@ -479,41 +425,3 @@ function StagePrelude({ onSkip, show }: { onSkip: () => void; show: boolean }) {
   )
 }
 
-function SceneTelemetry({
-  currentScene,
-  progress,
-  sceneCount,
-}: {
-  currentScene: Scene
-  progress: number
-  sceneCount: number
-}) {
-  return (
-    <aside className="scene-telemetry" aria-hidden="true">
-      <div className="scene-telemetry__eyebrow">Studio Telemetry</div>
-      <div className="scene-telemetry__body">
-        <div className="scene-telemetry__row">
-          <span className="scene-telemetry__kicker">Active Scene</span>
-          <span className="scene-telemetry__value">{currentScene.label}</span>
-        </div>
-        <div className="scene-telemetry__row">
-          <span className="scene-telemetry__kicker">Status</span>
-          <span className="scene-telemetry__value">{currentScene.status}</span>
-        </div>
-        <div className="scene-telemetry__row">
-          <span className="scene-telemetry__kicker">Scroll</span>
-          <span className="scene-telemetry__value">{Math.round(progress * 100)}%</span>
-        </div>
-      </div>
-      <div className="scene-telemetry__dots">
-        {Array.from({ length: sceneCount }).map((_, index) => (
-          <span
-            key={`scene-dot-${index}`}
-            className="scene-telemetry__dot"
-            data-active={HOME_SCENES[index]?.id === currentScene.id}
-          />
-        ))}
-      </div>
-    </aside>
-  )
-}

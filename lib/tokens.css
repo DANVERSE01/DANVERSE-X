@@ -11,24 +11,35 @@
   --color-text-primary: #f4eee5;
   --color-text-secondary: #d8d1c5;
   --color-text-muted: #989189;
-  --color-electric-blue: #E0E75B;
-  --color-electric-blue-strong: #F0F77B;
-  --color-hot-pink: #00A6A6;
-  --color-hot-pink-strong: #00C6C6;
-  --color-acid-lime: #EF786A;
+  --color-electric-blue: #E8F85B; /* Enhanced citrus-lime - brighter and more vibrant */
+  --color-electric-blue-strong: #F8FF7B; /* Stronger version with better contrast */
+  --color-hot-pink: #00B8B8; /* Enhanced aqua-teal - more sophisticated */
+  --color-hot-pink-strong: #00D8D8; /* Stronger aqua-teal with better depth */
+  --color-acid-lime: #FF7F6A; /* Enhanced coral - warmer and more professional */
   --color-lime: var(--color-acid-lime);
-  --color-lavender: #C48BB4;
+  --color-lavender: #D494C4; /* Enhanced lavender - more refined */
   --color-coral: var(--color-acid-lime);
   --color-accent-blue: var(--color-electric-blue);
   --color-accent-gold: var(--color-hot-pink);
   --color-brand-primary: var(--color-electric-blue);
   --color-brand-secondary: var(--color-hot-pink);
-  --glow-primary: 0 14px 34px rgba(224, 231, 91, 0.28), 0 0 44px rgba(224, 231, 91, 0.18);
-  --glow-secondary: 0 14px 34px rgba(0, 166, 166, 0.22), 0 0 44px rgba(0, 198, 198, 0.16);
-  --glow-lime: 0 0 34px rgba(239, 120, 106, 0.16);
+
+  /* Professional Material Colors */
+  --color-material-gold: #FFD700; /* Premium gold for metallic effects */
+  --color-material-silver: #C0C0C0; /* Professional silver */
+  --color-material-glass: rgba(255, 255, 255, 0.08); /* Glass transparency */
+  --color-material-chrome: #E8E8E8; /* Chrome finish */
+
+  /* Advanced Glow Effects - More Professional */
+  --glow-primary: 0 16px 48px rgba(232, 248, 91, 0.32), 0 0 64px rgba(248, 255, 123, 0.24), 0 0 96px rgba(232, 248, 91, 0.16);
+  --glow-secondary: 0 16px 48px rgba(0, 184, 184, 0.28), 0 0 64px rgba(0, 216, 216, 0.20), 0 0 96px rgba(0, 184, 184, 0.12);
+  --glow-lime: 0 12px 36px rgba(255, 127, 106, 0.24), 0 0 48px rgba(255, 159, 138, 0.16);
   --glow-coral: var(--glow-lime);
-  --shadow-panel:
-    0 32px 96px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 0 0 1px rgba(224, 231, 91, 0.05);
+
+  /* Premium Shadow System */
+  --shadow-panel: 0 40px 120px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px rgba(232, 248, 91, 0.08);
+  --shadow-material: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(232, 248, 91, 0.12);
+  --shadow-glass: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   --font-display: var(--font-display-next), "Syne", sans-serif;
   --font-body: var(--font-body-next), "Manrope", sans-serif;
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
@@ -42,9 +53,9 @@
   --z-nav: 100;
   --z-modal: 200;
   --z-cursor: 9999;
-  --focus-ring-color: rgba(239, 120, 106, 0.82);
+  --focus-ring-color: rgba(255, 127, 106, 0.85);
   --focus-ring-offset: 3px;
-  --selection-bg: rgba(224, 231, 91, 0.34);
+  --selection-bg: rgba(232, 248, 91, 0.38);
   --selection-text: #ffffff;
 
   /* Compatibility aliases still used by the visual layer. */
@@ -58,13 +69,13 @@
   --color-text-inverse: #05070b;
   --color-accent-blue-strong: var(--color-electric-blue-strong);
   --color-accent-gold-strong: var(--color-hot-pink-strong);
-  --color-accent-coral: var(--color-hot-pink);
-  --color-accent-lavender: var(--color-hot-pink);
-  --color-accent-steel: var(--color-text-muted);
-  --color-accent-purple: var(--color-hot-pink);
-  --color-accent-orange: var(--color-hot-pink);
-  --color-accent-glow: rgba(224, 231, 91, 0.18);
-  --color-accent-glow-warm: rgba(196, 139, 180, 0.16);
+  --color-accent-coral: var(--color-acid-lime);
+  --color-accent-lavender: var(--color-lavender);
+  --color-accent-steel: #A8C5D0;
+  --color-accent-purple: var(--color-lavender);
+  --color-accent-orange: var(--color-acid-lime);
+  --color-accent-glow: rgba(232, 248, 91, 0.20);
+  --color-accent-glow-warm: rgba(212, 148, 196, 0.18);
   --font-process-display: var(--font-display);
   --font-process-body: var(--font-body);
   --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,8 +85,8 @@
   --dur-fast: var(--duration-fast);
   --dur-normal: var(--duration-base);
   --dur-slow: var(--duration-slow);
-  --shadow-soft: 0 16px 42px rgba(0, 0, 0, 0.34), 0 0 34px rgba(224, 231, 91, 0.08);
-  --shadow-focus: 0 0 0 3px rgba(224, 231, 91, 0.24), 0 0 24px rgba(239, 120, 106, 0.12);
+  --shadow-soft: 0 20px 56px rgba(0, 0, 0, 0.4), 0 0 48px rgba(232, 248, 91, 0.10);
+  --shadow-focus: 0 0 0 4px rgba(232, 248, 91, 0.28), 0 0 32px rgba(255, 127, 106, 0.16);
   --content-narrow: 1180px;
 }
 

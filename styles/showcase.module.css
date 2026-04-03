@@ -11,10 +11,15 @@
   inset: 8% 0 auto;
   height: 42rem;
   background:
-    radial-gradient(circle at 18% 22%, rgba(224, 231, 91, 0.14), transparent 24%),
-    radial-gradient(circle at 82% 22%, rgba(39, 24, 36, 0.32), transparent 28%),
-    radial-gradient(circle at 50% 76%, rgba(239, 120, 106, 0.08), transparent 22%);
-  filter: blur(44px);
+    /* Primary glow - enhanced citrus-lime */
+    radial-gradient(circle at 18% 22%, rgba(232, 248, 91, 0.18), transparent 28%),
+    /* Secondary glow - enhanced aqua-teal */
+    radial-gradient(circle at 82% 22%, rgba(0, 184, 184, 0.14), transparent 32%),
+    /* Accent glow - enhanced coral */
+    radial-gradient(circle at 50% 76%, rgba(255, 127, 106, 0.12), transparent 26%),
+    /* Material reflection effect */
+    radial-gradient(circle at 65% 35%, rgba(255, 215, 0, 0.06), transparent 18%);
+  filter: blur(52px);
   pointer-events: none;
 }
 

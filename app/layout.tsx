@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Manrope, Syne } from "next/font/google"
+import { Manrope, Syne, Bebas_Neue } from "next/font/google"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -12,9 +12,16 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Syne({
+const displayFont = Bebas_Neue({
   subsets: ["latin"],
   variable: "--font-display-next",
+  weight: ["400"],
+  display: "swap",
+})
+
+const fallbackDisplayFont = Syne({
+  subsets: ["latin"],
+  variable: "--font-fallback-display",
   weight: ["500", "600", "700", "800"],
   display: "swap",
 })
@@ -114,7 +121,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${displayFont.variable} ${fallbackDisplayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />

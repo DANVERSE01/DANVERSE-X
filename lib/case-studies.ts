@@ -24,25 +24,25 @@ export const FEATURED_CASE_STUDIES: readonly CaseStudy[] = [
     client: "Jacob & Co x Bugatti",
     image: "/images/showcase/jacob-bugatti.jpg",
     summary:
-      "A luxury launch built to hold speed, obsession, and product authority without letting spectacle swallow the watch.",
-    challenge: "Translate mechanical intensity into a social-first campaign system that still feels expensive and controlled.",
-    focus: "Macro detail, contrast discipline, and a hook structure that lets the product carry authority before copy ever does.",
-    deliverables: ["Portrait launch master", "Thumb-stop opening hooks", "Premium finish system", "Still-frame campaign covers"],
+      "A luxury launch where precision had to read as rarity on fast-moving social platforms without sacrificing finish quality.",
+    challenge: "Luxury product photography contains mechanical density, but compressing that into platform-native formats risks losing product authority and perceived value.",
+    focus: "Macro framing, opening-frame authority, and pacing that lets the engineering detail carry trust before copy or claims ever appear.",
+    deliverables: ["Hero launch cut", "Opening-hook variants", "Product stills system", "Format-adapted exports (portrait, square, reels)"],
     tags: ["Luxury", "Social Film", "Macro Direction"],
     note: "The campaign worked because the product stayed in control of the frame instead of fighting with the edit.",
     broken:
-      "The raw material had spectacle, but the social-first version risked turning precision into noise and the watch into a prop.",
+      "Raw mechanical footage has depth, but translating that into 3-second social hooks without flattening the texture is the bottleneck.",
     decision:
-      "Strip the copy back, lead with mechanical obsession, and let macro detail prove rarity before the campaign asks for attention.",
+      "Build the hero cut around macro framing and edge contrast so mechanical authority reads immediately before any paid optimization can weaken it.",
     built:
-      "A launch master, opening-hook variants, still covers, and a premium finish system the team could use across paid and launch rollout.",
+      "A locked hero cut with macro detail rules, opening-hook variants optimized for scroll-stopping, still covers that don't need supporting copy, and export-ready versions for paid rollout.",
     after:
-      "The client left with one approved visual standard that could move from launch post to paid cut to internal review without reopening direction.",
+      "The reference direction held across all rollout: one macro-led aesthetic moved from hero launch to paid cutdowns to internal reviews without creative drift or reopening.",
     proofPoints: [
-      "Launch master approved as the reference cut for rollout",
-      "Macro detail rules carried into still covers and paid cutdowns",
-      "Opening-hook variants delivered in one usable pack",
-      "Luxury finish standard held across every exported format",
+      "Reference cut approved for launch and paid rollout without revision",
+      "Macro detail rules applied across stills, cutdowns, and paid derivatives",
+      "All opening-hook variants shipped as one finished pack",
+      "Export system allowed paid-social deployment the same day as hero launch",
     ],
     engagementContext:
       "Luxury launch campaign for a product where the first frame had to sell precision, speed, and rarity at the same time.",
@@ -54,24 +54,24 @@ export const FEATURED_CASE_STUDIES: readonly CaseStudy[] = [
     image: "/images/showcase/missha-time-revolution.jpg",
     summary:
       "Beauty motion built to stay fast on mobile while keeping texture, polish, and product clarity intact through every cut.",
-    challenge: "Create a beauty campaign that moves quickly on mobile while preserving polish, texture, and product clarity.",
-    focus: "Texture-led framing, controlled color rhythm, and vertical-first pacing tuned for launch sequences and paid social.",
-    deliverables: ["Vertical hero cut", "Beauty motion variants", "Format-adapted exports", "Launch-ready product stills"],
+    challenge: "Mobile beauty content needs fast motion to hold attention, but acceleration can erode product texture—the key selling point for luxury skincare.",
+    focus: "Vertical-first composition, color control, and motion rhythm that preserves texture perception while optimizing for mobile engagement speeds.",
+    deliverables: ["Vertical hero reel", "Mobile motion variants", "Product detail stills", "Multi-format export system"],
     tags: ["Beauty", "Motion Branding", "Vertical Campaign"],
     note: "Every motion choice had to increase perceived value, not just speed up the reel.",
     broken:
-      "The brand needed velocity for mobile launch formats, but fast edits were stripping away the product texture that made the offer convincing.",
+      "Mobile algorithms reward aggressive pacing and short clips, but beauty products require visible texture and detailed finish to justify premium pricing.",
     decision:
-      "Build around texture, color control, and vertical pacing so the campaign could move quickly without losing finish or clarity.",
+      "Anchor the motion around color transitions and micro-details first, then pace the cuts to work with platform dynamics—not against product perception.",
     built:
-      "A hero vertical cut, multiple beauty motion variants, product stills, and export-ready versions for the rollout stack.",
+      "A reference vertical cut with locked motion rhythm, texture-preservation rules, motion variants for different launch phases, and stills that reinforce product detail.",
     after:
-      "The launch team had one motion language for reels, cutdowns, and still support assets instead of rebuilding the look for every format.",
+      "The launch could repeat across reels, cutdowns, and still campaigns without reinventing the motion language or losing finish quality.",
     proofPoints: [
-      "Vertical hero cut established the reference pace for the campaign",
-      "Product texture held across fast motion transitions",
-      "Format-ready exports shipped with the hero and cutdowns together",
-      "Still support assets matched the motion finish instead of drifting off-system",
+      "Reference vertical cut locked and approved for all mobile variants",
+      "Texture detail rules ported into motion transitions and still stills",
+      "Mobile motion variants shipped as one coordinated pack",
+      "System reusable for subsequent product launches without creative redesign",
     ],
     engagementContext:
       "Beauty launch where speed mattered, but the product still had to read as premium and tactile on small screens.",
@@ -82,25 +82,25 @@ export const FEATURED_CASE_STUDIES: readonly CaseStudy[] = [
     client: "Modern Skincare",
     image: "/images/showcase/modern-skincare.jpg",
     summary:
-      "A social-first campaign system built to scale one visual standard across launch reels, covers, and rollout assets without quality drift.",
-    challenge: "Build a repeatable visual system for social launch moments without losing coherence across multiple outputs.",
-    focus: "Hook-first structure, platform-aware pacing, and a frame language that can scale from one hero asset into a rollout pack.",
-    deliverables: ["Launch reel", "Story-sized cutdowns", "Cover frame system", "Rollout-ready output pack"],
+      "A social launch system built around repeatable rules so one direction could scale across reels, covers, and rollout assets instead of degrading with repetition.",
+    challenge: "Social launches need multiple formats and variations, but every new cut risked pushing the aesthetic away from the original premium standard.",
+    focus: "Hook-first framing, repeatable cover logic, and platform-specific crops that all branch from one locked reference direction.",
+    deliverables: ["Launch reel", "Platform-specific cutdowns", "Social cover system", "Repeatable ruleset for growth"],
     tags: ["Skincare", "Launch System", "Platform Design"],
     note: "The advantage came from system control: one line of direction that could keep shipping without degradation.",
     broken:
-      "The brand needed more than one hero asset, but every extra format risked pushing the launch away from a consistent premium standard.",
+      "Multiple social formats and launch moments require flexibility, but each new variation risked drifting off the original aesthetic instead of strengthening it.",
     decision:
-      "Lock a hook-first frame language, then build the rollout pack around repeatable cover rules, pacing discipline, and platform-aware crops.",
+      "Lock a frame language and cover rules, then make the system strict: the same direction applied across every platform variant without reimagining.",
     built:
-      "A launch reel, story cutdowns, cover frame rules, and a reusable output pack ready for repeated social release.",
+      "A reference reel with locked motion logic, repeatable cover frame rules, platform-specific crop variations, and guidelines for future launch moments.",
     after:
-      "The team gained a rollout system that could expand into new launch moments without redoing the visual language every time.",
+      "The system became the asset: one direction shipped into reels, stories, feed covers, and paid without requiring new creative each time.",
     proofPoints: [
-      "Launch reel became the reference point for later rollout assets",
-      "Cover frame rules shipped with the motion pack",
-      "Story cutdowns matched the same hook and finish standard",
-      "The system could be reused without rebuilding the direction from zero",
+      "Reference reel approved as the standard for all variations",
+      "Cover frame rules applied consistently across platform variants",
+      "System deployed across initial launch and multiple subsequent releases",
+      "Internal teams extended the system without external creative direction",
     ],
     engagementContext:
       "Social-first skincare launch that needed scalable rollout control instead of one good-looking hero asset and a weak follow-through.",

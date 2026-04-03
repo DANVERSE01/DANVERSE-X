@@ -12,7 +12,7 @@ export const GENERAL_BRIEF_CTA: CtaDefinition = {
   }),
   source: "global-brief",
   whatHappensText:
-    "WhatsApp opens with four prompts: offer, audience, bottleneck, and deadline. The first reply comes back with the strongest next move.",
+    "WhatsApp opens with four prompts: offer, audience, bottleneck, and deadline. The first reply comes back with the strongest recommendation.",
 }
 
 export const GENERAL_DISCOVERY_CTA: CtaDefinition = {
@@ -20,9 +20,9 @@ export const GENERAL_DISCOVERY_CTA: CtaDefinition = {
   durationLabel: "15 minutes",
   label: "Request the 15-Minute Discovery Call",
   prefillMessage: buildDiscoveryCallMessage(
-    "We need to review the offer, the audience, the bottleneck, and the best next move before production starts."
+    "We need to review the offer, the audience, the bottleneck, and the strongest recommendation before production starts."
   ),
   source: "global-discovery",
   whatHappensText:
-    "WhatsApp opens with a discovery call request. The first reply confirms the agenda, the best slot, and what to prepare before the call.",
+    "WhatsApp opens with a discovery call request. The first reply confirms the agenda, the available time, and what to prepare before the call.",
 }

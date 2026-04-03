@@ -108,7 +108,7 @@ export const SERVICE_PAGE_DEFINITIONS: Record<ServicePageDefinition["slug"], Ser
           label: "03",
           title: "Paid rollout",
           description:
-            "Cutdowns, covers, and export variants ship as one launch-ready pack for paid and organic deployment.",
+            "Cutdowns, covers, and export variants ship as one production-ready pack for paid and organic deployment.",
         },
       ],
     },
@@ -246,7 +246,7 @@ export const SERVICE_PAGE_DEFINITIONS: Record<ServicePageDefinition["slug"], Ser
       title: "Launch pages that tell the buyer what to believe, when to trust, and where to act.",
       intro:
         "For the business that needs the page sequence to close the gap between traffic, proof, and action instead of relying on a pretty interface alone.",
-      chips: ["Traffic-to-action logic", "Proof sequencing", "Launch-ready handoff"],
+      chips: ["Traffic-to-action logic", "Proof sequencing", "Production-ready handoff"],
     },
     proofSection: {
       heading: "What each page section has to do commercially",
@@ -300,7 +300,7 @@ export const SERVICE_PAGE_DEFINITIONS: Record<ServicePageDefinition["slug"], Ser
     },
     archiveReference: {
       href: "/work",
-      label: "See the launch-ready work archive",
+      label: "See the production-ready work archive",
     },
     cta: {
       primary: {

@@ -14,7 +14,7 @@ export function generateMetadata(): Metadata {
     path: "/websites",
     title: "Websites & Landing Pages | DANVERSE",
     description:
-      "Conversion architecture, proof sequencing, and launch-ready websites for businesses that need the page to do commercial work immediately.",
+      "Conversion architecture, proof sequencing, and production-ready websites for businesses that need the page to do commercial work immediately.",
   })
 }
 

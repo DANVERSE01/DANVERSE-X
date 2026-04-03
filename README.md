@@ -1,6 +1,6 @@
 # DANVERSE
 
-A professional Next.js website for DANVERSE, a director-led creative studio specializing in cinematic ads, brand systems, and strategic content solutions.
+A professional Next.js website for DANVERSE, a director-led creative studio specializing in cinematic ads, brand systems, and conversion architecture.
 
 ## Badges
 

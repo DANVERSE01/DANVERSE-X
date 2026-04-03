@@ -36,7 +36,7 @@ const HERO_SIGNAL_CARDS = [
   },
   {
     label: "Delivery Standard",
-    value: "Launch-ready",
+    value: "Production-ready",
     detail: "Hook variants, cutdowns, still covers, and ratio-ready exports move together.",
     icon: Clapperboard,
   },

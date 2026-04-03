@@ -8,7 +8,7 @@ import { GENERAL_BRIEF_CTA } from "@/lib/site-ctas"
 
 export const metadata: Metadata = {
   title: "FAQ | DANVERSE",
-  description: "Answers on process, timelines, revisions, handoff, collaboration, and AI production at DANVERSE.",
+  description: "Answers on process, timelines, revisions, handoff, collaboration, and production methods at DANVERSE.",
   alternates: {
     canonical: "/faq",
   },
@@ -87,15 +87,15 @@ const FAQ_GROUPS = [
   },
   {
     title: "AI & Production Method",
-    intro: "How AI is used and where human direction matters most.",
+    intro: "How production efficiency is approached and where human direction remains essential.",
     items: [
       {
         q: "Is the work fully AI-generated?",
-        a: "No. AI is used as production infrastructure where it increases speed or control. Direction, selection, pacing, and the standard of the final output stay human-led.",
+        a: "No. Production uses computational tools where they compress time or increase control. Creative direction, aesthetic selection, pacing, revision logic, and final output standards remain human-led and human-reviewed.",
       },
       {
-        q: "What is the advantage of your AI-native workflow?",
-        a: "It compresses time without lowering the bar. The goal is faster iteration, more controlled rollout output, and fewer compromises between ambition and delivery speed.",
+        q: "How do you approach production efficiency?",
+        a: "We use optimization where it serves speed or precision: iterative testing, format variations, color grading, and rollout outputs. The commercial strategy, the aesthetic line, and the quality bar stay under direct creative control.",
       },
     ],
   },

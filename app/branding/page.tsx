@@ -16,7 +16,7 @@ export function generateMetadata(): Metadata {
     path: "/branding",
     title: "Branding & Visual Identity | DANVERSE",
     description:
-      "Identity systems, rollout rules, and visual control for founders who need trust, clarity, and a launch-ready brand standard.",
+      "Identity systems, rollout rules, and visual control for founders who need trust, clarity, and a production-ready brand standard.",
   })
 }
 

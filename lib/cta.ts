@@ -44,7 +44,7 @@ export function buildDiscoveryCallMessage(context: string) {
     "",
     "I want the 15-minute discovery call.",
     `Context: ${context}`,
-    "Please confirm the agenda, the best time, and what you need from me before the call.",
+    "Please confirm the agenda, the available time, and what you need from me before the call.",
   ].join("\n")
 }
 

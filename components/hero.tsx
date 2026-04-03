@@ -1,8 +1,8 @@
 "use client"
 
-import Image from "next/image"
+// import Image from "next/image"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
 import { resolveCtaHref } from "@/lib/cta"

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ArrowRight, ChevronDown } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import { resolveCtaHref } from "@/lib/cta"
 import { GENERAL_BRIEF_CTA } from "@/lib/site-ctas"
 import { PRIMARY_NAV_ROUTES, resolveRouteHref } from "@/lib/routes"

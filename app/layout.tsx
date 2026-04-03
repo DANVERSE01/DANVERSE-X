@@ -1,8 +1,8 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import localFont from "next/font/local"
+import { Inter } from "next/font/google"
+// import localFont from "next/font/local"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -15,21 +15,19 @@ const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
 // Professional Display Font - Clash Display (Simulated via local font or high-end Google Font)
 // Since Clash Display is not on Google Fonts, we'll use Geist for body and a bold sans for display
-const displayFont = Geist({
+const displayFont = Inter({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["700", "800", "900"],
   display: "swap",
 })
 
-const bodyFont = Geist({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["300", "400", "500", "600"],
   display: "swap",
 })
 
-const monoFont = Geist_Mono({
+const monoFont = Inter({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",

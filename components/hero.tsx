@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
@@ -41,22 +40,10 @@ const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const
 
 export function Hero() {
   return (
-    <section
-      id="hero"
-      aria-label="Hero introduction"
-      className="section-shell relative overflow-x-hidden pt-3 sm:pt-6"
-    >
-      {/* Unified Background Layer matching Selected Work style */}
+    <section id="hero" aria-label="Hero introduction" className="section-shell relative overflow-x-hidden pt-3 sm:pt-6">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
-        <div className="absolute inset-0 opacity-40">
-           <div className="absolute inset-[-10%] h-[120%] w-[120%] bg-[radial-gradient(circle_at_17%_25%,rgba(224,231,91,0.18),transparent_25%),radial-gradient(circle_at_82%_17%,rgba(0,166,166,0.16),transparent_30%),radial-gradient(circle_at_52%_70%,rgba(239,120,106,0.14),transparent_28%)] blur-[80px]" />
-        </div>
-        
         <div className="content-shell relative h-[560px] sm:h-[760px] lg:h-[840px]">
-          <div
-            className="hero-light-architecture intro-fade-up absolute inset-0"
-            style={{ animationDelay: "0.1s" }}
-          >
+          <div className="hero-light-architecture intro-fade-up absolute inset-0" style={{ animationDelay: "0.1s" }}>
             <div className="hero-light-grid" />
             <div className="hero-light-frame" />
             <div className="hero-light-beam" />
@@ -64,13 +51,15 @@ export function Hero() {
             <div className="hero-light-scan" />
             <div className="absolute inset-x-[18%] top-[34%] h-px bg-gradient-to-r from-transparent via-white/22 to-transparent" />
             <div className="absolute inset-x-[24%] bottom-[22%] h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
+            <div className="absolute left-[18%] top-[24%] h-[30%] w-px bg-gradient-to-b from-transparent via-[rgba(106,129,255,0.34)] to-transparent" />
+            <div className="absolute right-[18%] top-[30%] h-[28%] w-px bg-gradient-to-b from-transparent via-[rgba(198,235,104,0.24)] to-transparent" />
           </div>
 
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 50% 42%, rgba(3, 5, 8, 0.02) 0%, rgba(3, 5, 8, 0.12) 34%, rgba(3, 5, 8, 0.28) 66%, transparent 84%)",
+                "radial-gradient(circle at 50% 42%, rgba(6, 8, 14, 0.02) 0%, rgba(6, 8, 14, 0.12) 34%, rgba(6, 8, 14, 0.28) 66%, transparent 84%)",
             }}
           />
         </div>
@@ -78,31 +67,6 @@ export function Hero() {
 
       <div className="content-shell relative z-[2]">
         <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
-          {/* Immersive Stage with Integrated Astronaut Hero */}
-          <div className="hero-immersive-stage intro-fade-up mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]" style={{ animationDelay: "0.12s" }}>
-            <div className="hero-immersive-screen relative h-[340px] sm:h-[400px] lg:h-[480px] overflow-hidden rounded-[2.1rem] bg-[#030508]">
-              <div className="hero-immersive-glow absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(224,231,91,0.08),transparent_70%)]" />
-              <div className="hero-immersive-shards" aria-hidden="true" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image
-                  src="/images/hero/astronaut-hero.webp"
-                  alt="Cinematic studio astronaut hero background"
-                  fill
-                  className="object-cover opacity-90 transition-opacity duration-700"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 84vw, 1100px"
-                  priority
-                />
-              </div>
-              <div className="hero-immersive-screen-overlay absolute inset-0 bg-gradient-to-t from-[#030508]/60 via-transparent to-transparent" />
-              <div className="hero-immersive-hud absolute inset-x-0 bottom-5 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/85 sm:text-[13px]">
-                <span className="hero-hud-dot" />
-                WARP FRAME ACTIVE
-                <span className="hero-hud-dot" />
-                GLOBAL STUDIO MOTION
-              </div>
-            </div>
-          </div>
-
           <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
             <div
               className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
@@ -112,17 +76,20 @@ export function Hero() {
                 Positioning
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Director-led production for luxury, beauty, and consumer brands that need strategic direction and final delivery control.
+                Director-led production for luxury, beauty, and consumer brands that need strategic direction and final
+                delivery control.
               </p>
             </div>
 
             <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
-              <h1 className="hero-headline relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
+              <h1 className="relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
                 {HERO_HEADLINE_LINES.map((line, index) => (
                   <span
                     key={line.text}
                     className="intro-line-reveal block"
-                    style={{ animationDelay: `${HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1]}s` }}
+                    style={{
+                      animationDelay: `${HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1]}s`,
+                    }}
                   >
                     {line.text}{" "}
                     {line.accent ? (
@@ -143,7 +110,8 @@ export function Hero() {
                 Delivery
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Campaign films, brand systems, and launch pages that move from approved concept to market-ready assets in one coherent package.
+                Campaign films, brand systems, and launch pages that move from approved concept to market-ready assets
+                in one coherent package.
               </p>
             </div>
           </div>
@@ -152,7 +120,8 @@ export function Hero() {
             className="intro-fade-up mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
             style={{ animationDelay: "0.32s" }}
           >
-            Director-led strategy and production for brands where the first frame decides whether the message gets heard.
+            Director-led strategy and production for brands where the first frame decides whether the message gets
+            heard.
           </p>
 
           <div
@@ -168,7 +137,7 @@ export function Hero() {
               </div>
             ))}
             <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/66 backdrop-blur-xl">
-              <span className="h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(239,120,106,0.45)]" />
+              <span className="h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(198,235,104,0.45)]" />
               Open for select launches
             </div>
           </div>

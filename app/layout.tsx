@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Orbitron, Poppins } from "next/font/google"
+import { Inter, Syne, Bebas_Neue } from "next/font/google"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -12,24 +12,24 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
-const displayFont = Orbitron({
+const displayFont = Bebas_Neue({
   subsets: ["latin"],
   variable: "--font-display-next",
-  weight: ["500","600","700","800"],
+  weight: ["400"],
   display: "swap",
 })
 
-const fallbackDisplayFont = Poppins({
+const fallbackDisplayFont = Syne({
   subsets: ["latin"],
   variable: "--font-fallback-display",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 })
 
-const bodyFont = Poppins({
+const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 })
 
@@ -64,14 +64,7 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
-  keywords: [
-    "AI creative studio",
-    "cinematic ads",
-    "brand systems",
-    "launch pages",
-    "creative direction",
-    "DANVERSE",
-  ],
+  keywords: ["AI creative studio", "cinematic ads", "brand systems", "launch pages", "creative direction", "DANVERSE"],
   metadataBase: new URL(SITE_URL),
   manifest: "/manifest.webmanifest",
   openGraph: {
@@ -121,7 +114,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${fallbackDisplayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${displayFont.variable} ${fallbackDisplayFont.variable} ${bodyFont.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -162,7 +159,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <AmbientBackground />
         <ProgressiveEnhancements />
-        <main id="main-content" tabIndex={-1} className="relative overflow-x-hidden" style={{ zIndex: "var(--z-content)" }}>
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="relative overflow-x-hidden"
+          style={{ zIndex: "var(--z-content)" }}
+        >
           {children}
         </main>
       </body>

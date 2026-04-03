@@ -23,23 +23,23 @@
   --destructive-foreground: #ffffff;
   --border: var(--color-border);
   --input: rgba(13, 17, 24, 0.92);
-  --ring: rgba(106, 129, 255, 0.42);
+  --ring: rgba(224, 231, 91, 0.42);
   --chart-1: var(--color-electric-blue);
-  --chart-2: #7d5367;
+  --chart-2: #C48BB4;
   --chart-3: var(--color-acid-lime);
-  --chart-4: #7a8090;
+  --chart-4: #A8C5D0;
   --chart-5: #c8c8bc;
   --radius: 1rem;
   --sidebar: var(--color-surface);
   --sidebar-foreground: var(--color-text-primary);
   --sidebar-primary: var(--color-electric-blue);
   --sidebar-primary-foreground: var(--color-text-inverse);
-  --sidebar-accent: rgba(255, 47, 146, 0.12);
+  --sidebar-accent: rgba(239, 120, 106, 0.12);
   --sidebar-accent-foreground: var(--color-text-primary);
   --sidebar-border: var(--color-border);
-  --sidebar-ring: rgba(49, 93, 255, 0.26);
-  --scene-accent-rgb: 106 129 255;
-  --scene-secondary-rgb: 198 235 104;
+  --sidebar-ring: rgba(224, 231, 91, 0.26);
+  --scene-accent-rgb: 224 231 91;
+  --scene-secondary-rgb: 239 120 106;
   --scene-wash-rgb: 18 24 40;
 }
 
@@ -377,7 +377,7 @@
   border: 1px solid rgba(159, 177, 255, 0.34);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 34%),
-    linear-gradient(135deg, #6177ff 0%, #7186ff 38%, #29314b 76%, #c6eb68 118%);
+    linear-gradient(135deg, #E0E75B 0%, #F0F77B 38%, #29314b 76%, #EF786A 118%);
   background-size:
     100% 100%,
     160% 160%;

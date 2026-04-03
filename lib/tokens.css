@@ -1,112 +1,85 @@
 :root {
-  --color-bg: #06070a;
-  --color-surface: #0d1015;
-  --color-surface-2: #141923;
-  --color-surface-3: #1c2431;
-  --color-ink: #08090d;
-  --color-deep-navy: #141d31;
-  --color-smoked-plum: #271824;
-  --color-border: rgba(152, 165, 235, 0.12);
-  --color-border-strong: rgba(239, 120, 106, 0.24);
-  --color-text-primary: #f4eee5;
-  --color-text-secondary: #d8d1c5;
-  --color-text-muted: #989189;
-  --color-electric-blue: #D51BDF; /* neon magenta */
-  --color-electric-blue-strong: #7624F3; /* ion violet */
-  --color-hot-pink: #F4DE66; /* solar sulfur */
-  --color-hot-pink-strong: #FFEB89;
-  --color-acid-lime: #D51BDF; /* keep magenta accent */
-  --color-lime: #F4DE66;
-  --color-lavender: #C48BB4;
-  --color-coral: var(--color-acid-lime);
-  --color-accent-blue: var(--color-electric-blue);
-  --color-accent-gold: var(--color-hot-pink);
-  --color-brand-primary: var(--color-electric-blue);
-  --color-brand-secondary: var(--color-hot-pink);
-
-  /* Professional Material Colors */
-  --color-material-gold: #FFD700; /* Premium gold for metallic effects */
-  --color-material-silver: #C0C0C0; /* Professional silver */
-  --color-material-glass: rgba(255, 255, 255, 0.08); /* Glass transparency */
-  --color-material-chrome: #E8E8E8; /* Chrome finish */
-
-  /* Advanced Glow Effects - More Professional */
-  --glow-primary: 0 16px 48px rgba(232, 248, 91, 0.32), 0 0 64px rgba(248, 255, 123, 0.24), 0 0 96px rgba(232, 248, 91, 0.16);
-  --glow-secondary: 0 16px 48px rgba(0, 184, 184, 0.28), 0 0 64px rgba(0, 216, 216, 0.20), 0 0 96px rgba(0, 184, 184, 0.12);
-  --glow-lime: 0 12px 36px rgba(255, 127, 106, 0.24), 0 0 48px rgba(255, 159, 138, 0.16);
-  --glow-coral: var(--glow-lime);
-
-  /* Premium Shadow System */
-  --shadow-panel: 0 40px 120px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px rgba(232, 248, 91, 0.08);
-  --shadow-material: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(232, 248, 91, 0.12);
-  --shadow-glass: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --font-display: var(--font-display-next), var(--font-fallback-display), "Bebas Neue", "Syne", sans-serif;
-  --font-body: var(--font-body-next), "Inter", "Manrope", sans-serif;
-  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --section-inline: 1rem;
-  --section-block: 3.75rem;
-  --content-max: 1440px;
+  /* --- DANVERSE-X: THE ART DIRECTOR'S PALETTE (V2.0) --- */
+  
+  /* Core Neutrals - Deep Space Foundation */
+  --color-bg: #020408;
+  --color-surface: #080a0f;
+  --color-surface-2: #0e121a;
+  --color-surface-3: #161b26;
+  --color-ink: #040508;
+  
+  /* Professional Material Accents - Cinematic & Bold */
+  --color-cyber-magenta: #ff00ff;
+  --color-electric-violet: #7000ff;
+  --color-acid-lime: #d4ff00;
+  --color-deep-indigo: #1a1aff;
+  --color-solar-gold: #ffcc00;
+  
+  /* Functional Mapping - Unified Design Tokens */
+  --color-primary: var(--color-cyber-magenta);
+  --color-primary-strong: var(--color-electric-violet);
+  --color-secondary: var(--color-acid-lime);
+  --color-accent: var(--color-deep-indigo);
+  
+  /* Typography Colors - High Contrast & Readability */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-muted: rgba(255, 255, 255, 0.45);
+  --color-text-inverse: #000000;
+  
+  /* Borders & Dividers - Subtle Glassmorphism */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+  --color-border-accent: rgba(212, 255, 0, 0.2);
+  
+  /* Premium Glow & Shadow System - No "Patchwork" */
+  --glow-primary: 0 0 40px rgba(255, 0, 255, 0.25), 0 0 80px rgba(255, 0, 255, 0.1);
+  --glow-secondary: 0 0 40px rgba(212, 255, 0, 0.2), 0 0 80px rgba(212, 255, 0, 0.08);
+  --shadow-panel: 0 32px 64px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  
+  /* Typography - Modern & Professional */
+  /* Using Geist and Clash Display as conceptual targets, mapped to Next.js variables */
+  --font-display: var(--font-display-next), "Inter", sans-serif;
+  --font-body: var(--font-body-next), "Inter", sans-serif;
+  
+  /* Motion & Easing - Cinematic Feel */
+  --ease-cinematic: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  
+  /* Layout & Spacing - Symmetry */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  --section-inline: 1.5rem;
+  --section-block: 5rem;
+  --content-max: 1400px;
+  --content-narrow: 1000px;
+  
+  /* Z-Index Hierarchy */
   --z-background: 0;
   --z-content: 10;
   --z-overlay: 20;
   --z-nav: 100;
   --z-modal: 200;
   --z-cursor: 9999;
-  --focus-ring-color: rgba(255, 127, 106, 0.85);
-  --focus-ring-offset: 3px;
-  --selection-bg: rgba(232, 248, 91, 0.38);
-  --selection-text: #ffffff;
-
-  /* Compatibility aliases still used by the visual layer. */
-  --color-surface-elevated: var(--color-surface-3);
-  --color-surface-soft: rgba(17, 20, 28, 0.86);
-  --color-surface-overlay: rgba(6, 7, 10, 0.92);
-  --color-bg-card: var(--color-surface);
-  --color-surface-base: var(--color-bg);
-  --color-surface-raised: var(--color-surface-3);
-  --color-ash: var(--color-text-muted);
-  --color-text-inverse: #05070b;
-  --color-accent-blue-strong: var(--color-electric-blue-strong);
-  --color-accent-gold-strong: var(--color-hot-pink-strong);
-  --color-accent-coral: var(--color-acid-lime);
-  --color-accent-lavender: var(--color-lavender);
-  --color-accent-steel: #A8C5D0;
-  --color-accent-purple: var(--color-lavender);
-  --color-accent-orange: var(--color-acid-lime);
-  --color-accent-glow: rgba(232, 248, 91, 0.20);
-  --color-accent-glow-warm: rgba(212, 148, 196, 0.18);
-  --font-process-display: var(--font-display);
-  --font-process-body: var(--font-body);
-  --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 180ms;
-  --duration-base: 320ms;
-  --duration-slow: 640ms;
-  --dur-fast: var(--duration-fast);
-  --dur-normal: var(--duration-base);
-  --dur-slow: var(--duration-slow);
-  --shadow-soft: 0 20px 56px rgba(0, 0, 0, 0.4), 0 0 48px rgba(232, 248, 91, 0.10);
-  --shadow-focus: 0 0 0 4px rgba(232, 248, 91, 0.28), 0 0 32px rgba(255, 127, 106, 0.16);
-  --content-narrow: 1180px;
 }
 
-@media (min-width: 360px) {
+@media (min-width: 768px) {
   :root {
-    --section-inline: 1.125rem;
-    --section-block: 4rem;
+    --section-inline: 3rem;
+    --section-block: 8rem;
   }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1280px) {
   :root {
-    --section-inline: clamp(1.5rem, 4vw, 4rem);
-    --section-block: clamp(4.5rem, 9vw, 7rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --section-inline: clamp(1.5rem, 5vw, 6rem);
-    --section-block: clamp(4.5rem, 10vw, 8rem);
+    --section-inline: 5rem;
+    --section-block: 10rem;
   }
 }

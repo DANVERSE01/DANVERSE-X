@@ -6,6 +6,7 @@ import { Hero } from "@/components/hero"
 import { JsonLd } from "@/components/json-ld"
 import { SiteHeader } from "@/components/site-header"
 import { TrustBand } from "@/components/trust-band"
+import { MasterclassShowcase } from "@/components/masterclass-showcase"
 
 const Features = dynamic(() => import("@/components/features").then((module) => module.Features), {
   loading: () => <SectionFallback id="features" label="Studio principles" />,
@@ -83,6 +84,7 @@ export default function Page() {
       <div className="min-h-[100dvh] text-white">
         <SiteHeader />
         <Hero />
+        <MasterclassShowcase />
         <TrustBand />
         <Features />
         <LogoMarquee />

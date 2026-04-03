@@ -392,54 +392,55 @@
   border: 1px solid rgba(232, 248, 91, 0.42);
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  letter-spacing: 0.14em;
+  font-size: clamp(0.95rem, 1.05vw, 1.1rem);
   color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.58);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.52);
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 36%),
-    linear-gradient(125deg, #E8F85B 0%, #F8FF7B 33%, #053054 78%, #FF7F6A 115%);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 35%),
+    linear-gradient(110deg, #E8F85B 0%, #F8FF7B 25%, #103568 70%, #FF7F6A 115%);
   background-size:
     100% 100%,
-    140% 140%;
+    180% 180%;
   box-shadow:
-    0 22px 42px rgba(30, 40, 110, 0.52),
-    0 0 56px rgba(232, 248, 91, 0.3),
-    0 0 28px rgba(255, 127, 106, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 20px 48px rgba(16, 30, 85, 0.52),
+    0 0 55px rgba(232, 248, 91, 0.38),
+    0 0 30px rgba(255, 127, 106, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
   transition:
-    transform 180ms var(--ease-cinematic),
+    transform 170ms var(--ease-cinematic),
     box-shadow 220ms ease,
     filter 220ms ease,
     border-color 220ms ease;
-  animation: cta-spectrum 8s ease-in-out infinite;
+  animation: cta-spectrum 6.5s ease-in-out infinite;
   transform: translate3d(var(--magnetic-x, 0px), var(--magnetic-y, 0px), 0);
 }
 
 .cta-primary::before {
   content: "";
   position: absolute;
-  top: -160%;
-  left: -24%;
-  width: 44%;
-  height: 420%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
-  transform: rotate(18deg) translateX(-180%);
-  transition: transform 760ms var(--ease-cinematic);
+  top: -120%;
+  left: -14%;
+  width: 32%;
+  height: 320%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: rotate(22deg) translateX(-155%);
+  transition: transform 500ms var(--ease-cinematic);
   pointer-events: none;
+  opacity: 0.82;
 }
 
 .cta-primary::after {
   content: "";
   position: absolute;
-  inset: 12%;
+  inset: 14%;
   z-index: 0;
   border-radius: inherit;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 72%);
-  filter: blur(18px);
-  opacity: 0.7;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, transparent 68%);
+  filter: blur(12px);
+  opacity: 0.75;
   pointer-events: none;
 }
 
@@ -450,14 +451,42 @@
 
 .cta-primary:hover,
 .cta-primary:focus-visible {
-  border-color: rgba(198, 235, 104, 0.42);
+  border-color: rgba(232, 248, 91, 0.62);
   box-shadow:
-    0 22px 42px rgba(24, 34, 92, 0.42),
-    0 0 50px rgba(106, 129, 255, 0.28),
-    0 0 28px rgba(198, 235, 104, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  filter: saturate(1.06) brightness(1.04);
-  transform: translate3d(var(--magnetic-x, 0px), calc(var(--magnetic-y, 0px) - 2px), 0);
+    0 24px 52px rgba(16, 30, 85, 0.58),
+    0 0 68px rgba(232, 248, 91, 0.44),
+    0 0 36px rgba(255, 127, 106, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  filter: saturate(1.12) brightness(1.08);
+  transform: translate3d(var(--magnetic-x, 0px), calc(var(--magnetic-y, 0px) - 2px), 0) scale(1.01);
+}
+
+.cta-primary:hover::before,
+.cta-primary:focus-visible::before {
+  transform: rotate(22deg) translateX(230%);
+}
+
+/* main effect primary by css only, accent depth minimal in secondary */
+.cta-secondary {
+  position: relative;
+  border: 1px solid rgba(40, 65, 102, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(135deg, rgba(0, 184, 184, 0.21), rgba(255, 127, 106, 0.14)), rgba(8, 12, 20, 0.54);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  color: var(--color-text-primary);
+  backdrop-filter: blur(10px);
+  transition: transform 180ms var(--ease-cinematic), box-shadow 180ms ease;
+}
+
+.cta-secondary:hover,
+.cta-secondary:focus-visible {
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transform: translate3d(0, -1px, 0);
 }
 
 .cta-primary:hover::before,

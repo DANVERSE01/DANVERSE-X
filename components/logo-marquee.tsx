@@ -52,19 +52,21 @@ export function LogoMarquee() {
       <div ref={revealRef} className="content-shell">
         <div
           data-reveal-item
-          className="mx-auto mb-8 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,31rem)_minmax(0,21rem)_auto] lg:items-end lg:text-left"
+          className="mx-auto mb-8 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,32rem)_minmax(0,22rem)_auto] lg:items-end lg:text-left"
         >
           <div className="max-w-3xl">
-            <p className="section-label">Capability Reel</p>
+            <p className="section-label">Operating Context</p>
             <h2 className="section-heading mt-4 text-white">
-              Built for brands with <span className="text-[var(--color-acid-lime)]">global standards</span>
+              Built for launches where the first frame has to do real commercial work.
             </h2>
             <p className="body-copy mt-3 max-w-xl text-sm">
-              The message is breadth, but the visual rhythm should still feel controlled, balanced, and expensive.
+              Founders, product teams, luxury offers, paid-social launches, and sales pages that cannot afford weak
+              attention, soft trust, or confused rollout.
             </p>
           </div>
           <p className="body-copy max-w-[24rem] justify-self-center text-sm leading-7 lg:justify-self-start">
-            Two opposing rails. Smaller capsules. Cleaner spacing. Less noise around the idea itself.
+            The studio is set up for systems, not one-off hero shots. The work has to survive pressure after launch,
+            not only the reveal moment.
           </p>
           <HoverLift className="justify-self-center lg:justify-self-start">
             <Button
@@ -72,7 +74,7 @@ export function LogoMarquee() {
               variant="outline"
               className="rounded-full border-white/12 bg-transparent px-6 text-white hover:bg-white/5 hover:text-[var(--color-acid-lime)]"
             >
-              <Link href="#showcase">See Selected Work</Link>
+              <Link href="#case-files">Open the Case Files</Link>
             </Button>
           </HoverLift>
         </div>

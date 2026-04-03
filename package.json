@@ -17,7 +17,7 @@
     "test:a11y": "vitest run __tests__/accessibility.test.tsx",
     "test:all": "npm run test:unit && npm run test:a11y && npm run test:e2e",
     "verify:sitemap": "node scripts/verify-sitemap.mjs",
-    "test:e2e": "playwright test",
+    "test:e2e": "npm run build && playwright test",
     "bundlesize": "node -r ./scripts/bundlesize-fallback.cjs ./node_modules/bundlesize/index.js --config bundlesize.config.json"
   },
   "dependencies": {

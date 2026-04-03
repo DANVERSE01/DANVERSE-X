@@ -2,6 +2,7 @@
 
 import { useReportWebVitals } from "next/web-vitals"
 import { trackWebVital } from "@/lib/analytics"
+import { publicEnv } from "@/lib/public-env"
 
 const TRACKED_WEB_VITALS = new Set(["CLS", "FCP", "INP", "LCP", "TTFB"])
 const WEB_VITALS_ENDPOINT = "/api/vitals"
@@ -10,6 +11,10 @@ type ReportWebVitalMetric = Parameters<Parameters<typeof useReportWebVitals>[0]>
 
 function reportWebVital(payload: Pick<ReportWebVitalMetric, "id" | "name" | "value" | "delta" | "rating" | "navigationType">) {
   if (typeof window === "undefined") {
+    return
+  }
+
+  if (publicEnv.NEXT_PUBLIC_ENABLE_SERVER_TELEMETRY !== "true") {
     return
   }
 

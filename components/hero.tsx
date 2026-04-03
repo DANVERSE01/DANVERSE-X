@@ -3,27 +3,28 @@
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
-import { createWhatsAppUrl } from "@/lib/public-env"
+import { resolveCtaHref } from "@/lib/cta"
+import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {
     title: "Desire on Screen",
     eyebrow: "Luxury / Macro",
-    sub: "Luxury product worlds staged with the weight and restraint of a real campaign.",
+    sub: "Luxury product launches staged so the object holds authority before the copy starts selling.",
     videoSrc: "/videos/premium.mp4",
     posterSrc: "/images/hero/1178894778.jpg",
   },
   {
     title: "Speed That Looks Expensive",
     eyebrow: "Beauty / Velocity",
-    sub: "High-speed direction that still feels controlled, tactile, and impossible to fake.",
+    sub: "High-speed beauty direction that keeps texture, clarity, and premium control intact on mobile.",
     videoSrc: "/videos/speed.mp4",
     posterSrc: "/images/hero/1178894721.jpg",
   },
   {
     title: "Scroll Stopped. Attention Held.",
     eyebrow: "Social / Vertical",
-    sub: "Vertical-first assets built to win the thumb without losing the premium feel.",
+    sub: "Vertical-first assets built to win the thumb, hold attention, and ship as a usable rollout system.",
     videoSrc: "/videos/social-ready.mp4",
     posterSrc: "/images/hero/1178894835.jpg",
   },
@@ -82,8 +83,8 @@ export function Hero() {
                 Positioning
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Director-led systems for luxury, beauty, and launch-driven brands that need cinema and clarity in one
-                move.
+                Director-led creative for luxury, beauty, and launch-led brands that need the frame and the commercial
+                logic to land together.
               </p>
             </div>
 
@@ -114,7 +115,8 @@ export function Hero() {
                 Delivery
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Campaign films, launch pages, and AI-native production flows shaped as one coherent narrative.
+                Campaign films, brand systems, and launch pages built to move from concept approval to handoff without
+                losing control.
               </p>
             </div>
           </div>
@@ -123,8 +125,8 @@ export function Hero() {
             className="intro-fade-up mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
             style={{ animationDelay: "0.32s" }}
           >
-            Director-led creative systems for brands that need cinema, identity, and launch-readiness to arrive as one
-            deliberate experience.
+            Director-led creative systems for brands that need the hook, the proof, and the rollout to arrive as one
+            controlled release.
           </p>
 
           <div
@@ -154,8 +156,13 @@ export function Hero() {
                     size="lg"
                     className="cta-primary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
                   >
-                    <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer" aria-label="Start the brief on WhatsApp">
-                      Start the Brief
+                    <a
+                      href={resolveCtaHref(GENERAL_BRIEF_CTA)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Start the 4-point brief on WhatsApp"
+                    >
+                      Start the 4-Point Brief
                     </a>
                   </Button>
                 </HoverLift>
@@ -169,11 +176,18 @@ export function Hero() {
                     size="lg"
                     className="cta-secondary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
                   >
-                    <a href="#showcase">See the Work</a>
+                    <a href={resolveCtaHref(GENERAL_DISCOVERY_CTA)} target="_blank" rel="noopener noreferrer">
+                      Request the 15-Minute Call
+                    </a>
                   </Button>
                 </HoverLift>
               </div>
             </div>
+
+            <p className="max-w-[38rem] text-sm leading-7 text-white/56">
+              Under 3 minutes: offer, audience, bottleneck, and deadline. The first reply comes back with the strongest
+              next move.
+            </p>
           </div>
 
           <div className="mt-10 w-full sm:mt-14">

@@ -69,7 +69,9 @@ describe("smoke tests", () => {
     render(<Hero />)
 
     expect(screen.getByRole("heading", { name: /we build visual advantage/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /start the brief/i })).toHaveAttribute("href", "https://wa.me/201207346648")
-    expect(screen.getByRole("link", { name: /see the work/i })).toHaveAttribute("href", "#showcase")
+    expect(screen.getByRole("link", { name: /start the 4-point brief/i }).getAttribute("href")).toContain("https://wa.me/201207346648")
+    expect(screen.getByRole("link", { name: /request the 15-minute call/i }).getAttribute("href")).toContain(
+      "https://wa.me/201207346648"
+    )
   })
 })

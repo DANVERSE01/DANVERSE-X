@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test"
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://127.0.0.1:3000"
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://127.0.0.1:3100"
 const shouldUseLocalServer = !process.env.PLAYWRIGHT_BASE_URL
 
 export default defineConfig({
@@ -13,9 +13,9 @@ export default defineConfig({
   },
   webServer: shouldUseLocalServer
     ? {
-        command: "npx next dev -H 127.0.0.1 -p 3000",
-        port: 3000,
-        reuseExistingServer: !process.env.CI,
+        command: "npx serve out -l 3100",
+        port: 3100,
+        reuseExistingServer: false,
         timeout: 120000,
       }
     : undefined,

@@ -25,18 +25,18 @@ export function CaseStudySpotlight() {
             <div>
               <p className="section-label">Case Files</p>
               <h2 className="section-heading mt-4 max-w-[11ch] text-white">
-                Proof that the direction holds after the first beautiful frame.
+                What was broken, what got decided, what shipped, and what held after launch.
               </h2>
             </div>
             <p className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">
-              These are not generic gallery cards. Each one explains what had to be solved, what was built, and why the
-              system feels premium under pressure.
+              Every featured case has one job here: prove that the direction survives rollout pressure after the hero
+              frame is approved.
             </p>
             <Link
               href="/work"
               className="cta-secondary inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white lg:justify-self-end"
             >
-              Open Work Archive
+              Open the Work Proof Engine
             </Link>
           </div>
 
@@ -74,32 +74,26 @@ export function CaseStudySpotlight() {
                   <p className="mt-2 text-sm uppercase tracking-[0.16em] text-white/42">{featuredCaseStudy.client}</p>
                   <p className="body-copy mt-5 max-w-[36ch] text-[0.98rem] leading-7">{featuredCaseStudy.summary}</p>
 
-                  <div className="mt-6 grid gap-4 rounded-[1.5rem] border border-white/10 bg-black/18 p-4 sm:grid-cols-2">
-                    <div>
-                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">Challenge</p>
-                      <p className="mt-2 text-sm leading-7 text-white/72">{featuredCaseStudy.challenge}</p>
-                    </div>
-                    <div>
-                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">Focus</p>
-                      <p className="mt-2 text-sm leading-7 text-white/72">{featuredCaseStudy.focus}</p>
-                    </div>
+                  <div className="mt-6 grid gap-3">
+                    <NarrativeBlock label="What was broken" text={featuredCaseStudy.broken} />
+                    <NarrativeBlock label="What got decided" text={featuredCaseStudy.decision} />
+                    <NarrativeBlock label="What was built" text={featuredCaseStudy.built} />
+                    <NarrativeBlock label="What happened after" text={featuredCaseStudy.after} />
                   </div>
 
                   <div className="mt-6">
-                    <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">What Shipped</p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {featuredCaseStudy.deliverables.map((deliverable) => (
-                        <span
-                          key={deliverable}
-                          className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[0.72rem] font-semibold tracking-[-0.01em] text-white/80"
+                    <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">Proof of impact</p>
+                    <div className="mt-3 grid gap-2">
+                      {featuredCaseStudy.proofPoints.map((proofPoint) => (
+                        <div
+                          key={proofPoint}
+                          className="rounded-[1rem] border border-white/10 bg-white/[0.03] px-3 py-3 text-sm leading-6 text-white/74"
                         >
-                          {deliverable}
-                        </span>
+                          {proofPoint}
+                        </div>
                       ))}
                     </div>
                   </div>
-
-                  <p className="mt-6 text-sm leading-7 text-white/62">{featuredCaseStudy.note}</p>
                 </div>
               </div>
             </article>
@@ -131,10 +125,16 @@ export function CaseStudySpotlight() {
                         {caseStudy.title}
                       </h3>
                       <p className="mt-2 text-sm uppercase tracking-[0.16em] text-white/38">{caseStudy.client}</p>
-                      <p className="mt-3 text-sm leading-7 text-white/70">{caseStudy.summary}</p>
+                      <p className="mt-3 text-sm leading-7 text-white/70">{caseStudy.engagementContext}</p>
+
+                      <div className="mt-4 grid gap-2">
+                        <MiniNarrative label="Broken" text={caseStudy.broken} />
+                        <MiniNarrative label="After" text={caseStudy.after} />
+                      </div>
+
                       <div className="mt-4 flex items-center gap-2 text-sm text-[var(--color-acid-lime)]">
                         <ArrowUpRight className="h-4 w-4" />
-                        <span>{caseStudy.deliverables[0]}</span>
+                        <span>{caseStudy.proofPoints[0]}</span>
                       </div>
                     </div>
                   </div>
@@ -145,5 +145,23 @@ export function CaseStudySpotlight() {
         </div>
       </div>
     </section>
+  )
+}
+
+function NarrativeBlock({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="rounded-[1.25rem] border border-white/10 bg-black/18 px-4 py-4">
+      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">{label}</p>
+      <p className="mt-2 text-sm leading-7 text-white/74">{text}</p>
+    </div>
+  )
+}
+
+function MiniNarrative({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="rounded-[1rem] border border-white/10 bg-white/[0.03] px-3 py-3">
+      <p className="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/34">{label}</p>
+      <p className="mt-2 text-sm leading-6 text-white/68">{text}</p>
+    </div>
   )
 }

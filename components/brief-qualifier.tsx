@@ -1,40 +1,36 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { resolveCtaHref } from "@/lib/cta"
 import { contactEmailHref, createWhatsAppUrl, publicEnv } from "@/lib/public-env"
-import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
+import { GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 
-const SERVICE_OPTIONS = [
-  "Cinematic Ads",
-  "Brand Systems",
-  "Launch Pages",
-  "AI Content Engine",
-] as const
-
-const TIMELINE_OPTIONS = ["This Week", "2-4 Weeks", "This Quarter"] as const
-
-const PRIORITY_OPTIONS = ["Need premium perception", "Need a launch system", "Need content velocity"] as const
+const OFFER_OPTIONS = ["Hero product", "New launch", "Founder brand", "Sales page"] as const
+const AUDIENCE_OPTIONS = ["Cold paid traffic", "Premium consumer", "B2B buyer", "Existing community"] as const
+const BOTTLENECK_OPTIONS = ["Weak hook", "Weak trust", "Weak clarity", "No rollout system"] as const
+const DEADLINE_OPTIONS = ["This week", "In 2 weeks", "This month", "Planned launch"] as const
 
 export function BriefQualifier() {
-  const [service, setService] = useState<(typeof SERVICE_OPTIONS)[number]>("Cinematic Ads")
-  const [timeline, setTimeline] = useState<(typeof TIMELINE_OPTIONS)[number]>("2-4 Weeks")
-  const [priority, setPriority] = useState<(typeof PRIORITY_OPTIONS)[number]>("Need premium perception")
+  const [offer, setOffer] = useState<(typeof OFFER_OPTIONS)[number]>("Hero product")
+  const [audience, setAudience] = useState<(typeof AUDIENCE_OPTIONS)[number]>("Cold paid traffic")
+  const [bottleneck, setBottleneck] = useState<(typeof BOTTLENECK_OPTIONS)[number]>("Weak hook")
+  const [deadline, setDeadline] = useState<(typeof DEADLINE_OPTIONS)[number]>("In 2 weeks")
 
   const message = useMemo(
     () =>
       [
         "Hi DANVERSE,",
         "",
-        "I want to start a project.",
-        `Service: ${service}`,
-        `Timeline: ${timeline}`,
-        `Priority: ${priority}`,
+        "I want to start the 4-point brief.",
+        `Offer: ${offer}`,
+        `Audience: ${audience}`,
+        `Bottleneck: ${bottleneck}`,
+        `Deadline: ${deadline}`,
         "",
-        "Send me the best next step for the brief.",
+        "Send the strongest next move and the right scope.",
       ].join("\n"),
-    [priority, service, timeline]
+    [audience, bottleneck, deadline, offer]
   )
 
   return (
@@ -48,44 +44,44 @@ export function BriefQualifier() {
         <div className="statement-panel mx-auto max-w-[1120px] rounded-[2rem] px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
             <div>
-              <p className="section-label">Brief Qualifier</p>
-              <h2 className="section-heading mt-4 max-w-[10ch] text-white">
-                Shape the first conversation before we even reply.
-              </h2>
-              <p className="body-copy mt-4 max-w-[38ch] text-[0.98rem] leading-7">
-                This replaces vague outreach with a clearer project signal. Choose the kind of work, the timeline, and
-                the pressure point so the first response already sounds prepared.
+              <p className="section-label">4-Point Brief</p>
+              <h2 className="section-heading mt-4 max-w-[11ch] text-white">Send the four answers that decide the next move.</h2>
+              <p className="body-copy mt-4 max-w-[40ch] text-[0.98rem] leading-7">
+                Tell us what is being sold, who needs to care first, what is blocking response, and when the work has
+                to move. The first reply comes back with direction, scope pressure, and the right next step.
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <MetricCard label="Response Window" value="24h" note="First recommendation, not just a greeting." />
-                <MetricCard label="Typical Scope" value="1 Brief" note="One direction across ads, pages, and rollout assets." />
-                <MetricCard
-                  label="Preferred Channel"
-                  value="WhatsApp"
-                  note={`Fastest path to ${publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}.`}
-                />
+                <MetricCard label="Reply Window" value="24h" note="Direction first, not a generic reply." />
+                <MetricCard label="What You Send" value="4 Answers" note="Offer, audience, bottleneck, and deadline." />
+                <MetricCard label="Channel" value="WhatsApp" note={`Fastest route to ${publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}.`} />
               </div>
             </div>
 
             <div className="grid gap-6 rounded-[1.75rem] border border-white/10 bg-[rgba(7,10,16,0.4)] p-4 sm:p-6">
               <QualifierGroup
-                label="What are you building?"
-                options={SERVICE_OPTIONS}
-                value={service}
-                onChange={setService}
+                label="What needs to move?"
+                options={OFFER_OPTIONS}
+                value={offer}
+                onChange={setOffer}
               />
               <QualifierGroup
-                label="When does it need to move?"
-                options={TIMELINE_OPTIONS}
-                value={timeline}
-                onChange={setTimeline}
+                label="Who needs to act first?"
+                options={AUDIENCE_OPTIONS}
+                value={audience}
+                onChange={setAudience}
               />
               <QualifierGroup
-                label="What matters most?"
-                options={PRIORITY_OPTIONS}
-                value={priority}
-                onChange={setPriority}
+                label="What is blocking response?"
+                options={BOTTLENECK_OPTIONS}
+                value={bottleneck}
+                onChange={setBottleneck}
+              />
+              <QualifierGroup
+                label="When does it have to move?"
+                options={DEADLINE_OPTIONS}
+                value={deadline}
+                onChange={setDeadline}
               />
 
               <div className="rounded-[1.5rem] border border-white/10 bg-black/18 p-4">
@@ -95,25 +91,33 @@ export function BriefQualifier() {
                 </pre>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button
-                  type="button"
-                  className="cta-primary flex-1 rounded-full text-white"
-                  onClick={() => fireCTAAndOpenWhatsApp("brief-qualifier-cta", message)}
-                >
-                  Send This Brief
-                </Button>
-                <Button asChild variant="outline" className="cta-secondary flex-1 rounded-full text-white">
-                  <Link href={createWhatsAppUrl(message)} target="_blank" rel="noopener noreferrer">
-                    Open in WhatsApp
-                  </Link>
-                </Button>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button asChild className="cta-primary flex-1 rounded-full text-white">
+                    <a href={createWhatsAppUrl(message)} target="_blank" rel="noopener noreferrer">
+                      Send the 4-Point Brief on WhatsApp
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" className="cta-secondary flex-1 rounded-full text-white">
+                    <a href={resolveCtaHref(GENERAL_DISCOVERY_CTA)} target="_blank" rel="noopener noreferrer">
+                      {GENERAL_DISCOVERY_CTA.label}
+                    </a>
+                  </Button>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <MetaCard
+                    duration="Under 3 minutes"
+                    text="WhatsApp opens with the four selected answers already loaded, so the first reply can start with direction instead of clarification."
+                  />
+                  <MetaCard duration={GENERAL_DISCOVERY_CTA.durationLabel} text={GENERAL_DISCOVERY_CTA.whatHappensText} />
+                </div>
               </div>
 
               <p className="text-sm leading-7 text-white/58">
                 Prefer email?{" "}
                 <a href={contactEmailHref} className="accent-link text-white">
-                  Send the same brief to {publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}
+                  Send the same 4-point brief to {publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}
                 </a>
                 .
               </p>
@@ -122,6 +126,15 @@ export function BriefQualifier() {
         </div>
       </div>
     </section>
+  )
+}
+
+function MetaCard({ duration, text }: { duration: string; text: string }) {
+  return (
+    <div className="rounded-[1.15rem] border border-white/10 bg-white/[0.03] px-4 py-4">
+      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-acid-lime)]">{duration}</p>
+      <p className="mt-2 text-sm leading-6 text-white/66">{text}</p>
+    </div>
   )
 }
 
@@ -157,9 +170,7 @@ function QualifierGroup<T extends string>({
             aria-pressed={value === option}
             onClick={() => onChange(option)}
             className={`rounded-full px-4 py-2.5 text-sm font-semibold transition ${
-              value === option
-                ? "cta-primary text-white"
-                : "cta-secondary text-white/78 hover:text-white"
+              value === option ? "cta-primary text-white" : "cta-secondary text-white/78 hover:text-white"
             }`}
           >
             {option}

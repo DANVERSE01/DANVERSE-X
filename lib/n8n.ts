@@ -1,4 +1,4 @@
-import { createWhatsAppUrl } from "@/lib/public-env"
+import { createWhatsAppUrl, publicEnv } from "@/lib/public-env"
 import { pushAnalyticsEvent, trackCtaIntent } from "@/lib/analytics"
 
 export interface ClientIntakePayload extends Record<string, unknown> {
@@ -224,6 +224,10 @@ export function sendEngagementEventBeacon(payload: Record<string, unknown>) {
 
   pushAnalyticsEvent("engagement_event", payload)
 
+  if (publicEnv.NEXT_PUBLIC_ENABLE_SERVER_TELEMETRY !== "true") {
+    return
+  }
+
   const envelope = withMeta({ workflow: "engagement", payload })
 
   if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
@@ -239,7 +243,11 @@ export function sendEngagementEventBeacon(payload: Record<string, unknown>) {
 
 export function fireCTAAndOpenWhatsApp(source: string, waMessage = "") {
   trackCtaIntent(source)
-  triggerClientIntake({ source }).catch(() => null)
+
+  if (publicEnv.NEXT_PUBLIC_ENABLE_SERVER_TELEMETRY === "true") {
+    triggerClientIntake({ source }).catch(() => null)
+  }
+
   window.open(createWhatsAppUrl(waMessage), "_blank", "noopener,noreferrer")
 }
 

@@ -26,7 +26,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     title: "Strategy Lock",
     description:
       "We extract the real commercial problem, lock the creative angle, and set the visual standard before a single frame is built",
-    outcome: "A locked creative position \u2014 not a mood board",
+    outcome: "A locked creative position, not a loose reference stack",
     tags: ["Positioning", "Narrative Direction", "Reference System"],
     accent: "lime",
     icon: Sparkles,
@@ -49,7 +49,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     number: "03",
     label: "Launch Delivery",
     title: "Ship & Scale",
-    description: "Everything your team needs to launch today and scale tomorrow \u2014 no rebuild required",
+    description: "Everything your team needs to launch today and scale tomorrow, with no rebuild required",
     outcome: "One pack. Every ratio. Zero excuses not to launch",
     tags: ["Platform Ratios", "Launch Pack", "Scale Assets"],
     accent: "coral",
@@ -127,7 +127,7 @@ export function Pricing() {
               </p>
               <p className="mt-3 text-sm leading-7 text-white/68">
                 Each stage has a different job: define the angle, build the frame language, then package the launch so
-                the client never feels the handoff.
+                the team can move without re-briefing.
               </p>
             </div>
           </div>

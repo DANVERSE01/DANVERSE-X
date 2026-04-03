@@ -1,58 +1,112 @@
-import { SiteHeader } from "@/components/site-header"
-import { AppverseFooter } from "@/components/appverse-footer"
-import { JsonLd } from "@/components/json-ld"
-import { createWhatsAppUrl } from "@/lib/env"
 import Link from "next/link"
 import type { Metadata } from "next"
+import { AppverseFooter } from "@/components/appverse-footer"
+import { JsonLd } from "@/components/json-ld"
+import { SiteHeader } from "@/components/site-header"
+import { resolveCtaHref } from "@/lib/cta"
+import { GENERAL_BRIEF_CTA } from "@/lib/site-ctas"
 
 export const metadata: Metadata = {
-  title: "FAQ - DANVERSE",
-  description: "Frequently asked questions about DANVERSE creative services and delivery process.",
+  title: "FAQ | DANVERSE",
+  description: "Answers on process, timelines, revisions, handoff, collaboration, and AI production at DANVERSE.",
   alternates: {
     canonical: "/faq",
   },
 }
 
-const FAQS = [
+const FAQ_GROUPS = [
   {
-    q: "What exactly does DANVERSE produce?",
-    a: "AI-powered cinematic ads, brand films, social content, and full visual identity systems. Every deliverable is production-ready - not rough cuts.",
+    title: "Process",
+    intro: "How the work starts, what gets decided first, and how the direction stays controlled.",
+    items: [
+      {
+        q: "What happens first after we send the brief?",
+        a: "We review the offer, the audience, the bottleneck, and the deadline. The first reply comes back with the strongest next move, the likely scope, and whether the project needs a call before production starts.",
+      },
+      {
+        q: "Do you begin with concepts or with direction?",
+        a: "Direction comes first. The angle, the pressure point, and the proof sequence are locked before the work expands into scenes, assets, or rollout outputs.",
+      },
+    ],
   },
   {
-    q: "How long does a project take?",
-    a: "Most projects ship in 5-10 business days. Complex brand films or full campaigns take 2-3 weeks depending on scope.",
+    title: "Timelines",
+    intro: "How quickly work moves once the scope and direction are approved.",
+    items: [
+      {
+        q: "How fast can a project move?",
+        a: "Cinematic ads usually move fastest. Identity systems and launch pages depend on scope, but the timeline is set against the handoff standard the launch actually needs.",
+      },
+      {
+        q: "Can you work against a near launch deadline?",
+        a: "Yes, if the brief is clear enough and the scope matches the window. Tight launches are easier to save when direction is decided early instead of revised late.",
+      },
+    ],
   },
   {
-    q: "Do you work with brands outside Egypt?",
-    a: "Yes. We work with brands across Egypt, the Gulf, Canada, and beyond. All communication is handled remotely with zero quality compromise.",
+    title: "Revisions",
+    intro: "How feedback is handled without breaking the line of direction.",
+    items: [
+      {
+        q: "How do revisions work?",
+        a: "Feedback is handled against the approved direction, not as random taste changes. The goal is to sharpen the work, protect the standard, and avoid drift.",
+      },
+      {
+        q: "What if we change the brief halfway through?",
+        a: "If the commercial goal changes, the scope can change with it. That is handled explicitly so the launch is not delayed by silent brief expansion.",
+      },
+    ],
   },
   {
-    q: "What do you need from us to start?",
-    a: "A brief, your brand assets (logo, colors, references), and a clear goal. We handle everything else from concept to final file.",
+    title: "Deliverables & Handoff",
+    intro: "What ships and what your team receives after approval.",
+    items: [
+      {
+        q: "What do we receive at the end?",
+        a: "You receive the approved outputs plus the supporting rollout assets, ratios, usage guidance, and handoff clarity needed to keep moving after delivery.",
+      },
+      {
+        q: "Do you deliver for multiple ratios and surfaces?",
+        a: "Yes. Deliverables are mapped against the surfaces the launch actually needs so the handoff is usable in the real rollout, not only in the hero format.",
+      },
+    ],
   },
   {
-    q: "Can we request revisions?",
-    a: "Yes. Every project includes revision rounds covered in your package. We don't ship until you're satisfied.",
+    title: "Collaboration",
+    intro: "How collaboration runs once production starts.",
+    items: [
+      {
+        q: "Who do we communicate with during the project?",
+        a: "You communicate directly with the person shaping the creative line. The goal is fewer layers, faster decisions, and less dilution between brief and build.",
+      },
+      {
+        q: "Do you work with teams outside Egypt?",
+        a: "Yes. The studio works remotely across Egypt, the Gulf, and international projects where speed, clarity, and premium control matter.",
+      },
+    ],
   },
   {
-    q: "What platforms do you deliver for?",
-    a: "Instagram Reels, TikTok, YouTube, Facebook, and any custom ratio. All assets are exported platform-ready.",
-  },
-  {
-    q: "Do you work with AI tools only?",
-    a: "We use AI as a production accelerator - Kling, Runway, Seedance, ComfyUI - combined with human creative direction. The result is cinematic, not generated-looking.",
-  },
-  {
-    q: "How do we start?",
-    a: "Hit \"Chat With Us\" and tell us what you're building. We'll respond within 24 hours with a clear plan.",
+    title: "AI & Production Method",
+    intro: "How AI is used and where human direction matters most.",
+    items: [
+      {
+        q: "Is the work fully AI-generated?",
+        a: "No. AI is used as production infrastructure where it increases speed or control. Direction, selection, pacing, and the standard of the final output stay human-led.",
+      },
+      {
+        q: "What is the advantage of your AI-native workflow?",
+        a: "It compresses time without lowering the bar. The goal is faster iteration, more controlled rollout output, and fewer compromises between ambition and delivery speed.",
+      },
+    ],
   },
 ] as const
 
 export default function FAQPage() {
+  const flattenedFaqs = FAQ_GROUPS.flatMap<{ q: string; a: string }>((group) => [...group.items])
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: FAQS.map((faq) => ({
+    mainEntity: flattenedFaqs.map((faq) => ({
       "@type": "Question",
       acceptedAnswer: {
         "@type": "Answer",
@@ -66,37 +120,58 @@ export default function FAQPage() {
     <>
       <JsonLd id="faq-structured-data" data={faqStructuredData} />
       <SiteHeader />
-      <main className="min-h-screen px-4 py-16 text-white">
-        <div className="container mx-auto">
-          <div className="brand-card mx-auto max-w-4xl rounded-[2rem] p-8 md:p-10">
-            <header className="space-y-3">
+      <main className="section-shell min-h-screen py-10 text-white sm:py-14">
+        <div className="content-shell">
+          <div className="mx-auto max-w-[1120px]">
+            <header className="statement-panel rounded-[2rem] px-5 py-6 sm:px-8 sm:py-8">
               <p className="section-label">FAQ</p>
-              <h1 className="section-heading text-3xl text-white md:text-4xl">Before We Start</h1>
-              <p className="body-copy text-base md:text-lg">The questions brands ask before they commit</p>
+              <h1 className="section-heading mt-4 text-white">The practical questions buyers ask before they move.</h1>
+              <p className="body-copy mt-4 max-w-[42ch] text-[1rem] leading-7">
+                Process, timing, revisions, handoff, and AI production are answered here so the first call can stay on
+                the actual opportunity.
+              </p>
             </header>
 
-            <div className="mt-10 space-y-6">
-              {FAQS.map((faq, index) => (
-                <section key={faq.q} className="brand-card rounded-2xl px-6 py-5">
-                  <p className="section-label text-[11px]">Q{index + 1}</p>
-                  <h2 className="mt-2 text-xl font-bold text-white">{faq.q}</h2>
-                  <p className="body-copy mt-3 text-sm leading-7">{faq.a}</p>
+            <div className="mt-8 grid gap-6">
+              {FAQ_GROUPS.map((group) => (
+                <section key={group.title} className="brand-card rounded-[1.9rem] border-white/10 p-5 sm:p-6">
+                  <div className="max-w-[42rem]">
+                    <p className="section-label">{group.title}</p>
+                    <p className="mt-3 text-sm leading-7 text-white/66">{group.intro}</p>
+                  </div>
+
+                  <div className="mt-5 grid gap-3">
+                    {group.items.map((item) => (
+                      <details
+                        key={item.q}
+                        className="rounded-[1.2rem] border border-white/10 bg-black/18 px-4 py-4 open:bg-white/[0.04]"
+                      >
+                        <summary className="cursor-pointer list-none text-[1rem] font-semibold tracking-[-0.02em] text-white">
+                          {item.q}
+                        </summary>
+                        <p className="mt-3 text-sm leading-7 text-white/72">{item.a}</p>
+                      </details>
+                    ))}
+                  </div>
                 </section>
               ))}
             </div>
 
-            <section className="mt-8 border-t border-white/10 pt-6">
-              <p className="body-copy text-sm">
-                Need a custom answer?{" "}
-                <Link
-                  href={createWhatsAppUrl()}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="text-[var(--color-lime)] transition-colors hover:text-white"
-                >
-                  Chat With Us
-                </Link>
+            <section className="mt-8 rounded-[1.8rem] border border-white/10 bg-[linear-gradient(150deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-5 py-6 sm:px-8 sm:py-8">
+              <p className="section-label">Still Deciding?</p>
+              <h2 className="section-heading mt-4 text-white">Send the 4-point brief and get the next move back.</h2>
+              <p className="body-copy mt-4 max-w-[42ch] text-[1rem] leading-7">
+                Use WhatsApp if you already know the offer, the audience, the bottleneck, and the deadline. The first
+                reply comes back with the strongest recommendation.
               </p>
+              <Link
+                href={resolveCtaHref(GENERAL_BRIEF_CTA)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-primary mt-6 inline-flex rounded-full px-6 py-3 text-sm font-semibold text-white"
+              >
+                {GENERAL_BRIEF_CTA.label}
+              </Link>
             </section>
           </div>
         </div>

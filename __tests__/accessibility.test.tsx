@@ -62,17 +62,17 @@ describe("accessibility checks", () => {
 
     expect(container.querySelectorAll("h1")).toHaveLength(1)
     expect(screen.getByRole("heading", { level: 1, name: /we build visual advantage/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /start the brief/i })).toHaveAttribute("target", "_blank")
-    expect(screen.getByRole("link", { name: /see the work/i })).toHaveAttribute("href", "#showcase")
+    expect(screen.getByRole("link", { name: /start the 4-point brief/i })).toHaveAttribute("target", "_blank")
+    expect(screen.getByRole("link", { name: /request the 15-minute call/i })).toHaveAttribute("target", "_blank")
     expect(getUnnamedInteractiveElements(container)).toEqual([])
   })
 
   it("trust band exposes readable trust signals with named links", () => {
     const { container } = render(<TrustBand />)
 
-    expect(screen.getByRole("heading", { level: 2, name: /enough proof to move forward/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /start the brief/i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /danverseai@outlook.com/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 2, name: /the answers serious buyers ask for before they approve the call/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /start the 4-point brief on whatsapp/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /request the 15-minute discovery call/i })).toBeInTheDocument()
     expect(getUnnamedInteractiveElements(container)).toEqual([])
   })
 

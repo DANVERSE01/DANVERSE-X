@@ -1,25 +1,25 @@
-import Link from "next/link"
-import { contactEmailHref, createWhatsAppUrl } from "@/lib/public-env"
+import { resolveCtaHref } from "@/lib/cta"
+import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 
 const TRUST_METRICS = [
   {
     label: "Reply Window",
     value: "24h",
-    detail: "Clear brief reply and first recommendation.",
+    detail: "The first reply comes back with direction, scope pressure, and the strongest next move.",
   },
   {
     label: "Delivery Rhythm",
     value: "5-15 Days",
-    detail: "Fast lanes for ads, deeper tracks for launch systems.",
+    detail: "Ads move fast. Identity systems and launch pages run on the timeline the handoff actually needs.",
   },
   {
-    label: "Launch Coverage",
-    value: "Multi-Ratio",
-    detail: "Vertical, square, widescreen, and rollout-ready exports.",
+    label: "Handoff Standard",
+    value: "Launch-Ready",
+    detail: "Ratios, rollout assets, and decision clarity ship together so the team can move without re-briefing.",
   },
 ] as const
 
-const TRUST_CHIPS = ["Director-Led QA", "Launch-Ready Handoff", "WhatsApp-First Support"] as const
+const TRUST_CHIPS = ["Director-Led Review", "WhatsApp-First Intake", "Commercially Sharp Direction"] as const
 
 export function TrustBand() {
   return (
@@ -35,13 +35,13 @@ export function TrustBand() {
             <div>
               <p className="section-label">Trust Layer</p>
               <h2 className="mt-3 text-[clamp(1.5rem,4vw,2.35rem)] font-bold leading-[0.96] tracking-[-0.045em] text-white">
-                Enough proof to move forward before the call starts.
+                The answers serious buyers ask for before they approve the call.
               </h2>
             </div>
 
             <p className="body-copy max-w-[42ch] text-sm leading-7 sm:text-[0.98rem]">
-              The site now surfaces the same signals clients ask for in the first conversation: response speed,
-              delivery rhythm, and the handoff standard.
+              Reply speed, delivery range, and handoff standard are clear before the brief starts, so the first
+              conversation can stay on direction instead of logistics.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -55,12 +55,24 @@ export function TrustBand() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-3 text-sm">
-              <Link href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="accent-link text-white">
-                Start the Brief
-              </Link>
-              <a href={contactEmailHref} className="accent-link text-white/72 transition-colors hover:text-white">
-                {contactEmailHref.replace("mailto:", "")}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <a
+                href={resolveCtaHref(GENERAL_BRIEF_CTA)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-[1.25rem] border border-[rgba(198,235,104,0.18)] bg-[rgba(198,235,104,0.06)] px-4 py-4 transition-colors hover:border-[rgba(198,235,104,0.28)]"
+              >
+                <p className="text-sm font-semibold text-white">{GENERAL_BRIEF_CTA.label}</p>
+                <p className="mt-2 text-[0.76rem] leading-6 text-white/66">{GENERAL_BRIEF_CTA.whatHappensText}</p>
+              </a>
+              <a
+                href={resolveCtaHref(GENERAL_DISCOVERY_CTA)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-[1.25rem] border border-white/10 bg-white/[0.03] px-4 py-4 transition-colors hover:border-white/18"
+              >
+                <p className="text-sm font-semibold text-white">{GENERAL_DISCOVERY_CTA.label}</p>
+                <p className="mt-2 text-[0.76rem] leading-6 text-white/66">{GENERAL_DISCOVERY_CTA.whatHappensText}</p>
               </a>
             </div>
           </div>

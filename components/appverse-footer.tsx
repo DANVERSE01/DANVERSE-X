@@ -1,20 +1,24 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Instagram, Mail, MessageCircle, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { HoverLift } from "@/components/hover-lift"
-import { contactEmailHref, publicEnv } from "@/lib/public-env"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
+import { resolveCtaHref } from "@/lib/cta"
+import { contactEmailHref, publicEnv } from "@/lib/public-env"
+import { FOOTER_NAV_ROUTES, resolveRouteHref } from "@/lib/routes"
+import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 
 const TAGLINE =
-  "Director-led creative studio producing cinematic campaigns, identity systems, and AI-native launch content."
+  "Director-led studio for cinematic ads, identity systems, and launch pages that need a clear decision and a clean handoff."
 
-const CLOSE_PROOFS = ["Reply within 24h", "Director-led direction", "Launch-ready handoff"] as const
+const CLOSE_PROOFS = ["Reply within 24h", "Director-led review", "Launch-ready handoff"] as const
 
 export function AppverseFooter() {
+  const pathname = usePathname()
   const revealRef = useScrollReveal<HTMLDivElement>()
 
   return (
@@ -33,28 +37,35 @@ export function AppverseFooter() {
           data-reveal-item
           className="statement-panel mx-auto max-w-[1120px] rounded-[2rem] px-5 py-8 text-center sm:px-8 sm:py-10 lg:px-12 lg:py-12"
         >
-          <div className="relative z-10 mx-auto max-w-[46rem]">
-            <p className="section-label">Final Contact</p>
-            <h2 className="section-heading mt-4 max-w-[10ch] text-white sm:mx-auto">
-              Make the first reply feel inevitable.
-            </h2>
-            <p className="body-copy mx-auto mt-4 max-w-[34ch] text-[1rem] leading-7 text-white/72 sm:text-[1.05rem]">
-              When the direction is obvious, the project sells itself earlier. We build that feeling before the first
-              delivery lands.
+          <div className="relative z-10 mx-auto max-w-[52rem]">
+            <p className="section-label">Next Step</p>
+            <h2 className="section-heading mt-4 text-white sm:mx-auto">Send the brief. Get the next move back.</h2>
+            <p className="body-copy mx-auto mt-4 max-w-[42ch] text-[1rem] leading-7 text-white/72 sm:text-[1.05rem]">
+              WhatsApp opens with four prompts: offer, audience, bottleneck, and deadline. It takes under three
+              minutes, and the first reply comes back with the strongest recommendation and the right scope.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <HoverLift>
-                <Button
-                  onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
-                  aria-label="Book a discovery call on WhatsApp"
-                  className="cta-primary rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white"
-                >
-                  Book a Call
-                </Button>
-              </HoverLift>
-              <div className="cta-secondary inline-flex rounded-full px-5 py-3 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white/78">
-                Response within 24h
+            <div className="mt-7 flex flex-col items-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <HoverLift>
+                  <Button asChild className="cta-primary rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white">
+                    <a href={resolveCtaHref(GENERAL_BRIEF_CTA)} target="_blank" rel="noopener noreferrer">
+                      {GENERAL_BRIEF_CTA.label}
+                    </a>
+                  </Button>
+                </HoverLift>
+                <HoverLift>
+                  <Button asChild variant="outline" className="cta-secondary rounded-full px-8 py-3 font-semibold text-white">
+                    <a href={resolveCtaHref(GENERAL_DISCOVERY_CTA)} target="_blank" rel="noopener noreferrer">
+                      {GENERAL_DISCOVERY_CTA.label}
+                    </a>
+                  </Button>
+                </HoverLift>
+              </div>
+
+              <div className="grid gap-3 text-left sm:grid-cols-2">
+                <CtaMeta duration={GENERAL_BRIEF_CTA.durationLabel} text={GENERAL_BRIEF_CTA.whatHappensText} />
+                <CtaMeta duration={GENERAL_DISCOVERY_CTA.durationLabel} text={GENERAL_DISCOVERY_CTA.whatHappensText} />
               </div>
             </div>
 
@@ -75,20 +86,17 @@ export function AppverseFooter() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
             <div className="space-y-5">
               <div className="inline-flex">
-                <DanverseHeaderLogo className="scale-[0.95] origin-left" />
+                <DanverseHeaderLogo className="origin-left scale-[0.95]" />
               </div>
               <p className="body-copy max-w-sm text-sm leading-7">{TAGLINE}</p>
             </div>
 
             <FooterGroup
               title="Navigation"
-              items={[
-                { href: "/", label: "Home" },
-                { href: "/work", label: "Work" },
-                { href: "/#features", label: "Features" },
-                { href: "/#showcase", label: "Showcase" },
-                { href: "/#process", label: "Process" },
-              ]}
+              items={FOOTER_NAV_ROUTES.map((route) => ({
+                href: resolveRouteHref(route, pathname),
+                label: route.label,
+              }))}
             />
 
             <div>
@@ -101,7 +109,7 @@ export function AppverseFooter() {
                   external
                 />
                 <FooterLink href={contactEmailHref} icon={Mail} label={publicEnv.NEXT_PUBLIC_CONTACT_EMAIL} />
-                <FooterLink href="https://wa.me/201207346648" icon={MessageCircle} label="WhatsApp" external />
+                <FooterLink href={`https://wa.me/${publicEnv.NEXT_PUBLIC_WHATSAPP_NUMBER}`} icon={MessageCircle} label="WhatsApp" external />
               </ul>
             </div>
           </div>
@@ -123,13 +131,22 @@ export function AppverseFooter() {
   )
 }
 
+function CtaMeta({ duration, text }: { duration: string; text: string }) {
+  return (
+    <div className="max-w-[26rem] rounded-[1.35rem] border border-white/10 bg-white/[0.03] px-4 py-4">
+      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-acid-lime)]">{duration}</p>
+      <p className="mt-2 text-sm leading-6 text-white/68">{text}</p>
+    </div>
+  )
+}
+
 function FooterGroup({ items, title }: { items: Array<{ href: string; label: string }>; title: string }) {
   return (
     <div>
       <h4 className="section-label mb-3 text-xs">{title}</h4>
       <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)]">
         {items.map((item) => (
-          <li key={item.label}>
+          <li key={item.href}>
             <Link href={item.href} className="accent-link inline-flex items-center gap-2 text-white/72 transition-colors hover:text-white">
               {item.label}
             </Link>

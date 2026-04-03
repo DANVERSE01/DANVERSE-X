@@ -7,18 +7,94 @@ type Scene = {
   id: string
   label: string
   eyebrow: string
+  status: string
+  accent: string
+  secondary: string
+  wash: string
 }
 
 const HOME_SCENES: readonly Scene[] = [
-  { id: "hero", label: "Opening Frame", eyebrow: "Hero" },
-  { id: "trust", label: "Trust Layer", eyebrow: "Proof" },
-  { id: "features", label: "Studio Standard", eyebrow: "Craft" },
-  { id: "industries", label: "Capability Reel", eyebrow: "Breadth" },
-  { id: "case-files", label: "Case Files", eyebrow: "Evidence" },
-  { id: "showcase", label: "Showcase Stage", eyebrow: "Playback" },
-  { id: "process", label: "Operating Model", eyebrow: "Method" },
-  { id: "brief-planner", label: "Brief Qualifier", eyebrow: "Convert" },
-  { id: "contact", label: "Final Contact", eyebrow: "Close" },
+  {
+    id: "hero",
+    label: "Opening Frame",
+    eyebrow: "Hero",
+    status: "Atmosphere locked",
+    accent: "106 129 255",
+    secondary: "198 235 104",
+    wash: "18 24 40",
+  },
+  {
+    id: "trust",
+    label: "Trust Layer",
+    eyebrow: "Proof",
+    status: "Credibility surfaced",
+    accent: "198 235 104",
+    secondary: "157 176 255",
+    wash: "14 18 24",
+  },
+  {
+    id: "features",
+    label: "Studio Standard",
+    eyebrow: "Craft",
+    status: "Quality threshold visible",
+    accent: "157 176 255",
+    secondary: "216 154 183",
+    wash: "15 18 27",
+  },
+  {
+    id: "industries",
+    label: "Capability Reel",
+    eyebrow: "Breadth",
+    status: "Range under control",
+    accent: "216 154 183",
+    secondary: "106 129 255",
+    wash: "22 16 24",
+  },
+  {
+    id: "case-files",
+    label: "Case Files",
+    eyebrow: "Evidence",
+    status: "Receipts on deck",
+    accent: "198 235 104",
+    secondary: "216 154 183",
+    wash: "16 14 20",
+  },
+  {
+    id: "showcase",
+    label: "Showcase Stage",
+    eyebrow: "Playback",
+    status: "Playback in focus",
+    accent: "106 129 255",
+    secondary: "198 235 104",
+    wash: "10 14 20",
+  },
+  {
+    id: "process",
+    label: "Operating Model",
+    eyebrow: "Method",
+    status: "Delivery logic exposed",
+    accent: "255 47 146",
+    secondary: "106 129 255",
+    wash: "18 12 22",
+  },
+  {
+    id: "brief-planner",
+    label: "Brief Qualifier",
+    eyebrow: "Convert",
+    status: "Signal captured",
+    accent: "198 235 104",
+    secondary: "106 129 255",
+    wash: "12 18 20",
+  },
+  {
+    id: "contact",
+    label: "Final Contact",
+    eyebrow: "Close",
+    status: "Momentum ready",
+    accent: "198 235 104",
+    secondary: "216 154 183",
+    wash: "12 12 16",
+  },
 ] as const
 
 const CURSOR_EXPAND_SELECTOR = [
@@ -41,10 +117,15 @@ export function CinematicStage() {
   const [enabled, setEnabled] = useState(false)
   const [activeScene, setActiveScene] = useState(HOME_SCENES[0]?.id ?? "hero")
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [showPrelude, setShowPrelude] = useState(false)
   const dotRef = useRef<HTMLDivElement | null>(null)
   const ringRef = useRef<HTMLDivElement | null>(null)
 
   const scenes = useMemo(() => (pathname === "/" ? HOME_SCENES : []), [pathname])
+  const currentScene = useMemo(
+    () => scenes.find((scene) => scene.id === activeScene) ?? scenes[0] ?? HOME_SCENES[0],
+    [activeScene, scenes]
+  )
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)")
@@ -226,6 +307,24 @@ export function CinematicStage() {
   }, [enabled])
 
   useEffect(() => {
+    if (!enabled || pathname !== "/") {
+      setShowPrelude(false)
+      return
+    }
+
+    const hasSeenPrelude = window.sessionStorage.getItem("danverse:cinematic-prelude:v1") === "1"
+    if (hasSeenPrelude) {
+      return
+    }
+
+    window.sessionStorage.setItem("danverse:cinematic-prelude:v1", "1")
+    setShowPrelude(true)
+
+    const hideTimer = window.setTimeout(() => setShowPrelude(false), 2300)
+    return () => window.clearTimeout(hideTimer)
+  }, [enabled, pathname])
+
+  useEffect(() => {
     if (!enabled || pathname !== "/" || scenes.length === 0) {
       return
     }
@@ -276,18 +375,41 @@ export function CinematicStage() {
     }
   }, [enabled, pathname, scenes])
 
+  useEffect(() => {
+    if (!enabled || !currentScene) {
+      return
+    }
+
+    document.body.dataset.activeScene = currentScene.id
+    document.documentElement.style.setProperty("--scene-accent-rgb", currentScene.accent)
+    document.documentElement.style.setProperty("--scene-secondary-rgb", currentScene.secondary)
+    document.documentElement.style.setProperty("--scene-wash-rgb", currentScene.wash)
+
+    return () => {
+      document.body.removeAttribute("data-active-scene")
+      document.documentElement.style.removeProperty("--scene-accent-rgb")
+      document.documentElement.style.removeProperty("--scene-secondary-rgb")
+      document.documentElement.style.removeProperty("--scene-wash-rgb")
+    }
+  }, [currentScene, enabled])
+
   if (!enabled) {
     return null
   }
 
   return (
     <>
+      <div className="scene-wash" aria-hidden="true" />
       <div className="cinematic-spotlight" aria-hidden="true" />
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
       <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+      {pathname === "/" && currentScene ? (
+        <SceneTelemetry currentScene={currentScene} progress={scrollProgress} sceneCount={scenes.length} />
+      ) : null}
       {pathname === "/" && scenes.length > 0 ? (
         <SceneRail activeScene={activeScene} progress={scrollProgress} scenes={scenes} />
       ) : null}
+      {pathname === "/" ? <StagePrelude show={showPrelude} onSkip={() => setShowPrelude(false)} /> : null}
     </>
   )
 }
@@ -329,5 +451,69 @@ function SceneRail({
         })}
       </div>
     </nav>
+  )
+}
+
+function StagePrelude({ onSkip, show }: { onSkip: () => void; show: boolean }) {
+  if (!show) {
+    return null
+  }
+
+  return (
+    <div className="stage-prelude" role="presentation">
+      <div className="stage-prelude__grain" />
+      <div className="stage-prelude__beam" />
+      <div className="stage-prelude__copy">
+        <p className="stage-prelude__eyebrow">DANVERSE 2026</p>
+        <div className="stage-prelude__mark">
+          <span className="stage-prelude__line" />
+          <span className="stage-prelude__title">Visual Advantage</span>
+          <span className="stage-prelude__line" />
+        </div>
+        <p className="stage-prelude__note">Scroll slowly. Each section is cut like a scene.</p>
+      </div>
+      <button type="button" className="stage-prelude__skip" onClick={onSkip} aria-label="Skip cinematic intro">
+        Skip Intro
+      </button>
+    </div>
+  )
+}
+
+function SceneTelemetry({
+  currentScene,
+  progress,
+  sceneCount,
+}: {
+  currentScene: Scene
+  progress: number
+  sceneCount: number
+}) {
+  return (
+    <aside className="scene-telemetry" aria-hidden="true">
+      <div className="scene-telemetry__eyebrow">Studio Telemetry</div>
+      <div className="scene-telemetry__body">
+        <div className="scene-telemetry__row">
+          <span className="scene-telemetry__kicker">Active Scene</span>
+          <span className="scene-telemetry__value">{currentScene.label}</span>
+        </div>
+        <div className="scene-telemetry__row">
+          <span className="scene-telemetry__kicker">Status</span>
+          <span className="scene-telemetry__value">{currentScene.status}</span>
+        </div>
+        <div className="scene-telemetry__row">
+          <span className="scene-telemetry__kicker">Scroll</span>
+          <span className="scene-telemetry__value">{Math.round(progress * 100)}%</span>
+        </div>
+      </div>
+      <div className="scene-telemetry__dots">
+        {Array.from({ length: sceneCount }).map((_, index) => (
+          <span
+            key={`scene-dot-${index}`}
+            className="scene-telemetry__dot"
+            data-active={HOME_SCENES[index]?.id === currentScene.id}
+          />
+        ))}
+      </div>
+    </aside>
   )
 }

@@ -11,42 +11,30 @@ declare global {
 
 let consumerCount = 0
 let lenisInstance: Lenis | null = null
-let rafCallback: ((time: number) => void) | null = null
-let gsapInstance: (typeof import("gsap"))["gsap"] | null = null
-let scrollTriggerPlugin: (typeof import("gsap/ScrollTrigger"))["ScrollTrigger"] | null = null
+let rafId: number | null = null
 let LenisConstructor: (typeof import("lenis"))["default"] | null = null
 
 async function ensureLenis() {
-  if (!LenisConstructor || !gsapInstance || !scrollTriggerPlugin) {
-    const [lenisModule, gsapModule, scrollTriggerModule] = await Promise.all([
-      import("lenis"),
-      import("gsap"),
-      import("gsap/ScrollTrigger"),
-    ])
-
+  if (!LenisConstructor) {
+    const lenisModule = await import("lenis")
     LenisConstructor = lenisModule.default
-    gsapInstance = gsapModule.gsap
-    scrollTriggerPlugin = scrollTriggerModule.ScrollTrigger
-    gsapInstance.registerPlugin(scrollTriggerPlugin)
   }
 
-  if (!lenisInstance && LenisConstructor && scrollTriggerPlugin) {
+  if (!lenisInstance && LenisConstructor) {
     lenisInstance = new LenisConstructor({ lerp: 0.08, smoothWheel: true })
-    lenisInstance.on("scroll", () => scrollTriggerPlugin?.update())
     window.__DANVERSE_LENIS__ = lenisInstance
   }
 
-  if (!rafCallback && lenisInstance && gsapInstance) {
-    rafCallback = (time) => {
-      lenisInstance?.raf(time * 1000)
+  if (rafId === null) {
+    const loop = (time: number) => {
+      lenisInstance?.raf(time)
+      rafId = window.requestAnimationFrame(loop)
     }
 
-    gsapInstance.ticker.add(rafCallback)
-    gsapInstance.ticker.lagSmoothing(0)
+    rafId = window.requestAnimationFrame(loop)
   }
 
   document.documentElement.dataset.lenis = "true"
-  scrollTriggerPlugin?.refresh()
 }
 
 function teardownLenis() {
@@ -54,9 +42,9 @@ function teardownLenis() {
     return
   }
 
-  if (rafCallback && gsapInstance) {
-    gsapInstance.ticker.remove(rafCallback)
-    rafCallback = null
+  if (rafId !== null) {
+    window.cancelAnimationFrame(rafId)
+    rafId = null
   }
 
   lenisInstance?.destroy()

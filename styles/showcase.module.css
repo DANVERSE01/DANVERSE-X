@@ -198,6 +198,10 @@
   aspect-ratio: 1 / 1;
 }
 
+.mediaFigureEnter {
+  animation: showcase-fade-in 420ms var(--ease-cinematic) both;
+}
+
 .mediaVideo {
   position: absolute;
   inset: 0;

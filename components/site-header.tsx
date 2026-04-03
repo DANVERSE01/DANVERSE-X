@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { Building2, ChevronDown, Globe, HelpCircle, Info, Menu, Palette, Workflow } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -107,43 +106,37 @@ export function SiteHeader() {
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
-              <AnimatePresence>
-                {servicesOpen ? (
-                  <motion.div
-                    id="services-panel"
-                    initial={{ opacity: 0, y: -10, scale: 0.985 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.985 }}
-                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute left-1/2 top-[calc(100%+1rem)] z-[140] w-[min(34rem,calc(100vw-3rem))] -translate-x-1/2"
-                  >
-                    <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-[linear-gradient(160deg,rgba(9,12,17,0.98),rgba(14,19,28,0.96),rgba(20,14,20,0.94))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.42),0_0_30px_rgba(106,129,255,0.08)] backdrop-blur-2xl">
-                      <div className="grid gap-2">
-                        {SERVICES.map((service, index) => (
-                          <Link
-                            key={service.href}
-                            href={service.href}
-                            className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-4 rounded-[1.2rem] border border-white/0 bg-white/[0.015] px-4 py-3 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04]"
-                          >
-                            <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/8 bg-white/[0.035] text-[var(--color-electric-blue-strong)] transition-transform duration-200 group-hover:scale-[1.03] group-hover:-rotate-3">
-                              <service.icon className="h-4.5 w-4.5" />
+              {servicesOpen ? (
+                <div
+                  id="services-panel"
+                  className="menu-panel-enter absolute left-1/2 top-[calc(100%+1rem)] z-[140] w-[min(34rem,calc(100vw-3rem))] -translate-x-1/2"
+                >
+                  <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-[linear-gradient(160deg,rgba(9,12,17,0.98),rgba(14,19,28,0.96),rgba(20,14,20,0.94))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.42),0_0_30px_rgba(106,129,255,0.08)] backdrop-blur-2xl">
+                    <div className="grid gap-2">
+                      {SERVICES.map((service, index) => (
+                        <Link
+                          key={service.href}
+                          href={service.href}
+                          className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-4 rounded-[1.2rem] border border-white/0 bg-white/[0.015] px-4 py-3 transition-all duration-200 hover:border-white/8 hover:bg-white/[0.04]"
+                        >
+                          <span className="flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/8 bg-white/[0.035] text-[var(--color-electric-blue-strong)] transition-transform duration-200 group-hover:scale-[1.03] group-hover:-rotate-3">
+                            <service.icon className="h-4.5 w-4.5" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-semibold tracking-[-0.02em] text-white group-hover:text-[var(--color-acid-lime)]">
+                              {service.label}
                             </span>
-                            <span className="min-w-0">
-                              <span className="block text-sm font-semibold tracking-[-0.02em] text-white group-hover:text-[var(--color-acid-lime)]">
-                                {service.label}
-                              </span>
-                              <span className="mt-1 block text-[0.78rem] leading-6 text-white/60">{service.description}</span>
-                            </span>
-                            <span className="pt-1 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-white/24">
-                              0{index + 1}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
+                            <span className="mt-1 block text-[0.78rem] leading-6 text-white/60">{service.description}</span>
+                          </span>
+                          <span className="pt-1 text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-white/24">
+                            0{index + 1}
+                          </span>
+                        </Link>
+                      ))}
                     </div>
-                  </motion.div>
-                ) : null}
-              </AnimatePresence>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             {LINKS.map((link) => (

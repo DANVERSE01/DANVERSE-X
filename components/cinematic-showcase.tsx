@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
 import LazyVideo from "@/components/lazy-video"
 import { HoverLift } from "@/components/hover-lift"
 import { ShowcaseControlRail } from "@/components/showcase-control-rail"
@@ -74,35 +73,25 @@ export function CinematicShowcase() {
               <div className={styles.mediaViewport}>
                 <div className={styles.mediaBackdrop} style={mediaViewportStyle} />
                 <div className={styles.mediaStage} data-aspect={activeWork.aspect}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeWork.slug}
-                      initial={{ opacity: 0.18, y: 12, scale: 0.985 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0.08, y: -10, scale: 0.985 }}
-                      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                      className={styles.mediaFigure}
-                      data-aspect={activeWork.aspect}
-                    >
-                      <LazyVideo
-                        src={activeWork.videoSrc}
-                        poster={activeWork.poster}
-                        autoplay
-                        loop
-                        muted
-                        playsInline
-                        eager={activeIndex === 0}
-                        rootMargin={activeIndex <= 1 ? "80px" : "260px"}
-                        background={activeWork.backgroundColor ?? "#05070b"}
-                        onReady={handleMediaReady}
-                        className={`${styles.mediaVideo} ${
-                          activeWork.fit === "cover" ? styles.mediaVideoCover : styles.mediaVideoContain
-                        }`}
-                        aria-label={`${activeWork.title} campaign preview`}
-                        style={{ objectPosition: activeWork.objectPosition ?? "center center" }}
-                      />
-                    </motion.div>
-                  </AnimatePresence>
+                  <div key={activeWork.slug} className={`${styles.mediaFigure} ${styles.mediaFigureEnter}`} data-aspect={activeWork.aspect}>
+                    <LazyVideo
+                      src={activeWork.videoSrc}
+                      poster={activeWork.poster}
+                      autoplay
+                      loop
+                      muted
+                      playsInline
+                      eager={activeIndex === 0}
+                      rootMargin={activeIndex <= 1 ? "80px" : "260px"}
+                      background={activeWork.backgroundColor ?? "#05070b"}
+                      onReady={handleMediaReady}
+                      className={`${styles.mediaVideo} ${
+                        activeWork.fit === "cover" ? styles.mediaVideoCover : styles.mediaVideoContain
+                      }`}
+                      aria-label={`${activeWork.title} campaign preview`}
+                      style={{ objectPosition: activeWork.objectPosition ?? "center center" }}
+                    />
+                  </div>
                 </div>
 
                 <div

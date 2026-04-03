@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import { ArrowUpRight, Clapperboard, Rocket, Sparkles, type LucideIcon } from "lucide-react"
-import { gsap } from "gsap"
 import { ProcessVisual } from "@/components/process-visuals"
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 type ProcessStep = {
   number: string
@@ -67,104 +66,12 @@ const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
 }
 
 export function Pricing() {
-  const sectionRef = useRef<HTMLElement | null>(null)
-  const headlineRef = useRef<HTMLHeadingElement | null>(null)
-  const cardsWrapRef = useRef<HTMLDivElement | null>(null)
-  const wordRefs = useRef<HTMLSpanElement[]>([])
-  const cardRefs = useRef<HTMLElement[]>([])
-  const visualRefs = useRef<HTMLDivElement[]>([])
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
-    let cancelled = false
-
-    const ctx = gsap.context(() => {
-      const words = wordRefs.current.filter(Boolean)
-      const cards = cardRefs.current.filter(Boolean)
-      const visuals = visualRefs.current.filter(Boolean)
-
-      const setReducedState = () => {
-        gsap.set(words, { yPercent: 0, opacity: 1 })
-        gsap.set(cards, { y: 0, opacity: 1 })
-        gsap.set(visuals, { x: 0, opacity: 1, scale: 1 })
-      }
-
-      if (prefersReducedMotion) {
-        setReducedState()
-        return
-      }
-
-      const animateIn = () => {
-        if (cancelled) return
-
-        gsap.set(words, { yPercent: 112, opacity: 0.18 })
-        gsap.set(cards, { y: 56, opacity: 0 })
-        gsap.set(visuals, { x: 36, opacity: 0, scale: 0.96 })
-
-        gsap.to(words, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power4.out",
-          stagger: 0.08,
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: "top 85%",
-            once: true,
-          },
-        })
-
-        gsap.to(cards, {
-          y: 0,
-          opacity: 1,
-          duration: 1.1,
-          ease: "power4.out",
-          stagger: 0.16,
-          scrollTrigger: {
-            trigger: cardsWrapRef.current,
-            start: "top 85%",
-            once: true,
-          },
-        })
-
-        gsap.to(visuals, {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out",
-          stagger: 0.16,
-          scrollTrigger: {
-            trigger: cardsWrapRef.current,
-            start: "top 85%",
-            once: true,
-          },
-        })
-      }
-
-      const fontReady = document.fonts?.ready
-      if (fontReady) {
-        fontReady.then(() => {
-          animateIn()
-        })
-      } else {
-        animateIn()
-      }
-    }, section)
-
-    return () => {
-      cancelled = true
-      ctx.revert()
-    }
-  }, [])
+  const headlineRevealRef = useScrollReveal<HTMLDivElement>({ y: 28 })
+  const cardsRevealRef = useScrollReveal<HTMLDivElement>({ delay: 0.08, y: 40 })
 
   return (
     <section
       id="process"
-      ref={sectionRef}
       aria-labelledby="process-heading"
       className="section-shell relative isolate overflow-hidden bg-transparent text-white"
     >
@@ -188,34 +95,33 @@ export function Pricing() {
 
       <div className="content-shell relative py-[var(--section-block)]">
         <div className="mx-auto max-w-[1180px]">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end">
+          <div ref={headlineRevealRef} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end">
             <div className="max-w-[54rem]">
-              <p className="section-label">Operating Model</p>
+              <p className="section-label" data-reveal-item>
+                Operating Model
+              </p>
               <h2
                 id="process-heading"
-                ref={headlineRef}
                 className="section-heading mt-4 flex max-w-[11ch] flex-wrap gap-x-2.5 gap-y-2 text-[clamp(2.25rem,9vw,3.9rem)] leading-[0.93] text-white sm:mt-5 sm:gap-x-3.5 sm:gap-y-2.5 sm:text-[4.5rem] lg:text-[5.25rem]"
               >
                 {HEADLINE_WORDS.map((word, index) => (
-                  <span key={word} className="inline-flex overflow-hidden pb-1 sm:pb-3">
-                    <span
-                      ref={(element) => {
-                        if (element) wordRefs.current[index] = element
-                      }}
-                      className="inline-block will-change-transform"
-                    >
+                  <span key={`${word}-${index}`} className="inline-flex overflow-hidden pb-1 sm:pb-3">
+                    <span data-reveal-item className="inline-block will-change-transform">
                       {word}
                     </span>
                   </span>
                 ))}
               </h2>
 
-              <p className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
+              <p
+                className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7 sm:mt-6 sm:text-[1.05rem] sm:leading-8"
+                data-reveal-item
+              >
                 Three stages. One locked direction. Zero wasted rounds.
               </p>
             </div>
 
-            <div className="brand-card rounded-[1.6rem] p-5 text-left sm:p-6">
+            <div className="brand-card rounded-[1.6rem] p-5 text-left sm:p-6" data-reveal-item>
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-acid-lime)]">
                 Studio Discipline
               </p>
@@ -226,17 +132,15 @@ export function Pricing() {
             </div>
           </div>
 
-          <div ref={cardsWrapRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
-            {PROCESS_STEPS.map((step, index) => {
+          <div ref={cardsRevealRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
+            {PROCESS_STEPS.map((step) => {
               const Icon = step.icon
               const accent = ACCENT_COLOR[step.accent]
 
               return (
                 <article
                   key={step.number}
-                  ref={(element) => {
-                    if (element) cardRefs.current[index] = element
-                  }}
+                  data-reveal-item
                   className="process-banner group relative overflow-hidden rounded-[1.85rem] border border-white/10 text-white sm:rounded-[2.4rem]"
                   style={{ background: step.surface }}
                 >
@@ -304,9 +208,6 @@ export function Pricing() {
                     </div>
 
                     <div
-                      ref={(element) => {
-                        if (element) visualRefs.current[index] = element
-                      }}
                       className="process-banner-visual relative min-h-[220px] sm:min-h-[290px] lg:min-h-[380px]"
                       aria-hidden="true"
                     >

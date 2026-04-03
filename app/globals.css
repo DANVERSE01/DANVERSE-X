@@ -591,6 +591,83 @@
   filter: saturate(1);
 }
 
+.hover-lift {
+  transition:
+    transform 220ms var(--ease-cinematic),
+    filter 220ms ease;
+  will-change: transform;
+}
+
+.hover-lift:hover,
+.hover-lift:focus-within {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.intro-fade-up {
+  animation: intro-fade-up 720ms var(--ease-cinematic) both;
+}
+
+.intro-line-reveal {
+  animation: intro-line-reveal 760ms var(--ease-cinematic) both;
+}
+
+.hero-card-enter {
+  animation: intro-fade-up 680ms var(--ease-cinematic) both;
+}
+
+.menu-panel-enter {
+  transform-origin: top center;
+  animation: menu-panel-enter 220ms var(--ease-cinematic) both;
+}
+
+.showcase-fade-in {
+  animation: showcase-fade-in 420ms var(--ease-cinematic) both;
+}
+
+.ambient-float {
+  animation: ambient-float 8s ease-in-out infinite;
+}
+
+.ambient-float-soft {
+  animation: ambient-float-soft 7s ease-in-out infinite;
+}
+
+.ambient-pulse {
+  animation: ambient-pulse 5.6s ease-in-out infinite;
+}
+
+.ambient-progress {
+  animation: ambient-progress 6s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+.ambient-fade {
+  animation: ambient-fade 4s ease-in-out infinite;
+}
+
+.ambient-shift {
+  animation: ambient-shift 7s ease-in-out infinite;
+}
+
+[data-reveal-ready="true"] {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 48px), 0) scale(0.985);
+  transition:
+    opacity 820ms var(--ease-cinematic),
+    transform 820ms var(--ease-cinematic),
+    filter 820ms var(--ease-cinematic);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform, opacity, filter;
+}
+
+[data-reveal-ready="true"][data-reveal-visible="true"] {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
 .animate-scroll-right {
   animation: scroll-right 58s linear infinite;
 }
@@ -777,14 +854,149 @@ body::before {
   }
 }
 
+@keyframes intro-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.985);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-line-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes showcase-fade-in {
+  from {
+    opacity: 0.18;
+    transform: translate3d(0, 12px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes menu-panel-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes ambient-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes ambient-float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+@keyframes ambient-pulse {
+  0%,
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.05);
+  }
+}
+
+@keyframes ambient-progress {
+  0%,
+  100% {
+    transform: scaleX(0.22);
+  }
+
+  50% {
+    transform: scaleX(0.88);
+  }
+}
+
+@keyframes ambient-fade {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes ambient-shift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .process-banner,
   .process-banner-visual > *,
   .lazy-image,
   .animate-scroll-left,
-  .animate-scroll-right {
+  .animate-scroll-right,
+  .hover-lift,
+  .intro-fade-up,
+  .intro-line-reveal,
+  .hero-card-enter,
+  .menu-panel-enter,
+  .showcase-fade-in,
+  .ambient-float,
+  .ambient-float-soft,
+  .ambient-pulse,
+  .ambient-progress,
+  .ambient-fade,
+  .ambient-shift,
+  [data-reveal-ready="true"] {
     transition: none !important;
     animation: none !important;
+  }
+
+  [data-reveal-ready="true"] {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
   }
 
   .process-banner:hover,

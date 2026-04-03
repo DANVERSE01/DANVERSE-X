@@ -1,9 +1,7 @@
 "use client"
 
+import type Lenis from "lenis"
 import { useEffect, type ReactNode } from "react"
-import Lenis from "lenis"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 declare global {
   interface Window {
@@ -12,25 +10,28 @@ declare global {
 }
 
 let lenisInstance: Lenis | null = null
-let rafCallback: ((time: number) => void) | null = null
+let rafId: number | null = null
 let consumerCount = 0
+let LenisConstructor: (typeof import("lenis"))["default"] | null = null
 
-gsap.registerPlugin(ScrollTrigger)
+async function ensureLenis() {
+  if (!LenisConstructor) {
+    const lenisModule = await import("lenis")
+    LenisConstructor = lenisModule.default
+  }
 
-function ensureLenis() {
-  if (!lenisInstance) {
-    lenisInstance = new Lenis({ lerp: 0.08, smoothWheel: true })
-    lenisInstance.on("scroll", ScrollTrigger.update)
+  if (!lenisInstance && LenisConstructor) {
+    lenisInstance = new LenisConstructor({ lerp: 0.08, smoothWheel: true })
     window.__DANVERSE_LENIS__ = lenisInstance
   }
 
-  if (!rafCallback) {
-    rafCallback = (time) => {
-      lenisInstance?.raf(time * 1000)
+  if (rafId === null) {
+    const loop = (time: number) => {
+      lenisInstance?.raf(time)
+      rafId = window.requestAnimationFrame(loop)
     }
 
-    gsap.ticker.add(rafCallback)
-    gsap.ticker.lagSmoothing(0)
+    rafId = window.requestAnimationFrame(loop)
   }
 
   document.documentElement.dataset.lenis = "true"
@@ -42,9 +43,9 @@ function teardownLenis() {
     return
   }
 
-  if (rafCallback) {
-    gsap.ticker.remove(rafCallback)
-    rafCallback = null
+  if (rafId !== null) {
+    window.cancelAnimationFrame(rafId)
+    rafId = null
   }
 
   lenisInstance?.destroy()
@@ -56,8 +57,7 @@ function teardownLenis() {
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     consumerCount += 1
-    ensureLenis()
-    ScrollTrigger.refresh()
+    void ensureLenis()
 
     return () => {
       consumerCount -= 1

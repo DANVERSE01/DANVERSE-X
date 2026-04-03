@@ -1,15 +1,8 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { motion, useReducedMotion } from "framer-motion"
 
 type ProcessVisualMode = "brief" | "build" | "launch"
-
-const LOOP = {
-  duration: 8,
-  ease: "easeInOut",
-  repeat: Number.POSITIVE_INFINITY,
-} as const
 
 export function ProcessVisual({ mode }: { mode: ProcessVisualMode }) {
   switch (mode) {
@@ -34,7 +27,6 @@ function VisualShell({ children }: { children: ReactNode }) {
 }
 
 function BriefVisual() {
-  const reduced = useReducedMotion()
   const nodes = [
     { label: "Offer", className: "left-[6%] top-[18%] sm:left-[8%] sm:top-[24%]" },
     { label: "Audience", className: "left-[10%] bottom-[14%] sm:left-[16%] sm:bottom-[16%]" },
@@ -49,28 +41,23 @@ function BriefVisual() {
       <div className="absolute inset-y-[16%] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/14 to-transparent sm:inset-y-[18%]" />
 
       {nodes.map((node, index) => (
-        <motion.div
+        <div
           key={node.label}
-          className={`absolute ${node.className} rounded-full border border-white/10 bg-[rgba(11,16,26,0.72)] px-2.5 py-1.5 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/68 backdrop-blur-xl sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]`}
-          animate={reduced ? undefined : { y: [0, index % 2 === 0 ? -6 : 6, 0] }}
-          transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
+          className={`ambient-${index % 2 === 0 ? "float" : "float-soft"} absolute ${node.className} rounded-full border border-white/10 bg-[rgba(11,16,26,0.72)] px-2.5 py-1.5 text-[8px] font-semibold uppercase tracking-[0.18em] text-white/68 backdrop-blur-xl sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.22em]`}
+          style={{ animationDuration: `${6 + index}s`, animationDelay: `${index * 0.25}s` }}
         >
           {node.label}
-        </motion.div>
+        </div>
       ))}
 
-      <motion.div
-        className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(217,255,38,0.22)] bg-[radial-gradient(circle,rgba(217,255,38,0.12),rgba(11,16,26,0.76)_68%)] shadow-[0_0_42px_rgba(217,255,38,0.12)] sm:h-28 sm:w-28"
-        animate={reduced ? undefined : { scale: [1, 1.05, 1] }}
-        transition={reduced ? undefined : { ...LOOP, duration: 5.5 }}
-      >
+      <div className="ambient-pulse absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(217,255,38,0.22)] bg-[radial-gradient(circle,rgba(217,255,38,0.12),rgba(11,16,26,0.76)_68%)] shadow-[0_0_42px_rgba(217,255,38,0.12)] sm:h-28 sm:w-28">
         <div className="flex flex-col items-center gap-1 text-center">
           <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-acid-lime)] sm:text-[11px] sm:tracking-[0.24em]">
             Creative
           </span>
           <span className="text-[0.85rem] font-semibold tracking-[-0.04em] text-white sm:text-sm">Lock</span>
         </div>
-      </motion.div>
+      </div>
 
       <div className="absolute left-[10%] top-[48%] h-px w-[24%] bg-gradient-to-r from-transparent to-[rgba(217,255,38,0.3)] sm:left-[14%] sm:w-[20%]" />
       <div className="absolute right-[10%] top-[48%] h-px w-[24%] bg-gradient-to-l from-transparent to-[rgba(73,107,255,0.34)] sm:right-[14%] sm:w-[20%]" />
@@ -81,7 +68,6 @@ function BriefVisual() {
 }
 
 function BuildVisual() {
-  const reduced = useReducedMotion()
   const tracks = [
     { label: "Scene Arc", value: "Structure", accent: "from-[var(--color-electric-blue)] to-[rgba(73,107,255,0.3)]" },
     { label: "Motion Cadence", value: "Pacing", accent: "from-[var(--color-hot-pink)] to-[rgba(255,47,146,0.3)]" },
@@ -107,20 +93,21 @@ function BuildVisual() {
                 </span>
               </div>
               <div className="mt-3 h-1.5 rounded-full bg-white/8">
-                <motion.div
-                  className={`h-full rounded-full bg-gradient-to-r ${track.accent}`}
-                  animate={reduced ? undefined : { width: ["22%", "88%", "22%"] }}
-                  transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
+                <div
+                  className={`ambient-progress h-full rounded-full bg-gradient-to-r ${track.accent}`}
+                  style={{ animationDuration: `${6 + index}s`, animationDelay: `${index * 0.3}s` }}
                 />
               </div>
               <div className="mt-3 grid grid-cols-8 gap-1.5">
                 {Array.from({ length: 8 }).map((_, barIndex) => (
-                  <motion.span
+                  <span
                     key={`${track.label}-${barIndex}`}
-                    className="block rounded-full bg-white/8"
-                    style={{ height: 6 + ((barIndex + index) % 4) * 4 }}
-                    animate={reduced ? undefined : { opacity: [0.35, 1, 0.35] }}
-                    transition={reduced ? undefined : { ...LOOP, duration: 4 + barIndex * 0.35 + index }}
+                    className="ambient-fade block rounded-full bg-white/8"
+                    style={{
+                      height: 6 + ((barIndex + index) % 4) * 4,
+                      animationDuration: `${4 + barIndex * 0.35 + index}s`,
+                      animationDelay: `${barIndex * 0.08}s`,
+                    }}
                   />
                 ))}
               </div>
@@ -133,7 +120,6 @@ function BuildVisual() {
 }
 
 function LaunchVisual() {
-  const reduced = useReducedMotion()
   const outputs = ["9:16", "1:1", "16:9"]
   const deliverables = ["Master Exports", "Vertical Cutz", "Thumbnail Covers", "Launch Notes"]
 
@@ -147,16 +133,15 @@ function LaunchVisual() {
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3 justify-items-start">
               {outputs.map((ratio, index) => (
-                <motion.div
+                <div
                   key={ratio}
-                  className="flex h-[56px] w-[56px] items-center justify-center rounded-[0.85rem] border border-white/8 bg-white/[0.03] p-0 text-center sm:h-[72px] sm:w-[72px] sm:rounded-[1rem]"
-                  animate={reduced ? undefined : { y: [0, -4, 0] }}
-                  transition={reduced ? undefined : { ...LOOP, duration: 6 + index }}
+                  className={`ambient-${index % 2 === 0 ? "float" : "float-soft"} flex h-[56px] w-[56px] items-center justify-center rounded-[0.85rem] border border-white/8 bg-white/[0.03] p-0 text-center sm:h-[72px] sm:w-[72px] sm:rounded-[1rem]`}
+                  style={{ animationDuration: `${6 + index}s`, animationDelay: `${index * 0.18}s` }}
                 >
                   <div className="text-[1.05rem] font-black tracking-[-0.05em] text-white sm:text-[1.35rem]">
                     {ratio}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -185,14 +170,13 @@ function LaunchVisual() {
 
           <div className="grid h-full content-center gap-2.5 pl-8 sm:gap-3 sm:pl-[22%]">
             {deliverables.map((item, index) => (
-              <motion.div
+              <div
                 key={item}
-                className="rounded-[1rem] border border-white/8 bg-black/18 px-3.5 py-3 text-[0.92rem] font-medium text-white/76 sm:rounded-[1.15rem] sm:px-4 sm:py-4 sm:text-sm"
-                animate={reduced ? undefined : { x: [0, 8, 0] }}
-                transition={reduced ? undefined : { ...LOOP, duration: 7 + index }}
+                className="ambient-shift rounded-[1rem] border border-white/8 bg-black/18 px-3.5 py-3 text-[0.92rem] font-medium text-white/76 sm:rounded-[1.15rem] sm:px-4 sm:py-4 sm:text-sm"
+                style={{ animationDuration: `${7 + index}s`, animationDelay: `${index * 0.16}s` }}
               >
                 {item}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

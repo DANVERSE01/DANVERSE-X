@@ -31,11 +31,11 @@ const HERO_MEDIA: HeroMediaItem[] = [
 ]
 
 const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [
-  { text: "We Build" },
-  { text: "Visual" },
-  { text: "Advantage" },
+  { text: "Direction" },
+  { text: "That" },
+  { text: "Lands" },
 ]
-const HERO_SIGNAL_CHIPS = ["Cinematic Ads", "Brand Systems", "Launch Pages", "AI Content Engines"] as const
+const HERO_SIGNAL_CHIPS = ["Cinematic Ads", "Brand Systems", "Launch Pages", "Content Rollouts"] as const
 const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const
 
 export function Hero() {
@@ -83,8 +83,7 @@ export function Hero() {
                 Positioning
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Director-led creative for luxury, beauty, and launch-led brands that need the frame and the commercial
-                logic to land together.
+                Director-led production for luxury, beauty, and consumer brands that need strategic direction and final delivery control.
               </p>
             </div>
 
@@ -115,8 +114,7 @@ export function Hero() {
                 Delivery
               </p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Campaign films, brand systems, and launch pages built to move from concept approval to handoff without
-                losing control.
+                Campaign films, brand systems, and launch pages that move from approved concept to market-ready assets in one coherent package.
               </p>
             </div>
           </div>
@@ -125,8 +123,7 @@ export function Hero() {
             className="intro-fade-up mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
             style={{ animationDelay: "0.32s" }}
           >
-            Director-led creative systems for brands that need the hook, the proof, and the rollout to arrive as one
-            controlled release.
+            Director-led strategy and production for brands where the first frame decides whether the message gets heard.
           </p>
 
           <div

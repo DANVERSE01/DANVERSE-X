@@ -17,45 +17,45 @@ export const metadata: Metadata = {
 
 const BELIEFS = [
   {
-    title: "Decision before decoration",
+    title: "Strategy before execution",
     description:
-      "The frame has to solve the commercial problem first. Beauty without direction only delays the next hard conversation.",
+      "Every visual decision should solve a commercial problem, not just look good. Pretty without purpose is just expensive distraction.",
   },
   {
-    title: "Proof before polish language",
+    title: "Standards over surprises",
     description:
-      "The work is judged on whether it earns trust, clarifies the offer, and survives rollout pressure after approval.",
+      "The work gets approved faster when the direction is clear. Stakeholders trust coherence. You build that trust by showing the line and holding it.",
   },
   {
-    title: "Systems before one-off output",
+    title: "Systems not one-shots",
     description:
-      "One hero asset is not enough. The standard has to keep working across cutdowns, pages, decks, and internal handoffs.",
+      "One hero asset is never enough. The real win is building a ruleset that scales across formats, platforms, and launch moments without losing control.",
   },
 ] as const
 
 const WORKING_MODEL = [
   {
-    title: "We start with pressure, not aesthetics.",
+    title: "We start with the commercial problem, not the aesthetic.",
     description:
-      "Offer, audience, bottleneck, and deadline are defined before the direction expands. That keeps the work commercially sharp from the first move.",
+      "Offer, audience, bottleneck, and deadline are defined first. This keeps the work sharp from day one instead of wandering toward something beautiful that doesn't work.",
   },
   {
-    title: "We direct the line the team has to hold.",
+    title: "We build to a standard, not a concept.",
     description:
-      "Once the angle is locked, every asset is built to keep the same standard through review rounds, launch changes, and fast internal approvals.",
+      "Once the direction locks, every frame reinforces it. That's how you move through reviews without reopening the brief or losing consistency across formats.",
   },
   {
-    title: "We hand off work people can actually use.",
+    title: "We deliver work that teams can actually use.",
     description:
-      "Ratios, rollout assets, usage rules, and the next recommendation leave together so the team can move without rebuilding the brief.",
+      "Specs, ratios, asset rules, and next steps ship together. Your team gets handed a system, not a beautiful thing they have to figure out how to scale.",
   },
 ] as const
 
 const EXPECTATIONS = [
-  "Reply within 24 hours with a real recommendation, not a placeholder response.",
-  "Clear review logic so feedback sharpens the direction instead of creating drift.",
-  "Launch-ready delivery packs built for the ratios, formats, and surfaces the rollout actually needs.",
-  "Direct communication with the person shaping the creative line, not a pass-through account layer.",
+  "Response within 24-48 hours with a strategic recommendation, not a placeholder reply.",
+  "Clear review logic that sharpens direction instead of introducing scope creep or concept drift.",
+  "Production-ready delivery designed for the formats, ratios, and rollout surfaces your team actually uses.",
+  "Direct contact with the creative director, not a pass-through account manager.",
 ] as const
 
 export default function AboutPage() {
@@ -88,15 +88,13 @@ export default function AboutPage() {
             <div className="mx-auto max-w-[1120px] rounded-[2.2rem] border border-white/10 bg-[linear-gradient(160deg,rgba(10,13,18,0.92),rgba(14,18,28,0.88),rgba(19,10,19,0.88))] px-5 py-6 shadow-[0_24px_72px_rgba(0,0,0,0.34)] sm:px-8 sm:py-8 lg:px-10 lg:py-10">
               <p className="section-label">About DANVERSE</p>
               <h1 className="section-heading mt-4 max-w-[10ch] text-white">
-                The studio exists to remove hesitation from the frame.
+                Confidence starts with clear direction.
               </h1>
               <p className="mt-4 max-w-[44ch] text-sm leading-7 text-[var(--color-acid-lime)]">
-                Buyers should know what to trust before your team starts explaining. That is the standard behind every
-                ad, identity system, and launch page we build.
+                Your team should know what to trust before anyone starts building. That clarity is what separates work that lands from work that stalls.
               </p>
               <p className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7">
-                DANVERSE is director-led creative for brands that need the hook, the proof, and the handoff to stay
-                sharp under pressure. The work is built to carry commercial clarity, not visual noise.
+                DANVERSE is director-led strategy and production. We work with brands that know the hook, proof, and handoff have to work together or the whole system breaks.
               </p>
             </div>
           </div>

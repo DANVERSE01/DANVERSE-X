@@ -28,8 +28,7 @@ export function Features() {
               <h2 className="section-heading mt-4 max-w-[10ch] text-white">{TITLE}</h2>
             </div>
             <p className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">
-              The point is not to show more process. It is to make the standard obvious before the first deliverable
-              lands.
+              Set expectations before production starts. The work lands faster when direction is locked, constraints are clear, and the standard is non-negotiable.
             </p>
             <div className="accent-chip justify-self-center px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/78 lg:justify-self-end">
               Director-Led QA

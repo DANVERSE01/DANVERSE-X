@@ -58,7 +58,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.05rem;
+  gap: 1.14rem;
+  text-align: center;
+  color: #f8f9fd;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
 .eyebrow {
@@ -73,18 +77,18 @@
 
 .title {
   margin: 0;
-  font-size: clamp(3.6rem, 11vw, 9rem);
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
   font-weight: 900;
-  line-height: 0.91;
+  line-height: 1.1;
   text-transform: uppercase;
-  color: #f7fdff;
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.38), 0 0 54px rgba(5, 178, 255, 0.65);
-  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.02em;
 }
 
 .title span {
   display: block;
-  margin-top: -0.3em;
+  margin-top: -0.18em;
 }
 
 .subtitle {

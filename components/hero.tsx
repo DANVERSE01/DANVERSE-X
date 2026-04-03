@@ -74,6 +74,12 @@ export function Hero() {
 
       <div className="content-shell relative z-[2]">
         <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
+          <div
+            className="hero-badge-container intro-fade-up mb-5 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-[0.67rem] font-bold tracking-[0.22em] text-white/88 backdrop-blur-xl"
+            style={{ animationDelay: "0.08s" }}
+          >
+            <span className="hero-badge">STUDIO MASTERCLASS</span>
+          </div>
           <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
             <div
               className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
@@ -88,7 +94,7 @@ export function Hero() {
             </div>
 
             <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
-              <h1 className="relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
+              <h1 className="hero-headline relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
                 {HERO_HEADLINE_LINES.map((line, index) => (
                   <span
                     key={line.text}

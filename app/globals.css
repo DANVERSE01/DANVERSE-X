@@ -114,10 +114,10 @@ h1, h2, h3, h4, .section-heading, .cta-primary {
   body {
     min-height: 100vh;
     min-height: 100dvh;
-    background: transparent !important;
+    background: #03070f;
     color: var(--color-text-primary);
     font-family: var(--font-body);
-    letter-spacing: -0.012em;
+    letter-spacing: 0.01em;
     font-feature-settings:
       "ss01" 1,
       "cv05" 1,
@@ -180,9 +180,9 @@ h1, h2, h3, h4, .section-heading, .cta-primary {
     word-break: break-word;
     color: var(--color-text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    line-height: 1.05;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+    letter-spacing: 0.01em;
+    line-height: 1.16;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.28);
   }
 
   h1 {
@@ -1112,6 +1112,27 @@ body::before {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  animation: hero-architecture-float 16s ease-in-out infinite;
+}
+
+.hero-badge-container {
+  filter: drop-shadow(0 0 12px rgba(205, 245, 180, 0.45));
+  border: 1px solid rgba(194, 255, 135, 0.42);
+  background: linear-gradient(140deg, rgba(33, 45, 67, 0.4), rgba(15, 20, 35, 0.22));
+}
+
+.hero-badge {
+  background: linear-gradient(90deg, rgba(231, 255, 92, 1), rgba(48, 146, 255, 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.42);
+}
+
+.hero-headline {
+  text-shadow:
+    0 0 12px rgba(47, 103, 255, 0.42),
+    0 0 30px rgba(202, 245, 114, 0.2);
+  letter-spacing: -0.012em;
 }
 
 .hero-light-grid {
@@ -1177,6 +1198,8 @@ body::before {
   opacity: 0.2;
   transform: translate3d(calc(var(--hero-parallax-x, 0px) * 0.05), calc(var(--hero-parallax-y, 0px) * 0.04), 0);
   transition: transform 260ms var(--ease-cinematic);
+  animation: hero-spotlight-sweep 8s linear infinite;
+  background-size: 520% 340%;
 }
 
 .process-banner {
@@ -1352,6 +1375,29 @@ body::before {
 
   50% {
     transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes hero-architecture-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.99;
+  }
+
+  50% {
+    transform: translate3d(0, -2px, 0) scale(1.006);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-spotlight-sweep {
+  0% {
+    background-position: -120% 52%;
+  }
+
+  100% {
+    background-position: 180% 52%;
   }
 }
 

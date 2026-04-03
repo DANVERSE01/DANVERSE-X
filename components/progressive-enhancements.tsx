@@ -1,7 +1,8 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import { useEffect, useMemo, useState } from "react"
 
 const ScrollTracker = dynamic(() => import("@/components/scroll-tracker").then((module) => module.ScrollTracker), {
   ssr: false,
@@ -23,7 +24,11 @@ const WebVitalsReporter = dynamic(
 )
 
 export function ProgressiveEnhancements() {
-  const [enableDeferredEnhancements, setEnableDeferredEnhancements] = useState(false)
+  const pathname = usePathname()
+  const [enableIdleEnhancements, setEnableIdleEnhancements] = useState(false)
+  const [enableInteractiveEnhancements, setEnableInteractiveEnhancements] = useState(false)
+  const enableSmoothScroll = useMemo(() => pathname === "/" || pathname === "/work", [pathname])
+  const enableCinematicStage = pathname === "/"
 
   useEffect(() => {
     const schedule =
@@ -35,17 +40,40 @@ export function ProgressiveEnhancements() {
         ? window.cancelIdleCallback.bind(window)
         : (handle: number) => window.clearTimeout(handle)
 
-    const handle = schedule(() => setEnableDeferredEnhancements(true))
+    const handle = schedule(() => setEnableIdleEnhancements(true))
     return () => cancel(handle)
+  }, [])
+
+  useEffect(() => {
+    const activateEnhancements = () => {
+      setEnableInteractiveEnhancements(true)
+      cleanup()
+    }
+
+    const interactionEvents = ["pointerdown", "wheel", "touchstart", "keydown"] as const
+    const timerId = window.setTimeout(activateEnhancements, 2200)
+
+    const cleanup = () => {
+      window.clearTimeout(timerId)
+      interactionEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, activateEnhancements)
+      })
+    }
+
+    interactionEvents.forEach((eventName) => {
+      window.addEventListener(eventName, activateEnhancements, { passive: true, once: true })
+    })
+
+    return cleanup
   }, [])
 
   return (
     <>
       <ServiceWorkerRegister />
-      <WebVitalsReporter />
-      {enableDeferredEnhancements ? <ScrollTracker /> : null}
-      {enableDeferredEnhancements ? <SmoothScrollController /> : null}
-      {enableDeferredEnhancements ? <CinematicStage /> : null}
+      {enableIdleEnhancements ? <WebVitalsReporter /> : null}
+      {enableInteractiveEnhancements ? <ScrollTracker /> : null}
+      {enableInteractiveEnhancements && enableSmoothScroll ? <SmoothScrollController /> : null}
+      {enableInteractiveEnhancements && enableCinematicStage ? <CinematicStage /> : null}
     </>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import dynamic from "next/dynamic"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const Plasma = dynamic(() => import("@/components/plasma"), { ssr: false })
@@ -22,25 +23,41 @@ function allowAmbientEffects() {
 }
 
 export function PlasmaLayer() {
+  const pathname = usePathname()
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    if (!allowAmbientEffects()) {
+    const allowRoute = pathname === "/" || pathname === "/work"
+    const largeViewport = window.matchMedia?.("(min-width: 768px)")?.matches ?? true
+
+    if (!allowRoute || !largeViewport || !allowAmbientEffects()) {
       return
     }
 
-    const schedule =
-      "requestIdleCallback" in window
-        ? window.requestIdleCallback.bind(window)
-        : (callback: () => void) => window.setTimeout(callback, 600)
-    const cancel =
-      "cancelIdleCallback" in window
-        ? window.cancelIdleCallback.bind(window)
-        : (handle: number) => window.clearTimeout(handle)
+    const activate = () => {
+      setEnabled(true)
+      cleanup()
+    }
 
-    const handle = schedule(() => setEnabled(true))
-    return () => cancel(handle)
-  }, [])
+    const timerId = window.setTimeout(activate, 1600)
+    const interactionEvents = ["pointerdown", "wheel", "touchstart", "keydown"] as const
+
+    const cleanup = () => {
+      window.clearTimeout(timerId)
+      interactionEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, activate)
+      })
+    }
+
+    interactionEvents.forEach((eventName) => {
+      window.addEventListener(eventName, activate, { passive: true, once: true })
+    })
+
+    return () => {
+      cleanup()
+      setEnabled(false)
+    }
+  }, [pathname])
 
   if (!enabled) {
     return null

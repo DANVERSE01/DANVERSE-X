@@ -1,4 +1,4 @@
-import { createWhatsAppUrl } from "@/lib/env"
+import { createWhatsAppUrl } from "@/lib/public-env"
 import { pushAnalyticsEvent, trackCtaIntent } from "@/lib/analytics"
 
 export interface ClientIntakePayload extends Record<string, unknown> {

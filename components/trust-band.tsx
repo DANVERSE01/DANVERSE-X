@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { contactEmailHref, createWhatsAppUrl } from "@/lib/env"
+import { contactEmailHref, createWhatsAppUrl } from "@/lib/public-env"
 
 const TRUST_METRICS = [
   {

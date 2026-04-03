@@ -3,13 +3,11 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
-import { Building2, ChevronDown, Globe, HelpCircle, Info, Menu, Palette, Workflow } from "lucide-react"
+import { Building2, ChevronDown, Globe, HelpCircle, Info, Menu, Palette, Workflow, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { HoverLift } from "@/components/hover-lift"
-import { createWhatsAppUrl } from "@/lib/env"
+import { createWhatsAppUrl } from "@/lib/public-env"
 
 const SERVICES = [
   {
@@ -41,26 +39,35 @@ const LINKS = [
 
 export function SiteHeader() {
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const desktopMenuRef = useRef<HTMLDivElement | null>(null)
   const isServiceRoute = SERVICES.some((service) => service.href === pathname)
 
   useEffect(() => {
     setServicesOpen(false)
+    setMobileMenuOpen(false)
   }, [pathname])
 
   useEffect(() => {
-    if (!servicesOpen) return
-
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setServicesOpen(false)
+      if (event.key === "Escape") {
+        setServicesOpen(false)
+        setMobileMenuOpen(false)
+      }
     }
 
     const handlePointerDown = (event: MouseEvent | TouchEvent) => {
       if (!(event.target instanceof Node)) return
-      if (!desktopMenuRef.current?.contains(event.target)) {
+      if (servicesOpen && !desktopMenuRef.current?.contains(event.target)) {
         setServicesOpen(false)
       }
+    }
+
+    const previousOverflow = document.body.style.overflow
+
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden"
     }
 
     document.addEventListener("keydown", handleKeyDown)
@@ -68,11 +75,12 @@ export function SiteHeader() {
     document.addEventListener("touchstart", handlePointerDown)
 
     return () => {
+      document.body.style.overflow = previousOverflow
       document.removeEventListener("keydown", handleKeyDown)
       document.removeEventListener("mousedown", handlePointerDown)
       document.removeEventListener("touchstart", handlePointerDown)
     }
-  }, [servicesOpen])
+  }, [mobileMenuOpen, servicesOpen])
 
   return (
     <header
@@ -169,38 +177,74 @@ export function SiteHeader() {
           </div>
 
           <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-10 w-10 text-white hover:bg-white/10">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="flex h-full w-[min(20rem,100vw)] max-w-full flex-col border-white/10 bg-[linear-gradient(180deg,rgba(10,13,18,0.98),rgba(18,22,32,0.96),rgba(27,17,26,0.94))] p-0 backdrop-blur-xl"
-              >
-                <div className="border-b border-white/10 px-4 py-5">
-                  <DanverseHeaderLogo className="scale-[0.92] origin-left" />
-                </div>
-                <nav aria-label="Mobile" className="flex flex-1 flex-col overflow-y-auto py-2 pb-6">
-                  <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
-                    <CollapsibleTrigger className="flex w-full items-center justify-between px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-white">
-                      <div className="flex items-center gap-3">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 text-white hover:bg-white/10"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation-panel"
+              onClick={() => setMobileMenuOpen((current) => !current)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              <span className="sr-only">{mobileMenuOpen ? "Close menu" : "Open menu"}</span>
+            </Button>
+
+            {mobileMenuOpen ? (
+              <div className="fixed inset-0 z-[var(--z-modal)] md:hidden" aria-hidden={!mobileMenuOpen}>
+                <button
+                  type="button"
+                  className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+                  aria-label="Close menu"
+                  onClick={() => setMobileMenuOpen(false)}
+                />
+
+                <div
+                  id="mobile-navigation-panel"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Mobile navigation"
+                  className="absolute inset-y-0 right-0 flex h-full w-[min(20rem,100vw)] max-w-full flex-col border-l border-white/10 bg-[linear-gradient(180deg,rgba(10,13,18,0.98),rgba(18,22,32,0.96),rgba(27,17,26,0.94))] p-0 shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+                >
+                  <div className="flex items-center justify-between border-b border-white/10 px-4 py-5">
+                    <DanverseHeaderLogo className="origin-left scale-[0.92]" />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="h-10 w-10 text-white hover:bg-white/10"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <X className="h-5 w-5" />
+                      <span className="sr-only">Close menu</span>
+                    </Button>
+                  </div>
+
+                  <nav aria-label="Mobile" className="flex flex-1 flex-col overflow-y-auto py-2 pb-6">
+                    <button
+                      type="button"
+                      aria-expanded={servicesOpen}
+                      aria-controls="mobile-services-panel"
+                      className="flex w-full items-center justify-between px-5 py-3 text-white/90 transition-colors hover:bg-white/5 hover:text-white"
+                      onClick={() => setServicesOpen((current) => !current)}
+                    >
+                      <span className="flex items-center gap-3">
                         <Building2 className="h-4 w-4 text-[var(--color-electric-blue-strong)]" />
                         <span className="text-sm font-medium">Services</span>
-                      </div>
+                      </span>
                       <ChevronDown
                         className={`h-4 w-4 text-[var(--color-accent-blue-strong)] transition-transform ${servicesOpen ? "rotate-180" : ""}`}
                       />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <div className="mx-4 grid gap-2 rounded-[1.15rem] border border-white/10 bg-white/[0.035] p-2">
+                    </button>
+
+                    {servicesOpen ? (
+                      <div id="mobile-services-panel" className="mx-4 grid gap-2 rounded-[1.15rem] border border-white/10 bg-white/[0.035] p-2">
                         {SERVICES.map((service) => (
                           <Link
                             key={service.href}
                             href={service.href}
                             className="rounded-[0.95rem] px-4 py-3 text-white/78 transition-colors hover:bg-white/[0.05] hover:text-white"
+                            onClick={() => setMobileMenuOpen(false)}
                           >
                             <span className="flex items-center gap-3">
                               <service.icon className="h-4 w-4 text-[var(--color-electric-blue-strong)]" />
@@ -210,33 +254,34 @@ export function SiteHeader() {
                           </Link>
                         ))}
                       </div>
-                    </CollapsibleContent>
-                  </Collapsible>
+                    ) : null}
 
-                  {LINKS.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/[0.04] hover:text-[var(--color-acid-lime)]"
-                    >
-                      <link.icon className="h-4 w-4 opacity-75" />
-                      <span className="text-sm font-medium">{link.label}</span>
-                    </Link>
-                  ))}
-                </nav>
+                    {LINKS.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-3 px-5 py-3 text-white/90 transition-colors hover:bg-white/[0.04] hover:text-[var(--color-acid-lime)]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <link.icon className="h-4 w-4 opacity-75" />
+                        <span className="text-sm font-medium">{link.label}</span>
+                      </Link>
+                    ))}
+                  </nav>
 
-                <div
-                  className="mt-auto border-t border-white/10 p-4"
-                  style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
-                >
-                  <Button asChild className="cta-primary w-full rounded-full font-medium text-white">
-                    <Link href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
-                      Chat With Us
-                    </Link>
-                  </Button>
+                  <div
+                    className="mt-auto border-t border-white/10 p-4"
+                    style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
+                  >
+                    <Button asChild className="cta-primary w-full rounded-full font-medium text-white">
+                      <Link href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
+                        Chat With Us
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
-              </SheetContent>
-            </Sheet>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

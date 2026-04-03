@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
-import { createWhatsAppUrl } from "@/lib/env"
+import { createWhatsAppUrl } from "@/lib/public-env"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {

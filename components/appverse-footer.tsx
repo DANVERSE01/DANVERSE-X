@@ -5,7 +5,7 @@ import { Instagram, Mail, MessageCircle, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { HoverLift } from "@/components/hover-lift"
-import { contactEmailHref, env } from "@/lib/env"
+import { contactEmailHref, publicEnv } from "@/lib/public-env"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
@@ -100,7 +100,7 @@ export function AppverseFooter() {
                   label="Instagram"
                   external
                 />
-                <FooterLink href={contactEmailHref} icon={Mail} label={env.NEXT_PUBLIC_CONTACT_EMAIL} />
+                <FooterLink href={contactEmailHref} icon={Mail} label={publicEnv.NEXT_PUBLIC_CONTACT_EMAIL} />
                 <FooterLink href="https://wa.me/201207346648" icon={MessageCircle} label="WhatsApp" external />
               </ul>
             </div>

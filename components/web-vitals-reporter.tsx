@@ -1,12 +1,37 @@
 "use client"
 
-import * as Sentry from "@sentry/nextjs"
 import { useReportWebVitals } from "next/web-vitals"
 import { trackWebVital } from "@/lib/analytics"
 
 const TRACKED_WEB_VITALS = new Set(["CLS", "FCP", "INP", "LCP", "TTFB"])
+const WEB_VITALS_ENDPOINT = "/api/vitals"
 
 type ReportWebVitalMetric = Parameters<Parameters<typeof useReportWebVitals>[0]>[0]
+
+function reportWebVital(payload: Pick<ReportWebVitalMetric, "id" | "name" | "value" | "delta" | "rating" | "navigationType">) {
+  if (typeof window === "undefined") {
+    return
+  }
+
+  const body = JSON.stringify(payload)
+
+  if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
+    const beaconPayload = new Blob([body], { type: "application/json" })
+
+    if (navigator.sendBeacon(WEB_VITALS_ENDPOINT, beaconPayload)) {
+      return
+    }
+  }
+
+  fetch(WEB_VITALS_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body,
+    keepalive: true,
+  }).catch(() => null)
+}
 
 export function WebVitalsReporter() {
   useReportWebVitals((metric) => {
@@ -24,16 +49,7 @@ export function WebVitalsReporter() {
     } satisfies Pick<ReportWebVitalMetric, "id" | "name" | "value" | "delta" | "rating" | "navigationType">
 
     trackWebVital(payload)
-
-    Sentry.captureMessage(`Web Vital: ${metric.name}`, {
-      extra: payload,
-      level: metric.rating === "poor" ? "warning" : "info",
-      tags: {
-        metric: metric.name,
-        navigationType: metric.navigationType ?? "unknown",
-        rating: metric.rating ?? "unknown",
-      },
-    })
+    reportWebVital(payload)
   })
 
   return null

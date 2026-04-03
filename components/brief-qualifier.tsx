@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { contactEmailHref, createWhatsAppUrl, env } from "@/lib/env"
+import { contactEmailHref, createWhatsAppUrl, publicEnv } from "@/lib/public-env"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
 const SERVICE_OPTIONS = [
@@ -60,7 +60,11 @@ export function BriefQualifier() {
               <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 <MetricCard label="Response Window" value="24h" note="First recommendation, not just a greeting." />
                 <MetricCard label="Typical Scope" value="1 Brief" note="One direction across ads, pages, and rollout assets." />
-                <MetricCard label="Preferred Channel" value="WhatsApp" note={`Fastest path to ${env.NEXT_PUBLIC_CONTACT_EMAIL}.`} />
+                <MetricCard
+                  label="Preferred Channel"
+                  value="WhatsApp"
+                  note={`Fastest path to ${publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}.`}
+                />
               </div>
             </div>
 
@@ -107,7 +111,11 @@ export function BriefQualifier() {
               </div>
 
               <p className="text-sm leading-7 text-white/58">
-                Prefer email? <a href={contactEmailHref} className="accent-link text-white">Send the same brief to {env.NEXT_PUBLIC_CONTACT_EMAIL}</a>.
+                Prefer email?{" "}
+                <a href={contactEmailHref} className="accent-link text-white">
+                  Send the same brief to {publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}
+                </a>
+                .
               </p>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { FeaturesArchviz } from "./_components/features-archviz"
 import { LogoMarqueeArchviz } from "./_components/logo-marquee-archviz"
 import { PricingArchviz } from "./_components/pricing-archviz"
 import { FooterArchviz } from "./_components/footer-archviz"
-import Script from "next/script"
+import { JsonLd } from "@/components/json-ld"
 
 export const dynamic = "force-static"
 
@@ -46,14 +46,7 @@ export default function Page() {
         <FooterArchviz />
       </main>
 
-      <Script
-        id="archviz-structured-data"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(pageStructuredData),
-        }}
-      />
+      <JsonLd id="archviz-structured-data" data={pageStructuredData} />
     </>
   )
 }

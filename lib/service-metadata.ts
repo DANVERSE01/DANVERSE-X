@@ -17,9 +17,11 @@ export function createServiceMetadata({ path, title, description }: ServiceMetad
     alternates: {
       canonical: path,
     },
+    category: "creative service",
     openGraph: {
       title,
       description,
+      siteName: "DANVERSE",
       type: "website",
       url: pageUrl,
       images: [
@@ -36,6 +38,10 @@ export function createServiceMetadata({ path, title, description }: ServiceMetad
       title,
       description,
       images: [imageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   }
 }

@@ -184,7 +184,7 @@ export function Hero() {
                     size="lg"
                     className="cta-primary w-full rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white sm:w-auto"
                   >
-                    <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+                    <a href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer" aria-label="Start the brief on WhatsApp">
                       Start the Brief
                     </a>
                   </Button>

@@ -34,6 +34,7 @@ const SERVICES = [
 ] as const
 
 const LINKS = [
+  { href: "/work", label: "Work", icon: Globe },
   { href: "#process", label: "Process", icon: Workflow },
   { href: "/faq", label: "FAQ", icon: HelpCircle },
   { href: "/About", label: "About", icon: Info },
@@ -151,6 +152,7 @@ export function SiteHeader() {
                   href={link.href}
                   className="nav-link transition-colors hover:text-white"
                   data-active={isActive(pathname, link.href)}
+                  aria-current={isActive(pathname, link.href) ? "page" : undefined}
                 >
                   {link.label}
                 </Link>
@@ -165,7 +167,7 @@ export function SiteHeader() {
                 size="sm"
                 className="cta-primary rounded-full px-5 font-semibold tracking-[-0.02em] text-white"
               >
-                <Link href={createWhatsAppUrl()} target="_blank">
+                <Link href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                   <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--color-acid-lime)] shadow-[0_0_14px_rgba(217,255,38,0.42)]" />
                   Chat With Us
                 </Link>
@@ -235,7 +237,7 @@ export function SiteHeader() {
                   style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)" }}
                 >
                   <Button asChild className="cta-primary w-full rounded-full font-medium text-white">
-                    <Link href={createWhatsAppUrl()} target="_blank">
+                    <Link href={createWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
                       Chat With Us
                     </Link>
                   </Button>
@@ -250,5 +252,9 @@ export function SiteHeader() {
 }
 
 function isActive(pathname: string, href: string) {
-  return href === "#process" ? pathname === "/" : pathname === href
+  if (href === "#process") {
+    return pathname === "/"
+  }
+
+  return pathname === href
 }

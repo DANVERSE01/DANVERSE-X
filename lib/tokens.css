@@ -42,6 +42,10 @@
   --z-nav: 100;
   --z-modal: 200;
   --z-cursor: 9999;
+  --focus-ring-color: rgba(111, 143, 255, 0.82);
+  --focus-ring-offset: 3px;
+  --selection-bg: rgba(106, 129, 255, 0.34);
+  --selection-text: #ffffff;
 
   /* Compatibility aliases still used by the visual layer. */
   --color-surface-elevated: var(--color-surface-3);

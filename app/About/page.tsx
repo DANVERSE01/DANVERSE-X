@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
+import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import { createWhatsAppUrl, env } from "@/lib/env"
 import Link from "next/link"
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
   title: "About - DANVERSE",
   description:
     "DANVERSE builds cinematic brand systems, launch films, and production infrastructure for brands across Egypt and the Gulf.",
+  alternates: {
+    canonical: "/About",
+  },
 }
 
 const FEATURES = [
@@ -59,7 +63,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
+      <JsonLd id="about-organization-schema" data={schemaData} />
       <SiteHeader />
 
       <main className="min-h-screen text-white">

@@ -5,6 +5,7 @@ import { Instagram, Mail, MessageCircle, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { HoverLift } from "@/components/hover-lift"
+import { contactEmailHref, env } from "@/lib/env"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
 
@@ -46,6 +47,7 @@ export function AppverseFooter() {
               <HoverLift>
                 <Button
                   onClick={() => fireCTAAndOpenWhatsApp("footer-cta")}
+                  aria-label="Book a discovery call on WhatsApp"
                   className="cta-primary rounded-full px-8 py-3 font-semibold tracking-[-0.02em] text-white"
                 >
                   Book a Call
@@ -82,8 +84,9 @@ export function AppverseFooter() {
               title="Navigation"
               items={[
                 { href: "/", label: "Home" },
+                { href: "/work", label: "Work" },
                 { href: "/#features", label: "Features" },
-                { href: "/#showcase", label: "Work" },
+                { href: "/#showcase", label: "Showcase" },
                 { href: "/#process", label: "Process" },
               ]}
             />
@@ -97,7 +100,7 @@ export function AppverseFooter() {
                   label="Instagram"
                   external
                 />
-                <FooterLink href="mailto:danverseai@gmail.com" icon={Mail} label="Email" />
+                <FooterLink href={contactEmailHref} icon={Mail} label={env.NEXT_PUBLIC_CONTACT_EMAIL} />
                 <FooterLink href="https://wa.me/201207346648" icon={MessageCircle} label="WhatsApp" external />
               </ul>
             </div>

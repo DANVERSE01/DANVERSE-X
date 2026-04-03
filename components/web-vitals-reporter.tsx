@@ -1,8 +1,10 @@
 "use client"
 
+import * as Sentry from "@sentry/nextjs"
 import { useReportWebVitals } from "next/web-vitals"
+import { trackWebVital } from "@/lib/analytics"
 
-const TRACKED_WEB_VITALS = new Set(["CLS", "FID", "LCP", "TTFB"])
+const TRACKED_WEB_VITALS = new Set(["CLS", "FCP", "INP", "LCP", "TTFB"])
 
 type ReportWebVitalMetric = Parameters<Parameters<typeof useReportWebVitals>[0]>[0]
 
@@ -21,20 +23,16 @@ export function WebVitalsReporter() {
       navigationType: metric.navigationType,
     } satisfies Pick<ReportWebVitalMetric, "id" | "name" | "value" | "delta" | "rating" | "navigationType">
 
-    const body = JSON.stringify(payload)
+    trackWebVital(payload)
 
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon("/api/vitals", new Blob([body], { type: "application/json" }))
-      return
-    }
-
-    void fetch("/api/vitals", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    Sentry.captureMessage(`Web Vital: ${metric.name}`, {
+      extra: payload,
+      level: metric.rating === "poor" ? "warning" : "info",
+      tags: {
+        metric: metric.name,
+        navigationType: metric.navigationType ?? "unknown",
+        rating: metric.rating ?? "unknown",
       },
-      body,
-      keepalive: true,
     })
   })
 

@@ -4,7 +4,7 @@ import { z } from "zod"
 
 const webVitalSchema = z.object({
   id: z.string(),
-  name: z.enum(["CLS", "FID", "LCP", "TTFB"]),
+  name: z.enum(["CLS", "FCP", "INP", "LCP", "TTFB"]),
   value: z.number(),
   delta: z.number().optional(),
   rating: z.enum(["good", "needs-improvement", "poor"]).optional(),

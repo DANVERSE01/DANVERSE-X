@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { AppverseFooter } from "@/components/appverse-footer"
+import { JsonLd } from "@/components/json-ld"
 import { createWhatsAppUrl } from "@/lib/env"
 import Link from "next/link"
 import type { Metadata } from "next"
@@ -7,6 +8,9 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "FAQ - DANVERSE",
   description: "Frequently asked questions about DANVERSE creative services and delivery process.",
+  alternates: {
+    canonical: "/faq",
+  },
 }
 
 const FAQS = [
@@ -45,8 +49,22 @@ const FAQS = [
 ] as const
 
 export default function FAQPage() {
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((faq) => ({
+      "@type": "Question",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+      name: faq.q,
+    })),
+  }
+
   return (
     <>
+      <JsonLd id="faq-structured-data" data={faqStructuredData} />
       <SiteHeader />
       <main className="min-h-screen px-4 py-16 text-white">
         <div className="container mx-auto">
@@ -72,6 +90,8 @@ export default function FAQPage() {
                 Need a custom answer?{" "}
                 <Link
                   href={createWhatsAppUrl()}
+                  rel="noopener noreferrer"
+                  target="_blank"
                   className="text-[var(--color-lime)] transition-colors hover:text-white"
                 >
                   Chat With Us

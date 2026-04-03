@@ -95,6 +95,8 @@
     background: transparent;
     color-scheme: dark;
     scroll-behavior: auto;
+    scroll-padding-top: clamp(5rem, 8vw, 7rem);
+    accent-color: var(--color-acid-lime);
   }
 
   body {
@@ -113,6 +115,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
     touch-action: manipulation;
   }
 
@@ -202,6 +205,11 @@
     min-height: 100dvh;
     background: transparent;
   }
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 .section-shell {
@@ -805,7 +813,27 @@ body::before {
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible {
-  outline: 2px solid rgba(111, 143, 255, 0.82);
-  outline-offset: 3px;
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
   border-radius: 999px;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border: rgba(255, 255, 255, 0.22);
+    --muted-foreground: #d7d3cc;
+  }
+
+  .brand-card,
+  .statement-panel,
+  .liquid-glass,
+  .liquid-glass-enhanced,
+  .liquid-glass-header {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  p,
+  .body-copy {
+    color: #e7e2d9;
+  }
 }

@@ -1,15 +1,50 @@
 {
-  "name": "DANVERSE",
+  "id": "/",
+  "name": "DANVERSE Creative Studio",
   "short_name": "DANVERSE",
-  "description": "AI-Powered Creative Studio",
-  "start_url": "/",
+  "description": "Director-led AI-powered creative studio for cinematic ads, brand systems, and launch pages.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#e63c2f",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#06070a",
+  "theme_color": "#06070a",
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["business", "design", "productivity"],
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "any"
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start the Brief",
+      "short_name": "Brief",
+      "url": "/#hero",
+      "description": "Jump straight into the DANVERSE intro and briefing CTA."
+    },
+    {
+      "name": "Selected Work",
+      "short_name": "Work",
+      "url": "/#showcase",
+      "description": "Open the cinematic showcase section."
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "url": "/#contact",
+      "description": "Go directly to the contact section."
     }
   ]
 }

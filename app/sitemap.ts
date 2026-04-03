@@ -9,6 +9,7 @@ const URLS = [
   { url: "/branding", priority: 0.9, changeFrequency: "weekly" },
   { url: "/websites", priority: 0.9, changeFrequency: "weekly" },
   { url: "/faq", priority: 0.8, changeFrequency: "monthly" },
+  { url: "/work", priority: 0.8, changeFrequency: "monthly" },
   { url: "/About", priority: 0.7, changeFrequency: "monthly" },
   { url: "/checkout", priority: 0.6, changeFrequency: "monthly" },
   { url: "/revisions", priority: 0.6, changeFrequency: "monthly" },

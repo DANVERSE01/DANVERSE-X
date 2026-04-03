@@ -1,14 +1,11 @@
 import type React from "react"
 import "./globals.css"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Manrope, Syne } from "next/font/google"
 import Script from "next/script"
-import Plasma from "@/components/plasma"
-import { ScrollTracker } from "@/components/scroll-tracker"
-import { WebVitalsReporter } from "@/components/web-vitals-reporter"
+import { AmbientBackground } from "@/components/ambient-background"
+import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
 import { env } from "@/lib/env"
-import { Suspense } from "react"
-import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
 
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
@@ -30,16 +27,51 @@ const bodyFont = Manrope({
 })
 
 export const metadata: Metadata = {
+  applicationName: "DANVERSE",
   title: "DANVERSE | AI-Powered Creative Studio",
   description:
     "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
-  generator: "v0.app",
+  alternates: {
+    canonical: "/",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "DANVERSE",
+  },
+  authors: [{ name: "DANVERSE", url: SITE_URL }],
+  category: "creative studio",
+  creator: "DANVERSE",
+  formatDetection: {
+    address: false,
+    email: false,
+    telephone: false,
+  },
+  generator: "Next.js",
+  icons: {
+    apple: "/icons/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { sizes: "192x192", type: "image/png", url: "/icons/icon-192.png" },
+      { sizes: "512x512", type: "image/png", url: "/icons/icon-512.png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
+  keywords: [
+    "AI creative studio",
+    "cinematic ads",
+    "brand systems",
+    "launch pages",
+    "creative direction",
+    "DANVERSE",
+  ],
   metadataBase: new URL(SITE_URL),
   manifest: "/manifest.webmanifest",
   openGraph: {
     title: "DANVERSE | AI-Powered Creative Studio",
     description:
       "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+    siteName: "DANVERSE",
     type: "website",
     locale: "en_US",
     url: SITE_URL,
@@ -52,6 +84,18 @@ export const metadata: Metadata = {
       },
     ],
   },
+  publisher: "DANVERSE",
+  robots: {
+    follow: true,
+    index: true,
+    googleBot: {
+      follow: true,
+      index: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   twitter: {
     card: "summary_large_image",
     title: "DANVERSE | AI-Powered Creative Studio",
@@ -61,34 +105,22 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { color: "#06070a", media: "(prefers-color-scheme: dark)" },
+    { color: "#06070a", media: "(prefers-color-scheme: light)" },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://player.vimeo.com" />
         <link rel="preconnect" href="https://i.vimeocdn.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
-
-        {/* Dynamic Favicon Script */}
-        <Script id="dynamic-favicon" strategy="beforeInteractive">
-          {`
-            function updateFavicon() {
-              const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-              const faviconHref = '/favicon.ico';
-              let link = document.querySelector("link[rel~='icon']");
-              if (!link) {
-                link = document.createElement('link');
-                link.rel = 'icon';
-                document.getElementsByTagName('head')[0].appendChild(link);
-              }
-              link.href = faviconHref;
-            }
-            updateFavicon();
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
-          `}
-        </Script>
 
         {GTM_ID ? (
           <Script id="gtm-script" strategy="lazyOnload">
@@ -120,26 +152,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <SmoothScrollProvider>
-          <ScrollTracker />
-          <WebVitalsReporter />
-          <Suspense fallback={null}>
-            <div className="fixed inset-0 h-full w-full" style={{ zIndex: "var(--z-background)" }}>
-              <Plasma colorStops={["#1f3268", "#271824", "#bfd65c"]} speed={0.66} amplitude={0.84} blend={0.48} />
-              <div className="plasma-atmosphere" aria-hidden="true" />
-              <div className="plasma-grain" aria-hidden="true" />
-              <div className="editorial-vignette" aria-hidden="true" />
-            </div>
-            <main
-              id="main-content"
-              tabIndex={-1}
-              className="relative overflow-x-hidden"
-              style={{ zIndex: "var(--z-content)" }}
-            >
-              {children}
-            </main>
-          </Suspense>
-        </SmoothScrollProvider>
+        <AmbientBackground />
+        <ProgressiveEnhancements />
+        <main id="main-content" tabIndex={-1} className="relative overflow-x-hidden" style={{ zIndex: "var(--z-content)" }}>
+          {children}
+        </main>
       </body>
     </html>
   )

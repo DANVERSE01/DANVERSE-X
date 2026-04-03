@@ -39,6 +39,25 @@ Object.defineProperty(window, "matchMedia", {
   })),
 })
 
+Object.defineProperty(window, "requestIdleCallback", {
+  writable: true,
+  value: vi.fn((callback: IdleRequestCallback) =>
+    window.setTimeout(
+      () =>
+        callback({
+          didTimeout: false,
+          timeRemaining: () => 50,
+        }),
+      0
+    )
+  ),
+})
+
+Object.defineProperty(window, "cancelIdleCallback", {
+  writable: true,
+  value: vi.fn((handle: number) => window.clearTimeout(handle)),
+})
+
 Object.defineProperty(globalThis, "IntersectionObserver", {
   writable: true,
   value: MockIntersectionObserver,
@@ -62,4 +81,12 @@ Object.defineProperty(globalThis.HTMLMediaElement.prototype, "pause", {
 Object.defineProperty(globalThis.HTMLMediaElement.prototype, "load", {
   configurable: true,
   value: vi.fn(),
+})
+
+Object.defineProperty(navigator, "serviceWorker", {
+  configurable: true,
+  value: {
+    getRegistrations: vi.fn().mockResolvedValue([]),
+    register: vi.fn().mockResolvedValue({ scope: "/" }),
+  },
 })

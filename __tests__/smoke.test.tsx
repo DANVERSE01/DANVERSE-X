@@ -58,18 +58,18 @@ afterEach(() => {
 })
 
 describe("smoke tests", () => {
-  it("homepage renders without crashing", () => {
+  it("homepage renders without crashing", async () => {
     render(<Page />)
 
     expect(screen.getByTestId("site-header")).toBeInTheDocument()
-    expect(screen.getByTestId("process")).toBeInTheDocument()
+    expect(await screen.findByTestId("process")).toBeInTheDocument()
   })
 
   it("Hero component mounts correctly", () => {
     render(<Hero />)
 
-    expect(screen.getByRole("heading", { name: /we engineer brand authority\. frame by frame\./i })).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: /work with us/i })).toHaveAttribute("href", "https://wa.me/201207346648")
-    expect(screen.getByRole("link", { name: /explore projects/i })).toHaveAttribute("href", "#showcase")
+    expect(screen.getByRole("heading", { name: /we build visual advantage/i })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: /start the brief/i })).toHaveAttribute("href", "https://wa.me/201207346648")
+    expect(screen.getByRole("link", { name: /see the work/i })).toHaveAttribute("href", "#showcase")
   })
 })

@@ -6,11 +6,14 @@
   place-items: center;
   overflow: hidden;
   color: #ffffff;
-  /* Unified Background with Selected Work: Removing hard blue gradients */
-  background: 
-    radial-gradient(circle at 17% 25%, rgba(224, 231, 91, 0.12), transparent 25%),
-    radial-gradient(circle at 82% 17%, rgba(0, 166, 166, 0.1), transparent 30%),
-    linear-gradient(160deg, #030508 0%, #060912 40%, #030508 100%);
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      color-mix(in srgb, var(--color-electric-blue) 26%, transparent),
+      transparent 30%
+    ),
+    radial-gradient(circle at 80% 18%, color-mix(in srgb, var(--color-hot-pink) 24%, transparent), transparent 34%),
+    linear-gradient(160deg, var(--color-ink) 0%, var(--color-deep-navy) 40%, var(--color-bg) 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   isolation: isolate;
@@ -33,15 +36,23 @@
 }
 
 .glow {
-  /* Matching the Selected Work plasma tones */
-  background: radial-gradient(circle at 50% 30%, rgba(224, 231, 91, 0.18), transparent 46%);
-  filter: blur(48px);
-  opacity: 0.6;
+  background: radial-gradient(
+    circle at 50% 30%,
+    color-mix(in srgb, var(--color-electric-blue) 24%, transparent),
+    transparent 46%
+  );
+  filter: blur(36px);
+  opacity: 0.74;
   animation: glowPulse 9.6s ease-in-out infinite alternate;
 }
 
 .ring {
-  background: radial-gradient(circle at 50% 45%, transparent 34%, rgba(0, 166, 166, 0.2) 40%, transparent 42%);
+  background: radial-gradient(
+    circle at 50% 45%,
+    transparent 34%,
+    color-mix(in srgb, var(--color-hot-pink) 42%, var(--color-ink)) 40%,
+    transparent 42%
+  );
   filter: blur(12px);
   transform: scale(1.18);
   animation: ringSpin 18s linear infinite;
@@ -49,9 +60,21 @@
 
 .grid {
   background-image:
-    repeating-linear-gradient(90deg, rgba(224, 231, 91, 0.03) 0px, rgba(224, 231, 91, 0.03) 1px, transparent 2px, transparent 28px),
-    repeating-linear-gradient(0deg, rgba(224, 231, 91, 0.03) 0px, rgba(224, 231, 91, 0.03) 1px, transparent 2px, transparent 28px);
-  opacity: 0.15;
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-electric-blue) 12%, transparent) 0px,
+      color-mix(in srgb, var(--color-electric-blue) 12%, transparent) 1px,
+      transparent 2px,
+      transparent 28px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--color-electric-blue) 12%, transparent) 0px,
+      color-mix(in srgb, var(--color-electric-blue) 12%, transparent) 1px,
+      transparent 2px,
+      transparent 28px
+    );
+  opacity: 0.22;
 }
 
 .content {
@@ -61,46 +84,44 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.14rem;
-  text-align: center;
-  color: #f8f9fd;
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
+  gap: 1.05rem;
 }
 
 .eyebrow {
   margin: 0;
   font-size: clamp(0.65rem, 1vw, 0.95rem);
-  color: var(--color-electric-blue);
+  color: color-mix(in srgb, var(--color-electric-blue) 72%, white);
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.18em;
-  text-shadow: 0 0 14px rgba(224, 231, 91, 0.4);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--color-electric-blue) 48%, transparent);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-size: clamp(3.6rem, 11vw, 9rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 0.91;
   text-transform: uppercase;
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  text-shadow:
+    0 0 16px color-mix(in srgb, white 38%, transparent),
+    0 0 54px color-mix(in srgb, var(--color-electric-blue) 62%, transparent);
+  letter-spacing: -0.035em;
 }
 
 .title span {
   display: block;
-  margin-top: -0.18em;
+  margin-top: -0.3em;
 }
 
 .subtitle {
   margin: 0;
-  color: var(--color-text-secondary);
+  color: color-mix(in srgb, var(--color-electric-blue) 64%, var(--color-text-secondary));
   font-size: clamp(1rem, 1.8vw, 1.35rem);
   font-weight: 600;
   letter-spacing: 0.03em;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--color-electric-blue) 42%, transparent);
 }
 
 .buttons {
@@ -114,45 +135,88 @@
   border-radius: 999px;
   border: 1px solid transparent;
   padding: 0.87rem 1.6rem;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform .24s ease, box-shadow .24s ease, background .24s ease, border .24s ease;
-  font-family: var(--font-body);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.24s ease,
+    border 0.24s ease;
 }
 
 .primary {
-  background: linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-electric-blue-strong) 45%, #1a1f0a 100%);
-  color: #030508;
-  box-shadow: 0 0 24px rgba(224, 231, 91, 0.3), inset 0 1px 0 rgba(255,255,255,.35);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-electric-blue) 85%, white) 0%,
+    var(--color-electric-blue) 45%,
+    color-mix(in srgb, var(--color-hot-pink) 62%, var(--color-ink)) 100%
+  );
+  color: var(--color-text-inverse);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--color-electric-blue) 42%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .secondary {
-  background: rgba(3, 5, 8, 0.5);
-  border: 1px solid rgba(224, 231, 91, 0.4);
-  color: var(--color-electric-blue);
-  box-shadow: 0 0 16px rgba(224, 231, 91, 0.15);
+  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-electric-blue) 62%, transparent);
+  color: color-mix(in srgb, var(--color-electric-blue) 70%, var(--color-text-primary));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--color-electric-blue) 28%, transparent);
 }
 
 .primary:hover,
 .secondary:hover {
   transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,.36);
+  box-shadow:
+    0 16px 30px color-mix(in srgb, var(--color-electric-blue) 44%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+.primary:focus-visible,
+.secondary:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 @keyframes glowPulse {
-  0% { opacity: 0.5; }
-  100% { opacity: 0.8; }
+  0% {
+    opacity: 0.68;
+  }
+  100% {
+    opacity: 0.92;
+  }
 }
 
 @keyframes ringSpin {
-  0% { transform: scale(1.18) rotate(0deg); }
-  100% { transform: scale(1.18) rotate(360deg); }
+  0% {
+    transform: scale(1.18) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.18) rotate(360deg);
+  }
 }
 
 @media (max-width: 960px) {
-  .title { font-size: clamp(2.5rem, 12vw, 5.5rem); }
-  .subtitle { font-size: clamp(0.95rem, 2.4vw, 1.2rem); }
-  .buttons { flex-direction: column; align-items: center; }
+  .title {
+    font-size: clamp(2.5rem, 12vw, 5.5rem);
+  }
+  .subtitle {
+    font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+  }
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow,
+  .ring,
+  .primary,
+  .secondary {
+    animation: none !important;
+    transition: none !important;
+  }
 }

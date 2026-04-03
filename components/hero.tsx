@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
@@ -80,6 +81,31 @@ export function Hero() {
           >
             <span className="hero-badge">STUDIO MASTERCLASS</span>
           </div>
+
+          <div className="hero-immersive-stage intro-fade-up mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]" style={{ animationDelay: "0.12s" }}>
+            <div className="hero-immersive-screen relative h-[340px] sm:h-[400px] lg:h-[480px] overflow-hidden rounded-[2.1rem] bg-[#0a1130]">
+              <div className="hero-immersive-glow absolute inset-0" />
+              <div className="hero-immersive-shards" aria-hidden="true" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Image
+                  src="/images/hero/1178894778.jpg"
+                  alt="Cinematic studio astronaut motion background"
+                  fill
+                  className="object-cover opacity-85"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 84vw, 1100px"
+                  priority
+                />
+              </div>
+              <div className="hero-immersive-screen-overlay absolute inset-0" />
+              <div className="hero-immersive-hud absolute inset-x-0 bottom-5 flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/85 sm:text-[13px]">
+                <span className="hero-hud-dot" />
+                WARP FRAME ACTIVE
+                <span className="hero-hud-dot" />
+                GLOBAL STUDIO MOTION
+              </div>
+            </div>
+          </div>
+
           <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
             <div
               className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"

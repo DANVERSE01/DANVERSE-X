@@ -41,16 +41,16 @@ const PAGE_STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": "https://danverse.ai/",
-  name: "DANVERSE | AI-Powered Creative Studio",
+  name: "DANVERSE | Creative Studio",
   description:
-    "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+    "DANVERSE is a director-led creative studio that builds cinematic ads, bold branding, and strategic content systems for brands that want to stand out globally.",
   url: "https://danverse.ai/",
   mainEntity: {
     "@type": "Organization",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      email: "danverseai@outlook.com",
+      email: "danverseai@gmail.com",
     },
     name: "DANVERSE",
     url: "https://danverse.ai",

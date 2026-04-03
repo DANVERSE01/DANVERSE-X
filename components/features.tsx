@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { HoverLift } from "@/components/hover-lift"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
-const TITLE = "Precision Before Production."
+const TITLE = "Quality Before Speed."
 
 export function Features() {
   const revealRef = useScrollReveal<HTMLDivElement>()

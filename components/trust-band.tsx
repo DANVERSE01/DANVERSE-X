@@ -3,18 +3,18 @@ import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 
 const TRUST_METRICS = [
   {
-    label: "Reply Window",
-    value: "24h",
+    label: "Response Time",
+    value: "24-48h",
     detail: "The first reply comes back with direction, scope pressure, and the strongest next move.",
   },
   {
-    label: "Delivery Rhythm",
-    value: "5-15 Days",
+    label: "Delivery Timeline",
+    value: "7-21 Days",
     detail: "Ads move fast. Identity systems and launch pages run on the timeline the handoff actually needs.",
   },
   {
     label: "Handoff Standard",
-    value: "Launch-Ready",
+    value: "Production-Ready",
     detail: "Ratios, rollout assets, and decision clarity ship together so the team can move without re-briefing.",
   },
 ] as const

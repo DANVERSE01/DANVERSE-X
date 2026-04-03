@@ -1,7 +1,7 @@
 const PUBLIC_ENV_DEFAULTS = {
   NEXT_PUBLIC_SITE_URL: "https://danverse.ai",
   NEXT_PUBLIC_WHATSAPP_NUMBER: "201207346648",
-  NEXT_PUBLIC_CONTACT_EMAIL: "danverseai@outlook.com",
+  NEXT_PUBLIC_CONTACT_EMAIL: "danverseai@gmail.com",
   NEXT_PUBLIC_ENABLE_SERVER_TELEMETRY: undefined,
   NEXT_PUBLIC_GTM_ID: undefined,
   NEXT_PUBLIC_GA_ID: undefined,

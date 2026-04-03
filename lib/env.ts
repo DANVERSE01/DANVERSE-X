@@ -3,7 +3,7 @@ import { z } from "zod"
 const publicEnvDefaults = {
   NEXT_PUBLIC_SITE_URL: "https://danverse.ai",
   NEXT_PUBLIC_WHATSAPP_NUMBER: "201207346648",
-  NEXT_PUBLIC_CONTACT_EMAIL: "danverseai@outlook.com",
+  NEXT_PUBLIC_CONTACT_EMAIL: "danverseai@gmail.com",
 } as const
 
 const optionalTrimmedString = z.preprocess((value) => {

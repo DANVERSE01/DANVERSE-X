@@ -15,7 +15,7 @@ import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 const TAGLINE =
   "Director-led studio for cinematic ads, identity systems, and launch pages that need a clear decision and a clean handoff."
 
-const CLOSE_PROOFS = ["Reply within 24h", "Director-led review", "Launch-ready handoff"] as const
+const CLOSE_PROOFS = ["Response within 24-48h", "Director-led review", "Production-ready handoff"] as const
 
 export function AppverseFooter() {
   const pathname = usePathname()

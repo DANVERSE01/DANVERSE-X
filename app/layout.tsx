@@ -28,9 +28,9 @@ const bodyFont = Manrope({
 
 export const metadata: Metadata = {
   applicationName: "DANVERSE",
-  title: "DANVERSE | AI-Powered Creative Studio",
+  title: "DANVERSE | Creative Studio",
   description:
-    "DANVERSE is an AI powered creative studio that builds cinematic ads, bold branding, and smart content systems for brands that want to stand out globally.",
+    "DANVERSE is a director-led creative studio that builds cinematic ads, bold branding, and strategic content systems for brands that want to stand out globally.",
   alternates: {
     canonical: "/",
   },

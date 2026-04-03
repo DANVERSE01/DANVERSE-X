@@ -9,7 +9,7 @@ import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
 export const metadata: Metadata = {
   title: "About | DANVERSE",
   description:
-    "DANVERSE is a director-led creative studio for brands that need the frame, the proof, and the rollout to stay sharp under pressure.",
+    "DANVERSE is a director-led creative studio for brands that need strategic direction, proven results, and reliable delivery.",
   alternates: {
     canonical: "/about",
   },

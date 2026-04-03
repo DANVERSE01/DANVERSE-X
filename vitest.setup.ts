@@ -3,7 +3,7 @@ import { vi } from "vitest"
 
 process.env.NEXT_PUBLIC_SITE_URL ??= "https://danverse.ai"
 process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ??= "201207346648"
-process.env.NEXT_PUBLIC_CONTACT_EMAIL ??= "danverseai@outlook.com"
+process.env.NEXT_PUBLIC_CONTACT_EMAIL ??= "danverseai@gmail.com"
 process.env.NEXT_PUBLIC_GTM_ID ??= ""
 process.env.NEXT_PUBLIC_GA_ID ??= ""
 process.env.NEXT_PUBLIC_SENTRY_DSN ??= ""

@@ -2,7 +2,7 @@
   "id": "/",
   "name": "DANVERSE Creative Studio",
   "short_name": "DANVERSE",
-  "description": "Director-led AI-powered creative studio for cinematic ads, brand systems, and launch pages.",
+  "description": "Director-led creative studio for cinematic ads, brand systems, and launch pages.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",

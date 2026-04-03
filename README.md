@@ -1,6 +1,6 @@
-# DANVERSE-X
+# DANVERSE
 
-A Next.js App Router project with reusable UI components and multiple content routes for a marketing-style site.
+A professional Next.js website for DANVERSE, a director-led creative studio specializing in cinematic ads, brand systems, and strategic content solutions.
 
 ## Badges
 
@@ -9,8 +9,6 @@ A Next.js App Router project with reusable UI components and multiple content ro
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)
-
-Build status badge is not included because a repository origin URL is not configured in this checkout.
 
 ## Table of Contents
 
@@ -25,11 +23,13 @@ Build status badge is not included because a repository origin URL is not config
 
 ## Features
 
-- Next.js App Router layout and routes under `app/`.
-- Dedicated routes for About, FAQ, checkout, revisions, and terms pages.
-- API route handlers under `app/api`.
-- SEO assets including `sitemap.xml` and `robots.txt` routes.
-- Reusable UI components organized under `components/` and `components/ui`.
+- Next.js App Router with optimized performance
+- Professional marketing pages for services (cinematic ads, branding, websites)
+- Case studies and portfolio showcase
+- Contact forms and WhatsApp integration
+- SEO optimized with structured data
+- Responsive design with accessibility features
+- Performance monitoring and analytics integration
 
 ## Quickstart
 

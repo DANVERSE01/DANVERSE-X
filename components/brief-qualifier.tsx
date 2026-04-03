@@ -52,7 +52,7 @@ export function BriefQualifier() {
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <MetricCard label="Reply Window" value="24h" note="Direction first, not a generic reply." />
+                <MetricCard label="Response Time" value="24-48h" note="Direction first, not a generic reply." />
                 <MetricCard label="What You Send" value="4 Answers" note="Offer, audience, bottleneck, and deadline." />
                 <MetricCard label="Channel" value="WhatsApp" note={`Fastest route to ${publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}.`} />
               </div>

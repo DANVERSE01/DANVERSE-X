@@ -3,6 +3,14 @@
   isolation: isolate;
   overflow-x: hidden;
   scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 6rem);
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.stage, .stage::before, .stage::after {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
 }
 
 .stage::before {
@@ -12,18 +20,18 @@
   height: 56rem;
   width: 123%;
   background:
-    radial-gradient(circle at 17% 25%, rgba(232, 248, 91, 0.42), transparent 20%),
-    radial-gradient(circle at 82% 17%, rgba(0, 184, 184, 0.34), transparent 28%),
-    radial-gradient(circle at 52% 70%, rgba(255, 127, 106, 0.31), transparent 26%),
-    radial-gradient(circle at 40% 44%, rgba(196, 148, 196, 0.24), transparent 16%),
-    radial-gradient(circle at 55% 30%, rgba(255, 255, 255, 0.12), transparent 22%),
-    repeating-radial-gradient(circle at 78% 15%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0) 38px),
-    linear-gradient(130deg, rgba(8, 26, 86, 0.58), rgba(18, 32, 92, 0.44), rgba(32, 16, 42, 0.44));
-  background-blend-mode: screen, screen, screen, screen, overlay, screen, normal;
-  filter: blur(36px) saturate(1.45);
-  transform: rotate(-1.2deg) scale(1.06);
+    radial-gradient(circle at 17% 25%, rgba(232, 248, 91, 0.44), transparent 18%),
+    radial-gradient(circle at 82% 17%, rgba(0, 184, 184, 0.36), transparent 26%),
+    radial-gradient(circle at 52% 70%, rgba(255, 127, 106, 0.33), transparent 24%),
+    radial-gradient(circle at 40% 44%, rgba(196, 148, 196, 0.26), transparent 14%),
+    radial-gradient(circle at 55% 30%, rgba(255, 255, 255, 0.15), transparent 20%),
+    repeating-radial-gradient(circle at 78% 15%, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0) 38px),
+    linear-gradient(130deg, rgba(10, 30, 92, 0.62), rgba(20, 36, 96, 0.48), rgba(34, 18, 44, 0.45));
+  background-blend-mode: overlay, overlay, overlay, overlay, soft-light, screen, normal;
+  filter: blur(32px) saturate(1.5) contrast(1.08);
+  transform: rotate(-1.2deg) scale(1.06) translateZ(0);
   pointer-events: none;
-  animation: plasma-motion 28s linear infinite, plasma-hue 20s ease-in-out infinite;
+  animation: plasma-motion 28s linear infinite, plasma-hue 18s ease-in-out infinite;
 }
 
 .stage::after {
@@ -33,15 +41,16 @@
   height: 56rem;
   width: 135%;
   background:
-    radial-gradient(circle at 50% 20%, rgba(232, 248, 91, 0.22), transparent 42%),
-    radial-gradient(circle at 15% 56%, rgba(0, 184, 184, 0.18), transparent 40%),
-    radial-gradient(circle at 86% 46%, rgba(255, 127, 106, 0.20), transparent 41%),
-    radial-gradient(circle at 60% 80%, rgba(196, 148, 196, 0.16), transparent 48%),
-    repeating-radial-gradient(circle at 62% 29%, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0) 22px);
-  filter: blur(48px) saturate(1.4);
-  opacity: 0.86;
+    radial-gradient(circle at 50% 20%, rgba(232, 248, 91, 0.24), transparent 38%),
+    radial-gradient(circle at 15% 56%, rgba(0, 184, 184, 0.22), transparent 36%),
+    radial-gradient(circle at 86% 46%, rgba(255, 127, 106, 0.22), transparent 36%),
+    radial-gradient(circle at 60% 80%, rgba(196, 148, 196, 0.18), transparent 44%),
+    repeating-radial-gradient(circle at 62% 29%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0) 20px);
+  filter: blur(42px) saturate(1.5) contrast(1.05);
+  opacity: 0.9;
   pointer-events: none;
-  animation: plasma-motion 30s reverse linear infinite, plasma-spark 12s infinite;
+  transform: translateZ(0);
+  animation: plasma-motion 26s reverse linear infinite, plasma-spark 10s infinite;
 }
 
 @keyframes plasma-hue {
@@ -75,10 +84,18 @@
 
 @keyframes plasma-motion {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  25% { transform: translate3d(-2%, 1.5%, 0) scale(1.02); }
-  50% { transform: translate3d(1.5%, -1.5%, 0) scale(1.03); }
-  75% { transform: translate3d(-1%, 1%, 0) scale(1.01); }
+  25% { transform: translate3d(-1.4%, 0.9%, 0) scale(1.018); }
+  50% { transform: translate3d(1.2%, -1.2%, 0) scale(1.025); }
+  75% { transform: translate3d(-0.7%, 0.7%, 0) scale(1.012); }
   100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage::before,
+  .stage::after {
+    animation: none;
+    filter: blur(28px) saturate(1.25) contrast(1.03);
+  }
 }
 
 .stage::before,

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Bash(claude --version)",
+      "Bash(where claude:*)",
+      "Bash(claude logout:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls D:/Projects/DANVERSE-X/DANVERSE-X/components/*.module.css)",
+      "Bash(ls D:/Projects/DANVERSE-X/DANVERSE-X/components/*.css)",
+      "Bash(npx next:*)",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); console.log\\(JSON.stringify\\({gsap: pkg.dependencies.gsap, lenis: pkg.dependencies.lenis, framer: pkg.dependencies['framer-motion']}, null, 2\\)\\)\")",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); const deps = {...pkg.dependencies, ...pkg.devDependencies}; console.log\\(Object.entries\\(deps\\).filter\\(\\([k]\\) => k.includes\\('gsap'\\) || k.includes\\('framer'\\) || k.includes\\('split'\\)\\).map\\(\\([k,v]\\)=>k+': '+v\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); console.log\\(JSON.stringify\\({...pkg.dependencies, ...pkg.devDependencies}, null, 2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('\\\\n'.join\\(sorted\\(d.get\\('dependencies',{}\\).keys\\(\\)\\)\\)\\)\")",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const g = require\\('./node_modules/gsap/package.json'\\); console.log\\(g.version\\)\")",
+      "Bash(node --input-type=module -e ':*)",
+      "Bash(grep -v \"^$\")",
+      "Bash(NODE_OPTIONS=\"--enable-source-maps\" npx next build)"
+    ]
+  }
+}

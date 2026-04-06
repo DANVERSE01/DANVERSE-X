@@ -11,12 +11,12 @@
   --color-text-primary: #f4eee5;
   --color-text-secondary: #d8d1c5;
   --color-text-muted: #989189;
-  --color-electric-blue: #D51BDF; /* neon magenta */
-  --color-electric-blue-strong: #7624F3; /* ion violet */
-  --color-hot-pink: #F4DE66; /* solar sulfur */
-  --color-hot-pink-strong: #FFEB89;
-  --color-acid-lime: #D51BDF; /* keep magenta accent */
-  --color-lime: #F4DE66;
+  --color-electric-blue: #E0E75B; /* citrus-lime */
+  --color-electric-blue-strong: #F5F87E;
+  --color-hot-pink: #00A6A6; /* aqua-teal */
+  --color-hot-pink-strong: #00C6C6;
+  --color-acid-lime: #EF786A; /* coral */
+  --color-lime: var(--color-acid-lime);
   --color-lavender: #C48BB4;
   --color-coral: var(--color-acid-lime);
   --color-accent-blue: var(--color-electric-blue);

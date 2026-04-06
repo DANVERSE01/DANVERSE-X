@@ -1,8 +1,10 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { ArrowUpRight, Clapperboard, Rocket, Sparkles, type LucideIcon } from "lucide-react"
 import { ProcessVisual } from "@/components/process-visuals"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { registerGSAP, gsap, ScrollTrigger } from "@/lib/gsap"
 
 type ProcessStep = {
   number: string
@@ -66,11 +68,71 @@ const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
 }
 
 export function Pricing() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const stepsRef = useRef<HTMLDivElement>(null)
   const headlineRevealRef = useScrollReveal<HTMLDivElement>({ y: 28 })
-  const cardsRevealRef = useScrollReveal<HTMLDivElement>({ delay: 0.08, y: 40 })
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const stepsEl = stepsRef.current
+    if (!section || !stepsEl || typeof window === "undefined") return
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) return
+
+    registerGSAP()
+
+    const steps = Array.from(stepsEl.querySelectorAll<HTMLElement>(".process-banner"))
+    if (steps.length === 0) return
+
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches
+
+    if (isCoarse) {
+      // Mobile: simple per-step ScrollTrigger, no pin
+      const triggers = steps.map((step) => {
+        gsap.set(step, { clipPath: "inset(0 0 100% 0)" })
+        return ScrollTrigger.create({
+          trigger: step,
+          start: "top 88%",
+          onEnter: () =>
+            gsap.to(step, { clipPath: "inset(0 0 0% 0)", duration: 1.1, ease: "expo.out" }),
+          once: true,
+        })
+      })
+      return () => {
+        triggers.forEach((t) => t.kill())
+        steps.forEach((s) => gsap.set(s, { clearProps: "clipPath" }))
+      }
+    }
+
+    // Desktop: pin section, reveal steps sequentially
+    gsap.set(steps, { clipPath: "inset(0 0 100% 0)" })
+
+    const tl = gsap.timeline()
+    steps.forEach((step) => {
+      tl.to(step, { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "expo.out" })
+    })
+
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: `+=${window.innerHeight * steps.length}`,
+      pin: true,
+      scrub: 1,
+      animation: tl,
+      invalidateOnRefresh: true,
+    })
+
+    return () => {
+      st.kill()
+      tl.kill()
+      steps.forEach((s) => gsap.set(s, { clearProps: "clipPath" }))
+    }
+  }, [])
 
   return (
     <section
+      ref={sectionRef}
       id="process"
       aria-labelledby="process-heading"
       className="section-shell relative isolate overflow-hidden bg-transparent text-white"
@@ -132,7 +194,7 @@ export function Pricing() {
             </div>
           </div>
 
-          <div ref={cardsRevealRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
+          <div ref={stepsRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
             {PROCESS_STEPS.map((step) => {
               const Icon = step.icon
               const accent = ACCENT_COLOR[step.accent]
@@ -140,7 +202,6 @@ export function Pricing() {
               return (
                 <article
                   key={step.number}
-                  data-reveal-item
                   className="process-banner group relative overflow-hidden rounded-[1.85rem] border border-white/10 text-white sm:rounded-[2.4rem]"
                   style={{ background: step.surface }}
                 >

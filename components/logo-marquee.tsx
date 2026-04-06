@@ -1,12 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { ComponentProps } from "react"
 import { Button } from "@/components/ui/button"
 import { HoverLift } from "@/components/hover-lift"
 import { MarqueeCardIcon } from "@/components/marquee-card-icon"
+import { TextReveal } from "@/components/text-reveal"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
+import { useParallax } from "@/hooks/use-parallax"
 
 type ContentCardItem = {
   label: string
@@ -37,7 +40,58 @@ const SECOND_ROW: ContentCardItem[] = [
 
 export function LogoMarquee() {
   const [pausedRow, setPausedRow] = useState<string | null>(null)
+  const row1Ref = useRef<HTMLDivElement>(null)
+  const row2Ref = useRef<HTMLDivElement>(null)
   const revealRef = useScrollReveal<HTMLDivElement>()
+  const headerRef = useGsapEnter<HTMLDivElement>({ preset: "blur-rise", stagger: 0.14, childSelector: "[data-gsap-item]", start: "top 88%" })
+  const marqueeRef = useGsapEnter<HTMLDivElement>({ preset: "clip-bottom", stagger: 0.14, start: "top 86%" })
+  const blob1Ref = useParallax<HTMLDivElement>({ speed: 0.07 })
+  const blob2Ref = useParallax<HTMLDivElement>({ speed: -0.05 })
+
+  // Scroll-velocity marquee speed
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    let speedTarget = 1
+    let speedCurrent = 1
+    let rafId = 0
+    let easeBackTimer = 0
+
+    const applySpeed = (rate: number) => {
+      for (const el of [row1Ref.current, row2Ref.current]) {
+        if (!el) continue
+        const anims = el.getAnimations()
+        for (const anim of anims) {
+          anim.playbackRate = rate
+        }
+      }
+    }
+
+    const tick = () => {
+      speedCurrent += (speedTarget - speedCurrent) * 0.08
+      if (Math.abs(speedCurrent - speedTarget) > 0.001) {
+        applySpeed(speedCurrent)
+      }
+      rafId = requestAnimationFrame(tick)
+    }
+
+    const onScroll = () => {
+      speedTarget = 3
+      window.clearTimeout(easeBackTimer)
+      easeBackTimer = window.setTimeout(() => {
+        speedTarget = 1
+      }, 100) as unknown as number
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    rafId = requestAnimationFrame(tick)
+
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      cancelAnimationFrame(rafId)
+      window.clearTimeout(easeBackTimer)
+    }
+  }, [])
 
   return (
     <section
@@ -46,29 +100,35 @@ export function LogoMarquee() {
       className="section-shell relative overflow-hidden py-[var(--section-block)]"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[16%] h-[18rem] w-[18rem] rounded-full bg-[rgba(39,24,36,0.3)] blur-[120px]" />
-        <div className="absolute right-[-9rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(106,129,255,0.08)] blur-[120px]" />
+        <div ref={blob1Ref} className="absolute left-[-8rem] top-[16%] h-[18rem] w-[18rem] rounded-full bg-[rgba(39,24,36,0.3)] blur-[120px]" />
+        <div ref={blob2Ref} className="absolute right-[-9rem] bottom-[12%] h-[20rem] w-[20rem] rounded-full bg-[rgba(106,129,255,0.08)] blur-[120px]" />
       </div>
       <div ref={revealRef} className="content-shell">
         <div
-          data-reveal-item
+          ref={headerRef}
           className="mx-auto mb-8 grid w-full max-w-[1120px] gap-6 text-center lg:grid-cols-[minmax(0,32rem)_minmax(0,22rem)_auto] lg:items-end lg:text-left"
         >
-          <div className="max-w-3xl">
+          <div data-gsap-item className="max-w-3xl">
             <p className="section-label">Operating Context</p>
-            <h2 className="section-heading mt-4 text-white">
+            <TextReveal
+              as="h2"
+              type="chars"
+              preset="clip-up"
+              stagger={0.02}
+              className="section-heading mt-4 text-white"
+            >
               Built for launches where the first frame has to do real commercial work.
-            </h2>
+            </TextReveal>
             <p className="body-copy mt-3 max-w-xl text-sm">
               Founders, product teams, luxury offers, paid-social launches, and sales pages that cannot afford weak
               attention, soft trust, or confused rollout.
             </p>
           </div>
-          <p className="body-copy max-w-[24rem] justify-self-center text-sm leading-7 lg:justify-self-start">
+          <p data-gsap-item className="body-copy max-w-[24rem] justify-self-center text-sm leading-7 lg:justify-self-start">
             The studio is set up for systems, not one-off hero shots. The work has to survive pressure after launch,
             not only the reveal moment.
           </p>
-          <HoverLift className="justify-self-center lg:justify-self-start">
+          <HoverLift data-gsap-item className="justify-self-center lg:justify-self-start">
             <Button
               asChild
               variant="outline"
@@ -79,10 +139,11 @@ export function LogoMarquee() {
           </HoverLift>
         </div>
 
-        <div className="mx-auto w-full max-w-[1120px] space-y-3.5">
+        <div ref={marqueeRef} className="mx-auto w-full max-w-[1120px] space-y-3.5">
           <MarqueeRow
             id="first"
             items={FIRST_ROW}
+            rowRef={row1Ref}
             pausedRow={pausedRow}
             setPausedRow={setPausedRow}
             durationSeconds={72}
@@ -90,6 +151,7 @@ export function LogoMarquee() {
           <MarqueeRow
             id="second"
             items={SECOND_ROW}
+            rowRef={row2Ref}
             pausedRow={pausedRow}
             setPausedRow={setPausedRow}
             reverse
@@ -104,6 +166,7 @@ export function LogoMarquee() {
 function MarqueeRow({
   id,
   items,
+  rowRef,
   pausedRow,
   reverse = false,
   setPausedRow,
@@ -111,6 +174,7 @@ function MarqueeRow({
 }: {
   id: string
   items: readonly ContentCardItem[]
+  rowRef: React.Ref<HTMLDivElement>
   pausedRow: string | null
   reverse?: boolean
   setPausedRow: (rowId: string | null) => void
@@ -122,6 +186,7 @@ function MarqueeRow({
       className="relative min-h-[5.5rem] overflow-x-clip [contain:layout_paint] [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] sm:min-h-[6rem]"
     >
       <div
+        ref={rowRef}
         className={
           reverse
             ? "absolute inset-y-0 left-0 flex items-center animate-scroll-left"

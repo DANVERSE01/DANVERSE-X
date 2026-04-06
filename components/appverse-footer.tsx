@@ -6,7 +6,9 @@ import { Instagram, Mail, MessageCircle, type LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DanverseHeaderLogo } from "@/components/danverse-logo"
 import { HoverLift } from "@/components/hover-lift"
+import { TextReveal } from "@/components/text-reveal"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
 import { resolveCtaHref } from "@/lib/cta"
 import { contactEmailHref, publicEnv } from "@/lib/public-env"
 import { FOOTER_NAV_ROUTES, resolveRouteHref } from "@/lib/routes"
@@ -20,6 +22,8 @@ const CLOSE_PROOFS = ["Response within 24-48h", "Director-led review", "Producti
 export function AppverseFooter() {
   const pathname = usePathname()
   const revealRef = useScrollReveal<HTMLDivElement>()
+  const ctaPanelRef = useGsapEnter<HTMLDivElement>({ preset: "scale-in", start: "top 88%" })
+  const footerRef = useGsapEnter<HTMLElement>({ preset: "blur-rise", stagger: 0.12, childSelector: "[data-gsap-item]", start: "top 90%" })
 
   return (
     <section
@@ -34,12 +38,20 @@ export function AppverseFooter() {
 
       <div ref={revealRef} className="content-shell">
         <div
-          data-reveal-item
+          ref={ctaPanelRef}
           className="statement-panel mx-auto max-w-[1120px] rounded-[2rem] px-5 py-8 text-center sm:px-8 sm:py-10 lg:px-12 lg:py-12"
         >
           <div className="relative z-10 mx-auto max-w-[52rem]">
             <p className="section-label">Next Step</p>
-            <h2 className="section-heading mt-4 text-white sm:mx-auto">Send the brief. Get the next move back.</h2>
+            <TextReveal
+              as="h2"
+              type="chars"
+              preset="clip-up"
+              stagger={0.02}
+              className="section-heading mt-4 text-white sm:mx-auto"
+            >
+              Send the brief. Get the next move back.
+            </TextReveal>
             <p className="body-copy mx-auto mt-4 max-w-[42ch] text-[1rem] leading-7 text-white/72 sm:text-[1.05rem]">
               WhatsApp opens with four prompts: offer, audience, bottleneck, and deadline. It takes under three
               minutes, and the first reply comes back with the strongest recommendation and the right scope.
@@ -82,9 +94,9 @@ export function AppverseFooter() {
           </div>
         </div>
 
-        <footer data-reveal-item className="mx-auto mt-12 max-w-[1120px] border-t border-white/10 pt-10 sm:mt-14 sm:pt-12">
+        <footer ref={footerRef} className="mx-auto mt-12 max-w-[1120px] border-t border-white/10 pt-10 sm:mt-14 sm:pt-12">
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
-            <div className="space-y-5">
+            <div data-gsap-item className="space-y-5">
               <div className="inline-flex">
                 <DanverseHeaderLogo className="origin-left scale-[0.95]" />
               </div>
@@ -92,6 +104,7 @@ export function AppverseFooter() {
             </div>
 
             <FooterGroup
+              data-gsap-item
               title="Navigation"
               items={FOOTER_NAV_ROUTES.map((route) => ({
                 href: resolveRouteHref(route, pathname),
@@ -99,7 +112,7 @@ export function AppverseFooter() {
               }))}
             />
 
-            <div>
+            <div data-gsap-item>
               <h4 className="section-label mb-3 text-xs">Connect</h4>
               <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
                 <FooterLink
@@ -115,7 +128,7 @@ export function AppverseFooter() {
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-[var(--color-text-muted)] sm:flex-row">
-            <p>Copyright 2026 DANVERSE</p>
+            <p>© 2026 DANVERSE. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <Link href="/revisions" className="accent-link">
                 Revision Policy
@@ -140,9 +153,9 @@ function CtaMeta({ duration, text }: { duration: string; text: string }) {
   )
 }
 
-function FooterGroup({ items, title }: { items: Array<{ href: string; label: string }>; title: string }) {
+function FooterGroup({ items, title, ...rest }: { items: Array<{ href: string; label: string }>; title: string; [key: string]: unknown }) {
   return (
-    <div>
+    <div {...rest}>
       <h4 className="section-label mb-3 text-xs">{title}</h4>
       <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)]">
         {items.map((item) => (

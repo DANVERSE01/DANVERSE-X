@@ -85,6 +85,7 @@ export function HeroMediaCard({
 
   return (
     <HoverLift
+      data-cursor-label={featured ? "View Reel" : "Explore"}
       className={`group relative mx-auto h-full w-full ${featured ? "max-w-[20.5rem] sm:max-w-[370px]" : "max-w-[18.5rem] sm:max-w-[308px]"}`}
     >
       <div

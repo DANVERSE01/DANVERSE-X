@@ -1,5 +1,9 @@
+"use client"
+
 import { resolveCtaHref } from "@/lib/cta"
 import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
+import { TextReveal } from "@/components/text-reveal"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
 
 const TRUST_METRICS = [
   {
@@ -22,6 +26,9 @@ const TRUST_METRICS = [
 const TRUST_CHIPS = ["Director-Led Review", "WhatsApp-First Intake", "Commercially Sharp Direction"] as const
 
 export function TrustBand() {
+  const panelRef = useGsapEnter<HTMLDivElement>({ preset: "scale-in", start: "top 88%" })
+  const metricsRef = useGsapEnter<HTMLDivElement>({ preset: "stagger-up", stagger: 0.14, start: "top 85%" })
+
   return (
     <section
       id="trust"
@@ -30,13 +37,19 @@ export function TrustBand() {
       className="section-shell relative py-6 sm:py-8"
     >
       <div className="content-shell">
-        <div className="mx-auto grid max-w-[1120px] gap-4 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(155deg,rgba(11,14,20,0.82),rgba(18,23,34,0.72),rgba(16,10,16,0.74))] p-4 shadow-[0_24px_72px_rgba(0,0,0,0.34)] backdrop-blur-2xl sm:p-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
+        <div ref={panelRef} className="mx-auto grid max-w-[1120px] gap-4 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(155deg,rgba(11,14,20,0.82),rgba(18,23,34,0.72),rgba(16,10,16,0.74))] p-4 shadow-[0_24px_72px_rgba(0,0,0,0.34)] backdrop-blur-2xl sm:p-6 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
           <div className="space-y-4">
             <div>
               <p className="section-label">Trust Layer</p>
-              <h2 className="mt-3 text-[clamp(1.5rem,4vw,2.35rem)] font-bold leading-[0.96] tracking-[-0.045em] text-white">
+              <TextReveal
+                as="h2"
+                type="chars"
+                preset="clip-up"
+                stagger={0.02}
+                className="mt-3 text-[clamp(1.5rem,4vw,2.35rem)] font-bold leading-[0.96] tracking-[-0.045em] text-white"
+              >
                 The answers serious buyers ask for before they approve the call.
-              </h2>
+              </TextReveal>
             </div>
 
             <p className="body-copy max-w-[42ch] text-sm leading-7 sm:text-[0.98rem]">
@@ -77,7 +90,7 @@ export function TrustBand() {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+          <div ref={metricsRef} className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
             {TRUST_METRICS.map((metric) => (
               <article
                 key={metric.label}

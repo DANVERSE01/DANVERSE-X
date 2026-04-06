@@ -2,9 +2,11 @@
 
 import { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { TextReveal } from "@/components/text-reveal"
 import { resolveCtaHref } from "@/lib/cta"
 import { contactEmailHref, createWhatsAppUrl, publicEnv } from "@/lib/public-env"
 import { GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
 
 const OFFER_OPTIONS = ["Hero product", "New launch", "Founder brand", "Sales page"] as const
 const AUDIENCE_OPTIONS = ["Cold paid traffic", "Premium consumer", "B2B buyer", "Existing community"] as const
@@ -16,6 +18,9 @@ export function BriefQualifier() {
   const [audience, setAudience] = useState<(typeof AUDIENCE_OPTIONS)[number]>("Cold paid traffic")
   const [bottleneck, setBottleneck] = useState<(typeof BOTTLENECK_OPTIONS)[number]>("Weak hook")
   const [deadline, setDeadline] = useState<(typeof DEADLINE_OPTIONS)[number]>("In 2 weeks")
+  const panelRef = useGsapEnter<HTMLDivElement>({ preset: "scale-in", start: "top 88%" })
+  const leftRef = useGsapEnter<HTMLDivElement>({ preset: "blur-rise", stagger: 0.14, childSelector: "[data-gsap-item]", start: "top 85%" })
+  const rightRef = useGsapEnter<HTMLDivElement>({ preset: "clip-bottom", start: "top 85%" })
 
   const message = useMemo(
     () =>
@@ -41,24 +46,32 @@ export function BriefQualifier() {
       className="section-shell relative overflow-hidden py-[var(--section-block)]"
     >
       <div className="content-shell">
-        <div className="statement-panel mx-auto max-w-[1120px] rounded-[2rem] px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+        <div ref={panelRef} className="statement-panel mx-auto max-w-[1120px] rounded-[2rem] px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-            <div>
-              <p className="section-label">4-Point Brief</p>
-              <h2 className="section-heading mt-4 max-w-[11ch] text-white">Send the four answers that decide the next move.</h2>
-              <p className="body-copy mt-4 max-w-[40ch] text-[0.98rem] leading-7">
+            <div ref={leftRef}>
+              <p data-gsap-item className="section-label">4-Point Brief</p>
+              <TextReveal
+                as="h2"
+                type="chars"
+                preset="clip-up"
+                stagger={0.02}
+                className="section-heading mt-4 max-w-[11ch] text-white"
+              >
+                Send the four answers that decide the next move.
+              </TextReveal>
+              <p data-gsap-item className="body-copy mt-4 max-w-[40ch] text-[0.98rem] leading-7">
                 Tell us what is being sold, who needs to care first, what is blocking response, and when the work has
                 to move. The first reply comes back with direction, scope pressure, and the right next step.
               </p>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              <div data-gsap-item className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 <MetricCard label="Response Time" value="24-48h" note="Direction first, not a generic reply." />
                 <MetricCard label="What You Send" value="4 Answers" note="Offer, audience, bottleneck, and deadline." />
                 <MetricCard label="Channel" value="WhatsApp" note={`Fastest route to ${publicEnv.NEXT_PUBLIC_CONTACT_EMAIL}.`} />
               </div>
             </div>
 
-            <div className="grid gap-6 rounded-[1.75rem] border border-white/10 bg-[rgba(7,10,16,0.4)] p-4 sm:p-6">
+            <div ref={rightRef} className="grid gap-6 rounded-[1.75rem] border border-white/10 bg-[rgba(7,10,16,0.4)] p-4 sm:p-6">
               <QualifierGroup
                 label="What needs to move?"
                 options={OFFER_OPTIONS}

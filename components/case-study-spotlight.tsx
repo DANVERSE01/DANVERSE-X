@@ -1,11 +1,20 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { FEATURED_CASE_STUDIES } from "@/lib/case-studies"
+import { TextReveal } from "@/components/text-reveal"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
+import { useParallax } from "@/hooks/use-parallax"
 
 export function CaseStudySpotlight() {
   const featuredCaseStudy = FEATURED_CASE_STUDIES[0]
   const supportingCaseStudies = FEATURED_CASE_STUDIES.slice(1)
+  const headerRef = useGsapEnter<HTMLDivElement>({ preset: "blur-rise", stagger: 0.12, childSelector: "[data-gsap-item]" })
+  const featuredRef = useGsapEnter<HTMLElement>({ preset: "clip-left", start: "top 85%" })
+  const supportingRef = useGsapEnter<HTMLDivElement>({ preset: "stagger-up", stagger: 0.18, start: "top 82%" })
+  const featuredImgRef = useParallax<HTMLDivElement>({ speed: 0.12 })
 
   return (
     <section
@@ -21,36 +30,45 @@ export function CaseStudySpotlight() {
 
       <div className="content-shell relative">
         <div className="mx-auto max-w-[1120px]">
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,0.75fr)_auto] lg:items-end">
-            <div>
+          <div ref={headerRef} className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,0.75fr)_auto] lg:items-end">
+            <div data-gsap-item>
               <p className="section-label">Case Files</p>
-              <h2 className="section-heading mt-4 max-w-[11ch] text-white">
+              <TextReveal
+                as="h2"
+                type="chars"
+                preset="clip-up"
+                stagger={0.02}
+                className="section-heading mt-4 max-w-[11ch] text-white"
+              >
                 What was broken, what got decided, what shipped, and what held after launch.
-              </h2>
+              </TextReveal>
             </div>
-            <p className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">
+            <p data-gsap-item className="body-copy max-w-[34ch] text-[0.96rem] leading-7 lg:justify-self-center">
               Every featured case has one job here: prove that the direction survives rollout pressure after the hero
               frame is approved.
             </p>
             <Link
+              data-gsap-item
               href="/work"
               className="cta-secondary inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-white lg:justify-self-end"
             >
-              Open the Work Proof Engine
+              View All Case Studies
             </Link>
           </div>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:gap-6">
-            <article className="statement-panel overflow-hidden rounded-[2rem] border-white/10">
+            <article ref={featuredRef} className="statement-panel overflow-hidden rounded-[2rem] border-white/10">
               <div className="grid gap-0 lg:grid-cols-[minmax(0,0.96fr)_minmax(360px,0.84fr)]">
-                <div className="relative min-h-[340px] border-b border-white/10 lg:min-h-full lg:border-b-0 lg:border-r">
-                  <Image
-                    src={featuredCaseStudy.image}
-                    alt={`${featuredCaseStudy.client} case study cover frame`}
-                    fill
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                    className="object-cover"
-                  />
+                <div className="relative min-h-[340px] overflow-hidden border-b border-white/10 lg:min-h-full lg:border-b-0 lg:border-r">
+                  <div ref={featuredImgRef} className="absolute inset-[-10%]">
+                    <Image
+                      src={featuredCaseStudy.image}
+                      alt={`${featuredCaseStudy.client} case study cover frame`}
+                      fill
+                      sizes="(min-width: 1024px) 38vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,11,0.02)_0%,rgba(5,7,11,0.18)_42%,rgba(5,7,11,0.72)_100%)]" />
                   <div className="absolute left-5 top-5 flex flex-wrap gap-2">
                     {featuredCaseStudy.tags.map((tag) => (
@@ -98,11 +116,11 @@ export function CaseStudySpotlight() {
               </div>
             </article>
 
-            <div className="grid gap-5">
+            <div ref={supportingRef} className="grid gap-5">
               {supportingCaseStudies.map((caseStudy) => (
                 <article key={caseStudy.slug} className="brand-card overflow-hidden rounded-[1.7rem] border-white/10">
                   <div className="grid gap-0 sm:grid-cols-[180px_minmax(0,1fr)]">
-                    <div className="relative min-h-[190px] sm:min-h-full">
+                    <div className="relative min-h-[190px] overflow-hidden sm:min-h-full">
                       <Image
                         src={caseStudy.image}
                         alt={`${caseStudy.client} supporting case study frame`}

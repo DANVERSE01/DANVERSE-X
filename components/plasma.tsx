@@ -53,7 +53,7 @@ export default function Plasma({
       }
     `
 
-    // Fragment shader - cinematic plasma / aurora
+    // Fragment shader - cinematic plasma / aurora with mouse distortion
     const fragmentShaderSource = `
       precision highp float;
 
@@ -64,6 +64,7 @@ export default function Plasma({
       uniform vec3 u_color2;
       uniform vec3 u_color3;
       uniform vec2 u_resolution;
+      uniform vec2 u_mouse;
 
       varying vec2 v_uv;
 
@@ -134,6 +135,13 @@ export default function Plasma({
         vec2 uv = v_uv;
         vec2 p = uv * 2.0 - 1.0;
         p.x *= u_resolution.x / u_resolution.y;
+
+        // Mouse warp — plasma bends toward cursor
+        vec2 mouseNorm = (u_mouse / u_resolution) * 2.0 - 1.0;
+        mouseNorm.x *= u_resolution.x / u_resolution.y;
+        float mouseDist = length(p - mouseNorm);
+        float mouseWarp = exp(-mouseDist * 1.8) * 0.32;
+        p += (mouseNorm - p) * mouseWarp * 0.28;
 
         float time = u_time * 0.42;
         float field = fbm(p * 1.65 + vec2(time * 0.22, -time * 0.16));
@@ -219,6 +227,20 @@ export default function Plasma({
     const color2Location = gl.getUniformLocation(program, "u_color2")
     const color3Location = gl.getUniformLocation(program, "u_color3")
     const resolutionLocation = gl.getUniformLocation(program, "u_resolution")
+    const mouseLocation = gl.getUniformLocation(program, "u_mouse")
+
+    // Mouse tracking with lerp
+    let mouseX = canvas.width / 2
+    let mouseY = canvas.height / 2
+    let targetMouseX = mouseX
+    let targetMouseY = mouseY
+
+    const onMouseMove = (e: MouseEvent) => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      targetMouseX = e.clientX * dpr
+      targetMouseY = (window.innerHeight - e.clientY) * dpr // flip Y for WebGL
+    }
+    window.addEventListener("mousemove", onMouseMove, { passive: true })
 
     // Enable blending
     gl.enable(gl.BLEND)
@@ -267,6 +289,10 @@ export default function Plasma({
 
       const elapsed = (now - startTime) / 1000
 
+      // Lerp mouse toward target
+      mouseX += (targetMouseX - mouseX) * 0.06
+      mouseY += (targetMouseY - mouseY) * 0.06
+
       gl.uniform1f(timeLocation, elapsed * speed)
       gl.uniform1f(amplitudeLocation, amplitude)
       gl.uniform1f(blendLocation, blend)
@@ -274,6 +300,7 @@ export default function Plasma({
       gl.uniform3f(color2Location, colors[1][0], colors[1][1], colors[1][2])
       gl.uniform3f(color3Location, colors[2][0], colors[2][1], colors[2][2])
       gl.uniform2f(resolutionLocation, canvas.width, canvas.height)
+      gl.uniform2f(mouseLocation, mouseX, mouseY)
 
       gl.drawArrays(gl.TRIANGLES, 0, 6)
     }
@@ -284,6 +311,7 @@ export default function Plasma({
 
     return () => {
       window.removeEventListener("resize", resize)
+      window.removeEventListener("mousemove", onMouseMove)
       cancelAnimationFrame(animationId)
       observer.disconnect()
     }

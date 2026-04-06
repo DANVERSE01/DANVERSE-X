@@ -3,9 +3,35 @@ import "./globals.css"
 import type { Metadata, Viewport } from "next"
 import { Orbitron, Poppins } from "next/font/google"
 import Script from "next/script"
+import dynamic from "next/dynamic"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
 import { env } from "@/lib/env"
+
+const CinematicCursor = dynamic(
+  () => import("@/components/cinematic-cursor").then((m) => m.CinematicCursor),
+  { ssr: false }
+)
+const FilmGrain = dynamic(
+  () => import("@/components/film-grain").then((m) => m.FilmGrain),
+  { ssr: false }
+)
+const PageTransition = dynamic(
+  () => import("@/components/page-transition").then((m) => m.PageTransition),
+  { ssr: false }
+)
+const Preloader = dynamic(
+  () => import("@/components/preloader").then((m) => m.Preloader),
+  { ssr: false }
+)
+const ScrollProgress = dynamic(
+  () => import("@/components/scroll-progress").then((m) => m.ScrollProgress),
+  { ssr: false }
+)
+const SectionIndicator = dynamic(
+  () => import("@/components/section-indicator").then((m) => m.SectionIndicator),
+  { ssr: false }
+)
 
 const GTM_ID = env.NEXT_PUBLIC_GTM_ID
 const GA_ID = env.NEXT_PUBLIC_GA_ID
@@ -162,6 +188,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <AmbientBackground />
         <ProgressiveEnhancements />
+        <Preloader />
+        <PageTransition />
+        <ScrollProgress />
+        <SectionIndicator />
+        <FilmGrain />
+        <CinematicCursor />
         <main id="main-content" tabIndex={-1} className="relative overflow-x-hidden" style={{ zIndex: "var(--z-content)" }}>
           {children}
         </main>

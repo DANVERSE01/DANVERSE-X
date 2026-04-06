@@ -1,162 +1,213 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import LazyVideo from "@/components/lazy-video"
-import { HoverLift } from "@/components/hover-lift"
-import { ShowcaseControlRail } from "@/components/showcase-control-rail"
-import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-import { SHOWCASE_WORKS } from "@/lib/showcase-works"
-import { fireCTAAndOpenWhatsApp } from "@/lib/n8n"
-import styles from "@/styles/showcase.module.css"
+import { TextReveal } from "@/components/text-reveal"
+import { useGsapEnter } from "@/hooks/use-gsap-enter"
+import { SHOWCASE_WORKS, type ShowcaseWork } from "@/lib/showcase-works"
+import { registerGSAP, gsap, ScrollTrigger } from "@/lib/gsap"
 
 export function CinematicShowcase() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isMediaReady, setIsMediaReady] = useState(false)
-  const revealTimeoutRef = useRef<number | null>(null)
-  const revealRef = useScrollReveal<HTMLDivElement>()
-  const activeWork = SHOWCASE_WORKS[activeIndex]
-  const activeNumber = String(activeIndex + 1).padStart(2, "0")
-  const mediaViewportStyle = {
-    backgroundColor: activeWork.backgroundColor ?? "#05070b",
-    backgroundImage: `url(${activeWork.poster})`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  }
+  const headingRef = useGsapEnter<HTMLDivElement>({
+    preset: "blur-rise",
+    stagger: 0.14,
+    childSelector: "[data-gsap-item]",
+    start: "top 88%",
+  })
 
   useEffect(() => {
-    setIsMediaReady(false)
+    const section = sectionRef.current
+    const track = trackRef.current
+    if (!section || !track || typeof window === "undefined") return
 
-    return () => {
-      if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
-    }
-  }, [activeWork.videoSrc])
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches
+    if (isCoarse) return
 
-  const handleChange = (index: number) => {
-    if (index !== activeIndex) setActiveIndex(index)
-  }
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) return
 
-  const handlePrev = () => setActiveIndex((current) => (current - 1 + SHOWCASE_WORKS.length) % SHOWCASE_WORKS.length)
-  const handleNext = () => setActiveIndex((current) => (current + 1) % SHOWCASE_WORKS.length)
+    registerGSAP()
 
-  const handleMediaReady = () => {
-    if (revealTimeoutRef.current) window.clearTimeout(revealTimeoutRef.current)
-    revealTimeoutRef.current = window.setTimeout(() => setIsMediaReady(true), 120)
-  }
+    const cards = cardRefs.current.filter((c): c is HTMLDivElement => c !== null)
+    if (cards.length === 0) return
+
+    const getCardWidth = () => cards[0]?.offsetWidth ?? 0
+    const GAP = 24
+
+    const getTotalScroll = () => (cards.length - 1) * (getCardWidth() + GAP)
+
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: () => `+=${getTotalScroll() + window.innerWidth * 0.2}`,
+      pin: true,
+      scrub: 1,
+      snap: {
+        snapTo: 1 / (cards.length - 1),
+        duration: { min: 0.2, max: 0.5 },
+        ease: "power2.inOut",
+      },
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const totalScroll = getTotalScroll()
+        const x = -(self.progress * totalScroll)
+        gsap.set(track, { x, force3D: true })
+
+        const activeFloat = self.progress * (cards.length - 1)
+        const nextActive = Math.round(activeFloat)
+        setActiveIndex(nextActive)
+
+        cards.forEach((card, i) => {
+          const dist = Math.abs(i - activeFloat)
+          const scale = 1 - Math.min(dist, 1) * 0.08
+          gsap.set(card, { scale, force3D: true })
+        })
+      },
+    })
+
+    return () => st.kill()
+  }, [])
 
   return (
-    <section id="showcase" aria-label="Selected work" className={styles.stage}>
-      <div className="section-shell">
-        <div ref={revealRef} className={`${styles.contentShell} ${styles.contentLayer}`}>
-          <div className={styles.headingRow} data-reveal-item>
-            <div className={styles.headingCopy}>
-              <p className="section-label">Selected Work</p>
-              <h2 id="production-showcase-heading" className={styles.sectionHeading}>
-                A focused stage for the cuts that set the tone fastest.
-              </h2>
-              <p className={styles.headingText}>
-                One active frame, two arrows, cleaner switching, and a portrait-first viewer that respects the source
-                instead of cropping it into noise.
-              </p>
-            </div>
-
-            <HoverLift>
-              <button type="button" className={styles.ctaButton} onClick={() => fireCTAAndOpenWhatsApp("showcase-cta")}>
-                Book the Reel Build
-              </button>
-            </HoverLift>
+    <section
+      ref={sectionRef}
+      id="showcase"
+      aria-label="Selected work"
+      className="section-shell relative overflow-hidden bg-[var(--color-bg)]"
+    >
+      {/* Heading row */}
+      <div ref={headingRef} className="content-shell relative z-10 pb-8 pt-12 sm:pb-10 sm:pt-16">
+        <div className="mx-auto grid max-w-[1120px] items-end gap-5 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div data-gsap-item>
+            <p className="section-label">Selected Work</p>
+            <TextReveal
+              as="h2"
+              type="chars"
+              preset="clip-up"
+              stagger={0.02}
+              className="section-heading mt-4 max-w-[14ch] text-white"
+            >
+              The cuts that decide the campaign.
+            </TextReveal>
           </div>
-
-          <div className={styles.viewerShell}>
-            <div className={styles.mediaPanel} data-reveal-item>
-              <div className={styles.viewerGlow} aria-hidden="true" />
-              <div className={styles.mediaViewport}>
-                <div className={styles.mediaBackdrop} style={mediaViewportStyle} />
-                <div className={styles.mediaStage} data-aspect={activeWork.aspect}>
-                  <div key={activeWork.slug} className={`${styles.mediaFigure} ${styles.mediaFigureEnter}`} data-aspect={activeWork.aspect}>
-                    <LazyVideo
-                      src={activeWork.videoSrc}
-                      poster={activeWork.poster}
-                      autoplay
-                      loop
-                      muted
-                      playsInline
-                      eager={activeIndex === 0}
-                      rootMargin={activeIndex <= 1 ? "80px" : "260px"}
-                      background={activeWork.backgroundColor ?? "#05070b"}
-                      onReady={handleMediaReady}
-                      className={`${styles.mediaVideo} ${
-                        activeWork.fit === "cover" ? styles.mediaVideoCover : styles.mediaVideoContain
-                      }`}
-                      aria-label={`${activeWork.title} campaign preview`}
-                      style={{ objectPosition: activeWork.objectPosition ?? "center center" }}
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className={`${styles.loadingCurtain} ${isMediaReady ? styles.loadingCurtainHidden : ""}`}
-                  aria-hidden="true"
-                >
-                  <div className={styles.loadingContent}>
-                    <span className={styles.loadingEyebrow}>Portrait-first campaign viewer</span>
-                    <span className={styles.loadingTitle}>{activeWork.title}</span>
-                  </div>
-                </div>
-
-                <div className={styles.mediaMask} />
-                <div className={styles.mediaShade} />
-                <ShowcaseControlRail
-                  activeIndex={activeIndex}
-                  onNext={handleNext}
-                  onPrev={handlePrev}
-                  onSelect={handleChange}
-                  works={SHOWCASE_WORKS}
-                />
-              </div>
-            </div>
-
-            <article className={styles.summaryCard} aria-live="polite" aria-atomic="true" data-reveal-item>
-              <div className={styles.summaryTopline}>
-                <span className={styles.summaryProject}>Selected</span>
-                <span className={styles.summaryIndex}>{activeNumber}</span>
-                <span className={styles.summarySeparator}>&bull;</span>
-                <span className={styles.summaryCategory}>{activeWork.category}</span>
-              </div>
-
-              <h3 className={styles.summaryTitle}>{activeWork.title}</h3>
-              <p className={styles.summaryLead}>{activeWork.client}</p>
-
-              <div className={styles.summaryFacts}>
-                <span className={styles.summaryFact}>
-                  <span className={styles.summaryFactLabel}>Role</span>
-                  <span className={styles.summaryFactValue}>{activeWork.role}</span>
-                </span>
-                <span className={styles.summaryFact}>
-                  <span className={styles.summaryFactLabel}>Format</span>
-                  <span className={styles.summaryFactValue}>{activeWork.aspect}</span>
-                </span>
-              </div>
-
-              <p className={styles.summaryText}>{activeWork.desc}</p>
-
-              <div className={styles.summaryTags}>
-                <span className={styles.summaryTag}>Arrow-Driven Stage</span>
-                <span className={styles.summaryTag}>Local Playback</span>
-                <span className={styles.summaryTag}>Final Masters Ready</span>
-              </div>
-
-              <div className={styles.noteCard}>
-                <p className={styles.noteEyebrow}>Viewer logic</p>
-                <p className={styles.noteText}>
-                  The active project preloads first, the next swaps cleanly by arrows, and the stage now respects
-                  portrait media instead of forcing a universal crop.
-                </p>
-              </div>
-            </article>
-          </div>
+          <p data-gsap-item className="pb-1 text-sm text-white/42">
+            Scroll to explore{" "}
+            <span className="text-[var(--color-electric-blue)]">{SHOWCASE_WORKS.length} works</span>
+          </p>
         </div>
       </div>
+
+      {/* Horizontal scroll track — GSAP on desktop, CSS on mobile */}
+      <div className="relative overflow-hidden">
+        <div
+          ref={trackRef}
+          className="flex gap-6 will-change-transform"
+          style={{
+            paddingLeft: "max(1.5rem, calc((100vw - 1120px) / 2 + 1.5rem))",
+            paddingRight: "max(1.5rem, calc((100vw - 1120px) / 2 + 1.5rem))",
+          }}
+        >
+          {SHOWCASE_WORKS.map((work, i) => (
+            <ShowcaseCard
+              key={work.slug}
+              work={work}
+              isActive={i === activeIndex}
+              cardRef={(el) => {
+                cardRefs.current[i] = el
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile dot indicators */}
+      <div className="content-shell mt-6 flex justify-center gap-2 lg:hidden">
+        {SHOWCASE_WORKS.map((_, i) => (
+          <div
+            key={i}
+            className="h-1.5 rounded-full transition-all duration-300"
+            style={{
+              width: i === activeIndex ? "24px" : "6px",
+              background:
+                i === activeIndex
+                  ? "var(--color-electric-blue)"
+                  : "rgba(255,255,255,0.2)",
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="pb-12 sm:pb-16" />
     </section>
+  )
+}
+
+function ShowcaseCard({
+  work,
+  isActive,
+  cardRef,
+}: {
+  work: ShowcaseWork
+  isActive: boolean
+  cardRef: (el: HTMLDivElement | null) => void
+}) {
+  return (
+    <div
+      ref={cardRef}
+      data-cursor-label="View Case"
+      data-cursor-hover
+      className="group relative flex-shrink-0 overflow-hidden rounded-[2rem] border transition-[border-color,box-shadow] duration-500"
+      style={{
+        width: "clamp(72vw, 60vw, 760px)",
+        borderColor: isActive
+          ? "rgba(224,231,91,0.35)"
+          : "rgba(255,255,255,0.1)",
+        boxShadow: isActive
+          ? "0 0 48px rgba(224,231,91,0.1)"
+          : "none",
+      }}
+      aria-label={`${work.title} — ${work.category}`}
+    >
+      {/* Poster image */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+        <Image
+          src={work.poster}
+          alt={`${work.title} — ${work.category} campaign`}
+          fill
+          sizes="(max-width: 768px) 85vw, 60vw"
+          className="object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.06]"
+          priority={isActive}
+        />
+
+        {/* Gradient overlay — always present, deepens on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+        {/* Hover glow ring */}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-[2rem] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            boxShadow: "inset 0 0 0 2px rgba(224,231,91,0.4), 0 0 60px rgba(224,231,91,0.08)",
+          }}
+        />
+      </div>
+
+      {/* Info overlay — slides from bottom on hover */}
+      <div className="absolute inset-x-0 bottom-0 translate-y-3 p-6 transition-transform duration-500 ease-out group-hover:translate-y-0">
+        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[var(--color-electric-blue)]">
+          {work.category}
+        </p>
+        <h3 className="mt-2 max-w-[16ch] text-[clamp(1.1rem,2.8vw,1.6rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
+          {work.title}
+        </h3>
+        <p className="mt-1 text-sm text-white/55">{work.client}</p>
+        <p className="mt-3 line-clamp-2 max-w-[36ch] text-[0.85rem] leading-6 text-white/68">
+          {work.desc}
+        </p>
+      </div>
+    </div>
   )
 }

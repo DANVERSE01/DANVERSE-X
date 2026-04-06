@@ -1,11 +1,13 @@
 "use client"
 
 import Image from "next/image"
+import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { HeroMediaCard, type HeroMediaItem } from "@/components/hero-media-card"
 import { HoverLift } from "@/components/hover-lift"
 import { resolveCtaHref } from "@/lib/cta"
 import { GENERAL_BRIEF_CTA, GENERAL_DISCOVERY_CTA } from "@/lib/site-ctas"
+import { registerGSAP, gsap } from "@/lib/gsap"
 
 const HERO_MEDIA: HeroMediaItem[] = [
   {
@@ -31,15 +33,102 @@ const HERO_MEDIA: HeroMediaItem[] = [
   },
 ]
 
-const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: string }> = [
+const HERO_HEADLINE_LINES: ReadonlyArray<{ text: string; accent?: boolean }> = [
+  { text: "Creative" },
   { text: "Direction" },
-  { text: "That" },
-  { text: "Lands" },
+  { text: "Wins.", accent: true },
 ]
 const HERO_SIGNAL_CHIPS = ["Cinematic Ads", "Brand Systems", "Launch Pages", "Content Rollouts"] as const
 const HERO_LINE_DELAYS = [0.08, 0.18, 0.28] as const
 
 export function Hero() {
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const chipRowRef = useRef<HTMLDivElement>(null)
+  const ctaRowRef = useRef<HTMLDivElement>(null)
+  const subRef = useRef<HTMLParagraphElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const headline = headlineRef.current
+    if (!headline || typeof window === "undefined") return
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) return
+
+    registerGSAP()
+
+    const lines = Array.from(headline.querySelectorAll<HTMLElement>(".intro-line-reveal"))
+    const tl = gsap.timeline({ delay: 0.1 })
+
+    // Stage image — scale in from slightly larger
+    if (stageRef.current) {
+      tl.fromTo(
+        stageRef.current,
+        { scale: 1.04, opacity: 0, filter: "blur(8px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.2, ease: "expo.out" },
+        0
+      )
+    }
+
+    // Headline lines — clip-path wipe up stagger
+    if (lines.length) {
+      // Wrap each line inner content so clip doesn't affect layout
+      tl.fromTo(
+        lines,
+        { yPercent: 105, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 1.0, ease: "expo.out", stagger: 0.1 },
+        0.2
+      )
+    }
+
+    // Sub copy
+    if (subRef.current) {
+      tl.fromTo(
+        subRef.current,
+        { y: 24, opacity: 0, filter: "blur(6px)" },
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power3.out" },
+        0.55
+      )
+    }
+
+    // Chips
+    if (chipRowRef.current) {
+      const chips = Array.from(chipRowRef.current.children) as HTMLElement[]
+      tl.fromTo(
+        chips,
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.06 },
+        0.7
+      )
+    }
+
+    // CTAs
+    if (ctaRowRef.current) {
+      tl.fromTo(
+        ctaRowRef.current,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        0.85
+      )
+    }
+
+    // Cards
+    if (cardsRef.current) {
+      const cards = Array.from(cardsRef.current.children) as HTMLElement[]
+      tl.fromTo(
+        cards,
+        { y: 50, opacity: 0, scale: 0.96 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.0, ease: "expo.out", stagger: 0.12 },
+        0.6
+      )
+    }
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
+
   return (
     <section
       id="hero"
@@ -48,10 +137,7 @@ export function Hero() {
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
         <div className="content-shell relative h-[560px] sm:h-[760px] lg:h-[840px]">
-          <div
-            className="hero-light-architecture intro-fade-up absolute inset-0"
-            style={{ animationDelay: "0.1s" }}
-          >
+          <div className="hero-light-architecture absolute inset-0">
             <div className="hero-light-grid" />
             <div className="hero-light-frame" />
             <div className="hero-light-beam" />
@@ -75,14 +161,14 @@ export function Hero() {
 
       <div className="content-shell relative z-[2]">
         <div className="mx-auto flex max-w-[1160px] flex-col items-center py-8 text-center sm:py-14 lg:py-16">
-          <div className="hero-immersive-stage intro-fade-up mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]" style={{ animationDelay: "0.12s" }}>
+          <div ref={stageRef} className="hero-immersive-stage mb-6 w-full max-w-[1100px] overflow-hidden rounded-[2.4rem] border border-white/8 p-0.5 shadow-[0_34px_80px_rgba(0,0,0,0.48)]">
             <div className="hero-immersive-screen relative h-[340px] sm:h-[400px] lg:h-[480px] overflow-hidden rounded-[2.1rem] bg-[#0a1130]">
               <div className="hero-immersive-glow absolute inset-0" />
               <div className="hero-immersive-shards" aria-hidden="true" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src="/images/hero/1178894778.jpg"
-                  alt="Cinematic studio astronaut motion background"
+                  alt="Cinematic brand direction frame — DANVERSE studio reel"
                   fill
                   className="object-cover opacity-85"
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 84vw, 1100px"
@@ -100,10 +186,7 @@ export function Hero() {
           </div>
 
           <div className="grid w-full max-w-[1140px] items-end gap-6 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)_minmax(0,15rem)]">
-            <div
-              className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              style={{ animationDelay: "0.1s" }}
-            >
+            <div className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block">
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-acid-lime)]">
                 Positioning
               </p>
@@ -113,28 +196,26 @@ export function Hero() {
             </div>
 
             <div className="relative mx-auto flex w-full max-w-full justify-center px-1">
-              <h1 className="hero-headline relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
+              <h1 ref={headlineRef} className="hero-headline relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]">
                 {HERO_HEADLINE_LINES.map((line, index) => (
                   <span
                     key={line.text}
                     className="intro-line-reveal block"
                     style={{ animationDelay: `${HERO_LINE_DELAYS[index] ?? HERO_LINE_DELAYS[HERO_LINE_DELAYS.length - 1]}s` }}
                   >
-                    {line.text}{" "}
                     {line.accent ? (
-                      <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] to-[var(--color-acid-lime)] bg-clip-text text-transparent">
-                        {line.accent}
+                      <span className="bg-gradient-to-r from-[var(--color-electric-blue-strong)] via-[var(--color-hot-pink-strong)] to-[var(--color-acid-lime)] bg-clip-text text-transparent">
+                        {line.text}
                       </span>
-                    ) : null}
+                    ) : (
+                      line.text
+                    )}
                   </span>
                 ))}
               </h1>
             </div>
 
-            <div
-              className="intro-fade-up hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
-              style={{ animationDelay: "0.16s" }}
-            >
+            <div className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block">
               <p className="text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-[var(--color-electric-blue-strong)]">
                 Delivery
               </p>
@@ -145,15 +226,15 @@ export function Hero() {
           </div>
 
           <p
-            className="intro-fade-up mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
-            style={{ animationDelay: "0.32s" }}
+            ref={subRef}
+            className="mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
           >
-            Director-led strategy and production for brands where the first frame decides whether the message gets heard.
+            Director-led strategy and production for brands where the first frame decides whether the message gets heard — or gets skipped.
           </p>
 
           <div
-            className="intro-fade-up mt-5 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-2.5"
-            style={{ animationDelay: "0.38s" }}
+            ref={chipRowRef}
+            className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:mt-6 sm:gap-2.5"
           >
             {HERO_SIGNAL_CHIPS.map((chip) => (
               <div
@@ -169,7 +250,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="mt-8 flex w-full max-w-[19rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
+          <div ref={ctaRowRef} className="mt-8 flex w-full max-w-[19rem] flex-col items-center gap-4 sm:mt-9 sm:max-w-none">
             <div className="flex w-full flex-col items-center justify-center gap-3.5 sm:flex-row sm:justify-center">
               <div className="intro-fade-up w-full sm:w-auto" style={{ animationDelay: "0.52s" }}>
                 <HoverLift>
@@ -213,7 +294,7 @@ export function Hero() {
           </div>
 
           <div className="mt-10 w-full sm:mt-14">
-            <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:items-end lg:gap-6">
+            <div ref={cardsRef} className="mx-auto grid max-w-[1120px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:items-end lg:gap-6">
               {HERO_MEDIA.map((item, index) => (
                 <div
                   key={item.title}

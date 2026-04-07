@@ -20,8 +20,8 @@ const CinematicShowcase = dynamic(
     loading: () => <SectionFallback id="showcase" label="Selected work" />,
   }
 )
-const Pricing = dynamic(() => import("@/components/pricing").then((module) => module.Pricing), {
-  loading: () => <SectionFallback id="process" label="Operating model" />,
+const Process = dynamic(() => import("@/components/pricing").then((module) => module.Process), {
+  loading: () => <SectionFallback id="process" label="How we work" />,
 })
 const AppverseFooter = dynamic(() => import("@/components/appverse-footer").then((module) => module.AppverseFooter), {
   loading: () => <SectionFallback id="contact" label="Contact" />,
@@ -90,7 +90,7 @@ export default function Page() {
         <LogoMarquee />
         <CaseStudySpotlight />
         <CinematicShowcase />
-        <Pricing />
+        <Process />
         <BriefQualifier />
         <AppverseFooter />
         <ScrollToTop />

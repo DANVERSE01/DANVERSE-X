@@ -186,10 +186,9 @@ export function Hero() {
               ref={leftCardRef}
               className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
             >
-              <p className="section-label text-[var(--color-acid-lime)]">Positioning</p>
+              <p className="section-label text-[var(--color-acid-lime)]">Who We Are</p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Director-led production for luxury, beauty, and consumer brands that need strategic direction and final
-                delivery control.
+                Director-led cinematic studio. Strategy locked. Production controlled. One package: approved concept to market-ready assets.
               </p>
             </div>
 
@@ -203,7 +202,7 @@ export function Hero() {
                 trigger="immediate"
                 className="relative z-10 mx-auto w-full max-w-[11ch] break-normal text-center text-[clamp(2.5rem,10vw,4.8rem)] font-bold leading-[0.88] tracking-[-0.06em] text-white sm:max-w-[10ch] sm:text-[clamp(3.4rem,7.8vw,5.8rem)] lg:max-w-[10.8ch] lg:text-[clamp(4.9rem,6.6vw,7rem)]"
               >
-                Direction That Lands
+                Cinematic Ads. Brand Systems. Global.
               </TextReveal>
             </div>
 
@@ -212,10 +211,9 @@ export function Hero() {
               ref={rightCardRef}
               className="hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(165deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4 text-left backdrop-blur-xl lg:block"
             >
-              <p className="section-label text-[var(--color-electric-blue-strong)]">Delivery</p>
+              <p className="section-label text-[var(--color-electric-blue-strong)]">For Brands</p>
               <p className="mt-3 text-sm leading-6 text-white/68">
-                Campaign films, brand systems, and launch pages that move from approved concept to market-ready assets
-                in one coherent package.
+                Luxury. Beauty. Consumer. Tech. Brands where the first frame decides if the message gets heard.
               </p>
             </div>
           </div>
@@ -225,8 +223,7 @@ export function Hero() {
             ref={subRef}
             className="mx-auto mt-5 max-w-[42ch] text-[clamp(1rem,4vw,1.16rem)] leading-[1.7] text-white/74 sm:mt-7 sm:max-w-[48ch]"
           >
-            Director-led strategy and production for brands where the first frame decides whether the message gets
-            heard.
+            Strategic direction locked. Creative supervised. All deliverables approved by the director. Ready to launch.
           </p>
 
           {/* Signal chips */}
@@ -284,8 +281,7 @@ export function Hero() {
             </div>
 
             <p className="max-w-[38rem] text-sm leading-7 text-white/56">
-              Under 3 minutes: offer, audience, bottleneck, and deadline. The first reply comes back with the strongest
-              next move.
+              Brief on WhatsApp: offer, audience, bottleneck, timeline. Next reply: the strategic direction forward.
             </p>
           </div>
 

@@ -24,12 +24,12 @@ const HEADLINE_WORDS = ["No", "Brief", "Leaves", "Without", "a", "Direction"]
 const PROCESS_STEPS: ProcessStep[] = [
   {
     number: "01",
-    label: "Brief Architecture",
-    title: "Strategy Lock",
+    label: "Strategy Lock",
+    title: "Creative Direction Locked",
     description:
-      "We extract the real commercial problem, lock the creative angle, and set the visual standard before a single frame is built",
-    outcome: "A locked creative position, not a loose reference stack",
-    tags: ["Positioning", "Narrative Direction", "Reference System"],
+      "Commercial positioning. Creative angle. Visual language. Reference system. Client approval before production begins.",
+    outcome: "Locked Creative Brief + Approved Direction Document",
+    tags: ["Positioning", "Visual Language", "Director Approval"],
     accent: "lime",
     icon: Sparkles,
     visual: "brief",
@@ -37,11 +37,11 @@ const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "02",
-    label: "Production Engine",
-    title: "Frame & Build",
-    description: "Scene by scene. Shot by shot. Every motion decision made before it's rendered",
-    outcome: "Assets that look finished before they're finished",
-    tags: ["Scene Design", "Motion Language", "Finish System"],
+    label: "Frame & Build",
+    title: "Production Complete",
+    description: "Scene design. Motion language. Color grading. All deliverables finished. Client reviews final output. Director-approved.",
+    outcome: "Final Assets Ready for Review + QA Report",
+    tags: ["Scene Design", "Motion Control", "Director QA"],
     accent: "lavender",
     icon: Clapperboard,
     visual: "build",
@@ -49,11 +49,11 @@ const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     number: "03",
-    label: "Launch Delivery",
-    title: "Ship & Scale",
-    description: "Everything your team needs to launch today and scale tomorrow, with no rebuild required",
-    outcome: "One pack. Every ratio. Zero excuses not to launch",
-    tags: ["Platform Ratios", "Launch Pack", "Scale Assets"],
+    label: "Ship & Scale",
+    title: "Launch Ready",
+    description: "Every platform ratio. Every format. Upload specs. CDN setup. Ready to deploy today. Scale without rebuild.",
+    outcome: "Launch Pack + All Ratios + Deployment Guide",
+    tags: ["All Platforms", "Ready to Deploy", "Scale System"],
     accent: "coral",
     icon: Rocket,
     visual: "launch",
@@ -67,7 +67,7 @@ const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
   coral: "var(--color-electric-blue-strong)",
 }
 
-export function Pricing() {
+export function Process() {
   const sectionRef = useRef<HTMLElement>(null)
   const stepsRef = useRef<HTMLDivElement>(null)
   const headlineRevealRef = useScrollReveal<HTMLDivElement>({ y: 28 })

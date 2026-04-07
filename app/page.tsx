@@ -2,6 +2,7 @@ import dynamic from "next/dynamic"
 import { ScrollToTop } from "./scroll-to-top"
 import { BriefQualifier } from "@/components/brief-qualifier"
 import { CaseStudySpotlight } from "@/components/case-study-spotlight"
+import { FAQ } from "@/components/faq"
 import { Hero } from "@/components/hero"
 import { JsonLd } from "@/components/json-ld"
 import { SiteHeader } from "@/components/site-header"
@@ -91,6 +92,7 @@ export default function Page() {
         <CaseStudySpotlight />
         <CinematicShowcase />
         <Process />
+        <FAQ />
         <BriefQualifier />
         <AppverseFooter />
         <ScrollToTop />

@@ -1,7 +1,8 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Inter, Syne, Bebas_Neue } from "next/font/google"
+import { Inter, Syne, Bebas_Neue, Space_Grotesk } from "next/font/google"
+import dynamic from "next/dynamic"
 import Script from "next/script"
 import { AmbientBackground } from "@/components/ambient-background"
 import { ProgressiveEnhancements } from "@/components/progressive-enhancements"
@@ -12,6 +13,7 @@ const GA_ID = env.NEXT_PUBLIC_GA_ID
 const SITE_URL = env.NEXT_PUBLIC_SITE_URL
 const OG_IMAGE_PATH = "/images/danverse-logo.png"
 
+// — Fonts —————————————————————————————————————————————————————————————
 const displayFont = Bebas_Neue({
   subsets: ["latin"],
   variable: "--font-display-next",
@@ -19,7 +21,7 @@ const displayFont = Bebas_Neue({
   display: "swap",
 })
 
-const fallbackDisplayFont = Syne({
+const headingFont = Syne({
   subsets: ["latin"],
   variable: "--font-fallback-display",
   weight: ["500", "600", "700", "800"],
@@ -29,18 +31,52 @@ const fallbackDisplayFont = Syne({
 const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 })
+
+// Third face: labels, chips, eyebrows, captions — premium geometric sans
+const labelFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-label-next",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+})
+
+// — Global overlays (ssr:false — all touch DOM/window directly) ——————
+const CinematicCursor = dynamic(
+  () => import("@/components/cinematic-cursor").then((m) => m.CinematicCursor),
+  { ssr: false }
+)
+const FilmGrain = dynamic(
+  () => import("@/components/film-grain").then((m) => m.FilmGrain),
+  { ssr: false }
+)
+const Preloader = dynamic(
+  () => import("@/components/preloader").then((m) => m.Preloader),
+  { ssr: false }
+)
+const PageTransition = dynamic(
+  () => import("@/components/page-transition").then((m) => m.PageTransition),
+  { ssr: false }
+)
+const ScrollProgress = dynamic(
+  () => import("@/components/scroll-progress").then((m) => m.ScrollProgress),
+  { ssr: false }
+)
+const SectionIndicator = dynamic(
+  () => import("@/components/section-indicator").then((m) => m.SectionIndicator),
+  { ssr: false }
+)
+
+// ——————————————————————————————————————————————————————————————————————
 
 export const metadata: Metadata = {
   applicationName: "DANVERSE",
   title: "DANVERSE | Creative Studio",
   description:
     "DANVERSE is a director-led creative studio that builds cinematic ads, bold branding, and strategic content systems for brands that want to stand out globally.",
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -49,11 +85,7 @@ export const metadata: Metadata = {
   authors: [{ name: "DANVERSE", url: SITE_URL }],
   category: "creative studio",
   creator: "DANVERSE",
-  formatDetection: {
-    address: false,
-    email: false,
-    telephone: false,
-  },
+  formatDetection: { address: false, email: false, telephone: false },
   generator: "Next.js",
   icons: {
     apple: "/icons/apple-touch-icon.png",
@@ -64,7 +96,14 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
-  keywords: ["AI creative studio", "cinematic ads", "brand systems", "launch pages", "creative direction", "DANVERSE"],
+  keywords: [
+    "AI creative studio",
+    "cinematic ads",
+    "brand systems",
+    "launch pages",
+    "creative direction",
+    "DANVERSE",
+  ],
   metadataBase: new URL(SITE_URL),
   manifest: "/manifest.webmanifest",
   openGraph: {
@@ -75,14 +114,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    images: [
-      {
-        url: OG_IMAGE_PATH,
-        width: 1200,
-        height: 630,
-        alt: "DANVERSE creative studio preview",
-      },
-    ],
+    images: [{ url: OG_IMAGE_PATH, width: 1200, height: 630, alt: "DANVERSE creative studio preview" }],
   },
   publisher: "DANVERSE",
   robots: {
@@ -113,12 +145,15 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const fontVars = [
+    displayFont.variable,
+    headingFont.variable,
+    bodyFont.variable,
+    labelFont.variable,
+  ].join(" ")
+
   return (
-    <html
-      lang="en"
-      className={`${displayFont.variable} ${fallbackDisplayFont.variable} ${bodyFont.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={fontVars} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -137,19 +172,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Script>
         ) : null}
 
-        {GA_ID ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" /> : null}
+        {GA_ID ? (
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" />
+        ) : null}
         {GA_ID ? (
           <Script id="gtag-init" strategy="lazyOnload">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `}
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
           </Script>
         ) : null}
       </head>
+
       <body>
+        {/* Skip-nav */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-full focus:border focus:border-white/12 focus:bg-[rgba(11,14,20,0.96)] focus:px-4 focus:py-2 focus:text-white"
@@ -157,8 +191,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+
+        {/* Fixed full-page background (plasma + grain + vignette) */}
         <AmbientBackground />
+
+        {/* Global cinematic overlays — rendered once, outside main */}
+        <Preloader />
+        <PageTransition />
+        <CinematicCursor />
+        <FilmGrain />
+        <ScrollProgress />
+        <SectionIndicator />
+
+        {/* Lazy progressive enhancements (scroll, smooth-scroll, stage) */}
         <ProgressiveEnhancements />
+
         <main
           id="main-content"
           tabIndex={-1}

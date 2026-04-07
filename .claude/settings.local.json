@@ -17,7 +17,9 @@
       "Bash(node -e \"const g = require\\('./node_modules/gsap/package.json'\\); console.log\\(g.version\\)\")",
       "Bash(node --input-type=module -e ':*)",
       "Bash(grep -v \"^$\")",
-      "Bash(NODE_OPTIONS=\"--enable-source-maps\" npx next build)"
+      "Bash(NODE_OPTIONS=\"--enable-source-maps\" npx next build)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('three:', p.dependencies.three || p.devDependencies?.three || 'NOT INSTALLED'\\); console.log\\('framer-motion:', p.dependencies['framer-motion'] || 'NOT INSTALLED'\\)\")",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('three:', p.dependencies.three\\); console.log\\('framer-motion:', p.dependencies['framer-motion']\\)\")"
     ]
   }
 }

@@ -44,16 +44,28 @@
 }
 
 body {
-  font-family: "Inter", "Manrope", sans-serif;
+  font-family: var(--font-body);
 }
 
 h1,
 h2,
 h3,
 h4,
-.section-heading,
-.cta-primary {
-  font-family: "Bebas Neue", "Syne", sans-serif;
+.section-heading {
+  font-family: var(--font-display);
+}
+
+.section-label,
+.accent-chip,
+.accent-kicker,
+.eyebrow,
+.label-text,
+figcaption,
+caption,
+kbd,
+code,
+pre {
+  font-family: var(--font-label);
 }
 
 .dark {
@@ -370,7 +382,7 @@ h4,
 }
 
 .section-label {
-  font-family: var(--font-body);
+  font-family: var(--font-label);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.32em;
@@ -1085,6 +1097,74 @@ body[data-cinematic="true"] {
   box-shadow:
     0 0 34px rgba(106, 129, 255, 0.22),
     inset 0 0 20px rgba(198, 235, 104, 0.08);
+}
+
+/* ── Cursor state classes (applied to <html> by CinematicCursor) ─── */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+.custom-cursor .cursor-dot {
+  opacity: 1;
+}
+
+.custom-cursor.cursor-hover .cursor-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  background: linear-gradient(135deg, var(--color-electric-blue-strong), var(--color-acid-lime));
+  box-shadow:
+    0 0 22px rgba(224, 231, 91, 0.45),
+    0 0 14px rgba(239, 120, 106, 0.28);
+}
+
+.custom-cursor.cursor-hover .cursor-ring {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-color: rgba(224, 231, 91, 0.42);
+  box-shadow:
+    0 0 32px rgba(224, 231, 91, 0.18),
+    inset 0 0 16px rgba(224, 231, 91, 0.06);
+}
+
+.custom-cursor.cursor-active .cursor-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  opacity: 0.7;
+}
+
+.custom-cursor.cursor-active .cursor-ring {
+  width: 2rem;
+  height: 2rem;
+  border-color: rgba(239, 120, 106, 0.55);
+}
+
+.custom-cursor.cursor-blend .cursor-ring {
+  mix-blend-mode: difference;
+  border-color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+}
+
+/* Cursor label chip */
+.cursor-label {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(224, 231, 91, 0.28);
+  background: rgba(6, 7, 10, 0.82);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-label);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-electric-blue-strong);
+  white-space: nowrap;
+  transition: opacity 160ms ease;
 }
 
 body::before {

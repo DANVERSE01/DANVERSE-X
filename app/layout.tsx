@@ -24,14 +24,14 @@ const displayFont = Bebas_Neue({
 const headingFont = Syne({
   subsets: ["latin"],
   variable: "--font-fallback-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["700", "800"],
   display: "swap",
 })
 
 const bodyFont = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500"],
   display: "swap",
 })
 
@@ -39,7 +39,7 @@ const bodyFont = Inter({
 const labelFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-label-next",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500"],
   display: "swap",
 })
 
@@ -157,6 +157,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />
+        {/* LCP image preload — featured hero card poster */}
+        <link rel="preload" as="image" href="/images/hero/1178894778.jpg" fetchPriority="high" />
         <link rel="preconnect" href="https://player.vimeo.com" />
         <link rel="preconnect" href="https://i.vimeocdn.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />

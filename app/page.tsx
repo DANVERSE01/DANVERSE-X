@@ -106,7 +106,7 @@ function SectionFallback({ id, label }: { id: string; label: string }) {
   return (
     <section id={id} aria-busy="true" aria-label={label} className="section-shell py-[var(--section-block)]">
       <div className="content-shell">
-        <div className="mx-auto h-32 max-w-[1120px] rounded-[1.75rem] border border-white/8 bg-white/[0.03] backdrop-blur-xl" />
+        <div className="mx-auto min-h-[560px] max-w-[1120px] rounded-[1.75rem] border border-white/8 bg-white/[0.03] backdrop-blur-xl" />
       </div>
     </section>
   )

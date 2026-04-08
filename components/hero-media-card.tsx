@@ -33,7 +33,7 @@ export function HeroMediaCard({
   const revealTimeoutRef = useRef<number | null>(null)
   const readyTimeoutRef = useRef<number | null>(null)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-  const [shouldLoad, setShouldLoad] = useState(index === 0 || Boolean(videoSrc))
+  const [shouldLoad, setShouldLoad] = useState(featured || Boolean(videoSrc))
   const [isLoaded, setIsLoaded] = useState(false)
   const cardIndex = String(index + 1).padStart(2, "0")
   const query = prefersReducedMotion
@@ -122,7 +122,7 @@ export function HeroMediaCard({
             alt=""
             aria-hidden="true"
             fill
-            priority={featured || index === 0}
+            priority={featured}
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 42vw, 320px"
             className={`bg-[#05070b] object-cover transition-all duration-700 ease-out ${isLoaded ? "scale-[1.1] blur-xl opacity-0" : "scale-[1.06] opacity-65"}`}
           />
@@ -134,13 +134,13 @@ export function HeroMediaCard({
               loop
               muted
               playsInline
-              eager={featured || index === 0}
-              rootMargin={featured || index === 0 ? "0px" : "360px 0px"}
+              eager={featured}
+              rootMargin={featured ? "0px" : "360px 0px"}
               background="#05070b"
               aria-label={`${title} showcase reel`}
               onReady={() => {
                 if (readyTimeoutRef.current) window.clearTimeout(readyTimeoutRef.current)
-                readyTimeoutRef.current = window.setTimeout(() => setIsLoaded(true), featured || index === 0 ? 80 : 140)
+                readyTimeoutRef.current = window.setTimeout(() => setIsLoaded(true), featured ? 80 : 140)
               }}
               className={`absolute inset-0 h-full w-full scale-[1.04] object-cover transition-all duration-700 ease-out group-hover:scale-[1.065] ${isLoaded ? "opacity-100" : "opacity-0"}`}
             />

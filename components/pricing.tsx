@@ -13,120 +13,114 @@ type ProcessStep = {
   description: string
   outcome: string
   tags: string[]
-  accent: "lime" | "lavender" | "coral"
+  accent: string
   icon: LucideIcon
   visual: "brief" | "build" | "launch"
-  surface: string
+  tone: string
 }
-
-const HEADLINE_WORDS = ["No", "Brief", "Leaves", "Without", "a", "Direction"]
 
 const PROCESS_STEPS: ProcessStep[] = [
   {
     number: "01",
-    label: "Brief Architecture",
-    title: "Strategy Lock",
+    label: "Brief architecture",
+    title: "Strategy lock",
     description:
-      "We extract the real commercial problem, lock the creative angle, and set the visual standard before a single frame is built",
-    outcome: "A locked creative position, not a loose reference stack",
-    tags: ["Positioning", "Narrative Direction", "Reference System"],
-    accent: "lime",
+      "We extract the real commercial problem, set the creative angle, and decide the visual standard before a single frame is built.",
+    outcome: "A locked creative position instead of a loose stack of references.",
+    tags: ["Positioning", "Narrative direction", "Reference system"],
+    accent: "var(--color-electric-blue)",
     icon: Sparkles,
     visual: "brief",
-    surface: "linear-gradient(135deg, rgba(12,14,18,0.98) 0%, rgba(14,22,40,0.94) 42%, rgba(7,8,12,0.98) 100%)",
+    tone: "linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01) 20%, transparent 100%)",
   },
   {
     number: "02",
-    label: "Production Engine",
-    title: "Frame & Build",
-    description: "Scene by scene. Shot by shot. Every motion decision made before it's rendered",
-    outcome: "Assets that look finished before they're finished",
-    tags: ["Scene Design", "Motion Language", "Finish System"],
-    accent: "lavender",
+    label: "Production engine",
+    title: "Frame and build",
+    description:
+      "Scene by scene and shot by shot, the motion language gets decided before it ever has a chance to drift in revision.",
+    outcome: "Assets that already feel finished before they hit the final render queue.",
+    tags: ["Scene design", "Motion language", "Finish system"],
+    accent: "var(--color-acid-lime)",
     icon: Clapperboard,
     visual: "build",
-    surface: "linear-gradient(135deg, rgba(9,15,34,0.98) 0%, rgba(18,30,58,0.94) 42%, rgba(10,10,14,0.98) 100%)",
+    tone: "linear-gradient(180deg, rgba(141,121,255,0.08), rgba(255,255,255,0.01) 22%, transparent 100%)",
   },
   {
     number: "03",
-    label: "Launch Delivery",
-    title: "Ship & Scale",
-    description: "Everything your team needs to launch today and scale tomorrow, with no rebuild required",
-    outcome: "One pack. Every ratio. Zero excuses not to launch",
-    tags: ["Platform Ratios", "Launch Pack", "Scale Assets"],
-    accent: "coral",
+    label: "Launch delivery",
+    title: "Ship and scale",
+    description:
+      "Everything the team needs to launch now and scale later ships together, so rollout speed never comes from cutting corners.",
+    outcome: "One pack, every ratio, no rebuild required for launch pressure.",
+    tags: ["Platform ratios", "Launch pack", "Scale assets"],
+    accent: "var(--color-hot-pink)",
     icon: Rocket,
     visual: "launch",
-    surface: "linear-gradient(135deg, rgba(18,10,28,0.98) 0%, rgba(38,16,52,0.94) 46%, rgba(8,9,14,0.98) 100%)",
+    tone: "linear-gradient(180deg, rgba(240,113,69,0.08), rgba(255,255,255,0.01) 22%, transparent 100%)",
   },
 ]
 
-const ACCENT_COLOR: Record<ProcessStep["accent"], string> = {
-  lime: "var(--color-lime)",
-  lavender: "var(--color-hot-pink)",
-  coral: "var(--color-electric-blue-strong)",
-}
-
-export function Pricing() {
+export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const stepsRef = useRef<HTMLDivElement>(null)
-  const headlineRevealRef = useScrollReveal<HTMLDivElement>({ y: 28 })
+  const headlineRevealRef = useScrollReveal<HTMLDivElement>({ y: 22 })
 
   useEffect(() => {
     const section = sectionRef.current
-    const stepsEl = stepsRef.current
-    if (!section || !stepsEl || typeof window === "undefined") return
+    const stepsElement = stepsRef.current
+    if (!section || !stepsElement || typeof window === "undefined") return
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReducedMotion) return
 
     registerGSAP()
 
-    const steps = Array.from(stepsEl.querySelectorAll<HTMLElement>(".process-banner"))
+    const steps = Array.from(stepsElement.querySelectorAll<HTMLElement>(".process-banner"))
     if (steps.length === 0) return
 
-    const isCoarse = window.matchMedia("(pointer: coarse)").matches
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches
 
-    if (isCoarse) {
-      // Mobile: simple per-step ScrollTrigger, no pin
+    if (isCoarsePointer) {
       const triggers = steps.map((step) => {
         gsap.set(step, { clipPath: "inset(0 0 100% 0)" })
         return ScrollTrigger.create({
           trigger: step,
           start: "top 88%",
-          onEnter: () =>
-            gsap.to(step, { clipPath: "inset(0 0 0% 0)", duration: 1.1, ease: "expo.out" }),
+          onEnter: () => {
+            gsap.to(step, { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "expo.out" })
+          },
           once: true,
         })
       })
+
       return () => {
-        triggers.forEach((t) => t.kill())
-        steps.forEach((s) => gsap.set(s, { clearProps: "clipPath" }))
+        triggers.forEach((trigger) => trigger.kill())
+        steps.forEach((step) => gsap.set(step, { clearProps: "clipPath" }))
       }
     }
 
-    // Desktop: pin section, reveal steps sequentially
     gsap.set(steps, { clipPath: "inset(0 0 100% 0)" })
 
-    const tl = gsap.timeline()
+    const timeline = gsap.timeline()
     steps.forEach((step) => {
-      tl.to(step, { clipPath: "inset(0 0 0% 0)", duration: 1, ease: "expo.out" })
+      timeline.to(step, { clipPath: "inset(0 0 0% 0)", duration: 0.95, ease: "expo.out" })
     })
 
-    const st = ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: `+=${window.innerHeight * steps.length}`,
+      end: `+=${window.innerHeight * 2.25}`,
       pin: true,
       scrub: 1,
-      animation: tl,
+      animation: timeline,
       invalidateOnRefresh: true,
     })
 
     return () => {
-      st.kill()
-      tl.kill()
-      steps.forEach((s) => gsap.set(s, { clearProps: "clipPath" }))
+      trigger.kill()
+      timeline.kill()
+      steps.forEach((step) => gsap.set(step, { clearProps: "clipPath" }))
     }
   }, [])
 
@@ -135,61 +129,32 @@ export function Pricing() {
       ref={sectionRef}
       id="process"
       aria-labelledby="process-heading"
-      className="section-shell relative isolate overflow-hidden bg-transparent text-white"
+      className="section-shell relative isolate overflow-hidden bg-[var(--color-bg)] text-white"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute left-[-12rem] top-8 h-[28rem] w-[28rem] rounded-full blur-[150px]"
-          style={{ background: "rgba(49,93,255,0.16)" }}
-        />
-        <div
-          className="absolute right-[-10rem] top-[18rem] h-[24rem] w-[24rem] rounded-full blur-[140px]"
-          style={{ background: "rgba(255,47,146,0.15)" }}
-        />
-        <div
-          className="absolute inset-0 opacity-80"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 18%, rgba(255,47,146,0.06) 55%, rgba(49,93,255,0.08) 100%)",
-          }}
-        />
-      </div>
-
       <div className="content-shell relative py-[var(--section-block)]">
-        <div className="mx-auto max-w-[1180px]">
-          <div ref={headlineRevealRef} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end">
-            <div className="max-w-[54rem]">
+        <div className="mx-auto max-w-[1240px]">
+          <div
+            ref={headlineRevealRef}
+            className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:items-end"
+          >
+            <div className="max-w-[56rem]">
               <p className="section-label" data-reveal-item>
-                Operating Model
+                Process
               </p>
-              <h2
-                id="process-heading"
-                className="section-heading mt-4 flex max-w-[11ch] flex-wrap gap-x-2.5 gap-y-2 text-[clamp(2.25rem,9vw,3.9rem)] leading-[0.93] text-white sm:mt-5 sm:gap-x-3.5 sm:gap-y-2.5 sm:text-[4.5rem] lg:text-[5.25rem]"
-              >
-                {HEADLINE_WORDS.map((word, index) => (
-                  <span key={`${word}-${index}`} className="inline-flex overflow-hidden pb-1 sm:pb-3">
-                    <span data-reveal-item className="inline-block will-change-transform">
-                      {word}
-                    </span>
-                  </span>
-                ))}
+              <h2 id="process-heading" className="section-heading mt-4 max-w-[11ch] text-white" data-reveal-item>
+                Three stages. One locked direction.
               </h2>
-
-              <p
-                className="body-copy mt-5 max-w-[46ch] text-[1rem] leading-7 sm:mt-6 sm:text-[1.05rem] sm:leading-8"
-                data-reveal-item
-              >
-                Three stages. One locked direction. Zero wasted rounds.
+              <p className="body-copy mt-5 max-w-[42ch] text-[1rem] leading-8" data-reveal-item>
+                The sequence stays simple on purpose: define the angle, build the frame language, then ship the rollout
+                pack without reopening the brief.
               </p>
             </div>
 
-            <div className="brand-card rounded-[1.6rem] p-5 text-left sm:p-6" data-reveal-item>
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[var(--color-acid-lime)]">
-                Studio Discipline
-              </p>
-              <p className="mt-3 text-sm leading-7 text-white/68">
-                Each stage has a different job: define the angle, build the frame language, then package the launch so
-                the team can move without re-briefing.
+            <div className="brand-card rounded-[1.25rem] p-5" data-reveal-item>
+              <p className="section-label text-white/40">Studio discipline</p>
+              <p className="mt-3 text-sm leading-7 text-white/66">
+                Each step has a different job. Strategy chooses the line, production protects the line, delivery makes
+                that line usable by the team the same day it is approved.
               </p>
             </div>
           </div>
@@ -197,46 +162,38 @@ export function Pricing() {
           <div ref={stepsRef} className="mt-10 space-y-5 sm:mt-14 sm:space-y-6">
             {PROCESS_STEPS.map((step) => {
               const Icon = step.icon
-              const accent = ACCENT_COLOR[step.accent]
 
               return (
                 <article
                   key={step.number}
-                  className="process-banner group relative overflow-hidden rounded-[1.85rem] border border-white/10 text-white sm:rounded-[2.4rem]"
-                  style={{ background: step.surface }}
+                  className="process-banner group relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-[var(--color-surface)] text-white"
                 >
-                  <div className="pointer-events-none absolute right-5 top-4 text-[4.2rem] font-black leading-none tracking-[-0.08em] text-white/[0.04] sm:right-8 sm:top-6 sm:text-[6rem]">
+                  <div className="absolute inset-0 opacity-100" style={{ background: step.tone }} />
+                  <div className="absolute inset-x-0 top-0 h-px bg-white/12" />
+                  <div className="pointer-events-none absolute right-5 top-4 text-[4rem] font-semibold tracking-[-0.08em] text-white/[0.05] sm:right-8 sm:top-6 sm:text-[5.5rem]">
                     {step.number}
                   </div>
-                  <div
-                    className="absolute inset-0 opacity-90"
-                    style={{
-                      background:
-                        "radial-gradient(circle at top left, rgba(255,255,255,0.08) 0%, transparent 32%), radial-gradient(circle at bottom right, rgba(255,255,255,0.04) 0%, transparent 28%)",
-                    }}
-                  />
-                  <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
-                  <div className="relative grid gap-6 px-4 py-5 sm:gap-8 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,1.06fr)_minmax(340px,0.94fr)] lg:items-center lg:gap-10 lg:px-10 lg:py-10">
+                  <div className="relative grid gap-6 px-4 py-5 sm:gap-8 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(340px,0.96fr)] lg:items-center lg:gap-10 lg:px-10 lg:py-10">
                     <div className="flex h-full min-w-0 flex-col">
                       <div className="flex items-center gap-4">
                         <span
-                          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-black/25 sm:h-12 sm:w-12 sm:rounded-2xl"
-                          style={{ color: accent, boxShadow: `0 0 24px ${accent}22` }}
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] border border-white/10 bg-white/[0.03] sm:h-12 sm:w-12"
+                          style={{ color: step.accent }}
                         >
                           <Icon className="h-5 w-5" />
                         </span>
                         <div className="min-w-0">
-                          <p className="section-label text-[0.68rem]">Stage {step.number}</p>
-                          <p className="mt-1 text-[0.72rem] uppercase tracking-[0.28em] text-white/38">{step.label}</p>
+                          <p className="section-label text-white/44">Stage {step.number}</p>
+                          <p className="mt-1 text-[0.72rem] uppercase tracking-[0.14em] text-white/38">{step.label}</p>
                         </div>
                       </div>
 
-                      <h3 className="mt-6 max-w-[11ch] text-[clamp(1.9rem,10vw,3.3rem)] font-extrabold leading-[0.93] tracking-[-0.042em] text-white sm:mt-8 sm:max-w-[10ch] sm:text-[clamp(2.4rem,5vw,4.55rem)]">
+                      <h3 className="mt-6 max-w-[11ch] text-[clamp(1.9rem,7vw,3.4rem)] font-bold leading-[0.94] text-white sm:mt-8">
                         {step.title}
                       </h3>
 
-                      <p className="body-copy mt-4 max-w-[36ch] text-[0.98rem] leading-7 sm:mt-5 sm:text-[1.03rem] sm:leading-8">
+                      <p className="body-copy mt-4 max-w-[36ch] text-[0.98rem] leading-7 sm:mt-5 sm:text-[1.02rem] sm:leading-8">
                         {step.description}
                       </p>
 
@@ -244,7 +201,7 @@ export function Pricing() {
                         {step.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white/72 sm:px-4 sm:py-2 sm:text-[0.72rem] sm:tracking-[0.18em]"
+                            className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[0.64rem] font-semibold uppercase tracking-[0.12em] text-white/72 sm:px-4 sm:py-2"
                           >
                             {tag}
                           </span>
@@ -252,15 +209,15 @@ export function Pricing() {
                       </div>
 
                       <div className="mt-auto pt-6 sm:pt-8">
-                        <div className="max-w-[34rem] rounded-[1.35rem] border border-white/10 bg-[linear-gradient(150deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-4 backdrop-blur-sm sm:rounded-[1.6rem] sm:p-5">
+                        <div className="rounded-[1.2rem] border border-white/10 bg-black/16 p-4 sm:p-5">
                           <div className="flex items-start gap-3">
                             <span
-                              className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30"
-                              style={{ color: accent }}
+                              className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]"
+                              style={{ color: step.accent }}
                             >
                               <ArrowUpRight className="h-4 w-4" />
                             </span>
-                            <p className="text-[0.95rem] leading-6 text-white/82 sm:text-[1rem] sm:leading-7">
+                            <p className="text-[0.96rem] leading-6 text-white/78 sm:text-[1rem] sm:leading-7">
                               <span className="font-semibold text-white">Outcome:</span> {step.outcome}
                             </p>
                           </div>

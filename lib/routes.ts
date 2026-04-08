@@ -17,9 +17,10 @@ export const PRIMARY_NAV_ROUTES: readonly RouteConfig[] = [
 export const FOOTER_NAV_ROUTES: readonly RouteConfig[] = [
   { href: "/", kind: "route", label: "Home" },
   { href: "/work", kind: "route", label: "Work" },
-  { href: "#features", kind: "home-anchor", label: "Studio Standard" },
-  { href: "#case-files", kind: "home-anchor", label: "Case Files" },
+  { href: "#showcase", kind: "home-anchor", label: "Showcase" },
   { href: "#process", kind: "home-anchor", label: "Process" },
+  { href: "#proof", kind: "home-anchor", label: "Proof" },
+  { href: "#brief-planner", kind: "home-anchor", label: "Brief" },
   { href: "/about", kind: "route", label: "About" },
 ] as const
 

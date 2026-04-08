@@ -7,7 +7,6 @@ export type ShowcaseWork = {
   desc: string
   videoSrc: string
   poster: string
-  aspect: "portrait" | "landscape" | "square"
   fit?: "contain" | "cover"
   objectPosition?: string
   backgroundColor?: string
@@ -23,7 +22,6 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "A director-led mood piece built to prove atmosphere can still feel premium, deliberate, and commercially sharp.",
     videoSrc: "/videos/standout.mp4",
     poster: "/images/showcase/new-year-reel.jpg",
-    aspect: "portrait",
     fit: "contain",
     objectPosition: "center center",
     backgroundColor: "#07090d",
@@ -37,7 +35,6 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "A high-contrast watch campaign where velocity, obsession, and spectacle are framed with more restraint than noise.",
     videoSrc: "/videos/conversions.mp4",
     poster: "/images/showcase/jacob-bugatti.jpg",
-    aspect: "portrait",
     fit: "contain",
     objectPosition: "center center",
     backgroundColor: "#08090d",
@@ -51,7 +48,6 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "Mechanical detail staged as desire, with macro finish and product weight doing as much selling as the story itself.",
     videoSrc: "/videos/premium.mp4",
     poster: "/images/showcase/tag-heuer-carrera.jpg",
-    aspect: "portrait",
     fit: "contain",
     objectPosition: "center center",
     backgroundColor: "#06080b",
@@ -65,7 +61,6 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "Beauty motion that feels fast without becoming cheap, turning color, texture, and clarity into perceived value.",
     videoSrc: "/videos/speed.mp4",
     poster: "/images/showcase/missha-time-revolution.jpg",
-    aspect: "portrait",
     fit: "contain",
     objectPosition: "center center",
     backgroundColor: "#081018",
@@ -79,7 +74,6 @@ export const SHOWCASE_WORKS: readonly ShowcaseWork[] = [
     desc: "A vertical-first campaign system designed to win attention quickly while still preserving brand control and finish.",
     videoSrc: "/videos/social-ready.mp4",
     poster: "/images/showcase/modern-skincare.jpg",
-    aspect: "portrait",
     fit: "contain",
     objectPosition: "center center",
     backgroundColor: "#09070d",

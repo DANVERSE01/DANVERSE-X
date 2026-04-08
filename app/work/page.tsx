@@ -109,7 +109,9 @@ export default function WorkPage() {
 
                     <div className="mt-6 grid gap-4 rounded-[1.5rem] border border-white/10 bg-black/18 p-4">
                       <div>
-                        <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">What shipped</p>
+                        <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">
+                          What shipped
+                        </p>
                         <div className="mt-3 flex flex-wrap gap-2">
                           {caseStudy.deliverables.map((deliverable) => (
                             <span
@@ -123,7 +125,9 @@ export default function WorkPage() {
                       </div>
 
                       <div>
-                        <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">Proof of impact</p>
+                        <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-white/38">
+                          Proof of impact
+                        </p>
                         <div className="mt-3 grid gap-2">
                           {caseStudy.proofPoints.map((proofPoint) => (
                             <div
@@ -150,14 +154,17 @@ export default function WorkPage() {
                 <p className="section-label">Archive Rail</p>
                 <h2 className="section-heading mt-4 max-w-[14ch] text-white">More references, kept quieter.</h2>
               </div>
-              <Link href="/#case-files" className="accent-link hidden text-sm text-white/72 sm:inline-flex">
-                Back to homepage case files
+              <Link href="/#proof" className="accent-link hidden text-sm text-white/72 sm:inline-flex">
+                Back to homepage proof
               </Link>
             </div>
 
             <div className="mt-6 flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {SHOWCASE_WORKS.map((work) => (
-                <article key={work.slug} className="brand-card min-w-[15rem] max-w-[15rem] overflow-hidden rounded-[1.4rem] border-white/10">
+                <article
+                  key={work.slug}
+                  className="brand-card min-w-[15rem] max-w-[15rem] overflow-hidden rounded-[1.4rem] border-white/10"
+                >
                   <div className="relative aspect-[4/5]">
                     <Image
                       src={work.poster}
@@ -169,8 +176,12 @@ export default function WorkPage() {
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,11,0.08),rgba(5,7,11,0.68))]" />
                   </div>
                   <div className="px-4 py-4">
-                    <p className="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/38">{work.category}</p>
-                    <h3 className="mt-3 text-[1.05rem] font-bold leading-[1] tracking-[-0.04em] text-white">{work.title}</h3>
+                    <p className="text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/38">
+                      {work.category}
+                    </p>
+                    <h3 className="mt-3 text-[1.05rem] font-bold leading-[1] tracking-[-0.04em] text-white">
+                      {work.title}
+                    </h3>
                     <p className="mt-2 text-[0.72rem] uppercase tracking-[0.16em] text-white/38">{work.client}</p>
                   </div>
                 </article>

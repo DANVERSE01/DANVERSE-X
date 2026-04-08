@@ -5,12 +5,9 @@ import { registerGSAP, ScrollTrigger } from "@/lib/gsap"
 
 const SECTIONS = [
   { id: "hero", label: "Hero" },
-  { id: "features", label: "Standards" },
-  { id: "process", label: "Process" },
   { id: "showcase", label: "Work" },
-  { id: "case-files", label: "Cases" },
-  { id: "industries", label: "Industries" },
-  { id: "trust", label: "Trust" },
+  { id: "process", label: "Process" },
+  { id: "proof", label: "Proof" },
   { id: "brief-planner", label: "Brief" },
   { id: "contact", label: "Contact" },
 ]
@@ -79,14 +76,8 @@ export function SectionIndicator() {
             style={{
               width: activeId === id ? "8px" : "5px",
               height: activeId === id ? "8px" : "5px",
-              background:
-                activeId === id
-                  ? "var(--color-electric-blue)"
-                  : "rgba(255,255,255,0.25)",
-              boxShadow:
-                activeId === id
-                  ? "0 0 10px var(--color-electric-blue)"
-                  : "none",
+              background: activeId === id ? "var(--color-electric-blue)" : "rgba(255,255,255,0.25)",
+              boxShadow: activeId === id ? "0 0 12px rgba(201,255,57,0.24)" : "none",
             }}
           />
         </button>

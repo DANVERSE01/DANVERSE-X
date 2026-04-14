@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { motion, useScroll, useVelocity, useTransform } from "framer-motion"
 
 const ITEMS = [
@@ -69,6 +69,88 @@ function Row({ rtl = false, baseVelocity = 60 }: { rtl?: boolean; baseVelocity?:
   )
 }
 
+// ─── Full-width brand film ───────────────────────────────────────────────────
+function VideoReel() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  const onIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
+    const video = videoRef.current
+    if (!video) return
+    if (entries[0].isIntersecting) {
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [])
+
+  useEffect(() => {
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches
+    if (isCoarse) return
+
+    const el = wrapRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(onIntersect, { threshold: 0.25 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [onIntersect])
+
+  return (
+    <div
+      ref={wrapRef}
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "21 / 9",
+        overflow: "hidden",
+        background: "#050507",
+      }}
+    >
+      <video
+        ref={videoRef}
+        src="/videos/brand-film.mp4"
+        poster="/videos/showreel-hero.mp4"
+        muted
+        loop
+        playsInline
+        preload="none"
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          pointerEvents: "none",
+          background: "linear-gradient(to bottom, rgba(5,5,7,0.35) 0%, rgba(5,5,7,0.1) 50%, rgba(5,5,7,0.5) 100%)",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+            fontWeight: 700,
+            color: "#f4f4f0",
+            letterSpacing: "-0.03em",
+            textTransform: "uppercase",
+            textShadow: "0 2px 24px rgba(0,0,0,0.6)",
+          }}
+        >
+          Cinematic by Design
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export function MarqueeReel() {
   return (
     <section
@@ -85,6 +167,7 @@ export function MarqueeReel() {
     >
       <Row baseVelocity={30} />
       <Row rtl baseVelocity={25} />
+      <VideoReel />
     </section>
   )
 }

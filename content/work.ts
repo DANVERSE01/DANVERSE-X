@@ -55,7 +55,7 @@ export const works: WorkItem[] = [
       "/images/work/kova-cosmetics/application-closeup.webp",
     ],
     featured: true,
-    video: null,
+    video: "/videos/kova-3d-showcase.mp4",
     results: ["+180% engagement rate", "2.4M campaign reach", "+95% brand recall"],
     metrics: [
       { label: "Engagement Rate", value: "+180%" },

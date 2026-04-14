@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
+import { CaseStudyVideo } from "./CaseStudyVideo"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -132,6 +133,9 @@ export default async function WorkDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* Video Showcase */}
+      {work.video && <CaseStudyVideo src={work.video} title={work.title} />}
 
       {/* Client Quote */}
       {work.clientQuote && (

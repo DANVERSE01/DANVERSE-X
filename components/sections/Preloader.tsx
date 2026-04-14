@@ -147,7 +147,7 @@ export function Preloader() {
     return () => {
       timeline.kill()
     }
-  }, [mounted, preloaderDone, progress, setPreloaderDone])
+  }, [mounted, preloaderDone, progress, setActiveSection, setPreloaderDone])
 
   if (!mounted || preloaderDone) return null
 

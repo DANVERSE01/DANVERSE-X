@@ -1,25 +1,15 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Geist, JetBrains_Mono } from "next/font/google"
-import { MobileMenu } from "@/components/nav/MobileMenu"
+import { Inter } from "next/font/google"
 import { SiteNav } from "@/components/nav/SiteNav"
-import { Preloader } from "@/components/sections/Preloader"
-import { FilmGrain } from "@/components/canvas/FilmGrain"
 import { Observability } from "@/components/ui/Observability"
-import { ClientProviders } from "@/components/ui/ClientProviders"
+import { LayoutProviders } from "@/app/components/LayoutProviders"
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
-  weight: ["300", "400", "500"],
-  display: "swap",
-})
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono-next",
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 })
 
@@ -79,20 +69,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${mono.variable}`}>
+    <html lang="en" className={inter.variable}>
       <head />
       <body>
-        <FilmGrain />
-        <ClientProviders />
-        <Preloader />
-        <SiteNav />
-        <MobileMenu />
-        <div id="smooth-wrapper">
-          <div id="smooth-content">
-            {children}
-            <Observability />
-          </div>
-        </div>
+        <LayoutProviders>
+          <SiteNav />
+          {children}
+          <Observability />
+        </LayoutProviders>
       </body>
     </html>
   )

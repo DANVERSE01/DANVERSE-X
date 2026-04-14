@@ -176,7 +176,7 @@ export function ContactCinematic() {
         >
           LET&apos;S
           <br />
-          BUILD
+          WORK
         </h2>
 
         <div
@@ -198,7 +198,7 @@ export function ContactCinematic() {
               letterSpacing: "-0.01em",
             }}
           >
-            Open to brand identity, motion campaigns, and long-term creative partnerships across the GCC and beyond.
+            Taking on select brand, motion, and digital projects. If the work matters, we should talk.
           </p>
 
           <div
@@ -244,7 +244,7 @@ export function ContactCinematic() {
                 zIndex: 1,
               }}
             >
-              Start a Project →
+              Get in Touch →
             </MagneticButton>
           </div>
         </div>

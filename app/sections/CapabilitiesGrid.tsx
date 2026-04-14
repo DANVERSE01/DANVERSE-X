@@ -6,13 +6,13 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
 const CAPABILITIES = [
-  { id: "brand", title: "Brand Identity", desc: "Visual languages that travel across cultures and borders.", span: "2x2", featured: false },
-  { id: "motion", title: "Motion Design", desc: "Frame-by-frame cinematic craft for digital and broadcast.", span: "1x2", featured: false },
-  { id: "webgl", title: "WebGL & 3D", desc: "Interactive 3D experiences built with Three.js and R3F.", span: "1x1", featured: true },
-  { id: "ai", title: "AI Creative", desc: "Generative systems that scale without losing craft.", span: "1x1", featured: false },
-  { id: "strategy", title: "Creative Strategy", desc: "Research-led direction from brief to launch system.", span: "2x1", featured: false },
-  { id: "social", title: "Social Content", desc: "Platform-native content built for GCC and global audiences.", span: "1x1", featured: false },
-  { id: "design", title: "Digital Design", desc: "UI/UX systems where aesthetics and function are one.", span: "1x1", featured: false },
+  { id: "brand", title: "Brand Identity", desc: "Complete visual identity systems — from mark to guidelines to rollout.", span: "2x2", featured: false },
+  { id: "motion", title: "Motion Design", desc: "Frame-by-frame motion for campaigns, socials, and broadcast.", span: "1x2", featured: false },
+  { id: "webgl", title: "WebGL & 3D", desc: "Real-time 3D and CGI for web, product, and immersive experiences.", span: "1x1", featured: true },
+  { id: "ai", title: "AI Creative", desc: "AI-augmented creative workflows. Faster output, same craft standard.", span: "1x1", featured: false },
+  { id: "strategy", title: "Creative Strategy", desc: "Research-led direction from brief to final delivery.", span: "2x1", featured: false },
+  { id: "social", title: "Social Content", desc: "Platform-native content tuned for each channel and the Gulf market.", span: "1x1", featured: false },
+  { id: "design", title: "Digital Design", desc: "UI and product design where form serves function — always.", span: "1x1", featured: false },
 ]
 
 // Mini Three.js scene for the featured capability card
@@ -166,7 +166,7 @@ export function CapabilitiesGrid() {
               margin: "0.5rem 0 0",
             }}
           >
-            What we do
+            Capabilities
           </h2>
         </div>
 

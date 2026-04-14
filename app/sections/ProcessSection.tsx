@@ -11,25 +11,25 @@ const STEPS = [
   {
     num: "01",
     title: "Discover",
-    desc: "Deep research into market, audience, and competitive landscape. We find what everyone else missed.",
+    desc: "Market, audience, competition. We find the gap before we design anything.",
     detail: "Brand audits · Market research · Audience mapping · Competitive analysis",
   },
   {
     num: "02",
     title: "Define",
-    desc: "Strategy becomes clarity. Every visual decision from here is backed by logic, not taste.",
+    desc: "Strategy crystallized. Every visual decision from here is backed by evidence, not preference.",
     detail: "Brand positioning · Creative brief · Visual direction · System architecture",
   },
   {
     num: "03",
     title: "Design",
-    desc: "Execution at craft level. Motion, type, color, and space working as one unified language.",
+    desc: "Craft-level execution. Motion, type, color, and space — unified.",
     detail: "Identity systems · Motion design · Digital production · Content systems",
   },
   {
     num: "04",
     title: "Deploy",
-    desc: "Launch with precision. Every asset delivered, documented, and ready to scale.",
+    desc: "Delivered, documented, and production-ready. No loose ends.",
     detail: "Asset delivery · Brand guidelines · Team handoff · Ongoing support",
   },
 ]
@@ -129,7 +129,7 @@ export function ProcessSection() {
               margin: "0.5rem 0 0",
             }}
           >
-            How we work
+            How it works
           </h2>
         </div>
 

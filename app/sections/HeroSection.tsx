@@ -160,11 +160,11 @@ function HeroText() {
           overflow: "hidden",
         }}
       >
-        Brand&nbsp;Identity.
+        Brand&nbsp;Direction.
         <br />
-        <span style={{ color: "#c8ff00" }}>Motion.</span>
+        <span style={{ color: "#c8ff00" }}>Motion&nbsp;Craft.</span>
         <br />
-        Visual Systems.
+        Visual Authority.
       </h1>
 
       <p
@@ -179,7 +179,7 @@ function HeroText() {
           letterSpacing: "-0.01em",
         }}
       >
-        We build cinematic brand experiences that make you impossible to ignore across GCC markets.
+        Visual direction from Alexandria to the Gulf. Every frame intentional.
       </p>
 
       <div
@@ -209,7 +209,7 @@ function HeroText() {
             position: "relative",
           }}
         >
-          Start a Project
+          Get in Touch
         </MagneticButton>
 
         <MagneticButton
@@ -228,7 +228,7 @@ function HeroText() {
             cursor: "none",
           }}
         >
-          View Work ↓
+          See the Work ↓
         </MagneticButton>
       </div>
     </div>

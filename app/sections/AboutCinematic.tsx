@@ -9,10 +9,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
 const STATS = [
-  { value: "40+", label: "Projects delivered" },
-  { value: "8", label: "Countries reached" },
-  { value: "3×", label: "Avg. engagement lift" },
-  { value: "12", label: "Brand systems built" },
+  { value: "40+", label: "Projects directed" },
+  { value: "8", label: "Markets active" },
+  { value: "3×", label: "Engagement lift" },
+  { value: "12", label: "Systems shipped" },
 ]
 
 function StatCounter({ value, label }: { value: string; label: string }) {
@@ -188,7 +188,8 @@ export function AboutCinematic() {
               maxWidth: "28rem",
             }}
           >
-            Alexandria-born creative studio. We operate at the intersection of AI systems, motion craft, and brand strategy — building visual languages that travel beyond borders.
+            Alexandria-based creative studio. We direct brand systems, motion, and digital
+            experiences for clients who know the difference between good enough and unforgettable.
           </p>
 
           {/* Stats */}
@@ -253,7 +254,7 @@ export function AboutCinematic() {
 
           {/* Process timeline */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {["Research & Discovery", "Strategy & Direction", "Design & Motion", "Launch & Iterate"].map(
+            {["Research", "Strategy", "Craft", "Delivery"].map(
               (step, i) => (
                 <div
                   key={step}

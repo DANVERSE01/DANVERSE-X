@@ -233,13 +233,13 @@ function CaseStudyOverlay({ work, onClose }: { work: WorkItem; onClose: () => vo
         <div>
           <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Challenge</p>
           <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "#f0f0f0", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.hook ?? "Cinematic brand experience designed for modern markets."}
+            {work.hook ?? "Direction-led creative for brands that lead their market."}
           </p>
         </div>
         <div>
           <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Approach</p>
           <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "rgba(240,240,240,0.7)", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.solution ?? "Visual systems built for precision and longevity."}
+            {work.solution ?? "Visual craft built for precision and longevity."}
           </p>
         </div>
       </div>
@@ -313,7 +313,7 @@ export function WorkShowcase() {
                 margin: "0.5rem 0 0",
               }}
             >
-              Projects
+              Selected work
             </h2>
           </div>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "rgba(240,240,240,0.25)", letterSpacing: "0.1em" }}>

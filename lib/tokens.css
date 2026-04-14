@@ -1,112 +1,106 @@
+/* ─── DANVERSE DESIGN TOKENS 2026 ─── */
 :root {
-  /* Wacus Global Design DNA - Elite Redesign */
-  --color-bg: #000000;
-  --color-surface: #0a0a0a;
-  --color-surface-2: #111111;
-  --color-surface-3: #1a1a1a;
-  --color-ink: #000000;
-  
-  /* Wacus Primary Colors */
-  --color-primary: #ffffff;
-  --color-secondary: #888888;
-  --color-accent: #ffffff;
-  
-  /* Semantic Tokens */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a1a1a1;
-  --color-text-muted: #666666;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-strong: rgba(255, 255, 255, 0.2);
-  
-  /* Legacy/Compatibility Aliases (Mapped to new DNA) */
-  --color-electric-blue: #ffffff;
-  --color-electric-blue-strong: #ffffff;
-  --color-hot-pink: #ffffff;
-  --color-hot-pink-strong: #ffffff;
-  --color-acid-lime: #ffffff;
-  --color-lime: var(--color-acid-lime);
-  --color-lavender: #ffffff;
-  --color-coral: var(--color-acid-lime);
-  --color-accent-blue: var(--color-electric-blue);
-  --color-accent-gold: var(--color-hot-pink);
-  --color-brand-primary: var(--color-electric-blue);
-  --color-brand-secondary: var(--color-hot-pink);
+  /* Backgrounds — layered depth system */
+  --bg-base:     #050507;
+  --bg-surface:  #0a0a0f;
+  --bg-elevated: #111118;
+  --bg-overlay:  #1a1a24;
 
-  /* Typography - Wacus uses clean, high-end sans-serif */
-  --font-display: var(--font-body-next), "Inter", "Manrope", sans-serif;
-  --font-body: var(--font-body-next), "Inter", "Manrope", sans-serif;
-  --font-label: var(--font-label-next), "Space Grotesk", "DM Sans", sans-serif;
-  --font-heading: var(--font-body-next), "Inter", sans-serif;
+  /* Brand — DANVERSE signature lime */
+  --color-lime:      #c8ff00;
+  --color-lime-dim:  rgba(200, 255, 0, 0.6);
+  --color-lime-glow: rgba(200, 255, 0, 0.12);
+  --color-lime-trace:rgba(200, 255, 0, 0.04);
+  --color-white:     #f4f4f0;
+  --color-white-80:  rgba(244, 244, 240, 0.80);
+  --color-white-60:  rgba(244, 244, 240, 0.60);
+  --color-white-30:  rgba(244, 244, 240, 0.30);
+  --color-white-10:  rgba(244, 244, 240, 0.10);
+  --color-white-05:  rgba(244, 244, 240, 0.05);
 
-  /* Easing library - Wacus feel is smooth and deliberate */
-  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-expo-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-back-out: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Accent system */
+  --accent-primary:   #c8ff00;
+  --accent-secondary: #7b61ff;
+  --accent-tertiary:  #ff3d6b;
+
+  /* Legacy aliases — for backward compatibility */
+  --void:           var(--bg-base);
+  --void-1:         var(--bg-surface);
+  --void-2:         var(--bg-elevated);
+  --void-3:         var(--bg-overlay);
+  --void-border:    rgba(244, 244, 240, 0.06);
+  --void-border-hi: rgba(244, 244, 240, 0.12);
+  --signal:         var(--color-lime);
+  --signal-dim:     var(--color-lime-dim);
+  --signal-ghost:   var(--color-lime-glow);
+  --signal-trace:   var(--color-lime-trace);
+  --signal-glow:    var(--color-lime-glow);
+  --text-100:       var(--color-white);
+  --text-60:        var(--color-white-60);
+  --text-35:        var(--color-white-30);
+  --text-15:        var(--color-white-10);
+
+  /* Typography */
+  --font-display: "Clash Display", "Cabinet Grotesk", system-ui, sans-serif;
+  --font-body:    var(--font-body-next, "Inter", system-ui, sans-serif);
+  --font-mono:    var(--font-mono-next, "JetBrains Mono", "Courier New", monospace);
+
+  /* Fluid Type Scale */
+  --text-hero:    clamp(4rem, 10vw, 10rem);
+  --text-display: clamp(2.5rem, 6vw, 6rem);
+  --text-heading: clamp(1.75rem, 3vw, 3rem);
+  --text-subhead: clamp(1.1rem, 2vw, 1.5rem);
+  --text-body:    clamp(0.875rem, 1.2vw, 1.0625rem);
+  --text-small:   0.8125rem;
+  --text-label:   0.6875rem;
+
+  /* Legacy type aliases */
+  --t-xs:   clamp(0.625rem, 0.55rem + 0.3vw, 0.75rem);
+  --t-sm:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --t-base: clamp(0.875rem, 0.82rem + 0.3vw, 1rem);
+  --t-md:   clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
+  --t-lg:   clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+  --t-xl:   clamp(1.75rem, 1.4rem + 1.75vw, 2.75rem);
+  --t-2xl:  clamp(2.5rem, 1.8rem + 3.5vw, 5rem);
+  --t-3xl:  clamp(4rem, 2.5rem + 7.5vw, 9rem);
+  --t-hero: clamp(4.5rem, 2rem + 13vw, 14rem);
+
+  /* Tracking */
+  --tracking-display: -0.05em;
+  --tracking-title:   -0.04em;
+  --tracking-body:    -0.01em;
+  --tracking-mono:     0.08em;
+  --tracking-label:    0.12em;
+
+  /* Borders */
+  --border-subtle:  1px solid rgba(244, 244, 240, 0.06);
+  --border-default: 1px solid rgba(244, 244, 240, 0.12);
+  --border-strong:  1px solid rgba(244, 244, 240, 0.24);
+  --border-accent:  1px solid var(--color-lime);
+
+  /* Motion */
+  --ease-appear:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic:  cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-inout:      cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-depart:     cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-expo:    cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-fast:  200ms;
+  --dur-base:  400ms;
+  --dur-slow:  700ms;
+  --dur-xslow: 1200ms;
+
+  /* Z-layers */
+  --z-canvas:    0;
+  --z-content:   10;
+  --z-nav:       100;
+  --z-preloader: 9000;
+  --z-cursor:    9999;
 
   /* Layout */
-  --section-inline: 1.5rem;
-  --section-block: 5rem;
-  --content-max: 1440px;
-  --content-narrow: 1100px;
-
-  /* Z-index */
-  --z-background: 0;
-  --z-content: 10;
-  --z-overlay: 20;
-  --z-nav: 100;
-  --z-modal: 200;
-  --z-cursor: 9999;
-
-  /* Selection */
-  --selection-bg: rgba(255, 255, 255, 0.99);
-  --selection-text: #000000;
-
-  /* Duration scale */
-  --duration-instant: 80ms;
-  --duration-fast: 200ms;
-  --duration-base: 400ms;
-  --duration-slow: 700ms;
-  --duration-xslow: 1000ms;
-  --dur-instant: var(--duration-instant);
-  --dur-fast: var(--duration-fast);
-  --dur-normal: var(--duration-base);
-  --dur-slow: var(--duration-slow);
-  --dur-xslow: var(--duration-xslow);
-
-  /* Shadows - Minimalist Wacus style */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.25);
-  --shadow-soft: 0 20px 56px rgba(0, 0, 0, 0.1);
-  --shadow-focus: 0 0 0 3px rgba(255, 255, 255, 0.2);
-
-  /* Typography scale */
-  --text-xs: clamp(0.7rem, 0.75vw, 0.8rem);
-  --text-sm: clamp(0.85rem, 0.9vw, 0.95rem);
-  --text-base: clamp(1rem, 1.1vw, 1.1rem);
-  --text-lg: clamp(1.125rem, 1.3vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1.6vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 2.2vw, 2rem);
-  --text-3xl: clamp(2rem, 3.5vw, 3rem);
-  --text-4xl: clamp(2.5rem, 5vw, 4.5rem);
-  --text-hero: clamp(3.5rem, 8vw, 8.5rem);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --section-inline: 2.5rem;
-    --section-block: 7rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --section-inline: 5rem;
-    --section-block: 10rem;
-  }
+  --section-pad: clamp(5rem, 10vw, 10rem);
+  --space-section: clamp(6rem, 12vw, 14rem);
+  --space-block:   clamp(3rem, 5vw, 6rem);
+  --container:   min(100% - 2rem, 1400px);
 }

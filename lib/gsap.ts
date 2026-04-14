@@ -1,53 +1,56 @@
-/**
- * GSAP singleton — import this everywhere instead of `gsap` directly.
- * Ensures plugins are registered once and the Lenis ticker is wired.
- */
+"use client"
+
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+import { ScrollSmoother } from "gsap/ScrollSmoother"
+import { SplitText } from "gsap/SplitText"
+import { CustomEase } from "gsap/CustomEase"
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin"
 
 let registered = false
+let smoother: ScrollSmoother | null = null
 
 export function registerGSAP() {
   if (registered || typeof window === "undefined") return
-  registered = true
 
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, CustomEase, DrawSVGPlugin)
 
-  // Defaults that match the site aesthetic
-  gsap.defaults({ ease: "power3.out" })
+  CustomEase.create("appear", "M0,0 C0.16,1,0.3,1,1,1")
+  CustomEase.create("cinematic", "M0,0 C0.76,0,0.24,1,1,1")
+  CustomEase.create("spring", "M0,0 C0.34,1.56,0.64,1,1,1")
+  CustomEase.create("depart", "M0,0 C0.55,0,1,0.45,1,1")
 
   ScrollTrigger.defaults({
-    toggleActions: "play none none none",
+    toggleActions: "play none none reverse",
+    start: "top 82%",
   })
 
-  // Integrate with Lenis smooth scroll
-  wireLenis()
+  registered = true
 }
 
-function wireLenis() {
-  // Poll until Lenis attaches to window (it's lazy-loaded)
-  const MAX_ATTEMPTS = 20
-  let attempts = 0
+export function initScrollSmoother() {
+  if (typeof window === "undefined") return null
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null
 
-  const check = () => {
-    const lenis = window.__DANVERSE_LENIS__
+  registerGSAP()
 
-    if (lenis) {
-      lenis.on("scroll", () => ScrollTrigger.update())
-      gsap.ticker.add((time) => lenis.raf(time * 1000))
-      gsap.ticker.lagSmoothing(0)
-      return
-    }
+  if (smoother) return smoother
 
-    attempts++
-    if (attempts < MAX_ATTEMPTS) {
-      window.setTimeout(check, 200)
-    }
-  }
+  smoother = ScrollSmoother.create({
+    wrapper: "#smooth-wrapper",
+    content: "#smooth-content",
+    smooth: 1.4,
+    effects: true,
+    smoothTouch: 0.1,
+    normalizeScroll: true,
+  })
 
-  // Give Lenis time to initialise first
-  window.setTimeout(check, 400)
+  return smoother
 }
 
-export { gsap, ScrollTrigger }
+export function killScrollSmoother() {
+  smoother?.kill()
+  smoother = null
+}
+
+export { gsap, ScrollTrigger, ScrollSmoother, SplitText }

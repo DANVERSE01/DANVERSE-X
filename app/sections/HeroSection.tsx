@@ -273,40 +273,63 @@ function LowTierBg() {
   )
 }
 
-// ─── Hero Text with GSAP SplitText ───────────────────────────────────────────
+// ─── METRICS ─────────────────────────────────────────────────────────────────
+const HERO_METRICS = [
+  { val: "40+", label: "Projects" },
+  { val: "8", label: "Countries" },
+  { val: "2021", label: "Founded" },
+  { val: "CAI→GCC", label: "Base" },
+]
+
+// ─── Hero Text with GSAP 3.13 SplitText Mask ─────────────────────────────────
 function HeroText() {
-  const h1Ref = useRef<HTMLHeadingElement>(null)
+  const line1Ref = useRef<HTMLDivElement>(null)
+  const line2Ref = useRef<HTMLDivElement>(null)
+  const line3Ref = useRef<HTMLDivElement>(null)
   const subRef = useRef<HTMLParagraphElement>(null)
   const labelRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const metricsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const h1 = h1Ref.current
-    const sub = subRef.current
-    if (!h1 || !sub) return
-
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
-    const split = new SplitText(h1, { type: "chars,words", linesClass: "split-line" })
-    gsap.set(split.chars, { yPercent: 105, opacity: 0 })
-    gsap.set([sub, labelRef.current, ctaRef.current], { opacity: 0, y: 16 })
+    const lines = [line1Ref.current, line2Ref.current, line3Ref.current].filter(
+      (el): el is HTMLDivElement => el !== null
+    )
 
-    const tl = gsap.timeline({ delay: 0.3 })
-    tl.to(split.chars, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 1.1,
-      stagger: 0.02,
-      ease: "power4.out",
+    // GSAP 3.13 mask — auto clip-overflow per char, no parent overflow:hidden required
+    const splits = lines.map((el) => new SplitText(el, { type: "chars", mask: "chars" }))
+
+    gsap.set([labelRef.current, subRef.current, ctaRef.current, metricsRef.current], {
+      opacity: 0,
+      y: 22,
     })
-      .to(labelRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-      .to(sub, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-      .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+
+    const tl = gsap.timeline({ delay: 0.15 })
+
+    splits.forEach((split, i) => {
+      tl.from(
+        split.chars,
+        {
+          yPercent: 115,
+          duration: 1.0,
+          stagger: { amount: 0.38 },
+          ease: "power4.out",
+        },
+        i * 0.14
+      )
+    })
+
+    tl.to(labelRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.75)
+    tl.to(subRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.95)
+    tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.15)
+    tl.to(metricsRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.3)
 
     return () => {
       tl.kill()
-      split.revert()
+      splits.forEach((s) => s.revert())
     }
   }, [])
 
@@ -315,111 +338,210 @@ function HeroText() {
       style={{
         position: "relative",
         zIndex: 10,
-        padding: "0 clamp(1.5rem, 6vw, 6rem)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
+        display: "grid",
+        gridTemplateRows: "1fr auto",
         height: "100%",
-        paddingBottom: "clamp(4rem, 10vh, 8rem)",
+        padding: "0 clamp(1.5rem, 6vw, 6rem)",
       }}
     >
-      <div ref={labelRef} style={{ marginBottom: "1.5rem" }}>
-        <span
+      {/* Main content — flush to bottom */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          paddingBottom: "clamp(3.5rem, 7vh, 6rem)",
+        }}
+      >
+        {/* Label */}
+        <div ref={labelRef} style={{ marginBottom: "clamp(1.5rem, 3vw, 2.5rem)" }}>
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              fontSize: "0.6875rem",
+              letterSpacing: "0.28em",
+              color: "#c8ff00",
+              textTransform: "uppercase",
+            }}
+          >
+            <span
+              style={{
+                width: "2rem",
+                height: "1px",
+                background: "#c8ff00",
+                display: "inline-block",
+                flexShrink: 0,
+              }}
+            />
+            Creative Director · Alexandria → GCC
+          </span>
+        </div>
+
+        {/* Headline — staggered indented lines */}
+        <h1
           style={{
-            fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
-            fontSize: "0.6875rem",
-            letterSpacing: "0.25em",
-            color: "#c8ff00",
-            textTransform: "uppercase",
+            margin: 0,
+            fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+            fontWeight: 800,
+            lineHeight: 0.88,
+            letterSpacing: "-0.055em",
           }}
         >
-          Creative Director · Alexandria → GCC
-        </span>
+          <div
+            ref={line1Ref}
+            style={{
+              fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
+              color: "rgba(244,244,240,1)",
+              display: "block",
+            }}
+          >
+            Brand.
+          </div>
+          <div
+            ref={line2Ref}
+            style={{
+              fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
+              color: "#c8ff00",
+              display: "block",
+              marginLeft: "clamp(2rem, 7vw, 10rem)",
+            }}
+          >
+            Motion.
+          </div>
+          <div
+            ref={line3Ref}
+            style={{
+              fontSize: "clamp(4.5rem, 11.5vw, 14.5rem)",
+              color: "rgba(244,244,240,1)",
+              display: "block",
+              marginLeft: "clamp(4rem, 14vw, 20rem)",
+            }}
+          >
+            Systems.
+          </div>
+        </h1>
+
+        {/* Sub + CTA row */}
+        <div
+          style={{
+            marginTop: "clamp(2rem, 4vw, 3.5rem)",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "2rem",
+          }}
+        >
+          <p
+            ref={subRef}
+            style={{
+              fontFamily: "var(--font-body, 'Inter', sans-serif)",
+              fontSize: "clamp(0.875rem, 1.3vw, 1.0625rem)",
+              color: "rgba(244,244,240,0.45)",
+              maxWidth: "28rem",
+              lineHeight: 1.75,
+              letterSpacing: "-0.01em",
+              margin: 0,
+            }}
+          >
+            Cinematic brand experiences built for GCC markets. We make brands impossible to ignore.
+          </p>
+
+          <div ref={ctaRef} style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <MagneticButton
+              style={{
+                padding: "0.9rem 2.5rem",
+                background: "#c8ff00",
+                color: "#050507",
+                fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+                fontWeight: 700,
+                fontSize: "0.8125rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                border: "none",
+                cursor: "none",
+              }}
+            >
+              Start a Project
+            </MagneticButton>
+            <MagneticButton
+              style={{
+                padding: "0.9rem 2.5rem",
+                background: "transparent",
+                color: "rgba(244,244,240,0.75)",
+                fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+                fontWeight: 600,
+                fontSize: "0.8125rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                border: "1px solid rgba(200,255,0,0.15)",
+                cursor: "none",
+              }}
+            >
+              View Work ↓
+            </MagneticButton>
+          </div>
+        </div>
       </div>
 
-      <h1
-        ref={h1Ref}
-        style={{
-          fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-          fontSize: "clamp(4.5rem, 12vw, 14rem)",
-          fontWeight: 800,
-          lineHeight: 0.88,
-          letterSpacing: "-0.05em",
-          color: "#f0f0f0",
-          margin: 0,
-          overflow: "hidden",
-        }}
-      >
-        Brand&nbsp;Identity.
-        <br />
-        <span style={{ color: "#c8ff00" }}>Motion.</span>
-        <br />
-        Visual Systems.
-      </h1>
-
-      <p
-        ref={subRef}
-        style={{
-          marginTop: "2rem",
-          fontFamily: "var(--font-body, 'Inter', sans-serif)",
-          fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)",
-          color: "rgba(240,240,240,0.5)",
-          maxWidth: "36rem",
-          lineHeight: 1.7,
-          letterSpacing: "-0.01em",
-        }}
-      >
-        We build cinematic brand experiences that make you impossible to ignore across GCC markets.
-      </p>
-
+      {/* Metrics bar */}
       <div
-        ref={ctaRef}
+        ref={metricsRef}
         style={{
-          marginTop: "3rem",
           display: "flex",
-          gap: "1rem",
-          flexWrap: "wrap",
+          justifyContent: "space-between",
           alignItems: "center",
+          padding: "1.5rem 0",
+          borderTop: "1px solid rgba(200,255,0,0.08)",
+          flexWrap: "wrap",
+          gap: "1rem",
         }}
       >
-        <MagneticButton
-          className="hero-cta-primary"
-          style={{
-            padding: "0.875rem 2.25rem",
-            background: "#c8ff00",
-            color: "#050507",
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-            fontWeight: 700,
-            fontSize: "0.875rem",
-            letterSpacing: "0.04em",
-            textTransform: "uppercase",
-            border: "none",
-            borderRadius: 0,
-            cursor: "none",
-            position: "relative",
-          }}
-        >
-          Start a Project
-        </MagneticButton>
+        {HERO_METRICS.map((m) => (
+          <div key={m.label} style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+            <span
+              style={{
+                fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+                fontSize: "clamp(1.125rem, 2.2vw, 1.875rem)",
+                fontWeight: 800,
+                color: "#c8ff00",
+                letterSpacing: "-0.04em",
+                lineHeight: 1,
+              }}
+            >
+              {m.val}
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.5625rem",
+                color: "rgba(244,244,240,0.25)",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+              }}
+            >
+              {m.label}
+            </span>
+          </div>
+        ))}
 
-        <MagneticButton
-          className="hero-cta-secondary"
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            padding: "0.875rem 2.25rem",
-            background: "transparent",
-            color: "#f0f0f0",
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-            fontWeight: 600,
-            fontSize: "0.875rem",
-            letterSpacing: "0.04em",
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.5625rem",
+            color: "rgba(244,244,240,0.2)",
+            letterSpacing: "0.25em",
             textTransform: "uppercase",
-            border: "1px solid rgba(200,255,0,0.08)",
-            borderRadius: 0,
-            cursor: "none",
+            alignSelf: "flex-end",
           }}
         >
-          View Work ↓
-        </MagneticButton>
+          ↓ scroll
+        </motion.span>
       </div>
     </div>
   )
@@ -464,12 +586,13 @@ export function HeroSection() {
 
   return (
     <motion.section
+      id="tx-00"
       ref={sectionRef}
       style={{
         position: "relative",
         width: "100%",
         height: "100svh",
-        minHeight: "600px",
+        minHeight: "640px",
         background: "#050507",
         overflow: "hidden",
         skewY: springSkew,
@@ -497,45 +620,46 @@ export function HeroSection() {
         <LowTierBg />
       )}
 
-      {/* Radial vignette */}
+      {/* Radial vignette — deeper at edges */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 2,
           background:
-            "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, rgba(5,5,7,0.85) 100%)",
+            "radial-gradient(ellipse 85% 70% at 60% 40%, transparent 20%, rgba(5,5,7,0.7) 70%, rgba(5,5,7,0.95) 100%)",
           pointerEvents: "none",
         }}
       />
 
-      <HeroText />
-
-      {/* Scroll hint */}
+      {/* Subtle horizontal grid lines top-right */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
-          bottom: "2rem",
+          top: "clamp(1.5rem, 4vw, 4rem)",
           right: "clamp(1.5rem, 6vw, 6rem)",
-          zIndex: 10,
+          zIndex: 3,
           display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          color: "rgba(240,240,240,0.25)",
-          fontSize: "0.6rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+          flexDirection: "column",
+          gap: "0.4rem",
+          pointerEvents: "none",
         }}
       >
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          ↓
-        </motion.span>
-        Scroll
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            style={{
+              width: `${3 - i + 1}rem`,
+              height: "1px",
+              background: `rgba(200,255,0,${0.06 * i})`,
+              alignSelf: "flex-end",
+            }}
+          />
+        ))}
       </div>
+
+      <HeroText />
     </motion.section>
   )
 }

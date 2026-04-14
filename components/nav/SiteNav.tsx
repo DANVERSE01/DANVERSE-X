@@ -8,7 +8,7 @@ import { useDanverseStore } from "@/lib/store"
 
 const navItems = [
   { href: "/#tx-02", label: "Work" },
-  { href: "/#tx-03", label: "Services" },
+  { href: "/#tx-03", label: "Capabilities" },
   { href: "/#tx-04", label: "Process" },
   { href: "/#tx-05", label: "Contact" },
 ]

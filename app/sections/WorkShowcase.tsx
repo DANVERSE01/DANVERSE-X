@@ -1,13 +1,14 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
+import { motion, useMotionValue, useSpring, useScroll, useVelocity, useTransform, AnimatePresence } from "framer-motion"
 import { gsap } from "gsap"
+import { SplitText } from "gsap/SplitText"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { featuredWorks, type WorkItem } from "@/lib/work"
 import Image from "next/image"
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(SplitText, ScrollTrigger)
 
 function WorkCard({
   work,
@@ -117,23 +118,24 @@ function WorkCard({
         <div>
           <p
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6rem",
+              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              fontSize: "0.5625rem",
               color: "#c8ff00",
-              letterSpacing: "0.2em",
+              letterSpacing: "0.22em",
               textTransform: "uppercase",
-              marginBottom: "0.4rem",
+              marginBottom: "0.5rem",
             }}
           >
             {String(index + 1).padStart(2, "0")} — {work.category}
           </p>
           <h3
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+              fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+              fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)",
               fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.04em",
+              color: "rgba(244,244,240,1)",
+              letterSpacing: "-0.05em",
+              lineHeight: 1,
               margin: 0,
             }}
           >
@@ -251,6 +253,13 @@ export function WorkShowcase() {
   const [activeWork, setActiveWork] = useState<WorkItem | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+
+  // Velocity skew on track
+  const { scrollY } = useScroll()
+  const velY = useVelocity(scrollY)
+  const rawSkew = useTransform(velY, [-2500, 0, 2500], [-2, 0, 2])
+  const skewX = useSpring(rawSkew, { stiffness: 400, damping: 90 })
 
   useEffect(() => {
     const section = sectionRef.current
@@ -276,8 +285,33 @@ export function WorkShowcase() {
       },
     })
 
+    // SplitText mask on h2
+    const h = headlineRef.current
+    let split: InstanceType<typeof SplitText> | null = null
+    let headlineTrigger: ReturnType<typeof ScrollTrigger.create> | null = null
+    if (h) {
+      const reducedH = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      if (!reducedH) {
+        split = new SplitText(h, { type: "chars", mask: "chars" })
+        headlineTrigger = ScrollTrigger.create({
+          trigger: h,
+          start: "top 80%",
+          onEnter() {
+            gsap.from(split!.chars, {
+              yPercent: 115,
+              duration: 0.95,
+              stagger: { amount: 0.4 },
+              ease: "power4.out",
+            })
+          },
+        })
+      }
+    }
+
     return () => {
       trigger.kill()
+      headlineTrigger?.kill()
+      split?.revert()
       ScrollTrigger.getAll().filter((t) => t.trigger === section).forEach((t) => t.kill())
     }
   }, [])
@@ -285,6 +319,7 @@ export function WorkShowcase() {
   return (
     <>
       <section
+        id="tx-02"
         ref={sectionRef}
         style={{
           background: "#050507",
@@ -304,16 +339,18 @@ export function WorkShowcase() {
               Selected Work — 02
             </span>
             <h2
+              ref={headlineRef}
               style={{
-                fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-                fontSize: "clamp(2.5rem, 5vw, 5rem)",
+                fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+                fontSize: "clamp(3rem, 5.5vw, 6rem)",
                 fontWeight: 800,
-                color: "#f0f0f0",
-                letterSpacing: "-0.05em",
-                margin: "0.5rem 0 0",
+                color: "rgba(244,244,240,1)",
+                letterSpacing: "-0.055em",
+                lineHeight: 0.92,
+                margin: "0.75rem 0 0",
               }}
             >
-              Projects
+              Work
             </h2>
           </div>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "rgba(240,240,240,0.25)", letterSpacing: "0.1em" }}>
@@ -321,19 +358,21 @@ export function WorkShowcase() {
           </span>
         </div>
 
-        <div
+        <motion.div
           ref={trackRef}
           style={{
             display: "flex",
             gap: "clamp(2rem, 4vw, 4rem)",
             padding: "0 clamp(1.5rem, 6vw, 6rem)",
             paddingBottom: "clamp(3rem, 6vw, 6rem)",
+            skewX,
+            transformOrigin: "center",
           }}
         >
           {featuredWorks.map((work, i) => (
             <WorkCard key={work.slug} work={work} index={i} onClick={() => setActiveWork(work)} />
           ))}
-        </div>
+        </motion.div>
       </section>
 
       <AnimatePresence>

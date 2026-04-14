@@ -3,7 +3,7 @@ import "./globals.css"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { SiteNav } from "@/components/nav/SiteNav"
-import { Observability } from "@/components/ui/Observability"
+import { MobileMenu } from "@/components/nav/MobileMenu"
 import { LayoutProviders } from "@/app/components/LayoutProviders"
 
 const inter = Inter({
@@ -72,10 +72,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable}>
       <head />
       <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <LayoutProviders>
           <SiteNav />
-          {children}
-          <Observability />
+          <MobileMenu />
+          <main id="main-content">
+            {children}
+          </main>
         </LayoutProviders>
       </body>
     </html>

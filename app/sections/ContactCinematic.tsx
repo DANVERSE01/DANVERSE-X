@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useVelocity, useTransform, useSpring } from "framer-motion"
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -44,9 +44,9 @@ function LiveClock() {
 }
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Behance", href: "#" },
+  { label: "Instagram", href: "https://instagram.com/danverse.studio" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/danverse" },
+  { label: "Behance", href: "https://behance.net/danverse" },
 ]
 
 function SocialLink({ label, href }: { label: string; href: string }) {
@@ -95,6 +95,12 @@ export function ContactCinematic() {
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const [pulse, setPulse] = useState(false)
 
+  // Velocity skew
+  const { scrollY } = useScroll()
+  const velY = useVelocity(scrollY)
+  const rawSkew = useTransform(velY, [-2500, 0, 2500], [-2, 0, 2])
+  const skewX = useSpring(rawSkew, { stiffness: 400, damping: 90 })
+
   useEffect(() => {
     const h = headlineRef.current
     if (!h) return
@@ -102,18 +108,15 @@ export function ContactCinematic() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
-    const split = new SplitText(h, { type: "chars" })
-    gsap.set(split.chars, { yPercent: 110, opacity: 0 })
-
+    const split = new SplitText(h, { type: "chars", mask: "chars" })
     const trigger = ScrollTrigger.create({
       trigger: h,
       start: "top 75%",
       onEnter() {
-        gsap.to(split.chars, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.03,
+        gsap.from(split.chars, {
+          yPercent: 115,
+          duration: 1.1,
+          stagger: { amount: 0.5 },
           ease: "power4.out",
         })
       },
@@ -127,6 +130,7 @@ export function ContactCinematic() {
 
   return (
     <section
+      id="tx-05"
       ref={sectionRef}
       style={{
         position: "relative",
@@ -147,36 +151,39 @@ export function ContactCinematic() {
       />
 
       <div style={{ position: "relative", maxWidth: "1400px", margin: "0 auto" }}>
+        <motion.div style={{ skewX, transformOrigin: "center" }}>
         <span
           style={{
-            fontFamily: "var(--font-mono)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
             fontSize: "0.6875rem",
             color: "#c8ff00",
-            letterSpacing: "0.2em",
+            letterSpacing: "0.25em",
             textTransform: "uppercase",
-            display: "block",
             marginBottom: "2rem",
           }}
         >
-          Let&apos;s Connect — 07
+          <span style={{ width: "1.5rem", height: "1px", background: "#c8ff00", display: "inline-block" }} />
+          Let&apos;s Connect — 05
         </span>
 
         <h2
           ref={headlineRef}
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-            fontSize: "clamp(5rem, 14vw, 16rem)",
+            fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+            fontSize: "clamp(6rem, 16vw, 18rem)",
             fontWeight: 800,
-            color: "#f0f0f0",
+            color: "rgba(244,244,240,1)",
             letterSpacing: "-0.06em",
             lineHeight: 0.88,
             margin: 0,
-            overflow: "hidden",
           }}
         >
           LET&apos;S
           <br />
-          BUILD
+          <span style={{ color: "#c8ff00" }}>BUILD</span>
         </h2>
 
         <div
@@ -201,6 +208,11 @@ export function ContactCinematic() {
             Open to brand identity, motion campaigns, and long-term creative partnerships across the GCC and beyond.
           </p>
 
+          <a
+            href="mailto:hello@danverse.studio"
+            style={{ textDecoration: "none" }}
+            data-cursor="magnetic"
+          >
           <div
             style={{
               position: "relative",
@@ -247,6 +259,7 @@ export function ContactCinematic() {
               Start a Project →
             </MagneticButton>
           </div>
+          </a>
         </div>
 
         {/* Footer */}
@@ -280,8 +293,83 @@ export function ContactCinematic() {
             ))}
           </div>
 
+          <a
+            href="mailto:hello@danverse.studio"
+            data-cursor="magnetic"
+            style={{
+              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              fontSize: "0.75rem",
+              color: "rgba(240,240,240,0.35)",
+              letterSpacing: "0.08em",
+              textDecoration: "none",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#c8ff00")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(240,240,240,0.35)")}
+          >
+            hello@danverse.studio
+          </a>
+
           <LiveClock />
         </div>
+
+        {/* Copyright Bar */}
+        <div
+          style={{
+            marginTop: "2rem",
+            paddingTop: "1.5rem",
+            borderTop: "1px solid rgba(244,244,240,0.04)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+              fontSize: "0.6875rem",
+              color: "rgba(244,244,240,0.25)",
+              letterSpacing: "0.1em",
+            }}
+          >
+            © {new Date().getFullYear()} DANVERSE. All rights reserved.
+          </span>
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <a
+              href="/privacy"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                fontSize: "0.6875rem",
+                color: "rgba(244,244,240,0.25)",
+                letterSpacing: "0.1em",
+                textDecoration: "none",
+                transition: "color 0.25s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(244,244,240,0.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(244,244,240,0.25)")}
+            >
+              Privacy
+            </a>
+            <a
+              href="/terms"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
+                fontSize: "0.6875rem",
+                color: "rgba(244,244,240,0.25)",
+                letterSpacing: "0.1em",
+                textDecoration: "none",
+                transition: "color 0.25s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(244,244,240,0.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(244,244,240,0.25)")}
+            >
+              Terms
+            </a>
+          </div>
+        </div>
+      </motion.div>
       </div>
     </section>
   )

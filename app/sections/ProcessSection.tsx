@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useScroll, useVelocity, useTransform, useSpring } from "framer-motion"
 import { gsap } from "gsap"
+import { SplitText } from "gsap/SplitText"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(SplitText, ScrollTrigger)
 
 const STEPS = [
   {
@@ -39,6 +40,13 @@ export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const numbersRef = useRef<(HTMLSpanElement | null)[]>([])
   const svgLineRef = useRef<SVGLineElement>(null)
+  const headlineRef = useRef<HTMLHeadingElement>(null)
+
+  // Velocity skew
+  const { scrollY } = useScroll()
+  const velY = useVelocity(scrollY)
+  const rawSkew = useTransform(velY, [-2500, 0, 2500], [-2, 0, 2])
+  const skewX = useSpring(rawSkew, { stiffness: 400, damping: 90 })
 
   useEffect(() => {
     const section = sectionRef.current
@@ -94,11 +102,36 @@ export function ProcessSection() {
       })
     }
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+    // SplitText mask on h2
+    const h = headlineRef.current
+    let split: InstanceType<typeof SplitText> | null = null
+    let headlineTrigger: ReturnType<typeof ScrollTrigger.create> | null = null
+    if (h) {
+      split = new SplitText(h, { type: "chars", mask: "chars" })
+      headlineTrigger = ScrollTrigger.create({
+        trigger: h,
+        start: "top 80%",
+        onEnter() {
+          gsap.from(split!.chars, {
+            yPercent: 115,
+            duration: 0.95,
+            stagger: { amount: 0.4 },
+            ease: "power4.out",
+          })
+        },
+      })
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      headlineTrigger?.kill()
+      split?.revert()
+    }
   }, [])
 
   return (
     <section
+      id="tx-04"
       ref={sectionRef}
       style={{
         background: "#050507",
@@ -107,26 +140,33 @@ export function ProcessSection() {
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-        <div style={{ marginBottom: "5rem" }}>
+        <motion.div style={{ skewX, transformOrigin: "center" }}>
+        <div style={{ marginBottom: "clamp(3rem, 6vw, 5rem)" }}>
           <span
             style={{
-              fontFamily: "var(--font-mono)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              fontFamily: "var(--font-mono, 'JetBrains Mono', monospace)",
               fontSize: "0.6875rem",
               color: "#c8ff00",
-              letterSpacing: "0.2em",
+              letterSpacing: "0.25em",
               textTransform: "uppercase",
             }}
           >
+            <span style={{ width: "1.5rem", height: "1px", background: "#c8ff00", display: "inline-block" }} />
             Process — 04
           </span>
           <h2
+            ref={headlineRef}
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-              fontSize: "clamp(2.5rem, 5vw, 5rem)",
+              fontFamily: "'Clash Display', var(--font-display, sans-serif)",
+              fontSize: "clamp(3rem, 6vw, 7rem)",
               fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.05em",
-              margin: "0.5rem 0 0",
+              color: "rgba(244,244,240,1)",
+              letterSpacing: "-0.055em",
+              lineHeight: 0.92,
+              margin: "0.75rem 0 0",
             }}
           >
             How we work
@@ -250,6 +290,7 @@ export function ProcessSection() {
             ))}
           </div>
         </div>
+        </motion.div>
       </div>
     </section>
   )

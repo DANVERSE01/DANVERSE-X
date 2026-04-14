@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
+import { CaseStudy } from "./CaseStudy"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -38,38 +38,5 @@ export default async function WorkDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  return (
-    <main className="work-detail">
-      <p className="tx-label">TX-02 / CASE FILE</p>
-      <div className="work-detail__meta">
-        <h1>{work.title}</h1>
-        {work.category ? <p>{work.category}</p> : null}
-      </div>
-      {work.cover ? (
-        <div className="work-detail__hero">
-          <Image src={work.cover} alt={work.title} fill sizes="(max-width: 959px) 100vw, 1200px" priority />
-        </div>
-      ) : null}
-      <div className="work-detail__copy">
-        {work.hook ? (
-          <div>
-            <strong>Hook</strong>
-            <p>{work.hook}</p>
-          </div>
-        ) : null}
-        {work.solution ? (
-          <div>
-            <strong>Solution</strong>
-            <p>{work.solution}</p>
-          </div>
-        ) : null}
-        {work.tags.length ? (
-          <div>
-            <strong>Tags</strong>
-            <p>{work.tags.join(" · ")}</p>
-          </div>
-        ) : null}
-      </div>
-    </main>
-  )
+  return <CaseStudy work={work} />
 }

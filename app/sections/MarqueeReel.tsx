@@ -1,7 +1,15 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useVelocity, useTransform } from "framer-motion"
+import {
+  motion,
+  useScroll,
+  useVelocity,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  useAnimationFrame,
+} from "framer-motion"
 
 const ITEMS = [
   "Brand Identity",
@@ -14,10 +22,39 @@ const ITEMS = [
   "Digital Products",
 ]
 
-function Row({ rtl = false, baseVelocity = 60 }: { rtl?: boolean; baseVelocity?: number }) {
+function Row({ rtl = false, baseVelocity = 30 }: { rtl?: boolean; baseVelocity?: number }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const initialized = useRef(false)
   const { scrollY } = useScroll()
   const velocity = useVelocity(scrollY)
   const speedFactor = useTransform(velocity, [-3000, 0, 3000], [3, 1, 3])
+  const smoothSpeed = useSpring(speedFactor, { damping: 50, stiffness: 400 })
+  const x = useMotionValue(0)
+
+  useAnimationFrame((_, delta) => {
+    if (!containerRef.current) return
+    const halfWidth = containerRef.current.scrollWidth / 2
+    if (halfWidth <= 0) return
+
+    if (!initialized.current) {
+      if (!rtl) x.set(-halfWidth)
+      initialized.current = true
+    }
+
+    const speed = smoothSpeed.get()
+    const baseRate = halfWidth / (baseVelocity * 1000)
+    const move = baseRate * delta * speed
+
+    let newX = x.get()
+    if (rtl) {
+      newX -= move
+      if (newX <= -halfWidth) newX += halfWidth
+    } else {
+      newX += move
+      if (newX >= 0) newX -= halfWidth
+    }
+    x.set(newX)
+  })
 
   const items = [...ITEMS, ...ITEMS]
 
@@ -32,16 +69,12 @@ function Row({ rtl = false, baseVelocity = 60 }: { rtl?: boolean; baseVelocity?:
       }}
     >
       <motion.div
+        ref={containerRef}
         style={{
           display: "flex",
           gap: "0",
           willChange: "transform",
-        }}
-        animate={{ x: rtl ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{
-          duration: baseVelocity,
-          ease: "linear",
-          repeat: Infinity,
+          x,
         }}
       >
         {[...items, ...items].map((item, i) => (

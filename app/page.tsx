@@ -1,25 +1,28 @@
-import { Hero } from "@/components/sections/Hero"
-import { MarqueeReel } from "@/components/sections/MarqueeReel"
-import { Work } from "@/components/sections/Work"
-import { Services } from "@/components/sections/Services"
-import { Process } from "@/components/sections/Process"
-import { Contact } from "@/components/sections/Contact"
-import { Footer } from "@/components/sections/Footer"
+import { HeroSection } from "@/app/sections/HeroSection"
+import { MarqueeReel } from "@/app/sections/MarqueeReel"
+import { AboutCinematic } from "@/app/sections/AboutCinematic"
+import { WorkShowcase } from "@/app/sections/WorkShowcase"
+import { CapabilitiesGrid } from "@/app/sections/CapabilitiesGrid"
+import { ProcessSection } from "@/app/sections/ProcessSection"
+import { ContactCinematic } from "@/app/sections/ContactCinematic"
 
 export default function Page() {
   return (
-    <main className="page-shell">
-      {/* Act 1 — Identity statement */}
-      <Hero />
-      {/* Act 2 — Scrolling brand reel */}
+    <main style={{ background: "#050507", overflowX: "clip" }}>
+      {/* Act 1 — Identity Statement */}
+      <HeroSection />
+      {/* Act 2 — Scrolling Brand Reel */}
       <MarqueeReel />
-      {/* Act 3-5 — Work, capabilities, process */}
-      <Work />
-      <Services />
-      <Process />
-      {/* Act 6-7 — Contact + footer */}
-      <Contact />
-      <Footer />
+      {/* Act 3 — About + Story */}
+      <AboutCinematic />
+      {/* Act 4 — Selected Work */}
+      <WorkShowcase />
+      {/* Act 5 — Capabilities */}
+      <CapabilitiesGrid />
+      {/* Act 6 — Process */}
+      <ProcessSection />
+      {/* Act 7 — Contact + Footer */}
+      <ContactCinematic />
     </main>
   )
 }

@@ -14,7 +14,7 @@ const ITEMS = [
   "Digital Products",
 ]
 
-function Row({ rtl = false, baseVelocity = 60 }: { rtl?: boolean; baseVelocity?: number }) {
+function Row({ rtl = false, baseVelocity = 60, rowOpacity = 1 }: { rtl?: boolean; baseVelocity?: number; rowOpacity?: number }) {
   const { scrollY } = useScroll()
   const velocity = useVelocity(scrollY)
   const speedFactor = useTransform(velocity, [-3000, 0, 3000], [3, 1, 3])
@@ -28,6 +28,8 @@ function Row({ rtl = false, baseVelocity = 60 }: { rtl?: boolean; baseVelocity?:
         overflow: "hidden",
         whiteSpace: "nowrap",
         userSelect: "none",
+        opacity: rowOpacity,
+        mixBlendMode: "overlay" as const,
         maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
       }}
     >
@@ -173,8 +175,9 @@ export function MarqueeReel() {
         gap: "1rem",
       }}
     >
-      <Row baseVelocity={30} />
-      <Row rtl baseVelocity={25} />
+      <Row baseVelocity={40} rowOpacity={0.4} />
+      <Row rtl baseVelocity={60} rowOpacity={1} />
+      <Row baseVelocity={50} rowOpacity={0.7} />
       <VideoReel />
     </section>
   )

@@ -5,9 +5,7 @@ const config: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [{ protocol: "https", hostname: "**.r2.cloudflarestorage.com" }],
   },
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
 }
 
 export default config

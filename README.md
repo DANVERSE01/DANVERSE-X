@@ -1,91 +1,70 @@
 # DANVERSE
 
-A professional Next.js website for DANVERSE, a director-led creative studio specializing in cinematic ads, brand systems, and conversion architecture.
+DANVERSE is an AI-powered creative studio site rebuilt around the locked `TRANSMISSION` brief.
 
-## Badges
+## Stack
 
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
-![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)
+- Next.js 15 App Router
+- React 19
+- TypeScript strict mode
+- GSAP orchestration
+- Three.js device-tier rendering
+- Zustand state
+- Mitt event bus
 
-## Table of Contents
-
-- [Features](#features)
-- [Quickstart](#quickstart)
-- [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Scripts](#scripts)
-- [Contributing](#contributing)
-- [Security](#security)
-- [License](#license)
-
-## Features
-
-- Next.js App Router with optimized performance
-- Professional marketing pages for services (cinematic ads, branding, websites)
-- Case studies and portfolio showcase
-- Contact forms and WhatsApp integration
-- SEO optimized with structured data
-- Responsive design with accessibility features
-- Performance monitoring and analytics integration
-
-## Quickstart
-
-Clone the repository (URL TBD – origin remote is not configured in this checkout):
+## Local Commands
 
 ```bash
-git clone <TBD>
-cd DANVERSE-X
+npm install
+npm run dev
+npm run typecheck
+npm run build
 ```
 
-Install dependencies:
-
-```bash
-pnpm install
-```
-
-Start the development server:
-
-```bash
-pnpm dev
-```
-
-## Project Structure
+## Structure
 
 ```text
-.
-├── app/                # App Router routes, layouts, and assets
-├── components/         # Reusable UI components
-├── files/              # Project assets and supporting files
-├── lib/                # Shared utilities
-├── public/             # Static assets
-├── styles/             # Global styling
-├── .github/            # GitHub workflows and templates
-├── middleware.ts       # Next.js middleware
-└── package.json        # Scripts and dependencies
+app/                routes, metadata, API, global styles
+components/         canvas, cursor, nav, sections, UI primitives
+content/            brief-compliant work data
+lib/                motion, gsap, store, webgpu, work helpers, tokens
+public/             brand assets, icons, work imagery
+shaders/            transmission shader helpers
+docs/               rebuild inventory and asset audit
 ```
 
-## Configuration
+## Work Data Rules
 
-This project does not require environment variables for basic local development (based on current code).
+Only the brief-approved work fields are valid:
 
-## Scripts
+- `slug`
+- `title`
+- `year`
+- `date`
+- `category`
+- `hook`
+- `solution`
+- `tags`
+- `cover`
+- `gallery`
+- `featured`
+- optional `video`
+- optional `results`
 
-- `pnpm dev` - run the development server
-- `pnpm build` - build the production app
-- `pnpm start` - run the production server
-- `pnpm lint` - run ESLint
+If required data is unresolved, it stays unresolved and dependent UI stays hidden.
 
-## Contributing
+## Validation
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Run:
 
-## Security
+```bash
+npm run typecheck
+npm run build
+```
 
-See [SECURITY.md](SECURITY.md) for reporting guidance.
+Then verify:
 
-## License
-
-Licensed under the [MIT License](LICENSE).
+- `/`
+- `/work`
+- one work detail route
+- one unknown route for `404`

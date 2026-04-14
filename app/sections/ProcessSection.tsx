@@ -106,6 +106,33 @@ export function ProcessSection() {
         position: "relative",
       }}
     >
+      {/* Top atmospheric fade from previous section */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "20%",
+          background: "linear-gradient(to bottom, rgba(5,5,7,1), transparent)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
+
+      {/* Ambient lime radial glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "30%",
+          left: "-10%",
+          width: "50%",
+          height: "40%",
+          background: "radial-gradient(ellipse at center, rgba(200,255,0,0.015), transparent 70%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         <div style={{ marginBottom: "5rem" }}>
           <span

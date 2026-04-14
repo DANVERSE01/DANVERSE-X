@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
@@ -209,25 +210,34 @@ export function AboutCinematic() {
 
         {/* Right — scrollable */}
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {/* Image with parallax */}
+          {/* Image with parallax — real editorial photography */}
           <motion.div
             ref={imageRef}
             style={{
               y: imgY,
               aspectRatio: "4/5",
-              background:
-                "linear-gradient(135deg, rgba(200,255,0,0.06) 0%, rgba(5,5,7,1) 60%)",
+              background: "var(--bg-surface)",
               border: "1px solid rgba(200,255,0,0.08)",
               overflow: "hidden",
               position: "relative",
             }}
           >
+            <Image
+              src="/images/work/shelby-alexandria/stanley-golden.webp"
+              alt="Shelby GT studio shot — golden hour"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: "cover", filter: "saturate(0.85) contrast(1.05)" }}
+              priority={false}
+            />
+            {/* Cinematic gradient overlay */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(200,255,0,0.015) 2px, rgba(200,255,0,0.015) 4px)",
+                  "linear-gradient(180deg, transparent 40%, rgba(5,5,7,0.75) 100%)",
+                pointerEvents: "none",
               }}
             />
             <div
@@ -236,13 +246,14 @@ export function AboutCinematic() {
                 bottom: "2rem",
                 left: "2rem",
                 right: "2rem",
+                zIndex: 1,
               }}
             >
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: "0.6875rem",
-                  color: "rgba(240,240,240,0.3)",
+                  color: "rgba(240,240,240,0.5)",
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
                 }}
@@ -250,6 +261,36 @@ export function AboutCinematic() {
                 Studio — Alexandria, EG
               </span>
             </div>
+          </motion.div>
+
+          {/* Second image — editorial contrast */}
+          <motion.div
+            style={{
+              y: useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]),
+              aspectRatio: "16/10",
+              background: "var(--bg-surface)",
+              border: "1px solid rgba(200,255,0,0.08)",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <Image
+              src="/images/work/shelby-alexandria/bridge-sunset-1.webp"
+              alt="Shelby GT on Alexandria bridge at sunset"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: "cover", filter: "saturate(0.8)" }}
+              priority={false}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(180deg, transparent 50%, rgba(5,5,7,0.6) 100%)",
+                pointerEvents: "none",
+              }}
+            />
           </motion.div>
 
           {/* Process timeline */}

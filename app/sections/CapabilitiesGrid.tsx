@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
@@ -51,6 +51,62 @@ const itemVariants = {
   },
 }
 
+// Video background for the featured capability card (desktop only)
+function FeaturedVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
+
+  const onIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
+    const video = videoRef.current
+    if (!video) return
+    if (entries[0].isIntersecting) {
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [])
+
+  useEffect(() => {
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches
+    if (isCoarse) return
+
+    const el = wrapRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(onIntersect, { threshold: 0.25 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [onIntersect])
+
+  return (
+    <div
+      ref={wrapRef}
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 0,
+        overflow: "hidden",
+      }}
+    >
+      <video
+        ref={videoRef}
+        src="/videos/capabilities-reel.mp4"
+        muted
+        loop
+        playsInline
+        preload="none"
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          opacity: 0.15,
+          filter: "saturate(0)",
+        }}
+      />
+    </div>
+  )
+}
+
 function CapabilityCard({
   cap,
 }: {
@@ -79,16 +135,19 @@ function CapabilityCard({
       }}
     >
       {cap.featured && (
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <Canvas
-            camera={{ position: [0, 0, 3] }}
-            gl={{ antialias: false, powerPreference: "default" }}
-            dpr={1}
-            style={{ background: "transparent" }}
-          >
-            <MiniScene />
-          </Canvas>
-        </div>
+        <>
+          <FeaturedVideo />
+          <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+            <Canvas
+              camera={{ position: [0, 0, 3] }}
+              gl={{ antialias: false, powerPreference: "default" }}
+              dpr={1}
+              style={{ background: "transparent" }}
+            >
+              <MiniScene />
+            </Canvas>
+          </div>
+        </>
       )}
 
       <div style={{ position: "relative", zIndex: 1 }}>

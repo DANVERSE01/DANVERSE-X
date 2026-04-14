@@ -146,6 +146,31 @@ export function ContactCinematic() {
         }}
       />
 
+      {/* Top radial depth glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "40%",
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,255,0,0.012), transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Edge vignette */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 70% 70% at 50% 50%, transparent 50%, rgba(5,5,7,0.5) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
       <div style={{ position: "relative", maxWidth: "1400px", margin: "0 auto" }}>
         <span
           style={{

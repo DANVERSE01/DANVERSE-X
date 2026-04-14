@@ -297,7 +297,7 @@ export function HeroSection() {
       {/* Video underlay — desktop only */}
       <HeroVideo />
 
-      {/* Radial vignette */}
+      {/* Cinematic vignette — darker edges for focus */}
       <div
         style={{
           position: "absolute",
@@ -305,6 +305,36 @@ export function HeroSection() {
           zIndex: 2,
           background:
             "radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, rgba(5,5,7,0.85) 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Bottom fade — editorial dissolve into next section */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "30%",
+          zIndex: 3,
+          background:
+            "linear-gradient(to top, var(--bg-base) 0%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Top atmospheric lime wash */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "40%",
+          zIndex: 3,
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,255,0,0.02), transparent 80%)",
           pointerEvents: "none",
         }}
       />

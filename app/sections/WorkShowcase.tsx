@@ -68,7 +68,12 @@ function WorkCard({
             src={work.cover}
             alt={work.title}
             fill
-            style={{ objectFit: "cover", viewTransitionName: `work-img-${work.slug}` } as React.CSSProperties}
+            style={{
+              objectFit: "cover",
+              viewTransitionName: `work-img-${work.slug}`,
+              filter: "grayscale(0.6) contrast(1.05)",
+              transition: "filter 0.6s cubic-bezier(0.22,1,0.36,1)",
+            } as React.CSSProperties}
             priority={index === 0}
             sizes="80vw"
           />
@@ -81,6 +86,20 @@ function WorkCard({
             }}
           />
         )}
+
+        {/* Bottom card cinematic fade */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "50%",
+            background: "linear-gradient(to top, rgba(5,5,7,0.7), transparent)",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        />
 
         {/* Hover overlay */}
         <motion.div

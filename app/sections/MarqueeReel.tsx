@@ -110,7 +110,6 @@ function VideoReel() {
       <video
         ref={videoRef}
         src="/videos/brand-film.mp4"
-        poster="/videos/showreel-hero.mp4"
         muted
         loop
         playsInline
@@ -122,6 +121,16 @@ function VideoReel() {
           display: "block",
         }}
       />
+      {/* Top + bottom cinematic letterbox fades */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          background:
+            "linear-gradient(to bottom, rgba(5,5,7,0.6) 0%, transparent 18%, transparent 82%, rgba(5,5,7,0.6) 100%)",
+        }}
+      />
       <div
         style={{
           position: "absolute",
@@ -130,7 +139,6 @@ function VideoReel() {
           alignItems: "center",
           justifyContent: "center",
           pointerEvents: "none",
-          background: "linear-gradient(to bottom, rgba(5,5,7,0.35) 0%, rgba(5,5,7,0.1) 50%, rgba(5,5,7,0.5) 100%)",
         }}
       >
         <span

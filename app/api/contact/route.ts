@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: "DANVERSE Contact <no-reply@danverse.studio>",
-      to: ["studio@danverse.ai"],
+      to: ["danverseai@gmail.com"],
       replyTo: email,
       subject: `[TX-NEW] ${projectType || "Project"} from ${name}`,
       html: `

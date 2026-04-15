@@ -166,7 +166,7 @@ function CapabilityCard({
 
         <h3
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
             fontWeight: 700,
             color: "#f0f0f0",
@@ -217,7 +217,7 @@ export function CapabilitiesGrid() {
           </span>
           <h2
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 5vw, 5rem)",
               fontWeight: 800,
               color: "#f0f0f0",

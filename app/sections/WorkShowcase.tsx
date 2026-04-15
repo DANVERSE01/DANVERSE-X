@@ -6,6 +6,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { featuredWorks, type WorkItem } from "@/lib/work"
 import Image from "next/image"
+import { BLUR_DARK } from "@/lib/blur"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -76,6 +77,8 @@ function WorkCard({
             } as React.CSSProperties}
             priority={index === 0}
             sizes="80vw"
+            placeholder="blur"
+            blurDataURL={BLUR_DARK}
           />
         ) : (
           <div
@@ -148,7 +151,7 @@ function WorkCard({
           </p>
           <h3
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -217,7 +220,7 @@ function CaseStudyOverlay({ work, onClose }: { work: WorkItem; onClose: () => vo
           </span>
           <h2
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 6vw, 6rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -324,7 +327,7 @@ export function WorkShowcase() {
             </span>
             <h2
               style={{
-                fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.5rem, 5vw, 5rem)",
                 fontWeight: 800,
                 color: "#f0f0f0",

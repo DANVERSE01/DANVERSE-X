@@ -7,6 +7,7 @@ import { SplitText } from "gsap/SplitText"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion, useScroll, useVelocity, useTransform, useSpring } from "framer-motion"
 import { MagneticButton } from "@/app/components/MagneticButton"
+import { useLenis } from "lenis/react"
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
@@ -89,6 +90,7 @@ function HeroText() {
   const subRef = useRef<HTMLParagraphElement>(null)
   const labelRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const lenis = useLenis()
 
   useEffect(() => {
     const h1 = h1Ref.current
@@ -150,7 +152,7 @@ function HeroText() {
       <h1
         ref={h1Ref}
         style={{
-          fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+          fontFamily: "var(--font-display)",
           fontSize: "clamp(4.5rem, 12vw, 14rem)",
           fontWeight: 800,
           lineHeight: 0.88,
@@ -194,11 +196,12 @@ function HeroText() {
       >
         <MagneticButton
           className="hero-cta-primary"
+          onClick={() => lenis?.scrollTo("#tx-05")}
           style={{
             padding: "0.875rem 2.25rem",
             background: "#c8ff00",
             color: "#050507",
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontWeight: 700,
             fontSize: "0.875rem",
             letterSpacing: "0.04em",
@@ -214,11 +217,12 @@ function HeroText() {
 
         <MagneticButton
           className="hero-cta-secondary"
+          onClick={() => lenis?.scrollTo("#tx-02")}
           style={{
             padding: "0.875rem 2.25rem",
             background: "transparent",
             color: "#f0f0f0",
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontWeight: 600,
             fontSize: "0.875rem",
             letterSpacing: "0.04em",

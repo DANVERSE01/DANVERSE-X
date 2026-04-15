@@ -54,7 +54,7 @@ function Row({ rtl = false, baseVelocity = 60, rowOpacity = 1 }: { rtl?: boolean
               alignItems: "center",
               gap: "1.25rem",
               padding: "0 1.5rem",
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)",
               fontWeight: 500,
               letterSpacing: "-0.02em",
@@ -145,7 +145,7 @@ function VideoReel() {
       >
         <span
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
             fontWeight: 700,
             color: "#f4f4f0",

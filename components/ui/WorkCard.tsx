@@ -6,6 +6,7 @@ import { useRef } from "react"
 import { emitter } from "@/lib/events"
 import { useDanverseStore } from "@/lib/store"
 import type { WorkItem } from "@/lib/work"
+import { BLUR_DARK } from "@/lib/blur"
 
 export function WorkCard({ work }: { work: WorkItem }) {
   const setCursorState = useDanverseStore((state) => state.setCursorState)
@@ -58,6 +59,8 @@ export function WorkCard({ work }: { work: WorkItem }) {
             sizes="(max-width: 959px) 100vw, 420px"
             className="work-card__image"
             quality={90}
+            placeholder="blur"
+            blurDataURL={BLUR_DARK}
           />
         ) : (
           <div className="work-card__placeholder" />

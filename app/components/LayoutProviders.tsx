@@ -13,6 +13,7 @@ export function LayoutProviders({ children }: { children: ReactNode }) {
       <FilmGrain />
       <CustomCursor />
       <Preloader />
+      <PageTransition />
       <SmoothScroll>
         <PageTransition>
           {children}

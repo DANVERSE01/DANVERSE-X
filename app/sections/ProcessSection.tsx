@@ -150,7 +150,7 @@ export function ProcessSection() {
           </span>
           <h2
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 5vw, 5rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -214,7 +214,7 @@ export function ProcessSection() {
                   <span
                     ref={(el) => { numbersRef.current[i] = el }}
                     style={{
-                      fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+                      fontFamily: "var(--font-display)",
                       fontSize: "clamp(2rem, 4vw, 3.5rem)",
                       fontWeight: 800,
                       color: activeStep === i ? "#c8ff00" : "rgba(240,240,240,0.15)",
@@ -232,7 +232,7 @@ export function ProcessSection() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+                      fontFamily: "var(--font-display)",
                       fontSize: "clamp(1.75rem, 3vw, 2.75rem)",
                       fontWeight: 800,
                       color: "#f0f0f0",

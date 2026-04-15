@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { BLUR_DARK } from "@/lib/blur"
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
@@ -51,7 +52,7 @@ function StatCounter({ value, label }: { value: string; label: string }) {
       <span
         ref={ref}
         style={{
-          fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+          fontFamily: "var(--font-display)",
           fontSize: "clamp(2.5rem, 5vw, 5rem)",
           fontWeight: 800,
           color: "#c8ff00",
@@ -167,7 +168,7 @@ export function AboutCinematic() {
           <h2
             ref={headlineRef}
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 5vw, 5rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -228,6 +229,8 @@ export function AboutCinematic() {
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "cover", filter: "saturate(0.85) contrast(1.05)" }}
+              placeholder="blur"
+              blurDataURL={BLUR_DARK}
               priority={false}
             />
             {/* Cinematic gradient overlay */}
@@ -280,6 +283,8 @@ export function AboutCinematic() {
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: "cover", filter: "saturate(0.8)" }}
+              placeholder="blur"
+              blurDataURL={BLUR_DARK}
               priority={false}
             />
             <div
@@ -320,7 +325,7 @@ export function AboutCinematic() {
                   </span>
                   <span
                     style={{
-                      fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+                      fontFamily: "var(--font-display)",
                       fontSize: "clamp(1rem, 2vw, 1.375rem)",
                       fontWeight: 600,
                       color: "rgba(240,240,240,0.8)",

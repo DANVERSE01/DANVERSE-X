@@ -4,6 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
 import { CaseStudyVideo } from "./CaseStudyVideo"
+import { BLUR_DARK } from "@/lib/blur"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -73,6 +74,8 @@ export default async function WorkDetailPage({ params }: PageProps) {
               sizes="100vw" 
               priority 
               quality={90}
+              placeholder="blur"
+              blurDataURL={BLUR_DARK}
             />
           </div>
         </section>
@@ -127,6 +130,8 @@ export default async function WorkDetailPage({ params }: PageProps) {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   loading={index < 2 ? "eager" : "lazy"}
                   quality={85}
+                  placeholder="blur"
+                  blurDataURL={BLUR_DARK}
                 />
               </div>
             ))}

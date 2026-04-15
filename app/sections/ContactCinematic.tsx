@@ -254,7 +254,7 @@ export function ContactCinematic() {
             )}
 
             <MagneticButton
-              onClick={() => window.open("mailto:danverseai@gmail.com", "_self")}
+              href="mailto:danverseai@gmail.com"
               style={{
                 padding: "1.25rem 3rem",
                 background: "#c8ff00",

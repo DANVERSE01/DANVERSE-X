@@ -88,6 +88,7 @@ export function AboutCinematic() {
     offset: ["start end", "end start"],
   })
   const imgY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"])
+  const imgY2 = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"])
 
   useEffect(() => {
     const h = headlineRef.current
@@ -140,10 +141,9 @@ export function AboutCinematic() {
       }}
     >
       <div
+        className="about-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "4rem",
           maxWidth: "1400px",
           margin: "0 auto",
           alignItems: "start",
@@ -269,7 +269,7 @@ export function AboutCinematic() {
           {/* Second image — editorial contrast */}
           <motion.div
             style={{
-              y: useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]),
+      y: imgY2,
               aspectRatio: "16/10",
               background: "var(--bg-surface)",
               border: "1px solid rgba(200,255,0,0.08)",

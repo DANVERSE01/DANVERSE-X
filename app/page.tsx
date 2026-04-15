@@ -17,13 +17,13 @@ export default function Page() {
       {/* Act 3 — About + Story */}
       <AboutCinematic />
       {/* Act 4 — Selected Work */}
-      <WorkShowcase />
+      <div id="tx-02"><WorkShowcase /></div>
       {/* Act 5 — Capabilities */}
-      <CapabilitiesGridLazy />
+      <div id="tx-03"><CapabilitiesGridLazy /></div>
       {/* Act 6 — Process */}
-      <ProcessSection />
+      <div id="tx-04"><ProcessSection /></div>
       {/* Act 7 — Contact + Footer */}
-      <ContactCinematic />
+      <div id="tx-05"><ContactCinematic /></div>
     </main>
   )
 }

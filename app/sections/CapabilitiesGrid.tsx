@@ -195,8 +195,6 @@ function CapabilityCard({
 }
 
 export function CapabilitiesGrid() {
-  const ref = useRef<HTMLDivElement>(null)
-
   return (
     <section
       style={{
@@ -232,14 +230,13 @@ export function CapabilitiesGrid() {
         </div>
 
         <motion.div
-          ref={ref}
+          className="cap-grid"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
             gap: "1px",
             background: "rgba(200,255,0,0.08)",
           }}

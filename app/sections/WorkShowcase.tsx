@@ -196,44 +196,55 @@ function CaseStudyOverlay({ work, onClose }: { work: WorkItem; onClose: () => vo
     }
   }, [onClose])
 
+  const coverSrc = work.cover ?? work.gallery[0] ?? null
+
   return (
     <motion.div
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={{ type: "spring", stiffness: 280, damping: 32 }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Case study: ${work.title}`}
       style={{
         position: "fixed",
         inset: 0,
         zIndex: 8000,
         background: "#050507",
-        padding: "clamp(2rem, 5vw, 5rem) clamp(1.5rem, 6vw, 6rem)",
         overflowY: "auto",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "3rem" }}>
-        <div>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            Case Study
-          </span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.5rem, 6vw, 6rem)",
-              fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.05em",
-              margin: "0.5rem 0 0",
-            }}
-          >
-            {work.title}
-          </h2>
-        </div>
-
+      {/* Sticky header */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          background: "#050507",
+          borderBottom: "1px solid rgba(200,255,0,0.06)",
+          padding: "1.25rem clamp(1.5rem, 6vw, 6rem)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.6875rem",
+            color: "#c8ff00",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+          }}
+        >
+          Case Study — {work.category}
+        </span>
         <button
           onClick={onClose}
+          aria-label="Close case study"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.75rem",
@@ -251,19 +262,288 @@ function CaseStudyOverlay({ work, onClose }: { work: WorkItem; onClose: () => vo
         </button>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", flex: 1 }}>
-        <div>
-          <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Challenge</p>
-          <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "#f0f0f0", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.hook ?? "Direction-led creative for brands that lead their market."}
-          </p>
+      {/* Body */}
+      <div style={{ padding: "clamp(2rem, 5vw, 5rem) clamp(1.5rem, 6vw, 6rem)", flex: 1 }}>
+        {/* Title */}
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(3rem, 7vw, 7rem)",
+            fontWeight: 800,
+            color: "#f0f0f0",
+            letterSpacing: "-0.05em",
+            lineHeight: 1,
+            margin: "0 0 clamp(2rem, 4vw, 4rem)",
+          }}
+        >
+          {work.title}
+        </h2>
+
+        {/* Cover image */}
+        {coverSrc && (
+          <div
+            style={{
+              position: "relative",
+              aspectRatio: "16/9",
+              overflow: "hidden",
+              marginBottom: "clamp(2.5rem, 5vw, 5rem)",
+              background: "rgba(200,255,0,0.03)",
+            }}
+          >
+            <Image
+              src={coverSrc}
+              alt={work.title}
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 90vw"
+              placeholder="blur"
+              blurDataURL={BLUR_DARK}
+            />
+          </div>
+        )}
+
+        {/* Metrics */}
+        {work.metrics && work.metrics.length > 0 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${Math.min(work.metrics.length, 4)}, 1fr)`,
+              gap: "1px",
+              background: "rgba(200,255,0,0.08)",
+              border: "1px solid rgba(200,255,0,0.08)",
+              marginBottom: "clamp(2.5rem, 5vw, 5rem)",
+            }}
+          >
+            {work.metrics.map((m) => (
+              <div
+                key={m.label}
+                style={{
+                  background: "#050507",
+                  padding: "2rem 1.5rem",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2rem, 4vw, 3.5rem)",
+                    fontWeight: 800,
+                    color: "#c8ff00",
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1,
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  {m.value}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6875rem",
+                    color: "rgba(240,240,240,0.4)",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {m.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Challenge / Approach */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "3rem",
+            marginBottom: "clamp(2.5rem, 5vw, 5rem)",
+          }}
+          className="overlay-text-grid"
+        >
+          <div>
+            <p
+              style={{
+                fontSize: "0.6875rem",
+                color: "#c8ff00",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              Challenge
+            </p>
+            <p
+              style={{
+                fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                color: "#f0f0f0",
+                lineHeight: 1.7,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {work.challenge ?? work.hook}
+            </p>
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: "0.6875rem",
+                color: "#c8ff00",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                marginBottom: "0.75rem",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              Approach
+            </p>
+            <p
+              style={{
+                fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                color: "rgba(240,240,240,0.7)",
+                lineHeight: 1.7,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {work.approach ?? work.solution}
+            </p>
+          </div>
         </div>
-        <div>
-          <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Approach</p>
-          <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "rgba(240,240,240,0.7)", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.solution ?? "Visual craft built for precision and longevity."}
-          </p>
-        </div>
+
+        {/* Client quote */}
+        {work.clientQuote && (
+          <blockquote
+            style={{
+              borderLeft: "2px solid #c8ff00",
+              paddingLeft: "2rem",
+              margin: "0 0 clamp(2.5rem, 5vw, 5rem)",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                fontWeight: 500,
+                fontStyle: "italic",
+                color: "#f0f0f0",
+                lineHeight: 1.5,
+                letterSpacing: "-0.02em",
+                marginBottom: "1rem",
+              }}
+            >
+              &ldquo;{work.clientQuote.text}&rdquo;
+            </p>
+            <footer
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.6875rem",
+                color: "rgba(240,240,240,0.4)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              — {work.clientQuote.author}
+              {work.clientQuote.role && `, ${work.clientQuote.role}`}
+            </footer>
+          </blockquote>
+        )}
+
+        {/* Meta row — roles / tools / duration */}
+        {(work.roles?.length || work.tools?.length || work.duration) && (
+          <div
+            style={{
+              display: "flex",
+              gap: "3rem",
+              flexWrap: "wrap",
+              paddingTop: "2rem",
+              borderTop: "1px solid rgba(200,255,0,0.08)",
+              marginBottom: "clamp(2.5rem, 5vw, 5rem)",
+            }}
+          >
+            {work.roles && work.roles.length > 0 && (
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6875rem",
+                    color: "#c8ff00",
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Roles
+                </p>
+                <p style={{ color: "rgba(240,240,240,0.6)", fontSize: "0.9375rem", lineHeight: 1.6 }}>
+                  {work.roles.join(" · ")}
+                </p>
+              </div>
+            )}
+            {work.tools && work.tools.length > 0 && (
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6875rem",
+                    color: "#c8ff00",
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Tools
+                </p>
+                <p style={{ color: "rgba(240,240,240,0.6)", fontSize: "0.9375rem", lineHeight: 1.6 }}>
+                  {work.tools.join(" · ")}
+                </p>
+              </div>
+            )}
+            {work.duration && (
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.6875rem",
+                    color: "#c8ff00",
+                    letterSpacing: "0.15em",
+                    textTransform: "uppercase",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Duration
+                </p>
+                <p style={{ color: "rgba(240,240,240,0.6)", fontSize: "0.9375rem", lineHeight: 1.6 }}>
+                  {work.duration}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* CTA */}
+        <a
+          href={`/work/${work.slug}`}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: "1rem",
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            color: "#050507",
+            background: "#c8ff00",
+            padding: "1.125rem 2.5rem",
+            textDecoration: "none",
+            cursor: "none",
+          }}
+          data-cursor="magnetic"
+        >
+          View Full Case Study →
+        </a>
       </div>
     </motion.div>
   )

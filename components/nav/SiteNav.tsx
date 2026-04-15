@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation"
 import { useDanverseStore } from "@/lib/store"
 
 const navItems = [
-  { href: "/#tx-02", label: "Work" },
-  { href: "/#tx-03", label: "Services" },
-  { href: "/#tx-04", label: "Process" },
-  { href: "/#tx-05", label: "Contact" },
+  { href: "/#tx-02", label: "Work", activePath: "/work" },
+  { href: "/#tx-03", label: "Services", activePath: null },
+  { href: "/#tx-04", label: "Process", activePath: null },
+  { href: "/#tx-05", label: "Contact", activePath: null },
 ]
 
 export function SiteNav() {
@@ -42,11 +42,19 @@ export function SiteNav() {
           <span className="nav-wordmark">DANVERSE</span>
         </Link>
         <nav className="nav-links" aria-label="Primary">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className={pathname === "/work" ? "is-muted" : ""}>
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isOnWorkSection = pathname.startsWith("/work") && item.activePath === "/work"
+            const isMuted = pathname.startsWith("/work") && !isOnWorkSection
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={isOnWorkSection ? "is-active" : isMuted ? "is-muted" : ""}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
         </nav>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <span className="nav-available">Available for projects</span>

@@ -1,7 +1,6 @@
 "use client"
 
 import type { CSSProperties, ReactNode } from "react"
-import { useRef } from "react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 
 interface MagneticButtonProps {
@@ -18,18 +17,16 @@ export function MagneticButton({
   className = "",
   style,
   onClick,
+  href,
   strength = 0.4,
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLButtonElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 })
   const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 })
 
-  const onMove = (e: React.MouseEvent) => {
-    const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
+  const onMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
     x.set((e.clientX - (rect.left + rect.width / 2)) * strength)
     y.set((e.clientY - (rect.top + rect.height / 2)) * strength)
   }
@@ -39,9 +36,24 @@ export function MagneticButton({
     y.set(0)
   }
 
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        style={{ x: springX, y: springY, display: "inline-block", ...style }}
+        whileTap={{ scale: 0.97 }}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        className={className}
+        data-cursor="magnetic"
+      >
+        {children}
+      </motion.a>
+    )
+  }
+
   return (
     <motion.button
-      ref={ref}
       style={{ x: springX, y: springY, ...style }}
       whileTap={{ scale: 0.97 }}
       onMouseMove={onMove}

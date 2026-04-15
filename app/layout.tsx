@@ -1,7 +1,7 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Syne } from "next/font/google"
 import { SiteNav } from "@/components/nav/SiteNav"
 import { Observability } from "@/components/ui/Observability"
 import { LayoutProviders } from "@/app/components/LayoutProviders"
@@ -10,6 +10,13 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body-next",
   weight: ["300", "400", "500", "600"],
+  display: "swap",
+})
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display-next",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 })
 
@@ -69,7 +76,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <head />
       <body>
         <LayoutProviders>

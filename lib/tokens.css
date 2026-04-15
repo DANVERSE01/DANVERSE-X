@@ -41,7 +41,7 @@
   --text-15:        var(--color-white-10);
 
   /* Typography */
-  --font-display: "Clash Display", "Cabinet Grotesk", system-ui, sans-serif;
+  --font-display: var(--font-display-next, "Syne", system-ui, sans-serif);
   --font-body:    var(--font-body-next, "Inter", system-ui, sans-serif);
   --font-mono:    var(--font-mono-next, "JetBrains Mono", "Courier New", monospace);
 

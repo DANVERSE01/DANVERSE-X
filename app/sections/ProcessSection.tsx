@@ -47,19 +47,21 @@ export function ProcessSection() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
+    const triggers: ReturnType<typeof ScrollTrigger.create>[] = []
+
     STEPS.forEach((_, i) => {
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: section,
         start: `top+=${i * 25}% center`,
         end: `top+=${(i + 1) * 25}% center`,
         onEnter() { setActiveStep(i) },
         onEnterBack() { setActiveStep(i) },
-      })
+      }))
 
       const el = numbersRef.current[i]
       if (!el) return
 
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: section,
         start: `top+=${i * 25}% center`,
         end: `top+=${(i + 1) * 25}% center`,
@@ -75,7 +77,7 @@ export function ProcessSection() {
         onLeaveBack() {
           gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" })
         },
-      })
+      }))
     })
 
     // Animate connecting SVG line via stroke-dashoffset
@@ -83,7 +85,7 @@ export function ProcessSection() {
     if (line) {
       const len = line.getTotalLength?.() ?? 200
       gsap.set(line, { strokeDasharray: len, strokeDashoffset: len })
-      ScrollTrigger.create({
+      triggers.push(ScrollTrigger.create({
         trigger: section,
         start: "top 60%",
         end: "bottom 40%",
@@ -91,10 +93,10 @@ export function ProcessSection() {
         onUpdate(self) {
           gsap.set(line, { strokeDashoffset: len * (1 - self.progress) })
         },
-      })
+      }))
     }
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill())
+    return () => triggers.forEach((t) => t.kill())
   }, [])
 
   return (

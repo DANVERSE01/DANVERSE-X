@@ -139,6 +139,8 @@ function CapabilityCard({
           <FeaturedVideo />
           <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
             <Canvas
+              role="img"
+              aria-label="3D wireframe icosahedron animation"
               camera={{ position: [0, 0, 3] }}
               gl={{ antialias: false, powerPreference: "default" }}
               dpr={1}

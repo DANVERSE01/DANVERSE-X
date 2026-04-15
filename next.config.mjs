@@ -4,6 +4,10 @@ const config = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [{ protocol: "https", hostname: "**.r2.cloudflarestorage.com" }],
   },
+  reactCompiler: true,
+  experimental: {
+    optimizePackageImports: ["framer-motion", "gsap"],
+  },
 }
 
 export default config

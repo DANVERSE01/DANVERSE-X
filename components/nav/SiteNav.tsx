@@ -38,7 +38,7 @@ export function SiteNav() {
     <header className="site-nav" ref={headerRef}>
       <div className="nav-inner">
         <Link href="/" className="nav-brand" aria-label="DANVERSE home">
-          <Image src="/brand/danverse-mark.png" alt="DANVERSE" width={34} height={34} className="nav-logo" />
+          <Image src="/brand/danverse-mark.png" alt="DANVERSE" width={34} height={34} className="nav-logo" priority />
           <span className="nav-wordmark">DANVERSE</span>
         </Link>
         <nav className="nav-links" aria-label="Primary">

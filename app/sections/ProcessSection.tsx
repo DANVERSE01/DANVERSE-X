@@ -47,56 +47,56 @@ export function ProcessSection() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
-    const triggers: ReturnType<typeof ScrollTrigger.create>[] = []
+    const ctx = gsap.context(() => {
+      STEPS.forEach((_, i) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: `top+=${i * 25}% center`,
+          end: `top+=${(i + 1) * 25}% center`,
+          onEnter() { setActiveStep(i) },
+          onEnterBack() { setActiveStep(i) },
+        })
 
-    STEPS.forEach((_, i) => {
-      triggers.push(ScrollTrigger.create({
-        trigger: section,
-        start: `top+=${i * 25}% center`,
-        end: `top+=${(i + 1) * 25}% center`,
-        onEnter() { setActiveStep(i) },
-        onEnterBack() { setActiveStep(i) },
-      }))
+        const el = numbersRef.current[i]
+        if (!el) return
 
-      const el = numbersRef.current[i]
-      if (!el) return
+        ScrollTrigger.create({
+          trigger: section,
+          start: `top+=${i * 25}% center`,
+          end: `top+=${(i + 1) * 25}% center`,
+          onEnter() {
+            gsap.to(el, { scale: 1.4, duration: 0.5, ease: "power2.out" })
+          },
+          onLeave() {
+            gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" })
+          },
+          onEnterBack() {
+            gsap.to(el, { scale: 1.4, duration: 0.5, ease: "power2.out" })
+          },
+          onLeaveBack() {
+            gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" })
+          },
+        })
+      })
 
-      triggers.push(ScrollTrigger.create({
-        trigger: section,
-        start: `top+=${i * 25}% center`,
-        end: `top+=${(i + 1) * 25}% center`,
-        onEnter() {
-          gsap.to(el, { scale: 1.4, duration: 0.5, ease: "power2.out" })
-        },
-        onLeave() {
-          gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" })
-        },
-        onEnterBack() {
-          gsap.to(el, { scale: 1.4, duration: 0.5, ease: "power2.out" })
-        },
-        onLeaveBack() {
-          gsap.to(el, { scale: 1, duration: 0.4, ease: "power2.out" })
-        },
-      }))
-    })
+      // Animate connecting SVG line via stroke-dashoffset
+      const line = svgLineRef.current
+      if (line) {
+        const len = line.getTotalLength?.() ?? 200
+        gsap.set(line, { strokeDasharray: len, strokeDashoffset: len })
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 60%",
+          end: "bottom 40%",
+          scrub: true,
+          onUpdate(self) {
+            gsap.set(line, { strokeDashoffset: len * (1 - self.progress) })
+          },
+        })
+      }
+    }, section)
 
-    // Animate connecting SVG line via stroke-dashoffset
-    const line = svgLineRef.current
-    if (line) {
-      const len = line.getTotalLength?.() ?? 200
-      gsap.set(line, { strokeDasharray: len, strokeDashoffset: len })
-      triggers.push(ScrollTrigger.create({
-        trigger: section,
-        start: "top 60%",
-        end: "bottom 40%",
-        scrub: true,
-        onUpdate(self) {
-          gsap.set(line, { strokeDashoffset: len * (1 - self.progress) })
-        },
-      }))
-    }
-
-    return () => triggers.forEach((t) => t.kill())
+    return () => ctx.revert()
   }, [])
 
   return (

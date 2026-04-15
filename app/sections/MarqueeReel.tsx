@@ -164,6 +164,7 @@ function VideoReel() {
 export function MarqueeReel() {
   return (
     <section
+      aria-hidden="true"
       style={{
         padding: "clamp(2rem, 4vw, 3rem) 0",
         background: "#050507",

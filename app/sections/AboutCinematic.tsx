@@ -1,337 +1,140 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import Image from "next/image"
+import { useEffect, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { gsap } from "gsap"
-import { SplitText } from "gsap/SplitText"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(SplitText, ScrollTrigger)
+import { gsap, registerGSAP, ScrollTrigger, SplitText } from "@/lib/gsap"
 
 const STATS = [
-  { value: "40+", label: "Projects directed" },
-  { value: "8", label: "Markets active" },
-  { value: "3×", label: "Engagement lift" },
-  { value: "12", label: "Systems shipped" },
+  { value: 40, suffix: "+", label: "Projects" },
+  { value: 8, suffix: "", label: "Markets" },
+  { value: 3, suffix: "x", label: "Engagement" },
+  { value: 12, suffix: "", label: "Systems" },
 ]
-
-function StatCounter({ value, label }: { value: string; label: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const numPart = parseFloat(value.replace(/[^0-9.]/g, ""))
-    const suffix = value.replace(/[0-9.]/g, "")
-
-    const obj = { val: 0 }
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: "top 85%",
-      once: true,
-      onEnter() {
-        gsap.to(obj, {
-          val: numPart,
-          duration: 1.6,
-          ease: "power2.out",
-          onUpdate() {
-            el.textContent = Math.round(obj.val) + suffix
-          },
-        })
-      },
-    })
-
-    return () => trigger.kill()
-  }, [value])
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-      <span
-        ref={ref}
-        style={{
-          fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-          fontSize: "clamp(2.5rem, 5vw, 5rem)",
-          fontWeight: 800,
-          color: "#c8ff00",
-          letterSpacing: "-0.05em",
-          lineHeight: 1,
-        }}
-      >
-        0
-      </span>
-      <span
-        style={{
-          fontFamily: "var(--font-body, 'Inter', sans-serif)",
-          fontSize: "0.8125rem",
-          color: "rgba(240,240,240,0.4)",
-          letterSpacing: "0.05em",
-          textTransform: "uppercase",
-        }}
-      >
-        {label}
-      </span>
-    </div>
-  )
-}
 
 export function AboutCinematic() {
   const sectionRef = useRef<HTMLElement>(null)
-  const leftRef = useRef<HTMLDivElement>(null)
+  const stickyRef = useRef<HTMLDivElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
-
+  const statsRef = useRef<(HTMLSpanElement | null)[]>([])
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   })
-  const imgY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"])
+  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-12%"])
 
   useEffect(() => {
-    const h = headlineRef.current
     const section = sectionRef.current
-    if (!h || !section) return
+    const headline = headlineRef.current
+    if (!section || !headline) return
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
-    const split = new SplitText(h, { type: "words" })
-    gsap.set(split.words, { yPercent: 100, opacity: 0 })
+    registerGSAP()
+    const split = new SplitText(headline, { type: "words" })
+    gsap.set(split.words, { yPercent: 110, opacity: 0 })
 
-    const trigger = ScrollTrigger.create({
-      trigger: h,
-      start: "top 75%",
+    const headlineTrigger = ScrollTrigger.create({
+      trigger: headline,
+      start: "top 78%",
       onEnter() {
         gsap.to(split.words, {
           yPercent: 0,
           opacity: 1,
           duration: 0.9,
-          stagger: 0.05,
+          stagger: 0.045,
           ease: "power4.out",
         })
       },
     })
 
-    // Pin left column while right scrolls
     const pin = ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: "bottom bottom",
-      pin: leftRef.current,
+      pin: stickyRef.current,
       pinSpacing: false,
     })
 
+    const statTrigger = ScrollTrigger.create({
+      trigger: section,
+      start: "top 45%",
+      once: true,
+      onEnter() {
+        STATS.forEach((stat, index) => {
+          const el = statsRef.current[index]
+          if (!el) return
+
+          const obj = { value: 0 }
+          gsap.to(obj, {
+            value: stat.value,
+            duration: 1.4,
+            ease: "power2.out",
+            onUpdate() {
+              el.textContent = `${Math.round(obj.value)}${stat.suffix}`
+            },
+          })
+        })
+      },
+    })
+
     return () => {
-      trigger.kill()
+      headlineTrigger.kill()
       pin.kill()
+      statTrigger.kill()
       split.revert()
     }
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        position: "relative",
-        background: "#050507",
-        padding: "clamp(6rem, 12vw, 14rem) clamp(1.5rem, 6vw, 6rem)",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "4rem",
-          maxWidth: "1400px",
-          margin: "0 auto",
-          alignItems: "start",
-        }}
-      >
-        {/* Left — pinned */}
-        <div ref={leftRef} style={{ position: "sticky", top: "20vh" }}>
-          <div style={{ marginBottom: "1.5rem" }}>
-            <span
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.6875rem",
-                letterSpacing: "0.2em",
-                color: "#c8ff00",
-                textTransform: "uppercase",
-              }}
-            >
-              About — 01
-            </span>
+    <section id="identity" ref={sectionRef} className="identity-section">
+      <div className="identity-section__grid">
+        <div ref={stickyRef} className="identity-section__sticky">
+          <div className="ref-section-kicker">
+            <span>[ 02 ]</span>
+            <span>Our identity</span>
           </div>
-
-          <h2
-            ref={headlineRef}
-            style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-              fontSize: "clamp(2.5rem, 5vw, 5rem)",
-              fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.04em",
-              lineHeight: 1,
-              margin: 0,
-              overflow: "hidden",
-            }}
-          >
-            We build what doesn&apos;t exist yet.
+          <h2 ref={headlineRef}>
+            Creative direction
+            <br />
+            or code?
+            <br />
+            A hybrid.
           </h2>
-
-          <p
-            style={{
-              marginTop: "2rem",
-              fontSize: "clamp(0.9rem, 1.4vw, 1rem)",
-              color: "rgba(240,240,240,0.5)",
-              lineHeight: 1.75,
-              maxWidth: "28rem",
-            }}
-          >
-            Alexandria-based creative studio. We direct brand systems, motion, and digital
-            experiences for clients who know the difference between good enough and unforgettable.
-          </p>
-
-          {/* Stats */}
-          <div
-            style={{
-              marginTop: "3.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "2rem",
-            }}
-          >
-            {STATS.map((s) => (
-              <StatCounter key={s.label} value={s.value} label={s.label} />
-            ))}
-          </div>
         </div>
 
-        {/* Right — scrollable */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {/* Image with parallax — real editorial photography */}
-          <motion.div
-            ref={imageRef}
-            style={{
-              y: imgY,
-              aspectRatio: "4/5",
-              background: "var(--bg-surface)",
-              border: "1px solid rgba(200,255,0,0.08)",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
+        <div className="identity-section__content">
+          <motion.div className="identity-section__image" style={{ y: imageY }}>
             <Image
               src="/images/work/shelby-alexandria/stanley-golden.webp"
-              alt="Shelby GT studio shot — golden hour"
+              alt="Automotive CGI scene from the DANVERSE archive"
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: "cover", filter: "saturate(0.85) contrast(1.05)" }}
-              priority={false}
-            />
-            {/* Cinematic gradient overlay */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, transparent 40%, rgba(5,5,7,0.75) 100%)",
-                pointerEvents: "none",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                bottom: "2rem",
-                left: "2rem",
-                right: "2rem",
-                zIndex: 1,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.6875rem",
-                  color: "rgba(240,240,240,0.5)",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Studio — Alexandria, EG
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Second image — editorial contrast */}
-          <motion.div
-            style={{
-              y: useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]),
-              aspectRatio: "16/10",
-              background: "var(--bg-surface)",
-              border: "1px solid rgba(200,255,0,0.08)",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <Image
-              src="/images/work/shelby-alexandria/bridge-sunset-1.webp"
-              alt="Shelby GT on Alexandria bridge at sunset"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: "cover", filter: "saturate(0.8)" }}
-              priority={false}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, transparent 50%, rgba(5,5,7,0.6) 100%)",
-                pointerEvents: "none",
-              }}
+              sizes="(max-width: 900px) 100vw, 48vw"
+              loading="lazy"
+              quality={88}
             />
           </motion.div>
 
-          {/* Process timeline */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {["Research", "Strategy", "Craft", "Delivery"].map(
-              (step, i) => (
-                <div
-                  key={step}
-                  style={{
-                    padding: "1.5rem 0",
-                    borderBottom: "1px solid rgba(200,255,0,0.08)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1.5rem",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.6rem",
-                      color: "#c8ff00",
-                      letterSpacing: "0.1em",
-                      minWidth: "2rem",
-                    }}
-                  >
-                    0{i + 1}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-                      fontSize: "clamp(1rem, 2vw, 1.375rem)",
-                      fontWeight: 600,
-                      color: "rgba(240,240,240,0.8)",
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {step}
-                  </span>
-                </div>
-              )
-            )}
+          <div className="identity-copy">
+            <p>
+              We build campaign systems with a film director's eye and an engineer's refusal to let the frame drift.
+            </p>
+            <p>
+              Every surface is treated like a signal path: strategy, image, motion, interaction, and delivery tuned until the brand feels inevitable.
+            </p>
+            <p>
+              Based in Alexandria and built for GCC markets, DANVERSE operates where premium taste, platform speed, and technical production overlap.
+            </p>
+          </div>
+
+          <div className="identity-stats">
+            {STATS.map((stat, index) => (
+              <div key={stat.label}>
+                <span ref={(el) => { statsRef.current[index] = el }}>0{stat.suffix}</span>
+                <strong>{stat.label}</strong>
+              </div>
+            ))}
           </div>
         </div>
       </div>

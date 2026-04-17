@@ -1,16 +1,19 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export function CaseStudyVideo({ src, title }: { src: string; title: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const posterPath = `/videos/posters/${src.split("/").pop()?.replace(".mp4", "")}-poster.jpg`
 
   const onIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
     const video = videoRef.current
     if (!video) return
-    if (entries[0].isIntersecting) {
-      video.play().catch(() => {})
+    if (entries[0]?.isIntersecting) {
+      video.play().catch(() => undefined)
     } else {
       video.pause()
     }
@@ -33,33 +36,22 @@ export function CaseStudyVideo({ src, title }: { src: string; title: string }) {
       <h2 className="case-study__gallery-title">Video Showcase</h2>
       <div
         ref={wrapRef}
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          aspectRatio: "16 / 9",
-          borderRadius: "4px",
-          overflow: "hidden",
-          background: "#0a0a0f",
-        }}
+        className="case-study__video-wrap"
       >
         <video
           ref={videoRef}
           src={src}
+          poster={posterPath}
           muted
           loop
           playsInline
           preload="none"
           controls
           aria-label={`${title} video showcase`}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
+          onLoadedData={() => setIsLoaded(true)}
+          className={`case-study__video-el ${isLoaded ? "is-loaded" : ""}`}
         />
+        {!isLoaded && <div className="case-study__video-skeleton" />}
       </div>
     </section>
   )

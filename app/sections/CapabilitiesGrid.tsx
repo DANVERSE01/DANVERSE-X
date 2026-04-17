@@ -91,6 +91,7 @@ function FeaturedVideo() {
       <video
         ref={videoRef}
         src="/videos/capabilities-reel.mp4"
+        poster="/videos/posters/capabilities-reel-poster.jpg"
         muted
         loop
         playsInline

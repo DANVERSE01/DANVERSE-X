@@ -1,365 +1,152 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { featuredWorks, type WorkItem } from "@/lib/work"
 import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useRef } from "react"
+import { featuredWorks, type WorkItem } from "@/lib/work"
+import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
 
-gsap.registerPlugin(ScrollTrigger)
+function SelectedWorkCard({ work, index }: { work: WorkItem; index: number }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const cardRef = useRef<HTMLAnchorElement | null>(null)
 
-function WorkCard({
-  work,
-  index,
-  onClick,
-}: {
-  work: WorkItem
-  index: number
-  onClick: () => void
-}) {
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rotX = useSpring(tiltX, { stiffness: 150, damping: 20 })
-  const rotY = useSpring(tiltY, { stiffness: 150, damping: 20 })
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const px = (e.clientX - rect.left) / rect.width - 0.5
-    const py = (e.clientY - rect.top) / rect.height - 0.5
-    tiltX.set(-py * 6)
-    tiltY.set(px * 6)
+  const play = () => {
+    videoRef.current?.play().catch(() => undefined)
   }
 
-  const onLeave = () => {
-    tiltX.set(0)
-    tiltY.set(0)
+  const pause = () => {
+    if (!videoRef.current) return
+    videoRef.current.pause()
+    videoRef.current.currentTime = 0
   }
+
+  useEffect(() => {
+    const card = cardRef.current
+    if (!card || !work.video) return
+
+    const pauseVideo = () => {
+      if (!videoRef.current) return
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting) pauseVideo()
+      },
+      { threshold: 0.05 }
+    )
+
+    observer.observe(card)
+    return () => observer.disconnect()
+  }, [work.video])
 
   return (
-    <motion.div
+    <Link
+      ref={cardRef}
+      href={`/work/${work.slug}`}
+      className="selected-work"
       data-cursor="text"
-      onClick={onClick}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{
-        rotateX: rotX,
-        rotateY: rotY,
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-        width: "80vw",
-        maxWidth: "900px",
-        flexShrink: 0,
-        cursor: "none",
-        userSelect: "none",
-      }}
+      data-size={index % 2 === 0 ? "wide" : "narrow"}
+      onMouseEnter={play}
+      onMouseLeave={pause}
+      onFocus={play}
+      onBlur={pause}
     >
-      <div
-        style={{
-          position: "relative",
-          aspectRatio: "16/10",
-          background: "rgba(200,255,0,0.03)",
-          border: "1px solid rgba(200,255,0,0.08)",
-          overflow: "hidden",
-        }}
-      >
+      <span className="selected-work__index">{String(index + 1).padStart(2, "0")}</span>
+      <div className="selected-work__media" data-vt={`project-${work.slug}`}>
         {work.cover ? (
           <Image
             src={work.cover}
             alt={work.title}
             fill
-            style={{
-              objectFit: "cover",
-              viewTransitionName: `work-img-${work.slug}`,
-              filter: "grayscale(0.6) contrast(1.05)",
-              transition: "filter 0.6s cubic-bezier(0.22,1,0.36,1)",
-            } as React.CSSProperties}
+            sizes={index % 2 === 0 ? "100vw" : "(max-width: 900px) 100vw, 62vw"}
             priority={index === 0}
-            sizes="80vw"
+            quality={92}
+            loading={index === 0 ? "eager" : "lazy"}
           />
-        ) : (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(135deg, rgba(200,255,0,${0.04 + index * 0.02}) 0%, #050507 70%)`,
-            }}
-          />
-        )}
-
-        {/* Bottom card cinematic fade */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "50%",
-            background: "linear-gradient(to top, rgba(5,5,7,0.7), transparent)",
-            pointerEvents: "none",
-            zIndex: 1,
-          }}
-        />
-
-        {/* Hover overlay */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(5,5,7,0.6)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            padding: "2rem",
-          }}
-        >
-          <p style={{ color: "rgba(240,240,240,0.5)", fontSize: "0.8125rem", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.5rem", fontFamily: "var(--font-mono)" }}>
-            {work.category}
-          </p>
-          <p style={{ color: "#f0f0f0", fontSize: "clamp(0.875rem, 1.5vw, 1rem)", lineHeight: 1.6 }}>
-            {work.hook}
-          </p>
-        </motion.div>
+        ) : null}
+        {work.video ? (
+          <div className="selected-work__video" aria-hidden="true">
+            <video
+              ref={videoRef}
+              src={work.video}
+              poster={`/videos/posters/${work.video.split("/").pop()?.replace(".mp4", "")}-poster.jpg`}
+              muted
+              loop
+              playsInline
+              preload="none"
+            />
+          </div>
+        ) : null}
       </div>
-
-      <div
-        style={{
-          padding: "1.5rem 0",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-        }}
-      >
-        <div>
-          <p
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.6rem",
-              color: "#c8ff00",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              marginBottom: "0.4rem",
-            }}
-          >
-            {String(index + 1).padStart(2, "0")} — {work.category}
-          </p>
-          <h3
-            style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
-              fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.04em",
-              margin: 0,
-            }}
-          >
-            {work.title}
-          </h3>
-        </div>
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "flex-end", maxWidth: "40%" }}>
-          {work.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                padding: "0.25rem 0.75rem",
-                border: "1px solid rgba(200,255,0,0.12)",
-                fontSize: "0.625rem",
-                color: "rgba(240,240,240,0.4)",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+      <div className="selected-work__caption">
+        <h3>{work.title}</h3>
+        <dl>
+          <div>
+            <dt>Client</dt>
+            <dd>{work.tags[0] ?? "DANVERSE"}</dd>
+          </div>
+          <div>
+            <dt>Type</dt>
+            <dd>{work.category ?? "Campaign"}</dd>
+          </div>
+          <div>
+            <dt>Date</dt>
+            <dd>{work.year ?? "2026"}</dd>
+          </div>
+        </dl>
       </div>
-    </motion.div>
-  )
-}
-
-function CaseStudyOverlay({ work, onClose }: { work: WorkItem; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
-    window.addEventListener("keydown", onKey)
-    document.body.style.overflow = "hidden"
-    return () => {
-      window.removeEventListener("keydown", onKey)
-      document.body.style.overflow = ""
-    }
-  }, [onClose])
-
-  return (
-    <motion.div
-      initial={{ y: "100%" }}
-      animate={{ y: 0 }}
-      exit={{ y: "100%" }}
-      transition={{ type: "spring", stiffness: 280, damping: 32 }}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 8000,
-        background: "#050507",
-        padding: "clamp(2rem, 5vw, 5rem) clamp(1.5rem, 6vw, 6rem)",
-        overflowY: "auto",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "3rem" }}>
-        <div>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            Case Study
-          </span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-              fontSize: "clamp(2.5rem, 6vw, 6rem)",
-              fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.05em",
-              margin: "0.5rem 0 0",
-            }}
-          >
-            {work.title}
-          </h2>
-        </div>
-
-        <button
-          onClick={onClose}
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.75rem",
-            color: "rgba(240,240,240,0.4)",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            padding: "0.75rem 1.25rem",
-            border: "1px solid rgba(200,255,0,0.08)",
-            background: "transparent",
-            cursor: "none",
-          }}
-          data-cursor="magnetic"
-        >
-          Close ✕
-        </button>
+      <div className="selected-work__hover">
+        <span>{work.category ?? "Case study"}</span>
+        <p>{work.hook ?? "Direction-led creative for brands that need authority."}</p>
       </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", flex: 1 }}>
-        <div>
-          <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Challenge</p>
-          <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "#f0f0f0", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.hook ?? "Direction-led creative for brands that lead their market."}
-          </p>
-        </div>
-        <div>
-          <p style={{ fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem", fontFamily: "var(--font-mono)" }}>Approach</p>
-          <p style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)", color: "rgba(240,240,240,0.7)", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            {work.solution ?? "Visual craft built for precision and longevity."}
-          </p>
-        </div>
-      </div>
-    </motion.div>
+    </Link>
   )
 }
 
 export function WorkShowcase() {
-  const [activeWork, setActiveWork] = useState<WorkItem | null>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const section = sectionRef.current
-    const track = trackRef.current
-    if (!section || !track) return
+    if (!section) return
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
-    const totalWidth = track.scrollWidth - window.innerWidth
+    registerGSAP()
+    const cards = gsap.utils.toArray<HTMLElement>(".selected-work")
+    const triggers = cards.map((card) =>
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 82%",
+        onEnter() {
+          gsap.to(card, { y: 0, opacity: 1, duration: 0.85, ease: "power4.out" })
+        },
+      })
+    )
 
-    const trigger = gsap.to(track, {
-      x: -totalWidth,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: () => `+=${totalWidth}`,
-        pin: true,
-        scrub: 1.5,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
-    })
+    gsap.set(cards, { y: 80, opacity: 0 })
 
-    return () => {
-      trigger.kill()
-      ScrollTrigger.getAll().filter((t) => t.trigger === section).forEach((t) => t.kill())
-    }
+    return () => triggers.forEach((trigger) => trigger.kill())
   }, [])
 
   return (
-    <>
-      <section
-        ref={sectionRef}
-        style={{
-          background: "#050507",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            padding: "clamp(3rem, 6vw, 6rem) clamp(1.5rem, 6vw, 6rem)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-          }}
-        >
-          <div>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "#c8ff00", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-              Selected Work — 02
-            </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
-                fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                fontWeight: 800,
-                color: "#f0f0f0",
-                letterSpacing: "-0.05em",
-                margin: "0.5rem 0 0",
-              }}
-            >
-              Selected work
-            </h2>
-          </div>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "rgba(240,240,240,0.25)", letterSpacing: "0.1em" }}>
-            Scroll →
-          </span>
-        </div>
-
-        <div
-          ref={trackRef}
-          style={{
-            display: "flex",
-            gap: "clamp(2rem, 4vw, 4rem)",
-            padding: "0 clamp(1.5rem, 6vw, 6rem)",
-            paddingBottom: "clamp(3rem, 6vw, 6rem)",
-          }}
-        >
-          {featuredWorks.map((work, i) => (
-            <WorkCard key={work.slug} work={work} index={i} onClick={() => setActiveWork(work)} />
-          ))}
-        </div>
-      </section>
-
-      <AnimatePresence>
-        {activeWork && (
-          <CaseStudyOverlay work={activeWork} onClose={() => setActiveWork(null)} />
-        )}
-      </AnimatePresence>
-    </>
+    <section id="work" ref={sectionRef} className="selected-works-section">
+      <div className="ref-section-header">
+        <span>[ 01 ]</span>
+        <h2>Selected works</h2>
+        <p>/ {String(featuredWorks.length).padStart(2, "0")}</p>
+      </div>
+      <div className="selected-works-list">
+        {featuredWorks.map((work, index) => (
+          <SelectedWorkCard key={work.slug} work={work} index={index} />
+        ))}
+      </div>
+      <Link href="/work" className="archive-link" data-cursor="magnetic">
+        See all works
+      </Link>
+    </section>
   )
 }

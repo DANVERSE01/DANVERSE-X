@@ -23,10 +23,18 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.8.0",
-    "three": "^0.183.2",
+    "three": "^0.184.0",
     "zustand": "^5.0.12"
   },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings 0"
+    ],
+    "*.{css,json,md}": []
+  },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@netlify/plugin-nextjs": "^5.15.9",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^22.15.3",

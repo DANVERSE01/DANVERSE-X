@@ -2,15 +2,16 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { emitter } from "@/lib/events"
 import { useDanverseStore } from "@/lib/store"
 import type { WorkItem } from "@/lib/work"
 
-export function WorkCard({ work }: { work: WorkItem }) {
+export function WorkCard({ work, index = 0 }: { work: WorkItem; index?: number }) {
   const setCursorState = useDanverseStore((state) => state.setCursorState)
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const remoteVideo = work.video?.startsWith("https://") ? work.video : null
+  const cardRef = useRef<HTMLAnchorElement | null>(null)
+  const previewVideo = work.video ?? null
 
   const playVideo = () => {
     if (!videoRef.current) return
@@ -23,10 +24,30 @@ export function WorkCard({ work }: { work: WorkItem }) {
     videoRef.current.currentTime = 0
   }
 
+  useEffect(() => {
+    const card = cardRef.current
+    if (!card || !previewVideo) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) return
+        if (!videoRef.current) return
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0
+      },
+      { threshold: 0.05 }
+    )
+
+    observer.observe(card)
+    return () => observer.disconnect()
+  }, [previewVideo])
+
   return (
     <Link
+      ref={cardRef}
       href={`/work/${work.slug}`}
       className="work-card"
+      data-index={String(index + 1).padStart(2, "0")}
       data-cursor="hover-work"
       onMouseEnter={() => {
         emitter.emit("work-hover", { slug: work.slug })
@@ -62,7 +83,7 @@ export function WorkCard({ work }: { work: WorkItem }) {
         ) : (
           <div className="work-card__placeholder" />
         )}
-        {remoteVideo ? (
+        {previewVideo ? (
           <video
             ref={videoRef}
             className="work-card__video"
@@ -70,7 +91,8 @@ export function WorkCard({ work }: { work: WorkItem }) {
             loop
             playsInline
             preload="none"
-            src={remoteVideo}
+            src={previewVideo}
+            poster={`/videos/posters/${previewVideo.split("/").pop()?.replace(".mp4", "")}-poster.jpg`}
             aria-hidden="true"
           />
         ) : null}

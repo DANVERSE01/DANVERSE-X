@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useEffect, useRef } from "react"
 import { featuredWorks, type WorkItem } from "@/lib/work"
 import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
+import { BLUR_DARK } from "@/lib/blur"
 
 function SelectedWorkCard({ work, index }: { work: WorkItem; index: number }) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -64,6 +65,8 @@ function SelectedWorkCard({ work, index }: { work: WorkItem; index: number }) {
             priority={index === 0}
             quality={92}
             loading={index === 0 ? "eager" : "lazy"}
+            placeholder="blur"
+            blurDataURL={BLUR_DARK}
           />
         ) : null}
         {work.video ? (

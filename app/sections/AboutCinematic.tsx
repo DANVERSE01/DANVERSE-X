@@ -118,7 +118,7 @@ export function AboutCinematic() {
 
           <div className="identity-copy">
             <p>
-              We build campaign systems with a film director's eye and an engineer's refusal to let the frame drift.
+              We build campaign systems with a film director&apos;s eye and an engineer&apos;s refusal to let the frame drift.
             </p>
             <p>
               Every surface is treated like a signal path: strategy, image, motion, interaction, and delivery tuned until the brand feels inevitable.

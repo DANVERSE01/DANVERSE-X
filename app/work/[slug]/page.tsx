@@ -4,6 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
 import { CaseStudyVideo } from "./CaseStudyVideo"
+import { BLUR_DARK } from "@/lib/blur"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -117,6 +118,8 @@ export default async function WorkDetailPage({ params }: PageProps) {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   loading={index < 2 ? "eager" : "lazy"}
                   quality={86}
+                  placeholder="blur"
+                  blurDataURL={BLUR_DARK}
                 />
                 <span>{String(index + 1).padStart(2, "0")}</span>
               </div>

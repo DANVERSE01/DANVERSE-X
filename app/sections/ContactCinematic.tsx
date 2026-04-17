@@ -1,19 +1,14 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
-import { gsap } from "gsap"
-import { SplitText } from "gsap/SplitText"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MagneticButton } from "@/app/components/MagneticButton"
-
-gsap.registerPlugin(SplitText, ScrollTrigger)
+import { gsap, registerGSAP, ScrollTrigger, SplitText } from "@/lib/gsap"
 
 function LiveClock() {
   const [time, setTime] = useState("")
 
   useEffect(() => {
-    function tick() {
+    const tick = () => {
       setTime(
         new Date().toLocaleTimeString("en-US", {
           timeZone: "Africa/Cairo",
@@ -29,18 +24,7 @@ function LiveClock() {
     return () => clearInterval(id)
   }, [])
 
-  return (
-    <span
-      style={{
-        fontFamily: "var(--font-mono)",
-        fontSize: "0.6875rem",
-        color: "rgba(240,240,240,0.25)",
-        letterSpacing: "0.1em",
-      }}
-    >
-      CAI {time}
-    </span>
-  )
+  return <span className="contact-clock">CAI {time}</span>
 }
 
 const SOCIAL_LINKS = [
@@ -49,51 +33,9 @@ const SOCIAL_LINKS = [
   { label: "WhatsApp", href: "https://wa.link/rc25na" },
 ]
 
-function SocialLink({ label, href }: { label: string; href: string }) {
-  return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: "relative",
-        display: "inline-block",
-        fontFamily: "var(--font-body, 'Inter', sans-serif)",
-        fontSize: "0.875rem",
-        color: "rgba(240,240,240,0.5)",
-        letterSpacing: "0.02em",
-        cursor: "none",
-        paddingBottom: "2px",
-      }}
-      whileHover="hovered"
-      data-cursor="magnetic"
-    >
-      {label}
-      <motion.span
-        variants={{
-          hovered: { scaleX: 1, transformOrigin: "left" },
-          initial: { scaleX: 0, transformOrigin: "left" },
-        }}
-        initial="initial"
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "1px",
-          background: "#c8ff00",
-          display: "block",
-        }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      />
-    </motion.a>
-  )
-}
-
 export function ContactCinematic() {
   const sectionRef = useRef<HTMLElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
-  const [pulse, setPulse] = useState(false)
 
   useEffect(() => {
     const h = headlineRef.current
@@ -102,18 +44,19 @@ export function ContactCinematic() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduced) return
 
+    registerGSAP()
     const split = new SplitText(h, { type: "chars" })
     gsap.set(split.chars, { yPercent: 110, opacity: 0 })
 
     const trigger = ScrollTrigger.create({
       trigger: h,
-      start: "top 75%",
+      start: "top 80%",
       onEnter() {
         gsap.to(split.chars, {
           yPercent: 0,
           opacity: 1,
-          duration: 1.2,
-          stagger: 0.03,
+          duration: 1.0,
+          stagger: 0.035,
           ease: "power4.out",
         })
       },
@@ -126,188 +69,57 @@ export function ContactCinematic() {
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        position: "relative",
-        background: "#050507",
-        padding: "clamp(8rem, 16vw, 18rem) clamp(1.5rem, 6vw, 6rem)",
-        overflow: "hidden",
-      }}
-    >
-      {/* Subtle gradient mesh */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(200,255,0,0.04) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+    <section ref={sectionRef} className="contact-ref-section">
+      <div className="contact-ref-section__top">
+        <span>Let&apos;s connect — 07</span>
+        <span className="contact-coordinates">31.2001°N 29.9187°E — Alexandria</span>
+        <LiveClock />
+      </div>
 
-      {/* Top radial depth glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "40%",
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,255,0,0.012), transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+      <h2 ref={headlineRef}>
+        Let&apos;s
+        <br />
+        work
+      </h2>
 
-      {/* Edge vignette */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 70% 70% at 50% 50%, transparent 50%, rgba(5,5,7,0.5) 100%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div style={{ position: "relative", maxWidth: "1400px", margin: "0 auto" }}>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.6875rem",
-            color: "#c8ff00",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            display: "block",
-            marginBottom: "2rem",
-          }}
-        >
-          Let&apos;s Connect — 07
-        </span>
-
-        <h2
-          ref={headlineRef}
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(5rem, 14vw, 16rem)",
-            fontWeight: 800,
-            color: "#f0f0f0",
-            letterSpacing: "-0.06em",
-            lineHeight: 0.88,
-            margin: 0,
-            overflow: "hidden",
-          }}
-        >
-          LET&apos;S
+      <div className="contact-ref-section__body">
+        <p>
+          Taking on select brand, motion, and digital projects.
           <br />
-          WORK
-        </h2>
-
-        <div
-          style={{
-            marginTop: "clamp(3rem, 6vw, 6rem)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "2rem",
-          }}
+          If the work matters, we should talk.
+        </p>
+        <MagneticButton
+          href="mailto:danverseai@gmail.com"
+          className="contact-email-display"
         >
-          <p
-            style={{
-              fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-              color: "rgba(240,240,240,0.5)",
-              maxWidth: "32rem",
-              lineHeight: 1.7,
-              letterSpacing: "-0.01em",
-            }}
+          danverseai@gmail.com
+        </MagneticButton>
+      </div>
+
+      <div className="contact-socials">
+        {SOCIAL_LINKS.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="magnetic"
           >
-            Taking on select brand, motion, and digital projects. If the work matters, we should talk.
-          </p>
+            {link.label}
+            <em>↗</em>
+          </a>
+        ))}
+      </div>
 
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onMouseEnter={() => setPulse(true)}
-            onMouseLeave={() => setPulse(false)}
-          >
-            {/* Pulse ring */}
-            {pulse && (
-              <motion.div
-                initial={{ scale: 1, opacity: 0.5 }}
-                animate={{ scale: 2.2, opacity: 0 }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 0,
-                  border: "1px solid #c8ff00",
-                  pointerEvents: "none",
-                }}
-              />
-            )}
-
-            <MagneticButton
-              href="mailto:danverseai@gmail.com"
-              style={{
-                padding: "1.25rem 3rem",
-                background: "#c8ff00",
-                color: "#050507",
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                fontSize: "1rem",
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                border: "none",
-                cursor: "none",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              Get in Touch →
-            </MagneticButton>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div
-          style={{
-            marginTop: "clamp(6rem, 10vw, 10rem)",
-            paddingTop: "2rem",
-            borderTop: "1px solid rgba(200,255,0,0.08)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "1.5rem",
-          }}
+      <div className="contact-bottom">
+        <span>© 2026 DANVERSE. All rights reserved.</span>
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-          <span
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(1rem, 2vw, 1.375rem)",
-              fontWeight: 700,
-              color: "#f0f0f0",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            DANVERSE
-          </span>
-
-          <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-            {SOCIAL_LINKS.map((link) => (
-              <SocialLink key={link.label} {...link} />
-            ))}
-          </div>
-
-          <LiveClock />
-        </div>
+          ↑ Back to top
+        </button>
+        <LiveClock />
       </div>
     </section>
   )

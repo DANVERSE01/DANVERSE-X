@@ -44,9 +44,9 @@ function LiveClock() {
 }
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Behance", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/muhammedd_adel" },
+  { label: "Email", href: "mailto:danverseai@gmail.com" },
+  { label: "WhatsApp", href: "https://wa.link/rc25na" },
 ]
 
 function SocialLink({ label, href }: { label: string; href: string }) {
@@ -189,7 +189,7 @@ export function ContactCinematic() {
         <h2
           ref={headlineRef}
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(5rem, 14vw, 16rem)",
             fontWeight: 800,
             color: "#f0f0f0",
@@ -254,11 +254,12 @@ export function ContactCinematic() {
             )}
 
             <MagneticButton
+              href="mailto:danverseai@gmail.com"
               style={{
                 padding: "1.25rem 3rem",
                 background: "#c8ff00",
                 color: "#050507",
-                fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 700,
                 fontSize: "1rem",
                 letterSpacing: "0.04em",
@@ -289,7 +290,7 @@ export function ContactCinematic() {
         >
           <span
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(1rem, 2vw, 1.375rem)",
               fontWeight: 700,
               color: "#f0f0f0",

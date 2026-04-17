@@ -31,6 +31,6 @@ npm run build
 ### 4. Notes
 
 - Canonical site identity: `https://danverse.studio`
-- Primary inbox: `studio@danverse.ai`
+- Primary inbox: `danverseai@gmail.com`
 - Outbound email is not treated as finished until DNS and Resend configuration are verified
 - Numeric claims remain hidden unless a brief-approved source of truth exists

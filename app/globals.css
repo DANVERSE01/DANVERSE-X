@@ -1,5 +1,23 @@
 @import "../lib/tokens.css";
 
+/* ─── SKIP LINK ─── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: #E0E75B;
+  color: #06070a;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 0 0 4px 4px;
+  text-decoration: none;
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 /* ─── RESET ─── */
 *,
 *::before,
@@ -112,7 +130,6 @@ h3 {
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: var(--tracking-display);
-  font-feature-settings: "ss01" on, "ss03" on;
 }
 
 p {
@@ -226,6 +243,14 @@ p {
 .nav-links a:hover,
 .nav-links a:focus-visible {
   color: var(--text-100);
+}
+
+.nav-links a.is-active {
+  color: var(--signal);
+}
+
+.nav-links a.is-muted {
+  color: var(--text-35);
 }
 
 .nav-toggle {
@@ -1378,6 +1403,52 @@ p {
 .preloader__progress-fill {
   background: var(--signal);
 }
+
+/* ─── RESPONSIVE GRIDS ─── */
+
+/* About section: 2-col on desktop → 1-col on mobile */
+.about-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Capabilities grid: 4-col → 2-col → 1-col */
+.cap-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .cap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Case study overlay: 2-col challenge/approach → 1-col on mobile */
+.overlay-text-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+@media (max-width: 680px) {
+  .overlay-text-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 
 .preloader__wipe {
   position: absolute;

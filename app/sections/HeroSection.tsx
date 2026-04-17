@@ -144,7 +144,7 @@ export function HeroSection() {
           Brand systems, motion films, and digital production built with the control-room discipline of a tactical unit.
         </p>
         <div ref={ctaRef} className="hero-ref__actions">
-          <MagneticButton className="ref-button ref-button--red" cursor="send">
+          <MagneticButton className="ref-button ref-button--red">
             Start brief
           </MagneticButton>
           <a href="#work" className="ref-button ref-button--ghost" data-cursor="magnetic">

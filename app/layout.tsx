@@ -79,6 +79,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <head />
       <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <LayoutProviders>
           <SiteNav />
           {children}

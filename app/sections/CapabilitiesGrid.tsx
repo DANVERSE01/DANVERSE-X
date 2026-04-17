@@ -140,6 +140,8 @@ function CapabilityCard({
           <FeaturedVideo />
           <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
             <Canvas
+              role="img"
+              aria-label="3D wireframe icosahedron animation"
               camera={{ position: [0, 0, 3] }}
               gl={{ antialias: false, powerPreference: "default" }}
               dpr={1}
@@ -167,7 +169,7 @@ function CapabilityCard({
 
         <h3
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
             fontWeight: 700,
             color: "#f0f0f0",
@@ -194,8 +196,6 @@ function CapabilityCard({
 }
 
 export function CapabilitiesGrid() {
-  const ref = useRef<HTMLDivElement>(null)
-
   return (
     <section
       style={{
@@ -218,7 +218,7 @@ export function CapabilitiesGrid() {
           </span>
           <h2
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 5vw, 5rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -231,14 +231,13 @@ export function CapabilitiesGrid() {
         </div>
 
         <motion.div
-          ref={ref}
+          className="cap-grid"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
             gap: "1px",
             background: "rgba(200,255,0,0.08)",
           }}

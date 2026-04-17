@@ -108,7 +108,7 @@ export function Preloader() {
       >
         <span
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
             letterSpacing: "0.25em",
             color: "rgba(240,240,240,0.4)",
@@ -122,7 +122,7 @@ export function Preloader() {
           <span
             ref={counterRef}
             style={{
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(5rem, 15vw, 14rem)",
               fontWeight: 800,
               color: "#f0f0f0",
@@ -137,7 +137,7 @@ export function Preloader() {
 
         <span
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
             letterSpacing: "0.25em",
             color: "rgba(240,240,240,0.25)",

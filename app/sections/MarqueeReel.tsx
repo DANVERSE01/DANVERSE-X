@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef } from "react"
-import { motion, useScroll, useVelocity, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 
 const ITEMS = [
   "Brand Identity",
@@ -15,10 +15,6 @@ const ITEMS = [
 ]
 
 function Row({ rtl = false, baseVelocity = 60, rowOpacity = 1 }: { rtl?: boolean; baseVelocity?: number; rowOpacity?: number }) {
-  const { scrollY } = useScroll()
-  const velocity = useVelocity(scrollY)
-  const speedFactor = useTransform(velocity, [-3000, 0, 3000], [3, 1, 3])
-
   const items = [...ITEMS, ...ITEMS]
 
   return (
@@ -54,7 +50,7 @@ function Row({ rtl = false, baseVelocity = 60, rowOpacity = 1 }: { rtl?: boolean
               alignItems: "center",
               gap: "1.25rem",
               padding: "0 1.5rem",
-              fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)",
               fontWeight: 500,
               letterSpacing: "-0.02em",
@@ -145,7 +141,7 @@ function VideoReel() {
       >
         <span
           style={{
-            fontFamily: "var(--font-display, 'Clash Display', sans-serif)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
             fontWeight: 700,
             color: "#f4f4f0",
@@ -164,6 +160,7 @@ function VideoReel() {
 export function MarqueeReel() {
   return (
     <section
+      aria-hidden="true"
       style={{
         padding: "clamp(2rem, 4vw, 3rem) 0",
         background: "#050507",

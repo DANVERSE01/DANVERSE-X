@@ -45,7 +45,7 @@ Execution note: this report is the required pre-removal inventory/classification
 - Current typography stack uses Bebas Neue, Syne, Inter, and Space Grotesk; brief requires Cabinet Grotesk + Geist + JetBrains Mono.
 - Current tokens use a multi-accent palette; brief requires a strict two-color system.
 - Current homepage sequence does not follow `TX-00` through `TX-06`.
-- Current CTA/contact flow is WhatsApp-first; brief requires contact form + `studio@danverse.ai`.
+- Current CTA/contact flow is WhatsApp-first; brief requires contact form + `danverseai@gmail.com`.
 - Current site contains multiple old service/product routes that conflict with the single-page narrative.
 
 ### 2.4 Motion / rendering mismatches

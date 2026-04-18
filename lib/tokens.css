@@ -1,140 +1,109 @@
-/* ─── DANVERSE DESIGN TOKENS 2026 ─── */
+/* DANVERSE Assembly Tokens — Dark Cinematic System */
 :root {
-  /* Backgrounds — layered depth system */
-  --bg-base:     #050507;
-  --bg-surface:  #0a0a0f;
-  --bg-elevated: #111118;
-  --bg-overlay:  #1a1a24;
+  --font-display: var(--font-display-next, "Syne", sans-serif);
+  --font-body: var(--font-body-next, "Geist", system-ui, sans-serif);
+  --font-mono: var(--font-mono-next, "JetBrains Mono", "Courier New", monospace);
 
-  /* Brand — DANVERSE signature lime */
-  --color-lime:      #c8ff00;
-  --color-lime-dim:  rgba(200, 255, 0, 0.6);
-  --color-lime-glow: rgba(200, 255, 0, 0.12);
-  --color-lime-trace:rgba(200, 255, 0, 0.04);
-  --color-white:     #f4f4f0;
-  --color-white-80:  rgba(244, 244, 240, 0.80);
-  --color-white-60:  rgba(244, 244, 240, 0.60);
-  --color-white-30:  rgba(244, 244, 240, 0.30);
-  --color-white-10:  rgba(244, 244, 240, 0.10);
-  --color-white-05:  rgba(244, 244, 240, 0.05);
+  /* ── Core dark surface ────────────────────────────── */
+  --bone: #06070a;           /* PRIMARY DARK BG — was cream, now true black */
+  --bone-soft: #0b0c10;
+  --parchment: #111419;      /* elevated surface */
+  --smoke: rgba(244, 238, 229, 0.35);
+  --ash: rgba(244, 238, 229, 0.55);
+  --mineral: rgba(244, 238, 229, 0.18);
+  --glass: rgba(244, 238, 229, 0.06);
+  --glass-strong: rgba(244, 238, 229, 0.12);
 
-  /* Accent system */
-  --accent-primary:   #c8ff00;
-  --accent-secondary: #7b61ff;
-  --accent-tertiary:  #ff3d6b;
+  /* ── Text — light on dark ────────────────────────── */
+  --ink: #f4eee5;            /* PRIMARY TEXT — was near-black, now warm off-white */
+  --ink-soft: rgba(244, 238, 229, 0.85);
+  --ink-fog: rgba(244, 238, 229, 0.62);
+  --ink-muted: rgba(244, 238, 229, 0.42);
 
-  /* Legacy aliases — for backward compatibility */
-  --void:           var(--bg-base);
-  --void-1:         var(--bg-surface);
-  --void-2:         var(--bg-elevated);
-  --void-3:         var(--bg-overlay);
-  --void-border:    rgba(244, 244, 240, 0.06);
-  --void-border-hi: rgba(244, 244, 240, 0.12);
-  --signal:         var(--color-lime);
-  --signal-dim:     var(--color-lime-dim);
-  --signal-ghost:   var(--color-lime-glow);
-  --signal-trace:   var(--color-lime-trace);
-  --signal-glow:    var(--color-lime-glow);
-  --text-100:       var(--color-white);
-  --text-60:        var(--color-white-60);
-  --text-35:        var(--color-white-30);
-  --text-15:        var(--color-white-10);
+  /* ── Brand accent — citrus-lime ─────────────────── */
+  --ember: #E0E75B;          /* PRIMARY ACCENT — was brown, now citrus-lime */
+  --neon-cyan: #E0E75B;      /* lime — primary glow */
+  --neon-magenta: #EF786A;   /* coral — secondary glow */
+  --neon-amber: #00A6A6;     /* aqua-teal — tertiary */
 
-  /* Typography */
-  --font-display: var(--font-display-next, "Syne", system-ui, sans-serif);
-  --font-body:    var(--font-body-next, "Inter", system-ui, sans-serif);
-  --font-mono:    var(--font-mono-next, "JetBrains Mono", "Courier New", monospace);
+  /* ── Transparency layers ─────────────────────────── */
+  --veil: rgba(6, 7, 10, 0.72);
+  --veil-strong: rgba(6, 7, 10, 0.92);
+  --line: rgba(244, 238, 229, 0.1);
+  --line-soft: rgba(244, 238, 229, 0.06);
+  --line-light: rgba(244, 238, 229, 0.1);
 
-  /* Fluid Type Scale */
-  --text-hero:    clamp(4rem, 10vw, 10rem);
-  --text-display: clamp(2.5rem, 6vw, 6rem);
-  --text-heading: clamp(1.75rem, 3vw, 3rem);
-  --text-subhead: clamp(1.1rem, 2vw, 1.5rem);
-  --text-body:    clamp(0.875rem, 1.2vw, 1.0625rem);
-  --text-small:   0.8125rem;
-  --text-label:   0.6875rem;
+  /* ── Surface system ─────────────────────────────── */
+  --bg-base: #06070a;
+  --bg-surface: #0b0c10;
+  --bg-elevated: #111419;
+  --color-white: var(--ink);
+  --color-white-80: rgba(244, 238, 229, 0.8);
+  --color-white-60: rgba(244, 238, 229, 0.6);
+  --color-white-30: rgba(244, 238, 229, 0.3);
+  --color-white-10: rgba(244, 238, 229, 0.1);
+  --color-accent: var(--ember);
+  --color-accent-dim: rgba(224, 231, 91, 0.5);
+  --color-accent-glow: rgba(224, 231, 91, 0.15);
+  --color-accent-trace: rgba(224, 231, 91, 0.05);
 
-  /* Legacy type aliases */
-  --t-xs:   clamp(0.625rem, 0.55rem + 0.3vw, 0.75rem);
-  --t-sm:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  --t-base: clamp(0.875rem, 0.82rem + 0.3vw, 1rem);
-  --t-md:   clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
-  --t-lg:   clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
-  --t-xl:   clamp(1.75rem, 1.4rem + 1.75vw, 2.75rem);
-  --t-2xl:  clamp(2.5rem, 1.8rem + 3.5vw, 5rem);
-  --t-3xl:  clamp(4rem, 2.5rem + 7.5vw, 9rem);
-  --t-hero: clamp(4.5rem, 2rem + 13vw, 14rem);
+  /* ── Semantic aliases ────────────────────────────── */
+  --void: #06070a;
+  --void-1: #0b0c10;
+  --void-2: #111419;
+  --void-3: #080909;
+  --void-border: rgba(244, 238, 229, 0.12);
+  --void-border-hi: rgba(244, 238, 229, 0.24);
+  --signal: var(--ember);
+  --signal-dim: rgba(224, 231, 91, 0.5);
+  --signal-ghost: rgba(224, 231, 91, 0.12);
+  --signal-trace: rgba(224, 231, 91, 0.04);
+  --signal-glow: rgba(224, 231, 91, 0.15);
+  --text-100: var(--ink);
+  --text-60: rgba(244, 238, 229, 0.6);
+  --text-35: rgba(244, 238, 229, 0.38);
+  --text-15: rgba(244, 238, 229, 0.15);
 
-  /* Tracking */
-  --tracking-display: -0.05em;
-  --tracking-title:   -0.04em;
-  --tracking-body:    -0.01em;
-  --tracking-mono:     0.08em;
-  --tracking-label:    0.12em;
+  /* ── Typography scale ────────────────────────────── */
+  --t-xs: 0.72rem;
+  --t-sm: 0.86rem;
+  --t-base: 1rem;
+  --t-md: 1.18rem;
+  --t-lg: 1.56rem;
+  --t-xl: 3.25rem;
+  --t-2xl: 5.8rem;
+  --t-3xl: 8rem;
+  --t-hero: 11rem;
 
-  /* Borders */
-  --border-subtle:  1px solid rgba(244, 244, 240, 0.06);
-  --border-default: 1px solid rgba(244, 244, 240, 0.12);
-  --border-strong:  1px solid rgba(244, 244, 240, 0.24);
-  --border-accent:  1px solid var(--color-lime);
+  --tracking-display: -0.03em;
+  --tracking-title: -0.02em;
+  --tracking-body: 0;
+  --tracking-mono: -0.02em;
+  --tracking-label: 0.07em;
 
-  /* Motion — cinematic timing inspired by artefakt.mov */
-  --ease-appear:       cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-expo:     cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-cinematic:    cubic-bezier(0.76, 0, 0.24, 1);
-  --ease-inout:        cubic-bezier(0.83, 0, 0.17, 1);
-  --ease-spring:       cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-depart:       cubic-bezier(0.55, 0, 1, 0.45);
-  --ease-in-expo:      cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-out-quint:    cubic-bezier(0.23, 1, 0.32, 1);
-  --dur-fast:      300ms;
-  --dur-base:      600ms;
-  --dur-slow:      1000ms;
-  --dur-xslow:     1400ms;
+  /* ── Easing ─────────────────────────────────────── */
+  --ease-appear: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-inout: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 300ms;
+  --dur-base: 650ms;
+  --dur-slow: 1100ms;
   --dur-cinematic: 1800ms;
 
-  /* Z-layers */
-  --z-canvas:    0;
-  --z-content:   10;
-  --z-nav:       100;
+  /* ── Z-index ─────────────────────────────────────── */
+  --z-canvas: 0;
+  --z-content: 10;
+  --z-nav: 100;
   --z-preloader: 9000;
-  --z-cursor:    9999;
+  --z-cursor: 9999;
 
-  /* Atmospheric gradients */
-  --grad-vignette:    radial-gradient(ellipse 100% 80% at 50% 50%, transparent 30%, var(--bg-base) 100%);
-  --grad-hero-radial: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,255,0,0.04) 0%, transparent 70%);
-  --grad-fade-bottom: linear-gradient(to bottom, transparent 0%, var(--bg-base) 100%);
-  --grad-fade-top:    linear-gradient(to top, transparent 0%, var(--bg-base) 100%);
-  --grad-cinematic:   linear-gradient(180deg, rgba(5,5,7,0.95) 0%, rgba(5,5,7,0.3) 40%, rgba(5,5,7,0.3) 60%, rgba(5,5,7,0.95) 100%);
-  --grad-noise:       url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-
-  /* Atmospheric overlays */
-  --overlay-dark-heavy:  rgba(5, 5, 7, 0.85);
-  --overlay-dark-medium: rgba(5, 5, 7, 0.6);
-  --overlay-dark-light:  rgba(5, 5, 7, 0.35);
-  --overlay-lime-wash:   rgba(200, 255, 0, 0.015);
-
-  /* Shadows & Glows */
-  --shadow-card:   0 4px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lifted: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(200, 255, 0, 0.03);
-  --glow-lime:     0 0 40px rgba(200, 255, 0, 0.1), 0 0 80px rgba(200, 255, 0, 0.04);
-  --glow-lime-strong: 0 0 60px rgba(200, 255, 0, 0.2), 0 0 120px rgba(200, 255, 0, 0.06);
-
-  /* Editorial spacing — generous breathing room (artefakt.mov rhythm) */
-  --space-editorial:  clamp(8rem, 16vw, 18rem);
-  --space-generous:   clamp(10rem, 20vw, 22rem);
-  --space-component:  clamp(2rem, 4vw, 4rem);
-
-  /* Layout */
-  --section-pad: clamp(5rem, 10vw, 10rem);
-  --space-section: clamp(6rem, 12vw, 14rem);
-  --space-block:   clamp(3rem, 5vw, 6rem);
-  --container:   min(100% - 2rem, 1400px);
-
-  /* Media aspect ratios */
-  --ratio-hero: 16 / 9;
-  --ratio-card: 4 / 3;
-  --ratio-portrait: 3 / 4;
-  --ratio-square: 1 / 1;
+  /* ── Layout ─────────────────────────────────────── */
+  --section-pad: 9rem;
+  --container: min(100% - 4rem, 1480px);
+  --hairline: 1px solid var(--line);
+  --hairline-light: 1px solid var(--line-light);
+  --shadow-object: 0 24px 90px rgba(0, 0, 0, 0.72);
+  --grain-opacity: 0.05;
 }

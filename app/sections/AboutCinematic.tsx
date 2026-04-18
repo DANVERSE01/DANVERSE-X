@@ -6,10 +6,10 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { gsap, registerGSAP, ScrollTrigger, SplitText } from "@/lib/gsap"
 
 const STATS = [
-  { value: 40, suffix: "+", label: "Projects" },
+  { value: 40, suffix: "+", label: "Origin objects" },
   { value: 8, suffix: "", label: "Markets" },
-  { value: 3, suffix: "x", label: "Engagement" },
-  { value: 12, suffix: "", label: "Systems" },
+  { value: 12, suffix: "", label: "Systems formed" },
+  { value: 3, suffix: "x", label: "Motion lift" },
 ]
 
 export function AboutCinematic() {
@@ -21,7 +21,7 @@ export function AboutCinematic() {
     target: sectionRef,
     offset: ["start end", "end start"],
   })
-  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-12%"])
+  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-10%"])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -42,7 +42,7 @@ export function AboutCinematic() {
         gsap.to(split.words, {
           yPercent: 0,
           opacity: 1,
-          duration: 0.9,
+          duration: 1,
           stagger: 0.045,
           ease: "power4.out",
         })
@@ -59,7 +59,7 @@ export function AboutCinematic() {
 
     const statTrigger = ScrollTrigger.create({
       trigger: section,
-      start: "top 45%",
+      start: "top 48%",
       once: true,
       onEnter() {
         STATS.forEach((stat, index) => {
@@ -69,7 +69,7 @@ export function AboutCinematic() {
           const obj = { value: 0 }
           gsap.to(obj, {
             value: stat.value,
-            duration: 1.4,
+            duration: 1.5,
             ease: "power2.out",
             onUpdate() {
               el.textContent = `${Math.round(obj.value)}${stat.suffix}`
@@ -88,47 +88,49 @@ export function AboutCinematic() {
   }, [])
 
   return (
-    <section id="identity" ref={sectionRef} className="identity-section">
-      <div className="identity-section__grid">
-        <div ref={stickyRef} className="identity-section__sticky">
-          <div className="ref-section-kicker">
+    <section id="identity" ref={sectionRef} className="assembly-section">
+      <div className="assembly-section__grid">
+        <div ref={stickyRef} className="assembly-section__sticky">
+          <div className="section-kicker">
             <span>[ 02 ]</span>
-            <span>Our identity</span>
+            <span>The assembly</span>
           </div>
           <h2 ref={headlineRef}>
-            Creative direction
+            Direction
             <br />
-            or code?
+            becomes
             <br />
-            A hybrid.
+            an object
           </h2>
         </div>
 
-        <div className="identity-section__content">
-          <motion.div className="identity-section__image" style={{ y: imageY }}>
-            <Image
-              src="/images/work/shelby-alexandria/stanley-golden.webp"
-              alt="Automotive CGI scene from the DANVERSE archive"
-              fill
-              sizes="(max-width: 900px) 100vw, 48vw"
-              loading="lazy"
-              quality={88}
-            />
+        <div>
+          <motion.div className="assembly-arc" style={{ y: imageY }}>
+            <div className="assembly-arc__image">
+              <Image
+                src="/images/work/kova-cosmetics/hero-shot.webp"
+                alt="KOVA product image used as an origin object"
+                fill
+                sizes="(max-width: 900px) 100vw, 38rem"
+                loading="lazy"
+                quality={75}
+              />
+            </div>
           </motion.div>
 
-          <div className="identity-copy">
+          <div className="assembly-copy">
             <p>
-              We build campaign systems with a film director&apos;s eye and an engineer&apos;s refusal to let the frame drift.
+              DANVERSE works like a private room for brand decisions: fewer claims, stronger images, and no surface released before the system can hold.
             </p>
             <p>
-              Every surface is treated like a signal path: strategy, image, motion, interaction, and delivery tuned until the brand feels inevitable.
+              Campaigns, films, interfaces, and product images are treated as origin objects. Each one carries the conditions that formed it.
             </p>
             <p>
-              Based in Alexandria and built for GCC markets, DANVERSE operates where premium taste, platform speed, and technical production overlap.
+              Alexandria is the point of origin. The work is shaped for clients who need restraint, movement, and authority without theatrical noise.
             </p>
           </div>
 
-          <div className="identity-stats">
+          <div className="assembly-stats">
             {STATS.map((stat, index) => (
               <div key={stat.label}>
                 <span ref={(el) => { statsRef.current[index] = el }}>0{stat.suffix}</span>

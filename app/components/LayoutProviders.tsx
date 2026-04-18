@@ -4,6 +4,7 @@ import dynamic from "next/dynamic"
 import type { ReactNode } from "react"
 import { SmoothScroll } from "@/app/components/SmoothScroll"
 import { Preloader } from "@/app/components/Preloader"
+import { LightField } from "@/app/components/LightField"
 
 const FilmGrain = dynamic(() => import("@/app/components/FilmGrain").then((m) => ({ default: m.FilmGrain })), { ssr: false })
 const CustomCursor = dynamic(() => import("@/app/components/CustomCursor").then((m) => ({ default: m.CustomCursor })), { ssr: false })
@@ -13,6 +14,7 @@ export function LayoutProviders({ children }: { children: ReactNode }) {
   return (
     <>
       <FilmGrain />
+      <LightField />
       <CustomCursor />
       <Preloader />
       <SmoothScroll>

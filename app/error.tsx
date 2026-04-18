@@ -9,11 +9,11 @@ export default function Error({
 }) {
   return (
     <main className="state-screen">
-      <p className="tx-label">TX-500 / SIGNAL DROP</p>
-      <h1>Transmission interrupted.</h1>
-      <p>{error.message || "An unexpected interruption blocked the current channel."}</p>
+      <p className="tx-label">500 / Room closed</p>
+      <h1>The room failed to open.</h1>
+      <p>{error.message || "An unexpected interruption blocked the current place."}</p>
       <button className="signal-button" type="button" onClick={() => reset()}>
-        Retry transmission
+        Try again
       </button>
     </main>
   )

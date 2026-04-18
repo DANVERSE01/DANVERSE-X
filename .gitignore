@@ -40,3 +40,6 @@ DANVERSE-X/
 
 # TypeScript
 *.tsbuildinfo
+
+# Backup originals (large, not for repo)
+public/originals/

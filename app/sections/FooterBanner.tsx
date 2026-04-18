@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react"
 import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
 
-const STATEMENT = "BRAND DIRECTION. MOTION CRAFT. VISUAL AUTHORITY."
+const STATEMENT = "ORIGIN OBJECTS. CONTROLLED PLACES. QUIET RELEASE."
 
 export function FooterBanner() {
   const sectionRef = useRef<HTMLElement>(null)
-  const items = Array.from({ length: 6 }, (_, index) => index)
+  const items = Array.from({ length: 8 }, (_, index) => index)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -18,11 +18,11 @@ export function FooterBanner() {
 
     registerGSAP()
 
-    const track = section.querySelector(".closing-banner__track")
-    const terminal = section.querySelector(".closing-banner__terminal")
+    const track = section.querySelector(".footer-assembly__track")
+    const terminal = section.querySelector(".footer-assembly__terminal")
     if (!track || !terminal) return
 
-    gsap.set(track, { opacity: 0, yPercent: 30 })
+    gsap.set(track, { opacity: 0, yPercent: 25 })
     gsap.set(terminal, { opacity: 0, y: 20 })
 
     const trigger = ScrollTrigger.create({
@@ -40,7 +40,7 @@ export function FooterBanner() {
           opacity: 1,
           y: 0,
           duration: 0.7,
-          delay: 0.3,
+          delay: 0.25,
           ease: "power3.out",
         })
       },
@@ -50,16 +50,16 @@ export function FooterBanner() {
   }, [])
 
   return (
-    <footer ref={sectionRef} className="closing-banner">
-      <div className="closing-banner__track">
+    <footer ref={sectionRef} className="footer-assembly">
+      <div className="footer-assembly__track">
         {items.map((item) => (
           <span key={item}>{STATEMENT}</span>
         ))}
       </div>
-      <div className="closing-banner__terminal">
-        <span>For media inquiries</span>
-        <a href="mailto:hello@danverse.studio" data-cursor="send">
-          hello@danverse.studio
+      <div className="footer-assembly__terminal">
+        <span>Admission requests</span>
+        <a href="mailto:danverseai@gmail.com" data-cursor="magnetic">
+          danverseai@gmail.com
         </a>
         <strong>DANVERSE</strong>
       </div>

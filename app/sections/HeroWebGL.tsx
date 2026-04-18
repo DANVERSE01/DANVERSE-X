@@ -121,7 +121,7 @@ void main() {
   float d = length(uv);
   if (d > 0.5) discard;
   float alpha = (1.0 - d * 2.0) * 0.35 * (0.5 + vLife * 0.5);
-  // Lime tint: #c8ff00
+  // Mineral tint: #7b5136
   gl_FragColor = vec4(0.784, 1.0, 0.0, alpha);
 }
 `

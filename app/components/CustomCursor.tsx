@@ -6,23 +6,24 @@ import { motion, useMotionValue, useSpring } from "framer-motion"
 interface TrailPoint {
   x: number
   y: number
-  age: number
 }
+
+type CursorMode = "default" | "magnetic" | "text"
 
 export function CustomCursor() {
   const [mounted, setMounted] = useState(false)
-  const [cursorType, setCursorType] = useState<"default" | "magnetic" | "text">("default")
+  const [cursorMode, setCursorMode] = useState<CursorMode>("default")
   const [visible, setVisible] = useState(false)
 
-  const dotX = useMotionValue(-100)
-  const dotY = useMotionValue(-100)
-  const ringX = useSpring(dotX, { stiffness: 150, damping: 15, mass: 0.1 })
-  const ringY = useSpring(dotY, { stiffness: 150, damping: 15, mass: 0.1 })
+  const x = useMotionValue(-100)
+  const y = useMotionValue(-100)
+  const frameX = useSpring(x, { stiffness: 110, damping: 18, mass: 0.16 })
+  const frameY = useSpring(y, { stiffness: 110, damping: 18, mass: 0.16 })
 
-  const trailCanvasRef = useRef<HTMLCanvasElement>(null)
-  const trailRef = useRef<TrailPoint[]>([])
-  const animRef = useRef(0)
-  const mouseRef = useRef({ x: -100, y: -100 })
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const pointsRef = useRef<TrailPoint[]>([])
+  const mouseRef = useRef<TrailPoint>({ x: -100, y: -100 })
+  const frameRef = useRef(0)
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -30,20 +31,22 @@ export function CustomCursor() {
     if (reduced || coarse) return
 
     setMounted(true)
+    document.documentElement.classList.add("has-custom-cursor")
 
-    const onMove = (e: PointerEvent) => {
-      dotX.set(e.clientX)
-      dotY.set(e.clientY)
-      mouseRef.current = { x: e.clientX, y: e.clientY }
+    const onMove = (event: PointerEvent) => {
+      const point = { x: event.clientX, y: event.clientY }
+      x.set(point.x)
+      y.set(point.y)
+      mouseRef.current = point
       setVisible(true)
 
-      const target = e.target as HTMLElement
-      if (target.closest("[data-cursor='magnetic']")) {
-        setCursorType("magnetic")
-      } else if (target.closest("[data-cursor='text']")) {
-        setCursorType("text")
+      const target = event.target as HTMLElement
+      if (target.closest("[data-cursor='text']")) {
+        setCursorMode("text")
+      } else if (target.closest("[data-cursor='magnetic'], a, button")) {
+        setCursorMode("magnetic")
       } else {
-        setCursorType("default")
+        setCursorMode("default")
       }
     }
 
@@ -58,132 +61,102 @@ export function CustomCursor() {
       window.removeEventListener("pointermove", onMove)
       document.documentElement.removeEventListener("pointerleave", onLeave)
       document.documentElement.removeEventListener("pointerenter", onEnter)
+      document.documentElement.classList.remove("has-custom-cursor")
     }
-  }, [dotX, dotY])
+  }, [x, y])
 
   useEffect(() => {
-    const canvas = trailCanvasRef.current
+    const canvas = canvasRef.current
     if (!canvas || !mounted) return
 
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
     const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = Math.floor(window.innerWidth * dpr)
+      canvas.height = Math.floor(window.innerHeight * dpr)
+      canvas.style.width = `${window.innerWidth}px`
+      canvas.style.height = `${window.innerHeight}px`
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
+
     resize()
     window.addEventListener("resize", resize, { passive: true })
 
-    const MAX_TRAIL = 8
+    const render = () => {
+      frameRef.current = requestAnimationFrame(render)
+      const context = canvas.getContext("2d")
+      if (!context) return
 
-    function loop() {
-      animRef.current = requestAnimationFrame(loop)
-      const cv = trailCanvasRef.current
-      const c = cv?.getContext("2d")
-      if (!cv || !c) return
+      context.clearRect(0, 0, window.innerWidth, window.innerHeight)
+      pointsRef.current.unshift(mouseRef.current)
+      pointsRef.current = pointsRef.current.slice(0, cursorMode === "text" ? 22 : 15)
 
-      c.clearRect(0, 0, cv.width, cv.height)
+      for (let index = 0; index < pointsRef.current.length - 1; index += 1) {
+        const from = pointsRef.current[index]
+        const to = pointsRef.current[index + 1]
+        const alpha = Math.max(0, 1 - index / pointsRef.current.length)
 
-      const { x, y } = mouseRef.current
-      trailRef.current.unshift({ x, y, age: 0 })
-      if (trailRef.current.length > MAX_TRAIL) trailRef.current.pop()
+        const gradient = context.createLinearGradient(from.x, from.y, to.x, to.y)
+        gradient.addColorStop(0, `rgba(0, 232, 255, ${alpha * 0.85})`)
+        gradient.addColorStop(0.52, `rgba(255, 46, 214, ${alpha * 0.62})`)
+        gradient.addColorStop(1, `rgba(255, 207, 112, ${alpha * 0.25})`)
 
-      trailRef.current.forEach((pt, i) => {
-        pt.age += 0.05
-        const alpha = Math.max(0, 1 - i / MAX_TRAIL) * 0.35
-        const radius = Math.max(1, 4 - i * 0.4)
-        c.beginPath()
-        c.arc(pt.x, pt.y, radius, 0, Math.PI * 2)
-        c.fillStyle = `rgba(200,255,0,${alpha})`
-        c.fill()
-      })
+        context.strokeStyle = gradient
+        context.lineWidth = Math.max(0.65, 3.2 - index * 0.18)
+        context.lineCap = "square"
+        context.beginPath()
+        context.moveTo(from.x, from.y)
+        context.lineTo(to.x, to.y)
+        context.stroke()
+
+        if (index % 4 === 0) {
+          context.strokeStyle = `rgba(0, 232, 255, ${alpha * 0.22})`
+          context.lineWidth = 1
+          context.beginPath()
+          context.moveTo(from.x - 9, from.y + 5)
+          context.lineTo(from.x + 11, from.y - 7)
+          context.stroke()
+        }
+      }
     }
 
-    loop()
+    render()
 
     return () => {
-      cancelAnimationFrame(animRef.current)
+      cancelAnimationFrame(frameRef.current)
       window.removeEventListener("resize", resize)
     }
-  }, [mounted])
+  }, [cursorMode, mounted])
 
   if (!mounted) return null
 
-  const ringSize = cursorType === "text" ? 80 : cursorType === "magnetic" ? 56 : 40
+  const frameSize = cursorMode === "text" ? 76 : cursorMode === "magnetic" ? 58 : 34
 
   return (
     <>
-      <canvas
-        ref={trailCanvasRef}
-        aria-hidden="true"
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9996,
-          pointerEvents: "none",
-          mixBlendMode: "screen",
-        }}
-      />
-
-      {/* Dot */}
+      <canvas ref={canvasRef} aria-hidden="true" className="cursor-trails" />
       <motion.div
         aria-hidden="true"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          x: dotX,
-          y: dotY,
-          translateX: "-50%",
-          translateY: "-50%",
-          zIndex: 9998,
-          pointerEvents: "none",
-          width: 8,
-          height: 8,
-          borderRadius: "50%",
-          background: "#c8ff00",
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{ opacity: { duration: 0.2 } }}
+        className="cursor-core"
+        data-visible={visible}
+        style={{ x, y }}
       />
-
-      {/* Ring */}
       <motion.div
         aria-hidden="true"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          x: ringX,
-          y: ringY,
-          translateX: "-50%",
-          translateY: "-50%",
-          zIndex: 9997,
-          pointerEvents: "none",
-          borderRadius: "50%",
-          border: "1px solid rgba(240,240,240,0.2)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: visible ? 1 : 0,
-        }}
-        animate={{ width: ringSize, height: ringSize }}
-        transition={{ type: "spring", stiffness: 200, damping: 20, opacity: { duration: 0.2 } }}
+        className="cursor-frame"
+        data-mode={cursorMode}
+        data-visible={visible}
+        style={{ x: frameX, y: frameY }}
+        animate={{ width: frameSize, height: frameSize }}
+        transition={{ type: "spring", stiffness: 210, damping: 22 }}
       >
-        {cursorType === "text" && (
-          <span
-            style={{
-              fontSize: "0.5rem",
-              letterSpacing: "0.15em",
-              color: "#f0f0f0",
-              fontFamily: "var(--font-mono)",
-              textTransform: "uppercase",
-            }}
-          >
-            VIEW
-          </span>
-        )}
+        <span />
+        <span />
+        <span />
+        <span />
+        {cursorMode === "text" ? <strong>OPEN</strong> : null}
       </motion.div>
     </>
   )

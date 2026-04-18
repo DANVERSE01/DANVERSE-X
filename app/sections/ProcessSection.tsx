@@ -6,27 +6,27 @@ import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
 const STEPS = [
   {
     num: "01",
-    title: "Discover",
-    desc: "Market, audience, competition. We find the gap before we design anything.",
-    detail: "Brand audits · Market research · Audience mapping · Competitive analysis",
+    title: "Observe",
+    desc: "The brand is studied before it is named. Context, market pressure, and visual debt are made visible.",
+    detail: "Audit / Research / Reference control",
   },
   {
     num: "02",
-    title: "Define",
-    desc: "Strategy crystallized. Every visual decision from here is backed by evidence, not preference.",
-    detail: "Brand positioning · Creative brief · Visual direction · System architecture",
+    title: "Form",
+    desc: "A visual grammar is built around what the work must hold, not what the feed expects.",
+    detail: "Direction / System / Image rules",
   },
   {
     num: "03",
-    title: "Design",
-    desc: "Craft-level execution. Motion, type, color, and space — unified.",
-    detail: "Identity systems · Motion design · Digital production · Content systems",
+    title: "Move",
+    desc: "Motion, interaction, and scroll timing are tuned until the experience feels inevitable.",
+    detail: "Film / Interaction / Release rhythm",
   },
   {
     num: "04",
-    title: "Deploy",
-    desc: "Delivered, documented, and production-ready. No loose ends.",
-    detail: "Asset delivery · Brand guidelines · Team handoff · Ongoing support",
+    title: "Release",
+    desc: "Files, pages, and campaign surfaces leave the room only when they behave as one object.",
+    detail: "Delivery / QA / Handoff",
   },
 ]
 
@@ -66,7 +66,7 @@ export function ProcessSection() {
         ScrollTrigger.create({
           trigger: section,
           start: "top 70%",
-          end: "top 30%",
+          end: "top 25%",
           scrub: 1,
           onUpdate(self) {
             gsap.set(line, { strokeDashoffset: len * (1 - self.progress) })
@@ -74,8 +74,8 @@ export function ProcessSection() {
         })
       }
 
-      const cards = gsap.utils.toArray<HTMLElement>(".process-card")
-      gsap.set(cards, { opacity: 0, y: 24 })
+      const cards = gsap.utils.toArray<HTMLElement>(".method-card")
+      gsap.set(cards, { opacity: 0, y: 30 })
 
       ScrollTrigger.create({
         trigger: section,
@@ -85,7 +85,7 @@ export function ProcessSection() {
           gsap.to(cards, {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.85,
             stagger: 0.1,
             ease: "power4.out",
           })
@@ -97,11 +97,24 @@ export function ProcessSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="process-ref-section">
-      <div className="ref-section-header">
-        <span>[ 04 ]</span>
-        <h2>How it works</h2>
-        <p>Four-step production protocol</p>
+    <section ref={sectionRef} className="method-section">
+      <div className="method-section__header">
+        <div>
+          <div className="section-kicker">
+            <span>[ 05 ]</span>
+            <span>Method</span>
+          </div>
+          <h2>
+            Release
+            <br />
+            follows
+            <br />
+            formation
+          </h2>
+        </div>
+        <p>
+          The process is quiet on purpose. Each stage removes noise until the final surface has nowhere left to drift.
+        </p>
       </div>
 
       <div className="process-line">
@@ -120,15 +133,15 @@ export function ProcessSection() {
 
       <div className="process-grid">
         {STEPS.map((step, i) => (
-          <div
+          <article
             key={step.num}
-            className={`process-card${activeStep === i ? " is-active" : ""}`}
+            className={`method-card${activeStep === i ? " is-active" : ""}`}
           >
             <span>{step.num}</span>
             <h3>{step.title}</h3>
             <p>{step.desc}</p>
             <strong>{step.detail}</strong>
-          </div>
+          </article>
         ))}
       </div>
     </section>

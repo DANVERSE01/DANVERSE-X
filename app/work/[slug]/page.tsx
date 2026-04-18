@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const work = getWorkBySlug(slug)
 
   if (!work) {
-    return { title: "Signal Lost" }
+    return { title: "Object not found" }
   }
 
   return {
@@ -46,11 +46,11 @@ export default async function WorkDetailPage({ params }: PageProps) {
       <section className="case-study__hero">
         {work.cover ? (
           <div className="case-study__hero-media" data-vt={`project-${slug}`} aria-hidden="true">
-            <Image src={work.cover} alt="" fill priority quality={92} sizes="100vw" fetchPriority="high" />
+            <Image src={work.cover} alt="" fill priority quality={75} sizes="100vw" fetchPriority="high" />
           </div>
         ) : null}
         <div className="case-study__hero-copy">
-          <p className="tx-label">[ Case File ] / {work.category?.toUpperCase() ?? "PROJECT"}</p>
+          <p className="tx-label">[ Origin Object ] / {work.category?.toUpperCase() ?? "PROJECT"}</p>
           <h1 className="case-study__title">{work.title}</h1>
           {work.hook ? <p className="case-study__hook">{work.hook}</p> : null}
           <div className="case-study__meta-row">
@@ -63,7 +63,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
             ))}
           </div>
         </div>
-        <span className="case-study__scroll">00:00 Scroll down for more info</span>
+        <span className="case-study__scroll">Scroll for conditions</span>
       </section>
 
       {work.metrics && work.metrics.length > 0 ? (
@@ -104,7 +104,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
 
       {work.gallery.length > 0 ? (
         <section className="case-study__gallery">
-          <h2 className="case-study__gallery-title">Behind the scenes / {work.gallery.length.toString().padStart(2, "0")}</h2>
+          <h2 className="case-study__gallery-title">Formation record / {work.gallery.length.toString().padStart(2, "0")}</h2>
           <div className="case-study__gallery-grid">
             {work.gallery.map((image, index) => (
               <div
@@ -175,7 +175,7 @@ export default async function WorkDetailPage({ params }: PageProps) {
 
       <section className="case-study__next">
         <Link href="/work" className="case-study__next-link" data-cursor="magnetic">
-          <span className="tx-label">:/ Back to archive</span>
+            <span className="tx-label">Back to archive</span>
         </Link>
         {work.nextProject ? (
           <Link href={`/work/${work.nextProject}`} className="case-study__next-link" data-cursor="text">

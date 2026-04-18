@@ -28,7 +28,7 @@ function MiniScene() {
   return (
     <mesh ref={meshRef}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshBasicMaterial color="#c8ff00" wireframe opacity={0.6} transparent />
+      <meshBasicMaterial color="#7b5136" wireframe opacity={0.6} transparent />
     </mesh>
   )
 }
@@ -90,8 +90,8 @@ function FeaturedVideo() {
     >
       <video
         ref={videoRef}
-        src="/videos/capabilities-reel.mp4"
-        poster="/videos/posters/capabilities-reel-poster.jpg"
+        src="/videos/optimized/kova-social.mp4"
+        poster="/videos/optimized/posters/kova-social.jpg"
         muted
         loop
         playsInline
@@ -158,7 +158,7 @@ function CapabilityCard({
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.6rem",
-            color: "#c8ff00",
+            color: "#7b5136",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             marginBottom: "1rem",
@@ -209,7 +209,7 @@ export function CapabilitiesGrid() {
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "0.6875rem",
-              color: "#c8ff00",
+              color: "#7b5136",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
             }}

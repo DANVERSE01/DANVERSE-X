@@ -7,7 +7,10 @@ export function CaseStudyVideo({ src, title }: { src: string; title: string }) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const posterPath = `/videos/posters/${src.split("/").pop()?.replace(".mp4", "")}-poster.jpg`
+  const name = src.split("/").pop()?.replace(".mp4", "")
+  const posterPath = src.includes("/optimized/")
+    ? `/videos/optimized/posters/${name}.jpg`
+    : `/videos/posters/${name}-poster.jpg`
 
   const onIntersect = useCallback((entries: IntersectionObserverEntry[]) => {
     const video = videoRef.current
@@ -32,8 +35,8 @@ export function CaseStudyVideo({ src, title }: { src: string; title: string }) {
   }, [onIntersect])
 
   return (
-    <section className="case-study__video">
-      <h2 className="case-study__gallery-title">Video Showcase</h2>
+    <section className="case-study__video-section">
+      <h2 className="case-study__gallery-title">Motion record</h2>
       <div
         ref={wrapRef}
         className="case-study__video-wrap"

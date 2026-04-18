@@ -4,10 +4,11 @@ import Link from "next/link"
 import { useDanverseStore } from "@/lib/store"
 
 const navItems = [
-  { href: "/#tx-02", label: "Work" },
-  { href: "/#tx-03", label: "Services" },
-  { href: "/#tx-04", label: "Process" },
-  { href: "/#tx-05", label: "Contact" },
+  { href: "/places", label: "Places" },
+  { href: "/objects", label: "Objects" },
+  { href: "/about", label: "About" },
+  { href: "/people", label: "People" },
+  { href: "/work", label: "Archive" },
 ]
 
 export function MobileMenu() {
@@ -16,9 +17,10 @@ export function MobileMenu() {
 
   return (
     <div className={`mobile-menu ${mobileMenuOpen ? "is-open" : ""}`} aria-hidden={!mobileMenuOpen}>
+      <div className="mobile-menu__veil" onClick={() => setMobileMenuOpen(false)} />
       <div className="mobile-menu__inner">
         <button type="button" className="mobile-menu__close" onClick={() => setMobileMenuOpen(false)}>
-          CLOSE
+          Close
         </button>
         <nav className="mobile-menu__links">
           {navItems.map((item) => (
@@ -26,9 +28,6 @@ export function MobileMenu() {
               {item.label}
             </Link>
           ))}
-          <Link href="/work" onClick={() => setMobileMenuOpen(false)}>
-            Archive
-          </Link>
         </nav>
       </div>
     </div>

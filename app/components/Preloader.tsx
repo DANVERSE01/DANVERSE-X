@@ -79,7 +79,7 @@ export function Preloader() {
         position: "fixed",
         inset: 0,
         zIndex: 9000,
-        background: "#050507",
+        background: "#06070a",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -92,7 +92,7 @@ export function Preloader() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "#050507",
+          background: "#06070a",
           transformOrigin: "bottom center",
         }}
       />
@@ -110,8 +110,8 @@ export function Preloader() {
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-            letterSpacing: "0.25em",
-            color: "rgba(240,240,240,0.4)",
+            letterSpacing: "0.2em",
+            color: "rgba(224,231,91,0.7)",
             textTransform: "uppercase",
           }}
         >
@@ -123,10 +123,10 @@ export function Preloader() {
             ref={counterRef}
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(5rem, 15vw, 14rem)",
+              fontSize: "8rem",
               fontWeight: 800,
-              color: "#f0f0f0",
-              letterSpacing: "-0.05em",
+              color: "#E0E75B",
+              letterSpacing: "-0.04em",
               lineHeight: 0.9,
               display: "block",
             }}
@@ -140,7 +140,7 @@ export function Preloader() {
             fontFamily: "var(--font-display)",
             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
             letterSpacing: "0.25em",
-            color: "rgba(240,240,240,0.25)",
+            color: "rgba(244,238,229,0.35)",
             textTransform: "uppercase",
           }}
         >

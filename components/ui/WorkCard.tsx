@@ -8,6 +8,12 @@ import { useDanverseStore } from "@/lib/store"
 import type { WorkItem } from "@/lib/work"
 import { BLUR_DARK } from "@/lib/blur"
 
+function posterFor(video: string) {
+  const name = video.split("/").pop()?.replace(".mp4", "")
+  if (video.includes("/optimized/")) return `/videos/optimized/posters/${name}.jpg`
+  return `/videos/posters/${name}-poster.jpg`
+}
+
 export function WorkCard({ work, index = 0 }: { work: WorkItem; index?: number }) {
   const setCursorState = useDanverseStore((state) => state.setCursorState)
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -49,7 +55,7 @@ export function WorkCard({ work, index = 0 }: { work: WorkItem; index?: number }
       href={`/work/${work.slug}`}
       className="work-card"
       data-index={String(index + 1).padStart(2, "0")}
-      data-cursor="hover-work"
+      data-cursor="text"
       onMouseEnter={() => {
         emitter.emit("work-hover", { slug: work.slug })
         setCursorState("hover-work")
@@ -79,7 +85,7 @@ export function WorkCard({ work, index = 0 }: { work: WorkItem; index?: number }
             fill
             sizes="(max-width: 959px) 100vw, 420px"
             className="work-card__image"
-            quality={90}
+            quality={75}
             placeholder="blur"
             blurDataURL={BLUR_DARK}
           />
@@ -95,7 +101,7 @@ export function WorkCard({ work, index = 0 }: { work: WorkItem; index?: number }
             playsInline
             preload="none"
             src={previewVideo}
-            poster={`/videos/posters/${previewVideo.split("/").pop()?.replace(".mp4", "")}-poster.jpg`}
+            poster={posterFor(previewVideo)}
             aria-hidden="true"
           />
         ) : null}

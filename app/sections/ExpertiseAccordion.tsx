@@ -1,47 +1,33 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
 
-const EXPERTISE = [
+const PLACES = [
   {
-    title: "Creative direction",
-    items: ["Concept development", "Brand strategy", "Visual direction", "Creative consulting"],
+    title: "Lower hall",
+    meta: "Strategy room",
+    desc: "Positioning, reference audits, and the first rule set before any frame is made.",
   },
   {
-    title: "Digital production",
-    items: ["UI and product design", "Social content systems", "Platform-native formats", "End-to-end production"],
+    title: "Image chamber",
+    meta: "Visual formation",
+    desc: "Campaign stills, product objects, and art direction systems formed with restraint.",
   },
   {
-    title: "Motion and 3D",
-    items: ["Motion design", "Real-time 3D", "CGI product visualization", "Campaign motion"],
+    title: "Motion passage",
+    meta: "Film and rhythm",
+    desc: "Short films, social motion, and cinematic transitions tuned for release.",
   },
   {
-    title: "AI creative",
-    items: ["AI-augmented workflows", "Generative visual systems", "AI integration strategy", "Hybrid production models"],
+    title: "Interface vault",
+    meta: "Digital surface",
+    desc: "Web pages, interaction states, and narrative routes that behave like chapters.",
   },
 ]
 
 export function ExpertiseAccordion() {
-  const [active, setActive] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
-  const panelsRef = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduced) return
-
-    registerGSAP()
-    panelsRef.current.forEach((panel, index) => {
-      if (!panel) return
-
-      if (index === active) {
-        gsap.to(panel, { height: "auto", opacity: 1, duration: 0.5, ease: "power4.out" })
-      } else {
-        gsap.to(panel, { height: 0, opacity: 0, duration: 0.4, ease: "power4.inOut" })
-      }
-    })
-  }, [active])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -51,20 +37,19 @@ export function ExpertiseAccordion() {
     if (reduced) return
 
     registerGSAP()
-    const items = gsap.utils.toArray<HTMLElement>(".expertise-item")
-    gsap.set(items, { opacity: 0, y: 40 })
+    const cards = gsap.utils.toArray<HTMLElement>(".place-card")
+    gsap.set(cards, { opacity: 0, y: 50 })
 
     const trigger = ScrollTrigger.create({
       trigger: section,
-      start: "top 68%",
+      start: "top 72%",
       once: true,
       onEnter() {
-        setActive(0)
-        gsap.to(items, {
+        gsap.to(cards, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.1,
+          duration: 0.9,
+          stagger: 0.12,
           ease: "power4.out",
         })
       },
@@ -74,39 +59,36 @@ export function ExpertiseAccordion() {
   }, [])
 
   return (
-    <section id="expertise" ref={sectionRef} className="expertise-section">
-      <div className="ref-section-header">
-        <span>[ 03 ]</span>
-        <h2>Expertise</h2>
-        <p>From vision to screen</p>
+    <section id="places" ref={sectionRef} className="places-section">
+      <div className="places-section__header">
+        <div>
+          <div className="section-kicker">
+            <span>[ 04 ]</span>
+            <span>Places</span>
+          </div>
+          <h2>
+            Conditions
+            <br />
+            before
+            <br />
+            output
+          </h2>
+        </div>
+        <p>
+          The assembly is organized by rooms of work, each one responsible for a different pressure on the final object.
+        </p>
       </div>
 
-      <div className="expertise-list">
-        {EXPERTISE.map((item, index) => (
-          <div key={item.title} className={`expertise-item ${active === index ? "is-active" : ""}`}>
-            <button
-              type="button"
-              onClick={() => setActive(active === index ? -1 : index)}
-              data-cursor="magnetic"
-              aria-expanded={active === index ? "true" : "false"}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{item.title}</strong>
-              <em>{active === index ? "Close" : "Open"}</em>
-            </button>
-            <div
-              ref={(el) => {
-                panelsRef.current[index] = el
-              }}
-              className="expertise-item__panel"
-            >
-              <ul>
-                {item.items.map((capability) => (
-                  <li key={capability}>{capability}</li>
-                ))}
-              </ul>
+      <div className="places-grid">
+        {PLACES.map((place, index) => (
+          <article className="place-card" key={place.title}>
+            <span className="place-card__num">{String(index + 1)}</span>
+            <div>
+              <span className="place-card__meta">{place.meta}</span>
+              <h3>{place.title}</h3>
             </div>
-          </div>
+            <p>{place.desc}</p>
+          </article>
         ))}
       </div>
     </section>

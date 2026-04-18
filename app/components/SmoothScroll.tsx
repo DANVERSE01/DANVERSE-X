@@ -38,7 +38,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     <ReactLenis
       root
       autoRaf={false}
-      options={{ lerp: 0.08, duration: 1.2, syncTouch: false, touchMultiplier: 1.5 }}
+      options={{ lerp: 0.065, duration: 1.45, wheelMultiplier: 0.9, syncTouch: false, touchMultiplier: 1.35 }}
     >
       <GSAPSync />
       {children}

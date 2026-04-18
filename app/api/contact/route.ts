@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
+let resend: Resend | null = null
+
+function getResend() {
+  if (!process.env.RESEND_API_KEY) return null
+  resend ??= new Resend(process.env.RESEND_API_KEY)
+  return resend
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,11 +27,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 })
     }
 
-    if (!resend) {
+    const client = getResend()
+    if (!client) {
       return NextResponse.json({ error: "Transmission endpoint is not configured." }, { status: 503 })
     }
 
-    await resend.emails.send({
+    await client.emails.send({
       from: "DANVERSE Contact <no-reply@danverse.studio>",
       to: ["danverseai@gmail.com"],
       replyTo: email,
@@ -39,7 +46,7 @@ export async function POST(req: NextRequest) {
       `,
     })
 
-    await resend.emails.send({
+    await client.emails.send({
       from: "DANVERSE <no-reply@danverse.studio>",
       to: [email],
       subject: "Transmission received · DANVERSE",

@@ -110,6 +110,12 @@ Run in Claude Code with `/command-name`:
 | `/review-code` | Post-change code quality review |
 | `/session-notes` | Write session summary to SESSION_NOTES.md |
 | `/video-prompt $BRIEF` | Generate cinematic AI video prompt |
+| `/generate-video $BRIEF` | Full HiggsField.ai video generation pipeline |
+| `/generate-image $BRIEF` | AI image generation (Midjourney/Flux/Ideogram) |
+| `/awwwards-audit $TARGET` | AWWWARDS SOTD standard critique with scores |
+| `/interaction-audit` | Interactive elements quality audit |
+| `/design-review $TARGET` | Design system + visual quality review |
+| `/export-assets` | Optimize + export all media assets |
 
 ---
 
@@ -130,6 +136,14 @@ Run in Claude Code with `/command-name`:
 | `testing` | test, vitest, playwright, rtl, coverage |
 | `performance` | bundle, cwv, lcp, lazy, optimize |
 | `seo` | metadata, og, sitemap, ranking, schema |
+| `higgsfield-ai` | higgsfield, higgs, hf video, cinematic generation |
+| `awwwards-ux` | awwwards, sotd, micro-interaction, scroll story |
+| `webgl-advanced` | fbo, ping-pong, ray march, gpu particle, tsl |
+| `gsap-advanced` | splittext, drawtsvg, morphsvg, flip, scramble |
+| `css-advanced` | houdini, view transition, scroll-driven, @property |
+| `ai-image-generation` | midjourney, flux, ideogram, generate image |
+| `interactive-design` | cursor, magnetic, tilt, particle trail, spotlight |
+| `motion-design` | easing, timing, choreography, stagger, animation system |
 
 ---
 
@@ -149,6 +163,11 @@ Invoke these for deep-focus work:
 | `accessibility-expert` | WCAG 2.1 AA compliance review |
 | `git-master` | Complex git operations (rebase, bisect, release) |
 | `seo-optimizer` | Metadata, structured data, sitemap audit |
+| `higgs-video-director` | HiggsField.ai shot planning + generation pipeline |
+| `awwwards-critic` | AWWWARDS SOTD level design critique with scores |
+| `webgl-engineer` | GPU particles, ray march, FBO, TSL, post-processing |
+| `interaction-designer` | Cursor, magnetic, scroll storytelling, micro-interactions |
+| `ai-media-director` | Full AI media pipeline: brief → image → video → optimize |
 
 ---
 

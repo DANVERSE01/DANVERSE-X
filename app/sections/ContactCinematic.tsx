@@ -30,7 +30,7 @@ function LiveClock() {
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/muhammedd_adel" },
-  { label: "Email", href: "mailto:danverseai@gmail.com" },
+  { label: "Email", href: "mailto:hello@danverse.studio" },
   { label: "WhatsApp", href: "https://wa.link/rc25na" },
 ]
 
@@ -114,8 +114,8 @@ export function ContactCinematic() {
           <p>
             Bring a brand, object, campaign, or digital room that needs to be formed with discipline.
           </p>
-          <MagneticButton href="mailto:danverseai@gmail.com" className="contact-email-display">
-            danverseai@gmail.com
+          <MagneticButton href="mailto:hello@danverse.studio" className="contact-email-display">
+            hello@danverse.studio
           </MagneticButton>
         </div>
 
@@ -149,7 +149,7 @@ export function ContactCinematic() {
               ? "Admission request received."
               : status === "error"
                 ? "Admission endpoint is not configured yet."
-                : "Replies arrive from danverseai@gmail.com."}
+                : "Replies arrive from hello@danverse.studio."}
           </p>
         </form>
       </div>

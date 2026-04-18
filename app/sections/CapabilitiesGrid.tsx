@@ -28,7 +28,7 @@ function MiniScene() {
   return (
     <mesh ref={meshRef}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshBasicMaterial color="#7b5136" wireframe opacity={0.6} transparent />
+      <meshBasicMaterial color="#E0E75B" wireframe opacity={0.5} transparent />
     </mesh>
   )
 }
@@ -119,13 +119,13 @@ function CapabilityCard({
   return (
     <motion.div
       variants={itemVariants}
-      whileHover={{ y: -4, boxShadow: "0 0 40px rgba(200,255,0,0.1), 0 0 80px rgba(200,255,0,0.04)" }}
+      whileHover={{ y: -4, boxShadow: "0 0 40px rgba(224,231,91,0.12), 0 0 80px rgba(224,231,91,0.04)" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{
         gridColumn: gridCol,
         gridRow: gridRow,
-        background: "rgba(200,255,0,0.03)",
-        border: "1px solid rgba(200,255,0,0.08)",
+        background: "rgba(244,238,229,0.03)",
+        border: "1px solid var(--line)",
         padding: "2rem",
         position: "relative",
         overflow: "hidden",
@@ -158,7 +158,7 @@ function CapabilityCard({
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.6rem",
-            color: "#7b5136",
+            color: "var(--ember)",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             marginBottom: "1rem",
@@ -172,7 +172,7 @@ function CapabilityCard({
             fontFamily: "var(--font-display)",
             fontSize: "clamp(1.25rem, 2vw, 1.75rem)",
             fontWeight: 700,
-            color: "#f0f0f0",
+            color: "var(--ink)",
             letterSpacing: "-0.03em",
             margin: "0 0 0.75rem",
           }}
@@ -183,7 +183,7 @@ function CapabilityCard({
         <p
           style={{
             fontSize: "0.875rem",
-            color: "rgba(240,240,240,0.4)",
+            color: "var(--ink-muted)",
             lineHeight: 1.7,
             maxWidth: "24rem",
           }}
@@ -199,8 +199,9 @@ export function CapabilitiesGrid() {
   return (
     <section
       style={{
-        background: "#050507",
+        background: "var(--bone)",
         padding: "clamp(6rem, 12vw, 14rem) clamp(1.5rem, 6vw, 6rem)",
+        borderTop: "var(--hairline)",
       }}
     >
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
@@ -209,24 +210,26 @@ export function CapabilitiesGrid() {
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "0.6875rem",
-              color: "#7b5136",
+              color: "var(--ink-muted)",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
             }}
           >
-            Capabilities — 03
+            [ 03 ] Capabilities
           </span>
           <h2
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2.5rem, 5vw, 5rem)",
               fontWeight: 800,
-              color: "#f0f0f0",
+              color: "var(--ink)",
               letterSpacing: "-0.05em",
               margin: "0.5rem 0 0",
             }}
           >
-            Capabilities
+            Seven forms,
+            <br />
+            one standard
           </h2>
         </div>
 
@@ -239,7 +242,7 @@ export function CapabilitiesGrid() {
           style={{
             display: "grid",
             gap: "1px",
-            background: "rgba(200,255,0,0.08)",
+            background: "var(--line)",
           }}
         >
           {CAPABILITIES.map((cap) => (

@@ -124,7 +124,7 @@ export const works: WorkItem[] = [
     tags: ["Luxury", "Watch", "Precision"],
     cover: null,
     gallery: [],
-    featured: true,
+    featured: false,
     video: null,
     results: ["+340% engagement rate", "4.2M campaign reach", "+28% retail conversion"],
     metrics: [
@@ -186,7 +186,7 @@ export const works: WorkItem[] = [
     tags: ["Skincare", "Launch System", "Platform Design"],
     cover: null,
     gallery: [],
-    featured: true,
+    featured: false,
     video: null,
     results: ["+156% follower growth", "3.8M impressions", "92% positive sentiment"],
     metrics: [

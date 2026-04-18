@@ -58,8 +58,8 @@ export function FooterBanner() {
       </div>
       <div className="footer-assembly__terminal">
         <span>Admission requests</span>
-        <a href="mailto:danverseai@gmail.com" data-cursor="magnetic">
-          danverseai@gmail.com
+        <a href="mailto:hello@danverse.studio" data-cursor="magnetic">
+          hello@danverse.studio
         </a>
         <strong>DANVERSE</strong>
       </div>

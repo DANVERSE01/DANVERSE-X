@@ -110,22 +110,62 @@ node_modules/ | .next/ | out/ | dist/ | .git/
 - Context7 — up-to-date library docs (add "use context7" to prompt)
 
 ## Skills Available
-See .claude/skills/ — auto-loaded for relevant tasks:
-- danverse-design-system — color tokens, animations, design language
-- nextjs-patterns — App Router, server components, data fetching
-- cinematic-prompts — AI video prompt engineering
-- framer-motion — animation patterns and variants
-- threejs-webgl — 3D scenes and WebGL shaders
-- typescript-rules — strict TypeScript patterns
-- arabic-rtl — Arabic language + RTL web systems
+See `.claude/skills/` — auto-loaded for relevant tasks:
+
+### Original Skills
+- `danverse-design-system` — color tokens, animations, design language
+- `nextjs-patterns` — App Router, server components, data fetching
+- `cinematic-prompts` — AI video prompt engineering
+- `framer-motion` — animation patterns and variants
+- `threejs-webgl` — 3D scenes and WebGL shaders
+- `typescript-rules` — strict TypeScript patterns
+- `arabic-rtl` — Arabic language + RTL web systems
+
+### New Skills (April 2026)
+- `accessibility` — WCAG 2.1 AA, ARIA patterns, keyboard nav, motion/reduced-motion
+- `security` — XSS prevention, CSP, env vars, dependency audit, Netlify headers
+- `git-workflow` — branching strategy, conventional commits, rebase, release tagging
+- `testing` — Vitest + RTL + Playwright, GSAP/Three.js mocking, coverage targets
+- `performance` — Core Web Vitals, bundle budgets, dynamic imports, Lenis+GSAP optimization
+- `seo` — metadata API, OG/Twitter cards, structured data, hreflang, sitemap
 
 ## Subagents Available
-See .claude/agents/ — invoke for specialized tasks:
-- code-reviewer — post-change quality analysis
-- ui-architect — component and layout design
-- performance-auditor — pre-deploy bundle + CWV audit
-- prompt-engineer — AI video prompt writing
-- debug-specialist — systematic error diagnosis
+See `.claude/agents/` — invoke for specialized tasks:
+
+### Original Agents
+- `code-reviewer` — post-change quality analysis
+- `ui-architect` — component and layout design
+- `performance-auditor` — pre-deploy bundle + CWV audit
+- `prompt-engineer` — AI video prompt writing
+- `debug-specialist` — systematic error diagnosis
+
+### New Agents (April 2026)
+- `security-auditor` — deep vulnerability scanning (XSS, secrets, CSP, dep CVEs)
+- `test-engineer` — write unit/integration/E2E tests with proper GSAP mocking
+- `accessibility-expert` — WCAG 2.1 AA compliance review and remediation
+- `git-master` — complex git operations: rebase, bisect, cherry-pick, releases
+- `seo-optimizer` — metadata audit, structured data, sitemap, hreflang
+
+## Slash Commands Available
+See `.claude/commands/` — run with `/command-name` in Claude Code:
+
+### Original Commands
+- `/deploy-check` — TypeScript + build + asset + env pre-deploy audit
+- `/new-component` — scaffold new DANVERSE-X component
+- `/review-code` — post-change code quality review
+- `/session-notes` — write session summary to SESSION_NOTES.md
+- `/video-prompt` — cinematic AI video prompt generator
+
+### New Commands (April 2026)
+- `/commit` — smart conventional commit with gitmoji, auto-stages, splits by concern
+- `/create-pr` — branch + commit + push + open GitHub PR
+- `/pr-review $PR` — 5-perspective review: PM, Engineering, QA, Security, DevOps
+- `/fix-github-issue $N` — fetch, analyze, fix, and PR for GitHub issue #N
+- `/todo` — manage project todos.md (add, complete, list, remove, next, past-due)
+- `/context-prime` — deep-read codebase and produce structured context summary
+- `/release $VERSION` — update CHANGELOG, tag, push, create GitHub release
+- `/security-audit` — full security scan: deps, secrets, XSS, CSP, headers
+- `/performance-check` — bundle analysis, dynamic import audit, CWV checklist
 
 ## Docs (load on demand)
 - docs/ARCHITECTURE.md — full system architecture

@@ -189,17 +189,16 @@ export function WorkShowcase() {
     <section id="work" ref={sectionRef} className="work-list-section">
       <div className="work-list-header">
         <div className="work-list-header__top">
-          <span className="section-kicker-cs">{"// 00.03°"}</span>
-          <span className="section-kicker-cs">Origin Objects</span>
+          <span className="section-kicker-cs">[ 01 ] Origin Objects</span>
+          <span className="section-kicker-cs">ALX / 31.2001°N 29.9187°E</span>
         </div>
         <div className="work-list-header__body">
           <h2 className="work-list-heading">
             Selected<br />
-            Works
+            Objects
           </h2>
           <p className="work-list-copy">
-            Projects formed as objects — each carrying the visual discipline of its origin.
-            Brand systems, motion campaigns, and digital surfaces released from Alexandria.
+            Each project is an origin object — formed under conditions, released only when the image and system hold as one.
           </p>
         </div>
       </div>

@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import { ContactCinematic } from "@/app/sections/ContactCinematic"
 
 export const metadata: Metadata = {
-  title: "People",
-  description: "Admission and contact for DANVERSE.",
+  title: "Admission — DANVERSE",
+  description: "DANVERSE accepts projects on a selective cycle. Bring a brand, campaign, or digital surface that needs discipline.",
 }
 
 export default function PeoplePage() {
@@ -12,39 +12,42 @@ export default function PeoplePage() {
     <main className="chapter-page">
       <section className="chapter-hero">
         <div className="section-kicker">
-          <span>[ People ]</span>
-          <span>Admission</span>
+          <span>[ Admission ]</span>
+          <span>Selective intake</span>
         </div>
         <h1>
-          People
+          Work begins
           <br />
-          enter with
+          with the
           <br />
-          intent
+          right brief
         </h1>
         <p>
-          Bring the project when it is ready to be held with discipline. The first conversation decides whether it belongs inside the room.
+          The assembly works on a selective cycle. Bring a project when it is ready to be formed — not when it needs to be saved.
         </p>
       </section>
 
       <section className="chapter-copy">
+        <div>
+          <div className="section-kicker">
+            <span>What we need</span>
+            <span>From you</span>
+          </div>
+          <p>
+            A clear object. A brand that needs a visual system, a product that needs a campaign, a motion piece that needs direction, or a digital surface that needs to behave. The brief does not need to be perfect — the conditions do.
+          </p>
+          <p>
+            The assembly is not a production vendor. It does not take briefs that require speed over discipline. Projects accepted here are shaped, not processed.
+          </p>
+        </div>
         <div className="chapter-copy__image">
           <Image
             src="/images/work/shelby-alexandria/bridge-sunset-2.webp"
-            alt="Precision object study"
+            alt="Stanley Bridge, Alexandria — point of origin"
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
-            quality={75}
+            quality={80}
           />
-        </div>
-        <div>
-          <div className="section-kicker">
-            <span>No public queue</span>
-            <span>Selective cycle</span>
-          </div>
-          <p>
-            The assembly works with a small number of projects at a time so the object can receive enough attention to become specific.
-          </p>
         </div>
       </section>
 

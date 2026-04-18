@@ -30,7 +30,7 @@ function LiveClock() {
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/muhammedd_adel" },
-  { label: "Email", href: "mailto:hello@danverse.studio" },
+  { label: "Email", href: "mailto:danverseai@gmail.com" },
   { label: "WhatsApp", href: "https://wa.link/rc25na" },
 ]
 
@@ -47,18 +47,16 @@ export function ContactCinematic() {
     if (reduced) return
 
     registerGSAP()
-    const split = new SplitText(h, { type: "chars" })
-    gsap.set(split.chars, { yPercent: 110, opacity: 0 })
+    const split = new SplitText(h, { type: "lines", mask: "lines" })
 
     const trigger = ScrollTrigger.create({
       trigger: h,
       start: "top 80%",
       onEnter() {
-        gsap.to(split.chars, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.03,
+        gsap.from(split.lines, {
+          yPercent: 110,
+          duration: 1.1,
+          stagger: 0.08,
           ease: "power4.out",
         })
       },
@@ -104,18 +102,18 @@ export function ContactCinematic() {
       </div>
 
       <h2 ref={headlineRef}>
-        Seek
+        Start
         <br />
-        admission
+        the conversation
       </h2>
 
       <div className="admission-section__body">
         <div className="contact-copy">
           <p>
-            Bring a brand, object, campaign, or digital room that needs to be formed with discipline.
+            Bring a brand that needs positioning, a campaign that needs direction, or a product that needs an image. The assembly works on a selective cycle — projects are accepted when the conditions are right.
           </p>
-          <MagneticButton href="mailto:hello@danverse.studio" className="contact-email-display">
-            hello@danverse.studio
+          <MagneticButton href="mailto:danverseai@gmail.com" className="contact-email-display">
+            danverseai@gmail.com
           </MagneticButton>
         </div>
 
@@ -146,10 +144,10 @@ export function ContactCinematic() {
           </button>
           <p className="contact-status" aria-live="polite">
             {status === "success"
-              ? "Admission request received."
+              ? "Request received. Expect a reply within 48 hours."
               : status === "error"
-                ? "Admission endpoint is not configured yet."
-                : "Replies arrive from hello@danverse.studio."}
+                ? "Something went wrong. Write directly to danverseai@gmail.com."
+                : "No queue. Selective intake. Replies within 48 hours."}
           </p>
         </form>
       </div>

@@ -85,16 +85,16 @@ export function HeroSection() {
       </motion.figure>
 
       <div ref={metaRef} className="artifact-hero__meta">
-        <span>A private creative assembly for makers</span>
-        <span>Coordinates held in Alexandria</span>
+        <span>Creative direction / Alexandria → GCC</span>
+        <span>Brand · Motion · Digital · CGI</span>
       </div>
 
       <span className="artifact-hero__commitment">
-        Commitment
+        Discipline
         <br />
-        precedes
+        before
         <br />
-        entry
+        release
       </span>
 
       <motion.div className="artifact-hero__copy" style={{ y: titleY }}>
@@ -103,14 +103,14 @@ export function HeroSection() {
           <br />
           leaves
           <br />
-          ordinary
+          soft
         </h1>
         <div ref={actionRef} className="artifact-hero__cta">
           <MagneticButton href="/people" className="assembly-button">
             Seek admission
           </MagneticButton>
-          <Link href="/places" className="artifact-hero__below" data-cursor="magnetic">
-            Explore places
+          <Link href="/work" className="artifact-hero__below" data-cursor="magnetic">
+            View objects
           </Link>
         </div>
       </motion.div>

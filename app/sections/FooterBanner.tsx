@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import { gsap, registerGSAP, ScrollTrigger } from "@/lib/gsap"
 
-const STATEMENT = "ORIGIN OBJECTS. CONTROLLED PLACES. QUIET RELEASE."
+const STATEMENT = "ORIGIN OBJECTS. CONTROLLED PLACES. QUIET RELEASE. — "
 
 export function FooterBanner() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -58,8 +58,8 @@ export function FooterBanner() {
       </div>
       <div className="footer-assembly__terminal">
         <span>Admission requests</span>
-        <a href="mailto:hello@danverse.studio" data-cursor="magnetic">
-          hello@danverse.studio
+        <a href="mailto:danverseai@gmail.com" data-cursor="magnetic">
+          danverseai@gmail.com
         </a>
         <strong>DANVERSE</strong>
       </div>

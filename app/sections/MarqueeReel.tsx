@@ -62,15 +62,13 @@ export function MarqueeReel() {
             <span>The threshold</span>
           </div>
           <h2>
-            Not every
+            Form before
             <br />
-            frame asks
-            <br />
-            to be seen
+            announcement
           </h2>
         </div>
         <p>
-          The work is held until the object, the motion, and the environment can carry one thought without explanation.
+          Every image, film, and surface is held until the system that carries it is strong enough to require no explanation.
         </p>
       </motion.div>
     </section>

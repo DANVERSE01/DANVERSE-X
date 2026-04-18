@@ -7,22 +7,22 @@ const PLACES = [
   {
     title: "Lower hall",
     meta: "Strategy room",
-    desc: "Positioning, reference audits, and the first rule set before any frame is made.",
+    desc: "Market pressure, reference audits, and the first visual rule set — established before any frame is committed.",
   },
   {
     title: "Image chamber",
     meta: "Visual formation",
-    desc: "Campaign stills, product objects, and art direction systems formed with restraint.",
+    desc: "Campaign stills, product renders, and editorial direction systems shaped until the object feels inevitable.",
   },
   {
     title: "Motion passage",
     meta: "Film and rhythm",
-    desc: "Short films, social motion, and cinematic transitions tuned for release.",
+    desc: "Social films, broadcast motion, and transition choreography cut for attention without noise.",
   },
   {
     title: "Interface vault",
     meta: "Digital surface",
-    desc: "Web pages, interaction states, and narrative routes that behave like chapters.",
+    desc: "Web surfaces and interaction states composed as rooms — every state intentional, no dead ends.",
   },
 ]
 

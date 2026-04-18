@@ -6,10 +6,10 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { gsap, registerGSAP, ScrollTrigger, SplitText } from "@/lib/gsap"
 
 const STATS = [
-  { value: 40, suffix: "+", label: "Origin objects" },
-  { value: 8, suffix: "", label: "Markets" },
-  { value: 12, suffix: "", label: "Systems formed" },
-  { value: 3, suffix: "x", label: "Motion lift" },
+  { value: 40, suffix: "+", label: "Objects released" },
+  { value: 12, suffix: "M+", label: "Organic reach" },
+  { value: 6, suffix: "", label: "Active markets" },
+  { value: 68, suffix: "%", label: "Avg view-through" },
 ]
 
 export function AboutCinematic() {
@@ -32,18 +32,16 @@ export function AboutCinematic() {
     if (reduced) return
 
     registerGSAP()
-    const split = new SplitText(headline, { type: "words" })
-    gsap.set(split.words, { yPercent: 110, opacity: 0 })
+    const split = new SplitText(headline, { type: "lines", mask: "lines" })
 
     const headlineTrigger = ScrollTrigger.create({
       trigger: headline,
       start: "top 78%",
       onEnter() {
-        gsap.to(split.words, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.045,
+        gsap.from(split.lines, {
+          yPercent: 110,
+          duration: 1.1,
+          stagger: 0.09,
           ease: "power4.out",
         })
       },
@@ -120,13 +118,13 @@ export function AboutCinematic() {
 
           <div className="assembly-copy">
             <p>
-              DANVERSE works like a private room for brand decisions: fewer claims, stronger images, and no surface released before the system can hold.
+              DANVERSE is a creative direction practice operating from Alexandria. The work covers brand systems, motion campaigns, CGI, and digital surfaces — each treated as an object with its own conditions for release.
             </p>
             <p>
-              Campaigns, films, interfaces, and product images are treated as origin objects. Each one carries the conditions that formed it.
+              Nothing leaves until the image, motion, and message are aligned. That discipline is the service. Not speed, not volume — coherence under pressure.
             </p>
             <p>
-              Alexandria is the point of origin. The work is shaped for clients who need restraint, movement, and authority without theatrical noise.
+              The clients are beauty brands, automotive studios, and luxury operators who need work that holds authority without announcement. GCC market fluency is built in.
             </p>
           </div>
 

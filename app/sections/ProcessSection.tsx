@@ -105,15 +105,15 @@ export function ProcessSection() {
             <span>Method</span>
           </div>
           <h2>
-            Release
+            Formation
             <br />
-            follows
+            before
             <br />
-            formation
+            release
           </h2>
         </div>
         <p>
-          The process is quiet on purpose. Each stage removes noise until the final surface has nowhere left to drift.
+          Each stage removes one layer of noise. By the time the object leaves the assembly, it has nowhere left to drift.
         </p>
       </div>
 

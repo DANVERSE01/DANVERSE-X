@@ -110,22 +110,87 @@ node_modules/ | .next/ | out/ | dist/ | .git/
 - Context7 — up-to-date library docs (add "use context7" to prompt)
 
 ## Skills Available
-See .claude/skills/ — auto-loaded for relevant tasks:
-- danverse-design-system — color tokens, animations, design language
-- nextjs-patterns — App Router, server components, data fetching
-- cinematic-prompts — AI video prompt engineering
-- framer-motion — animation patterns and variants
-- threejs-webgl — 3D scenes and WebGL shaders
-- typescript-rules — strict TypeScript patterns
-- arabic-rtl — Arabic language + RTL web systems
+See `.claude/skills/` — auto-loaded for relevant tasks:
+
+### Original Skills
+- `danverse-design-system` — color tokens, animations, design language
+- `nextjs-patterns` — App Router, server components, data fetching
+- `cinematic-prompts` — AI video prompt engineering (Kling, Runway, Seedance, Veo, Sora)
+- `framer-motion` — animation patterns and variants
+- `threejs-webgl` — 3D scenes and WebGL shaders
+- `typescript-rules` — strict TypeScript patterns
+- `arabic-rtl` — Arabic language + RTL web systems
+
+### New Skills (April 2026 — Batch 1)
+- `accessibility` — WCAG 2.1 AA, ARIA patterns, keyboard nav, motion/reduced-motion
+- `security` — XSS prevention, CSP, env vars, dependency audit, Netlify headers
+- `git-workflow` — branching strategy, conventional commits, rebase, release tagging
+- `testing` — Vitest + RTL + Playwright, GSAP/Three.js mocking, coverage targets
+- `performance` — Core Web Vitals, bundle budgets, dynamic imports, Lenis+GSAP optimization
+- `seo` — metadata API, OG/Twitter cards, structured data, hreflang, sitemap
+
+### New Skills (April 2026 — Batch 2)
+- `higgsfield-ai` — HiggsField.ai browser workflow: shot prompts, camera controls, full pipeline
+- `awwwards-ux` — AWWWARDS SOTD UX patterns, scroll storytelling, micro-interactions, self-assessment
+- `webgl-advanced` — FBO ping-pong GPU particles, ray marching, TSL, MeshTransmission, post-FX
+- `gsap-advanced` — SplitText, DrawSVG, MorphSVG, Flip, MotionPath, ScrambleText, scrub patterns
+- `css-advanced` — Houdini paint worklets, View Transitions API, Scroll-Driven, @property, anchor positioning
+- `ai-image-generation` — Midjourney v7, Flux Dev/Kontext, Ideogram 3.0, prompting, pipeline
+- `interactive-design` — Cursor system, magnetic pull, 3D tilt, particle trail, spotlight, preloader
+- `motion-design` — 12 principles, easing system, timing bible, choreography, stagger, reduced motion
 
 ## Subagents Available
-See .claude/agents/ — invoke for specialized tasks:
-- code-reviewer — post-change quality analysis
-- ui-architect — component and layout design
-- performance-auditor — pre-deploy bundle + CWV audit
-- prompt-engineer — AI video prompt writing
-- debug-specialist — systematic error diagnosis
+See `.claude/agents/` — invoke for specialized tasks:
+
+### Original Agents
+- `code-reviewer` — post-change quality analysis
+- `ui-architect` — component and layout design
+- `performance-auditor` — pre-deploy bundle + CWV audit
+- `prompt-engineer` — AI video prompt writing
+- `debug-specialist` — systematic error diagnosis
+
+### New Agents (April 2026 — Batch 1)
+- `security-auditor` — deep vulnerability scanning (XSS, secrets, CSP, dep CVEs)
+- `test-engineer` — write unit/integration/E2E tests with proper GSAP mocking
+- `accessibility-expert` — WCAG 2.1 AA compliance review and remediation
+- `git-master` — complex git operations: rebase, bisect, cherry-pick, releases
+- `seo-optimizer` — metadata audit, structured data, sitemap, hreflang
+
+### New Agents (April 2026 — Batch 2)
+- `higgs-video-director` — HiggsField.ai shot planning, prompt writing, browser step-by-step
+- `awwwards-critic` — brutal AWWWARDS jury critique with scored report (Design/Usability/Creativity/Content)
+- `webgl-engineer` — production Three.js: FBO, ray march, custom GLSL, post-processing, iOS fixes
+- `interaction-designer` — micro-interactions, cursor systems, scroll storytelling, state machines
+- `ai-media-director` — orchestrates full media pipeline: brief → still → video → optimize → deploy
+
+## Slash Commands Available
+See `.claude/commands/` — run with `/command-name` in Claude Code:
+
+### Original Commands
+- `/deploy-check` — TypeScript + build + asset + env pre-deploy audit
+- `/new-component` — scaffold new DANVERSE-X component
+- `/review-code` — post-change code quality review
+- `/session-notes` — write session summary to SESSION_NOTES.md
+- `/video-prompt` — cinematic AI video prompt generator
+
+### New Commands (April 2026 — Batch 1)
+- `/commit` — smart conventional commit with gitmoji, auto-stages, splits by concern
+- `/create-pr` — branch + commit + push + open GitHub PR
+- `/pr-review $PR` — 5-perspective review: PM, Engineering, QA, Security, DevOps
+- `/fix-github-issue $N` — fetch, analyze, fix, and PR for GitHub issue #N
+- `/todo` — manage project todos.md (add, complete, list, remove, next, past-due)
+- `/context-prime` — deep-read codebase and produce structured context summary
+- `/release $VERSION` — update CHANGELOG, tag, push, create GitHub release
+- `/security-audit` — full security scan: deps, secrets, XSS, CSP, headers
+- `/performance-check` — bundle analysis, dynamic import audit, CWV checklist
+
+### New Commands (April 2026 — Batch 2)
+- `/generate-video $BRIEF` — HiggsField.ai full shot plan + browser instructions
+- `/generate-image $BRIEF` — AI image generation pipeline (Midjourney/Flux/Ideogram)
+- `/awwwards-audit $TARGET` — AWWWARDS SOTD level critique with scoring
+- `/interaction-audit` — comprehensive interactive elements quality audit
+- `/design-review $TARGET` — design system + typography + spacing quality review
+- `/export-assets` — optimize + convert all media assets for production
 
 ## Docs (load on demand)
 - docs/ARCHITECTURE.md — full system architecture

@@ -7,6 +7,10 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/session-start.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/asset-watcher.sh 2>/dev/null || true"
           }
         ]
       }
@@ -32,6 +36,38 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-forbidden-paths.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(gh:*)",
+      "Bash(node:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(sharp:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(echo:*)",
+      "Bash(du:*)",
+      "Bash(ls:*)",
+      "Bash(bash .claude/hooks/*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(git push --force origin main:*)"
     ]
   }
 }

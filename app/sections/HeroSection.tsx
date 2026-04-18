@@ -30,20 +30,18 @@ export function HeroSection() {
     if (reduced) return
 
     registerGSAP()
-    const split = new SplitText(title, { type: "words,chars" })
-    gsap.set(split.chars, { yPercent: 112, opacity: 0 })
-    gsap.set([meta, action], { y: 18, opacity: 0 })
+    const split = new SplitText(title, { type: "lines", mask: "lines" })
+    gsap.set([meta, action], { y: 24, opacity: 0 })
 
-    const tl = gsap.timeline({ delay: 0.28 })
-    tl.to(split.chars, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 1.05,
-      stagger: 0.012,
+    const tl = gsap.timeline({ delay: 0.15 })
+    tl.from(split.lines, {
+      yPercent: 110,
+      duration: 1.1,
+      stagger: 0.09,
       ease: "power4.out",
     })
-      .to(meta, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, "-=0.55")
-      .to(action, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, "-=0.32")
+      .to(meta, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.55")
+      .to(action, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.38")
 
     const scan = ScrollTrigger.create({
       trigger: sectionRef.current,

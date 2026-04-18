@@ -5,9 +5,9 @@
   --font-mono: var(--font-mono-next, "JetBrains Mono", "Courier New", monospace);
 
   /* ── Core dark surface ────────────────────────────── */
-  --bone: #06070a;           /* PRIMARY DARK BG — was cream, now true black */
-  --bone-soft: #0b0c10;
-  --parchment: #111419;      /* elevated surface */
+  --bone: #050507;           /* PRIMARY DARK BG — near-black with depth */
+  --bone-soft: #0a0b0f;
+  --parchment: #101217;      /* elevated surface */
   --smoke: rgba(244, 238, 229, 0.35);
   --ash: rgba(244, 238, 229, 0.55);
   --mineral: rgba(244, 238, 229, 0.18);
@@ -15,50 +15,50 @@
   --glass-strong: rgba(244, 238, 229, 0.12);
 
   /* ── Text — light on dark ────────────────────────── */
-  --ink: #f4eee5;            /* PRIMARY TEXT — was near-black, now warm off-white */
+  --ink: #f4eee5;            /* PRIMARY TEXT — warm off-white */
   --ink-soft: rgba(244, 238, 229, 0.85);
   --ink-fog: rgba(244, 238, 229, 0.62);
   --ink-muted: rgba(244, 238, 229, 0.42);
 
-  /* ── Brand accent — citrus-lime ─────────────────── */
-  --ember: #E0E75B;          /* PRIMARY ACCENT — was brown, now citrus-lime */
-  --neon-cyan: #E0E75B;      /* lime — primary glow */
+  /* ── Brand accent — electric lime ───────────────── */
+  --ember: #c8ff00;          /* PRIMARY ACCENT — electric lime */
+  --neon-cyan: #c8ff00;      /* lime — primary glow */
   --neon-magenta: #EF786A;   /* coral — secondary glow */
   --neon-amber: #00A6A6;     /* aqua-teal — tertiary */
 
   /* ── Transparency layers ─────────────────────────── */
-  --veil: rgba(6, 7, 10, 0.72);
-  --veil-strong: rgba(6, 7, 10, 0.92);
+  --veil: rgba(5, 5, 7, 0.72);
+  --veil-strong: rgba(5, 5, 7, 0.92);
   --line: rgba(244, 238, 229, 0.1);
   --line-soft: rgba(244, 238, 229, 0.06);
   --line-light: rgba(244, 238, 229, 0.1);
 
   /* ── Surface system ─────────────────────────────── */
-  --bg-base: #06070a;
-  --bg-surface: #0b0c10;
-  --bg-elevated: #111419;
+  --bg-base: #050507;
+  --bg-surface: #0a0b0f;
+  --bg-elevated: #101217;
   --color-white: var(--ink);
   --color-white-80: rgba(244, 238, 229, 0.8);
   --color-white-60: rgba(244, 238, 229, 0.6);
   --color-white-30: rgba(244, 238, 229, 0.3);
   --color-white-10: rgba(244, 238, 229, 0.1);
   --color-accent: var(--ember);
-  --color-accent-dim: rgba(224, 231, 91, 0.5);
-  --color-accent-glow: rgba(224, 231, 91, 0.15);
-  --color-accent-trace: rgba(224, 231, 91, 0.05);
+  --color-accent-dim: rgba(200, 255, 0, 0.5);
+  --color-accent-glow: rgba(200, 255, 0, 0.15);
+  --color-accent-trace: rgba(200, 255, 0, 0.05);
 
   /* ── Semantic aliases ────────────────────────────── */
-  --void: #06070a;
-  --void-1: #0b0c10;
-  --void-2: #111419;
+  --void: #050507;
+  --void-1: #0a0b0f;
+  --void-2: #101217;
   --void-3: #080909;
   --void-border: rgba(244, 238, 229, 0.12);
   --void-border-hi: rgba(244, 238, 229, 0.24);
   --signal: var(--ember);
-  --signal-dim: rgba(224, 231, 91, 0.5);
-  --signal-ghost: rgba(224, 231, 91, 0.12);
-  --signal-trace: rgba(224, 231, 91, 0.04);
-  --signal-glow: rgba(224, 231, 91, 0.15);
+  --signal-dim: rgba(200, 255, 0, 0.5);
+  --signal-ghost: rgba(200, 255, 0, 0.12);
+  --signal-trace: rgba(200, 255, 0, 0.04);
+  --signal-glow: rgba(200, 255, 0, 0.15);
   --text-100: var(--ink);
   --text-60: rgba(244, 238, 229, 0.6);
   --text-35: rgba(244, 238, 229, 0.38);
@@ -79,7 +79,7 @@
   --tracking-title: -0.02em;
   --tracking-body: 0;
   --tracking-mono: -0.02em;
-  --tracking-label: 0.07em;
+  --tracking-label: 0.1em;
 
   /* ── Easing ─────────────────────────────────────── */
   --ease-appear: cubic-bezier(0.16, 1, 0.3, 1);

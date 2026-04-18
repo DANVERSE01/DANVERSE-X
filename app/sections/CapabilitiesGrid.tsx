@@ -28,7 +28,7 @@ function MiniScene() {
   return (
     <mesh ref={meshRef}>
       <icosahedronGeometry args={[1, 1]} />
-      <meshBasicMaterial color="#E0E75B" wireframe opacity={0.5} transparent />
+      <meshBasicMaterial color="#c8ff00" wireframe opacity={0.5} transparent />
     </mesh>
   )
 }

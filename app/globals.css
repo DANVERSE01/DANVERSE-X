@@ -19,7 +19,8 @@ body {
   min-height: 100vh;
   overflow-x: clip;
   background:
-    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(224, 231, 91, 0.04), transparent),
+    radial-gradient(ellipse 120% 50% at 50% -5%, rgba(200, 255, 0, 0.055), transparent 60%),
+    radial-gradient(ellipse 60% 30% at 85% 100%, rgba(239, 120, 106, 0.04), transparent 50%),
     var(--bone);
   color: var(--ink);
   font-family: var(--font-body);
@@ -50,7 +51,7 @@ body.is-menu-open {
 
 ::selection {
   background: var(--ember);
-  color: #06070a;
+  color: #050507;
 }
 
 ::-webkit-scrollbar {
@@ -138,7 +139,7 @@ h3 {
   padding: 0.75rem 1rem;
   clip: auto;
   background: var(--ember);
-  color: #06070a;
+  color: #050507;
 }
 
 #smooth-wrapper,
@@ -162,7 +163,7 @@ main {
   pointer-events: none;
   transform-origin: top;
   background:
-    linear-gradient(112deg, transparent 0 42%, rgba(224, 231, 91, 0.18) 42% 43%, transparent 43%),
+    linear-gradient(112deg, transparent 0 42%, rgba(200, 255, 0, 0.18) 42% 43%, transparent 43%),
     linear-gradient(180deg, rgba(6, 7, 10, 0.98), rgba(12, 14, 20, 0.96));
 }
 
@@ -171,7 +172,7 @@ main {
   inset: 0;
   background:
     repeating-linear-gradient(90deg, transparent 0 5.2rem, rgba(255, 255, 255, 0.03) 5.2rem 5.24rem),
-    linear-gradient(90deg, rgba(239, 120, 106, 0.1), transparent 28%, rgba(224, 231, 91, 0.1));
+    linear-gradient(90deg, rgba(239, 120, 106, 0.1), transparent 28%, rgba(200, 255, 0, 0.1));
 }
 
 .light-field {
@@ -191,7 +192,7 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.04);
   background:
     linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent),
-    linear-gradient(90deg, rgba(224, 231, 91, 0.06), transparent 35%, rgba(0, 166, 166, 0.08));
+    linear-gradient(90deg, rgba(200, 255, 0, 0.06), transparent 35%, rgba(0, 166, 166, 0.08));
   filter: blur(22px);
   transform: rotate(-17deg);
   animation: glass-beam 16s var(--ease-inout) infinite alternate;
@@ -240,7 +241,7 @@ main {
   height: 5px;
   background: var(--neon-cyan);
   box-shadow:
-    0 0 14px rgba(224, 231, 91, 0.95),
+    0 0 14px rgba(200, 255, 0, 0.95),
     0 0 28px rgba(239, 120, 106, 0.32);
   opacity: 0;
   transform: translate(-50%, -50%);
@@ -264,7 +265,7 @@ main {
   width: 42%;
   height: 1px;
   background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
-  box-shadow: 0 0 12px rgba(224, 231, 91, 0.6);
+  box-shadow: 0 0 12px rgba(200, 255, 0, 0.6);
 }
 
 .cursor-frame span:nth-child(1) {
@@ -424,7 +425,7 @@ html.has-custom-cursor select {
 .state-screen button:hover {
   background: var(--ember);
   border-color: var(--ember);
-  color: #06070a;
+  color: #050507;
   transform: translateY(-2px);
 }
 
@@ -512,7 +513,7 @@ html.has-custom-cursor select {
   overflow: hidden;
   border-radius: 50%;
   background: var(--bone);
-  box-shadow: 0 0 120px rgba(224, 231, 91, 0.12);
+  box-shadow: 0 0 120px rgba(200, 255, 0, 0.12);
 }
 
 .mobile-menu__object img {
@@ -576,7 +577,7 @@ html.has-custom-cursor select {
   align-items: end;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 52% 54%, rgba(224, 231, 91, 0.05), transparent 38rem),
+    radial-gradient(ellipse at 52% 54%, rgba(200, 255, 0, 0.05), transparent 38rem),
     linear-gradient(180deg, var(--parchment), var(--bone) 72%);
 }
 
@@ -624,7 +625,7 @@ html.has-custom-cursor select {
   font-size: var(--t-hero);
   font-weight: 800;
   letter-spacing: var(--tracking-display);
-  text-shadow: 0 0 80px rgba(224, 231, 91, 0.08);
+  text-shadow: 0 0 80px rgba(200, 255, 0, 0.08);
 }
 
 .artifact-hero__meta,
@@ -754,6 +755,14 @@ html.has-custom-cursor select {
   gap: 0.8rem;
   margin-bottom: 1.3rem;
   color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.section-kicker span:first-child {
+  color: var(--ember);
 }
 
 /* ── Film / Chapter ──────────────────────────────────── */
@@ -1435,7 +1444,7 @@ html.has-custom-cursor select {
 .place-card:hover,
 .method-card.is-active {
   background: var(--ember);
-  color: #06070a;
+  color: #050507;
 }
 
 .place-card__num,
@@ -1493,8 +1502,8 @@ html.has-custom-cursor select {
   isolation: isolate;
   padding: var(--section-pad) 2rem;
   background:
-    linear-gradient(120deg, rgba(224, 231, 91, 0.06), transparent 22%, rgba(239, 120, 106, 0.05) 62%, transparent),
-    #06070a;
+    linear-gradient(120deg, rgba(200, 255, 0, 0.06), transparent 22%, rgba(239, 120, 106, 0.05) 62%, transparent),
+    #050507;
   color: var(--ink);
 }
 
@@ -1517,7 +1526,7 @@ html.has-custom-cursor select {
   z-index: -1;
   background:
     linear-gradient(116deg, transparent 0 33%, rgba(255, 255, 255, 0.08) 33.3%, transparent 36%),
-    linear-gradient(64deg, transparent 0 60%, rgba(224, 231, 91, 0.08) 60.2%, transparent 62%),
+    linear-gradient(64deg, transparent 0 60%, rgba(200, 255, 0, 0.08) 60.2%, transparent 62%),
     linear-gradient(180deg, rgba(6, 7, 10, 0), rgba(6, 7, 10, 0.82));
   opacity: 0.6;
 }
@@ -1582,7 +1591,7 @@ html.has-custom-cursor select {
   background: #040405;
   box-shadow:
     0 34px 100px rgba(0, 0, 0, 0.64),
-    inset 0 0 80px rgba(224, 231, 91, 0.04);
+    inset 0 0 80px rgba(200, 255, 0, 0.04);
 }
 
 .motion-vault__stage video {
@@ -1599,7 +1608,7 @@ html.has-custom-cursor select {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(224, 231, 91, 0.07), transparent 38%, rgba(239, 120, 106, 0.1)),
+    linear-gradient(90deg, rgba(200, 255, 0, 0.07), transparent 38%, rgba(239, 120, 106, 0.1)),
     linear-gradient(0deg, rgba(0, 0, 0, 0.74), transparent 48%);
 }
 
@@ -1649,8 +1658,8 @@ html.has-custom-cursor select {
 .motion-tile:hover,
 .motion-tile:focus-visible,
 .motion-tile[data-active="true"] {
-  border-color: rgba(224, 231, 91, 0.5);
-  background: rgba(224, 231, 91, 0.06);
+  border-color: rgba(200, 255, 0, 0.5);
+  background: rgba(200, 255, 0, 0.06);
   transform: translateX(-0.35rem);
 }
 
@@ -1707,8 +1716,9 @@ html.has-custom-cursor select {
 }
 
 .process-line line {
-  stroke: rgba(244, 238, 229, 0.15);
-  stroke-width: 2;
+  stroke: var(--ember);
+  stroke-width: 1;
+  opacity: 0.35;
 }
 
 /* ── Contact / Admission ─────────────────────────────── */
@@ -1785,7 +1795,7 @@ html.has-custom-cursor select {
 .admission-form select:focus,
 .admission-form textarea:focus {
   outline: none;
-  border-color: rgba(224, 231, 91, 0.4);
+  border-color: rgba(200, 255, 0, 0.4);
 }
 
 .admission-form textarea {

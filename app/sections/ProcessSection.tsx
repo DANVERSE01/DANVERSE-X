@@ -67,7 +67,7 @@ export function ProcessSection() {
           trigger: section,
           start: "top 70%",
           end: "top 25%",
-          scrub: 1,
+          scrub: 1.5,
           onUpdate(self) {
             gsap.set(line, { strokeDashoffset: len * (1 - self.progress) })
           },

@@ -99,11 +99,9 @@ export function HeroSection() {
 
       <motion.div className="artifact-hero__copy" style={{ y: titleY }}>
         <h1 ref={titleRef} className="artifact-hero__title">
-          Nothing
+          Creative
           <br />
-          leaves
-          <br />
-          soft
+          <em>assembly</em>
         </h1>
         <div ref={actionRef} className="artifact-hero__cta">
           <MagneticButton href="/people" className="assembly-button">

@@ -195,7 +195,7 @@ export function WorkShowcase() {
         <div className="work-list-header__body">
           <h2 className="work-list-heading">
             Selected<br />
-            Objects
+            <em>objects</em>
           </h2>
           <p className="work-list-copy">
             Each project is an origin object — formed under conditions, released only when the image and system hold as one.

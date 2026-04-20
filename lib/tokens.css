@@ -64,7 +64,7 @@
   --text-35: rgba(244, 238, 229, 0.38);
   --text-15: rgba(244, 238, 229, 0.15);
 
-  /* ── Typography scale ────────────────────────────── */
+  /* ── Typography scale — Editorial dominance ──── */
   --t-xs: 0.72rem;
   --t-sm: 0.86rem;
   --t-base: 1rem;
@@ -73,7 +73,8 @@
   --t-xl: 3.25rem;
   --t-2xl: 5.8rem;
   --t-3xl: 8rem;
-  --t-hero: 11rem;
+  --t-hero: clamp(5rem, 14vw, 14rem);
+  --t-display: clamp(6rem, 16vw, 18rem);
 
   --tracking-display: -0.03em;
   --tracking-title: -0.02em;

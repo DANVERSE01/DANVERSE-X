@@ -1,45 +1,44 @@
 # Pre-Compact Context Snapshot
-**Saved:** 2026-04-05 06:08
+**Saved:** 2026-04-21 03:31
 
 ## Git State
-**Branch:** main
-**Last commit:** 72b3af3 style: unify design tokens — DANVERSE STUDIO color & typography system
+**Branch:** claude/vigorous-villani-5266f8
+**Last commit:** 30cc492 feat: editorial redesign - headline updates motion enhancement
 
 ## Changed Files
 ```
+ M .claude/logs/pre-compact-context.md
+ D app/components/CapabilitiesGridLazy.tsx
+ M app/components/LayoutProviders.tsx
+ D app/components/LightField.tsx
+ M app/components/MagneticButton.tsx
+ M app/components/PageTransition.tsx
+ M app/components/Preloader.tsx
  M app/globals.css
- M app/layout.tsx
- M components/appverse-footer.tsx
- M components/case-study-spotlight.tsx
- M components/cinematic-showcase.tsx
- M components/features.tsx
- M components/hero.tsx
- M components/hover-lift.tsx
- M components/masterclass-showcase.tsx
- M components/plasma.tsx
- M components/pricing.tsx
- M components/trust-band.tsx
- M lib/tokens.css
- M package-lock.json
- M package.json
- M styles/masterclass.module.css
-?? .claude/
-?? CLAUDE.md
-?? components/cinematic-cursor.tsx
-?? components/film-grain.tsx
-?? components/page-transition.tsx
-?? components/text-reveal.tsx
-?? hooks/use-gsap-enter.ts
-?? hooks/use-magnetic.ts
-?? lib/gsap.ts
-?? lib/split-text.ts
+ D app/objects/page.tsx
+ M app/page.tsx
+ D app/sections/CapabilitiesGrid.tsx
+ D app/sections/ExpertiseAccordion.tsx
+ D app/sections/FooterBanner.tsx
+ D app/sections/HeroWebGL.tsx
+ D app/sections/MarqueeReel.tsx
+ M app/sections/WorkShowcase.tsx
+ M components/nav/MobileMenu.tsx
+ M components/nav/SiteNav.tsx
+ M tailwind.config.ts
+?? app/sections/AtmosphericHold.tsx
+?? app/sections/ExpertiseTimeline.tsx
+?? app/sections/KineticStatement.tsx
+?? components/archive/
+?? lib/chapters.ts
+?? lib/motion-presets.ts
 ```
 
 ## Recent Changes (last 3 commits)
 ```
-72b3af3 style: unify design tokens — DANVERSE STUDIO color & typography system
-cf8d880 Hero refactor: exact flagship cinematic frame, shards, lighting, and studio screen prototype
-d92e0e8 Master the hero: studio class badge, headline glow, scan sweep animation and polish
+30cc492 feat: editorial redesign - headline updates motion enhancement
+a664f13 Merge pull request #55 from DANVERSE01/copilot/audit-file-existence-and-update
+02aa5da chore: add session 2-4 claude skills and agents scaffolding
 ```
 
 ---

@@ -73,79 +73,14 @@ export function Preloader() {
   if (!visible) return null
 
   return (
-    <div
-      ref={wrapperRef}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9000,
-        background: "#06070a",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        pointerEvents: "all",
-      }}
-    >
-      <div
-        ref={curtainRef}
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "#06070a",
-          transformOrigin: "bottom center",
-        }}
-      />
-
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-            letterSpacing: "0.2em",
-            color: "rgba(224,231,91,0.7)",
-            textTransform: "uppercase",
-          }}
-        >
-          DANVERSE
-        </span>
-
-        <div style={{ overflow: "hidden", lineHeight: 1 }}>
-          <span
-            ref={counterRef}
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "8rem",
-              fontWeight: 800,
-              color: "#E0E75B",
-              letterSpacing: "-0.04em",
-              lineHeight: 0.9,
-              display: "block",
-            }}
-          >
-            000
-          </span>
+    <div ref={wrapperRef} className="preloader" role="status" aria-live="polite" aria-label="Loading DANVERSE">
+      <div ref={curtainRef} className="preloader__curtain" />
+      <div className="preloader__inner">
+        <span className="preloader__eyebrow">DANVERSE</span>
+        <div className="preloader__counter-mask">
+          <span ref={counterRef} className="preloader__counter">000</span>
         </div>
-
-        <span
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-            letterSpacing: "0.25em",
-            color: "rgba(244,238,229,0.35)",
-            textTransform: "uppercase",
-          }}
-        >
-          Loading
-        </span>
+        <span className="preloader__label">Assembling</span>
       </div>
     </div>
   )

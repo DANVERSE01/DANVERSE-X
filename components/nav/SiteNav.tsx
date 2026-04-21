@@ -7,10 +7,9 @@ import { usePathname } from "next/navigation"
 import { useDanverseStore } from "@/lib/store"
 
 const navItems = [
-  { href: "/places", label: "Places" },
-  { href: "/objects", label: "Objects" },
+  { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/people", label: "People" },
+  { href: "/about#admission", label: "People" },
 ]
 
 export function SiteNav() {
@@ -48,7 +47,7 @@ export function SiteNav() {
           </nav>
 
           <div className="nav-actions">
-            <Link href="/people" className="nav-request" data-cursor="magnetic">
+            <Link href="/about#admission" className="nav-request" data-cursor="magnetic">
               Seek admission
             </Link>
             <button
@@ -92,7 +91,7 @@ export function SiteNav() {
             <Link href="/work" onClick={() => setMobileMenuOpen(false)}>
               Archive
             </Link>
-            <Link href="/people" onClick={() => setMobileMenuOpen(false)}>
+            <Link href="/about#admission" onClick={() => setMobileMenuOpen(false)}>
               Admission
             </Link>
           </nav>

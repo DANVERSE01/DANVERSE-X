@@ -217,7 +217,7 @@ export function WorkShowcase() {
       </div>
 
       <div className="work-list-footer">
-        <Link href="/objects" className="work-archive-link" data-cursor="magnetic">
+        <Link href="/work" className="work-archive-link" data-cursor="magnetic">
           <span>Full archive</span>
           <span className="work-archive-link__count">
             ({featuredWorks.length} objects)

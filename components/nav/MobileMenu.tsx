@@ -4,11 +4,9 @@ import Link from "next/link"
 import { useDanverseStore } from "@/lib/store"
 
 const navItems = [
-  { href: "/places", label: "Places" },
-  { href: "/objects", label: "Objects" },
+  { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/people", label: "People" },
-  { href: "/work", label: "Archive" },
 ]
 
 export function MobileMenu() {

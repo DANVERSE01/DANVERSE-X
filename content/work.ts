@@ -194,6 +194,11 @@ export const works: WorkItem[] = [
       { label: "Impressions", value: "3.8M" },
       { label: "Positive Sentiment", value: "92%" },
     ],
+    clientQuote: {
+      text: "One asset system. Every platform. DANVERSE built us a language that travels without losing edge.",
+      author: "Noura H.",
+      role: "Brand Manager, Modern Skincare",
+    },
     roles: ["Brand Strategy", "Visual Design", "Content Production", "Social Management"],
     duration: "10 weeks",
     tools: ["Figma", "After Effects", "Lightroom", "Premiere Pro"],

@@ -11,3 +11,13 @@ export function getWorkBySlug(slug: string) {
 export function getAllWorkSlugs() {
   return works.map((work) => work.slug)
 }
+
+export function getAdjacentWorks(slug: string) {
+  const index = works.findIndex((work) => work.slug === slug)
+  if (index === -1) {
+    return { previous: null, next: null }
+  }
+  const previous = index > 0 ? works[index - 1] : works[works.length - 1]
+  const next = index < works.length - 1 ? works[index + 1] : works[0]
+  return { previous, next }
+}

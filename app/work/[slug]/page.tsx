@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
+import { getAdjacentWorks, getAllWorkSlugs, getWorkBySlug } from "@/lib/work"
 import { CaseStudyVideo } from "./CaseStudyVideo"
+import { ProjectNav } from "@/components/work/ProjectNav"
 import { BLUR_DARK } from "@/lib/blur"
 
 type PageProps = {
@@ -40,6 +40,8 @@ export default async function WorkDetailPage({ params }: PageProps) {
   if (!work) {
     notFound()
   }
+
+  const { previous, next } = getAdjacentWorks(slug)
 
   return (
     <main className="case-study">
@@ -173,17 +175,10 @@ export default async function WorkDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="case-study__next">
-        <Link href="/work" className="case-study__next-link" data-cursor="magnetic">
-            <span className="tx-label">Back to archive</span>
-        </Link>
-        {work.nextProject ? (
-          <Link href={`/work/${work.nextProject}`} className="case-study__next-link" data-cursor="text">
-            <span className="tx-label">Next project</span>
-            <span className="case-study__next-arrow">Next</span>
-          </Link>
-        ) : null}
-      </section>
+      <ProjectNav
+        previous={previous ? { slug: previous.slug, title: previous.title, category: previous.category } : null}
+        next={next ? { slug: next.slug, title: next.title, category: next.category } : null}
+      />
     </main>
   )
 }

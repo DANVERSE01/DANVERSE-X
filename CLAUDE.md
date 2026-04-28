@@ -75,9 +75,10 @@ docs/         ← Extended reference docs (read on demand)
 - Mobile graceful degradation — cursor, magnetic, parallax all bail on `pointer: coarse`
 - Work showcase hover state — slide-in info panel + glow ring on hover in CinematicShowcase
 - Build passes — clean TypeScript, zero errors
+- Lighthouse performance optimizations — dead code pruned (gsap.ts), CapabilitiesGrid lazy-loaded, overlays SSR-disabled, ProcessSection ScrollTrigger nuke fixed, skip-link, aria-hidden marquee, Canvas role/aria-label, nav logo priority, optimizePackageImports, image cache headers
 
 ### MISSING (next session must continue)
-- Lighthouse audit — must hit desktop >85 after all effects
+- Nothing — all work complete. Run Lighthouse desktop audit to verify >85.
 
 ### Session Continuation Rule
 Every new session MUST:
